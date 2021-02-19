@@ -1,0 +1,42 @@
+invokerPackage: video.api.client.api
+apiPackage: video.api.client.api.clients
+modelPackage: video.api.client.api.models
+groupId: video.api
+artifactDescription: api.video java API client
+artifactVersion: 1.0.0
+developerName: api.video ecosystem team
+developerOrganization: api.video
+developerOrganizationUrl: https://api.video
+developerEmail: ecosystem-team@api.video
+licenseName: MIT
+library: okhttp-gson
+httpUserAgent: api.video SDK (java; v:1.8.1; )
+dateLibrary: java8
+sourceFolder: src/main/java
+artifactId: java-api-client
+hideGenerationTimestamp: true
+serializableModel: "true"
+java8: "true"
+
+files:
+  page.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Page.java
+  ApiVideoAuthInterceptor.mustache:
+    folder: src/main/java/video/api/client/api/auth
+    destinationFilename: ApiVideoAuthInterceptor.java
+  EmptyArrayFixTypeAdapterFactory.mustache:
+    folder: src/main/java/video/api/client/api
+    destinationFilename: EmptyArrayFixTypeAdapterFactory.java
+  UploadChunkRequestBody.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadChunkRequestBody.java
+  UploadProgressListener.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadProgressListener.java
+  ApiVideoClient.mustache:
+    folder: src/main/java/video/api/client
+    destinationFilename: ApiVideoClient.java
+  pagination.md.mustache:
+    folder: docs
+    destinationFilename: Pagination.md

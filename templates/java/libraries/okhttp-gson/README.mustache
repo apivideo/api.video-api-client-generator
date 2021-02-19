@@ -1,0 +1,140 @@
+# {{artifactDescription}}
+
+{{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
+
+{{#infoUrl}}
+  For more information, please visit [{{{infoUrl}}}]({{{infoUrl}}})
+{{/infoUrl}}
+
+
+
+## Requirements
+
+Building the API client library requires:
+1. Java {{#supportJava6}}1.6{{/supportJava6}}{{^supportJava6}}{{#java8}}1.8{{/java8}}{{^java8}}1.7{{/java8}}{{/supportJava6}}+
+2. Maven/Gradle
+
+## Installation
+
+### Maven users
+
+Add this dependency to your project's POM:
+
+```xml
+<dependency>
+  <groupId>{{{groupId}}}</groupId>
+  <artifactId>{{{artifactId}}}</artifactId>
+  <version>{{{artifactVersion}}}</version>
+  <scope>compile</scope>
+</dependency>
+```
+
+### Gradle users
+
+Add this dependency to your project's build file:
+
+```groovy
+compile "{{{groupId}}}:{{{artifactId}}}:{{{artifactVersion}}}"
+```
+
+### Others
+
+At first generate the JAR by executing:
+
+```shell
+mvn clean package
+```
+
+Then manually install the following JARs:
+
+* `target/{{{artifactId}}}-{{{artifactVersion}}}.jar`
+* `target/lib/*.jar`
+
+## Getting Started
+
+Please follow the [installation](#installation) instruction and execute the following Java code:
+
+```java
+{{#apiInfo}}{{#apis}}{{#-first}}{{#operations}}{{#operation}}{{#-first}}
+import video.api.client.ApiVideoClient;
+import {{{invokerPackage}}}.ApiException;
+import {{{invokerPackage}}}.models.*;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+    // if you rather like to use the sandbox environment:
+    // ApiVideoClient apiVideoClient = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environments.SANDBOX);
+
+    File myVideoFile = new File("my-video.mp4");
+
+    try {
+        Video video = apiVideoClient.videos().upload(myVideoFile);
+        System.out.println(video);
+    } catch (ApiException e) {
+        System.err.println("Exception when calling AccountApi#get");
+        System.err.println("Status code: " + e.getCode());
+        System.err.println("Reason: " + e.getMessage());
+        System.err.println("Response headers: " + e.getResponseHeaders());
+        e.printStackTrace();
+    }
+  }
+}
+{{/-first}}{{/operation}}{{/operations}}{{/-first}}{{/apis}}{{/apiInfo}}
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}}
+
+
+#### Retrieve an instance of {{classname}}:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+{{classname}} {{classVarName}} = client.{{classVarName}}()
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+## Documentation for Models
+
+{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{/model}}{{/models}}
+
+## Documentation for Authorization
+
+### API token
+
+Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client. All you have to do is provide an API token when instantiating the ApiVideoClient:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+```
+
+### Public endpoints
+
+Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API token:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient();
+```
+
+## Recommendation
+
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+
+## Author
+
+{{#apiInfo}}{{#apis}}{{#-last}}{{infoEmail}}
+{{/-last}}{{/apis}}{{/apiInfo}}

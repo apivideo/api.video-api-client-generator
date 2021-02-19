@@ -1,0 +1,5 @@
+generated-clients/*
+.idea
+apivideo-generator/target
+api-video-api-client-generator.iml
+.DS_Store

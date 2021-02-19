@@ -1,0 +1,98 @@
+{{>licenseInfo}}
+
+package {{package}};
+
+import {{invokerPackage}}.ApiException;
+{{#imports}}import {{import}};
+{{/imports}}
+import {{modelPackage}}.Page;
+
+{{^fullJavaUtil}}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+{{/fullJavaUtil}}
+
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+/**
+ * API tests for {{classname}}
+ */
+@DisplayName("{{classname}}")
+public class {{classname}}Test extends AbstractApiTest {
+
+    private final {{classname}} api = new {{classname}}(apiClientMock);
+
+
+    {{#operations}}{{#operation}}
+    @Nested
+    @DisplayName("{{vendorExtensions.x-client-action}}")
+    class {{vendorExtensions.x-client-action}} {
+        private static final String PAYLOADS_PATH = "/payloads/{{classVarName}}/{{vendorExtensions.x-client-action}}/";
+
+        @Test
+        @DisplayName("required parameters")
+        public void requiredParametersTest() {
+            answerOnAnyRequest(201, "{}");
+
+            {{#vendorExtensions.x-group-parameters}}
+            assertThatNoException().isThrownBy(() -> api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#required}}{{#unescape}}{{example}}{{/unescape}}{{/required}}{{/allParams}}).execute());
+            {{/vendorExtensions.x-group-parameters}}
+            {{^vendorExtensions.x-group-parameters}}
+            assertThatNoException().isThrownBy(() -> api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#unescape}}{{example}}{{/unescape}}{{^-last}}, {{/-last}}{{/allParams}}));
+            assertThatNoException().isThrownBy(() -> api.{{vendorExtensions.x-client-action}}({{#allParams}}null{{^-last}}, {{/-last}}{{/allParams}}));
+            {{/vendorExtensions.x-group-parameters}}
+            //{{#allParams}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}
+            {{#allParams}}
+            {{#bodyParam}}
+            // body
+            {{/bodyParam}}
+            {{#isModel}}
+            // model
+            {{/isModel}}
+            {{/allParams}}
+        }
+
+        {{#responses}}
+        @Test
+        @DisplayName("{{code}} response")
+        public void responseWithStatus{{code}}Test() throws ApiException {
+            answerOnAnyRequest({{code}}, readResourceFile(PAYLOADS_PATH + "responses/{{code}}.json"));
+
+            {{^vendorExtensions.x-is-error}}
+            {{#vendorExtensions.x-group-parameters}}
+            {{#returnType}}{{#vendorExtensions.x-client-paginated}}Page<{{vendorExtensions.x-pagination.type}}>{{/vendorExtensions.x-client-paginated}}{{^vendorExtensions.x-client-paginated}}{{returnType}}{{/vendorExtensions.x-client-paginated}} res = {{/returnType}}api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#required}}{{#unescape}}{{example}}{{/unescape}}{{/required}}{{/allParams}}).execute();
+            {{/vendorExtensions.x-group-parameters}}
+            {{^vendorExtensions.x-group-parameters}}
+            {{#returnType}}{{returnType}} res = {{/returnType}}api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#unescape}}{{example}}{{/unescape}}{{^-last}}, {{/-last}}{{/allParams}});
+            {{/vendorExtensions.x-group-parameters}}
+            {{/vendorExtensions.x-is-error}}
+            {{#vendorExtensions.x-is-error}}
+            {{#vendorExtensions.x-group-parameters}}
+            assertThatThrownBy(() -> api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#required}}{{#unescape}}{{example}}{{/unescape}}{{/required}}{{/allParams}}).execute())
+            {{/vendorExtensions.x-group-parameters}}
+            {{^vendorExtensions.x-group-parameters}}
+            assertThatThrownBy(() -> api.{{vendorExtensions.x-client-action}}({{#allParams}}{{#unescape}}{{example}}{{/unescape}}{{^-last}}, {{/-last}}{{/allParams}}))
+            {{/vendorExtensions.x-group-parameters}}
+                .isInstanceOf(ApiException.class)
+                .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo({{code}}))
+                .hasMessage("{{vendorExtensions.x-example-response.title}}");
+            {{/vendorExtensions.x-is-error}}
+
+            /* sample response:
+                {{#unescape}}{{#indented_16}}{{ vendorExtensions.x-example-response-json }}{{/indented_16}}{{/unescape}}
+            */
+        }
+        {{/responses}}
+    }
+
+    {{/operation}}
+    {{/operations}}
+}

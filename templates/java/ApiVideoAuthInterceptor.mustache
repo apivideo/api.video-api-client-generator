@@ -1,0 +1,61 @@
+package {{invokerPackage}}.auth;
+
+import {{apiPackage}}.AuthenticationApi;
+import {{invokerPackage}}.ApiClient;
+import {{invokerPackage}}.ApiException;
+import {{modelPackage}}.AccessToken;
+import {{modelPackage}}.AuthenticatePayload;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+
+public class ApiVideoAuthInterceptor implements Interceptor {
+
+    private final String apiKey;
+    private final AuthenticationApi authenticationApi;
+    private String cachedAccessToken;
+    private Long tokenExpirationMs;
+
+
+    public ApiVideoAuthInterceptor(ApiClient client, String apiKey) {
+        this.apiKey = apiKey;
+        this.authenticationApi = new AuthenticationApi(client);
+    }
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+
+        if(request.url().toString().equals(authenticationApi.getApiClient().getBasePath() + "/auth/api-key")) {
+            return chain.proceed(request);
+        }
+
+        try {
+            return chain.proceed(request.newBuilder().addHeader("authorization", "Bearer " + getAccessToken()).build());
+        } catch (ApiException e) {
+            throw new IOException(e);
+        }
+    }
+
+    public String getAccessToken() throws ApiException {
+        if(!isTokenValid()) {
+            retrieveAccessToken();
+        }
+        return this.cachedAccessToken;
+    }
+
+    private void retrieveAccessToken() throws ApiException {
+        AccessToken accessToken = authenticationApi.authenticate(new AuthenticatePayload().apiKey(apiKey));
+
+        Integer expires = accessToken.getExpiresIn();
+        this.tokenExpirationMs = System.currentTimeMillis() + (expires - 60) * 1000;
+        this.cachedAccessToken = accessToken.getAccessToken();
+
+    }
+
+    private boolean isTokenValid() {
+        return tokenExpirationMs != null && tokenExpirationMs > System.currentTimeMillis();
+    }
+}

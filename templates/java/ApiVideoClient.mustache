@@ -1,0 +1,105 @@
+package video.api.client;
+
+import {{invokerPackage}}.*;
+import {{apiPackage}}.*;
+import okhttp3.OkHttpClient;
+
+public class ApiVideoClient {
+    private final ApiClient apiClient;
+{{# apiInfo.apis }}{{^x-client-hidden}}
+    private final {{classFilename}} {{classVarName}};{{/x-client-hidden}}{{/ apiInfo.apis }}
+
+
+{{# apiInfo.apis }}
+    {{#-first}}
+    public enum Environment {
+        PRODUCTION("{{vendorExtensions.x-client-base-paths.production}}"),
+        SANDBOX("{{vendorExtensions.x-client-base-paths.sandbox}}");
+
+        private final String basePath;
+
+        Environment(String basePath) {
+            this.basePath = basePath;
+        }
+    }
+    {{/-first}}
+{{/apiInfo.apis}}
+
+
+    /**
+     * Build an instance that targets production environment without authentication
+     */
+    public ApiVideoClient() {
+        this(Environment.PRODUCTION);
+    }
+
+    /**
+     * Build an instance that targets the given environment without authentication
+     * @param environment the target environment
+     */
+    public ApiVideoClient(Environment environment) {
+        this(new ApiClient(environment.basePath));
+    }
+
+    /**
+     * Build an instance that targets the production environment with authentication
+     * @param apiKey the api key to use to authenticate
+     */
+    public ApiVideoClient(String apiKey) {
+        this(apiKey, Environment.PRODUCTION);
+    }
+
+    /**
+     * Build an instance that targets the given environment with authentication
+     * @param apiKey the api key to use to authenticate
+     * @param environment the target environment
+     */
+    public ApiVideoClient(String apiKey, Environment environment) {
+        this(new ApiClient(apiKey, environment.basePath));
+    }
+
+    /**
+     * Build an instance that targets the production environment using a custom OkHttp client
+     * @param client the OkHttpClient instance to use
+     */
+    public ApiVideoClient(OkHttpClient client) {
+        this(new ApiClient(client, Environment.PRODUCTION.basePath));
+    }
+
+    /**
+     * Build an instance that targets the production environment using a custom OkHttp client
+     * @param client the OkHttpClient instance to use
+     * @param environment the target environment
+     */
+    public ApiVideoClient(OkHttpClient client, Environment environment) {
+        this(new ApiClient(client, environment.basePath));
+    }
+
+    private ApiVideoClient(ApiClient apiClient) {
+        this.apiClient = apiClient;
+{{# apiInfo.apis }}{{^x-client-hidden}}
+        this.{{classVarName}} = new {{classFilename}}(this.apiClient);{{/x-client-hidden}}{{/ apiInfo.apis }}
+    }
+
+{{# apiInfo.apis }}{{^x-client-hidden}}
+    /**
+    * Get an {{classFilename}} instance
+    * @return {{classFilename}}
+    */
+    public {{classFilename}} {{classVarName}}() {
+        return this.{{classVarName}};
+    }
+{{/x-client-hidden}}{{/ apiInfo.apis }}
+
+    public ApiClient getHttpClient() {
+        return this.apiClient;
+    }
+
+    public long getUploadChunkSize() {
+        return this.apiClient.getUploadChunkSize();
+    }
+
+    public void setUploadChunkSize(long uploadChunkSize) {
+        this.apiClient.setUploadChunkSize(uploadChunkSize);
+    }
+}
