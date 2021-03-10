@@ -1,0 +1,279 @@
+{{>partial_header}}
+package {{packageName}}
+
+{{#operations}}
+import (
+	"context"
+	"net/http"
+    "net/url"
+{{#imports}}	"{{import}}"
+{{/imports}}
+)
+// Linger please
+var (
+	_ context.Context
+)
+
+{{#operation}}
+{{#vendorExtensions.x-group-parameters}}
+type {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request struct { {{#allParams}}
+    {{^isPathParam}}{{paramName}} *{{{dataType}}}{{/isPathParam}}{{/allParams}}
+}
+{{#allParams}}{{^isPathParam}}
+func (r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request) {{vendorExtensions.x-export-param-name}}({{paramName}} {{{dataType}}}) {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request {
+	r.{{paramName}} = &{{paramName}}
+	return r
+}{{/isPathParam}}{{/allParams}}
+{{/vendorExtensions.x-group-parameters}}
+{{/operation}}
+
+{{#generateInterfaces}}
+
+
+type {{classname}}ServiceI interface {
+	{{#operation}}
+	/*
+	 * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().{{#pathParams}}
+	 * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+	 * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
+	 */
+    {{#vendorExtensions.x-upload}}{{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+    {{#vendorExtensions.x-group-parameters}}{{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
+    {{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}{{nickname}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
+    {{/vendorExtensions.x-upload}}
+    {{#vendorExtensions.x-upload}}
+
+
+    /*
+     * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{#pathParams}}
+     * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+     * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
+     */{{#vendorExtensions.x-group-parameters}}
+    {{nickname}}File({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}{{nickname}}File({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
+    {{/vendorExtensions.x-upload}}
+    {{/operation}}
+}
+{{/generateInterfaces}}
+
+// {{classname}}Service communicating with the {{classname}}
+// endpoints of the api.video API
+type {{classname}}Service struct {
+    client *Client
+}
+{{#operation}}
+
+
+
+{{#vendorExtensions.x-upload}}
+/*
+ * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{#notes}}
+ * {{{unescapedNotes}}}
+{{/notes}}{{#pathParams}}
+ * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+ * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
+ */
+{{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}File({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
+{{^vendorExtensions.x-group-parameters}}
+func (s *{{{classname}}}Service) {{nickname}}File({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-client-chunk-upload}}
+    fileInfo, _  := file.Stat()
+    fileSize := fileInfo.Size()
+{{/vendorExtensions.x-client-chunk-upload}}
+
+    return s.{{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}}, {{/isFile}}{{/requiredParams}}file.Name(), io.Reader(file){{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}})
+}
+{{/vendorExtensions.x-upload}}
+
+
+/*
+ * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
+{{#notes}}
+ * {{{unescapedNotes}}}
+{{/notes}}{{#pathParams}}
+ * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+ * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
+ */
+{{#vendorExtensions.x-upload}}func (s *{{{classname}}}Service) {{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+{{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
+{{^vendorExtensions.x-group-parameters}}
+func (s *{{{classname}}}Service) {{nickname}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {
+{{/vendorExtensions.x-group-parameters}}
+{{/vendorExtensions.x-upload}}
+{{^vendorExtensions.x-upload}}
+	var localVarPostBody interface{}
+{{/vendorExtensions.x-upload}}
+
+	localVarPath := "{{{path}}}"{{#pathParams}}
+	localVarPath = strings.Replace(localVarPath, "{"+"{{baseName}}"+"}", url.PathEscape(parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")), -1){{/pathParams}}
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}{{#formParams}}{{#isFile}}{{#-first}}
+	localVarFormParams := make(map[string]string){{/-first}}{{/isFile}}{{/formParams}}
+{{#allParams}}
+	{{#required}}
+	{{#minItems}}
+	if len({{^isPathParam}}*{{/isPathParam}}r.{{paramName}}) < {{minItems}} {
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must have at least {{minItems}} elements")
+	}
+	{{/minItems}}
+	{{#maxItems}}
+	if len({{^isPathParam}}*{{/isPathParam}}r.{{paramName}}) > {{maxItems}} {
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must have less than {{maxItems}} elements")
+	}
+	{{/maxItems}}
+	{{#minLength}}
+	if strlen({{^isPathParam}}*{{/isPathParam}}r.{{paramName}}) < {{minLength}} {
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must have at least {{minLength}} elements")
+	}
+	{{/minLength}}
+	{{#maxLength}}
+	if strlen({{^isPathParam}}*{{/isPathParam}}r.{{paramName}}) > {{maxLength}} {
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must have less than {{maxLength}} elements")
+	}
+	{{/maxLength}}
+	{{#minimum}}
+	{{#isString}}
+	{{paramName}}Txt, err := atoi({{^isPathParam}}*{{/isPathParam}}r.{{paramName}})
+	if {{paramName}}Txt < {{minimum}} {
+	{{/isString}}
+	{{^isString}}
+	if {{^isPathParam}}*{{/isPathParam}}r.{{paramName}} < {{minimum}} {
+	{{/isString}}
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must be greater than {{minimum}}")
+	}
+	{{/minimum}}
+	{{#maximum}}
+	{{#isString}}
+	{{paramName}}Txt, err := atoi({{^isPathParam}}*{{/isPathParam}}r.{{paramName}})
+	if {{paramName}}Txt > {{maximum}} {
+	{{/isString}}
+	{{^isString}}
+	if {{^isPathParam}}*{{/isPathParam}}r.{{paramName}} > {{maximum}} {
+	{{/isString}}
+		return {{#returnType}}nil, {{/returnType}}reportError("{{paramName}} must be less than {{maximum}}")
+	}
+	{{/maximum}}
+	{{/required}}
+{{/allParams}}
+{{#queryParams}}
+	{{#required}}
+	{{#isCollectionFormatMulti}}
+	{
+		t := *r.{{paramName}}
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("{{baseName}}", parameterToString(s.Index(i), "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+			}
+		} else {
+			localVarQueryParams.Add("{{baseName}}", parameterToString(t, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+		}
+	}
+	{{/isCollectionFormatMulti}}
+	{{^isCollectionFormatMulti}}
+	{{/isCollectionFormatMulti}}
+	{{/required}}
+	{{^required}}
+	if r.{{paramName}} != nil {
+	{{#isCollectionFormatMulti}}
+		t := *r.{{paramName}}
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("{{baseName}}", parameterToString(s.Index(i), "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+			}
+		} else {
+			localVarQueryParams.Add("{{baseName}}", parameterToString(t, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+		}
+	{{/isCollectionFormatMulti}}
+	{{^isCollectionFormatMulti}}
+    {{#vendorExtensions.x-key-value-serialized-param}}
+        if r.{{paramName}} != nil && len(*r.{{paramName}}) > 0 {
+            for _, v := range *r.{{paramName}} {
+                localVarQueryParams.Add(fmt.Sprintf("{{baseName}}[%s]", *v.Key), *(v.Value))
+            }
+        }
+    {{/vendorExtensions.x-key-value-serialized-param}}
+    {{^vendorExtensions.x-key-value-serialized-param}}
+		localVarQueryParams.Add("{{baseName}}", parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+    {{/vendorExtensions.x-key-value-serialized-param}}
+	{{/isCollectionFormatMulti}}
+	}
+	{{/required}}
+{{/queryParams}}
+{{#headerParams}}
+	{{#required}}
+	localVarHeaderParams["{{baseName}}"] = parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+	{{/required}}
+	{{^required}}
+	if r.{{paramName}} != nil {
+		localVarHeaderParams["{{baseName}}"] = parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+	}
+	{{/required}}
+{{/headerParams}}
+{{#formParams}}
+{{^isFile}}{{#required}}
+	localVarFormParams["{{baseName}}"] = parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+{{/required}}{{^required}}{{#isModel}}
+	if r.{{paramName}} != nil {
+		paramJson, err := parameterToJson(*r.{{paramName}})
+		if err != nil {
+			return {{#returnType}}nil, {{/returnType}}err
+		}
+		localVarFormParams.Add("{{baseName}}", paramJson)
+	}
+{{/isModel}}
+{{^isModel}}
+	if r.{{paramName}} != nil {
+        localVarFormParams["{{baseName}}"] = parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+	}
+{{/isModel}}
+{{/required}}
+{{/isFile}}
+{{/formParams}}
+{{#bodyParams}}
+	// body params
+	localVarPostBody = {{paramName}}
+{{/bodyParams}}
+
+{{#vendorExtensions.x-upload}}
+{{#formParams}}{{#isFile}}{{#-first}}{{^vendorExtensions.x-client-chunk-upload}}
+    req, err := s.client.prepareUploadRequest(localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams){{/vendorExtensions.x-client-chunk-upload}}
+{{#vendorExtensions.x-client-chunk-upload}}
+    requests, err := s.client.prepareRangeRequests(localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+{{/vendorExtensions.x-client-chunk-upload}}
+{{/-first}}{{/isFile}}{{/formParams}}
+{{/vendorExtensions.x-upload}}
+{{^vendorExtensions.x-upload}}
+	req, err := s.client.prepareRequest(http.Method{{httpMethod}}, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+{{/vendorExtensions.x-upload}}
+	if err != nil {
+		return {{#returnType}}nil, {{/returnType}}err
+	}
+
+    {{#returnType}}res := new({{{.}}}){{/returnType}}
+{{#vendorExtensions.x-client-chunk-upload}}
+	for _, req := range requests {
+		_, err = s.client.do(req, {{#returnType}}res{{/returnType}}{{^returnType}}nil{{/returnType}})
+
+		if err != nil {
+            return {{#returnType}}nil, {{/returnType}}err
+		}
+	}
+{{/vendorExtensions.x-client-chunk-upload}}
+{{^vendorExtensions.x-client-chunk-upload}}
+    _, err = s.client.do(req, {{#returnType}}res{{/returnType}}{{^returnType}}nil{{/returnType}})
+
+	if err != nil {
+		return {{#returnType}}nil, {{/returnType}}err
+	}
+{{/vendorExtensions.x-client-chunk-upload}}
+
+    return {{#returnType}}res, {{/returnType}}nil
+
+}
+{{/operation}}
+{{/operations}}

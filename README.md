@@ -28,7 +28,7 @@ To see the list of available profiles, see the "profile" column in the table of 
 | TypeScript        | typescript        | started | [typescript-api-client](https://github.com/apivideo/typescript-api-client) |
 | Php | php | to be started | - |
 | C# | csharp | to be started | - |
-| Go | go | to be started | - |
+| Go | go | private beta |  [go-api-client](https://github.com/apivideo/go-api-client) |
 | Python | python | to be started | - |
 
 ## Template files

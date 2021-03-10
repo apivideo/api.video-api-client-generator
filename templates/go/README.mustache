@@ -1,0 +1,116 @@
+![](https://raw.githubusercontent.com/apivideo/API_OAS_file/master/apivideo_banner.png)
+
+# api.video Golang api client
+
+{{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
+This documentation helps you use the corresponding Golang client.
+
+
+## Installation
+```bash
+go get {{gitHost}}/{{gitUserId}}/{{gitRepoId}}
+```
+
+
+## Getting Started
+
+For a more advanced usage you can checkout the rest of the documentation in the [docs directory](/docs)
+
+```golang
+package main
+
+import (
+    "fmt"
+    "os"
+    {{packageName}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}"
+)
+
+func main() {
+    //Connect to production environment
+    client := {{packageName}}.ClientBuilder("YOUR_API_TOKEN").Build()
+
+    // if you rather like to use the sandbox environment:
+    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+
+
+    //List Videos
+    //First create the url options for searching
+    opts := apivideosdk.VideosApiListRequest{}.
+        CurrentPage(1).
+        PageSize(25).
+        SortBy("publishedAt").
+        SortOrder("desc")
+
+    //Then call the List endpoint with the options
+    result, err := client.Videos.List(opts)
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    for _, video := range result.Data {
+        fmt.Printf("%s\n", *video.VideoId)
+        fmt.Printf("%s\n", *video.Title)
+    }
+
+
+    //Upload a video
+    //First create a container
+    create, err := client.Videos.Create(apivideosdk.VideoCreatePayload{Title: "My video title"})
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    //Then open the video file
+    videoFile, err := os.Open("path/to/video.mp4")
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    //Finally upload your video to the container with the videoId
+    uploadedVideo, err := client.Videos.UploadFile(*create.VideoId, videoFile)
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+
+    //And get the assets
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Hls)
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Iframe)
+}
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}} API
+
+
+#### Retrieve an instance of the {{classname}} API:
+```golang
+client := {{packageName}}.ClientBuilder("API_VIDEO_KEY").Build()
+{{classVarName}}Api := client.{{classname}}
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+
+## Documentation For Models
+
+{{#models}}{{#model}} - [{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
+{{/model}}{{/models}}
+

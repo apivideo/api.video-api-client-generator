@@ -54,7 +54,7 @@
             <id>go</id>
             <properties>
                 <folder>go</folder>
-                <generatorName>go</generatorName>
+                <generatorName>video.api.client.generator.Go</generatorName>
             </properties>
         </profile>
     </profiles>

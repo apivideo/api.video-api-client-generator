@@ -1,0 +1,94 @@
+# {{invokerPackage}}\{{classname}}{{#description}}
+
+{{description}}{{/description}}
+
+All URIs are relative to *{{basePath}}*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}[**{{operationId}}**]({{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+
+{{#operations}}
+{{#operation}}
+
+## {{{operationId}}}
+
+{{#vendorExtensions.x-group-parameters}}> {{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
+{{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}> {{nickname}}{{#vendorExtensions.x-upload}}File{{/vendorExtensions.x-upload}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
+{{#vendorExtensions.x-upload}}
+
+> {{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}
+
+{{{summary}}}{{#notes}}
+
+{{{unespacedNotes}}}{{/notes}}
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+{{#vendorExtensions.x-go-import}}
+{{{vendorExtensions.x-go-import}}}
+{{/vendorExtensions.x-go-import}}
+    {{packageName}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}"
+)
+
+func main() {
+    client := {{packageName}}.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    {{#vendorExtensions.x-group-parameters}}req := {{packageName}}.{{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{}
+    {{/vendorExtensions.x-group-parameters}}
+    {{#vendorExtensions.x-group-parameters}}{{#allParams}}
+    req.{{vendorExtensions.x-export-param-name}}({{{vendorExtensions.x-go-example}}}) // {{{dataType}}} | {{{description}}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}{{/allParams}}{{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}{{#allParams}}
+    {{paramName}} := {{{vendorExtensions.x-go-example}}} // {{{dataType}}} | {{{description}}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}{{/allParams}}{{/vendorExtensions.x-group-parameters}}
+
+    {{#vendorExtensions.x-group-parameters}}{{#returnType}}res, {{/returnType}}err := client.{{classname}}.{{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}req{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}){{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}{{#returnType}}res, {{/returnType}}err := client.{{classname}}.{{operationId}}{{#vendorExtensions.x-upload}}File{{/vendorExtensions.x-upload}}({{#requiredParams}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}){{/vendorExtensions.x-group-parameters}}
+
+    {{#vendorExtensions.x-upload}}
+    // you can also use a Reader instead of a File:
+    // client.{{classname}}.{{operationId}}({{#requiredParams}}{{^isFile}}{{paramName}}, {{/isFile}}{{/requiredParams}}fileName, fileReader{{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}})
+
+    {{/vendorExtensions.x-upload}}
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `{{classname}}.{{operationId}}``: %v\n", err)
+    }
+    {{#returnType}}
+    // response from `{{operationId}}`: {{{.}}}
+    fmt.Fprintf(os.Stdout, "Response from `{{classname}}.{{operationId}}`: %v\n", res)
+    {{/returnType}}
+}
+```
+
+### Path Parameters
+
+{{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#pathParams}}{{#-last}}
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------{{/-last}}{{/pathParams}}{{#pathParams}}
+**{{paramName}}** | {{^isPrimitiveType}}{{^isFile}}[{{/isFile}}{{/isPrimitiveType}}**{{dataType}}**{{^isPrimitiveType}}{{^isFile}}]({{baseType}}.md){{/isFile}}{{/isPrimitiveType}} | {{description}} | {{#defaultValue}}[default to {{defaultValue}}]{{/defaultValue}}{{/pathParams}}
+
+### Other Parameters
+
+{{#allParams}}{{#-last}}
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}{{#allParams}}{{^isPathParam}}
+**{{paramName}}** | {{#isContainer}}{{#isArray}}{{#items}}{{^isPrimitiveType}}{{^isFile}}[{{/isFile}}{{/isPrimitiveType}}**[]{{dataType}}**{{^isPrimitiveType}}{{^isFile}}]({{^baseType}}{{dataType}}{{/baseType}}{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}{{/items}}{{/isArray}}{{#isMap}}{{#items}}{{^isPrimitiveType}}{{^isFile}}[{{/isFile}}{{/isPrimitiveType}}**map[string]{{dataType}}**{{^isPrimitiveType}}{{^isFile}}]({{^baseType}}{{dataType}}{{/baseType}}{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}{{/items}}{{/isMap}}{{/isContainer}}{{^isContainer}}{{^isPrimitiveType}}{{^isFile}}[{{/isFile}}{{/isPrimitiveType}}**{{dataType}}**{{^isPrimitiveType}}{{^isFile}}]({{^baseType}}{{dataType}}{{/baseType}}{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}{{/isContainer}} | {{description}} | {{#defaultValue}}[default to {{defaultValue}}]{{/defaultValue}}{{/isPathParam}}{{/allParams}}
+
+### Return type
+
+{{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}} (empty response body){{/returnType}}
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+{{/operation}}
+{{/operations}}

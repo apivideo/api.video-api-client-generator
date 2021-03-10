@@ -1,1 +1,10 @@
 licenseName: MIT
+generateInterfaces: true
+structPrefix: true
+packageName: apivideosdk
+goImportAlias: apivideosdk
+gitUserId: apivideo
+gitRepoId: go-api-client
+ignoredFiles:
+  - configuration.mustache
+  - response.mustache
