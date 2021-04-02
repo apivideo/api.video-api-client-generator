@@ -1,0 +1,50 @@
+{{>partial_header}}
+from urllib3_mock import Responses
+
+from {{apiPackage}}.{{classVarName}} import {{classname}}  # noqa: E501
+from {{packageName}}.exceptions import ApiException, NotFoundException
+
+from helper import MainTest
+
+
+responses = Responses()
+
+
+class {{#operations}}Test{{classname}}(MainTest):
+    """{{classname}} unit test"""
+
+    def setUp(self):
+        super().setUp()
+        self.api = {{classname}}(self.client)  # noqa: E501
+
+    {{#operation}}
+    @responses.activate
+    def test_{{operationId}}(self):
+        """Test case for {{{operationId}}}
+
+{{#summary}}
+        {{{summary}}}  # noqa: E501
+{{/summary}}
+        """
+        for status, json in self.load_json('{{#lambda.lowercase}}{{{baseName}}}{{/lambda.lowercase}}', '{{{operationId}}}'):
+            responses.reset()
+
+            kwargs = {
+            {{#requiredParams}}
+                '{{paramName}}': {{{example}}},
+            {{/requiredParams}}
+            }
+            url = '{{#lambda.underscore}}{{{path}}}{{/lambda.underscore}}'.format(**kwargs)
+
+            responses.add('{{httpMethod}}', url, body=json, status=int(status), content_type='application/json')
+
+            if status[0] == '4':
+                with self.assertRaises(ApiException) as context:
+                    self.api.{{{operationId}}}(**kwargs)
+                if status == '404':
+                    self.assertIsInstance(context.exception, NotFoundException)
+            else:
+                self.api.{{{operationId}}}(**kwargs)
+
+   {{/operation}}
+{{/operations}}

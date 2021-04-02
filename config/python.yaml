@@ -1,1 +1,8 @@
 licenseName: MIT
+packageName: apivideo
+projectName: api.video
+ignoredFiles:
+  - gitlab-ci.mustache
+  - travis.mustache
+  - git_push.sh.mustache
+  - model_test.mustache

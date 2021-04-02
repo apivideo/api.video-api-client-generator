@@ -46,7 +46,7 @@
             <id>python</id>
             <properties>
                 <folder>python</folder>
-                <generatorName>python</generatorName>
+                <generatorName>video.api.client.generator.Python</generatorName>
             </properties>
         </profile>
         <profile>
