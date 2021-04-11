@@ -1,1 +1,28 @@
 licenseName: MIT
+sourceFolder: src/
+groupId: video.api
+artifactDescription: api.video csharp API client
+artifactVersion: 1.0.0
+artifactId: csharp-api-client
+developerName: api.video ecosystem team
+developerOrganization: api.video
+developerOrganizationUrl: https://api.video
+developerEmail: ecosystem-team@api.video
+packageName: VideoApiClient
+
+files:
+  page.mustache:
+    folder: src/VideoApiClient/Model
+    destinationFilename: Page.cs
+  pagination.md.mustache:
+    folder: docs
+    destinationFilename: Pagination.md
+  ApiVideoClient.mustache:
+    folder: src/VideoApiClient/
+    destinationFilename: ApiVideoClient.cs
+  AuthenticationManager.mustache:
+    folder: src/VideoApiClient/Client/
+    destinationFilename: AuthenticationManager.cs
+  IUploadProgressListener.mustache:
+    folder: src/VideoApiClient/Model
+    destinationFilename: IUploadProgressListener.cs
