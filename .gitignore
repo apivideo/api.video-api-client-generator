@@ -3,3 +3,4 @@ generated-clients/*
 apivideo-generator/target
 api-video-api-client-generator.iml
 .DS_Store
+!generated-clients/java/src/test/*
