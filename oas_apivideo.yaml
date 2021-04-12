@@ -689,6 +689,7 @@ paths:
                         value: John Doe
                       - key: Format
                         value: Tutorial
+                    scheduledAt: '2020-03-03T12:52:03.085Z'
                     publishedAt: '2020-07-14T23:36:18.598Z'
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
@@ -3661,6 +3662,7 @@ components:
             value: John Doe
           - key: Format
             value: Tutorial
+        scheduledAt: '4251-03-03T12:52:03.085Z'
         publishedAt: '4665-07-14T23:36:18.598Z'
         actions:
           - video_delete
@@ -3905,18 +3907,6 @@ components:
             others to see. True means you are broadcasting to viewers, false
             means you are not.
           example: true
-        createdAt:
-          type: string
-          description: >-
-            The date and time the API created the video. Date and time are
-            provided using ISO-8601 UTC format.
-          example: '2019-12-16T08:25:51+00:00'
-        updatedAt:
-          type: string
-          description: >-
-            The date and time the API created the video. Date and time are
-            provided using ISO-8601 UTC format.
-          example: '2019-12-16T08:25:51+00:00'
     live-stream-session:
       title: Live Stream Session
       type: object
