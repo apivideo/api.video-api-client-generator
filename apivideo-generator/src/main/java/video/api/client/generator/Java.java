@@ -23,6 +23,11 @@ public class Java extends JavaClientCodegen {
     public static final String VENDOR_X_CLIENT_IGNORE = "x-client-ignore";
     public static final List<String> PARAMETERS_TO_HIDE_IN_CLIENT_DOC = Arrays.asList("currentPage", "pageSize");
 
+    public Java() {
+        super();
+        this.modelTestTemplateFiles.remove("model_test.mustache");
+    }
+
     @Override
     public void postProcessParameter(CodegenParameter parameter) {
         super.postProcessParameter(parameter);

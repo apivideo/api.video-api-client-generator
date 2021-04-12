@@ -24,6 +24,7 @@ paths:
       x-client-action: authenticate
       x-client-hidden: true
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -73,6 +74,7 @@ paths:
       x-client-action: refresh
       x-client-hidden: true
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -416,6 +418,7 @@ paths:
       x-client-action: create
       requestBody:
         description: video to create
+        required: true
         content:
           application/json:
             schema:
@@ -543,6 +546,7 @@ paths:
             type: string
           example: 'Content-Range: bytes 200-100/5000'
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -656,6 +660,7 @@ paths:
           schema:
             type: string
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -756,6 +761,7 @@ paths:
             type: string
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -960,6 +966,7 @@ paths:
             type: string
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1220,6 +1227,7 @@ paths:
       operationId: POST_upload-tokens
       x-client-action: createToken
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1359,6 +1367,7 @@ paths:
             type: string
           example: 'Content-Range: bytes 200-100/5000'
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -1559,6 +1568,7 @@ paths:
       operationId: POST_live-streams
       x-client-action: create
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1696,6 +1706,7 @@ paths:
             type: string
           example: li400mYKSgQ6xs7taUeSaEKr
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1755,6 +1766,7 @@ paths:
             type: string
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -1920,6 +1932,7 @@ paths:
             type: string
           example: en
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -2032,6 +2045,7 @@ paths:
             type: string
           example: en
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -2236,6 +2250,7 @@ paths:
             type: string
           example: en
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -2765,6 +2780,7 @@ paths:
             type: string
           example: pl14Db6oMJRH6SRVoOwORacK
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -3296,9 +3312,10 @@ paths:
       x-client-action: create
       description: >-
         Webhooks can push notifications to your server, rather than polling
-        api.video for changes
+        api.video for changes. We currently offer one event, the ```video.encoding.quality.completed``` event.  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
       operationId: POST-webhooks
       requestBody:
+        required: true
         content:
           application/json:
             schema:
