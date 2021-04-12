@@ -24,6 +24,7 @@ paths:
       x-client-action: authenticate
       x-client-hidden: true
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -73,6 +74,7 @@ paths:
       x-client-action: refresh
       x-client-hidden: true
       requestBody:
+        required: true
         content:
           application/json:
             schema:
