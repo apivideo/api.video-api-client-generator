@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
@@ -32,7 +33,7 @@ public class ApiException extends Exception {
     }
 
     public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders,
-                        String responseBody) {
+            String responseBody) {
         super(message, throwable);
 
         this.code = code;
@@ -44,25 +45,29 @@ public class ApiException extends Exception {
         Map<String, Object> parsedResponse = new Gson().fromJson(responseBody, typeOfHashMap);
 
         if (parsedResponse != null) {
-            if (StringUtils.isBlank(message)) {
-                try {
-
-                    if (parsedResponse.get("title") != null) {
-                        bodyMessage = (String) parsedResponse.get("title");
-                    } else {
-                        bodyMessage = (String) parsedResponse.get("events");
-                    }
-
-                } catch (JsonSyntaxException ignored) {
-
+            String details = null;
+            try {
+                if (parsedResponse.get("title") != null) {
+                    details = (String) parsedResponse.get("title");
+                } else if (parsedResponse.get("events") != null) {
+                    details = (String) parsedResponse.get("events");
                 }
+            } catch (JsonSyntaxException ignored) {
+
+            }
+
+            if(StringUtils.isNotBlank(message) && details != null) {
+                bodyMessage = message + ": " + details;
+            } else if(details != null) {
+                bodyMessage = details;
+            } else {
+                bodyMessage = message;
             }
 
             if (parsedResponse.containsKey("problems")) {
                 List<Map<String, String>> problemsList = (List<Map<String, String>>) parsedResponse.get("problems");
                 if (problemsList != null) {
-                    this.problems = problemsList.stream()
-                            .filter(Objects::nonNull)
+                    this.problems = problemsList.stream().filter(Objects::nonNull)
                             .map(p -> new ApiProblem(p.get("type"), p.get("title"), p.get("name")))
                             .collect(Collectors.toList());
                 }

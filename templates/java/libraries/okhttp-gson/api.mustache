@@ -266,12 +266,13 @@ public class {{classname}} {
     {{/isDeprecated}}
     @SuppressWarnings("rawtypes")
     private okhttp3.Call {{operationId}}ValidateBeforeCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}final ApiCallback _callback) throws ApiException {
-        {{#allParams}}{{#bodyParam}}
+        {{#allParams}}{{#required}}
+        // verify the required parameter '{{paramName}}' is set
         if ({{paramName}} == null) {
             throw new ApiException("Missing the required parameter '{{paramName}}' when calling {{operationId}}");
         }
-
-        {{# vars }}
+        {{/required}}{{/allParams}}
+        {{#allParams}}{{#bodyParam}}{{# vars }}
         {{#required}}
         if ({{paramName}}.{{getter}}() == null) {
             throw new ApiException("Missing the required parameter '{{paramName}}.{{name}}' when calling {{operationId}}");
@@ -279,12 +280,7 @@ public class {{classname}} {
 
         {{/required}}
         {{/vars}}{{/bodyParam}}
-        {{#required}}
-        // verify the required parameter '{{paramName}}' is set
-        if ({{paramName}} == null) {
-            throw new ApiException("Missing the required parameter '{{paramName}}' when calling {{operationId}}");
-        }
-        {{/required}}{{/allParams}}
+       {{/allParams}}
         okhttp3.Call localVarCall = {{operationId}}Call({{#allParams}}{{paramName}}, {{/allParams}}_callback);
         return localVarCall;
     }

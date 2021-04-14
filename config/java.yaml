@@ -4,11 +4,16 @@ modelPackage: video.api.client.api.models
 groupId: video.api
 artifactDescription: api.video java API client
 artifactVersion: 1.0.0
+artifactUrl: https://github.com/apivideo/java-api-client
+scmConnection: scm:git:git://github.com/apivideo/java-api-client.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/java-api-client.git
+scmUrl: https://github.com/apivideo/java-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video
 developerEmail: ecosystem-team@api.video
-licenseName: MIT
+licenseName: MIT License
+licenseUrl: http://www.opensource.org/licenses/mit-license.php
 library: okhttp-gson
 httpUserAgent: api.video SDK (java; v:1.8.1; )
 dateLibrary: java8
@@ -40,3 +45,5 @@ files:
   pagination.md.mustache:
     folder: docs
     destinationFilename: Pagination.md
+  post-generate.sh:
+    destinationFilename: post-generate.sh

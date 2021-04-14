@@ -69,7 +69,8 @@ public class Example {
     File myVideoFile = new File("my-video.mp4");
 
     try {
-        Video video = apiVideoClient.videos().upload(myVideoFile);
+        Video video = apiVideoClient.videos().create(new VideoCreatePayload().title("my video"));
+        video = apiVideoClient.videos().upload(video.getVideoId(), myVideoFile);
         System.out.println(video);
     } catch (ApiException e) {
         System.err.println("Exception when calling AccountApi#get");
