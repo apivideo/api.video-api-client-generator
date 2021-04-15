@@ -23,6 +23,9 @@ files:
   AuthenticationManager.mustache:
     folder: src/VideoApiClient/Client/
     destinationFilename: AuthenticationManager.cs
+  EmptyArrayFixTypeConverter.mustache:
+    folder: src/VideoApiClient/Client/
+    destinationFilename: EmptyArrayFixTypeConverter.cs
   IUploadProgressListener.mustache:
     folder: src/VideoApiClient/Model
     destinationFilename: IUploadProgressListener.cs

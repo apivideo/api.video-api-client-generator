@@ -30,7 +30,11 @@ namespace {{packageName}}.Client
         private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-            NullValueHandling = NullValueHandling.Ignore
+            NullValueHandling = NullValueHandling.Ignore,
+            Converters =
+            {
+                new EmptyArrayFixTypeConverter()
+            }
         };
         private AuthenticationManager AuthManager { get; set; }
 

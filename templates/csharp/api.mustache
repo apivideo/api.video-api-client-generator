@@ -70,13 +70,25 @@ namespace {{packageName}}.{{apiPackage}}
 		public ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Object{{/returnType}}> {{operationId}}WithHttpInfo({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = default{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},IUploadProgressListener progressListener = null{{/vendorExtensions.x-client-chunk-upload}})
         {
             {{#allParams}}
+            {{#bodyParam}}
+            if ({{paramName}} == null) 
+                throw new ApiException(400,"Missing required parameter '{{paramName}}' when calling {{classname}}->{{operationId}}");
+            
+            {{# vars }}
+            {{#required}}
+            if ({{paramName}} != null && {{paramName}}.{{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} == null) {
+                throw new ApiException(400,"Missing required parameter '{{paramName}}.{{name}}' when calling {{classname}}->{{operationId}}");
+            }
+            {{/required}}
+            {{/vars}}{{/bodyParam}}
+            {{/allParams}}
+            {{#allParams}}
             {{#required}}
             // verify the required parameter '{{paramName}}' is set
             if ({{paramName}} == null)
                 throw new ApiException(400, "Missing required parameter '{{paramName}}' when calling {{classname}}->{{operationId}}");
             {{/required}}
             {{/allParams}}
-
             
             {{#vendorExtensions.x-client-chunk-upload}}
             long totalBytes = file.Length;
@@ -192,11 +204,12 @@ namespace {{packageName}}.{{apiPackage}}
                 localVarPathParams, localVarContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
-            
+            {{#vendorExtensions.x-client-chunk-upload}}
             if (progressListener != null)
             {
                 progressListener.onProgress(totalBytes, totalBytes, 1, 1);
             }
+            {{/vendorExtensions.x-client-chunk-upload}}
             {{#returnType}}
             return new ApiResponse<{{{returnType}}}>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.{{^netStandard}}Name{{/netStandard}}{{#netStandard}}Key{{/netStandard}}, x => string.Join(",", x.Value){{#caseInsensitiveResponseHeaders}}, StringComparer.OrdinalIgnoreCase{{/caseInsensitiveResponseHeaders}}),
