@@ -157,15 +157,15 @@ paths:
             search for videos with specific key value pairs using this
             parameter.
           required: false
-          style: form
+          style: deepObject
+          x-key-value-serialized-param: true
           explode: true
           schema:
-            type: array
-            items:
+            type: object
+            additionalProperties:
               type: string
           example: >-
-            [{"key":"Author", "value":"John Doe"}, {"key":"Format",
-            "value":"Tutorial"}]
+            metadata[Author]=John Doe&metadata[Format]=Tutorial
         - name: description
           in: query
           description: >-
@@ -2841,10 +2841,6 @@ paths:
       responses:
         '204':
           description: No Content
-          content:
-            application/json:
-              schema:
-                type: object
         '404':
           description: Not Found
           content:
