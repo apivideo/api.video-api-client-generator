@@ -16,9 +16,10 @@ Method | HTTP request | Description
 
 {{#vendorExtensions.x-group-parameters}}> {{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
 {{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}> {{nickname}}{{#vendorExtensions.x-upload}}File{{/vendorExtensions.x-upload}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
-{{#vendorExtensions.x-upload}}
-
-> {{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}
+{{#vendorExtensions.x-upload}}> {{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}
+{{#vendorExtensions.x-group-parameters}}> {{nickname}}WithContext(ctx context.Context, {{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
+{{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}> {{nickname}}{{#vendorExtensions.x-upload}}File{{/vendorExtensions.x-upload}}WithContext(ctx context.Context, {{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
+{{#vendorExtensions.x-upload}}> {{nickname}}WithContext(ctx context.Context, {{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}
 
 {{{summary}}}{{#notes}}
 
