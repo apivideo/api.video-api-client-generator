@@ -1,5 +1,5 @@
 {{>partial_header}}
-
+import os  # noqa: F401
 import re  # noqa: F401
 import sys  # noqa: F401
 
@@ -260,6 +260,7 @@ class {{classname}}(_EndPoint):
             self._validate_inputs(kwargs, params_map, allowed_values, validations, openapi_types)
             params = self._gather_params(kwargs, location_map, attribute_map, openapi_types, collection_format_map)
 {{#vendorExtensions.x-client-chunk-upload}}
+            res = None
             for content_range, chunk in self._chunk_file(params['file']):
                 res = self.api_client.call_api(
                     "{{{path}}}",

@@ -23,9 +23,31 @@ import static org.openapitools.codegen.utils.StringUtils.underscore;
  * </pre>
  */
 public class UnderscoreLambda implements Mustache.Lambda {
+
+    private final boolean isForPath;
+
+    public UnderscoreLambda() {
+        this(false);
+    }
+
+    public UnderscoreLambda(boolean isForPath) {
+        this.isForPath = isForPath;
+    }
+
     @Override
     public void execute(Template.Fragment fragment, Writer writer) throws IOException {
         String text = fragment.execute();
-        writer.write(underscore(text));
+        if (this.isForPath) {
+            String[] arrOfStr = text.split("((?<=\\{.+\\})|(?=\\{.+\\}))");
+            for (String a: arrOfStr) {
+                if (a.charAt(0) == '{') {
+                    writer.write(underscore(a));
+                } else {
+                    writer.write(a);
+                }
+            }
+        } else {
+            writer.write(underscore(text));
+        }
     }
 }
