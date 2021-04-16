@@ -8,3 +8,6 @@ gitRepoId: go-api-client
 ignoredFiles:
   - configuration.mustache
   - response.mustache
+files:
+  post-generate.sh:
+    destinationFilename: post-generate.sh
