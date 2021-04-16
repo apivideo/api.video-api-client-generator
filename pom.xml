@@ -54,6 +54,7 @@
             <properties>
                 <folder>go</folder>
                 <generatorName>video.api.client.generator.Go</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
     </profiles>

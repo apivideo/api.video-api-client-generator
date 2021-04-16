@@ -436,6 +436,14 @@ public class ApiClient {
             return params;
         }
 
+        if(value instanceof HashMap) {
+            HashMap map = (HashMap)value;
+            map.forEach((k, v) -> {
+                if(k != null) params.add(new Pair(name + "[" + k + "]", v == null ? null : v.toString()));
+            });
+            return params;
+        }
+
         params.add(new Pair(name, parameterToString(value)));
         return params;
     }

@@ -7,8 +7,11 @@ import video.api.client.api.ApiException;
 import video.api.client.api.models.*;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -177,6 +180,77 @@ public class VideosTest {
 
             assertThat(video.getVideoId()).isEqualTo(testVideo.getVideoId());
             assertThat(video.getTitle()).isEqualTo(testVideo.getTitle());
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("list with metadata")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ListWithMetadata {
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreatePayload().metadata(Collections.singletonList(new Metadata("key1", "value1")))
+                            .title("[Java-SDK-tests] list metadatas"));
+        }
+
+        @Test
+        public void listMetadataNotFound() throws ApiException {
+            Map<String, String> metadata = new HashMap<>();
+            metadata.put("key1", "valueNotFound");
+            Page<Video> page = apiClient.videos().list().metadata(metadata)
+                    .execute();
+
+            assertThat(page.getItemsTotal()).isEqualTo(0);
+        }
+
+        @Test
+        public void listMetadataFound() throws ApiException {
+            Map<String, String> metadata = new HashMap<>();
+            metadata.put("key1", "value1");
+            Page<Video> page = apiClient.videos().list().metadata(metadata)
+                    .execute();
+
+            assertThat(page.getItemsTotal()).isGreaterThan(0);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("list with tags")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ListWithTags {
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.testVideo = apiClient.videos().create(
+                    new VideoCreatePayload().tags(Arrays.asList("tag1", "tag2")).title("[Java-SDK-tests] list tags"));
+        }
+
+        @Test
+        public void listTagNotFound() throws ApiException {
+            Page<Video> page = apiClient.videos().list().tags(Collections.singletonList("valueNotFound")).execute();
+
+            assertThat(page.getItemsTotal()).isEqualTo(0);
+        }
+
+        @Test
+        public void listTagFound() throws ApiException {
+            Page<Video> page = apiClient.videos().list().tags(Arrays.asList("tag1", "tag2")).execute();
+
+            assertThat(page.getItemsTotal()).isGreaterThan(0);
         }
 
         @AfterAll
