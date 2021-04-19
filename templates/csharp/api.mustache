@@ -1,0 +1,335 @@
+{{>partial_header}}
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
+using System.IO;
+using {{packageName}}.Upload;
+{{#netStandard}}
+using RestSharp.Portable;
+{{/netStandard}}
+{{^netStandard}}
+using RestSharp;
+{{/netStandard}}
+using {{packageName}}.Client;
+{{#hasImport}}using {{packageName}}.{{modelPackage}};
+{{/hasImport}}
+
+namespace {{packageName}}.{{apiPackage}}
+{
+    {{#operations}}
+    /// <summary>
+    /// Represents a collection of functions to interact with the API endpoints
+    /// </summary>
+    {{>visibility}} class {{classname}}
+    {
+        /// <summary>
+        /// Api Client Instance
+        /// </summary>
+        public ApiClient ApiClient {get; set;}
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{classname}}"/> class.
+        /// </summary>
+        /// <returns></returns>
+        public {{classname}}(ApiClient apiClient)
+        {
+            this.ApiClient = apiClient;
+        }
+
+        {{#operation}}
+        /// <summary>
+        /// {{summary}} {{notes}}
+        /// </summary>
+        /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
+        {{#allParams}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+        {{/allParams}}
+        {{#vendorExtensions.x-client-chunk-upload}}/// <param name="progressListener">Progress listener called after each chunk upload</param>{{/vendorExtensions.x-client-chunk-upload}}
+        /// <returns>{{#returnType}}{{returnType}}{{/returnType}}</returns>
+		{{#isDeprecated}}
+		[Obsolete]
+		{{/isDeprecated}}
+		public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = default{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},IUploadProgressListener progressListener = null{{/vendorExtensions.x-client-chunk-upload}})
+        {
+             {{#returnType}}ApiResponse<{{{returnType}}}> localVarResponse = {{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},progressListener{{/vendorExtensions.x-client-chunk-upload}});
+             return localVarResponse.Data;{{/returnType}}{{^returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}});{{/returnType}}
+        }
+
+        /// <summary>
+        /// {{summary}} {{notes}}
+        /// </summary>
+        /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
+        {{#allParams}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
+        {{/allParams}}
+        {{#vendorExtensions.x-client-chunk-upload}}/// <param name="progressListener">Progress listener called after each chunk upload</param>{{/vendorExtensions.x-client-chunk-upload}}
+        /// <returns>ApiResponse of {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Object(void){{/returnType}}</returns>
+		{{#isDeprecated}}
+		[Obsolete]
+		{{/isDeprecated}}
+		public ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Object{{/returnType}}> {{operationId}}WithHttpInfo({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = default{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},IUploadProgressListener progressListener = null{{/vendorExtensions.x-client-chunk-upload}})
+        {
+            {{#allParams}}
+            {{#bodyParam}}
+            if ({{paramName}} == null) 
+                throw new ApiException(400,"Missing required parameter '{{paramName}}' when calling {{classname}}->{{operationId}}");
+            
+            {{# vars }}
+            {{#required}}
+            if ({{paramName}} != null && {{paramName}}.{{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} == null) {
+                throw new ApiException(400,"Missing required parameter '{{paramName}}.{{name}}' when calling {{classname}}->{{operationId}}");
+            }
+            {{/required}}
+            {{/vars}}{{/bodyParam}}
+            {{/allParams}}
+            {{#allParams}}
+            {{#required}}
+            // verify the required parameter '{{paramName}}' is set
+            if ({{paramName}} == null)
+                throw new ApiException(400, "Missing required parameter '{{paramName}}' when calling {{classname}}->{{operationId}}");
+            {{/required}}
+            {{/allParams}}
+            
+            {{#vendorExtensions.x-client-chunk-upload}}
+            long totalBytes = file.Length;
+            int chunkSize = Convert.ToInt32(this.ApiClient.UploadChunkSize);
+            {{/vendorExtensions.x-client-chunk-upload}}
+
+            var localVarPath = "{{#netStandard}}.{{/netStandard}}{{{path}}}";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>();
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarContentTypes = new string[] {
+                {{#consumes}}
+                "{{{mediaType}}}"{{^-last}}, {{/-last}}
+                {{/consumes}}
+            };
+            string localVarContentType = ApiClient.SelectHeaderContentType(localVarContentTypes);
+            localVarHeaderParams.Add("Content-Type", localVarContentType);
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                {{#produces}}
+                "{{{mediaType}}}"{{^-last}}, {{/-last}}
+                {{/produces}}
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            {{#pathParams}}
+            if ({{paramName}} != null) localVarPathParams.Add("{{baseName}}", this.ApiClient.ParameterToString({{paramName}})); // path parameter
+            {{/pathParams}}
+            {{#queryParams}}
+            if ({{paramName}} != null) localVarQueryParams.AddRange(this.ApiClient.ParameterToKeyValuePairs("{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}", "{{baseName}}", {{paramName}})); // query parameter
+            {{/queryParams}}
+            {{#headerParams}}
+            if ({{paramName}} != null) localVarHeaderParams.Add("{{baseName}}", this.ApiClient.ParameterToString({{paramName}})); // header parameter
+            {{/headerParams}}
+            {{#formParams}}
+            {{^isFile}}if ({{paramName}} != null) 
+                localVarFormParams.Add("{{baseName}}", {{#vendorExtensions.x-is-json}}{{paramName}}.ToJson(){{/vendorExtensions.x-is-json}}{{^vendorExtensions.x-is-json}}this.ApiClient.{{#isPrimitiveType}}ParameterToString{{/isPrimitiveType}}{{^isPrimitiveType}}Serialize{{/isPrimitiveType}}({{paramName}}){{/vendorExtensions.x-is-json}}); // form parameter{{/isFile}}
+            {{/formParams}}
+            {{#bodyParam}}
+            if ({{paramName}} != null && {{paramName}}.GetType() != typeof(byte[]) && {{paramName}}.GetType() != typeof(string))
+            {
+                localVarPostBody = this.ApiClient.Serialize({{paramName}}); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = {{paramName}}; // byte array
+            }
+            {{/bodyParam}}
+
+            {{#vendorExtensions.x-client-chunk-upload}}
+            if (totalBytes > chunkSize)
+            {
+                ApiResponse<Video> lastRes = null;
+                localVarHeaderParams.Add("Content-Range", "");
+                var chunkNum = 0;
+                int chunkCount = (int)Math.Ceiling((double)totalBytes / (double)chunkSize);
+                for (int i = 0; i < totalBytes; i += chunkSize)
+                {
+                    chunkNum++;
+                    byte[] buffer = new byte[chunkSize];
+                    localVarHeaderParams["Content-Range"] = "bytes " + i + "-" + (Math.Min(i+chunkSize,totalBytes)-1) + "/" + totalBytes;
+                    
+                    file.Read(buffer, 0, chunkSize);
+
+                    if(buffer != null)
+                    {
+                        if(localVarFileParams.ContainsKey("file"))
+                        {
+                            localVarFileParams["file"] = this.ApiClient.ParameterToFile("file", file, buffer);
+                        }
+                        else
+                        {
+                            localVarFileParams.Add("file",this.ApiClient.ParameterToFile("file", file, buffer));
+                        }
+                    }
+                    
+                    // make the HTTP request
+                    IRestResponse localVarResponse = (IRestResponse)this.ApiClient.CallApi(localVarPath,
+                        Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                        localVarPathParams, localVarContentType);
+
+                    int localVarStatusCode = (int)localVarResponse.StatusCode;
+                    lastRes = new ApiResponse<Video>(localVarStatusCode,
+                        localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                        (Video)this.ApiClient.Deserialize(localVarResponse, typeof(Video)));
+                    
+                    if(progressListener != null)
+                    {
+                        progressListener.onProgress(Math.Min(i + chunkSize, totalBytes), totalBytes, chunkCount, chunkNum);
+                    }
+                }
+                return lastRes;
+            }
+            else{
+            {{/vendorExtensions.x-client-chunk-upload}}
+
+            {{#formParams}}{{#isFile}}
+            if ({{paramName}} != null) 
+                localVarFileParams.Add("{{baseName}}", this.ApiClient.ParameterToFile("{{baseName}}", {{paramName}}));{{/isFile}}
+            {{/formParams}}
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.ApiClient.CallApi(localVarPath,
+                Method.{{httpMethod}}, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            {{#vendorExtensions.x-client-chunk-upload}}
+            if (progressListener != null)
+            {
+                progressListener.onProgress(totalBytes, totalBytes, 1, 1);
+            }
+            {{/vendorExtensions.x-client-chunk-upload}}
+            {{#returnType}}
+            return new ApiResponse<{{{returnType}}}>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.{{^netStandard}}Name{{/netStandard}}{{#netStandard}}Key{{/netStandard}}, x => string.Join(",", x.Value){{#caseInsensitiveResponseHeaders}}, StringComparer.OrdinalIgnoreCase{{/caseInsensitiveResponseHeaders}}),
+                ({{{returnType}}}) this.ApiClient.Deserialize(localVarResponse, typeof({{#returnContainer}}{{{returnContainer}}}{{/returnContainer}}{{^returnContainer}}{{{returnType}}}{{/returnContainer}})));
+            {{/returnType}}
+            {{^returnType}}
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.{{^netStandard}}Name{{/netStandard}}{{#netStandard}}Key{{/netStandard}}, x => string.Join(",", x.Value){{#caseInsensitiveResponseHeaders}}, StringComparer.OrdinalIgnoreCase{{/caseInsensitiveResponseHeaders}}),
+                null);
+            {{/returnType}}
+            
+            {{#vendorExtensions.x-client-chunk-upload}}
+            }
+            {{/vendorExtensions.x-client-chunk-upload}}
+        }
+
+        
+        {{#vendorExtensions.x-group-parameters}}
+        /// <summary>
+        /// {{notes}}
+        /// </summary>{{#requiredParams}}
+        /// <param name="{{paramName}}">{{description}} (required)</param>{{/requiredParams}}
+        /// <returns>API{{operationId}}Request</returns>
+        {{#isDeprecated}}
+        [Obsolete]
+        {{/isDeprecated}}
+        public API{{operationId}}Request {{operationId}}({{#requiredParams}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}) {
+            return new API{{operationId}}Request(this{{#requiredParams}}{{#-first}},{{/-first}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}});
+        }
+
+        /// <summary>
+        /// Request {{operationId}} class to get paginated list of items
+        /// </summary>
+        public class API{{operationId}}Request {
+            {{#requiredParams}}
+            private {{{dataType}}} {{paramName}};
+            {{/requiredParams}}
+            {{#optionalParams}}
+            private {{{dataType}}} {{paramName}};
+            {{/optionalParams}}
+
+            private {{classname}} currentApiInstance;
+
+            /// <summary>
+            /// Class constructor with api instance
+            /// </summary>
+            /// <param name="instance">Instance of the current api</param>{{#requiredParams}}
+            /// <param name="{{paramName}}">{{description}} (required)</param>{{/requiredParams}}
+            public API{{operationId}}Request({{classname}} instance{{#requiredParams}}{{#-first}}, {{/-first}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}) {
+                {{#requiredParams}}
+                this.{{paramName}} = {{paramName}};
+                {{/requiredParams}}
+                this.currentApiInstance = instance;
+            }
+
+            {{#optionalParams}}
+            /// <summary>
+            /// Set {{paramName}}
+            /// </summary>
+            /// <param name="{{paramName}}">{{description}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}})</param>
+            /// <returns>API{{operationId}}Request</returns>
+            public API{{operationId}}Request {{# lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{{dataType}}} {{paramName}}) {
+                this.{{paramName}} = {{paramName}};
+                return this;
+            }
+
+            {{/optionalParams}}
+            
+            {{^vendorExtensions.x-client-paginated}}
+            /// <summary>
+            /// Execute {{operationId}} request{{#returnType}}
+            /// </summary>
+            /// <returns>{{returnType}}{{/returnType}} </returns>
+            {{#isDeprecated}}
+            [Obsolete]
+            {{/isDeprecated}}
+            public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} execute(){
+                {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}this.currentApiInstance.{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}});
+                {{#returnType}}
+                return localVarResp.Data;
+                {{/returnType}}
+            }
+            {{/vendorExtensions.x-client-paginated}}
+
+            {{#vendorExtensions.x-client-paginated}}
+            /// <summary>
+            /// Execute {{operationId}} request{{#returnType}}
+            /// </summary>
+            /// <returns>{{returnType}}{{/returnType}} </returns>
+            {{#isDeprecated}}
+            [Obsolete]
+            {{/isDeprecated}}
+            public Page<{{vendorExtensions.x-pagination.type}}> execute(){
+                {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}this.currentApiInstance.{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}});
+                {{#returnType}}
+                return new Page<{{vendorExtensions.x-pagination.type}}>(localVarResp.Data.data, localVarResp.Data.pagination, () => {
+                    try {
+                        return copy().CurrentPage((currentPage == null ? 1 : currentPage) + 1).execute();
+                    } catch (ApiException e) {
+                        throw new Exception(e.Message);
+                    }
+                }); 
+                {{/returnType}}
+            }
+            {{/vendorExtensions.x-client-paginated}}
+
+            private API{{operationId}}Request copy() {
+                API{{operationId}}Request copy = new API{{operationId}}Request({{className}} this.currentApiInstance{{#allParams}}{{#required}}{{#-first}}, {{/-first}}{{paramName}}{{/required}}{{/allParams}});
+                {{#allParams}}
+                {{^required}}
+                copy.{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{paramName}});
+                {{/required}}
+                {{/allParams}}
+                return copy;
+            }
+        }
+        {{/vendorExtensions.x-group-parameters}}
+            {{/operation}}
+
+    }
+
+}
+{{/operations}}

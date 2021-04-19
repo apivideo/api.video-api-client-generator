@@ -39,7 +39,7 @@
             <id>csharp</id>
             <properties>
                 <folder>csharp</folder>
-                <generatorName>csharp</generatorName>
+                <generatorName>video.api.client.generator.Csharp</generatorName>
             </properties>
         </profile>
         <profile>
