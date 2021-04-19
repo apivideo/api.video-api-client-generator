@@ -1,7 +1,6 @@
 package apivideosdk
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -43,7 +42,7 @@ func TestChapters_Get(t *testing.T) {
 		fmt.Fprint(w, chapterJSONResponses[0])
 	})
 
-	chapter, err := client.Chapters.Get(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en")
+	chapter, err := client.Chapters.Get("vi2ZEQZrOQckdYZ3X5sjPse8", "en")
 	if err != nil {
 		t.Errorf("Chapters.Get error: %v", err)
 	}
@@ -68,7 +67,7 @@ func TestChapters_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	chapters, err := client.Chapters.List(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", ChaptersApiListRequest{})
+	chapters, err := client.Chapters.List("vi2ZEQZrOQckdYZ3X5sjPse8", ChaptersApiListRequest{})
 	if err != nil {
 		t.Errorf("Chapters.List error: %v", err)
 	}
@@ -93,7 +92,7 @@ func TestChapters_Upload(t *testing.T) {
 	file := createTempFile("test.chapter", 1024*1024)
 	defer os.Remove(file.Name())
 
-	chapter, err := client.Chapters.UploadFile(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en", file)
+	chapter, err := client.Chapters.UploadFile("vi2ZEQZrOQckdYZ3X5sjPse8", "en", file)
 	if err != nil {
 		t.Errorf("Chapters.Upload error: %v", err)
 	}
@@ -112,7 +111,7 @@ func TestChapters_Delete(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Chapters.Delete(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en")
+	err := client.Chapters.Delete("vi2ZEQZrOQckdYZ3X5sjPse8", "en")
 	if err != nil {
 		t.Errorf("Chapters.Delete error: %v", err)
 	}

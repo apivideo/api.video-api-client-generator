@@ -1,7 +1,6 @@
 package apivideosdk
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -52,7 +51,7 @@ func TestCaptions_Get(t *testing.T) {
 		fmt.Fprint(w, captionJSONResponses[0])
 	})
 
-	caption, err := client.Captions.Get(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en")
+	caption, err := client.Captions.Get("vi2ZEQZrOQckdYZ3X5sjPse8", "en")
 	if err != nil {
 		t.Errorf("Captions.Get error: %v", err)
 	}
@@ -77,7 +76,7 @@ func TestCaptions_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	captions, err := client.Captions.List(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", CaptionsApiListRequest{})
+	captions, err := client.Captions.List("vi2ZEQZrOQckdYZ3X5sjPse8", CaptionsApiListRequest{})
 	if err != nil {
 		t.Errorf("Captions.List error: %v", err)
 	}
@@ -103,7 +102,7 @@ func TestCaptions_Upload(t *testing.T) {
 
 	defer os.Remove(file.Name())
 
-	caption, err := client.Captions.UploadFile(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en", file)
+	caption, err := client.Captions.UploadFile("vi2ZEQZrOQckdYZ3X5sjPse8", "en", file)
 	if err != nil {
 		t.Errorf("Captions.Upload error: %v", err)
 	}
@@ -135,7 +134,7 @@ func TestCaptions_Update(t *testing.T) {
 		fmt.Fprint(w, captionJSONResponses[0])
 	})
 
-	caption, err := client.Captions.Update(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en", CaptionsUpdatePayload{
+	caption, err := client.Captions.Update("vi2ZEQZrOQckdYZ3X5sjPse8", "en", CaptionsUpdatePayload{
 		Default: PtrBool(true),
 	})
 	if err != nil {
@@ -156,7 +155,7 @@ func TestCaptions_Delete(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Captions.Delete(context.Background(), "vi2ZEQZrOQckdYZ3X5sjPse8", "en")
+	err := client.Captions.Delete("vi2ZEQZrOQckdYZ3X5sjPse8", "en")
 	if err != nil {
 		t.Errorf("Captions.Delete error: %v", err)
 	}
