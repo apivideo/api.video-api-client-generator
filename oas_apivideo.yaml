@@ -691,7 +691,6 @@ paths:
                         value: John Doe
                       - key: Format
                         value: Tutorial
-                    scheduledAt: '2020-03-03T12:52:03.085Z'
                     publishedAt: '2020-07-14T23:36:18.598Z'
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
@@ -3909,6 +3908,16 @@ components:
             others to see. True means you are broadcasting to viewers, false
             means you are not.
           example: true
+        createdAt:
+              type: string
+              description: 'When the player was created, presented in ISO-8601 format.'
+              format: date-time
+              example: '2020-01-31T10:17:47+00:00'
+        updatedAt:
+              type: string
+              description: 'When the player was last updated, presented in ISO-8601 format.'
+              format: date-time
+              example: '2020-01-31T10:18:47+00:00'
     live-stream-session:
       title: Live Stream Session
       type: object
@@ -4259,7 +4268,7 @@ components:
         - timecode
       properties:
         timecode:
-          pattern: '00:00:00.00'
+          pattern: '\d{2}:\d{2}:\d{2}(\.\d{2})?'
           type: string
           description: |-
             Frame in video to be used as a placeholder before the video plays. 
