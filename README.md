@@ -24,12 +24,12 @@ To see the list of available profiles, see the "profile" column in the table of 
 
 | Language | Profile | Status | Repository |
 | ------- | ------ | ---- | ---- |
-| Java    |  java      | private beta | [java-api-client](https://github.com/apivideo/java-api-client) |
+| Java    |  java      | released | [java-api-client](https://github.com/apivideo/java-api-client) |
 | TypeScript        | typescript        | started | [typescript-api-client](https://github.com/apivideo/typescript-api-client) |
 | Php | php | to be started | - |
-| C# | csharp | to be started | - |
+| C# | csharp | private beta | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
 | Go | go | private beta |  [go-api-client](https://github.com/apivideo/go-api-client) |
-| Python | python | to be started | - |
+| Python | python | private beta | [python-api-client](https://github.com/apivideo/python-api-client) |
 
 ## Template files
 
