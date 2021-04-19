@@ -1,0 +1,65 @@
+{{>partial_header}}
+from dateutil.parser import parse as dateutil_parser
+from urllib3_mock import Responses
+
+from {{apiPackage}}.{{classVarName}} import {{classname}}  # noqa: E501
+from {{packageName}}.exceptions import ApiException, NotFoundException
+from {{modelPackage}}.metadata import Metadata
+{{#imports}}
+{{{import}}}
+{{/imports}}
+
+from helper import MainTest
+
+
+responses = Responses()
+
+
+class {{#operations}}Test{{classname}}(MainTest):
+    """{{classname}} unit test"""
+
+    def setUp(self):
+        super().setUp()
+        self.api = {{classname}}(self.client)  # noqa: E501
+
+    {{#operation}}
+    @responses.activate
+    def test_{{operationId}}(self):
+        """Test case for {{{operationId}}}
+
+{{#summary}}
+        {{{summary}}}  # noqa: E501
+{{/summary}}
+        """
+{{#responses.0.vendorExtensions.x-example-response-json}}
+        for status, json in self.load_json('{{#lambda.lowercase}}{{{baseName}}}{{/lambda.lowercase}}', '{{{operationId}}}'):
+            responses.reset()
+
+            kwargs = {
+            {{#requiredParams}}
+                {{#isBinary}}
+                '{{paramName}}': open('test_file', 'rb'),
+                {{/isBinary}}
+                {{^isBinary}}
+                '{{paramName}}': {{{example}}},
+                {{/isBinary}}
+            {{/requiredParams}}
+            }
+            url = '{{#lambda.underscorePath}}{{{path}}}{{/lambda.underscorePath}}'.format(**kwargs)
+
+            responses.add('{{httpMethod}}', url, body=json, status=int(status), content_type='application/json')
+
+            if status[0] == '4':
+                with self.assertRaises(ApiException) as context:
+                    self.api.{{{operationId}}}(**kwargs)
+                if status == '404':
+                    self.assertIsInstance(context.exception, NotFoundException)
+            else:
+                self.api.{{{operationId}}}(**kwargs)
+{{/responses.0.vendorExtensions.x-example-response-json}}
+{{^responses.0.vendorExtensions.x-example-response-json}}
+        pass
+{{/responses.0.vendorExtensions.x-example-response-json}}
+
+   {{/operation}}
+{{/operations}}

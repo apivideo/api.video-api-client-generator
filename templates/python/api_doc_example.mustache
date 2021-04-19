@@ -1,0 +1,80 @@
+```python
+import {{{packageName}}}
+from {{apiPackage}} import {{classVarName}}
+{{#imports}}
+{{{.}}}
+{{/imports}}
+{{#vendorExtensions.x-client-chunk-upload}}
+from apivideo.configuration import Configuration
+{{/vendorExtensions.x-client-chunk-upload}}
+from pprint import pprint
+
+# Enter a context with an instance of the API client
+{{#vendorExtensions.x-client-chunk-upload}}
+# When uploading a file you can change the chunk size (in octet)
+configuration = Configuration(chunk_size=10 * 1024 * 1024)
+with {{{packageName}}}.AuthenticatedApiClient(__API_KEY__, configuration=configuration) as api_client:
+{{/vendorExtensions.x-client-chunk-upload}}
+{{^vendorExtensions.x-client-chunk-upload}}
+with {{{packageName}}}.AuthenticatedApiClient(__API_KEY__) as api_client:
+{{/vendorExtensions.x-client-chunk-upload}}
+    # Create an instance of the API class
+    api_instance = {{classVarName}}.{{{classname}}}(api_client)
+{{#requiredParams}}
+{{^defaultValue}}
+    {{paramName}} = {{{example}}} # {{{dataType}}} | {{{description}}}
+{{/defaultValue}}
+{{/requiredParams}}
+{{#optionalParams}}
+    {{paramName}} = {{{example}}} # {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} if omitted the server will use the default value of {{{defaultValue}}}{{/defaultValue}}
+{{/optionalParams}}
+{{#requiredParams}}
+{{#-last}}
+
+    # example passing only required values which don't have defaults set
+    try:
+{{#summary}}
+        # {{{.}}}
+{{/summary}}
+        {{#returnType}}api_response = {{/returnType}}api_instance.{{{operationId}}}({{#requiredParams}}{{^defaultValue}}{{paramName}}{{^-last}}, {{/-last}}{{/defaultValue}}{{/requiredParams}})
+{{#returnType}}
+        pprint(api_response)
+{{/returnType}}
+    except {{{packageName}}}.ApiException as e:
+        print("Exception when calling {{classname}}->{{operationId}}: %s\n" % e)
+{{/-last}}
+{{/requiredParams}}
+{{#optionalParams}}
+{{#-last}}
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+{{#summary}}
+        # {{{.}}}
+{{/summary}}
+        {{#returnType}}api_response = {{/returnType}}api_instance.{{{operationId}}}({{#requiredParams}}{{^defaultValue}}{{paramName}}, {{/defaultValue}}{{/requiredParams}}{{#optionalParams}}{{paramName}}={{paramName}}{{^-last}}, {{/-last}}{{/optionalParams}})
+{{#returnType}}
+        pprint(api_response)
+{{/returnType}}
+    except {{{packageName}}}.ApiException as e:
+        print("Exception when calling {{classname}}->{{operationId}}: %s\n" % e)
+{{/-last}}
+{{/optionalParams}}
+{{^requiredParams}}
+{{^optionalParams}}
+
+    # example, this endpoint has no required or optional parameters
+    try:
+{{#summary}}
+        # {{{.}}}
+{{/summary}}
+        {{#returnType}}api_response = {{/returnType}}api_instance.{{{operationId}}}()
+{{#returnType}}
+        pprint(api_response)
+{{/returnType}}
+    except {{{packageName}}}.ApiException as e:
+        print("Exception when calling {{classname}}->{{operationId}}: %s\n" % e)
+{{/optionalParams}}
+{{/requiredParams}}
+```

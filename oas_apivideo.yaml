@@ -149,7 +149,7 @@ paths:
             type: array
             items:
               type: string
-          example: '"tags": ["captions", "dialogue"]'
+          example: '["captions", "dialogue"]'
         - name: metadata
           in: query
           description: >-
@@ -240,7 +240,7 @@ paths:
                           - key: Format
                             value: Tutorial
                         publishedAt: '2019-12-16T08:25:51+00:00'
-                        updateddAt: '2019-12-16T08:48:49+00:00'
+                        updatedAt: '2019-12-16T08:48:49+00:00'
                         source:
                           uri: /videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source
                         assets:
@@ -274,7 +274,7 @@ paths:
                           - key: Technology
                             value: Computers
                         publishedAt: '2019-12-16T08:25:51+00:00'
-                        updateddAt: '2019-12-16T08:48:49+00:00'
+                        updatedAt: '2019-12-16T08:48:49+00:00'
                         source:
                           uri: /videos/1b9d6ae8-8f57-4b6d-8552-d636926b4f5f/source
                         assets:
@@ -303,7 +303,7 @@ paths:
                           - key: Length
                             value: Short
                         publishedAt: '2019-12-16T08:25:51+00:00'
-                        updateddAt: '2019-12-16T08:48:49+00:00'
+                        updatedAt: '2019-12-16T08:48:49+00:00'
                         source:
                           uri: /videos/73129412-e320-4b93-99f6-59a85e3cedcd/source
                         assets:
@@ -691,7 +691,6 @@ paths:
                         value: John Doe
                       - key: Format
                         value: Tutorial
-                    scheduledAt: '2020-03-03T12:52:03.085Z'
                     publishedAt: '2020-07-14T23:36:18.598Z'
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
@@ -873,7 +872,7 @@ paths:
                       - key: Format
                         value: Tutorial
                     publishedAt: '2019-12-16T08:25:51+00:00'
-                    updateddAt: '2019-12-16T08:48:49+00:00'
+                    updatedAt: '2019-12-16T08:48:49+00:00'
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
                     assets:
@@ -3909,6 +3908,16 @@ components:
             others to see. True means you are broadcasting to viewers, false
             means you are not.
           example: true
+        createdAt:
+              type: string
+              description: 'When the player was created, presented in ISO-8601 format.'
+              format: date-time
+              example: '2020-01-31T10:17:47+00:00'
+        updatedAt:
+              type: string
+              description: 'When the player was last updated, presented in ISO-8601 format.'
+              format: date-time
+              example: '2020-01-31T10:18:47+00:00'
     live-stream-session:
       title: Live Stream Session
       type: object
@@ -4259,7 +4268,7 @@ components:
         - timecode
       properties:
         timecode:
-          pattern: '00:00:00.00'
+          pattern: '\d{2}:\d{2}:\d{2}(\.\d{2})?'
           type: string
           description: |-
             Frame in video to be used as a placeholder before the video plays. 

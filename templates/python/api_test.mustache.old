@@ -1,0 +1,32 @@
+{{>partial_header}}
+
+import unittest
+from urllib3_mock import Responses
+
+import {{packageName}}
+from {{apiPackage}}.{{classVarName}} import {{classname}}  # noqa: E501
+
+
+class {{#operations}}Test{{classname}}(unittest.TestCase):
+    """{{classname}} unit test stubs"""
+
+    def setUp(self):
+        self.api = {{classname}}({{packageName}}.AuthenticatedApiClient("__KEY__"))  # noqa: E501
+        self.response = Responses('{{packageName}}.rest.urllib3')
+
+   {{#operation}}
+    def test_{{operationId}}(self):
+        """Test case for {{{operationId}}}
+
+{{#summary}}
+        {{{summary}}}  # noqa: E501
+{{/summary}}
+        """
+        responses.add('{{httpMethod}}', '{{{path}}}', body=, status=200, content_type='application/json')
+        self.api.{{{operationId}}}()
+
+   {{/operation}}
+{{/operations}}
+
+if __name__ == '__main__':
+    unittest.main()

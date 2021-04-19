@@ -1,0 +1,16 @@
+# flake8: noqa
+
+{{>partial_header}}
+
+__version__ = "{{packageVersion}}"
+
+# import VideoApiClient
+from {{packageName}}.auth_api_client import AuthenticatedApiClient
+
+# import exceptions
+from {{packageName}}.exceptions import OpenApiException
+from {{packageName}}.exceptions import ApiAttributeError
+from {{packageName}}.exceptions import ApiTypeError
+from {{packageName}}.exceptions import ApiValueError
+from {{packageName}}.exceptions import ApiKeyError
+from {{packageName}}.exceptions import ApiException
