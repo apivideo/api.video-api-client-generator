@@ -18,7 +18,7 @@ pip install api.video
 
 ## Examples
 
-# Automatic authentification
+### Automatic authentification
 
 list all videos:
 
@@ -38,7 +38,7 @@ with {{packageName}}.AuthenticatedApiClient(api_key) as client:
 
 In this context the client will keep its authentification updated.
 
-# Manual authentification
+### Manual authentification
 
 If you rather update the access token manually:
 
@@ -64,7 +64,25 @@ except ApiAuthException:
 ...
 ```
 
+## Documentation for API Endpoints
 
-## Documentation
+All URIs are relative to *{{basePath}}*
 
-[All the documentation is in the `docs` directory.](docs/)
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}} API endpoints
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+
+## Documentation For Models
+
+{{#models}}{{#model}} - [{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
+{{/model}}{{/models}}

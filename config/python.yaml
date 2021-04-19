@@ -1,6 +1,12 @@
 licenseName: MIT
 packageName: apivideo
 projectName: api.video
+appShortDescription: api.video Python API client
+packageVersion: 1.0.0
+infoName: api.video ecosystem team
+infoEmail: ecosystem-team@api.video
+packageUrl: https://github.com/apivideo/python-api-client
+httpUserAgent: api.video client (python; v:1.0.0; )
 ignoredFiles:
   - gitlab-ci.mustache
   - travis.mustache
