@@ -1,37 +1,84 @@
+# https://openapi-generator.tech/docs/configuration/
+# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/languages/TypeScriptClientCodegen.java
+# https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript
+# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultCodegen.java
 licenseName: MIT
-supportsES6: true
 npmName: "@api.video/typescript-api-client"
 npmVersion: 1.0.0
-npmDescription: api.video java API client
+npmDescription: api.video typescript client
 npmAuthor: api.video ecosystem team
+
+# Defines the output folder for each kind of specific templates.
+# The naming is quite confusing because it was based on java "package" naming, but this is in fact just a "path".
+# API Model APIDocs ModelDocs APITests ModelTests SupportingFiles
+modelPackage: src/model
+apiPackage: src/api
+testPackage: test
+#apiTestFileFolder:
+#modelTestFileFolder:
+#docPackage: doc/
+apiDocFileFolder: doc/api
+modelDocFileFolder: doc/model
+
+#fileSuffix:
+#outputFolder:
+#embeddedTemplateDir:
+#templateDir: my_custom_templates
+# responseExamplePayloadFolder: test/payloads ???
+
 ignoredFiles:
-  - api/baseapi.mustache
-  - api/auth.mustache
-  - api/exception.mustache
-  - api/middleware.mustache
-  - auth/auth.mustache
-  - configuration.mustache
-  - git_push.sh.mustache
-  - http/http.mustache
-  - http/isomorphic-fetch.mustache
-  - http/servers.mustache
-  - middleware.mustache
-  - model/models_all.mustache
-  - rxjsStub.mustache
-  - servers.mustache
-  - services/configuration.mustache
-  - types/ObjectParamAPI.mustache
-  - types/ObservableAPI.mustache
-  - types/PromiseAPI.mustache
-  - util.mustache
-responseExamplePayloadFolder: tests/payloads
+#  # api
+#  - api/api.mustache
+#  - api/baseapi.mustache
+#  - api/exception.mustache
+#  - api/middleware.mustache
+#  # auth
+#  - auth/auth.mustache
+#  # http
+#  - http/http.mustache
+#  - http/isomorphic-fetch.mustache
+#  - http/jquery.mustache
+#  - http/servers.mustache
+#  # model
+#  - model/ObjectSerializer.ts.mustache
+#  - model/model.mustache
+#  - model/models_all.mustache
+#  # services
+#  - services/ObjectParamAPI.mustache
+#  - services/ObservableAPI.mustache
+#  - services/PromiseAPI.mustache
+#  - services/api.mustache
+#  - services/configuration.mustache
+#  - services/http.mustache
+#  - services/index.mustache
+#  # types
+#  - types/ObjectParamAPI.mustache
+#  - types/ObservableAPI.mustache
+#  - types/PromiseAPI.mustache
+#
+#  - .gitignore.mustache
+#  - README.mustache
+#  - configuration.mustache
+#  - git_push.sh.mustache
+#  - index.mustache
+#  - licenseInfo.mustache
+#  - package.mustache
+#  - rxjsStub.mustache
+#  - tsconfig.mustache
+#  - util.mustache
+  # This shouldn't be needed.
+  # These files should be automatically excluded from supporting files since they are configure in files.
+  - doc/api/api_doc.md.mustache
+  - doc/model/model_doc.md.mustache
+  - src/api/api.ts.mustache
+  - src/model/model.ts.mustache
+
 files:
-  gitignore:
-    folder: .
-    destinationFilename: .gitignore
-  client/HttpClient.ts:
-    folder: client/
-    destinationFilename: HttpClient.ts
-  client/ErrorHandler.ts:
-    folder: client/
-    destinationFilename: ErrorHandler.ts
+  doc/api/api_doc.md.mustache:
+    templateType: APIDocs
+  doc/model/model_doc.md.mustache:
+    templateType: ModelDocs
+  src/api/api.ts.mustache:
+    templateType: API # API Model APIDocs ModelDocs APITests ModelTests SupportingFiles
+  src/model/model.ts.mustache:
+    templateType: Model

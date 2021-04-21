@@ -1,9 +1,9 @@
-import * as FormData from 'form-data';
+import FormData from 'form-data';
 import { createReadStream } from 'fs';
-import got, { AfterResponseHook, ExtendOptions, Got, Headers, Response } from 'got';
-import { ObjectSerializer } from '../models/ObjectSerializer';
-import errorHandler from './ErrorHandler';
-import {version} from '../package.json';
+import got, { AfterResponseHook, ExtendOptions, Got, Headers, Response, RequestError } from 'got';
+import { ObjectSerializer } from './model/ObjectSerializer';
+import { version } from '../package.json';
+import ApiVideoError from './ApiVideoError';
 
 export type QueryOptions = Got | ExtendOptions;
 
@@ -24,23 +24,46 @@ export default class HttpClient {
       'User-Agent': `api.video SDK (nodejs; v:${version})`,
       'Accept': 'application/json, */*;q=0.8'
     };
-
-    console.log({version});
-
     this.baseRequest = got.extend({
       prefixUrl: this.baseUri,
       headers: this.headers,
+      mutableDefaults: true,
       hooks: {
-        afterResponse: !!this.apiKey 
-        ? [ 
-          this.isStillAuthenticated.bind(this), 
-        ]
-        : [],
-        beforeError: [
-          process.env.NODE_ENV !== 'production' ? errorHandler : e => e,
+        afterResponse: [
+          this.isStillAuthenticated.bind(this),
+        ],
+        beforeRequest: [
+          async (options) => {
+            if (!options.headers.Authorization) {
+              if (!this.accessToken) {
+                await this.getAccessToken.call(this);
+              }
+              // eslint-disable-next-line no-param-reassign
+              options.headers.Authorization = `${this.tokenType} ${this.accessToken}`;
+            }
+          },
         ],
       },
-      mutableDefaults: true,
+      handlers: [
+        (options, next) => {
+          if (options.isStream) {
+            return next(options);
+          }
+
+          return next(options)
+              .catch((error: Error) => {
+                if (error instanceof RequestError) {
+                  const { response } = error;
+                  const contentType = response?.headers['content-type'];
+                  if (contentType === 'application/problem+json') {
+                    throw new ApiVideoError(response);
+                  }
+                }
+
+                throw error;
+              });
+        },
+      ],
     });
   }
 

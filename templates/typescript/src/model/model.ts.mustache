@@ -2,7 +2,7 @@
 {{#models}}
 {{#model}}
 {{#tsImports}}
-import { {{classname}} } from './{{filename}}{{extensionForDeno}}';
+import { {{classname}} } from './{{filename}}';
 {{/tsImports}}
 
 {{#description}}
@@ -50,7 +50,7 @@ export class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
         {{/parent}}
     }
     {{/isArray}}
-    
+
     public constructor() {
         {{#parent}}
         super();

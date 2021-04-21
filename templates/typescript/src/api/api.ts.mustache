@@ -1,18 +1,15 @@
-import {ObjectSerializer} from '../models/ObjectSerializer';
-import HttpClient, { QueryOptions } from '../client/HttpClient';
 import { URLSearchParams } from 'url';
-
+import FormData from "form-data";
+import { ObjectSerializer } from '{{ modelPackage }}/ObjectSerializer';
+import HttpClient, { QueryOptions } from '../HttpClient';
 {{#imports}}
-import { {{classname}} } from '..{{filename}}';
+import { {{classname}} } from '{{filename}}';
 {{/imports}}
 {{#operations}}
 
 /**
  * {{#description}}{{{description}}}{{/description}}{{^description}}no description{{/description}}
  */
-{{#useInversify}}
-@injectable()
-{{/useInversify}}
 export class {{classname}} {
     private httpClient: HttpClient;
 
@@ -20,7 +17,7 @@ export class {{classname}} {
         this.httpClient = httpClient;
     }
 
-	{{#operation}}
+    {{#operation}}
     /**
      {{#notes}}
      * {{&notes}}
@@ -36,20 +33,20 @@ export class {{classname}} {
         const queryParams: QueryOptions = {};
 
         queryParams.headers = {};
-		{{#allParams}}
-		
-		{{#required}}
+        {{#allParams}}
+
+        {{#required}}
         // verify required parameter '{{paramName}}' is not null or undefined
         if ({{paramName}} === null || {{paramName}} === undefined) {
             throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
         }
 
-		{{/required}}
-		{{/allParams}}
-		// Path Params
-    	const localVarPath = '{{{path}}}'.substring(1){{#pathParams}}
+        {{/required}}
+        {{/allParams}}
+        // Path Params
+        const localVarPath = '{{{path}}}'.substring(1){{#pathParams}}
             .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
-		{{#queryParams}}
+        {{#queryParams}}
         {{#-first}}
 
         // Query Params
@@ -63,21 +60,21 @@ export class {{classname}} {
 
         queryParams.searchParams = urlSearchParams;
         {{/-last}}
-		{{/queryParams}}
-		{{#headerParams}}
+        {{/queryParams}}
+        {{#headerParams}}
         {{#-first}}
 
-		// Header Params
+        // Header Params
         {{/-first}}
         queryParams.headers["{{baseName}}"] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
-		{{/headerParams}}
-	    {{#hasFormParams}}
+        {{/headerParams}}
+        {{#hasFormParams}}
 
-		// Form Params
-		let localVarFormParams = new FormData();
+        // Form Params
+        let localVarFormParams = new FormData();
 
-		{{/hasFormParams}}
-		{{#formParams}}
+        {{/hasFormParams}}
+        {{#formParams}}
         {{#isArray}}
         if ({{paramName}}) {
         {{#isCollectionFormatMulti}}
@@ -107,13 +104,13 @@ export class {{classname}} {
              {{/isFile}}
         }
         {{/isArray}}
-		{{/formParams}}		
-	    {{#hasFormParams}}
+        {{/formParams}}
+        {{#hasFormParams}}
         queryParams.form = localVarFormParams;
-		{{/hasFormParams}}
-	    {{#bodyParam}}
+        {{/hasFormParams}}
+        {{#bodyParam}}
 
-		// Body Params
+        // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([{{#consumes}}
             "{{{mediaType}}}"{{^-last}},{{/-last}}
         {{/consumes}}]);
@@ -123,7 +120,7 @@ export class {{classname}} {
             ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"),
             contentType
         );;
-	    {{/bodyParam}}
+        {{/bodyParam}}
 
         queryParams.method = '{{httpMethod}}';
 

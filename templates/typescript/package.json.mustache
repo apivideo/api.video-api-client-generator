@@ -1,0 +1,49 @@
+{
+  "name": "@api.video/typescript-sdk",
+  "version": "{{ npmVersion }}",
+  "description": "api.video java API client",
+  "author": "api.video ecosystem team",
+  "engines": {
+    "node": "^14.16.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ApiVideo/typescript-api-client"
+  },
+  "bugs:": "https://github.com/ApiVideo/typescript-api-client/issues",
+  "keywords": [
+    "fetch",
+    "typescript",
+    "openapi-client",
+    "openapi-generator"
+  ],
+  "license": "{{ licenseName }}",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "mocha --require test/api/index.js --exclude test/sandbox.spec.js",
+    "test:sandbox": "node test/sandbox.spec.js",
+    "eslint": "eslint src/**/*.ts",
+    "prettier": "prettier-eslint --write 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "got": "^11.8.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "@types/got": "^9.6.11",
+    "@types/node": "^14.14.28",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.2.1",
+    "prettier-eslint-cli": "^5.0.1",
+    "typescript": "^3.9.3"
+  }
+}
