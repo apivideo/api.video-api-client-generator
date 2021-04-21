@@ -63,6 +63,7 @@ jobs:
             core.exportVariable('SHA_AUTHOR_EMAIL', commit.author.email);
 
       - name: Configure git user, add, commit and push changes if required
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           cd ${{ env.PROFILE_PATH }}
           git config user.name '${{ env.SHA_AUTHOR_NAME }}'
