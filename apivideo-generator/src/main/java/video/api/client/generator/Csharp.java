@@ -26,6 +26,7 @@ public class Csharp extends CSharpClientCodegen {
     @Override
     public void postProcessParameter(CodegenParameter parameter) {
         super.postProcessParameter(parameter);
+        this.modelTestTemplateFiles.remove("model_test.mustache");
     }
 
     @Override
@@ -124,6 +125,21 @@ public class Csharp extends CSharpClientCodegen {
         return super.postProcessOperationsWithModels(objs, allModels);
     }
 
+    @Override
+    public Map<String, Object> postProcessModels(Map<String, Object> objs) {
+        Map<String, Object> res = super.postProcessModels(objs);
+        List<Map> models = (List<Map>) res.get("models");
+
+        models.forEach(model -> {
+            ((CodegenModel)model.get("model")).vars.forEach(var -> {
+                if (var.defaultValue != null) {
+                    ((CodegenModel)model.get("model")).vendorExtensions.put("x-has-defaults", true);
+                }
+            });
+        });
+        return res;
+    }
+
     private void populateOperationResponse(CodegenOperation operation, CodegenResponse response) {
         response.vendorExtensions.put("allParams", operation.allParams);
         response.vendorExtensions.put("x-client-action", operation.vendorExtensions.get("x-client-action"));
@@ -144,9 +160,8 @@ public class Csharp extends CSharpClientCodegen {
             } catch (JsonProcessingException ignored) {
             }
 
-
             try {
-                String folder = getOutputDir() + "/src/VideoApiClient.Test/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
+                String folder = getOutputDir() + "/tests/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
                 Files.createDirectories(Paths.get(folder));
                 PrintWriter out = new PrintWriter(folder + response.code + ".json");
                 out.print(responseExample);

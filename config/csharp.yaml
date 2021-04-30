@@ -2,30 +2,35 @@ licenseName: MIT
 sourceFolder: src/
 groupId: video.api
 artifactDescription: api.video csharp API client
-artifactVersion: 1.0.0
+artifactVersion: 0.0.6
+httpUserAgent: api.video client (C#; v:0.0.6; )
 artifactId: csharp-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video
 developerEmail: ecosystem-team@api.video
-packageName: VideoApiClient
+packageName: ApiVideo
+artifactUrl: https://github.com/apivideo/csharp-api-client
+targetFramework: v4.5.2
 
 files:
   page.mustache:
-    folder: src/VideoApiClient/Model
+    folder: src/ApiVideo/Model
     destinationFilename: Page.cs
   pagination.md.mustache:
     folder: docs
     destinationFilename: Pagination.md
   ApiVideoClient.mustache:
-    folder: src/VideoApiClient/
-    destinationFilename: ApiVideoClient.cs
+    folder: src/ApiVideo/
+    destinationFilename: ApiVideo.cs
   AuthenticationManager.mustache:
-    folder: src/VideoApiClient/Client/
+    folder: src/ApiVideo/Client/
     destinationFilename: AuthenticationManager.cs
   EmptyArrayFixTypeConverter.mustache:
-    folder: src/VideoApiClient/Client/
+    folder: src/ApiVideo/Client/
     destinationFilename: EmptyArrayFixTypeConverter.cs
   IUploadProgressListener.mustache:
-    folder: src/VideoApiClient/Model
+    folder: src/ApiVideo/Model
     destinationFilename: IUploadProgressListener.cs
+  post-generate.sh:
+    destinationFilename: post-generate.sh

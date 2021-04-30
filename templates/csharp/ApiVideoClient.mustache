@@ -46,16 +46,8 @@ namespace {{packageName}}.Client
         /// Build an instance that targets the production environment using a custom OkHttp client
         /// </summary>
         /// <param name="client">the RestClient instance to use</param>
-        public ApiVideoClient(RestClient client) : this(new ApiClient(client, Environment.PRODUCTION.GetUrl()))
+        public ApiVideoClient(RestClient client) : this(new ApiClient(client))
         { 
-        }
-
-        /// <summary>
-        /// Build an instance that targets the production environment using a custom OkHttp client
-        /// </summary>
-        /// <param name="client">the RestClient instance to use</param>
-        /// <param name="environment">the target environment</param>
-        public ApiVideoClient(RestClient client, Environment environment) : this(new ApiClient(client, environment.GetUrl())) { 
         }
 
         private ApiVideoClient(ApiClient apiClient) {

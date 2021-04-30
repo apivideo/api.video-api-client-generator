@@ -54,8 +54,8 @@ namespace {{packageName}}.Client
         /// </summary>
         /// <param name="basePath">the api base path.</param>
         public ApiClient(string basePath) {
-            this.BasePath = basePath;
             this.RestClient = new RestClient(basePath);
+            this.RestClient.UserAgent = "{{httpUserAgent}}";
         }
         
         /// <summary>
@@ -64,8 +64,8 @@ namespace {{packageName}}.Client
         /// <param name="apiKey">the api key to use to authenticate to the API</param>
         /// <param name="basePath">the api base path.</param>
         public ApiClient(string apiKey,string basePath) {
-            this.BasePath = basePath;
             this.RestClient = new RestClient(basePath);
+            this.RestClient.UserAgent = "{{httpUserAgent}}";
             this.AuthManager = new AuthenticationManager(apiKey, this);
         }
 
@@ -73,10 +73,9 @@ namespace {{packageName}}.Client
         /// Constructor for ApiClient with custom http client.
         /// </summary>
         /// <param name="client">a RestClient instance used to make API call</param>
-        /// <param name="basePath">the api base path.</param>
-        public ApiClient(RestClient client,string basePath) {
-            this.BasePath = basePath;
+        public ApiClient(RestClient client) {
             this.RestClient = client;
+            this.RestClient.UserAgent = "{{httpUserAgent}}";
         }
 
         /// <summary>
@@ -107,10 +106,12 @@ namespace {{packageName}}.Client
         public RestClient RestClient { get; set; }
 
         /// <summary>
-        /// Gets or sets the api base path.
+        /// Sets the api base path.
         /// </summary>
-        /// <value>The base path</value>
-        public string BasePath { get; set; }
+        public void SetBasePath(string basePath) {
+            this.RestClient.BaseUrl = new Uri(basePath);
+        }
+
 
         /// <summary>
         /// Gets or sets the file upload chunk size
@@ -157,7 +158,7 @@ namespace {{packageName}}.Client
                 {{/netStandard}}
                 {{^netStandard}}
                 {{^supportsUWP}}
-                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName{{#isRestSharp_106_10_1_above}}, param.Value.ContentLength{{/isRestSharp_106_10_1_above}}, param.Value.ContentType);
+                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
                 {{/supportsUWP}}
                 {{#supportsUWP}}
                 byte[] paramWriter = null;

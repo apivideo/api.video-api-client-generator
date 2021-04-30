@@ -25,6 +25,16 @@ namespace {{packageName}}.Model {
 
     {{/vars}}
 
+{{#vendorExtensions.x-has-defaults}}
+    /// <summary>
+    /// Constructor. Set default values.
+    /// </summary>
+    public {{classname}}() {
+        {{#vars}}{{#defaultValue}}{{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} = {{{.}}};
+        {{/defaultValue}}{{/vars}}
+    }
+
+{{/vendorExtensions.x-has-defaults}}
     /// <summary>
     /// Get the string presentation of the object
     /// </summary>
