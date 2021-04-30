@@ -3,8 +3,10 @@
 # api.video Golang api client
 
 {{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
-This documentation helps you use the corresponding Golang client.
 
+## Warning
+
+This API client is still in beta. Please feel free to report any issue you may encounter.
 
 ## Installation
 ```bash
@@ -56,7 +58,7 @@ func main() {
 
     //Upload a video
     //First create a container
-    create, err := client.Videos.Create(apivideosdk.VideoCreatePayload{Title: "My video title"})
+    create, err := client.Videos.Create(apivideosdk.VideoCreationPayload{Title: "My video title"})
 
     if err != nil {
         fmt.Println(err)

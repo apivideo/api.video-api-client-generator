@@ -72,7 +72,7 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAllOfAssets{
+		Assets: &PlayerAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3Lony8J6NozV71Yxn8KVFn/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
@@ -93,29 +93,12 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAllOfAssets{
+		Assets: &PlayerAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3zY7qtojdW2EvMIU37707q/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
 	},
 }
-
-var playerRequestJSON = `{
-	"text": PtrString("rgba(255, 255, 255, 0.95)"),
-	"link": PtrString("rgba(255, 0, 0, 0.95)"),
-	"linkHover": PtrString("rgba(255, 255, 255, 0.75)"),
-	"trackPlayed": PtrString("rgba(255, 255, 255, 0.95)"),
-	"trackUnplayed": PtrString("rgba(255, 255, 255, 0.1)"),
-	"trackBackground": PtrString("rgba(0, 0, 0, 0)"),
-	"backgroundTop": PtrString("rgba(72, 4, 45, 1)"),
-	"backgroundBottom": PtrString("rgba(94, 95, 89, 1)"),
-	"backgroundText": PtrString("rgba(255, 255, 255, 0.95)"),
-	"enableApi": false,
-	"enableControls": true,
-	"forceAutoplay": false,
-	"hideTitle": false,
-	"forceLoop": false
-  }`
 
 var playerCreationPayload = PlayerCreationPayload{
 	Text:             PtrString("rgba(255, 255, 255, 0.95)"),

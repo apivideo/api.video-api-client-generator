@@ -8,7 +8,6 @@ import (
 	"os"
 	"reflect"
 	"testing"
-	"time"
 )
 
 var videoJSONResponses = []string{`{
@@ -79,11 +78,6 @@ var videoJSONResponses = []string{`{
   }`,
 }
 
-func getTime(timStr string) time.Time {
-	parsed, _ := time.Parse("2006-01-02T15:04:05.000Z", timStr)
-	return parsed
-}
-
 var videoStructs = []Video{
 	{
 		VideoId:     PtrString("vi4k0jvEUuaTdRAEjQ4Jfagz"),
@@ -146,30 +140,7 @@ var videoStructs = []Video{
 	},
 }
 
-var videoRequestJSON = `{
-	"title": "Maths video",
-	"description": "An amazing video explaining the string theory",
-	"public": true,
-	"mp4Support":true,
-	"playerId": "pl45KFKdlddgk654dspkze",
-	"tags": [
-	  "maths",
-	  "string theory",
-	  "video"
-	],
-	"metadata": [
-	  {
-		"key": "Author",
-		"value": "John Doe"
-	  },
-	  {
-		"key": "Format",
-		"value": "Tutorial"
-	  }
-	]
-  }`
-
-var videoCreatePayload = VideoCreatePayload{
+var videoCreatePayload = VideoCreationPayload{
 	Title:       "Maths video",
 	Description: PtrString("An amazing video explaining the string theory"),
 	Public:      PtrBool(true),
@@ -264,8 +235,8 @@ var videoStatusJSONResponse = `{
 	}
   }`
 
-var videoStatusStruct = Videostatus{
-	Ingest: &VideostatusIngest{
+var videoStatusStruct = VideoStatus{
+	Ingest: &VideoStatusIngest{
 		Status:   PtrString("uploaded"),
 		Filesize: PtrInt32(273579401),
 		ReceivedBytes: &[]BytesRange{
@@ -281,7 +252,7 @@ var videoStatusStruct = Videostatus{
 			},
 		},
 	},
-	Encoding: &VideostatusEncoding{
+	Encoding: &VideoStatusEncoding{
 		Playable: PtrBool(true),
 		Qualities: &[]Quality{
 			{
@@ -305,7 +276,7 @@ var videoStatusStruct = Videostatus{
 				Status:  PtrString("waiting"),
 			},
 		},
-		Metadata: &VideostatusEncodingMetadata{
+		Metadata: &VideoStatusEncodingMetadata{
 			Width:       PtrInt32(424),
 			Height:      PtrInt32(240),
 			Bitrate:     PtrFloat32(411),
@@ -590,7 +561,7 @@ func TestVideos_ChunkedUpload(t *testing.T) {
 
 	filesize := int64(8 * 1024 * 1024)
 	chunksize := int64(2 * 1024 * 1024)
-	nbRequests := (filesize / chunksize)
+	nbRequests := filesize / chunksize
 	file := createTempFile("test.video", filesize)
 	defer os.Remove(file.Name())
 

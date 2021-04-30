@@ -39,6 +39,7 @@ public class Go extends GoClientCodegen {
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
         Map<String, CodegenModel> model = new HashMap<>();
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
+        Set<String> additionalImports = new HashSet<>();
 
         Set<String> seenModelNames = new HashSet<>();
 
@@ -63,6 +64,10 @@ public class Go extends GoClientCodegen {
                         }
                     });
                 }
+
+                operation.queryParams.forEach(queryParam -> {
+                    if(queryParam.vendorExtensions.containsKey("x-key-value-serialized-param")) additionalImports.add("fmt");
+                });
 
                 // overwrite operationId & nickname values of the operation with the x-client-action
                 if(StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
@@ -99,6 +104,11 @@ public class Go extends GoClientCodegen {
                 ioMap.put("import", "io");
                 imports.add(ioMap);
             }
+            additionalImports.forEach(imp -> {
+                HashMap<String, String> ioMap = new HashMap<>();
+                ioMap.put("import", imp);
+                imports.add(ioMap);
+            });
         }
         //imports.add(Collections.singletonMap("import", "os"))
 
