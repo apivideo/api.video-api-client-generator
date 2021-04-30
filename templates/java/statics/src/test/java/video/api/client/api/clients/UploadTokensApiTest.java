@@ -143,9 +143,9 @@ public class UploadTokensApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             assertThatThrownBy(() -> api.createToken(null)).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'tokenCreatePayload' when calling createToken");
+                    .hasMessage("Missing the required parameter 'tokenCreationPayload' when calling createToken");
 
-            assertThatNoException().isThrownBy(() -> api.createToken(new TokenCreatePayload()));
+            assertThatNoException().isThrownBy(() -> api.createToken(new TokenCreationPayload()));
         }
 
         @Test
@@ -153,7 +153,7 @@ public class UploadTokensApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            UploadToken res = api.createToken(new TokenCreatePayload());
+            UploadToken res = api.createToken(new TokenCreationPayload());
 
             assertThat(res.getToken()).isEqualTo("to1tcmSFHeYY5KzyhOqVKMKb");
             assertThat(res.getTtl()).isEqualTo(3600);
@@ -164,7 +164,7 @@ public class UploadTokensApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, "");
 
-            assertThatThrownBy(() -> api.createToken(new TokenCreatePayload())).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.createToken(new TokenCreationPayload())).isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400)).hasMessage("");
         }
     }

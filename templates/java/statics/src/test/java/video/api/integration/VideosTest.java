@@ -37,7 +37,7 @@ public class VideosTest {
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos()
-                    .create(new VideoCreatePayload().title("[Java-SDK-tests] upload with chunk")._public(false));
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] upload with chunk")._public(false));
         }
 
         @Test
@@ -86,7 +86,7 @@ public class VideosTest {
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos()
-                    .create(new VideoCreatePayload().title("[Java-SDK-tests] upload without chunk"));
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] upload without chunk"));
         }
 
         @Test
@@ -132,7 +132,7 @@ public class VideosTest {
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos()
-                    .create(new VideoCreatePayload().title("[Java-SDK-tests] video updates"));
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] video updates"));
         }
 
         @Test
@@ -171,7 +171,7 @@ public class VideosTest {
 
         @BeforeAll
         public void createVideo() throws ApiException {
-            this.testVideo = apiClient.videos().create(new VideoCreatePayload().title("[Java-SDK-tests] get"));
+            this.testVideo = apiClient.videos().create(new VideoCreationPayload().title("[Java-SDK-tests] get"));
         }
 
         @Test
@@ -197,7 +197,8 @@ public class VideosTest {
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos()
-                    .create(new VideoCreatePayload().metadata(Collections.singletonList(new Metadata("key1", "value1")))
+                    .create(new VideoCreationPayload()
+                            .metadata(Collections.singletonList(new Metadata("key1", "value1")))
                             .title("[Java-SDK-tests] list metadatas"));
         }
 
@@ -205,8 +206,7 @@ public class VideosTest {
         public void listMetadataNotFound() throws ApiException {
             Map<String, String> metadata = new HashMap<>();
             metadata.put("key1", "valueNotFound");
-            Page<Video> page = apiClient.videos().list().metadata(metadata)
-                    .execute();
+            Page<Video> page = apiClient.videos().list().metadata(metadata).execute();
 
             assertThat(page.getItemsTotal()).isEqualTo(0);
         }
@@ -215,8 +215,7 @@ public class VideosTest {
         public void listMetadataFound() throws ApiException {
             Map<String, String> metadata = new HashMap<>();
             metadata.put("key1", "value1");
-            Page<Video> page = apiClient.videos().list().metadata(metadata)
-                    .execute();
+            Page<Video> page = apiClient.videos().list().metadata(metadata).execute();
 
             assertThat(page.getItemsTotal()).isGreaterThan(0);
         }
@@ -236,7 +235,7 @@ public class VideosTest {
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos().create(
-                    new VideoCreatePayload().tags(Arrays.asList("tag1", "tag2")).title("[Java-SDK-tests] list tags"));
+                    new VideoCreationPayload().tags(Arrays.asList("tag1", "tag2")).title("[Java-SDK-tests] list tags"));
         }
 
         @Test
@@ -267,7 +266,7 @@ public class VideosTest {
 
         @BeforeAll
         public void createVideo() throws ApiException {
-            this.testVideo = apiClient.videos().create(new VideoCreatePayload().title("[Java-SDK-tests] thumbnail"));
+            this.testVideo = apiClient.videos().create(new VideoCreationPayload().title("[Java-SDK-tests] thumbnail"));
         }
 
         @Test
@@ -298,17 +297,18 @@ public class VideosTest {
     @Nested
     @DisplayName("video status")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    class VideoStatus {
+    class VideoStatusTest {
         private Video testVideo;
 
         @BeforeAll
         public void createVideo() throws ApiException {
-            this.testVideo = apiClient.videos().create(new VideoCreatePayload().title("[Java-SDK-tests] videoStatus"));
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] videoStatus"));
         }
 
         @Test
         public void getVideoStatus() throws ApiException {
-            Videostatus videoStatus = apiClient.videos().getStatus(testVideo.getVideoId());
+            VideoStatus videoStatus = apiClient.videos().getStatus(testVideo.getVideoId());
 
             assertThat(videoStatus.getIngest()).isNull();
             assertThat(videoStatus.getEncoding()).isNotNull();

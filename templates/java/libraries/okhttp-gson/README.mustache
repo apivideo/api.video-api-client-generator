@@ -1,3 +1,5 @@
+![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
+
 # {{artifactDescription}}
 
 {{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
@@ -69,7 +71,7 @@ public class Example {
     File myVideoFile = new File("my-video.mp4");
 
     try {
-        Video video = apiVideoClient.videos().create(new VideoCreatePayload().title("my video"));
+        Video video = apiVideoClient.videos().create(new VideoCreationPayload().title("my video"));
         video = apiVideoClient.videos().upload(video.getVideoId(), myVideoFile);
         System.out.println(video);
     } catch (ApiException e) {
@@ -134,8 +136,3 @@ ApiVideoClient apiVideoClient = new ApiVideoClient();
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-
-## Author
-
-{{#apiInfo}}{{#apis}}{{#-last}}{{infoEmail}}
-{{/-last}}{{/apis}}{{/apiInfo}}

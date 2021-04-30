@@ -181,9 +181,9 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Videostatus res = api.getStatus("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            VideoStatus res = api.getStatus("vi4k0jvEUuaTdRAEjQ4Jfrgz");
 
-            assertThat(res.getIngest().getStatus()).isEqualTo(VideostatusIngest.StatusEnum.UPLOADED);
+            assertThat(res.getIngest().getStatus()).isEqualTo(VideoStatusIngest.StatusEnum.UPLOADED);
             assertThat(res.getIngest().getFilesize()).isEqualTo(273579401);
             assertThat(res.getIngest().getReceivedBytes())
                     .isEqualTo(Arrays.asList(new BytesRange().from(0).to(134217727).total(273579401),
@@ -436,12 +436,12 @@ public class VideosApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             assertThatThrownBy(() -> api.create(null)).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'videoCreatePayload' when calling create");
+                    .hasMessage("Missing the required parameter 'videoCreationPayload' when calling create");
 
-            assertThatThrownBy(() -> api.create(new VideoCreatePayload())).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'videoCreatePayload.title' when calling create");
+            assertThatThrownBy(() -> api.create(new VideoCreationPayload())).isInstanceOf(ApiException.class)
+                    .hasMessage("Missing the required parameter 'videoCreationPayload.title' when calling create");
 
-            assertThatNoException().isThrownBy(() -> api.create(new VideoCreatePayload().title("title")));
+            assertThatNoException().isThrownBy(() -> api.create(new VideoCreationPayload().title("title")));
         }
 
         @Test
@@ -449,7 +449,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus201Test() throws ApiException {
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            Video res = api.create(new VideoCreatePayload().title("title"));
+            Video res = api.create(new VideoCreationPayload().title("title"));
 
             assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
             assertThat(res.getPlayerId()).isEqualTo("pl4k0jvEUuaTdRAEjQ4Jfrgz");
@@ -482,7 +482,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            assertThatThrownBy(() -> api.create(new VideoCreatePayload().title("title")))
+            assertThatThrownBy(() -> api.create(new VideoCreationPayload().title("title")))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
                     .hasMessage("This attribute is required.");
