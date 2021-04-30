@@ -210,8 +210,8 @@ paths:
           schema:
             type: string
           example: asc
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -422,7 +422,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/video-create-payload'
+              $ref: '#/components/schemas/video-creation-payload'
       responses:
         '201':
           description: Created
@@ -1082,7 +1082,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/videostatus'
+                $ref: '#/components/schemas/video-status'
               examples:
                 response:
                   value:
@@ -1180,8 +1180,8 @@ paths:
               - asc
               - desc
           example: asc
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -1230,7 +1230,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/token-create-payload'
+              $ref: '#/components/schemas/token-creation-payload'
       responses:
         '200':
           description: Success
@@ -1479,8 +1479,8 @@ paths:
               - asc
               - desc
           example: desc
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -1571,7 +1571,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/live-stream-create-payload'
+              $ref: '#/components/schemas/live-stream-creation-payload'
       responses:
         '200':
           description: Success
@@ -2116,8 +2116,8 @@ paths:
           schema:
             type: string
           example: vi4k0jvEUuaTdRAEjQ4Prklg
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -2345,8 +2345,8 @@ paths:
           schema:
             type: string
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -2433,8 +2433,8 @@ paths:
               - asc
               - desc
           example: asc
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -2543,7 +2543,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/playerCreationPayload'
+              $ref: '#/components/schemas/player-creation-payload'
       responses:
         '201':
           description: Created
@@ -2707,7 +2707,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/playerUpdatePayload'
+              $ref: '#/components/schemas/player-update-payload'
       responses:
         '200':
           description: Success
@@ -2910,8 +2910,8 @@ paths:
           example: >-
             [{"key": "Author", "value": "John Doe"}, {"key": "Format", "value":
             "Tutorial"}]
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -3018,8 +3018,8 @@ paths:
             type: string
             format: period
           example: '2019-01-01'
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -3109,8 +3109,8 @@ paths:
           schema:
             type: string
           example: psEmFwGQUAXR2lFHj5nDOpy
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -3260,8 +3260,8 @@ paths:
           schema:
             type: string
           example: video.encoding.quality.completed
-        - $ref: '#/components/parameters/currentPage'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -3314,7 +3314,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhooks-create-payload'
+              $ref: '#/components/schemas/webhooks-creation-payload'
       responses:
         '201':
           description: Created
@@ -3430,7 +3430,7 @@ x-client-base-paths:
   sandbox: 'https://sandbox.api.video'
 components:
   parameters:
-    currentPage:
+    current-page:
       name: currentPage
       in: query
       description: 'Choose the number of search results to return per page. Minimum value: 1'
@@ -3441,7 +3441,7 @@ components:
         type: integer
         default: 1
       example: 2
-    pageSize:
+    page-size:
       name: pageSize
       in: query
       description: 'Results per page. Allowed values 1-100, default is 25.'
@@ -3571,7 +3571,7 @@ components:
         status:
           type: integer
     video:
-      title: video
+      title: Video
       type: object
       properties:
         videoId:
@@ -3625,9 +3625,9 @@ components:
           items:
             $ref: '#/components/schemas/metadata'
         source:
-          $ref: '#/components/schemas/videoSource'
+          $ref: '#/components/schemas/video-source'
         assets:
-          $ref: '#/components/schemas/videoAssets'
+          $ref: '#/components/schemas/video-assets'
         playerId:
           type: string
           description: |
@@ -3670,61 +3670,102 @@ components:
           - video_download
           - video_update
     player:
-      allOf:
-        - $ref: '#/components/schemas/playerinput'
-        - type: object
+      type: object
+      properties:
+        text:
+          type: string
+          description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
+        link:
+          type: string
+          description: 'RGBA color for all controls. Default: rgba(255, 255, 255, 1)'
+        linkHover:
+          type: string
+          description: >-
+            RGBA color for all controls when hovered. Default: rgba(255, 255,
+            255, 1)
+        trackPlayed:
+          type: string
+          description: >-
+            RGBA color playback bar: played content. Default: rgba(88, 131, 255,
+            .95)
+        trackUnplayed:
+          type: string
+          description: >-
+            RGBA color playback bar: downloaded but unplayed (buffered) content.
+            Default: rgba(255, 255, 255, .35)
+        trackBackground:
+          type: string
+          description: >-
+            RGBA color playback bar: background. Default: rgba(255, 255, 255,
+            .2)
+        backgroundTop:
+          type: string
+          description: 'RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)'
+        backgroundBottom:
+          type: string
+          description: 'RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)'
+        backgroundText:
+          type: string
+          description: 'RGBA color for title text. Default: rgba(255, 255, 255, 1)'
+        enableApi:
+          type: boolean
+          description: 'enable/disable player SDK access. Default: true'
+        enableControls:
+          type: boolean
+          description: 'enable/disable player controls. Default: true'
+        forceAutoplay:
+          type: boolean
+          description: 'enable/disable player autoplay. Default: false'
+        hideTitle:
+          type: boolean
+          description: 'enable/disable title. Default: false'
+        forceLoop:
+          type: boolean
+          description: 'enable/disable looping. Default: false'
+        playerId:
+          type: string
+          example: pl45KFKdlddgk654dspkze
+        createdAt:
+          type: string
+          description: 'When the player was created, presented in ISO-8601 format.'
+          format: date-time
+          example: '2020-01-31T10:17:47+00:00'
+        updatedAt:
+          type: string
+          description: 'When the player was last updated, presented in ISO-8601 format.'
+          format: date-time
+          example: '2020-01-31T10:18:47+00:00'
+        shapeMargin:
+          type: integer
+          description: Deprecated
+        shapeRadius:
+          type: integer
+          description: Deprecated
+        shapeAspect:
+          type: string
+          description: Deprecated
+        shapeBackgroundTop:
+          type: string
+          description: Deprecated
+        shapeBackgroundBottom:
+          type: string
+          description: Deprecated
+        linkActive:
+          type: string
+          description: Deprecated
+        assets:
+          type: object
           properties:
-            playerId:
+            logo:
               type: string
-              example: pl45KFKdlddgk654dspkze
-            createdAt:
+              description: The name of the file containing the logo you want to use.
+              example: mylogo.jpg
+            link:
               type: string
-              description: 'When the player was created, presented in ISO-8601 format.'
-              format: date-time
-              example: '2020-01-31T10:17:47+00:00'
-            updatedAt:
-              type: string
-              description: 'When the player was last updated, presented in ISO-8601 format.'
-              format: date-time
-              example: '2020-01-31T10:18:47+00:00'
-            shapeMargin:
-              type: integer
-              description: Deprecated
-            shapeRadius:
-              type: integer
-              description: Deprecated
-            shapeAspect:
-              type: string
-              description: Deprecated
-            shapeBackgroundTop:
-              type: string
-              description: Deprecated
-            shapeBackgroundBottom:
-              type: string
-              description: Deprecated
-            linkActive:
-              type: string
-              description: Deprecated
-            assets:
-              type: object
-              properties:
-                logo:
-                  type: string
-                  description: The name of the file containing the logo you want to use.
-                  example: mylogo.jpg
-                link:
-                  type: string
-                  description: The path to the file containing your logo.
-                  example: path/to/my/logo/mylogo.jpg
+              description: The path to the file containing your logo.
+              example: path/to/my/logo/mylogo.jpg
       title: Player
-    playerCreationPayload:
-      allOf:
-        - $ref: '#/components/schemas/playerinput'
-    playerUpdatePayload:
-      allOf:
-        - $ref: '#/components/schemas/playerinput'
-    playerinput:
-      title: PlayerInput
+    player-creation-payload:
       type: object
       properties:
         text:
@@ -3782,31 +3823,60 @@ components:
           type: boolean
           description: 'enable/disable looping. Default: false'
           default: false
-      example:
-        assets:
-          logo: 'https://cdn.api.video/player/pl14Db6oMJRH6SRVoOwORacK/logo.png'
-          link: 'https://api.video'
-        shapeMargin: 10
-        shapeRadius: 3
-        shapeAspect: flat
-        shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-        shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
-        text: 'rgba(255, 255, 255, .95)'
-        link: 'rgba(255, 0, 0, .95)'
-        linkHover: 'rgba(255, 255, 255, .75)'
-        linkActive: 'rgba(255, 0, 0, .75)'
-        trackPlayed: 'rgba(255, 255, 255, .95)'
-        trackUnplayed: 'rgba(255, 255, 255, .1)'
-        trackBackground: 'rgba(0, 0, 0, 0)'
-        backgroundTop: 'rgba(72, 4, 45, 1)'
-        backgroundBottom: 'rgba(94, 95, 89, 1)'
-        backgroundText: 'rgba(255, 255, 255, .95)'
-        language: en
-        enableApi: true
-        enableControls: true
-        forceAutoplay: false
-        hideTitle: false
-        forceLoop: false
+    player-update-payload:
+      title: PlayerUpdatePayload
+      type: object
+      properties:
+        text:
+          type: string
+          description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
+        link:
+          type: string
+          description: 'RGBA color for all controls. Default: rgba(255, 255, 255, 1)'
+        linkHover:
+          type: string
+          description: >-
+            RGBA color for all controls when hovered. Default: rgba(255, 255,
+            255, 1)
+        trackPlayed:
+          type: string
+          description: >-
+            RGBA color playback bar: played content. Default: rgba(88, 131, 255,
+            .95)
+        trackUnplayed:
+          type: string
+          description: >-
+            RGBA color playback bar: downloaded but unplayed (buffered) content.
+            Default: rgba(255, 255, 255, .35)
+        trackBackground:
+          type: string
+          description: >-
+            RGBA color playback bar: background. Default: rgba(255, 255, 255,
+            .2)
+        backgroundTop:
+          type: string
+          description: 'RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)'
+        backgroundBottom:
+          type: string
+          description: 'RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)'
+        backgroundText:
+          type: string
+          description: 'RGBA color for title text. Default: rgba(255, 255, 255, 1)'
+        enableApi:
+          type: boolean
+          description: 'enable/disable player SDK access. Default: true'
+        enableControls:
+          type: boolean
+          description: 'enable/disable player controls. Default: true'
+        forceAutoplay:
+          type: boolean
+          description: 'enable/disable player autoplay. Default: false'
+        hideTitle:
+          type: boolean
+          description: 'enable/disable title. Default: false'
+        forceLoop:
+          type: boolean
+          description: 'enable/disable looping. Default: false'
     subtitle:
       title: Subtitle
       type: object
@@ -3825,21 +3895,21 @@ components:
           example: false
           default: false
     video-session:
-      title: Video Session
+      title: VideoSession
       type: object
       properties:
         session:
-          $ref: '#/components/schemas/video_session_session'
+          $ref: '#/components/schemas/video-session-session'
         location:
-          $ref: '#/components/schemas/video_session_location'
+          $ref: '#/components/schemas/video-session-location'
         referrer:
-          $ref: '#/components/schemas/video_session_referrer'
+          $ref: '#/components/schemas/video-session-referrer'
         device:
-          $ref: '#/components/schemas/video_session_device'
+          $ref: '#/components/schemas/video-session-device'
         os:
-          $ref: '#/components/schemas/video_session_os'
+          $ref: '#/components/schemas/video-session-os'
         client:
-          $ref: '#/components/schemas/video_session_client'
+          $ref: '#/components/schemas/video-session-client'
       example:
         session:
           sessionId: psEmFwGQUAXR2lFHj5nDOpy
@@ -3896,7 +3966,7 @@ components:
             unique token for each view.
           example: true
         assets:
-          $ref: '#/components/schemas/live_stream_assets'
+          $ref: '#/components/schemas/live-stream-assets'
         playerId:
           type: string
           description: The unique identifier for the player.
@@ -3919,23 +3989,23 @@ components:
               format: date-time
               example: '2020-01-31T10:18:47+00:00'
     live-stream-session:
-      title: Live Stream Session
+      title: LiveStreamSession
       type: object
       properties:
         session:
-          $ref: '#/components/schemas/live_stream_session_session'
+          $ref: '#/components/schemas/live-stream-session-session'
         location:
-          $ref: '#/components/schemas/live_stream_session_location'
+          $ref: '#/components/schemas/live-stream-session-location'
         referrer:
-          $ref: '#/components/schemas/live_stream_session_referrer'
+          $ref: '#/components/schemas/live-stream-session-referrer'
         device:
-          $ref: '#/components/schemas/live_stream_session_device'
+          $ref: '#/components/schemas/live-stream-session-device'
         os:
-          $ref: '#/components/schemas/video_session_os'
+          $ref: '#/components/schemas/video-session-os'
         client:
-          $ref: '#/components/schemas/live_stream_session_client'
+          $ref: '#/components/schemas/live-stream-session-client'
     player-session-event:
-      title: Player Session Event
+      title: PlayerSessionEvent
       type: object
       properties:
         type:
@@ -3978,14 +4048,14 @@ components:
           type: string
           description: URL of the webhook
           example: 'http://clientnotificationserver.com/notif?myquery=query'
-    videostatus:
+    video-status:
       title: VideoStatus
       type: object
       properties:
         ingest:
-          $ref: '#/components/schemas/videostatus_ingest'
+          $ref: '#/components/schemas/video-status-ingest'
         encoding:
-          $ref: '#/components/schemas/videostatus_encoding'
+          $ref: '#/components/schemas/video-status-encoding'
       example:
         ingest:
           status: uploaded
@@ -4026,7 +4096,7 @@ components:
             audioCodec: aac
             aspectRatio: 16/9
     quality:
-      title: quality
+      title: Quality
       type: object
       properties:
         quality:
@@ -4054,8 +4124,8 @@ components:
             - encoding
             - encoded
             - failed
-    bytes_range:
-      title: bytes_range
+    bytes-range:
+      title: BytesRange
       type: object
       properties:
         from:
@@ -4110,7 +4180,7 @@ components:
           format: date-time
           example: '2019-12-16T09:25:51+00:00'
     authenticate-payload:
-      title: apiKey
+      title: ApiKey
       required:
         - apiKey
       type: object
@@ -4123,7 +4193,7 @@ components:
       example:
         apiKey: 9VxMaPgsaFg7EBqmuspSzF7
     refresh-token-payload:
-      title: refreshToken
+      title: RefreshToken
       required:
         - refreshToken
       type: object
@@ -4153,7 +4223,7 @@ components:
         pagination:
           $ref: '#/components/schemas/pagination'
     metadata:
-      title: metadata
+      title: Metadata
       type: object
       x-client-all-args-constructor: true
       properties:
@@ -4165,11 +4235,11 @@ components:
           type: string
           description: A variable which belongs to the data set.
           example: Green
-    video-create-payload:
+    video-creation-payload:
       required:
         - title
       type: object
-      title: videoCreationPayload
+      title: VideoCreationPayload
       properties:
         title:
           type: string
@@ -4263,7 +4333,7 @@ components:
           example: '@/path/to/video.mp4'
     video-thumbnail-pick-payload:
       type: object
-      title: pickThumbnailPayload
+      title: ThumbnailPickPayload
       required:
         - timecode
       properties:
@@ -4281,6 +4351,7 @@ components:
       example:
         timecode: '00:00:00.000'
     video-thumbnail-upload-payload:
+      title: VideoThumbnailUploadPayload
       required:
         - file
       type: object
@@ -4291,7 +4362,7 @@ components:
           format: binary
     video-update-payload:
       type: object
-      title: videoUpdatePayload
+      title: VideoUpdatePayload
       properties:
         playerId:
           type: string
@@ -4353,7 +4424,7 @@ components:
           - key: Format
             value: Tutorial
     token-list-response:
-      title: uploadTokens
+      title: UploadTokens
       required:
         - data
         - pagination
@@ -4366,8 +4437,8 @@ components:
             $ref: '#/components/schemas/upload-token'
         pagination:
           $ref: '#/components/schemas/pagination'
-    token-create-payload:
-      title: tokenCreationPayload
+    token-creation-payload:
+      title: TokenCreationPayload
       type: object
       properties:
         ttl:
@@ -4382,6 +4453,7 @@ components:
       example:
         ttl: 3600
     token-upload-payload:
+      title: tokenUploadPayload
       required:
         - file
       type: object
@@ -4412,8 +4484,8 @@ components:
             $ref: '#/components/schemas/live-stream'
         pagination:
           $ref: '#/components/schemas/pagination'
-    live-stream-create-payload:
-      title: liveStreamCreationPayload
+    live-stream-creation-payload:
+      title: LiveStreamCreationPayload
       required:
         - name
       type: object
@@ -4474,6 +4546,7 @@ components:
             want to update.
           example: pl45KFKdlddgk654dspkze
     captions-upload-payload:
+      title: CaptionsUploadPayload
       required:
         - file
       type: object
@@ -4484,6 +4557,7 @@ components:
           format: binary
           example: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
     live-stream-thumbnail-upload-payload:
+      title: LiveStreamThumbnailUploadPayload
       required:
         - file
       type: object
@@ -4493,7 +4567,7 @@ components:
           description: The image to be added as a thumbnail.
           format: binary
     captions-update-payload:
-      title: UpdateCaptionPayload
+      title: CaptionsUpdatePayload
       type: object
       properties:
         default:
@@ -4509,7 +4583,7 @@ components:
         pagination:
           $ref: '#/components/schemas/pagination'
     chapters-update-payload:
-      title: UpdateChapterPayload
+      title: ChaptersUpdatePayload
       required:
         - file
       type: object
@@ -4539,6 +4613,7 @@ components:
         pagination:
           $ref: '#/components/schemas/pagination'
     players-upload-logo-payload:
+      title: PlayersUploadLogoPayload
       required:
         - file
         - link
@@ -4594,7 +4669,8 @@ components:
             $ref: '#/components/schemas/webhook'
         pagination:
           $ref: '#/components/schemas/pagination'
-    webhooks-create-payload:
+    webhooks-creation-payload:
+      title: WebhooksCreationPayloas
       required:
         - events
         - url
@@ -4621,7 +4697,7 @@ components:
         events:
           - video.encoding.quality.completed
         url: 'http://clientnotificationserver.com/notif?myquery=query'
-    pagination_link:
+    pagination-link:
       type: object
       title: PaginationLink
       properties:
@@ -4630,14 +4706,14 @@ components:
         uri:
           type: string
           format: uri
-    video_source_live_stream_link:
+    video-source-live-stream-link:
       type: object
       properties:
         rel:
           type: string
         uri:
           type: string
-    video_source_live_stream:
+    video-source-live-stream:
       type: object
       properties:
         liveStreamId:
@@ -4647,9 +4723,10 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/video_source_live_stream_link'
+            $ref: '#/components/schemas/video-source-live-stream-link'
       description: This appears if the video is from a Live Record.
-    videoSource:
+    video-source:
+      title: VideoSource
       type: object
       properties:
         uri:
@@ -4659,9 +4736,10 @@ components:
         type:
           type: string
         liveStream:
-          $ref: '#/components/schemas/video_source_live_stream'
+          $ref: '#/components/schemas/video-source-live-stream'
       description: Source information about the video.
-    videoAssets:
+    video-assets:
+      title: VideoAssets
       type: object
       properties:
         hls:
@@ -4702,7 +4780,8 @@ components:
       description: >-
         Collection of details about the video object that you can use to work
         with the video object.
-    video_session_session:
+    video-session-session:
+      title: VideoSessionSession
       type: object
       properties:
         sessionId:
@@ -4721,7 +4800,8 @@ components:
           description: 'When the video session ended, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T12:45:01.109+00'
-    video_session_location:
+    video-session-location:
+      title: VideoSessionLocation
       type: object
       properties:
         country:
@@ -4733,7 +4813,8 @@ components:
           description: The city of the viewer.
           example: Paris
       description: The location of the viewer.
-    video_session_referrer:
+    video-session-referrer:
+      title: VideoSessionReferrer
       type: object
       properties:
         url:
@@ -4756,7 +4837,8 @@ components:
         searchTerm:
           type: string
           description: The search term they typed to arrive at the video session.
-    video_session_device:
+    video-session-device:
+      title: VideoSessionDevice
       type: object
       properties:
         type:
@@ -4772,7 +4854,8 @@ components:
           description: 'The specific model of the device, if known.'
           example: unknown
       description: What type of device the user is on when in the video session.
-    video_session_os:
+    video-session-os:
+      title: VideoSessionOs
       type: object
       properties:
         name:
@@ -4790,7 +4873,8 @@ components:
           description: The version of the operating system.
           example: Windows 10
       description: The operating system the viewer is on.
-    video_session_client:
+    video-session-client:
+      title: VideoSessionClient
       type: object
       properties:
         name:
@@ -4806,7 +4890,8 @@ components:
           description: The type of client used to view the video session.
           example: browser
       description: What kind of browser the viewer is using for the video session.
-    live_stream_assets:
+    live-stream-assets:
+      title: LiveStreamAssets
       type: object
       properties:
         hls:
@@ -4832,7 +4917,8 @@ components:
           description: A link to the thumbnail for your video.
           format: uri
           example: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
-    live_stream_session_session:
+    live-stream-session-session:
+      title: LiveStreamSessionSession
       type: object
       properties:
         sessionId:
@@ -4854,7 +4940,8 @@ components:
             format.
           format: date-time
           example: '2019-06-24T12:45:01.109+00'
-    live_stream_session_location:
+    live-stream-session-location:
+      title: LiveStreamSessionLocation
       type: object
       properties:
         country:
@@ -4866,7 +4953,8 @@ components:
           description: The city of the viewer of the live stream.
           example: Paris
       description: The location of the viewer of the live stream.
-    live_stream_session_referrer:
+    live-stream-session-referrer:
+      title: LiveStreamSessionReferrer
       type: object
       properties:
         url:
@@ -4892,7 +4980,8 @@ components:
           type: string
           description: What term they searched for that led them to the live stream.
           example: video stream
-    live_stream_session_device:
+    live-stream-session-device:
+      title: LiveStreamSessionDevice
       type: object
       properties:
         type:
@@ -4908,7 +4997,8 @@ components:
           description: 'The specific model of the device, if known.'
           example: unknown
       description: What type of device the user is on when in the live stream session.
-    live_stream_session_client:
+    live-stream-session-client:
+      title: LiveStreamSessionClient
       type: object
       properties:
         name:
@@ -4924,7 +5014,8 @@ components:
           description: The type of client used to view the live stream session.
           example: browser
       description: What kind of browser the viewer is using for the live stream session.
-    videostatus_ingest:
+    video-status-ingest:
+      title: VideoStatusIngest
       type: object
       properties:
         status:
@@ -4949,11 +5040,12 @@ components:
             The total number of bytes received, listed for each chunk of the
             upload.
           items:
-            $ref: '#/components/schemas/bytes_range'
+            $ref: '#/components/schemas/bytes-range'
       description: >-
         Details about the capturing, transferring, and storing of your video for
         use immediately or in the future.
-    videostatus_encoding_metadata:
+    video-status-encoding-metadata:
+      title: VideoStatusEncodingMetadata
       type: object
       properties:
         width:
@@ -4993,7 +5085,8 @@ components:
             video.
         aspectRatio:
           type: string
-    videostatus_encoding:
+    video-status-encoding:
+      title: VideoStatusEncoding
       type: object
       properties:
         playable:
@@ -5006,7 +5099,7 @@ components:
           items:
             $ref: '#/components/schemas/quality'
         metadata:
-          $ref: '#/components/schemas/videostatus_encoding_metadata'
+          $ref: '#/components/schemas/video-status-encoding-metadata'
     account:
       type: object
       title: Account
