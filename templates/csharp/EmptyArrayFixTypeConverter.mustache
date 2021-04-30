@@ -1,16 +1,16 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using VideoApiClient.Model;
+using {{packageName}}.Model;
 
-namespace VideoApiClient.Client
+namespace {{packageName}}.Client
 {
     class EmptyArrayFixTypeConverter : JsonConverter
     {
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(VideostatusIngest);
+            return objectType == typeof(VideoStatusIngest);
         }
         public override bool CanWrite => false;
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

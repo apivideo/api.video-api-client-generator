@@ -40,6 +40,7 @@
             <properties>
                 <folder>csharp</folder>
                 <generatorName>video.api.client.generator.Csharp</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
         <profile>
