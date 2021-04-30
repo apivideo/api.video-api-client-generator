@@ -111,23 +111,20 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     new PaginationLink().rel("first").uri(URI.create("/live-streams?currentPage=1&pageSize=25")),
                     new PaginationLink().rel("last").uri(URI.create("/live-streams?currentPage=1&pageSize=25")));
 
-            assertThat(res.getItems()).containsExactlyInAnyOrder(
-                    new LiveStream()
-                            .updatedAt(OffsetDateTime.parse("2020-03-09T13:19:43Z"))
-                            .createdAt(OffsetDateTime.parse("2020-01-31T10:17:47Z"))
-                            .liveStreamId("li400mYKSgQ6xs7taUeSaEKr").streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332")
-                            .name("Live Stream From the browser").record(true).broadcasting(false)._public(true)
-                            .assets(new LiveStreamAssets().iframe(
-                                    "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                                    .player(URI.create("https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"))
-                                    .hls(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8")).thumbnail(
-                                            URI.create("https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg"))),
-                    new LiveStream()
-                            .updatedAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
+            assertThat(res.getItems()).containsExactlyInAnyOrder(new LiveStream()
+                    .updatedAt(OffsetDateTime.parse("2020-03-09T13:19:43Z"))
+                    .createdAt(OffsetDateTime.parse("2020-01-31T10:17:47Z")).liveStreamId("li400mYKSgQ6xs7taUeSaEKr")
+                    .streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332").name("Live Stream From the browser").record(true)
+                    .broadcasting(false)._public(true)
+                    .assets(new LiveStreamAssets().iframe(
+                            "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                            .player(URI.create("https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"))
+                            .hls(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8")).thumbnail(
+                                    URI.create("https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg"))),
+                    new LiveStream().updatedAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
                             .createdAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
-                            .liveStreamId("li4pqNqGUkhKfWcBGpZVLRY5")
-                            .streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135").name("Live From New York").record(true)
-                            .broadcasting(false)._public(true)
+                            .liveStreamId("li4pqNqGUkhKfWcBGpZVLRY5").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135")
+                            .name("Live From New York").record(true).broadcasting(false)._public(true)
                             .assets(new LiveStreamAssets().iframe(
                                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
@@ -234,12 +231,12 @@ public class LiveStreamsApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             assertThatThrownBy(() -> api.create(null)).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'liveStreamCreatePayload' when calling create");
+                    .hasMessage("Missing the required parameter 'liveStreamCreationPayload' when calling create");
 
-            assertThatThrownBy(() -> api.create(new LiveStreamCreatePayload())).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'liveStreamCreatePayload.name' when calling create");
+            assertThatThrownBy(() -> api.create(new LiveStreamCreationPayload())).isInstanceOf(ApiException.class)
+                    .hasMessage("Missing the required parameter 'liveStreamCreationPayload.name' when calling create");
 
-            assertThatNoException().isThrownBy(() -> api.create(new LiveStreamCreatePayload().name("name")));
+            assertThatNoException().isThrownBy(() -> api.create(new LiveStreamCreationPayload().name("name")));
         }
 
         @Test
@@ -247,7 +244,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            LiveStream res = api.create(new LiveStreamCreatePayload().name("name"));
+            LiveStream res = api.create(new LiveStreamCreationPayload().name("name"));
 
             assertThat(res.getLiveStreamId()).isEqualTo("li4pqNqGUkhKfWcBGpZVLRY5");
             assertThat(res.getStreamKey()).isEqualTo("cc1b4df0-d1c5-4064-a8f9-9f0368385135");
@@ -266,7 +263,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, "");
 
-            assertThatThrownBy(() -> api.create(new LiveStreamCreatePayload().name("name")))
+            assertThatThrownBy(() -> api.create(new LiveStreamCreationPayload().name("name")))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400)).hasMessage("");
         }

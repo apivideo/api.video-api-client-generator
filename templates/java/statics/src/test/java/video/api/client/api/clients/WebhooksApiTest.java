@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.Page;
 import video.api.client.api.models.Webhook;
-import video.api.client.api.models.WebhooksCreatePayload;
+import video.api.client.api.models.WebhooksCreationPayload;
 
 import java.time.OffsetDateTime;
 
@@ -148,12 +148,12 @@ public class WebhooksApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             assertThatThrownBy(() -> api.create(null)).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'webhooksCreatePayload' when calling create");
+                    .hasMessage("Missing the required parameter 'webhooksCreationPayload' when calling create");
 
-            assertThatThrownBy(() -> api.create(new WebhooksCreatePayload())).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'webhooksCreatePayload.url' when calling create");
+            assertThatThrownBy(() -> api.create(new WebhooksCreationPayload())).isInstanceOf(ApiException.class)
+                    .hasMessage("Missing the required parameter 'webhooksCreationPayload.url' when calling create");
 
-            assertThatNoException().isThrownBy(() -> api.create(new WebhooksCreatePayload().url("url")));
+            assertThatNoException().isThrownBy(() -> api.create(new WebhooksCreationPayload().url("url")));
         }
 
         @Test
@@ -161,7 +161,7 @@ public class WebhooksApiTest extends AbstractApiTest {
         public void responseWithStatus201Test() throws ApiException {
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            api.create(new WebhooksCreatePayload().url("url"));
+            api.create(new WebhooksCreationPayload().url("url"));
         }
 
         @Test
@@ -169,7 +169,7 @@ public class WebhooksApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            assertThatThrownBy(() -> api.create(new WebhooksCreatePayload().url("url")))
+            assertThatThrownBy(() -> api.create(new WebhooksCreationPayload().url("url")))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400)).satisfies(e -> {
                         ApiException apiException = (ApiException) e;

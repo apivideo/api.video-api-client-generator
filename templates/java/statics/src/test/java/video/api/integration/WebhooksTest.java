@@ -6,7 +6,7 @@ import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.Page;
 import video.api.client.api.models.Webhook;
-import video.api.client.api.models.WebhooksCreatePayload;
+import video.api.client.api.models.WebhooksCreationPayload;
 
 import java.util.Collections;
 
@@ -31,7 +31,7 @@ public class WebhooksTest {
     @DisplayName("create a webhook")
     public void createWebhook() throws ApiException {
         this.webhook = apiClient.webhooks()
-                .create(new WebhooksCreatePayload()
+                .create(new WebhooksCreationPayload()
                         .events(Collections.singletonList("video.encoding.quality.completed"))
                         .url("https://webhooks.test-java-api-client"));
 
