@@ -3314,7 +3314,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhooks-create-payload'
+              $ref: '#/components/schemas/webhooks-creation-payload'
       responses:
         '201':
           description: Created
@@ -4669,7 +4669,8 @@ components:
             $ref: '#/components/schemas/webhook'
         pagination:
           $ref: '#/components/schemas/pagination'
-    webhooks-create-payload:
+    webhooks-creation-payload:
+      title: WebhooksCreationPayloas
       required:
         - events
         - url
