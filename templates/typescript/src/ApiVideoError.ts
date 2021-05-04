@@ -1,10 +1,11 @@
 import { Response } from 'got';
+import ProblemDetails from './model/ProblemDetails';
 
 export default class ApiVideoError extends Error {
-    private problemDetails: string | null;
-    private code: number | null;
+    private problemDetails: ProblemDetails;
+    private code: number;
 
-    constructor(response?: Response) {
+    constructor(response: Response<ProblemDetails>) {
         const { statusCode, body: problemDetails } = response;
 
         super(problemDetails.title);

@@ -51,11 +51,14 @@ export default class HttpClient {
           }
 
           return next(options)
+              // @ts-ignore
               .catch((error: Error) => {
                 if (error instanceof RequestError) {
+                  // @ts-ignore
                   const { response } = error;
                   const contentType = response?.headers['content-type'];
                   if (contentType === 'application/problem+json') {
+                    // @ts-ignore
                     throw new ApiVideoError(response);
                   }
                 }
@@ -143,10 +146,5 @@ export default class HttpClient {
     }
 
     return this.baseRequest.extend({ headers }).post(path, { body: form });
-  };
-
-
-  isSuccessfull(response: Response) {
-    return response.statusCode >= 200 && response.statusCode < 300;
   };
 };
