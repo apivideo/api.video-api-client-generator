@@ -1,3 +1,4 @@
+import { existsSync, createReadStream } from 'fs';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from 'src/ObjectSerializer';
@@ -44,7 +45,7 @@ export default class {{classname}} {
     {{/required}}
     {{/allParams}}
     // Path Params
-    const localVarPath = '{{{path}}}'{{#pathParams}}
+    const localVarPath = '{{{path}}}'.substring(1){{#pathParams}}
       .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
     {{#queryParams}}
     {{#-first}}
@@ -68,37 +69,42 @@ export default class {{classname}} {
     {{/-first}}
     queryParams.headers["{{baseName}}"] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
     {{/headerParams}}
+
     {{#hasFormParams}}
-
-    // Form Params
-    let localVarFormParams = new FormData();
-
+    const form = new FormData();
     {{/hasFormParams}}
+
     {{#formParams}}
     {{#isArray}}
     if ({{paramName}}) {
     {{#isCollectionFormatMulti}}
       {{paramName}}.forEach((element) => {
-        localVarFormParams.append('{{baseName}}', element);
+        form.append('{{baseName}}', element);
       })
     {{/isCollectionFormatMulti}}
     {{^isCollectionFormatMulti}}
-        localVarFormParams.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+        form.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
     {{/isCollectionFormatMulti}}
     }
     {{/isArray}}
     {{^isArray}}
     if (typeof {{paramName}} !== undefined) {
        {{^isFile}}
-       localVarFormParams.append('{{baseName}}', {{paramName}});
+       form.append('{{baseName}}', {{paramName}});
        {{/isFile}}
        {{#isFile}}
+      form.append(
+          '{{baseName}}',
+          Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
+          '{{baseName}}',
+      );
+
        {{#platforms}}
        {{#node}}
-       localVarFormParams.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
+       form.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
        {{/node}}
        {{^node}}
-       localVarFormParams.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+       form.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
        {{/node}}
        {{/platforms}}
        {{/isFile}}
@@ -106,7 +112,7 @@ export default class {{classname}} {
     {{/isArray}}
     {{/formParams}}
     {{#hasFormParams}}
-    queryParams.form = localVarFormParams;
+    queryParams.body = form;
     {{/hasFormParams}}
     {{#bodyParam}}
 

@@ -24,7 +24,7 @@
     "build": "tsc",
     "prepare": "npm run build",
     "test": "mocha --require test/api/index.js --exclude test/sandbox.spec.js",
-    "test:sandbox": "node test/sandbox.spec.js",
+    "test:sandbox": "NODE_PATH=. node test/sandbox.spec.js",
     "eslint": "eslint src/**/*.ts",
     "prettier": "prettier-eslint --write 'src/**/*.ts'"
   },

@@ -1,7 +1,7 @@
 import FormData from 'form-data';
 import { createReadStream } from 'fs';
 import got, { AfterResponseHook, ExtendOptions, Got, Headers, Response, RequestError } from 'got';
-import { ObjectSerializer } from './model/ObjectSerializer';
+import ObjectSerializer from './ObjectSerializer';
 import { version } from '../package.json';
 import ApiVideoError from './ApiVideoError';
 

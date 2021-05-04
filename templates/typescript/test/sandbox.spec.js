@@ -1,8 +1,8 @@
-import { expect } from 'chai';
-import apiVideo from '../lib/index';
-import Caption from '../models/caption';
-import Video from '../models/video';
-import Player from '../models/player';
+const { expect } = require('chai');
+const ApiVideoClient = require('../src').default;
+// import Caption from '../models/caption';
+// import Video from '../models/video';
+// import Player from '../models/player';
 
 const timeout = (ms = 100) => new Promise((resolve) => {
   setTimeout(() => {
@@ -20,12 +20,17 @@ const timeout = (ms = 100) => new Promise((resolve) => {
     }
 
     // Create client for Sandbox and authenticate
-    const client = new apiVideo.ClientSandbox({ apiKey: process.env.API_KEY });
+    const client = new ApiVideoClient({ apiKey: process.env.API_KEY });
 
-    // Create and upload a video ressource
+    // Create
     const videoTitle = 'Course #4 - Part B';
-    const { videoId, title } = await client.videos.upload('test/data/small.webm', { title: videoTitle });
-    expect(title).to.equals(videoTitle);
+    const { videoId, title } = await client.videos.create({ title: videoTitle });
+
+    // upload a video resource
+    await client.videos.upload(videoId,'test/data/small.webm').then((video) => {
+      expect(title).to.equals(videoTitle);
+    });
+
 
     // Update video properties
     const newDescription = 'Course #4 - Part C';
