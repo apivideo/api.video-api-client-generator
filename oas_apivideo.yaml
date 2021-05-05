@@ -3651,6 +3651,9 @@ components:
             This lets you know whether mp4 is supported. If enabled, an mp4 URL
             will be provided in the response for the video.
           example: true
+      required:
+        - videoId
+        - title
       example:
         videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
         title: Maths video
@@ -3766,6 +3769,8 @@ components:
               description: The path to the file containing your logo.
               example: path/to/my/logo/mylogo.jpg
       title: PlayerTheme
+      required:
+        - playerId
     player-theme-creation-payload:
       title: PlayerThemeCreationPayload
       type: object
@@ -3990,6 +3995,8 @@ components:
               description: 'When the player was last updated, presented in ISO-8601 format.'
               format: date-time
               example: '2020-01-31T10:18:47+00:00'
+      required:
+        - liveStreamId
     live-stream-session:
       title: LiveStreamSession
       type: object
@@ -4614,6 +4621,9 @@ components:
             $ref: '#/components/schemas/player-theme'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     player-theme-upload-logo-payload:
       title: PlayerThemeUploadLogoPayload
       required:

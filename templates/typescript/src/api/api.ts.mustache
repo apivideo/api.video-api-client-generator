@@ -18,7 +18,132 @@ export default class {{classname}} {
     this.httpClient = httpClient;
   }
 
+
   {{#operation}}
+      {{#hasRequiredParams}}
+          // has required params
+      {{/hasRequiredParams}}
+      {{#requiredParams}}
+          // {{paramName}}
+      {{/requiredParams}}
+  {{#vendorExtensions.x-group-parameters}}
+  /**
+   {{#notes}}
+   * {{&notes}}
+   {{/notes}}
+   {{#summary}}
+   * {{&summary}}
+   {{/summary}}
+   * @param {Object} searchParams
+   {{#allParams}}
+   * @param { {{dataType}} } searchParams.{{paramName}} {{description}}
+   {{/allParams}}
+   */
+  public async {{nickname}}({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+    const queryParams: QueryOptions = {};
+    queryParams.headers = {};
+    {{#allParams}}
+    {{#required}}
+    // verify required parameter '{{paramName}}' is not null or undefined
+    if ({{paramName}} === null || {{paramName}} === undefined) {
+      throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
+    }
+    {{/required}}
+    {{/allParams}}
+    // Path Params
+    const localVarPath = '{{{path}}}'.substring(1){{#pathParams}}
+      .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
+    {{#queryParams}}
+    {{#-first}}
+
+    // Query Params
+    const urlSearchParams = new URLSearchParams();
+
+    {{/-first}}
+    if ({{paramName}} !== undefined) {
+      urlSearchParams.append("{{baseName}}", ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"));
+    }
+    {{#-last}}
+
+    queryParams.searchParams = urlSearchParams;
+    {{/-last}}
+    {{/queryParams}}
+    {{#headerParams}}
+    {{#-first}}
+
+    // Header Params
+    {{/-first}}
+    queryParams.headers["{{baseName}}"] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
+    {{/headerParams}}
+
+    {{#hasFormParams}}
+    const form = new FormData();
+    {{/hasFormParams}}
+
+    {{#formParams}}
+    {{#isArray}}
+    if ({{paramName}}) {
+    {{#isCollectionFormatMulti}}
+      {{paramName}}.forEach((element) => {
+        form.append('{{baseName}}', element);
+      })
+    {{/isCollectionFormatMulti}}
+    {{^isCollectionFormatMulti}}
+        form.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+    {{/isCollectionFormatMulti}}
+    }
+    {{/isArray}}
+    {{^isArray}}
+    if (typeof {{paramName}} !== undefined) {
+       {{^isFile}}
+       form.append('{{baseName}}', {{paramName}});
+       {{/isFile}}
+       {{#isFile}}
+      form.append(
+          '{{baseName}}',
+          Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
+          '{{baseName}}',
+      );
+
+       {{#platforms}}
+       {{#node}}
+       form.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
+       {{/node}}
+       {{^node}}
+       form.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+       {{/node}}
+       {{/platforms}}
+       {{/isFile}}
+    }
+    {{/isArray}}
+    {{/formParams}}
+    {{#hasFormParams}}
+    queryParams.body = form;
+    {{/hasFormParams}}
+    {{#bodyParam}}
+
+    // Body Params
+    const contentType = ObjectSerializer.getPreferredMediaType([{{#consumes}}
+      "{{{mediaType}}}"{{^-last}},{{/-last}}
+    {{/consumes}}]);
+    queryParams.headers["Content-Type"] = contentType;
+
+    queryParams.body = ObjectSerializer.stringify(
+      ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"),
+      contentType
+    );
+    {{/bodyParam}}
+
+    queryParams.method = '{{httpMethod}}';
+
+    return this.httpClient.call(localVarPath, queryParams)
+      .then(response => ObjectSerializer.deserialize(
+        ObjectSerializer.parse(response.body, response.headers["content-type"]),
+        "{{{returnType}}}", "{{returnFormat}}"
+      ) as {{{returnType}}});
+  }
+  {{/vendorExtensions.x-group-parameters}}
+  {{^vendorExtensions.x-group-parameters}}
   /**
    {{#notes}}
    * {{&notes}}
@@ -136,7 +261,7 @@ export default class {{classname}} {
         "{{{returnType}}}", "{{returnFormat}}"
       ) as {{{returnType}}});
   }
-
+  {{/vendorExtensions.x-group-parameters}}
   {{/operation}}
 }
 {{/operations}}
