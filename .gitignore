@@ -3,4 +3,4 @@ generated-clients/*
 apivideo-generator/target
 *.iml
 .DS_Store
-
+target/
