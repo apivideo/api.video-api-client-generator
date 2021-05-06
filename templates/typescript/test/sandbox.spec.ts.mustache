@@ -22,7 +22,9 @@ const timeout = (ms = 100) => new Promise((resolve) => {
 (async () => {
   try {
     if (!process.env.API_KEY) {
-      console.error('You must provide `API_KEY` environment variable to test the sandbox.');
+      console.error(
+        'You must provide `API_KEY` environment variable to test the sandbox.'
+      );
       console.log('API_KEY=xxx yarn test:sandbox');
 
       process.exit(1);
@@ -33,26 +35,35 @@ const timeout = (ms = 100) => new Promise((resolve) => {
 
     // Create
     const videoTitle = 'Course #4 - Part B';
-    const { videoId, title } = await client.videos.create({ title: videoTitle });
+    const { videoId, title } = await client.videos.create({
+      title: videoTitle,
+    });
 
     // upload a video resource
-    await client.videos.upload(videoId,'test/data/small.webm').then((video) => {
-      expect(title).to.equals(videoTitle);
-    });
+    await client.videos
+      .upload(videoId, 'test/data/small.webm')
+      .then((video) => {
+        expect(title).to.equals(videoTitle);
+      });
 
     // Update video properties
     const newDescription = 'Course #4 - Part C';
-    await client.videos.update(videoId, { description: newDescription }).then((video) => {
-      expect(video.description).to.equals(newDescription);
-    });
+    await client.videos
+      .update(videoId, { description: newDescription })
+      .then((video) => {
+        expect(video.description).to.equals(newDescription);
+      });
 
     // Search videos with paginated results
-    await client.videos.list({ currentPage: 1, pageSize: 100 }).then(({ data: videos }) => {
-      expect(videos).to.be.an('array');
-      // console.log(videos);
-      // videos.forEach(video => expect(video).to.have.keys(new Video()));
-      expect(videos.findIndex(video => video.videoId === videoId) !== -1, 'To find video id').to.be.true;
-    });
+    await client.videos
+      .list({ currentPage: 1, pageSize: 100 })
+      .then(({ data: videos }) => {
+        expect(videos).to.be.an('array');
+        expect(
+          videos.findIndex((v) => v.videoId === videoId) !== -1,
+          'To find the previously created video in the list.'
+        ).to.be.true;
+      });
 
     // Upload a video thumbnail
     // @todo does not work yet
@@ -61,88 +72,81 @@ const timeout = (ms = 100) => new Promise((resolve) => {
     // });
 
     // Pick a thumbnail from the given time code.
-    await client.videos.pickThumbnail(videoId, { timecode: '00:15:22.05' }).then((video) => {
-      expect(video.videoId).to.equals(videoId);
-    });
+    await client.videos
+      .pickThumbnail(videoId, { timecode: '00:15:22.05' })
+      .then((video) => expect(video.videoId).to.equals(videoId));
 
-    // Upload video subtitle
-    await client.captions.upload(videoId, 'en', 'test/data/en.vtt').then((subtitle) => {
-      console.log('subtitle', subtitle);
-      // @todo keys
-      // expect(subtitle).to.have.keys(new Subtitle());
-    });
+    // Upload video caption
+    await client.captions
+      .upload(videoId, 'en', 'test/data/en.vtt')
+      .then((caption) => expect(caption.srclang).to.equals('en'));
 
     await timeout(1000);
 
-    // Get video subtitle by language
-    await client.captions.get(videoId, 'en').then((subtitle) => {
-      expect(subtitle.src).to.be.a('string');
-    });
+    // Get video caption by language
+    await client.captions
+      .get(videoId, 'en')
+      .then((caption) => expect(caption.src).to.be.a('string'));
 
     // Update the default caption language
-    await client.captions.update(videoId, 'en', { _default: true }).then((subtitle) => {
-        expect(subtitle.srclang).to.equals('en');
-        expect(subtitle._default).to.equals(true);
-    });
+    await client.captions
+      .update(videoId, 'en', { _default: true })
+      .then((caption) => {
+        expect(caption.srclang).to.equals('en');
+        expect(caption._default).to.equals(true);
+      });
 
     // Delete caption by language
-    await client.captions.delete(videoId, 'en').then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    await client.captions.delete(videoId, 'en');
 
     // Upload video chapter
-    await client.chapters.upload(videoId, 'en', 'test/data/en.vtt').then((chapter) => {
-      expect(chapter.language).to.equals('en');
-    });
+    await client.chapters
+      .upload(videoId, 'en', 'test/data/en.vtt')
+      .then((chapter) => expect(chapter.language).to.equals('en'));
 
     await timeout(1000);
 
     // Get video chapter by language
-    await client.chapters.get(videoId, 'en').then((chapter) => {
-      expect(chapter.language).to.equals('en');
-    });
+    await client.chapters
+      .get(videoId, 'en')
+      .then((chapter) => expect(chapter.language).to.equals('en'));
 
     // Delete chapter by language
-    await client.chapters.delete(videoId, 'en').then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    await client.chapters.delete(videoId, 'en');
 
-    // // Get video Analytics Data for the current year
-    // await client.analyticsVideo.get(videoId, new Date().getFullYear()).then((analyticVideo) => {
-    //   expect(analyticVideo.data).to.be.an('array');
-    // });
+    // Get video Analytics Data for the current year
+    await client.rawStatistics
+      .listVideoSessions({
+        videoId,
+        period: new Date().getFullYear().toString(),
+      })
+      .then(({ data: videoSessions }) => {
+        console.log(videoSessions);
+        expect(videoSessions).to.be.an('array');
+      });
 
-    // Delete video ressource
-    await client.videos.delete(videoId).then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    // Delete video resource
+    await client.videos.delete(videoId);
 
-    // Create players with default values
+    // Create a player theme with default values
     const { playerId } = await client.playerThemes.create({});
     expect(playerId).to.be.a('string');
 
-    // Get a player
-    await client.playerThemes.get(playerId).then((player) => {
-      expect(playerId).to.equals(player.playerId);
+    // Get a playerTheme
+    await client.playerThemes.get(playerId).then((playerTheme) => {
+      expect(playerId).to.equals(playerTheme.playerId);
     });
 
-    // Search a player with paginate results
-    await client.playerThemes.list({ currentPage: 1, pageSize: 50 }).then(({ data: players}) => {
-      expect(players).to.be.an('array');
-      // @todo fix different keys
-      // players.forEach(player => expect(player).to.have.keys(new Player()));
-    });
+    // Search a player theme with paginate results
+    await client.playerThemes
+      .list({ currentPage: 1, pageSize: 50 })
+      .then(({ data: playerThemes }) => {
+        expect(playerThemes).to.be.an('array');
+        // @todo fix different keys
+        // playerThemes.forEach(playerTheme => expect(playerTheme).to.have.keys(new PlayerTheme()));
+      });
 
-    const properties: PlayerUpdatePayload = {
-      // shapeMargin: 10,
-      // shapeRadius: 3,
-      // shapeAspect: 'flat',
-      // shapeBackgroundTop: 'rgba(50, 50, 50, .7)',
-      // shapeBackgroundBottom: 'rgba(50, 50, 50, .8)',
-      // linkActive: 'rgba(255, 0, 0, .75)',
+    const properties: PlayerThemeUpdatePayload = {
       text: 'rgba(255, 255, 255, .95)',
       link: 'rgba(255, 0, 0, .95)',
       linkHover: 'rgba(255, 255, 255, .75)',
@@ -159,57 +163,65 @@ const timeout = (ms = 100) => new Promise((resolve) => {
       forceLoop: true,
     };
 
-    await client.playerThemes.update(playerId, properties).then((player) => {
-      Object.keys(properties).forEach((property) => {
-        // expect(player).to.have.property(property, properties[property]);
+    await client.playerThemes
+      .update(playerId, properties)
+      .then((playerTheme) => {
+        Object.keys(properties).forEach((property) => {
+          // @ts-ignore
+          expect(playerTheme).to.have.property(property, properties[property]);
+        });
       });
-    });
 
-    await client.playerThemes.uploadLogo(playerId,'test/data/test.jpg', 'https://api.video').then((player) => {
-      // @todo fix missing link?
-      console.log('player', player);
-      // expect(player.assets?.logo?.link).to.equals('https://api.video');
-    });
+    await client.playerThemes
+      .uploadLogo(playerId, 'test/data/test.jpg', 'https://api.video')
+      .then((playerTheme) =>
+        expect(playerTheme.assets?.link).to.equals('https://api.video')
+      );
 
-    await client.playerThemes.delete(playerId).then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    await client.playerThemes.delete(playerId);
 
     // Create a live
     const name = 'This is a live';
-    const { liveStreamId } = await client.liveStreams.create({ name });
+    const { liveStreamId, name: liveName } = await client.liveStreams.create({
+      name,
+    });
+    expect(liveName).to.equals(name);
 
     // Update live thumbnail
-    await client.liveStreams.uploadThumbnail(liveStreamId, 'test/data/test.jpg').then((live) => {
-      expect(live.name).to.equals(name);
-    });
+    await client.liveStreams
+      .uploadThumbnail(liveStreamId, 'test/data/test.jpg')
+      .then((live) => expect(live.name).to.equals(name));
 
-    // // Get live Analytics Data for the current year
-    // await client.analyticsLive.get(liveStreamId, new Date().getFullYear()).then((analyticLive) => {
-    //   expect(analyticLive.data).to.be.an('array');
-    // });
+    // Get live Analytics Data for the current year
+    await client.rawStatistics
+      .listLiveStreamSessions({
+        liveStreamId,
+        period: new Date().getFullYear().toString(),
+      })
+      .then(({ data: liveStreamSessions }) =>
+        expect(liveStreamSessions).to.be.an('array')
+      );
 
     // Delete live resource
-    await client.liveStreams.delete(liveStreamId).then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    await client.liveStreams.delete(liveStreamId);
 
     // Create a private live
-    const { liveStreamId: privateLiveStreamId, _public: isPublic } = await client.liveStreams.create({ name: 'This is a private live', _public: false });
+    const {
+      liveStreamId: privateLiveStreamId,
+      _public: isPublic,
+    } = await client.liveStreams.create({
+      name: 'This is a private live',
+      _public: false,
+    });
     expect(isPublic).to.equals(false);
 
     // Delete the private live
-    await client.liveStreams.delete(privateLiveStreamId).then((statusCode) => {
-      // @todo fix delete methods
-      // expect(statusCode).to.equals(204);
-    });
+    await client.liveStreams.delete(privateLiveStreamId);
 
     // Generate a token for delegated upload
-    await client.uploadTokens.createToken({}).then(({ token }) => {
-      expect(token).to.be.a('string');
-    });
+    await client.uploadTokens
+      .createToken({})
+      .then(({ token }) => expect(token).to.be.a('string'));
   } catch (e) {
     console.error(e);
     process.exit(1);
