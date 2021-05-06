@@ -77,7 +77,6 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 
 ## TODO
-- Changelog
 - Fix sandbox failing test cases
   - Fix schema issues
   - Fix delete issues
@@ -88,7 +87,7 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 ### General changes
 
-Methods which were listing objects are now called `list` instead of `search`.
+Listing methods are now called `list` instead of `search`.
 They don't fetch all pages by default, this is now left to the user.
 This also means the return values has changed, instead of returning an array of object,
 the full response body is returned.
@@ -101,9 +100,11 @@ You must access the `data` property on the response, to retrieve the array of ob
 ```
 
 Subtitle model is now called `Subtitle` instead of `Caption`.
-> @todo rly? API is still named `captions` but model is named `Subtitle`?
+> API is still named `captions` but model is named `Subtitle`?
+> @todo break API on Subtitle and PR on clietn generator
 
 Player theme API is now called `playerThemes` instead of `players`.
+> @todo `Player` -> `PlayerTheme`
 Live stream API is now called `liveStreams` instead of `lives`.
 
 ### Search videos with paginated results
@@ -119,7 +120,10 @@ await client.videos.list({ currentPage: 1, pageSize: 50 })
 ```
 
 ### Upload a video thumbnail
-await client.videos.uploadThumbnail('test/data/test.jpg', videoId); -> await client.videos.uploadThumbnail(videoId, 'test/data/test.jpg');
+await client.videos.uploadThumbnail('test/data/test.jpg', videoId); ->
+await client.videos.uploadThumbnail(videoId, 'test/data/test.jpg');
+
+> `videoId` was sometimes the second parameter but is now the first paramter most of the time.
 
 ### Pick a thumbnail from the given time code.
 Before:
@@ -132,6 +136,8 @@ After:
 await client.videos.pickThumbnail(videoId, { timecode: '00:15:22.05' });
 ```
 > @todo this feels stranger than before
+> @todo find a counter example?
+> When posted its always an object....
 
 ### Upload video caption
 Before:
@@ -166,7 +172,7 @@ After:
 await client.chapters.upload(videoId, 'en', 'test/data/en.vtt');
 ```
 
-### Create players with default values
+### Create player theme with default values
 Before:
 ```js
 await client.players.create();
@@ -177,6 +183,26 @@ After:
 await client.playerThemes.create({});
 ```
 
+// @todo is it possible to make the optionnal is optionnal?
+//
+
+#### Payload model
+Payload models are a pain because: if all properties of payload model are optionnal, we cant detect it
+I'm not able to set it as optionnal?
+Or set it as optionnal somewhere else...
+idea is to do smthing like
+```ts
+const create = ( payload = {}) => {};
+
+// and to call
+create();
+
+// instead of
+create({})
+```
+> @todo Add vendor extension to the operation level
+> or might be done at param level...
+
 > Properties doesn't exist anymore:
 ```
 // shapeMargin: 10,
@@ -186,7 +212,6 @@ await client.playerThemes.create({});
 // shapeBackgroundBottom: 'rgba(50, 50, 50, .8)',
 // linkActive: 'rgba(255, 0, 0, .75)',
 ```
-> @todo is that normal?
 
 ### Get a player
 Before:
@@ -227,18 +252,21 @@ client.playerThemes.update(playerId, properties)
 
 ### Create a live
 ```client.lives.create(name)``` -> ```client.liveStreams.create({ name });```
+> Post payload are objects
 
 ### Update live thumbnail
 ```await client.lives.uploadThumbnail('test/data/test.jpg', liveStreamId)``` -> ```client.liveStreams.uploadThumbnail(liveStreamId, 'test/data/test.jpg')```
 
 ### Delete live resource
-```await client.lives.delete(liveStreamId)``` -> client.liveStreams.delete(liveStreamId)```
+```await client.lives.delete(liveStreamId)```
+->
+```client.liveStreams.delete(liveStreamId)```
+
 
 ### Create a private live
 ```await client.lives.create('This is a private live', { public: false });```
 ->
 ```await client.liveStreams.create({ name: 'This is a private live', _public: false });```
-
 
 ### Generate a token for delegated upload
 ```js
@@ -255,10 +283,21 @@ await client.uploadTokens.createToken({})
 ~~// public async list(title?: string, tags?: Array<string>~~
 ~~This isn't natural...~~
 
+~~### Lot's of parameters have changed order, sometimes it's weird~~
 
 ### `Video.videoId` should be required
+```
+const { videoId, title } = await client.videos.create({ title: videoTitle });
+```
+> `videoId` may be undefined.
+> @todo make them required and see
+```
+  required:
+    - videoId
+    - title
+```
 
-### Video Tags should be strings string when getting a video
+### Video Tags should be strings when getting a video
 
 ### Delete
 ```
@@ -275,29 +314,35 @@ Deleting a caption is marked as returning void, whereas it's not and should at l
 analytics/live-streams/
 ```
 
-### Payload model
-Payload models are a pain because: if all properties of payload model are optionnal, we cant detect it
-I'm not able to set it as optionnal?
-Or set it as optionnal somewhere else...
-idea is to do smthing like
-```ts
-const create = ( payload = {}) => {};
-
-// and to call
-create();
-
-// instead of
-create({})
-```
 
 ### Model duplication
 
 Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
 
+Generation get strange when, using inheritance, most client generate shit.
+It would require a lot of efforts to rewrite clients and would crash all clients.
+It might be a pain to maintained.
+
 ### `Player.playerId` should be required
 
 
 ###  PlayersListResponse.data should never be undefined, could be empty array though
+
+```
+players-list-response:
+  title: Players
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '#/components/schemas/player'
+    pagination:
+      $ref: '#/components/schemas/pagination'
+  required:
+    - data
+    - pagination
+```
 
 ### PlayerUpdatePayload missing properties
     // shapeMargin: 10,
@@ -311,3 +356,167 @@ Ex: Model Player is the same as player-creation-payload and update payload... th
 ### 39: Property 'logo' does not exist on type 'Player'.
 
 -> player.assets.logo ??? -> not the same property
+```
+class Player {
+  constructor() {
+    this.playerId = null;
+    this.shapeMargin = null;
+    this.shapeRadius = null;
+    this.shapeAspect = null;
+    this.shapeBackgroundTop = null;
+    this.shapeBackgroundBottom = null;
+    this.text = null;
+    this.link = null;
+    this.linkHover = null;
+    this.linkActive = null;
+    this.trackPlayed = null;
+    this.trackUnplayed = null;
+    this.trackBackground = null;
+    this.backgroundTop = null;
+    this.backgroundBottom = null;
+    this.backgroundText = null;
+    this.enableApi = null;
+    this.enableControls = null;
+    this.forceAutoplay = null;
+    this.hideTitle = null;
+    this.forceLoop = null;
+    this.logo = {};
+  }
+}
+```
+
+
+    link
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Automation pipeline (previous notes)
+https://github.com/apivideo/API_OAS_file
+> __Other example__
+> https://github.com/LePetitBloc/bitcoin-swagger
+> I think it was based on the petstore idea there:
+> https://github.com/swagger-api/swagger-petstore
+
+
+
+
+https://github.com/apivideo/api-client-generator
+> https://github.com/openapitools/openapi-generator/wiki/FAQ
+
+
+  -
+
+Might be intersting to work with docker version :
+https://github.com/openapitools/openapi-generator/wiki/FAQ#how-to-test-with-the-latest-master-of-openapi-generator
+
+This would avoid to rely on java.
+
+Or just use the node version <3
+
+```
+# install the latest version of "openapi-generator-cli"
+npm install @openapitools/openapi-generator-cli -g
+# use a specific version of "openapi-generator-cli"
+openapi-generator-cli version-manager set 5.0.1
+# Or install it as dev-dependency in your node.js projects
+npm install @openapitools/openapi-generator-cli -D
+```
+
+
+# Automation pipeline
+
+```mermaid
+sequenceDiagram
+    apivideo/openapi->>+apivideo/generator: Dispatch update event
+    apivideo/generator->>+apivideo/some-client: Build, commit and push to
+```
+> https://mermaid-js.github.io/mermaid/#/sequenceDiagram
+
+1. Checkout generator repo
+2. Checkout `profile` repository in `generetated/${profile}/`
+3. Git branch `name-of-the-branch?`
+4. Generate client
+5. Commit with same commit message as the last commit on the generator
+6. Submit PR to `profile.repository`
+7.
+
+```
+./git_push.sh
+```
+> https://openapi-generator.tech/docs/integrations/#github-integration
+> https://github.com/OpenAPITools/openapi-generator/commit/3bebbada98234b58934804fa58f538170d991b69
+
+> https://github.com/actions/checkout/
+
+
+> https://openapi-generator.tech/docs/faq-extending/#how-do-i-skip-files-during-code-generation
+
+
+## Generator action
+
+```
+# .github/actions/update-client-action
+inputs:
+   profile:
+       description: 'Name of the profile'
+       required: true
+   repository: # could be read with INPUT_REPOSITORY
+       description: 'Repository name organization/repository-name'
+       required: true
+outputs:
+```
+> Then create a file:
+> https://github.com/actions/hello-world-javascript-action/blob/main/index.js
+> https://github.com/actions/toolkit/tree/main/packages/github#usage
+
+```
+# .github/workflows/typescript-example.yml
+
+strategy:
+  matrix:
+    profile: ['typescript', 'java']
+steps:
+- name: Check out repository code
+  uses: actions/checkout@v2
+
+- name: Checkout typescript client
+  uses: actions/checkout@v2
+  with:
+    repository: ${{ repository }}
+    token: ${{ secrets.GitHub_PAT }} # `GitHub_PAT` is a secret that contains your PAT
+    path: generated-clients/typescript
+
+- run: echo "Hello guys"
+- run: echo "Hello guys"
+- run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+```
+
+## Resources
+- https://github.community/t/triggering-by-other-repository/16163/6
+- https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+- https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
+
+
+# Typescript
+
+https://github.com/openapitools/openapi-generator/wiki/FAQ#typescript
+
+Once pushed on the repo...
+1. https://github.com/marketplace/actions/github-releases
+2. npm release
+3.
