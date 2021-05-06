@@ -1,8 +1,8 @@
 ## {{npmName}}@{{npmVersion}}
 
+The api-client is a lightweight client built in TypeScript first, targeting nodejs and built upon our Open API schema definition.
 
 {{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
-
 
 ### Building
 
@@ -83,108 +83,8 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
   - Add analytics tests
 - ...
 
-## Migration from `@apvideo/nodejs-sdk`
 
-### General changes
-
-Listing methods are now called `list` instead of `search`.
-They don't fetch all pages by default, this is now left to the user.
-This also means the return values has changed, instead of returning an array of object,
-the full response body is returned.
-You must access the `data` property on the response, to retrieve the array of object.
-```
-{
-  'data': Array<{}>;
-  'pagination': Pagination;
-}
-```
-
-Subtitle model is now called `Subtitle` instead of `Caption`.
-> API is still named `captions` but model is named `Subtitle`?
-> @todo break API on Subtitle and PR on clietn generator
-
-Player theme API is now called `playerThemes` instead of `players`.
-> @todo `Player` -> `PlayerTheme`
-Live stream API is now called `liveStreams` instead of `lives`.
-
-### Search videos with paginated results
-
-Before (with `@apvideo/nodejs-sdk`):
-```js
-await client.videos.search({ currentPage: 1, pageSize: 50 })
-```
-
-After (with `@apvideo/typescript-client`):
-```ts
-await client.videos.list({ currentPage: 1, pageSize: 50 })
-```
-
-### Upload a video thumbnail
-await client.videos.uploadThumbnail('test/data/test.jpg', videoId); ->
-await client.videos.uploadThumbnail(videoId, 'test/data/test.jpg');
-
-> `videoId` was sometimes the second parameter but is now the first paramter most of the time.
-
-### Pick a thumbnail from the given time code.
-Before:
-```js
-await client.videos.updateThumbnailWithTimecode(videoId, '00:15:22.05');
-```
-
-After:
-```ts
-await client.videos.pickThumbnail(videoId, { timecode: '00:15:22.05' });
-```
-> @todo this feels stranger than before
-> @todo find a counter example?
-> When posted its always an object....
-
-### Upload video caption
-Before:
-```js
-await client.captions.upload('test/data/en.vtt', { videoId, language: 'en' }).
-```
-
-After:
-```ts
-await client.captions.upload(videoId, 'en', 'test/data/en.vtt').
-```
-
-### Update the default caption language
-Before:
-```js
-await client.captions.updateDefault(videoId, 'en', true);
-```
-
-After
-```ts
-await client.captions.update(videoId, 'en', { _default: true })
-```
-
-### Upload video chapter
-Before:
-```js
-await client.chapters.upload('test/data/en.vtt', { videoId, language: 'en' });
-```
-
-After:
-```ts
-await client.chapters.upload(videoId, 'en', 'test/data/en.vtt');
-```
-
-### Create player theme with default values
-Before:
-```js
-await client.players.create();
-```
-
-After:
-```ts
-await client.playerThemes.create({});
-```
-
-// @todo is it possible to make the optionnal is optionnal?
-//
+## Issues
 
 #### Payload model
 Payload models are a pain because: if all properties of payload model are optionnal, we cant detect it
@@ -203,148 +103,73 @@ create({})
 > @todo Add vendor extension to the operation level
 > or might be done at param level...
 
-> Properties doesn't exist anymore:
-```
-// shapeMargin: 10,
-// shapeRadius: 3,
-// shapeAspect: 'flat',
-// shapeBackgroundTop: 'rgba(50, 50, 50, .7)',
-// shapeBackgroundBottom: 'rgba(50, 50, 50, .8)',
-// linkActive: 'rgba(255, 0, 0, .75)',
-```
-
-### Get a player
-Before:
-```js
-await client.players.get(playerId)
-```
-
-After:
-```ts
-await client.playerThemes.get(playerId)
-```
-
-### Search a player with paginate results
-Before:
-```js
-await client.players.search({ currentPage: 1, pageSize: 50 });
-```
-
-After:
-```ts
-await client.playerThemes.list({ currentPage: 1, pageSize: 50 });
-```
-
-### Players
-```
-client.players.update(playerId, properties)
-```
-->
-```
-client.playerThemes.update(playerId, properties)
-```
-
-
-```client.players.uploadLogo('test/data/test.jpg', playerId, 'https://api.video')```
-->
-```client.playerThemes.uploadLogo(playerId,'test/data/test.jpg', 'https://api.video')```
-
-
-### Create a live
-```client.lives.create(name)``` -> ```client.liveStreams.create({ name });```
-> Post payload are objects
-
-### Update live thumbnail
-```await client.lives.uploadThumbnail('test/data/test.jpg', liveStreamId)``` -> ```client.liveStreams.uploadThumbnail(liveStreamId, 'test/data/test.jpg')```
-
-### Delete live resource
-```await client.lives.delete(liveStreamId)```
-->
-```client.liveStreams.delete(liveStreamId)```
-
-
-### Create a private live
-```await client.lives.create('This is a private live', { public: false });```
-->
-```await client.liveStreams.create({ name: 'This is a private live', _public: false });```
-
-### Generate a token for delegated upload
-```js
-await client.tokens.generate()
-```
-->
-```ts
-await client.uploadTokens.createToken({})
-```
-
-## Issues
 
 ~~Will we keep array syntax?~~
 ~~// public async list(title?: string, tags?: Array<string>~~
-~~This isn't natural...~~
+    ~~This isn't natural...~~
 
-~~### Lot's of parameters have changed order, sometimes it's weird~~
+    ~~### Lot's of parameters have changed order, sometimes it's weird~~
 
-### `Video.videoId` should be required
-```
-const { videoId, title } = await client.videos.create({ title: videoTitle });
-```
-> `videoId` may be undefined.
-> @todo make them required and see
-```
-  required:
+    ### `Video.videoId` should be required
+    ```
+    const { videoId, title } = await client.videos.create({ title: videoTitle });
+    ```
+    > `videoId` may be undefined.
+    > @todo make them required and see
+    ```
+    required:
     - videoId
     - title
-```
+    ```
 
-### Video Tags should be strings when getting a video
+    ### Video Tags should be strings when getting a video
 
-### Delete
-```
-await client.captions.delete(videoId, 'en').then((statusCode) => {
+    ### Delete
+    ```
+    await client.captions.delete(videoId, 'en').then((statusCode) => {
     expect(statusCode).to.equals(204);
-});
-```
+    });
+    ```
 
-Deleting a caption is marked as returning void, whereas it's not and should at least return a status code?
+    Deleting a caption is marked as returning void, whereas it's not and should at least return a status code?
 
-~~### Missing analytics~~
-> @todo to be done
-```
-analytics/live-streams/
-```
-
-
-### Model duplication
-
-Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
-
-Generation get strange when, using inheritance, most client generate shit.
-It would require a lot of efforts to rewrite clients and would crash all clients.
-It might be a pain to maintained.
-
-### `Player.playerId` should be required
+    ~~### Missing analytics~~
+    > @todo to be done
+    ```
+    analytics/live-streams/
+    ```
 
 
-###  PlayersListResponse.data should never be undefined, could be empty array though
+    ### Model duplication
 
-```
-players-list-response:
-  title: Players
-  type: object
-  properties:
+    Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
+
+    Generation get strange when, using inheritance, most client generate shit.
+    It would require a lot of efforts to rewrite clients and would crash all clients.
+    It might be a pain to maintained.
+
+    ### `Player.playerId` should be required
+
+
+    ###  PlayersListResponse.data should never be undefined, could be empty array though
+
+    ```
+    players-list-response:
+    title: Players
+    type: object
+    properties:
     data:
-      type: array
-      items:
-        $ref: '#/components/schemas/player'
+    type: array
+    items:
+    $ref: '#/components/schemas/player'
     pagination:
-      $ref: '#/components/schemas/pagination'
-  required:
+    $ref: '#/components/schemas/pagination'
+    required:
     - data
     - pagination
-```
+    ```
 
-### PlayerUpdatePayload missing properties
+    ### PlayerUpdatePayload missing properties
     // shapeMargin: 10,
     // shapeRadius: 3,
     // shapeAspect: 'flat',
@@ -353,12 +178,12 @@ players-list-response:
     // linkActive: 'rgba(255, 0, 0, .75)',
 
 
-### 39: Property 'logo' does not exist on type 'Player'.
+    ### 39: Property 'logo' does not exist on type 'Player'.
 
--> player.assets.logo ??? -> not the same property
-```
-class Player {
-  constructor() {
+    -> player.assets.logo ??? -> not the same property
+    ```
+    class Player {
+    constructor() {
     this.playerId = null;
     this.shapeMargin = null;
     this.shapeRadius = null;
@@ -381,9 +206,9 @@ class Player {
     this.hideTitle = null;
     this.forceLoop = null;
     this.logo = {};
-  }
-}
-```
+    }
+    }
+    ```
 
 
     link
@@ -404,8 +229,7 @@ class Player {
 
 
 
-
-# Automation pipeline (previous notes)
+    # Automation pipeline (previous notes)
 https://github.com/apivideo/API_OAS_file
 > __Other example__
 > https://github.com/LePetitBloc/bitcoin-swagger

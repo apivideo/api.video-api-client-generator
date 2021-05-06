@@ -23,10 +23,10 @@ export default class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
 {{/vars}}
 
   {{#discriminator}}
-  static readonly discriminator: string | undefined = "{{discriminatorName}}";
+  static readonly discriminator?: string = "{{discriminatorName}}";
   {{/discriminator}}
   {{^discriminator}}
-  static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator?: string = undefined;
   {{/discriminator}}
 
   {{^isArray}}
