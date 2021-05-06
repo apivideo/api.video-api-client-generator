@@ -1,4 +1,4 @@
-## {{npmName}}@{{npmVersion}}
+## {{npmName}}
 
 The api-client is a lightweight client built in TypeScript first, targeting nodejs and built upon our Open API schema definition.
 
@@ -77,12 +77,8 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 
 ## TODO
-- Fix sandbox failing test cases
-  - Fix schema issues
-  - Fix delete issues
-  - Add analytics tests
+- Fix delete issues
 - ...
-
 
 ## Issues
 
@@ -103,130 +99,13 @@ create({})
 > @todo Add vendor extension to the operation level
 > or might be done at param level...
 
+### Model duplication
 
-~~Will we keep array syntax?~~
-~~// public async list(title?: string, tags?: Array<string>~~
-    ~~This isn't natural...~~
+Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
 
-    ~~### Lot's of parameters have changed order, sometimes it's weird~~
-
-    ### `Video.videoId` should be required
-    ```
-    const { videoId, title } = await client.videos.create({ title: videoTitle });
-    ```
-    > `videoId` may be undefined.
-    > @todo make them required and see
-    ```
-    required:
-    - videoId
-    - title
-    ```
-
-    ### Video Tags should be strings when getting a video
-
-    ### Delete
-    ```
-    await client.captions.delete(videoId, 'en').then((statusCode) => {
-    expect(statusCode).to.equals(204);
-    });
-    ```
-
-    Deleting a caption is marked as returning void, whereas it's not and should at least return a status code?
-
-    ~~### Missing analytics~~
-    > @todo to be done
-    ```
-    analytics/live-streams/
-    ```
-
-
-    ### Model duplication
-
-    Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
-
-    Generation get strange when, using inheritance, most client generate shit.
-    It would require a lot of efforts to rewrite clients and would crash all clients.
-    It might be a pain to maintained.
-
-    ### `Player.playerId` should be required
-
-
-    ###  PlayersListResponse.data should never be undefined, could be empty array though
-
-    ```
-    players-list-response:
-    title: Players
-    type: object
-    properties:
-    data:
-    type: array
-    items:
-    $ref: '#/components/schemas/player'
-    pagination:
-    $ref: '#/components/schemas/pagination'
-    required:
-    - data
-    - pagination
-    ```
-
-    ### PlayerUpdatePayload missing properties
-    // shapeMargin: 10,
-    // shapeRadius: 3,
-    // shapeAspect: 'flat',
-    // shapeBackgroundTop: 'rgba(50, 50, 50, .7)',
-    // shapeBackgroundBottom: 'rgba(50, 50, 50, .8)',
-    // linkActive: 'rgba(255, 0, 0, .75)',
-
-
-    ### 39: Property 'logo' does not exist on type 'Player'.
-
-    -> player.assets.logo ??? -> not the same property
-    ```
-    class Player {
-    constructor() {
-    this.playerId = null;
-    this.shapeMargin = null;
-    this.shapeRadius = null;
-    this.shapeAspect = null;
-    this.shapeBackgroundTop = null;
-    this.shapeBackgroundBottom = null;
-    this.text = null;
-    this.link = null;
-    this.linkHover = null;
-    this.linkActive = null;
-    this.trackPlayed = null;
-    this.trackUnplayed = null;
-    this.trackBackground = null;
-    this.backgroundTop = null;
-    this.backgroundBottom = null;
-    this.backgroundText = null;
-    this.enableApi = null;
-    this.enableControls = null;
-    this.forceAutoplay = null;
-    this.hideTitle = null;
-    this.forceLoop = null;
-    this.logo = {};
-    }
-    }
-    ```
-
-
-    link
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Generation get strange when, using inheritance, most client generate shit.
+It would require a lot of efforts to rewrite clients and would crash all clients.
+It might be a pain to maintained.
 
 
     # Automation pipeline (previous notes)

@@ -1,10 +1,9 @@
+licenseName: MIT
+supportsES6: true
 npmName: "@api.video/nodejs-client"
 npmVersion: 2.0.0
 npmDescription: api.video typescript client
 npmAuthor: api.video ecosystem team
-
-httpUserAgent: @api.video/client (GO; v:2.0.0; )
-licenseName: MIT
 
 templateDir: typescript
 # Defines the output folder for each kind of specific templates.
