@@ -26,7 +26,7 @@
     "test": "mocha --require test/api/index.js --exclude test/sandbox.spec.js",
     "test:sandbox": "NODE_PATH=. ts-node test/sandbox.spec.ts",
     "eslint": "eslint src/**/*.ts",
-    "prettier": "prettier-eslint --write 'src/**/*.ts'"
+    "prettier": "prettier-eslint --write 'src/**/*.ts' 'test/**/*.ts'"
   },
   "dependencies": {
     "form-data": "^4.0.0",
