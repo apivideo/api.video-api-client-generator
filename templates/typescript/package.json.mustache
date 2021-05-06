@@ -1,8 +1,8 @@
 {
-  "name": "@api.video/typescript-sdk",
+  "name": "{{ npmName }}",
   "version": "{{ npmVersion }}",
-  "description": "api.video java API client",
-  "author": "api.video ecosystem team",
+  "description": "{{ npmDescription }}",
+  "author": "{{ npmAuthor }}",
   "engines": {
     "node": "^14.16.1"
   },
@@ -12,10 +12,10 @@
   },
   "bugs:": "https://github.com/ApiVideo/typescript-api-client/issues",
   "keywords": [
-    "fetch",
-    "typescript",
-    "openapi-client",
-    "openapi-generator"
+    "api",
+    "video",
+    "client",
+    "rest"
   ],
   "license": "{{ licenseName }}",
   "main": "./dist/index.js",
@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "mocha --require test/api/index.js --exclude test/sandbox.spec.js",
+    "test": "mocha --require test/api/index.ts --exclude test/sandbox.spec.ts",
     "test:sandbox": "NODE_PATH=. ts-node test/sandbox.spec.ts",
     "eslint": "eslint src/**/*.ts",
     "prettier": "prettier-eslint --write 'src/**/*.ts' 'test/**/*.ts'"

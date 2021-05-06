@@ -165,3 +165,8 @@ final CodegenConfigurator configurator = new CodegenConfigurator()
     DefaultGenerator generator = new DefaultGenerator();
     generator.opts(clientOptInput).generate();
 }
+
+# https://openapi-generator.tech/docs/configuration/
+# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/languages/TypeScriptClientCodegen.java
+# https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript
+# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultCodegen.java

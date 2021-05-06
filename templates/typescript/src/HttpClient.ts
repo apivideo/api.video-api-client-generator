@@ -2,7 +2,7 @@ import FormData from 'form-data';
 import { createReadStream } from 'fs';
 import got, { AfterResponseHook, ExtendOptions, Got, Headers, Response, RequestError } from 'got';
 import ObjectSerializer from './ObjectSerializer';
-import { version } from '../package.json';
+import { name, version } from '../package.json';
 import ApiVideoError from './ApiVideoError';
 
 export type QueryOptions = Got | ExtendOptions;
@@ -21,7 +21,7 @@ export default class HttpClient {
     this.baseUri = params.baseUri;
     this.tokenType = 'Bearer';
     this.headers = {
-      'User-Agent': `api.video SDK (nodejs; v:${version})`,
+      'User-Agent': `${name} (nodejs; v:${version})`,
       'Accept': 'application/json, */*;q=0.8'
     };
     this.baseRequest = got.extend({

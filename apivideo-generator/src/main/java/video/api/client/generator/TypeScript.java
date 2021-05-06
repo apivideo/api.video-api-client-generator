@@ -49,28 +49,23 @@ public class TypeScript extends DefaultCodegen {
     protected String apiTestFileFolder = "";
     protected String modelTestFileFolder = "";
 
-    // NPM Options
-    private static final String SNAPSHOT = "snapshot";
-    @SuppressWarnings("squid:S5164")
-    protected static final ThreadLocal<SimpleDateFormat> SNAPSHOT_SUFFIX_FORMAT = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyyMMddHHmm", Locale.ROOT));
-    private static final String NPM_REPOSITORY = "npmRepository";
+    // npm options
     private static final String NPM_NAME = "npmName";
     private static final String NPM_VERSION = "npmVersion";
+    private static final String NPM_REPOSITORY = "npmRepository";
 
-    // NPM Option Values
-    protected String npmRepository = null;
-    protected String snapshot = null;
+    // npm Option Values
     protected String npmName = null;
     protected String npmVersion = "1.0.0";
+    protected String npmRepository = null;
+
     protected String modelPropertyNaming = "camelCase";
     protected HashSet<String> languageGenericTypes;
-
 
     public static final String VENDOR_X_CLIENT_IGNORE = "x-client-ignore";
     public static final String VENDOR_X_CLIENT_HIDDEN = "x-client-hidden";
 
     public static final List<String> PARAMETERS_TO_HIDE_IN_CLIENT_DOC = Arrays.asList("currentPage", "pageSize");
-//    public static final String DOC_SUBFOLDER = "doc/";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TypeScript.class);
 
@@ -80,7 +75,6 @@ public class TypeScript extends DefaultCodegen {
 
         // clear import mapping (from default generator) as TS does not use it at the moment
         importMapping.clear();
-        templateDir = "typescript";
         outputFolder = "generated-code" + File.separator + templateDir;
         embeddedTemplateDir = templateDir;
 
@@ -89,7 +83,7 @@ public class TypeScript extends DefaultCodegen {
         // NOTE: TypeScript uses camel cased reserved words, while models are title cased. We don't want lowercase comparisons.
         reservedWords.addAll(Arrays.asList(
                 // local variable names used in API methods (endpoints)
-                "varLocalPath", "queryParameters", "headerParams", "formParams", "useFormData", "varLocalDeferred",
+                "localVarPath", "queryParameters", "headerParams", "formParams", "formData", "useFormData", "varLocalDeferred",
                 "requestOptions",
                 // Typescript reserved words
                 "abstract", "await", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "in", "instanceof", "int", "interface", "let", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with", "yield"
@@ -152,78 +146,15 @@ public class TypeScript extends DefaultCodegen {
                 " Required to generate a full package"));
         cliOptions.add(new CliOption(NPM_VERSION, "The version of your npm package. If not provided, using the version from the OpenAPI specification file.").defaultValue(this.getNpmVersion()));
         cliOptions.add(new CliOption(NPM_REPOSITORY, "Use this property to set an url your private npmRepo in the package.json"));
-        cliOptions.add(CliOption.newBoolean(SNAPSHOT,
-                "When setting this property to true, the version will be suffixed with -SNAPSHOT." + TypeScript.SNAPSHOT_SUFFIX_FORMAT.get().toPattern(),
-                false));
         cliOptions.add(new CliOption(CodegenConstants.MODEL_PROPERTY_NAMING, CodegenConstants.MODEL_PROPERTY_NAMING_DESC).defaultValue("camelCase"));
         cliOptions.add(new CliOption(CodegenConstants.SUPPORTS_ES6, CodegenConstants.SUPPORTS_ES6_DESC).defaultValue("false"));
         cliOptions.add(new CliOption(TypeScript.FILE_CONTENT_DATA_TYPE, TypeScript.FILE_CONTENT_DATA_TYPE_DESC).defaultValue("Buffer"));
 
-        // @todo models
-        setModelPackage("");
-//        supportingFiles.add(new SupportingFile("model" + File.separator + "ObjectSerializer.mustache", "models", "ObjectSerializer.ts"));
-//        modelTemplateFiles.put("model" + File.separator + "model.mustache", ".ts");
-
-        // @todo api
-//        setApiPackage("");
-//        supportingFiles.add(new SupportingFile("api" + File.separator + "middleware.mustache", "", "middleware.ts"));
-//        supportingFiles.add(new SupportingFile("api" + File.separator + "baseapi.mustache", "apis", "baseapi.ts"));
-//        apiTemplateFiles.put("api" + File.separator + "api.mustache", ".ts");
-
         modifyFeatureSet(features -> features.includeDocumentationFeatures(DocumentationFeature.Api, DocumentationFeature.Model));
-
-        String configFile = Paths.get("/config/", templateDir, ".yaml").toString();
-//        if (isNotEmpty(configFile)) {
-//            DynamicSettings settings = CodegenConfigurator.fromFile(configFile, []);
-//        }
-
-
-        supportingFiles.clear();
-
-        Path templatePath = Paths.get("templates/", templateDir, File.separator);
-        LOGGER.info("templatePath="+templatePath.toString());
-
-        try {
-            Files
-                    .walk(templatePath)
-                    .filter(Files::isRegularFile)
-                    .forEach(x -> supportingFiles.add(createSupportingFileTemplateDefinition(x.toString().replace(templatePath.toString()+File.separator, ""))))
-            ;
-        } catch (IOException ioException) {
-            LOGGER.error(ioException.getMessage());
-        }
-
-//        apiDocTemplateFiles.put("doc/api_doc.md.mustache", ".md");
-//        modelDocTemplateFiles.put("doc/model_doc.md.mustache", ".md");
-//
-//        additionalProperties.put("apiDocPath", DOC_SUBFOLDER);
-//        additionalProperties.put("modelDocPath", DOC_SUBFOLDER);
-    }
-
-    /**
-     * Create a supporting file from a template file path.
-     * The template filename should includes the expected extension (or none for no extension).
-     * Destination path is guessed from template path.
-     *
-     * @param templateFile String
-     * @return SupportingFile
-     */
-    SupportingFile createSupportingFileTemplateDefinition(String templateFile) {
-        Path templatePath = Paths.get(templateFile);
-        LOGGER.info("templateFile="+templateFile);
-        String destinationFilename = templatePath.getFileName().toString().replace(".mustache", "");
-        LOGGER.info(destinationFilename);
-        Path parent = templatePath.getParent();
-        String folder = parent != null ? parent.toString() : "";
-
-        LOGGER.info(folder);
-
-        return new SupportingFile(templateFile, folder, destinationFilename);
     }
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
-
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
@@ -286,10 +217,6 @@ public class TypeScript extends DefaultCodegen {
             } catch (JsonProcessingException ignored) {
             }
 
-
-//            LOGGER.error("modelPackage=" + modelPackage());
-//            LOGGER.error("testPackage=" + testPackage());
-
             try {
                 Path folder = Paths.get(
                         getOutputDir(),
@@ -299,7 +226,6 @@ public class TypeScript extends DefaultCodegen {
                         (String) operation.vendorExtensions.get("x-client-action"),
                         "responses"
                 );
-//                LOGGER.error(folder.toString());
                 Files.createDirectories(folder);
                 PrintWriter out = new PrintWriter(folder + response.code + ".json");
                 out.print(responseExample);
@@ -337,6 +263,29 @@ public class TypeScript extends DefaultCodegen {
     }
 
     /**
+     * Create a supporting file from a template file path.
+     * The template filename should includes the expected extension (or none for no extension).
+     * Destination path is guessed from template path.
+     *
+     * @param templateFile String
+     * @return SupportingFile
+     */
+    SupportingFile createSupportingFileTemplateDefinition(String templateFile) {
+        Path templatePath = Paths.get(templateFile);
+        LOGGER.info("templateFile="+templateFile);
+
+        String destinationFilename = templatePath.getFileName().toString().replace(".mustache", "");
+        LOGGER.info("destinationFilename="+destinationFilename);
+
+        Path parent = templatePath.getParent();
+
+        String folder = parent != null ? parent.toString() : "";
+        LOGGER.info("folder="+folder);
+
+        return new SupportingFile(templateFile, folder, destinationFilename);
+    }
+
+    /**
      * Remove files listed in the "ignoredFiles" list of the config file from the list of files to generate
      */
     @Override
@@ -357,10 +306,6 @@ public class TypeScript extends DefaultCodegen {
 
         if (additionalProperties.containsKey(TypeScript.MODEL_DOC_FILE_FOLDER)) {
             modelDocFileFolder = (String) additionalProperties.get(TypeScript.MODEL_DOC_FILE_FOLDER);
-        }
-
-        if (additionalProperties.containsKey(TypeScript.TEST_PACKAGE)) {
-            testPackage = (String) additionalProperties.get(TypeScript.TEST_PACKAGE);
         }
     
         if (additionalProperties.containsKey(TypeScript.API_TEST_FILE_FOLDER)) {
@@ -390,14 +335,28 @@ public class TypeScript extends DefaultCodegen {
             setNpmRepository(additionalProperties.get(NPM_REPOSITORY).toString());
         }
 
+        String configFile = Paths.get("/config/", templateDir, ".yaml").toString();
+//        if (isNotEmpty(configFile)) {
+//            DynamicSettings settings = CodegenConfigurator.fromFile(configFile, []);
+//        }
+
+        supportingFiles.clear();
+
+        LOGGER.info("templateDir()="+templateDir());
+
+        try {
+            Files
+                    .walk(Paths.get(templateDir()))
+                    .filter(Files::isRegularFile)
+                    .forEach(x -> supportingFiles.add(createSupportingFileTemplateDefinition(x.toString().replace(templateDir()+File.separator, ""))))
+            ;
+        } catch (IOException ioException) {
+            LOGGER.error(ioException.getMessage());
+        }
+
         // @todo could probably use something similar to remove templates identified as specific templates
-        // fromt the list of supporting files
+        // remove ignored files from the list of supporting files
         List<String> ignoredFiles = (List<String>) additionalProperties.get("ignoredFiles");
-        LOGGER.error(additionalProperties.values().toString());
-        LOGGER.error(getGeneratorMetadata().getLibraryFeatures().keySet().toString());
-        LOGGER.error(supportingFiles.toString());
-        LOGGER.error(Paths.get("hello").toString());
-        LOGGER.error(ignoredFiles.toString());
         supportingFiles.removeIf(e -> ignoredFiles.contains(e.getTemplateFile()));
     }
 
@@ -443,9 +402,7 @@ public class TypeScript extends DefaultCodegen {
 
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
-
         if (additionalProperties.containsKey(NPM_NAME)) {
-
             // If no npmVersion is provided in additional properties, version from API specification is used.
             // If none of them is provided then fallbacks to default version
             if (additionalProperties.containsKey(NPM_VERSION)) {
@@ -453,16 +410,7 @@ public class TypeScript extends DefaultCodegen {
             } else if (openAPI.getInfo() != null && openAPI.getInfo().getVersion() != null) {
                 this.setNpmVersion(openAPI.getInfo().getVersion());
             }
-
-            if (additionalProperties.containsKey(SNAPSHOT) && Boolean.parseBoolean(additionalProperties.get(SNAPSHOT).toString())) {
-                if (npmVersion.toUpperCase(Locale.ROOT).matches("^.*-SNAPSHOT$")) {
-                    this.setNpmVersion(npmVersion + "." + SNAPSHOT_SUFFIX_FORMAT.get().format(new Date()));
-                } else {
-                    this.setNpmVersion(npmVersion + "-SNAPSHOT." + SNAPSHOT_SUFFIX_FORMAT.get().format(new Date()));
-                }
-            }
             additionalProperties.put(NPM_VERSION, npmVersion);
-
         }
     }
 

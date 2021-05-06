@@ -79,7 +79,7 @@ export default class {{classname}} {
     {{/headerParams}}
 
     {{#hasFormParams}}
-    const form = new FormData();
+    const formData = new FormData();
     {{/hasFormParams}}
 
     {{#formParams}}
@@ -87,21 +87,21 @@ export default class {{classname}} {
     if ({{paramName}}) {
     {{#isCollectionFormatMulti}}
       {{paramName}}.forEach((element) => {
-        form.append('{{baseName}}', element);
+        formData.append('{{baseName}}', element);
       })
     {{/isCollectionFormatMulti}}
     {{^isCollectionFormatMulti}}
-        form.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+        formData.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
     {{/isCollectionFormatMulti}}
     }
     {{/isArray}}
     {{^isArray}}
     if (typeof {{paramName}} !== undefined) {
        {{^isFile}}
-       form.append('{{baseName}}', {{paramName}});
+       formData.append('{{baseName}}', {{paramName}});
        {{/isFile}}
        {{#isFile}}
-      form.append(
+      formData.append(
           '{{baseName}}',
           Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
           '{{baseName}}',
@@ -109,10 +109,10 @@ export default class {{classname}} {
 
        {{#platforms}}
        {{#node}}
-       form.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
+       formData.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
        {{/node}}
        {{^node}}
-       form.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+       formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
        {{/node}}
        {{/platforms}}
        {{/isFile}}
@@ -120,7 +120,7 @@ export default class {{classname}} {
     {{/isArray}}
     {{/formParams}}
     {{#hasFormParams}}
-    queryParams.body = form;
+    queryParams.body = formData;
     {{/hasFormParams}}
     {{#bodyParam}}
 
@@ -198,7 +198,7 @@ export default class {{classname}} {
     {{/headerParams}}
 
     {{#hasFormParams}}
-    const form = new FormData();
+    const formData = new FormData();
     {{/hasFormParams}}
 
     {{#formParams}}
@@ -206,21 +206,21 @@ export default class {{classname}} {
     if ({{paramName}}) {
     {{#isCollectionFormatMulti}}
       {{paramName}}.forEach((element) => {
-        form.append('{{baseName}}', element);
+        formData.append('{{baseName}}', element);
       })
     {{/isCollectionFormatMulti}}
     {{^isCollectionFormatMulti}}
-        form.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+        formData.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
     {{/isCollectionFormatMulti}}
     }
     {{/isArray}}
     {{^isArray}}
     if (typeof {{paramName}} !== undefined) {
        {{^isFile}}
-       form.append('{{baseName}}', {{paramName}});
+       formData.append('{{baseName}}', {{paramName}});
        {{/isFile}}
        {{#isFile}}
-      form.append(
+      formData.append(
           '{{baseName}}',
           Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
           '{{baseName}}',
@@ -228,10 +228,10 @@ export default class {{classname}} {
 
        {{#platforms}}
        {{#node}}
-       form.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
+       formData.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
        {{/node}}
        {{^node}}
-       form.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+       formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
        {{/node}}
        {{/platforms}}
        {{/isFile}}
@@ -239,7 +239,7 @@ export default class {{classname}} {
     {{/isArray}}
     {{/formParams}}
     {{#hasFormParams}}
-    queryParams.body = form;
+    queryParams.body = formData;
     {{/hasFormParams}}
     {{#bodyParam}}
 
