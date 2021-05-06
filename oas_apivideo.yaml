@@ -1885,7 +1885,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subtitle'
+                $ref: '#/components/schemas/caption'
               examples:
                 response:
                   value:
@@ -1942,7 +1942,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subtitle'
+                $ref: '#/components/schemas/caption'
               examples:
                 response:
                   value:
@@ -2055,7 +2055,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subtitle'
+                $ref: '#/components/schemas/caption'
               examples:
                 response:
                   value:
@@ -2441,7 +2441,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/players-list-response'
+                $ref: '#/components/schemas/player-themes-list-response'
               examples:
                 response:
                   value:
@@ -2543,14 +2543,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/player-creation-payload'
+              $ref: '#/components/schemas/player-theme-creation-payload'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/player'
+                $ref: '#/components/schemas/player-theme'
               examples:
                 response:
                   value:
@@ -2604,7 +2604,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/player'
+                $ref: '#/components/schemas/player-theme'
               examples:
                 response:
                   value:
@@ -2707,14 +2707,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/player-update-payload'
+              $ref: '#/components/schemas/player-theme-update-payload'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/player'
+                $ref: '#/components/schemas/player-theme'
               examples:
                 response:
                   value:
@@ -2783,14 +2783,14 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/players-upload-logo-payload'
+              $ref: '#/components/schemas/player-theme-upload-logo-payload'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/player'
+                $ref: '#/components/schemas/player-theme'
         '400':
           description: Bad Request
           content:
@@ -3612,7 +3612,8 @@ components:
             One array of tags (each tag is a string) in order to categorize a
             video. Tags may include spaces. 
           example: '"tags": ["maths", "string theory", "video"]'
-          items: {}
+          items:
+            type: string
         metadata:
           type: array
           description: >
@@ -3669,7 +3670,7 @@ components:
           - video_delete
           - video_download
           - video_update
-    player:
+    player-theme:
       type: object
       properties:
         text:
@@ -3764,8 +3765,9 @@ components:
               type: string
               description: The path to the file containing your logo.
               example: path/to/my/logo/mylogo.jpg
-      title: Player
-    player-creation-payload:
+      title: PlayerTheme
+    player-theme-creation-payload:
+      title: PlayerThemeCreationPayload
       type: object
       properties:
         text:
@@ -3823,8 +3825,8 @@ components:
           type: boolean
           description: 'enable/disable looping. Default: false'
           default: false
-    player-update-payload:
-      title: PlayerUpdatePayload
+    player-theme-update-payload:
+      title: PlayerThemeUpdatePayload
       type: object
       properties:
         text:
@@ -3877,8 +3879,8 @@ components:
         forceLoop:
           type: boolean
           description: 'enable/disable looping. Default: false'
-    subtitle:
-      title: Subtitle
+    caption:
+      title: Caption
       type: object
       properties:
         uri:
@@ -4579,7 +4581,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/subtitle'
+            $ref: '#/components/schemas/caption'
         pagination:
           $ref: '#/components/schemas/pagination'
     chapters-update-payload:
@@ -4602,18 +4604,18 @@ components:
             $ref: '#/components/schemas/chapter'
         pagination:
           $ref: '#/components/schemas/pagination'
-    players-list-response:
-      title: Players
+    player-themes-list-response:
+      title: PlayerThemes
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/player'
+            $ref: '#/components/schemas/player-theme'
         pagination:
           $ref: '#/components/schemas/pagination'
-    players-upload-logo-payload:
-      title: PlayersUploadLogoPayload
+    player-theme-upload-logo-payload:
+      title: PlayerThemeUploadLogoPayload
       required:
         - file
         - link
