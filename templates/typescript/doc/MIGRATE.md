@@ -2,7 +2,7 @@
 
 Listing methods are now called `list` instead of `search`.
 They don't fetch all pages by default, this is now left to the user.
-This also means return value has changed, instead of returning the array of data,
+This also means the return value has changed. Instead of returning the array of data,
 it now returns the full response body:
 ```json
 {
