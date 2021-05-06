@@ -1,9 +1,14 @@
-import FormData from 'form-data';
-import { createReadStream } from 'fs';
-import got, { AfterResponseHook, ExtendOptions, Got, Headers, Response, RequestError } from 'got';
+import got, {
+  AfterResponseHook,
+  ExtendOptions,
+  Got,
+  Headers,
+  RequestError,
+} from 'got';
 import ObjectSerializer from './ObjectSerializer';
-import { name, version } from '../package.json';
+import { version } from '../package.json';
 import ApiVideoError from './ApiVideoError';
+import AccessToken from './model/AccessToken';
 
 export type QueryOptions = Got | ExtendOptions;
 
@@ -11,35 +16,34 @@ export default class HttpClient {
   private apiKey?: string;
   private baseUri: string;
   private tokenType: string;
-  private accessToken?: string;
-  private refreshToken?: string;
+  private accessToken?: AccessToken;
   private headers: Headers;
   private baseRequest: Got;
 
-  constructor(params: {apiKey?: string, baseUri: string}) {
+  constructor(params: { apiKey?: string; baseUri: string }) {
     this.apiKey = params.apiKey;
     this.baseUri = params.baseUri;
     this.tokenType = 'Bearer';
     this.headers = {
-      'User-Agent': `${name} (nodejs; v:${version})`,
-      'Accept': 'application/json, */*;q=0.8'
+      'User-Agent': `api.video SDK (nodejs; v:${version})`,
+      Accept: 'application/json, */*;q=0.8',
     };
     this.baseRequest = got.extend({
       prefixUrl: this.baseUri,
       headers: this.headers,
       mutableDefaults: true,
       hooks: {
-        afterResponse: [
-          this.isStillAuthenticated.bind(this),
-        ],
+        afterResponse: [this.isStillAuthenticated.bind(this)],
         beforeRequest: [
           async (options) => {
             if (!options.headers.Authorization) {
               if (!this.accessToken) {
                 await this.getAccessToken.call(this);
               }
+              // @ts-ignore
+              const { tokenType, accessToken } = this.accessToken;
               // eslint-disable-next-line no-param-reassign
-              options.headers.Authorization = `${this.tokenType} ${this.accessToken}`;
+              options.headers.Authorization = `${tokenType} ${accessToken}`;
             }
           },
         ],
@@ -50,7 +54,8 @@ export default class HttpClient {
             return next(options);
           }
 
-          return next(options)
+          return (
+            next(options)
               // @ts-ignore
               .catch((error: Error) => {
                 if (error instanceof RequestError) {
@@ -64,37 +69,33 @@ export default class HttpClient {
                 }
 
                 throw error;
-              });
+              })
+          );
         },
       ],
     });
   }
 
-
-  async getAccessToken() {
-    const { statusCode, body } = await got.post(`${this.baseUri}/auth/api-key`, {
-      json: { apiKey: this.apiKey },
-      responseType: 'json',
-    });
-    const token = ObjectSerializer.deserialize(body, "AccessToken", "");
+  async getAccessToken(): Promise<AccessToken> {
+    const { statusCode, body } = await got.post(
+      `${this.baseUri}/auth/api-key`,
+      {
+        json: { apiKey: this.apiKey },
+        responseType: 'json',
+      }
+    );
+    this.accessToken = ObjectSerializer.deserialize(
+      body,
+      'AccessToken',
+      ''
+    ) as AccessToken;
 
     if (statusCode >= 400) {
       throw new Error('Authentication Failed');
     }
 
-    return this.setAccessToken(token.tokenType, token.accessToken, token.refreshToken);
-  };
-
-  async setAccessToken(tokenType: string, accessToken: string, refreshToken: string) {
-    this.tokenType = tokenType;
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
-    return {
-      tokenType: this.tokenType,
-      accessToken: this.accessToken,
-      refreshToken: this.refreshToken,
-    };
-  };
+    return this.accessToken;
+  }
 
   isStillAuthenticated: AfterResponseHook = async (response, retry) => {
     if (response.statusCode === 401) {
@@ -108,7 +109,7 @@ export default class HttpClient {
       // Save for further requests
       this.baseRequest.defaults.options = got.mergeOptions(
         this.baseRequest.defaults.options,
-        updatedOptions,
+        updatedOptions
       );
 
       // Make a new retry
@@ -117,34 +118,9 @@ export default class HttpClient {
 
     // No changes otherwise
     return response;
-  }
-
+  };
 
   call(path: string, queryOptions?: QueryOptions) {
     return this.baseRequest.extend(queryOptions || {})(path);
   }
-
-  async submit(path: string, source: string, filename: string, headers = {}) {
-    const form = new FormData();
-    form.append(
-      filename,
-      Buffer.isBuffer(source) ? source : createReadStream(source),
-      filename,
-    );
-
-    return this.baseRequest.extend(Object.assign({}, { headers })).post(path, { body: form });
-  };
-
-  // eslint-disable-next-line max-len
-  async submitMultiPart(path: string, source: string, data = {}, headers = {}) {
-    const form = new FormData();
-    form.append('file', createReadStream(source));
-
-    const entries = Object.entries(data);
-    for (const [key, value] of entries) {
-      form.append(key, value);
-    }
-
-    return this.baseRequest.extend({ headers }).post(path, { body: form });
-  };
-};
+}
