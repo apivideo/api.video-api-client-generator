@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-non-null-assertion */
+{{>licenseInfo}}
+
 {{#models}}
 {{#model}}
 import {{classname}}{{#hasEnums}}, { {{#vars}}{{#isEnum}}{{classname}}{{enumName}}, {{/isEnum}}{{/vars}} }{{/hasEnums}} from '{{modelPackage}}/{{{ classFilename }}}';

@@ -1,3 +1,5 @@
+{{>licenseInfo}}
+
 import HttpClient from "./HttpClient";
 {{# apiInfo.apis }}{{^x-client-hidden}}
 import {{classFilename}} from '{{ apiPackage }}/{{classFilename}}';{{/x-client-hidden}}{{/ apiInfo.apis }}
