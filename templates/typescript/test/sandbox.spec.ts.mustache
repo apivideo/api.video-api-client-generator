@@ -120,10 +120,7 @@ const timeout = (ms = 100) => new Promise((resolve) => {
         videoId,
         period: new Date().getFullYear().toString(),
       })
-      .then(({ data: videoSessions }) => {
-        console.log(videoSessions);
-        expect(videoSessions).to.be.an('array');
-      });
+      .then(({ data: videoSessions }) => expect(videoSessions).to.be.an('array'));
 
     // Delete video resource
     await client.videos.delete(videoId);
