@@ -1,35 +1,34 @@
 import { expect } from 'chai';
 import ApiVideoClient from '../src';
-
 {{#models}}
 {{#model}}
 import {{classFilename}} from '../{{ modelPackage }}/{{classFilename}}';
 {{/model}}
 {{/models}}
 
-{{# apiInfo.apis }}
-{{^x-client-hidden}}
-import {{classFilename}} from '../{{ apiPackage }}/{{classFilename}}';
-{{/x-client-hidden}}
-{{/ apiInfo.apis }}
+const timeout = (ms = 100) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
 
-const timeout = (ms = 100) => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve();
-  }, ms);
-});
+try {
+  if (!process.env.API_KEY) {
+    console.error(
+      'You must provide `API_KEY` environment variable to test the sandbox.'
+    );
+    console.log('API_KEY=xxx yarn test:sandbox');
 
-(async () => {
-  try {
-    if (!process.env.API_KEY) {
-      console.error(
-        'You must provide `API_KEY` environment variable to test the sandbox.'
-      );
-      console.log('API_KEY=xxx yarn test:sandbox');
+    process.exit(1);
+  }
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}
 
-      process.exit(1);
-    }
-
+describe('ApiVideoClient', () => {
+  it('works with the sandbox', async () => {
     // Create client for Sandbox and authenticate
     const client = new ApiVideoClient({ apiKey: process.env.API_KEY });
 
@@ -120,7 +119,9 @@ const timeout = (ms = 100) => new Promise((resolve) => {
         videoId,
         period: new Date().getFullYear().toString(),
       })
-      .then(({ data: videoSessions }) => expect(videoSessions).to.be.an('array'));
+      .then(({ data: videoSessions }) =>
+        expect(videoSessions).to.be.an('array')
+      );
 
     // Delete video resource
     await client.videos.delete(videoId);
@@ -219,8 +220,5 @@ const timeout = (ms = 100) => new Promise((resolve) => {
     await client.uploadTokens
       .createToken()
       .then(({ token }) => expect(token).to.be.a('string'));
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
-})();
+  });
+});

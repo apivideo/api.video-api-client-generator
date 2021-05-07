@@ -1,0 +1,18 @@
+import { expect } from 'chai';
+import ApiVideoClient from '../src';
+{{# apiInfo.apis }}
+    {{^x-client-hidden}}
+import {{classFilename}} from '../{{ apiPackage }}/{{classFilename}}';
+    {{/x-client-hidden}}
+{{/ apiInfo.apis }}
+
+describe('ApiVideoClient', () => {
+{{# apiInfo.apis }}
+    {{^x-client-hidden}}
+    it('should use the {{classFilename}} class', () => {
+        const client = new ApiVideoClient({ apiKey: 'test' });
+        expect(client.{{classVarName}}).instanceOf({{classFilename}});
+    });
+    {{/x-client-hidden}}
+{{/ apiInfo.apis }}
+});
