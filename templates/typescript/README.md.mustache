@@ -94,23 +94,6 @@ It's recommended to create an instance of `ApiVideoClient` per thread in a multi
 
 ## Issues
 
-#### Payload model
-Payload models are a pain because: if all properties of payload model are optionnal, we cant detect it
-I'm not able to set it as optionnal?
-Or set it as optionnal somewhere else...
-idea is to do smthing like
-```ts
-const create = ( payload = {}) => {};
-
-// and to call
-create();
-
-// instead of
-create({})
-```
-> @todo Add vendor extension to the operation level
-> or might be done at param level...
-
 ### Model duplication
 
 Ex: Model Player is the same as player-creation-payload and update payload... there should be an inheritance
