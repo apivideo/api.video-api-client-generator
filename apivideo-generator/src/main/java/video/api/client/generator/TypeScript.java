@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -185,6 +184,12 @@ public class TypeScript extends DefaultCodegen {
                                 .forEach(p -> p.vendorExtensions.put("x-client-doc-hidden", true))
                 );
 
+                operation
+                    .allParams
+                    .stream()
+                    .filter(p -> p.isModel && p.getRequiredVars().size() == 0)
+                    .forEach(p -> p.vendorExtensions.put("x-optional-object", true))
+                ;
 
                 operation.responses.forEach(response -> populateOperationResponse(operation, response));
 

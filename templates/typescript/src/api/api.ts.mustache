@@ -22,12 +22,6 @@ export default class {{classname}} {
 
 
   {{#operation}}
-      {{#hasRequiredParams}}
-          // has required params
-      {{/hasRequiredParams}}
-      {{#requiredParams}}
-          // {{paramName}}
-      {{/requiredParams}}
   {{#vendorExtensions.x-group-parameters}}
   /**
    {{#notes}}
@@ -157,7 +151,7 @@ export default class {{classname}} {
    * @param {{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
     const queryParams: QueryOptions = {};
 
     queryParams.headers = {};

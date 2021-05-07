@@ -111,7 +111,7 @@ await client.players.create();
 ```
 __After:__
 ```ts
-await client.playerThemes.create({});
+await client.playerThemes.create();
 ```
 
 ### Get a player theme
@@ -216,5 +216,5 @@ await client.tokens.generate()
 ```
 __After:__
 ```ts
-await client.uploadTokens.createToken({})
+await client.uploadTokens.createToken()
 ```

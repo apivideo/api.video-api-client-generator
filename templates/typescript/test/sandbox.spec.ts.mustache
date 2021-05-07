@@ -126,7 +126,7 @@ const timeout = (ms = 100) => new Promise((resolve) => {
     await client.videos.delete(videoId);
 
     // Create a player theme with default values
-    const { playerId } = await client.playerThemes.create({});
+    const { playerId } = await client.playerThemes.create();
     expect(playerId).to.be.a('string');
 
     // Get a playerTheme
@@ -217,7 +217,7 @@ const timeout = (ms = 100) => new Promise((resolve) => {
 
     // Generate a token for delegated upload
     await client.uploadTokens
-      .createToken({})
+      .createToken()
       .then(({ token }) => expect(token).to.be.a('string'));
   } catch (e) {
     console.error(e);
