@@ -24,7 +24,7 @@
   "scripts": {
     "prepare": "tsc",
     "test": "mocha --reporter spec --require ts-node/register --require tsconfig-paths/register test/**/*.spec.ts --exclude test/sandbox.spec.ts",
-    "test:sandbox": "mocha --timeout 30000 --reporter spec --require ts-node/register --require tsconfig-paths/register test/sandbox.spec.ts",
+    "test:sandbox": "mocha --timeout 120000 --reporter spec --require ts-node/register --require tsconfig-paths/register test/sandbox.spec.ts",
     "eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
     "prettier": "prettier-eslint --write 'src/**/*.ts' 'test/**/*.ts'"
   },
