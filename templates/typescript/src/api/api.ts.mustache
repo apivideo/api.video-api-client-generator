@@ -3,10 +3,10 @@
 import { existsSync, createReadStream } from 'fs';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
-import ObjectSerializer from 'src/ObjectSerializer';
-import HttpClient, { QueryOptions } from 'src/HttpClient';
+import ObjectSerializer from 'ObjectSerializer';
+import HttpClient, { QueryOptions } from 'HttpClient';
 {{#imports}}
-import {{classname}} from '{{filename}}';
+import {{classname}} from 'model/{{classname}}';
 {{/imports}}
 {{#operations}}
 

@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".", // @todo
+    "baseUrl": "src", // @todo
     "declaration": true,
     "outDir": "./lib",
   },
