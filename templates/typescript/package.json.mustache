@@ -20,9 +20,9 @@
   "license": "{{ licenseName }}",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
+  "files": ["/dist", "/doc"],
   "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build",
+    "prepare": "tsc",
     "test": "mocha --require test/api/index.ts --exclude test/sandbox.spec.ts",
     "test:sandbox": "NODE_PATH=. ts-node test/sandbox.spec.ts",
     "eslint": "eslint src/**/*.ts",

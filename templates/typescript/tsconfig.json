@@ -2,6 +2,8 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".", // @todo
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true,
+    "outDir": "./dist",
   }
 }
