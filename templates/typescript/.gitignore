@@ -1,4 +1,4 @@
-dist
+lib
 .openapi-generator
 node_modules
 licenseInfo

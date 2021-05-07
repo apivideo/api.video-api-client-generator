@@ -18,11 +18,11 @@
     "rest"
   ],
   "license": "{{ licenseName }}",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "files": ["/dist"],
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "files": ["lib/", "doc/", "test/sandbox.spec.ts"],
   "scripts": {
-    "prepare": "tsc",
+    "prepublishOnly": "tsc",
     "test": "mocha --reporter spec --require ts-node/register --require tsconfig-paths/register test/**/*.spec.ts --exclude test/sandbox.spec.ts",
     "test:sandbox": "mocha --timeout 120000 --reporter spec --require ts-node/register --require tsconfig-paths/register test/sandbox.spec.ts",
     "eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",

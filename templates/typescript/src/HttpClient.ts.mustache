@@ -1,3 +1,5 @@
+{{>licenseInfo}}
+
 import got, {
   AfterResponseHook,
   ExtendOptions,
@@ -6,7 +8,6 @@ import got, {
   RequestError,
 } from 'got';
 import ObjectSerializer from './ObjectSerializer';
-import { version } from '../package.json';
 import ApiVideoError from './ApiVideoError';
 import AccessToken from './model/AccessToken';
 
@@ -25,7 +26,7 @@ export default class HttpClient {
     this.baseUri = params.baseUri;
     this.tokenType = 'Bearer';
     this.headers = {
-      'User-Agent': `api.video SDK (nodejs; v:${version})`,
+      'User-Agent': `{{ npmName }} (nodejs; v:{{ npmVersion }})`,
       Accept: 'application/json, */*;q=0.8',
     };
     this.baseRequest = got.extend({

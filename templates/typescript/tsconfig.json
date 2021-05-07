@@ -2,8 +2,10 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".", // @todo
-    "resolveJsonModule": true,
     "declaration": true,
-    "outDir": "./dist",
-  }
+    "outDir": "./lib",
+  },
+  "include": [
+    "./src"
+  ]
 }
