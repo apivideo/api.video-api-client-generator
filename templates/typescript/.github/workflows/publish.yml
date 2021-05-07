@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - run: npm ci
+      - run: npm install
       - run: npm test
       - name: Run sandbox test
         run: npm run test:sandbox
