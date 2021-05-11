@@ -1,19 +1,33 @@
-name: update-client
-on: [push]
+name: Update clients PRs
+on:
+  # Trigger the workflow on pull requests targeting the master branch
+  pull_request:
+    types: [assigned, unassigned, opened, reopened, synchronize, labeled, unlabeled, edited, closed]
+    branches:
+      - master
+
 jobs:
-  update-client:
+  get_available_profiles:
     runs-on: ubuntu-latest
+    outputs:
+      profiles: ${{ steps.get-profiles-step.outputs.profiles }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: get-profiles-step
+        uses: ./.github/actions/get-profiles
 
-    env:
-      PROFILE_PATH: generated-clients/${{ matrix.profile }}
-      OWNER: apivideo
-      REPO: ${{ matrix.profile }}-api-client
-      BRANCH: ${{ github.run_id }}
-      TARGET: main
+  update_client_pr:
+    if: github.event.type != 'closed'
 
+    runs-on: ubuntu-latest
+    needs: [ get_available_profiles ]
     strategy:
       matrix:
-        profile: ['typescript']
+        profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+
+    env:
+      CLIENT_PATH: generated-clients/${{ matrix.profile }}
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
 
     steps:
       - name: Check out repository code
@@ -35,40 +49,99 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
 
-      - name: Checkout client
+      - name: Checkout client repository
         uses: actions/checkout@v2
         with:
-          repository: ${{ env.OWNER }}/${{ env.REPO }}
+          repository: ${{ env.CLIENT_REPOSITORY }}
           token: ${{ secrets.PAT }}
-          path: ${{ env.PROFILE_PATH }}
+          path: ${{ env.CLIENT_PATH }}
 
       - name: Remove files to allow files deletion from git
         run: |
-          cd ${{ env.PROFILE_PATH }}
+          cd ${{ env.CLIENT_PATH }}
           rm -r *
 
       - name: Generate client
         run: mvn package -P ${{ matrix.profile }}
 
+      # Make changes to pull request here
+      - uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PAT }}
+          path: ${{ env.CLIENT_PATH }}
+          commit-message: ${{ github.event.pull_request.title }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: ${{ github.event.pull_request.head.ref }}
+          title: ${{ github.event.pull_request.title }}
+          body: |
+            > ${{ github.event.pull_request.body }}
+            > Created by @${{ github.actor }} via ${{ github.event.pull_request.html_url }}
+          delete-branch: true
+          labels: ${{ join(github.event.pull_request.labels.*.name) }}
+          assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
+          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }}
+          draft: true
 
-      - name: Get commit
+  merge_client_pr:
+    # this job will only run if the PR has been merged
+    if: github.event.type == 'closed' && github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+    needs: [ get_available_profiles ]
+    strategy:
+      matrix:
+        profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+    env:
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-typescript-api-client
+
+    steps:
+      - run: |
+          echo PR ${{ github.event.repo.name }}#${{ github.event.number }} has been merged
+      - name: Look for existing PRs and merge them
         id: commit
         uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.PAT }}
           script: |
-            const { data: { commit } } = await github.request(`GET /repos/${process.env.GITHUB_REPOSITORY}/commits/${process.env.GITHUB_SHA}`);
-            core.exportVariable('SHA_MESSAGE', commit.message);
-            core.exportVariable('SHA_AUTHOR_NAME', commit.author.name);
-            core.exportVariable('SHA_AUTHOR_EMAIL', commit.author.email);
+            const { data: pullRequests } = await github.request(`GET /repos/${process.env.CLIENT_REPOSITORY}/pulls`, { head: context.payload.pull_request.head.label });
+            if (pullRequests.length > 0) {
+              pullRequests.forEach(async (pullRequest) => {
+                console.log(`Found ${pullRequest.state} PR ${process.env.CLIENT_REPOSITORY}#${pullRequest.number}`);
+                const mergeResponse = await github.request(`PUT /repos/${process.env.CLIENT_REPOSITORY}/pulls/${pullRequest.number}/merge`);
+                console.log('mergeResponse', mergeResponse);
+              });
+            } else {
+              console.log(`There are no PRs from branch ${context.payload.pull_request.head.ref} on ${process.env.CLIENT_REPOSITORY} repository.`);
+            }
 
-      - name: Configure git user, add, commit and push changes if required
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: |
-          cd ${{ env.PROFILE_PATH }}
-          git config user.name '${{ env.SHA_AUTHOR_NAME }}'
-          git config user.email '${{ env.SHA_AUTHOR_EMAIL }}'
-          echo "The job was automatically triggered by a ${{ github.event_name }} event."
-          git add .
-          git commit -m '${{ env.SHA_MESSAGE }}'
-          git push origin HEAD --force
+  close_client_pr:
+    # this job will only run if the PR has been closed without being merged
+    if: github.event.type == 'closed' && github.event.pull_request.merged == false
+
+    runs-on: ubuntu-latest
+    needs: [ get_available_profiles ]
+    strategy:
+      matrix:
+        profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+    env:
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
+
+    steps:
+      - run: |
+          echo PR ${{ github.event.repo.name }}#${{ github.event.number }} has been closed
+      - name: Look for existing PRs and close them
+        id: commit
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            const { data: pullRequests } = await github.request(`GET /repos/${process.env.CLIENT_REPOSITORY}/pulls`, { head: context.payload.pull_request.head.label });
+            if (pullRequests.length > 0) {
+              pullRequests.forEach(async (pullRequest) => {
+                console.log(`Found ${pullRequest.state} PR ${process.env.CLIENT_REPOSITORY}#${pullRequest.number}`);
+                await github.request(`PATCH /repos/${process.env.CLIENT_REPOSITORY}/pulls/${pullRequest.number}`, { state: 'closed' });
+              });
+            } else {
+              console.log(`There are no PRs from branch ${context.payload.pull_request.head.ref} on ${process.env.CLIENT_REPOSITORY} repository.`);
+            }
