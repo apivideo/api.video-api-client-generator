@@ -1,0 +1,14 @@
+name: Get profiles
+description: Get available client profile names
+outputs:
+  profiles:
+    description: The list of available profiles as a Json array string
+    value: ${{ steps.get-profiles.outputs.profiles }}
+runs:
+  using: composite
+  steps:
+    - id: get-profiles
+      run: |
+        PROFILES=$(echo $(cat $GITHUB_ACTION_PATH/profiles.json) | sed 's/ //g' )
+        echo "::set-output name=profiles::$PROFILES"
+      shell: bash
