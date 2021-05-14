@@ -1,7 +1,15 @@
 {{>licenseInfo}}
 
 import path from 'path';
-import { existsSync, statSync, createReadStream } from 'fs';
+import {
+  existsSync,
+  statSync,
+  createReadStream,
+  openSync,
+  read,
+  closeSync,
+} from 'fs';
+import { promisify } from 'util';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from 'ObjectSerializer';
@@ -21,7 +29,6 @@ export default class {{classname}} {
     this.httpClient = httpClient;
   }
 
-
   {{#operation}}
   {{#vendorExtensions.x-group-parameters}}
   /**
@@ -37,119 +44,6 @@ export default class {{classname}} {
    {{/allParams}}
    */
   public async {{nickname}}({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
-    const queryParams: QueryOptions = {};
-    queryParams.headers = {};
-    {{#allParams}}
-    {{#required}}
-    // verify required parameter '{{paramName}}' is not null or undefined
-    if ({{paramName}} === null || {{paramName}} === undefined) {
-      throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
-    }
-    {{#isFile}}
-    {{#platforms}}
-    {{#node}}
-    if (!existsSync({{paramName}})) {
-      throw new Error(`${ {{paramName}} } must be a readable source file`);
-    }
-
-    const length = statSync({{paramName}}).size;
-    if (length <= 0) {
-      throw new Error(`${ {{paramName}} } is empty`);
-    }
-    {{/node}}
-    {{/platforms}}
-    {{/isFile}}
-    {{/required}}
-    {{/allParams}}
-    // Path Params
-    const localVarPath = '{{{path}}}'.substring(1){{#pathParams}}
-      .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
-    {{#queryParams}}
-    {{#-first}}
-
-    // Query Params
-    const urlSearchParams = new URLSearchParams();
-
-    {{/-first}}
-    if ({{paramName}} !== undefined) {
-      urlSearchParams.append("{{baseName}}", ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"));
-    }
-    {{#-last}}
-
-    queryParams.searchParams = urlSearchParams;
-    {{/-last}}
-    {{/queryParams}}
-    {{#headerParams}}
-    {{#-first}}
-
-    // Header Params
-    {{/-first}}
-    queryParams.headers["{{baseName}}"] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
-    {{/headerParams}}
-
-    {{#hasFormParams}}
-    const formData = new FormData();
-    {{/hasFormParams}}
-    {{#formParams}}
-    {{#isArray}}
-    if ({{paramName}}) {
-    {{#isCollectionFormatMulti}}
-      {{paramName}}.forEach((element) => {
-        formData.append('{{baseName}}', element);
-      })
-    {{/isCollectionFormatMulti}}
-    {{^isCollectionFormatMulti}}
-        formData.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
-    {{/isCollectionFormatMulti}}
-    }
-    {{/isArray}}
-    {{^isArray}}
-    if (typeof {{paramName}} !== undefined) {
-      {{^isFile}}
-      formData.append('{{baseName}}', {{paramName}});
-      {{/isFile}}
-      {{#isFile}}
-      {{#platforms}}
-      {{#node}}
-      formData.append(
-        filename,
-        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
-        filename,
-      );
-      {{/node}}
-      {{^node}}
-      formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
-      {{/node}}
-      {{/platforms}}
-      {{/isFile}}
-    }
-    {{/isArray}}
-    {{/formParams}}
-    {{#hasFormParams}}
-    queryParams.body = formData;
-    {{/hasFormParams}}
-    {{#bodyParam}}
-
-    // Body Params
-    const contentType = ObjectSerializer.getPreferredMediaType([{{#consumes}}
-      "{{{mediaType}}}"{{^-last}},{{/-last}}
-    {{/consumes}}]);
-    queryParams.headers["Content-Type"] = contentType;
-
-    queryParams.body = ObjectSerializer.stringify(
-      ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"),
-      contentType
-    );
-    {{/bodyParam}}
-
-    queryParams.method = '{{httpMethod}}';
-
-    return this.httpClient.call(localVarPath, queryParams)
-      .then(response => ObjectSerializer.deserialize(
-        ObjectSerializer.parse(response.body, response.headers["content-type"]),
-        "{{{returnType}}}", "{{returnFormat}}"
-      ) as {{{returnType}}});
-  }
   {{/vendorExtensions.x-group-parameters}}
   {{^vendorExtensions.x-group-parameters}}
   /**
@@ -164,15 +58,16 @@ export default class {{classname}} {
    {{/allParams}}
    */
   public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  {{/vendorExtensions.x-group-parameters}}
     const queryParams: QueryOptions = {};
     queryParams.headers = {};
     {{#allParams}}
-
     {{#required}}
-    // verify required parameter '{{paramName}}' is not null or undefined
+    {{^isFile}}
     if ({{paramName}} === null || {{paramName}} === undefined) {
       throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
     }
+    {{/isFile}}
     {{#isFile}}
     {{#platforms}}
     {{#node}}
@@ -215,51 +110,7 @@ export default class {{classname}} {
     queryParams.headers["{{baseName}}"] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
     {{/headerParams}}
 
-    {{#hasFormParams}}
-    const formData = new FormData();
-    {{/hasFormParams}}
-
-    {{#formParams}}
-    {{#isArray}}
-    if ({{paramName}}) {
-    {{#isCollectionFormatMulti}}
-      {{paramName}}.forEach((element) => {
-        formData.append('{{baseName}}', element);
-      })
-    {{/isCollectionFormatMulti}}
-    {{^isCollectionFormatMulti}}
-        formData.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
-    {{/isCollectionFormatMulti}}
-    }
-    {{/isArray}}
-    {{^isArray}}
-    if (typeof {{paramName}} !== undefined) {
-      {{^isFile}}
-      formData.append('{{baseName}}', {{paramName}});
-      {{/isFile}}
-      {{#isFile}}
-      {{#platforms}}
-      {{#node}}
-      const filename = path.basename({{paramName}});
-      formData.append(
-        filename,
-        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
-        filename,
-      );
-      {{/node}}
-      {{^node}}
-      formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
-      {{/node}}
-      {{/platforms}}
-      {{/isFile}}
-    }
-    {{/isArray}}
-    {{/formParams}}
-    {{#hasFormParams}}
-    queryParams.body = formData;
-    {{/hasFormParams}}
     {{#bodyParam}}
-
     // Body Params
     const contentType = ObjectSerializer.getPreferredMediaType([{{#consumes}}
       "{{{mediaType}}}"{{^-last}},{{/-last}}
@@ -274,13 +125,124 @@ export default class {{classname}} {
 
     queryParams.method = '{{httpMethod}}';
 
+    {{#hasFormParams}}
+    const formData = new FormData();
+    {{/hasFormParams}}
+    {{#formParams}}
+    {{#isArray}}
+    if ({{paramName}}) {
+    {{#isCollectionFormatMulti}}
+      {{paramName}}.forEach((element) => {
+        formData.append('{{baseName}}', element);
+      })
+    {{/isCollectionFormatMulti}}
+    {{^isCollectionFormatMulti}}
+        formData.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+    {{/isCollectionFormatMulti}}
+    }
+    {{/isArray}}
+    {{^isArray}}
+
+      {{^isFile}}
+      if (typeof {{paramName}} !== undefined) {
+         formData.append('{{baseName}}', {{paramName}});
+      }
+      {{/isFile}}
+      {{#isFile}}
+      {{#vendorExtensions.x-client-chunk-upload}}
+      const chunkSize = 64 * 1024 * 1024;
+      // Upload in a single request when file is small enough
+      if (chunkSize > length) {
+        {{#platforms}}
+        {{#node}}
+          const filename = path.basename({{paramName}});
+          formData.append(
+            filename,
+            createReadStream({{paramName}}),
+            filename
+          );
+        {{/node}}
+        {{^node}}
+        formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+        {{/node}}
+        {{/platforms}}
+        {{#hasFormParams}}
+        queryParams.body = formData;
+        {{/hasFormParams}}
+        return this.httpClient.call(localVarPath, queryParams)
+          .then(response => ObjectSerializer.deserialize(
+          ObjectSerializer.parse(response.body, response.headers["content-type"]),
+          "{{{returnType}}}", "{{returnFormat}}"
+          ) as {{{returnType}}});
+      }
+      const fileDescriptor = openSync({{paramName}}, 'r');
+      const readAsPromise = promisify(read);
+      const buf = Buffer.alloc(chunkSize);
+      let uploadChunkSize = chunkSize;
+      let lastBody;
+      for (let offset = 0; offset < length; offset += chunkSize) {
+        // default the upload size to be as large as possible.
+        uploadChunkSize = chunkSize;
+        // BUT,if we are on the last chunk to be uploaded, the uploaded chunk must be
+        // reduced to match the remaining bytes in the file
+        if (offset + uploadChunkSize > length) {
+          uploadChunkSize = length - offset;
+        }
+        await readAsPromise(fileDescriptor, buf, 0, uploadChunkSize, offset);
+        console.log(`Uploading ${offset}-${offset + uploadChunkSize}...`);
+
+        const filename = path.basename({{paramName}});
+        const chunkFormData = new FormData();
+        chunkFormData.append(filename, buf, filename);
+
+        queryParams.body = chunkFormData;
+        queryParams.headers['Content-Range'] = `bytes ${offset}-${
+          offset + uploadChunkSize - 1
+        }/${length}`;
+
+        lastBody = await this.httpClient.call(localVarPath, queryParams)
+          .then(response => ObjectSerializer.deserialize(
+            ObjectSerializer.parse(response.body, response.headers["content-type"]),
+            "{{{returnType}}}", "{{returnFormat}}"
+          ) as {{{returnType}}})
+          .catch((error: Error) => {
+            closeSync(fileDescriptor);
+            throw error;
+          });
+      }
+
+      return Promise.resolve(lastBody as {{{returnType}}});
+      {{/vendorExtensions.x-client-chunk-upload}}
+      {{^vendorExtensions.x-client-chunk-upload}}
+      {{#platforms}}
+      {{#node}}
+      const filename = path.basename({{paramName}});
+      formData.append(
+        filename,
+        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
+        filename,
+      );
+      {{/node}}
+      {{^node}}
+      formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+      {{/node}}
+      {{/platforms}}
+      {{/vendorExtensions.x-client-chunk-upload}}
+      {{/isFile}}
+    {{/isArray}}
+    {{/formParams}}
+
+    {{^vendorExtensions.x-client-chunk-upload}}
+    {{#hasFormParams}}
+    queryParams.body = formData;
+    {{/hasFormParams}}
     return this.httpClient.call(localVarPath, queryParams)
       .then(response => ObjectSerializer.deserialize(
         ObjectSerializer.parse(response.body, response.headers["content-type"]),
         "{{{returnType}}}", "{{returnFormat}}"
       ) as {{{returnType}}});
+    {{/vendorExtensions.x-client-chunk-upload}}
   }
-  {{/vendorExtensions.x-group-parameters}}
   {{/operation}}
 
 }

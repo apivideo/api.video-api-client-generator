@@ -212,8 +212,10 @@ describe('ApiVideoClient', () => {
     await client.liveStreams.delete(privateLiveStreamId);
 
     // Generate a token for delegated upload
-    await client.uploadTokens
-      .createToken()
-      .then(({ token }) => expect(token).to.be.a('string'));
+    const { token } = await client.uploadTokens.createToken();
+    expect(token).to.be.a('string');
+
+    // Upload a video with a token
+    await client.videos.uploadWithUploadToken(token as string, 'test/data/small.webm');
   });
 });
