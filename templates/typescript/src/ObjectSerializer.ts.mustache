@@ -201,8 +201,10 @@ export default class ObjectSerializer {
       return JSON.stringify(data);
     }
 
-    // @todo does it make sense?
-    return '';
+    // HTTP DELETE response.
+    if (data === '') {
+      return data;
+    }
 
     throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.stringify.");
   }
@@ -212,8 +214,11 @@ export default class ObjectSerializer {
    */
   public static parse(rawData: string, mediaType: string | undefined): any {
     if (mediaType === undefined) {
-      // @todo does it make sense?
-      return rawData;
+      // HTTP DELETE response.
+      if (rawData === '') {
+        return rawData;
+      }
+
       throw new Error("Cannot parse content. No Content-Type defined.");
     }
 

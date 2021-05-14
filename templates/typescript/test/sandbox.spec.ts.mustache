@@ -137,11 +137,7 @@ describe('ApiVideoClient', () => {
     // Search a player theme with paginate results
     await client.playerThemes
       .list({ currentPage: 1, pageSize: 50 })
-      .then(({ data: playerThemes }) => {
-        expect(playerThemes).to.be.an('array');
-        // @todo fix different keys
-        // playerThemes.forEach(playerTheme => expect(playerTheme).to.have.keys(new PlayerTheme()));
-      });
+      .then(({ data: playerThemes }) => expect(playerThemes).to.be.an('array'));
 
     const properties: PlayerThemeUpdatePayload = {
       text: 'rgba(255, 255, 255, .95)',
