@@ -1,6 +1,7 @@
 {{>licenseInfo}}
 
-import { existsSync, createReadStream } from 'fs';
+import path from 'path';
+import { existsSync, statSync, createReadStream } from 'fs';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from 'ObjectSerializer';
@@ -44,6 +45,20 @@ export default class {{classname}} {
     if ({{paramName}} === null || {{paramName}} === undefined) {
       throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
     }
+    {{#isFile}}
+    {{#platforms}}
+    {{#node}}
+    if (!existsSync({{paramName}})) {
+      throw new Error(`${ {{paramName}} } must be a readable source file`);
+    }
+
+    const length = statSync({{paramName}}).size;
+    if (length <= 0) {
+      throw new Error(`${ {{paramName}} } is empty`);
+    }
+    {{/node}}
+    {{/platforms}}
+    {{/isFile}}
     {{/required}}
     {{/allParams}}
     // Path Params
@@ -75,7 +90,6 @@ export default class {{classname}} {
     {{#hasFormParams}}
     const formData = new FormData();
     {{/hasFormParams}}
-
     {{#formParams}}
     {{#isArray}}
     if ({{paramName}}) {
@@ -91,25 +105,23 @@ export default class {{classname}} {
     {{/isArray}}
     {{^isArray}}
     if (typeof {{paramName}} !== undefined) {
-       {{^isFile}}
-       formData.append('{{baseName}}', {{paramName}});
-       {{/isFile}}
-       {{#isFile}}
+      {{^isFile}}
+      formData.append('{{baseName}}', {{paramName}});
+      {{/isFile}}
+      {{#isFile}}
+      {{#platforms}}
+      {{#node}}
       formData.append(
-          '{{baseName}}',
-          Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
-          '{{baseName}}',
+        filename,
+        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
+        filename,
       );
-
-       {{#platforms}}
-       {{#node}}
-       formData.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
-       {{/node}}
-       {{^node}}
-       formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
-       {{/node}}
-       {{/platforms}}
-       {{/isFile}}
+      {{/node}}
+      {{^node}}
+      formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+      {{/node}}
+      {{/platforms}}
+      {{/isFile}}
     }
     {{/isArray}}
     {{/formParams}}
@@ -153,7 +165,6 @@ export default class {{classname}} {
    */
   public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
     const queryParams: QueryOptions = {};
-
     queryParams.headers = {};
     {{#allParams}}
 
@@ -162,7 +173,20 @@ export default class {{classname}} {
     if ({{paramName}} === null || {{paramName}} === undefined) {
       throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
     }
+    {{#isFile}}
+    {{#platforms}}
+    {{#node}}
+    if (!existsSync({{paramName}})) {
+      throw new Error(`${ {{paramName}} } must be a readable source file`);
+    }
 
+    const length = statSync({{paramName}}).size;
+    if (length <= 0) {
+      throw new Error(`${ {{paramName}} } is empty`);
+    }
+    {{/node}}
+    {{/platforms}}
+    {{/isFile}}
     {{/required}}
     {{/allParams}}
     // Path Params
@@ -210,25 +234,24 @@ export default class {{classname}} {
     {{/isArray}}
     {{^isArray}}
     if (typeof {{paramName}} !== undefined) {
-       {{^isFile}}
-       formData.append('{{baseName}}', {{paramName}});
-       {{/isFile}}
-       {{#isFile}}
+      {{^isFile}}
+      formData.append('{{baseName}}', {{paramName}});
+      {{/isFile}}
+      {{#isFile}}
+      {{#platforms}}
+      {{#node}}
+      const filename = path.basename({{paramName}});
       formData.append(
-          '{{baseName}}',
-          Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
-          '{{baseName}}',
+        filename,
+        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
+        filename,
       );
-
-       {{#platforms}}
-       {{#node}}
-       formData.append('{{baseName}}', {{paramName}}.data, {{paramName}}.name);
-       {{/node}}
-       {{^node}}
-       formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
-       {{/node}}
-       {{/platforms}}
-       {{/isFile}}
+      {{/node}}
+      {{^node}}
+      formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
+      {{/node}}
+      {{/platforms}}
+      {{/isFile}}
     }
     {{/isArray}}
     {{/formParams}}
@@ -259,5 +282,6 @@ export default class {{classname}} {
   }
   {{/vendorExtensions.x-group-parameters}}
   {{/operation}}
+
 }
 {{/operations}}

@@ -31,6 +31,9 @@ public class TypeScript extends DefaultCodegen {
     private static final String X_DISCRIMINATOR_TYPE = "x-discriminator-value";
     private static final String UNDEFINED_VALUE = "undefined";
 
+    private static final String PLATFORM_SWITCH = "platform";
+    private static final String PLATFORM_SWITCH_DESC = "Specifies the platform the code should run on. The default is 'node' for the 'request' framework and 'browser' otherwise.";
+    private static final String[] PLATFORMS = { "browser", "node", "deno" };
     private static final String FILE_CONTENT_DATA_TYPE = "fileContentDataType";
     private static final String FILE_CONTENT_DATA_TYPE_DESC = "Specifies the type to use for the content of a file - i.e. Blob (Browser, Deno) / Buffer (node)";
 
@@ -147,7 +150,15 @@ public class TypeScript extends DefaultCodegen {
         cliOptions.add(new CliOption(NPM_REPOSITORY, "Use this property to set an url your private npmRepo in the package.json"));
         cliOptions.add(new CliOption(CodegenConstants.MODEL_PROPERTY_NAMING, CodegenConstants.MODEL_PROPERTY_NAMING_DESC).defaultValue("camelCase"));
         cliOptions.add(new CliOption(CodegenConstants.SUPPORTS_ES6, CodegenConstants.SUPPORTS_ES6_DESC).defaultValue("false"));
-        cliOptions.add(new CliOption(TypeScript.FILE_CONTENT_DATA_TYPE, TypeScript.FILE_CONTENT_DATA_TYPE_DESC).defaultValue("Buffer"));
+        cliOptions.add(new CliOption(FILE_CONTENT_DATA_TYPE,FILE_CONTENT_DATA_TYPE_DESC).defaultValue("Buffer"));
+
+        CliOption platformOption = new CliOption(PLATFORM_SWITCH, PLATFORM_SWITCH_DESC);
+        for (String option: PLATFORMS) {
+            platformOption.addEnum(option, option);
+        }
+        platformOption.defaultValue(PLATFORMS[0]);
+
+        cliOptions.add(platformOption);
 
         modifyFeatureSet(features -> features.includeDocumentationFeatures(DocumentationFeature.Api, DocumentationFeature.Model));
     }
@@ -326,6 +337,20 @@ public class TypeScript extends DefaultCodegen {
         }
 
         convertPropertyToBooleanAndWriteBack(CodegenConstants.SUPPORTS_ES6);
+
+
+        // platform
+        Object propPlatform = additionalProperties.get(PLATFORM_SWITCH);
+        if (propPlatform == null) {
+            propPlatform = "node";
+            additionalProperties.put("platform", propPlatform);
+        }
+        Map<String, Boolean> platforms = new HashMap<>();
+        for (String platform: PLATFORMS) {
+            platforms.put(platform, platform.equals(propPlatform));
+        }
+        additionalProperties.put("platforms", platforms);
+        additionalProperties.putIfAbsent(FILE_CONTENT_DATA_TYPE, propPlatform.equals("node") ? "Buffer" : "Blob");
 
         // NPM Settings
         if (additionalProperties.containsKey(NPM_NAME)) {

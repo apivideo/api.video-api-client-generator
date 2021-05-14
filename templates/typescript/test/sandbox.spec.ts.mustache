@@ -65,10 +65,9 @@ describe('ApiVideoClient', () => {
       });
 
     // Upload a video thumbnail
-    // @todo does not work yet
-    // await client.videos.uploadThumbnail(videoId, 'test/data/test.jpg').then((video) => {
-    //   expect(video.videoId).to.equals(videoId);
-    // });
+    await client.videos
+      .uploadThumbnail(videoId, 'test/data/test.jpg')
+      .then((video) => expect(video.videoId).to.equals(videoId));
 
     // Pick a thumbnail from the given time code.
     await client.videos
