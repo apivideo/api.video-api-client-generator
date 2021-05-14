@@ -81,7 +81,7 @@ jobs:
           labels: ${{ join(github.event.pull_request.labels.*.name) }}
           assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
           reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }}
-          draft: true
+#          draft: true
 
   merge_client_pr:
     # this job will only run if the PR has been merged
