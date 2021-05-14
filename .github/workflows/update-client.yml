@@ -2,7 +2,7 @@ name: Update clients PRs
 on:
   # Trigger the workflow on pull requests targeting the master branch
   pull_request:
-    types: [assigned, unassigned, opened, reopened, synchronize, labeled, unlabeled, edited, closed]
+    types: [assigned, unassigned, opened, reopened, synchronize, edited, labeled, unlabeled, edited, closed]
     branches:
       - master
 
