@@ -22,9 +22,9 @@
             </properties>
         </profile>
         <profile>
-            <id>typescript</id>
+            <id>nodejs</id>
             <properties>
-                <folder>typescript</folder>
+                <folder>nodejs</folder>
                 <generatorName>video.api.client.generator.TypeScript</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
