@@ -93,7 +93,7 @@ jobs:
       matrix:
         profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
     env:
-      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-typescript-api-client
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
 
     steps:
       - run: |
