@@ -25,7 +25,7 @@ To see the list of available profiles, see the "profile" column in the table of 
 | Language | Profile | Status | Repository |
 | ------- | ------ | ---- | ---- |
 | Java    |  java      | released | [java-api-client](https://github.com/apivideo/java-api-client) |
-| TypeScript        | typescript        | started | [typescript-api-client](https://github.com/apivideo/typescript-api-client) |
+| NodeJs        | nodejs        | released | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
 | Php | php | to be started | - |
 | C# | csharp | private beta | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
 | Go | go | private beta |  [go-api-client](https://github.com/apivideo/go-api-client) |
@@ -80,15 +80,47 @@ files:
 
 Some target language require tweaks that can't be done through the config file or the templates. In this case, a subclass of the generator is created at `apivideo-generator/src/main/java/video/api/client/generator/[pascal-case-profile].java`.  
 
+## Development
 
-## Reverse
+We recommend the usage of a dedicated [Java IDE](https://en.wikipedia.org/wiki/Comparison_of_integrated_development_environments#Java) to work on the development of this project.
+Especially if you want to tweak one of the language specific `Codegen` written in `Java` you'll need to navigate through the class hierarchy.
 
-The following command:
+### Configuration
+
+A `CodegenConfigurator` instance is built from configurations coming from:
+  - the `CLI`
+  - a `yml` configuration file.
+
+This `CodegenConfigurator` is then turned into a `ClientOptInput` (via the `toClientOptInput` method) to be fed to a `Generator`.
+> __This is when our custom codegen, which implements `CodegenConfig` interface is involved.__
+
+The generation is actually done by the `generate` method of the `DefaultGenerator` class.
+This method will mainly :
+- `processUserDefinedTemplates`
+- `generateModels` given the list of `files` and available `models`
+- `generateApis` given the list of `files` and available `operations`
+- `generateSupportingFiles` given available `models` and `operations`
+
+#### CLI
+
+The profile configuration is first read from `pom.xml`, see java for example :
+```xml
+<profile>
+    <id>java</id>
+    <properties>
+        <folder>java</folder>
+        <generatorName>video.api.client.generator.Java</generatorName>
+        <postGenerationScript>./post-generate.sh</postGenerationScript>
+    </properties>
+</profile>
 ```
-mvn package -P [generatorName]
+
+When generating a client with the following command:
+```
+mvn package -P [profile]
 ```
 
-`maven` use the config from `pom.xml` and run the `generate` command from `openapi-generator-cli` with the following options:
+Internally the `generate` command of the `openapi-generator-cli` run with the following options:
 ```xml
 <configuration>
     <inputSpec>oas_apivideo.yaml</inputSpec>
@@ -99,74 +131,13 @@ mvn package -P [generatorName]
 </configuration>
 ```
 
-## Generation 
+#### File
 
-### Configuration
-
-Looking at `Generate.class`, the following key are different, but the rest seem consistent:
-- `templateDirectory` -> `templateDir`
-- `configurationFile` -> `configFile`
-
-The `configFile` -- our `yml` config file -- is loaded by the `CodegenConfigurator.fromFile` method.
+The `yml` config file -- is loaded in the `CodegenConfigurator` class via the `fromFile` method.
 > A class which manages the contextual configuration for code generation. 
 > This includes configuring the generator, templating, and the workflow which orchestrates these. 
-> This helper also enables the deserialization of GeneratorSettings via application-specific Jackson JSON usage (see DynamicSettings.
- 
-Having a look at `DynamicSettings.getFiles` give us a clue on how the `files` key (user defined files) are treated.
-```
- TemplateDefinition file = kvp.getValue();
-            String templateFile = kvp.getKey();
-            String destination = file.getDestinationFilename();
-            if (TemplateFileType.SupportingFiles.equals(file.getTemplateType()) && StringUtils.isBlank(destination)) {
-                // this special case allows definitions such as LICENSE:{}
-                destination = templateFile;
-            }
-            TemplateDefinition definition = new TemplateDefinition(templateFile, file.getFolder(), destination);
-            definition.setTemplateType(file.getTemplateType());
-            return definition;
-```
-And `TemplateDefinition` show us how a template is defined.
+> 
+> This helper also enables the deserialization of `GeneratorSettings` via application-specific Jackson JSON usage (see `DynamicSettings`.
 
-
-After loading all the configs from CLI and/or? from the file into the `CodegenConfigurator`,
-
-
-
-all options ar turned into a `ClientOptInput` via the `toClientOptInput` method,
-This is when our custom codegen is involved. It implements `CodegenConfig` interface
-In the ends only methods present in this interface are used by the generatpr
-it then instantiate a `DefaultGenerator` class and pass these options via `opts` method.
-and finally calls `generate` method.
-
-### Generate
-
-The `DefaultGenerator` generate method will mainly :
-- `processUserDefinedTemplates`
-- `generateModels` given the list of `files` and available `models`
-- `generateApis` given the list of `files` and available `operations`
-- `generateSupportingFiles` given available `models` and `operations`
-
-Where does `files` come from?
-Where the codegen is involved?
-
-// use this test to launch you code generator in the debugger.
-// this allows you to easily set break points in MyclientcodegenGenerator.
-@Test
-public void launchCodeGenerator() {
-// to understand how the 'openapi-generator-cli' module is using 'CodegenConfigurator', have a look at the 'Generate' class:
-// https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-cli/src/main/java/org/openapitools/codegen/cmd/Generate.java
-final CodegenConfigurator configurator = new CodegenConfigurator()
-.setGeneratorName("{{name}}") // use this codegen library
-.setInputSpec("../../../modules/openapi-generator/src/test/resources/2_0/petstore.yaml") // sample OpenAPI file
-// .setInputSpec("https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml") // or from the server
-.setOutputDir("out/{{name}}"); // output directory
-
-    final ClientOptInput clientOptInput = configurator.toClientOptInput();
-    DefaultGenerator generator = new DefaultGenerator();
-    generator.opts(clientOptInput).generate();
-}
-
-# https://openapi-generator.tech/docs/configuration/
-# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/languages/TypeScriptClientCodegen.java
-# https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript
-# https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultCodegen.java
+Each entry under the `files` key of the `yml` configuration file is used to build a `TemplateDefinition` object.
+If not specified otherwise the file is treated as a `SupportingFile`.
