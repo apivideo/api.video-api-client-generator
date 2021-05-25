@@ -2,4 +2,4 @@ lib
 .openapi-generator
 node_modules
 licenseInfo
-./post-generate.sh
+post-generate.sh
