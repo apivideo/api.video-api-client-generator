@@ -25,10 +25,10 @@ Method | HTTP request | Description
 (async () => {
     try {
     {{^authMethods}}
-        const client = new VideoApiClient();
+        const client = new ApiVideoClient();
     {{/authMethods}}
     {{#authMethods}}
-        const client = new VideoApiClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
     {{/authMethods}}
 
     {{#allParams}}
