@@ -1,0 +1,82 @@
+# {{npmName}}
+
+A lightweight client built in `TypeScript` for `nodejs`.
+
+> This client is part of our generated clients built upon our [Open API schema definition](https://github.com/apivideo/API_OAS_file).
+
+{{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
+
+## Installation
+With `npm`:
+```
+npm install {{npmName}} --save
+```
+
+...or with `yarn`:
+```
+yarn add {{npmName}}
+```
+
+## Migration
+
+If you're coming from [@api.video/nodejs-sdk](https://github.com/apivideo/nodejs-sdk) make sure to read our [Migration guide](./doc/MIGRATE.md) first.
+
+## Development
+
+To build and compile the typescript sources to javascript use:
+```
+npm install
+npm run build
+```
+
+## API resources
+
+All URIs are relative to *{{basePath}}*
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}}
+
+```js
+const apiVideoClient = new VideoApiClient({ apiKey: "YOUR_API_TOKEN" });
+const {{classVarName}} = apiVideoClient.{{classVarName}};
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocFileFolder}}/{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+## API Models
+
+{{#models}}{{#model}} - [{{classname}}]({{modelDocFileFolder}}/{{classname}}.md)
+{{/model}}{{/models}}
+
+## Authorization
+
+### API token
+
+Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client.
+
+All you have to do is provide an API token when instantiating the ApiVideoClient:
+```js
+const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+```
+
+### Public endpoints
+
+Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API token:
+```js
+const client = new ApiVideoClient();
+```
+
+## Author
+
+{{#apiInfo}}{{#apis}}{{#-last}}{{infoEmail}}
+{{/-last}}{{/apis}}{{/apiInfo}}

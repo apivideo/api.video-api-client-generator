@@ -1,37 +1,39 @@
 licenseName: MIT
 supportsES6: true
-npmName: "@api.video/typescript-api-client"
-npmVersion: 1.0.0
-npmDescription: api.video java API client
+npmName: "@api.video/nodejs-client"
+npmVersion: 2.0.0
+npmDescription: api.video typescript client
 npmAuthor: api.video ecosystem team
+
+templateDir: typescript
+# Defines the output folder for each kind of specific templates.
+# The naming is quite confusing because it was based on java "package" naming,
+# but this can in fact be used just as a "path".
+modelPackage: src/model
+apiPackage: src/api
+testPackage: test
+#apiTestFileFolder:
+#modelTestFileFolder:
+#docPackage: doc/
+apiDocFileFolder: doc/api
+modelDocFileFolder: doc/model
+
 ignoredFiles:
-  - api/baseapi.mustache
-  - api/auth.mustache
-  - api/exception.mustache
-  - api/middleware.mustache
-  - auth/auth.mustache
-  - configuration.mustache
-  - git_push.sh.mustache
-  - http/http.mustache
-  - http/isomorphic-fetch.mustache
-  - http/servers.mustache
-  - middleware.mustache
-  - model/models_all.mustache
-  - rxjsStub.mustache
-  - servers.mustache
-  - services/configuration.mustache
-  - types/ObjectParamAPI.mustache
-  - types/ObservableAPI.mustache
-  - types/PromiseAPI.mustache
-  - util.mustache
-responseExamplePayloadFolder: tests/payloads
+  # This shouldn't be needed.
+  # These files should be automatically excluded from supporting files since they are configured in files.
+  - doc/api/api_doc.md.mustache
+  - doc/model/model_doc.md.mustache
+  - src/api/api.ts.mustache
+  - src/model/model.ts.mustache
+
+# `templateType` can be any of the following:
+# API Model APIDocs ModelDocs APITests ModelTests SupportingFiles
 files:
-  gitignore:
-    folder: .
-    destinationFilename: .gitignore
-  client/HttpClient.ts:
-    folder: client/
-    destinationFilename: HttpClient.ts
-  client/ErrorHandler.ts:
-    folder: client/
-    destinationFilename: ErrorHandler.ts
+  doc/api/api_doc.md.mustache:
+    templateType: APIDocs
+  doc/model/model_doc.md.mustache:
+    templateType: ModelDocs
+  src/api/api.ts.mustache:
+    templateType: API
+  src/model/model.ts.mustache:
+    templateType: Model

@@ -1,0 +1,31 @@
+{{>licenseInfo}}
+
+import HttpClient from "./HttpClient";
+{{# apiInfo.apis }}{{^x-client-hidden}}
+import {{classFilename}} from 'api/{{classFilename}}';{{/x-client-hidden}}{{/ apiInfo.apis }}
+
+const PRODUCTION_BASE_URI = "https://ws.api.video";
+
+export default class ApiVideoClient {
+  private httpClient: HttpClient;{{# apiInfo.apis }}{{^x-client-hidden}}
+  private _{{classVarName}}: {{classFilename}};{{/x-client-hidden}}{{/ apiInfo.apis }}
+
+  constructor(params: {apiKey?: string, baseUri?: string}) {
+    this.httpClient = new HttpClient({
+      ...params,
+      baseUri: params.baseUri || PRODUCTION_BASE_URI,
+    })
+{{# apiInfo.apis }}{{^x-client-hidden}}
+    this._{{classVarName}} = new {{classFilename}}(this.httpClient);{{/x-client-hidden}}{{/ apiInfo.apis }}
+  }
+
+{{# apiInfo.apis }}{{^x-client-hidden}}
+  /**
+  * Get an {{classFilename}} instance
+  * @return {{classFilename}}
+  */
+  public get {{classVarName}}(): {{classFilename}} {
+    return this._{{classVarName}};
+  }
+{{/x-client-hidden}}{{/ apiInfo.apis }}
+}

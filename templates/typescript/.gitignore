@@ -1,0 +1,6 @@
+lib
+.openapi-generator
+.openapi-generator-ignore
+node_modules
+licenseInfo
+post-generate.sh

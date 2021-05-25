@@ -1,5 +1,3 @@
-*mostly copy/paste from java version, must be adapted*
-
 # {{classname}}{{#description}}
 {{description}}{{/description}}
 
@@ -13,7 +11,7 @@ Method | HTTP request | Description
 {{#operations}}
 {{#operation}}
 <a name="{{operationId}}"></a>
-# **{{operationId}}**{{#comment}}{{^vendorExtensions.x-group-parameters}}
+## **{{operationId}}**{{#comment}}{{^vendorExtensions.x-group-parameters}}
 > {{#returnType}}{{returnType}} {{/returnType}}{{operationId}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}}){{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}
 > {{#returnType}}{{returnType}} {{/returnType}}{{operationId}}({{#requiredParams}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}){{#optionalParams}}.{{paramName}}({{paramName}}){{/optionalParams}}.execute();{{/vendorExtensions.x-group-parameters}}
 {{/comment}}
@@ -23,39 +21,43 @@ Method | HTTP request | Description
 {{notes}}{{/notes}}{{/unescape}}
 
 ### Example
-```javascript
-{{^authMethods}}
-const apiVideoClient = new VideoApiClient();
-{{/authMethods}}
-{{#authMethods}}
-const apiVideoClient = new VideoApiClient({ apiKey: "YOUR_API_TOKEN" });
-{{/authMethods}}
+```js
+(async () => {
+    try {
+    {{^authMethods}}
+        const client = new VideoApiClient();
+    {{/authMethods}}
+    {{#authMethods}}
+        const client = new VideoApiClient({ apiKey: "YOUR_API_TOKEN" });
+    {{/authMethods}}
 
-const api = apiVideoClient.{{classVarName}};
+    {{#allParams}}
+        {{^vendorExtensions.x-client-doc-hidden}}
+        const {{{paramName}}} = '{{{example}}}'; // {{{description}}}
+        {{/vendorExtensions.x-client-doc-hidden}}
+        {{#isModel}}
+            {{#vars}}
+                {{{paramName}}}.{{setter}}({{#unescape}}{{example}}{{/unescape}}); // {{ unescapedDescription }}
+            {{/vars}}
+        {{/isModel}}
+    {{/allParams}}
 
-//TODO from java generator, to be adapted
-/*
-
-{{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}
-    {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/vendorExtensions.x-client-doc-hidden}}{{#isModel}}
-    {{#vars}}
-        {{{paramName}}}.{{setter}}({{#unescape}}{{example}}{{/unescape}}); // {{ unescapedDescription }}
-    {{/vars}}
-{{/isModel}}{{/allParams}}
-
-try {
-    {{#returnType}}{{#vendorExtensions.x-client-paginated}}Page<{{vendorExtensions.x-pagination.type}}>{{/vendorExtensions.x-client-paginated}}{{^vendorExtensions.x-client-paginated}}{{returnType}}{{/vendorExtensions.x-client-paginated}} result = {{/returnType}}apiInstance.{{{operationId}}}{{^vendorExtensions.x-group-parameters}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}({{#requiredParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/requiredParams}}){{#optionalParams}}
-    .{{{paramName}}}({{{paramName}}}){{/optionalParams}}
-    .execute();{{/vendorExtensions.x-group-parameters}}{{#returnType}}
-    System.out.println(result);{{/returnType}}
-} catch (ApiException e) {
-    System.err.println("Exception when calling {{{classname}}}#{{{operationId}}}");
-    System.err.println("Status code: " + e.getCode());
-    System.err.println("Reason: " + e.getMessage());
-    System.err.println("Response headers: " + e.getResponseHeaders());
-    e.printStackTrace();
-}
-*/
+    {{#returnType}}
+        // {{#vendorExtensions.x-client-paginated}}Page<{{vendorExtensions.x-pagination.type}}>{{/vendorExtensions.x-client-paginated}}{{^vendorExtensions.x-client-paginated}}{{returnType}}{{/vendorExtensions.x-client-paginated}}
+    {{/returnType}}
+    {{^vendorExtensions.x-group-parameters}}
+        const result = await client.{{classVarName}}.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});
+    {{/vendorExtensions.x-group-parameters}}
+    {{#vendorExtensions.x-group-parameters}}
+        const result = await client.{{classVarName}}.{{{operationId}}}({ {{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}} })
+    {{/vendorExtensions.x-group-parameters}}
+    {{#returnType}}
+        console.log(result);
+    {{/returnType}}
+    } catch (e) {
+        console.error(e);
+    }
+})();
 ```
 
 ### Parameters
@@ -78,13 +80,8 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
 {{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type
-
 {{#returnType}}{{#vendorExtensions.x-client-paginated}}[**Page**](pagination.md)<[**{{vendorExtensions.x-pagination.type}}**]({{vendorExtensions.x-pagination.type}}.md)>{{/vendorExtensions.x-client-paginated}}{{/returnType}}
-{{^vendorExtensions.x-client-paginated}}{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}{{/vendorExtensions.x-client-paginated}}
-
-### Authorization
-
-{{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[API token](../README.md#api-token){{^-last}}, {{/-last}}{{/authMethods}}
+{{^vendorExtensions.x-client-paginated}}{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}{{/vendorExtensions.x-client-paginated}}
 
 ### HTTP request headers
 

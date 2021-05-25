@@ -3651,6 +3651,9 @@ components:
             This lets you know whether mp4 is supported. If enabled, an mp4 URL
             will be provided in the response for the video.
           example: true
+      required:
+        - videoId
+        - title
       example:
         videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
         title: Maths video
@@ -3766,6 +3769,8 @@ components:
               description: The path to the file containing your logo.
               example: path/to/my/logo/mylogo.jpg
       title: PlayerTheme
+      required:
+        - playerId
     player-theme-creation-payload:
       title: PlayerThemeCreationPayload
       type: object
@@ -3990,6 +3995,8 @@ components:
               description: 'When the player was last updated, presented in ISO-8601 format.'
               format: date-time
               example: '2020-01-31T10:18:47+00:00'
+      required:
+        - liveStreamId
     live-stream-session:
       title: LiveStreamSession
       type: object
@@ -4213,9 +4220,6 @@ components:
           def502005346d9cc2bd79a7793ab5bdabfefcaabfbb8c253f14733f1262077e1a3f38c4751d6d20f590c3784e531a82adc11f05fc1949aa46d5575aaa99cb84b9334ba66ac773576b5d7a418937ae337de62811d086dd42ad1164b12f87d67be6ffea18f2d50be9b95697b21c4d3c4372849bdb2287259cb80541570e913691a08b2fa33c85885930de15cebea627fc09f0255562ab3d39d87d4ff8fc02b00e252afcd480421dec7de9d1411176bcf669c527762e22294b453bc9ea06e9fa8ba5b873feb2ee14ce0a6a6ddd4b78c580631e210e9b9387265dc2bec9478a66a09dcdce1c40d2f856689e9d81742c9628a0b87b359e0b218ea1f07427eef89f999e47af89792f598e05847bd008fddc32ee63f4a601ffb4cd2ad08977f1c854ec358238322c918f05aa5a41f8a171dee497218408abc8283473f6112aeed7310815416a0fa36c63667e0ed014fa40b8992891bf58bae400d901c01450101c88f4978938ad138adc19cfe5698d60fd82cb27c586f6a8f70f4393c7c9e579df8739d46d249fb76d7
     videos-list-response:
       title: Videos
-      required:
-        - data
-        - pagination
       type: object
       properties:
         data:
@@ -4224,6 +4228,9 @@ components:
             $ref: '#/components/schemas/video'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     metadata:
       title: Metadata
       type: object
@@ -4427,9 +4434,6 @@ components:
             value: Tutorial
     token-list-response:
       title: UploadTokens
-      required:
-        - data
-        - pagination
       type: object
       properties:
         data:
@@ -4439,6 +4443,9 @@ components:
             $ref: '#/components/schemas/upload-token'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     token-creation-payload:
       title: TokenCreationPayload
       type: object
@@ -4475,9 +4482,6 @@ components:
             video upload scenario.
     live-stream-list-response:
       title: LiveStreams
-      required:
-        - data
-        - pagination
       type: object
       properties:
         data:
@@ -4486,6 +4490,9 @@ components:
             $ref: '#/components/schemas/live-stream'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     live-stream-creation-payload:
       title: LiveStreamCreationPayload
       required:
@@ -4584,6 +4591,9 @@ components:
             $ref: '#/components/schemas/caption'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     chapters-update-payload:
       title: ChaptersUpdatePayload
       required:
@@ -4604,6 +4614,9 @@ components:
             $ref: '#/components/schemas/chapter'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     player-themes-list-response:
       title: PlayerThemes
       type: object
@@ -4614,6 +4627,9 @@ components:
             $ref: '#/components/schemas/player-theme'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     player-theme-upload-logo-payload:
       title: PlayerThemeUploadLogoPayload
       required:
@@ -4641,6 +4657,9 @@ components:
             $ref: '#/components/schemas/video-session'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     raw-statistics-list-live-stream-analytics-response:
       title: LiveStreamSessions
       type: object
@@ -4651,6 +4670,9 @@ components:
             $ref: '#/components/schemas/live-stream-session'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     raw-statistics-list-player-session-events-response:
       title: PlayerSessionEvents
       type: object
@@ -4661,6 +4683,9 @@ components:
             $ref: '#/components/schemas/player-session-event'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     webhooks-list-response:
       title: Webhooks
       type: object
@@ -4671,6 +4696,9 @@ components:
             $ref: '#/components/schemas/webhook'
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
     webhooks-creation-payload:
       title: WebhooksCreationPayloas
       required:
