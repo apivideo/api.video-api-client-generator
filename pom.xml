@@ -26,6 +26,7 @@
             <properties>
                 <folder>typescript</folder>
                 <generatorName>video.api.client.generator.TypeScript</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
         <profile>
