@@ -2,10 +2,9 @@ licenseName: MIT
 supportsES6: true
 npmName: "@api.video/nodejs-client"
 npmVersion: 2.0.0
-npmDescription: api.video typescript client
+npmDescription: api.video nodejs client
 npmAuthor: api.video ecosystem team
 
-templateDir: typescript
 # Defines the output folder for each kind of specific templates.
 # The naming is quite confusing because it was based on java "package" naming,
 # but this can in fact be used just as a "path".
