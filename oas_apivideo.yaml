@@ -3526,7 +3526,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/pagination_link'
+            $ref: '#/components/schemas/pagination-link'
       example:
         itemsTotal: 123
         pagesTotal: 7
