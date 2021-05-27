@@ -50,6 +50,7 @@
             <properties>
                 <folder>python</folder>
                 <generatorName>video.api.client.generator.Python</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
         <profile>

@@ -66,6 +66,8 @@ public class Python extends PythonClientCodegen {
         supportingFiles.add(new SupportingFile("helper.mustache", packagePath() + "/../test/", "helper.py"));
         supportingFiles.add(new SupportingFile("test_auth.mustache", packagePath() + "/../test/", "test_auth.py"));
         supportingFiles.add(new SupportingFile("test_file", packagePath() + "/../test/", "test_file"));
+
+        supportingFiles.removeIf(a -> a.getFolder().equals("apivideo/models"));
     }
 
     public void preprocessOpenAPI(OpenAPI openAPI) {
@@ -366,10 +368,10 @@ public class Python extends PythonClientCodegen {
                     Random random = new Random(18);
                     String sample = rgxGen.generate(random);
                     // omit leading / and trailing /, omit trailing /i
-                    Pattern valueExtractor = Pattern.compile("^/?(.+?)/?.?$");
+                    Pattern valueExtractor = Pattern.compile("^/?(.+?)(/[i]?)?$");
                     Matcher m = valueExtractor.matcher(sample);
                     if (m.find()) {
-                        example = m.group(m.groupCount());
+                        example = m.group(1);
                     } else {
                         example = "";
                     }
