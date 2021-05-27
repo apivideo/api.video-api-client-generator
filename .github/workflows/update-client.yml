@@ -59,7 +59,8 @@ jobs:
       - name: Remove files to allow files deletion from git
         run: |
           cd ${{ env.CLIENT_PATH }}
-          rm -r *
+          shopt -s extglob
+          rm -Rf !(.git|examples|.|..)
 
       - name: Generate client
         run: mvn package -P ${{ matrix.profile }}
