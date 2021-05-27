@@ -4193,6 +4193,7 @@ components:
           description: 'When the token expires, displayed in ISO-8601 format.'
           format: date-time
           example: '2019-12-16T09:25:51+00:00'
+          nullable: true
     authenticate-payload:
       title: ApiKey
       required:
