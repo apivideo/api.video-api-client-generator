@@ -38,7 +38,7 @@ public class UnderscoreLambda implements Mustache.Lambda {
     public void execute(Template.Fragment fragment, Writer writer) throws IOException {
         String text = fragment.execute();
         if (this.isForPath) {
-            String[] arrOfStr = text.split("((?<=\\{.+\\})|(?=\\{.+\\}))");
+            String[] arrOfStr = text.split("((?=\\{.+\\}))");
             for (String a: arrOfStr) {
                 if (a.charAt(0) == '{') {
                     writer.write(underscore(a));
