@@ -2,7 +2,7 @@
 
 import HttpClient from "./HttpClient";
 {{# apiInfo.apis }}{{^x-client-hidden}}
-import {{classFilename}} from 'api/{{classFilename}}';{{/x-client-hidden}}{{/ apiInfo.apis }}
+import {{classFilename}} from './api/{{classFilename}}';{{/x-client-hidden}}{{/ apiInfo.apis }}
 
 const PRODUCTION_BASE_URI = "https://ws.api.video";
 

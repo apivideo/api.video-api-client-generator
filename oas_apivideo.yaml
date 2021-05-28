@@ -69,7 +69,7 @@ paths:
         first authenticated using the api-key endpoint. Send the refresh token
         in the body of your request. The api.video API returns a new access
         token that is valid for one hour (3600 seconds) and a new refresh
-        token. 
+        token.
       operationId: POST_auth-refresh
       x-client-action: refresh
       x-client-hidden: true
@@ -123,6 +123,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
       parameters:
         - name: title
           in: query
@@ -373,7 +374,7 @@ paths:
 
         -H 'Authorization: Bearer {access_token} \
 
-        -d '{"title":"My video", 
+        -d '{"title":"My video",
              "description":"so many details",
              "mp4Support":true
         }'
@@ -381,7 +382,7 @@ paths:
         ```
 
 
-        ### Creating a hosted video 
+        ### Creating a hosted video
 
 
         You can also create a video directly from one hosted on a third-party
@@ -1150,6 +1151,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-client-action: list
+      x-optional-object: true
       parameters:
         - name: sortBy
           in: query
@@ -1430,6 +1432,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
       parameters:
         - name: streamKey
           in: query
@@ -1552,7 +1555,7 @@ paths:
       description: >-
         A live stream will give you the 'connection point' to RTMP your video
         stream to api.video. It will also give you the details for viewers to
-        watch the same livestream. 
+        watch the same livestream.
 
         The public=false 'private livestream' is available as a BETA feature,
         and should be limited to livestreams of 3,000 viewers or fewer.
@@ -2024,7 +2027,7 @@ paths:
           in: path
           description: >-
             The unique identifier for the video you want to have automatic
-            captions for. 
+            captions for.
           required: true
           style: simple
           explode: false
@@ -2293,7 +2296,7 @@ paths:
           in: path
           description: >-
             The unique identifier for the video you want to delete a chapter
-            from. 
+            from.
           required: true
           style: simple
           explode: false
@@ -2402,6 +2405,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
       parameters:
         - name: sortBy
           in: query
@@ -2762,7 +2766,7 @@ paths:
       summary: Upload a logo
       description: >-
         The uploaded image maximum size should be 200x100 and its weight should
-        be 200KB. 
+        be 200KB.
 
         It will be scaled down to 30px height and converted to PNG to be
         displayed in the player.
@@ -2880,14 +2884,14 @@ paths:
         - name: period
           in: query
           description: |
-            Period must have one of the following formats: 
+            Period must have one of the following formats:
 
             - For a day : 2018-01-01,
-            - For a week: 2018-W01, 
+            - For a week: 2018-W01,
             - For a month: 2018-01
             - For a year: 2018
 
-            For a range period: 
+            For a range period:
             -  Date range: 2018-01-01/2018-01-15
           required: false
           style: form
@@ -3002,14 +3006,14 @@ paths:
         - name: period
           in: query
           description: |
-            Period must have one of the following formats: 
+            Period must have one of the following formats:
 
             - For a day : "2018-01-01",
-            - For a week: "2018-W01", 
+            - For a week: "2018-W01",
             - For a month: "2018-01"
             - For a year: "2018"
 
-            For a range period: 
+            For a range period:
             -  Date range: "2018-01-01/2018-01-15"
           required: false
           style: form
@@ -3250,6 +3254,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-client-action: list
+      x-optional-object: true
       parameters:
         - name: events
           in: query
@@ -3610,7 +3615,7 @@ components:
           type: array
           description: >
             One array of tags (each tag is a string) in order to categorize a
-            video. Tags may include spaces. 
+            video. Tags may include spaces.
           example: '"tags": ["maths", "string theory", "video"]'
           items:
             type: string
@@ -3619,7 +3624,7 @@ components:
           description: >
             Metadata you can use to categorise and filter videos. Metadata is a
             list of dictionaries, where each dictionary represents a key value
-            pair for categorising a video. 
+            pair for categorising a video.
           example: >-
             [{"key":"Author", "value":"John Doe"}, {"key":"Format",
             "value":"Tutorial"}]
@@ -4350,12 +4355,12 @@ components:
           pattern: '\d{2}:\d{2}:\d{2}(\.\d{2})?'
           type: string
           description: |-
-            Frame in video to be used as a placeholder before the video plays. 
+            Frame in video to be used as a placeholder before the video plays.
             Example: '"00:01:00.000" for 1 minute into the video.'
-            Valid Patterns: 
+            Valid Patterns:
             "hh:mm:ss.ms"
             "hh:mm:ss:frameNumber"
-            "124" (integer value is reported as seconds) 
+            "124" (integer value is reported as seconds)
             If selection is out of range, "00:00:00.00" will be chosen.
       example:
         timecode: '00:00:00.000'
@@ -5107,7 +5112,7 @@ components:
           type: string
           description: >-
             The method used to compress and decompress digital video. API Video
-            supports all codecs in the libavcodec library. 
+            supports all codecs in the libavcodec library.
         audioCodec:
           type: string
           description: >-

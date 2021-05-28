@@ -12,10 +12,10 @@ import {
 import { promisify } from 'util';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
-import ObjectSerializer from 'ObjectSerializer';
-import HttpClient, { QueryOptions } from 'HttpClient';
+import ObjectSerializer from '../ObjectSerializer';
+import HttpClient, { QueryOptions } from '../HttpClient';
 {{#imports}}
-import {{classname}} from 'model/{{classname}}';
+import {{classname}} from '../model/{{classname}}';
 {{/imports}}
 {{#operations}}
 
@@ -43,7 +43,7 @@ export default class {{classname}} {
    * @param { {{dataType}} } searchParams.{{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
   {{/vendorExtensions.x-group-parameters}}
   {{^vendorExtensions.x-group-parameters}}
   /**
