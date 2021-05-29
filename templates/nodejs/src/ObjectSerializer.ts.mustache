@@ -3,7 +3,7 @@
 
 {{#models}}
 {{#model}}
-import {{classname}}{{#hasEnums}}, { {{#vars}}{{#isEnum}}{{classname}}{{enumName}}, {{/isEnum}}{{/vars}} }{{/hasEnums}} from 'model/{{{ classFilename }}}';
+import {{classname}}{{#hasEnums}}, { {{#vars}}{{#isEnum}}{{classname}}{{enumName}}, {{/isEnum}}{{/vars}} }{{/hasEnums}} from './model/{{{ classFilename }}}';
 {{/model}}
 {{/models}}
 
