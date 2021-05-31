@@ -220,4 +220,21 @@ public class Go extends GoClientCodegen {
         }
     }
 
+    @Override
+    public Map<String, Object> postProcessModels(Map<String, Object> objs) {
+        Map<String, Object> stringObjectMap = super.postProcessModels(objs);
+
+        List<Map<String, Object>> models = (List)objs.get("models");
+        models.forEach(map -> {
+            CodegenModel model = ((CodegenModel)map.get("model"));
+            model.vars.forEach(var -> {
+                if(var.dataType.equals("NullableTime")) {
+                    var.dataType = "NullableString";
+                    var.isString = true;
+                    var.isDateTime = false;
+                }
+            });
+        });
+        return stringObjectMap;
+    }
 }

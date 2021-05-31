@@ -1,6 +1,6 @@
+artifactVersion: 0.0.3
 licenseName: MIT
 generateInterfaces: true
-httpUserAgent: api.video client (GO; v:0.0.2; )
 structPrefix: true
 packageName: apivideosdk
 goImportAlias: apivideosdk

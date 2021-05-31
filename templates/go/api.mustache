@@ -37,7 +37,7 @@ type {{classname}}ServiceI interface {
 	 * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
 	 * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
 	 */
-	 {{#vendorExtensions.x-upload}}{{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+	 {{#vendorExtensions.x-upload}}{{nickname}}({{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}, {{/isFile}}{{/allParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
 	 {{#vendorExtensions.x-group-parameters}}{{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
 	 {{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}{{nickname}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
 	 {{/vendorExtensions.x-upload}}
@@ -48,7 +48,7 @@ type {{classname}}ServiceI interface {
 	 * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
 	 * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
 	 */
-    {{#vendorExtensions.x-upload}}{{nickname}}WithContext(ctx context.Context{{#requiredParams}}{{^isFile}}, {{paramName}} {{{dataType}}}{{/isFile}}{{/requiredParams}}, fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+    {{#vendorExtensions.x-upload}}{{nickname}}WithContext(ctx context.Context{{#allParams}}{{^isFile}}, {{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{/isFile}}{{/allParams}}, fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
     {{#vendorExtensions.x-group-parameters}}{{nickname}}WithContext(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}, r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error)
     {{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}{{nickname}}WithContext(ctx context.Context{{#requiredParams}}, {{paramName}} {{{dataType}}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
     {{/vendorExtensions.x-upload}}
@@ -61,7 +61,7 @@ type {{classname}}ServiceI interface {
 	 * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
 	 */{{#vendorExtensions.x-group-parameters}}
 	 {{nickname}}File({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
-	 {{^vendorExtensions.x-group-parameters}}{{nickname}}File({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
+	 {{^vendorExtensions.x-group-parameters}}{{nickname}}File({{#allParams}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
  
     /*
 	 * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
@@ -70,7 +70,7 @@ type {{classname}}ServiceI interface {
 	 * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
 	 */{{#vendorExtensions.x-group-parameters}}
     {{nickname}}FileWithContext(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}, r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
-    {{^vendorExtensions.x-group-parameters}}{{nickname}}FileWithContext(ctx context.Context{{#requiredParams}}, {{paramName}} {{{dataType}}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}{{nickname}}FileWithContext(ctx context.Context{{#allParams}}, {{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{/allParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {{/vendorExtensions.x-group-parameters}}
     {{/vendorExtensions.x-upload}}
     {{/operation}}
 }
@@ -96,8 +96,8 @@ type {{classname}}Service struct {
  */
  {{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}File({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
  {{^vendorExtensions.x-group-parameters}}
- func (s *{{{classname}}}Service) {{nickname}}File({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
-	 return s.{{nickname}}FileWithContext(context.Background(){{#requiredParams}}, {{paramName}}{{/requiredParams}})
+ func (s *{{{classname}}}Service) {{nickname}}File({{#allParams}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
+	 return s.{{nickname}}FileWithContext(context.Background(){{#allParams}}, {{paramName}}{{/allParams}})
  }
 
 /*
@@ -111,12 +111,12 @@ type {{classname}}Service struct {
  */
 {{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}File(ctx context.Context{{#pathParams}}{{paramName}}, {{{dataType}}}{{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
 {{^vendorExtensions.x-group-parameters}}
-func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context{{#requiredParams}}, {{paramName}} {{{dataType}}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-client-chunk-upload}}
+func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context{{#allParams}}, {{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{/allParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-client-chunk-upload}}
     fileInfo, _  := file.Stat()
     fileSize := fileInfo.Size()
 {{/vendorExtensions.x-client-chunk-upload}}
 
-    return s.{{nickname}}WithContext(ctx, {{#requiredParams}}{{^isFile}}{{paramName}}, {{/isFile}}{{/requiredParams}}file.Name(), io.Reader(file){{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}})
+    return s.{{nickname}}WithContext(ctx, {{#allParams}}{{^isFile}}{{paramName}}, {{/isFile}}{{/allParams}}file.Name(), io.Reader(file){{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}})
 }
 {{/vendorExtensions.x-upload}}
 
@@ -128,13 +128,13 @@ func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context
  * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
  * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
  */
- {{#vendorExtensions.x-upload}}func (s *{{{classname}}}Service) {{nickname}}({{#requiredParams}}{{^isFile}}{{paramName}} {{{dataType}}}, {{/isFile}}{{/requiredParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+ {{#vendorExtensions.x-upload}}func (s *{{{classname}}}Service) {{nickname}}({{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}, {{/isFile}}{{/allParams}}fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
  {{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}({{#pathParams}}{{paramName}} {{{dataType}}}, {{/pathParams}}r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
  {{^vendorExtensions.x-group-parameters}}
  func (s *{{{classname}}}Service) {{nickname}}({{#requiredParams}}{{paramName}} {{{dataType}}}{{^-last}}, {{/-last}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {
  {{/vendorExtensions.x-group-parameters}}
  {{/vendorExtensions.x-upload}}
-	{{#vendorExtensions.x-upload}}return s.{{nickname}}WithContext(context.Background(){{#requiredParams}}{{^isFile}}, {{paramName}}{{/isFile}}{{/requiredParams}}, fileName, fileReader{{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+	{{#vendorExtensions.x-upload}}return s.{{nickname}}WithContext(context.Background(){{#allParams}}{{^isFile}}, {{paramName}}{{/isFile}}{{/allParams}}, fileName, fileReader{{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}}){{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
 	{{#vendorExtensions.x-group-parameters}}return s.{{nickname}}WithContext(context.Background(){{#pathParams}}, {{paramName}}{{/pathParams}}, r{{#bodyParams}}, {{paramName}}{{/bodyParams}}){{/vendorExtensions.x-group-parameters}}
 	{{^vendorExtensions.x-group-parameters}}
 	return s.{{nickname}}WithContext(context.Background(){{#requiredParams}}, {{paramName}}{{/requiredParams}})
@@ -152,7 +152,7 @@ func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context
  * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
  * @return {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request
  */
-{{#vendorExtensions.x-upload}}func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#requiredParams}}{{^isFile}}, {{paramName}} {{{dataType}}}{{/isFile}}{{/requiredParams}}, fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
+{{#vendorExtensions.x-upload}}func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#allParams}}{{^isFile}}, {{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{/isFile}}{{/allParams}}, fileName string, fileReader io.Reader{{#vendorExtensions.x-client-chunk-upload}}, fileSize int64{{/vendorExtensions.x-client-chunk-upload}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-upload}}{{^vendorExtensions.x-upload}}
 {{#vendorExtensions.x-group-parameters}}func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#pathParams}}, {{paramName}} {{{dataType}}}{{/pathParams}}, r {{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{{#bodyParams}}, {{paramName}} {{baseName}}{{/bodyParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) { {{/vendorExtensions.x-group-parameters}}
 {{^vendorExtensions.x-group-parameters}}
 func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#requiredParams}}, {{paramName}} {{{dataType}}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error) {
@@ -283,8 +283,8 @@ func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#r
 	}
 {{/isModel}}
 {{^isModel}}
-	if r.{{paramName}} != nil {
-        localVarFormParams["{{baseName}}"] = parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+	if {{paramName}} != nil {
+        localVarFormParams["{{baseName}}"] = parameterToString(*{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
 	}
 {{/isModel}}
 {{/required}}

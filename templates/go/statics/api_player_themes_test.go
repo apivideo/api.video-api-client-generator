@@ -55,9 +55,9 @@ var playerJSONResponses = []string{
 	}`,
 }
 
-var playerStructs = []Player{
+var playerStructs = []PlayerTheme{
 	{
-		PlayerId:         PtrString("pt3Lony8J6NozV71Yxn8KVFn"),
+		PlayerId:         "pt3Lony8J6NozV71Yxn8KVFn",
 		Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 		Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 		LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -72,13 +72,13 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAssets{
+		Assets: &PlayerThemeAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3Lony8J6NozV71Yxn8KVFn/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
 	},
 	{
-		PlayerId:         PtrString("pl3zY7qtojdW2EvMIU37707q"),
+		PlayerId:         "pl3zY7qtojdW2EvMIU37707q",
 		Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 		Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 		LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -93,14 +93,14 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAssets{
+		Assets: &PlayerThemeAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3zY7qtojdW2EvMIU37707q/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
 	},
 }
 
-var playerCreationPayload = PlayerCreationPayload{
+var playerCreationPayload = PlayerThemeCreationPayload{
 	Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 	Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 	LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -117,7 +117,7 @@ var playerCreationPayload = PlayerCreationPayload{
 	ForceLoop:        PtrBool(false),
 }
 
-var playerUpdatePayload = PlayerUpdatePayload{
+var playerUpdatePayload = PlayerThemeUpdatePayload{
 	Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 	Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 	LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -181,9 +181,9 @@ func TestPlayers_List(t *testing.T) {
 		t.Errorf("Players.List error: %v", err)
 	}
 
-	expected := PlayersListResponse{
-		Data:       &playerStructs,
-		Pagination: &paginationStruct,
+	expected := PlayerThemesListResponse{
+		Data:       playerStructs,
+		Pagination: paginationStruct,
 	}
 	if !reflect.DeepEqual(*players, expected) {
 		t.Errorf("Players.List\n got=%#v\nwant=%#v", *players, expected)
@@ -301,7 +301,7 @@ func TestPlayers_UploadLogo(t *testing.T) {
 	file := createTempFile("test.logo", 1024*1024)
 	defer os.Remove(file.Name())
 
-	player, err := client.PlayerThemes.UploadLogoFile("pt3Lony8J6NozV71Yxn8KVFn", file, "https://api.video")
+	player, err := client.PlayerThemes.UploadLogoFile("pt3Lony8J6NozV71Yxn8KVFn", file, PtrString("https://api.video"))
 	if err != nil {
 		t.Errorf("Captions.Upload error: %v", err)
 	}
@@ -311,6 +311,7 @@ func TestPlayers_UploadLogo(t *testing.T) {
 		t.Errorf("Captions.Upload\n got=%#v\nwant=%#v", player, expected)
 	}
 }
+
 
 func TestPlayers_DeleteLogo(t *testing.T) {
 	setup()

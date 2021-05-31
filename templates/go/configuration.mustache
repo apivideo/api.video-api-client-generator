@@ -106,7 +106,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "{{#httpUserAgent}}{{{.}}}{{/httpUserAgent}}{{^httpUserAgent}}OpenAPI-Generator/{{{packageVersion}}}/go{{/httpUserAgent}}",
+		UserAgent:        "api.video client (go; v:{{ artifactVersion }}; )",
 		Debug:            false,
 		{{#servers}}
 		{{#-first}}
