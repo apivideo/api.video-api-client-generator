@@ -1,14 +1,13 @@
+artifactVersion: 0.0.7
 licenseName: MIT
 sourceFolder: src/
 groupId: video.api
 artifactDescription: api.video csharp API client
-artifactVersion: 0.0.6
-httpUserAgent: api.video client (C#; v:0.0.6; )
 artifactId: csharp-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video
-developerEmail: ecosystem-team@api.video
+developerEmail: ecosystem@api.video
 packageName: ApiVideo
 artifactUrl: https://github.com/apivideo/csharp-api-client
 targetFramework: v4.5.2

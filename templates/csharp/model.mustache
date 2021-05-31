@@ -21,8 +21,7 @@ namespace {{packageName}}.Model {
     /// <value>{{{description}}}</value>{{/description}}
     [DataMember(Name="{{baseName}}", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "{{baseName}}")]
-    public {{{dataType}}}{{#isDateTime}}?{{/isDateTime}} {{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} { get; set; }
-
+    public {{{dataType}}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}} {{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} { get; set; }
     {{/vars}}
 
 {{#vendorExtensions.x-has-defaults}}

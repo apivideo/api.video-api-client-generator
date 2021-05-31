@@ -416,12 +416,12 @@ namespace VideoApiTests.Client
             api.Invoking(x => x.create(null))
                                             .Should()
                                             .Throw<ApiException>()
-                                            .WithMessage("Missing required parameter 'videoCreatePayload' when calling VideosApi->create");
+                                            .WithMessage("Missing required parameter 'videoCreationPayload' when calling VideosApi->create");
 
             api.Invoking(x => x.create(new VideoCreationPayload()))
                                             .Should()
                                             .Throw<ApiException>()
-                                            .WithMessage("Missing required parameter 'videoCreatePayload.title' when calling VideosApi->create");
+                                            .WithMessage("Missing required parameter 'videoCreationPayload.title' when calling VideosApi->create");
 
             api.Invoking(x => x.create(new VideoCreationPayload() { title = "title" }))
                                 .Should()
