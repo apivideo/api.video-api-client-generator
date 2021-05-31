@@ -1,0 +1,23 @@
+name: Run unit tests
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ '3.1.x' ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Dotnet ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Test
+        run: |
+          cd src
+          msbuild /r ApiVideo.csproj
+          cd ../tests
+          msbuild /r ApiVideoTests.csproj
+          dotnet test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
