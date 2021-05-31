@@ -180,7 +180,7 @@ public class RawStatisticsApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("listVideoSessions")
     class listVideoSessions {
-        private static final String PAYLOADS_PATH = "/payloads/rawStatistics/listVideoSessions/";
+        private static final String PAYLOADS_PATH = "/payloads/rawstatistics/listVideoSessions/";
 
         @Test
         @DisplayName("required parameters")

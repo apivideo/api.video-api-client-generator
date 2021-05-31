@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.Page;
-import video.api.client.api.models.Player;
-import video.api.client.api.models.PlayerCreationPayload;
-import video.api.client.api.models.PlayerUpdatePayload;
+import video.api.client.api.models.PlayerTheme;
+import video.api.client.api.models.PlayerThemeCreationPayload;
+import video.api.client.api.models.PlayerThemeUpdatePayload;
 
 import java.io.File;
 
@@ -132,7 +132,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<Player> res = api.list().execute();
+            Page<PlayerTheme> res = api.list().execute();
 
             /*
              * sample response: { "data" : [ { "playerId" : "pl4fgtjy4tjyKDK545DRdfg", "createdAt" :
@@ -200,7 +200,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Player res = api.get("pl45d5vFFGrfdsdsd156dGhh");
+            PlayerTheme res = api.get("pl45d5vFFGrfdsdsd156dGhh");
 
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
@@ -247,13 +247,13 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.update(null, new PlayerUpdatePayload())).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.update(null, new PlayerThemeUpdatePayload())).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'playerId' when calling update");
 
             assertThatThrownBy(() -> api.update("pl45d5vFFGrfdsdsd156dGhh", null)).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'playerUpdatePayload' when calling update");
 
-            assertThatNoException().isThrownBy(() -> api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerUpdatePayload()));
+            assertThatNoException().isThrownBy(() -> api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerThemeUpdatePayload()));
         }
 
         @Test
@@ -261,7 +261,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Player res = api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerUpdatePayload());
+            PlayerTheme res = api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerThemeUpdatePayload());
 
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
@@ -292,7 +292,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerUpdatePayload()))
+            assertThatThrownBy(() -> api.update("pl45d5vFFGrfdsdsd156dGhh", new PlayerThemeUpdatePayload()))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
@@ -312,7 +312,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
             assertThatThrownBy(() -> api.create(null)).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'playerCreationPayload' when calling create");
 
-            assertThatNoException().isThrownBy(() -> api.create(new PlayerCreationPayload()));
+            assertThatNoException().isThrownBy(() -> api.create(new PlayerThemeCreationPayload()));
         }
 
         @Test
@@ -320,7 +320,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus201Test() throws ApiException {
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            Player res = api.create(new PlayerCreationPayload());
+            PlayerTheme res = api.create(new PlayerThemeCreationPayload());
 
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
@@ -375,7 +375,7 @@ public class PlayerThemesApiTest extends AbstractApiTest {
         public void responseWithStatus201Test() throws ApiException {
             answerOnAnyRequest(201, "");
 
-            Player res = api.uploadLogo("pl14Db6oMJRH6SRVoOwORacK", new File(""), "file_example");
+            PlayerTheme res = api.uploadLogo("pl14Db6oMJRH6SRVoOwORacK", new File(""), "file_example");
         }
 
         @Test

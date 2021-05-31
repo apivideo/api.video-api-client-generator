@@ -4,9 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import video.api.client.api.ApiException;
+import video.api.client.api.models.Caption;
 import video.api.client.api.models.CaptionsUpdatePayload;
 import video.api.client.api.models.Page;
-import video.api.client.api.models.Subtitle;
 
 import java.io.File;
 
@@ -77,7 +77,7 @@ public class CaptionsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<Subtitle> res = api.list("vi4k0jvEUuaTdRAEjQ4Prklg").execute();
+            Page<Caption> res = api.list("vi4k0jvEUuaTdRAEjQ4Prklg").execute();
 
             assertThat(res.getCurrentPage()).isEqualTo(1);
             assertThat(res.getPageSize()).isEqualTo(25);
@@ -87,9 +87,9 @@ public class CaptionsApiTest extends AbstractApiTest {
             assertThat(res.getItems()).hasSize(2);
 
             assertThat(res.getItems()).containsExactlyInAnyOrder(
-                    new Subtitle().src("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt")
+                    new Caption().src("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt")
                             .uri("/videos/vi3N6cDinStg3oBbN79GklWS/captions/en").srclang("en")._default(false),
-                    new Subtitle().src("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/fr.vtt")
+                    new Caption().src("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/fr.vtt")
                             .uri("/videos/vi3N6cDinStg3oBbN79GklWS/captions/fr").srclang("fr")._default(false));
         }
 
@@ -127,7 +127,7 @@ public class CaptionsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Subtitle res = api.get("vi4k0jvEUuaTdRAEjQ4Prklg", "en");
+            Caption res = api.get("vi4k0jvEUuaTdRAEjQ4Prklg", "en");
 
             assertThat(res.getUri()).isEqualTo("/videos/vi3N6cDinStg3oBbN79GklWS/captions/en");
             assertThat(res.getSrc()).isEqualTo("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt");
@@ -175,7 +175,7 @@ public class CaptionsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Subtitle res = api.update("vi4k0jvEUuaTdRAEjQ4Prklg", "en", new CaptionsUpdatePayload());
+            Caption res = api.update("vi4k0jvEUuaTdRAEjQ4Prklg", "en", new CaptionsUpdatePayload());
 
             assertThat(res.getUri()).isEqualTo("/videos/vi3N6cDinStg3oBbN79GklWS/captions/en");
             assertThat(res.getSrc()).isEqualTo("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt");
@@ -233,7 +233,7 @@ public class CaptionsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Subtitle res = api.upload("vi4k0jvEUuaTdRAEjQ4Prklg", "en", new File(""));
+            Caption res = api.upload("vi4k0jvEUuaTdRAEjQ4Prklg", "en", new File(""));
 
             assertThat(res.getUri()).isEqualTo("/videos/vi3N6cDinStg3oBbN79GklWS/captions/en");
             assertThat(res.getSrc()).isEqualTo("https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt");
