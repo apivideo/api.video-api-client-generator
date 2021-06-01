@@ -1,1 +1,4 @@
 licenseName: MIT
+srcBasePath: src
+variableNamingConvention: camelCase
+invokerPackage: ApiVideo\SDK

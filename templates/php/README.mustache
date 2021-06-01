@@ -1,0 +1,119 @@
+{{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
+
+
+# Initialize api.video client
+
+Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
+1. Base URI, which can be either `https://sandbox.api.video` or `https://ws.api.video`
+2. Your API key, available on your account
+3. HTTP client
+4. (Request factory)
+5. (Stream factory)
+
+Note : If the HTTP client also implements RequestFactoryInterface and StreamFactoryInterface, then it is not necessary to pass this object in 4th and 5th argument.
+
+## Symfony HTTP client example
+
+The Symfony HTTP client has the triple advantage of playing the role of **HTTP client**, but also of **request factory** and **stream factory**. It is therefore sufficient to pass it as an argument 3 times.
+
+```php
+$httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+$client = new \ApiVideo\Client(
+    'https://sandbox.api.video',
+    'YOUR_API_TOKEN',
+    $httpClient
+);
+```
+
+# Public endpoints
+
+Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API token:
+
+```php
+$httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+$client = new \ApiVideo\Client(
+    'https://sandbox.api.video',
+    null,
+    $httpClient
+);
+```
+
+# Cookbook
+
+In the following examples the `$client` must already be initialized.
+
+## Create a video
+
+```php
+$payload = (new VideoCreationPayload())
+    ->setTitle('Test video creation');
+
+$video = $client->videos()->create($payload);
+```
+
+## Upload a video
+
+```php
+$payload = (new VideoCreationPayload())
+    ->setTitle('Test video creation');
+
+$video = $client->videos()->create($payload);
+
+$this->client->videos()->upload(
+    $video->getVideoId(),
+    new SplFileObject(__DIR__.'/../earth.mp4')
+);
+```
+
+### Chunks
+
+The video is automatically split into 1 Mb chunks.
+
+To modify the size of the chunks, fill in the last argument `$contentRange` as follows:
+
+- `bytes 0-{size}/0` where `{size}` is the size of the chunk.
+
+For example : `bytes 0-500000/0` for 500 Kb chunks.
+
+# API Endpoints
+
+All URIs are relative to `{{basePath}}`.
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+## {{classname}}
+
+### Retrieve an instance of {{classname}}
+
+```php
+// The $client must already be initialized
+${{classVarName}} = $client->{{classVarName}}();
+```
+
+### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}**]({{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+## Models
+
+{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}/{{classname}}.md)
+{{/model}}{{/models}}
+
+# Tests
+
+In order to run the PhpUnit tests, it is necessary to enter two variables in the command line:
+
+- `BASE_URI` (for example : `https://sandbox.api.video`)
+- `API_KEY`
+
+These identifiers must belong to a real Api.video account.
+
+```
+$ BASE_URI="" API_KEY="..." vendor/bin/phpunit
+```
