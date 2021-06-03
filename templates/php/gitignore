@@ -1,0 +1,9 @@
+vendor
+composer.lock
+
+test.php
+.idea
+*.mp4
+.openapi-generator
+.openapi-generator-ignore
+.phpunit.result.cache
