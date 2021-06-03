@@ -151,7 +151,7 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("src/Request.php", toSrcPath(invokerPackage, srcBasePath), "Request.php"));
         supportingFiles.add(new SupportingFile("src/Authenticator.php", toSrcPath(invokerPackage, srcBasePath), "Authenticator.php"));
         supportingFiles.add(new SupportingFile("src/Client.mustache", toSrcPath(invokerPackage, srcBasePath), "Client.php"));
-        supportingFiles.add(new SupportingFile("src/BaseClient.php", toSrcPath(invokerPackage, srcBasePath), "BaseClient.php"));
+        supportingFiles.add(new SupportingFile("src/BaseClient.mustache", toSrcPath(invokerPackage, srcBasePath), "BaseClient.php"));
         supportingFiles.add(new SupportingFile("src/ObjectSerializer.mustache", toSrcPath(invokerPackage, srcBasePath), "ObjectSerializer.php"));
         supportingFiles.add(new SupportingFile("src/ModelPreprocessor.php", toSrcPath(invokerPackage, srcBasePath), "ModelPreprocessor.php"));
         supportingFiles.add(new SupportingFile("src/VideoUploader.php", toSrcPath(invokerPackage, srcBasePath), "VideoUploader.php"));

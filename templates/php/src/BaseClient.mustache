@@ -83,6 +83,8 @@ class BaseClient
             $request = $request->withHeader($name, $value);
         }
 
+        $request = $request->withHeader('User-Agent', 'api.video client (php; v:{{ artifactVersion }}; )');
+
         return $this->sendRequest($request);
     }
 
