@@ -1,7 +1,11 @@
+![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
+
+# api.video PHP API client
+
 {{#appDescriptionWithNewLines}}{{{appDescriptionWithNewLines}}}{{/appDescriptionWithNewLines}}
 
 
-# Initialize api.video client
+## Initialize api.video client
 
 Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
 1. Base URI, which can be either `https://sandbox.api.video` or `https://ws.api.video`
@@ -12,7 +16,7 @@ Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
 
 Note : If the HTTP client also implements RequestFactoryInterface and StreamFactoryInterface, then it is not necessary to pass this object in 4th and 5th argument.
 
-## Symfony HTTP client example
+### Symfony HTTP client example
 
 The Symfony HTTP client has the triple advantage of playing the role of **HTTP client**, but also of **request factory** and **stream factory**. It is therefore sufficient to pass it as an argument 3 times.
 
@@ -25,7 +29,7 @@ $client = new \ApiVideo\Client(
 );
 ```
 
-# Public endpoints
+## Public endpoints
 
 Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API token:
 
@@ -38,11 +42,11 @@ $client = new \ApiVideo\Client(
 );
 ```
 
-# Cookbook
+## Cookbook
 
 In the following examples the `$client` must already be initialized.
 
-## Create a video
+### Create a video
 
 ```php
 $payload = (new VideoCreationPayload())
@@ -51,7 +55,7 @@ $payload = (new VideoCreationPayload())
 $video = $client->videos()->create($payload);
 ```
 
-## Upload a video
+### Upload a video
 
 ```php
 $payload = (new VideoCreationPayload())
@@ -65,7 +69,7 @@ $this->client->videos()->upload(
 );
 ```
 
-### Chunks
+#### Chunks
 
 The video is automatically split into 1 Mb chunks.
 
@@ -75,7 +79,7 @@ To modify the size of the chunks, fill in the last argument `$contentRange` as f
 
 For example : `bytes 0-500000/0` for 500 Kb chunks.
 
-# API Endpoints
+## API Endpoints
 
 All URIs are relative to `{{basePath}}`.
 
@@ -83,16 +87,16 @@ All URIs are relative to `{{basePath}}`.
 {{#apis}}
 {{^x-client-hidden}}
 
-## {{classname}}
+### {{classname}}
 
-### Retrieve an instance of {{classname}}
+#### Retrieve an instance of {{classname}}
 
 ```php
 // The $client must already be initialized
 ${{classVarName}} = $client->{{classVarName}}();
 ```
 
-### Endpoints
+#### Endpoints
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -100,12 +104,12 @@ Method | HTTP request | Description
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
-## Models
+### Models
 
 {{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}/{{classname}}.md)
 {{/model}}{{/models}}
 
-# Tests
+## Tests
 
 In order to run the PhpUnit tests, it is necessary to enter two variables in the command line:
 
