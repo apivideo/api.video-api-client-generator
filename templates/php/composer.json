@@ -1,9 +1,10 @@
 {
-  "name": "apivideo/php-api-client",
-  "description": "PHP client for api.video API.",
+  "name": "api-video/php-api-client",
+  "description": "PHP client for api.video web services.",
   "keywords": ["api.video"],
   "homepage": "https://api.video/",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "ApiVideo",
