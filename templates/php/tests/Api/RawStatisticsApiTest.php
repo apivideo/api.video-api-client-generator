@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
 /**
  * Note : Unable to test `listSessionEvents`

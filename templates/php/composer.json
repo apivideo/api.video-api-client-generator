@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ApiVideo\\SDK\\": "src/"
+      "ApiVideo\\Client\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "ApiVideo\\SDK\\Tests\\": "tests/"
+      "ApiVideo\\Client\\Tests\\": "tests/"
     }
   }
 }

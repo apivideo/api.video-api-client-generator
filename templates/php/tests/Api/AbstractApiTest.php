@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Client;
+use ApiVideo\Client\Client;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\Psr18Client;
 

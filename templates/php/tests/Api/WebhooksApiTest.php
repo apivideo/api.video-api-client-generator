@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Model\WebhooksCreationPayload;
+use ApiVideo\Client\Model\WebhooksCreationPayload;
 
 class WebhooksApiTest extends AbstractApiTest
 {
@@ -38,9 +38,9 @@ class WebhooksApiTest extends AbstractApiTest
     }
 
     /**
-     * @covers \ApiVideo\SDK\Api\WebhooksApi::create
-     * @covers \ApiVideo\SDK\Api\WebhooksApi::get
-     * @covers \ApiVideo\SDK\Api\WebhooksApi::delete
+     * @covers \ApiVideo\Client\Api\WebhooksApi::create
+     * @covers \ApiVideo\Client\Api\WebhooksApi::get
+     * @covers \ApiVideo\Client\Api\WebhooksApi::delete
      */
     public function testCreate()
     {

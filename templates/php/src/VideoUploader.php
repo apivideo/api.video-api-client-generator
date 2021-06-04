@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK;
+namespace ApiVideo\Client;
 
-use ApiVideo\SDK\Model\Video;
+use ApiVideo\Client\Model\Video;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Psr\Http\Client\ClientExceptionInterface;
 use SplFileObject;

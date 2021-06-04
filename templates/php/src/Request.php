@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK;
+namespace ApiVideo\Client;
 
 use Psr\Http\Message\StreamInterface;
 

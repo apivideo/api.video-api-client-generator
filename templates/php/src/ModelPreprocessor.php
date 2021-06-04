@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK;
+namespace ApiVideo\Client;
 
-use ApiVideo\SDK\Model\ModelInterface;
+use ApiVideo\Client\Model\ModelInterface;
 
 final class ModelPreprocessor
 {

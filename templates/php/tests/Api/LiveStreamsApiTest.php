@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Model\LiveStreamCreationPayload;
-use ApiVideo\SDK\Model\LiveStreamUpdatePayload;
+use ApiVideo\Client\Model\LiveStreamCreationPayload;
+use ApiVideo\Client\Model\LiveStreamUpdatePayload;
 use SplFileObject;
 
 class LiveStreamsApiTest extends AbstractApiTest
@@ -94,8 +94,8 @@ class LiveStreamsApiTest extends AbstractApiTest
     }
 
     /**
-     * @covers \ApiVideo\SDK\Api\LiveStreamsApi::uploadThumbnail
-     * @covers \ApiVideo\SDK\Api\LiveStreamsApi::deleteThumbnail
+     * @covers \ApiVideo\Client\Api\LiveStreamsApi::uploadThumbnail
+     * @covers \ApiVideo\Client\Api\LiveStreamsApi::deleteThumbnail
      *
      * The file sent may take a long time to be available online,
      * so we only test the return of the request and not the presence

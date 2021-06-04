@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Model\PlayerCreationPayload;
-use ApiVideo\SDK\Model\PlayerThemeCreationPayload;
-use ApiVideo\SDK\Model\PlayerThemeUpdatePayload;
-use ApiVideo\SDK\Model\PlayerUpdatePayload;
+use ApiVideo\Client\Model\PlayerCreationPayload;
+use ApiVideo\Client\Model\PlayerThemeCreationPayload;
+use ApiVideo\Client\Model\PlayerThemeUpdatePayload;
+use ApiVideo\Client\Model\PlayerUpdatePayload;
 use SplFileObject;
 
 class PlayerThemesApiTest extends AbstractApiTest
@@ -37,12 +37,12 @@ class PlayerThemesApiTest extends AbstractApiTest
     }
 
     /**
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::create
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::get
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::update
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::uploadLogo
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::deleteLogo
-     * @covers \ApiVideo\SDK\Api\PlayerThemesApi::delete
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::create
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::get
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::update
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::uploadLogo
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::deleteLogo
+     * @covers \ApiVideo\Client\Api\PlayerThemesApi::delete
      */
     public function testCreate()
     {

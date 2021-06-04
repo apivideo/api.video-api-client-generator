@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Api;
+namespace ApiVideo\Client\Api;
 
 /**
  * APIs must implement this interface

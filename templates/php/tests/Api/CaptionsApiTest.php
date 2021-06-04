@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Exception\HttpException;
-use ApiVideo\SDK\Model\CaptionsUpdatePayload;
+use ApiVideo\Client\Exception\HttpException;
+use ApiVideo\Client\Model\CaptionsUpdatePayload;
 use SplFileObject;
 
 class CaptionsApiTest extends AbstractApiTest
@@ -43,10 +43,10 @@ class CaptionsApiTest extends AbstractApiTest
     }
 
     /**
-     * @covers \ApiVideo\SDK\Api\CaptionsApi::upload
-     * @covers \ApiVideo\SDK\Api\CaptionsApi::update
-     * @covers \ApiVideo\SDK\Api\CaptionsApi::get
-     * @covers \ApiVideo\SDK\Api\CaptionsApi::delete
+     * @covers \ApiVideo\Client\Api\CaptionsApi::upload
+     * @covers \ApiVideo\Client\Api\CaptionsApi::update
+     * @covers \ApiVideo\Client\Api\CaptionsApi::get
+     * @covers \ApiVideo\Client\Api\CaptionsApi::delete
      */
     public function testUpload()
     {

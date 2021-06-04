@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Exception;
+namespace ApiVideo\Client\Exception;
 
 /**
  * Exceptions must implement this interface

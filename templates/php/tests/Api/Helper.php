@@ -1,14 +1,14 @@
 <?php
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Client;
-use ApiVideo\SDK\Model\LiveStream;
-use ApiVideo\SDK\Model\LiveStreamCreationPayload;
-use ApiVideo\SDK\Model\TokenCreationPayload;
-use ApiVideo\SDK\Model\UploadToken;
-use ApiVideo\SDK\Model\Video;
-use ApiVideo\SDK\Model\VideoCreationPayload;
+use ApiVideo\Client\Client;
+use ApiVideo\Client\Model\LiveStream;
+use ApiVideo\Client\Model\LiveStreamCreationPayload;
+use ApiVideo\Client\Model\TokenCreationPayload;
+use ApiVideo\Client\Model\UploadToken;
+use ApiVideo\Client\Model\Video;
+use ApiVideo\Client\Model\VideoCreationPayload;
 
 class Helper
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace ApiVideo\SDK\Tests\Api;
+namespace ApiVideo\Client\Tests\Api;
 
-use ApiVideo\SDK\Client;
-use ApiVideo\SDK\Model\VideoCreationPayload;
-use ApiVideo\SDK\Model\VideosListResponse;
-use ApiVideo\SDK\Model\VideoThumbnailPickPayload;
-use ApiVideo\SDK\Model\VideoUpdatePayload;
+use ApiVideo\Client\Client;
+use ApiVideo\Client\Model\VideoCreationPayload;
+use ApiVideo\Client\Model\VideosListResponse;
+use ApiVideo\Client\Model\VideoThumbnailPickPayload;
+use ApiVideo\Client\Model\VideoUpdatePayload;
 use SplFileObject;
 use Symfony\Component\HttpClient\Psr18Client;
 
@@ -39,9 +39,9 @@ class VideosApiTest extends AbstractApiTest
     }
 
     /**
-     * @covers \ApiVideo\SDK\Api\VideosApi::upload
-     * @covers \ApiVideo\SDK\Api\VideosApi::pickThumbnail
-     * @covers \ApiVideo\SDK\Api\VideosApi::getStatus
+     * @covers \ApiVideo\Client\Api\VideosApi::upload
+     * @covers \ApiVideo\Client\Api\VideosApi::pickThumbnail
+     * @covers \ApiVideo\Client\Api\VideosApi::getStatus
      */
     public function testUpload()
     {
