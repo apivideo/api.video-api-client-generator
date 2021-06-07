@@ -1,0 +1,290 @@
+<?php declare(strict_types = 1);
+{{>partial_header}}
+
+namespace {{apiPackage}};
+
+use {{invokerPackage}}\BaseClient;
+use {{invokerPackage}}\ModelPreprocessor;
+use Exception;
+use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Psr\Http\Client\ClientExceptionInterface;
+use {{invokerPackage}}\Request;
+use {{invokerPackage}}\ObjectSerializer;
+use {{invokerPackage}}\VideoUploader;
+
+/**
+ * @category Class
+ * @package  {{invokerPackage}}
+ */
+{{#operations}}class {{classname}} implements ApiInterface
+{
+    /**
+     * @var BaseClient
+     */
+    private $client;
+
+    /**
+     * @param BaseClient $client
+     */
+    public function __construct(BaseClient $client)
+    {
+        $this->client = $client;
+    }
+
+{{#operation}}
+    /**
+{{#summary}}
+     * {{.}}
+{{/summary}}
+     *
+{{#description}}
+     * {{.}}
+     *
+{{/description}}
+{{#servers}}
+{{#-first}}
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+{{/-first}}
+     * URL: {{{url}}}
+{{#-last}}
+     *
+{{/-last}}
+{{/servers}}
+{{#allParams}}
+{{^isQueryParam}}
+     * @param  {{{dataType}}} ${{paramName}}{{#description}} {{description}}{{/description}}{{^description}} {{paramName}}{{/description}} {{#required}}(required){{/required}}{{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}
+{{/isQueryParam}}
+{{/allParams}}
+{{#vendorExtensions.x-group-parameters}}
+     * @param  array $queryParams
+{{/vendorExtensions.x-group-parameters}}
+     *
+     * @throws \{{invokerPackage}}\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return {{#returnType}}{{#responses}}{{#dataType}}{{^-first}}|{{/-first}}{{/dataType}}{{{dataType}}}{{/responses}}{{/returnType}}{{^returnType}}void{{/returnType}}
+     */
+    {{#vendorExtensions.x-group-parameters}}
+    public function {{vendorExtensions.x-client-action}}({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): {{returnType}}{{^returnType}}void{{/returnType}}
+    {{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}
+    public function {{vendorExtensions.x-client-action}}({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): {{returnType}}{{^returnType}}void{{/returnType}}
+    {{/vendorExtensions.x-group-parameters}}
+    {
+        {{#vendorExtensions.x-client-chunk-upload}}
+        $videoUploader = new VideoUploader($this->client);
+        $model = $videoUploader->{{vendorExtensions.x-client-action}}({{^vendorExtensions.x-group-parameters}}{{#allParams}}${{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}$queryParams{{/vendorExtensions.x-group-parameters}});
+        ModelPreprocessor::execute($model);
+
+        return $model;
+        {{/vendorExtensions.x-client-chunk-upload}}
+        {{^vendorExtensions.x-client-chunk-upload}}
+        $request = $this->build{{operationId}}Request({{#allParams}}{{^isQueryParam}}${{paramName}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}{{#vendorExtensions.x-group-parameters}}$queryParams{{/vendorExtensions.x-group-parameters}});
+
+        {{#returnType}}
+        $model = new {{returnType}}($this->client->request($request));
+        ModelPreprocessor::execute($model);
+
+        return $model;
+        {{/returnType}}
+        {{^returnType}}
+        $this->client->request($request);
+        {{/returnType}}
+        {{/vendorExtensions.x-client-chunk-upload}}
+    }
+
+    /**
+     * Create request for operation '{{vendorExtensions.x-client-action}}'
+     *
+{{#servers}}
+{{#-first}}
+     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
+{{/-first}}
+     * URL: {{{url}}}
+{{#-last}}
+     *
+{{/-last}}
+{{/servers}}
+{{#allParams}}
+{{^isQueryParam}}
+     * @param  {{{dataType}}} ${{paramName}}{{#description}} {{description}}{{/description}} {{#required}}(required){{/required}}{{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}
+{{/isQueryParam}}
+{{/allParams}}
+{{#vendorExtensions.x-group-parameters}}
+     * @param  array $queryParams
+{{/vendorExtensions.x-group-parameters}}
+     *
+     * @throws \InvalidArgumentException
+     * @return Request
+     */
+    {{#vendorExtensions.x-group-parameters}}
+    private function build{{operationId}}Request({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): Request
+    {{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}
+    private function build{{operationId}}Request({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): Request
+    {{/vendorExtensions.x-group-parameters}}
+    {
+        {{#vendorExtensions.x-group-parameters}}
+        // unbox the parameters from the associative array
+        {{#allParams}}
+        {{#isQueryParam}}
+        ${{paramName}} = array_key_exists('{{paramName}}', $queryParams) ? $queryParams['{{paramName}}'] : {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
+        {{/isQueryParam}}
+        {{/allParams}}
+
+        {{/vendorExtensions.x-group-parameters}}
+        {{#allParams}}
+        {{#required}}
+        // verify the required parameter '{{paramName}}' is set
+        if (${{paramName}} === null || (is_array(${{paramName}}) && count(${{paramName}}) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter ${{paramName}} when calling {{vendorExtensions.x-client-action}}'
+            );
+        }
+        {{/required}}
+        {{#hasValidation}}
+        {{#maxLength}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}strlen(${{paramName}}) > {{maxLength}}) {
+            throw new \InvalidArgumentException('invalid length for "${{paramName}}" when calling {{classname}}.{{operationId}}, must be smaller than or equal to {{maxLength}}.');
+        }
+        {{/maxLength}}
+        {{#minLength}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}strlen(${{paramName}}) < {{minLength}}) {
+            throw new \InvalidArgumentException('invalid length for "${{paramName}}" when calling {{classname}}.{{operationId}}, must be bigger than or equal to {{minLength}}.');
+        }
+        {{/minLength}}
+        {{#maximum}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}${{paramName}} >{{#exclusiveMaximum}}={{/exclusiveMaximum}} {{maximum}}) {
+            throw new \InvalidArgumentException('invalid value for "${{paramName}}" when calling {{classname}}.{{operationId}}, must be smaller than {{^exclusiveMaximum}}or equal to {{/exclusiveMaximum}}{{maximum}}.');
+        }
+        {{/maximum}}
+        {{#minimum}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}${{paramName}} <{{#exclusiveMinimum}}={{/exclusiveMinimum}} {{minimum}}) {
+            throw new \InvalidArgumentException('invalid value for "${{paramName}}" when calling {{classname}}.{{operationId}}, must be bigger than {{^exclusiveMinimum}}or equal to {{/exclusiveMinimum}}{{minimum}}.');
+        }
+        {{/minimum}}
+        {{#pattern}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}!preg_match("{{{pattern}}}", ${{paramName}})) {
+            throw new \InvalidArgumentException("invalid value for \"{{paramName}}\" when calling {{classname}}.{{operationId}}, must conform to the pattern {{{pattern}}}.");
+        }
+        {{/pattern}}
+        {{#maxItems}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}count(${{paramName}}) > {{maxItems}}) {
+            throw new \InvalidArgumentException('invalid value for "${{paramName}}" when calling {{classname}}.{{operationId}}, number of items must be less than or equal to {{maxItems}}.');
+        }
+        {{/maxItems}}
+        {{#minItems}}
+        if ({{^required}}${{paramName}} !== null && {{/required}}count(${{paramName}}) < {{minItems}}) {
+            throw new \InvalidArgumentException('invalid value for "${{paramName}}" when calling {{classname}}.{{operationId}}, number of items must be greater than or equal to {{minItems}}.');
+        }
+        {{/minItems}}
+
+        {{/hasValidation}}
+        {{/allParams}}
+
+        $resourcePath = '{{{path}}}';
+        $formParams = [];
+        $queryParams = [];
+        $headers = [];
+        $httpBody = '';
+        $multipart = false;
+
+        {{#queryParams}}
+        // query params
+        {{#isExplode}}
+        if (${{paramName}} !== null) {
+        {{#style}}
+            if('form' === '{{style}}' && is_array(${{paramName}})) {
+                foreach(${{paramName}} as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['{{baseName}}'] = ${{paramName}};
+            }
+        {{/style}}
+        {{^style}}
+            $queryParams['{{baseName}}'] = ${{paramName}};
+        {{/style}}
+        }
+        {{/isExplode}}
+        {{^isExplode}}
+        if (is_array(${{paramName}})) {
+            ${{paramName}} = ObjectSerializer::serializeCollection(${{paramName}}, '{{#style}}{{style}}{{/style}}{{^style}}{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}{{/style}}', true);
+        }
+        if (${{paramName}} !== null) {
+            $queryParams['{{baseName}}'] = ${{paramName}};
+        }
+        {{/isExplode}}
+        {{/queryParams}}
+
+        {{#headerParams}}
+        // header params
+        {{#collectionFormat}}
+        if (is_array(${{paramName}})) {
+            ${{paramName}} = ObjectSerializer::serializeCollection(${{paramName}}, '{{collectionFormat}}');
+        }
+        {{/collectionFormat}}
+        if (${{paramName}} !== null) {
+            $headerParams['{{baseName}}'] = ObjectSerializer::toHeaderValue(${{paramName}});
+        }
+        {{/headerParams}}
+
+        {{#pathParams}}
+        // path params
+        {{#collectionFormat}}
+        if (is_array(${{paramName}})) {
+            ${{paramName}} = ObjectSerializer::serializeCollection(${{paramName}}, '{{collectionFormat}}');
+        }
+        {{/collectionFormat}}
+        if (${{paramName}} !== null) {
+            $resourcePath = str_replace(
+                '{' . '{{baseName}}' . '}',
+                ObjectSerializer::toPathValue(${{paramName}}),
+                $resourcePath
+            );
+        }
+        {{/pathParams}}
+
+        {{#bodyParams}}
+        if (${{paramName}}) {
+            $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization(${{paramName}}));
+        }
+        {{/bodyParams}}
+
+        {{#formParams}}
+        // form params
+        if (${{paramName}} !== null) {
+            {{#isFile}}
+            $builder = new MultipartStreamBuilder($this->client->getStreamFactory());
+            $builder->addResource('file', ${{paramName}}->fread(${{paramName}}->getSize()), [
+                'filename' => basename($file->getRealPath()),
+                'headers' => ['Content-Type' => 'application/octet-stream']]
+            );
+            $request = new Request(
+                '{{httpMethod}}',
+                $resourcePath,
+                [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'multipart/form-data; boundary="'.$builder->getBoundary().'"',
+                ]
+            );
+            $request->setStream($builder->build());
+
+            return $request;
+            {{/isFile}}
+        }
+        {{/formParams}}
+
+        $query = \http_build_query($queryParams);
+
+        return new Request(
+            '{{httpMethod}}',
+            $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    {{/operation}}
+}
+{{/operations}}

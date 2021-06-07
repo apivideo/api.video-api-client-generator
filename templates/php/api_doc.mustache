@@ -1,0 +1,66 @@
+# {{invokerPackage}}\Api\{{classname}}{{#description}}
+
+{{description}}{{/description}}
+
+All URIs are relative to {{basePath}}.
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}[**{{vendorExtensions.x-client-action}}()**]({{classname}}.md#{{vendorExtensions.x-client-action}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}{{#operations}}{{#operation}}
+
+## {{vendorExtensions.x-client-action}}()
+
+{{#notes}}
+
+{{{notes}}}{{/notes}}
+
+```php
+{{#vendorExtensions.x-group-parameters}}
+{{vendorExtensions.x-client-action}}({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): {{returnType}}{{^returnType}}void{{/returnType}}
+{{/vendorExtensions.x-group-parameters}}
+{{^vendorExtensions.x-group-parameters}}
+{{vendorExtensions.x-client-action}}({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): {{returnType}}{{^returnType}}void{{/returnType}}
+{{/vendorExtensions.x-group-parameters}}
+```
+
+### Arguments
+
+{{#vendorExtensions.x-group-parameters}}
+
+{{#allParams}}{{#-first}}{{^isQueryParam}}Name | Type | Description  | Example | Notes
+------------- | ------------- | ------------- | ------------- | -------------{{/isQueryParam}}{{/-first}}{{/allParams}}
+{{#allParams}}{{^isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{/isQueryParam}}{{/allParams}}
+
+Note: `$queryParams` argument is an associative array with the keys listed below.
+
+{{#allParams}}{{#-last}}Name | Type | Description  | Example | Notes
+------------- | ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
+{{#allParams}}{{#isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{/isQueryParam}}{{/allParams}}
+
+{{/vendorExtensions.x-group-parameters}}
+
+{{^vendorExtensions.x-group-parameters}}
+
+{{#allParams}}{{#-last}}Name | Type | Description  | Example | Notes
+------------- | ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
+{{#allParams}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{/allParams}}
+
+{{/vendorExtensions.x-group-parameters}}
+
+{{^allParams}}This endpoint does not need any parameter.{{/allParams}}
+
+### Return type
+
+{{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**](../Model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
+
+### Authorization
+
+{{^authMethods}}No authorization required.{{/authMethods}}{{#authMethods}}[{{{name}}}](../../README.md){{^-last}}, {{/-last}}{{/authMethods}}
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md){{/operation}}{{/operations}}

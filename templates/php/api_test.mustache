@@ -1,0 +1,38 @@
+<?php
+
+{{>partial_header}}
+
+namespace {{invokerPackage}}\Tests\Api;
+
+/**
+ * {{classname}}Test Class Doc Comment
+ *
+ * @category Class
+ * @package  {{invokerPackage}}
+ * @author   OpenAPI Generator team
+ * @link     https://openapi-generator.tech
+ */
+{{#operations}}class {{classname}}Test extends AbstractServiceTest
+{
+
+    /**
+     * Setup before running each test case
+     */
+    public function setUp(): void
+    {
+    }
+
+    {{#operation}}
+
+    /**
+     * Test case for {{{operationId}}}
+     *
+     * {{{summary}}}.
+     */
+    public function test{{vendorExtensions.x-client-action}}()
+    {
+        $this->markTestIncomplete('Not implemented');
+    }
+    {{/operation}}
+}
+{{/operations}}

@@ -1,0 +1,59 @@
+<?php declare(strict_types = 1);
+
+namespace ApiVideo\Client;
+
+use ApiVideo\Client\Service\ServiceInterface;
+use ApiVideo\Client\Service\VideoService;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+
+/**
+ * Api.video client
+ */
+class Client
+{
+    /**
+     * @var BaseClient
+     */
+    private $baseClient;
+
+    /**
+     * @var ServiceInterface[]
+     */
+    private $services = [];
+
+    /**
+     * @param string                       $baseUri
+     * @param string|null                  $apiKey
+     * @param ClientInterface              $httpClient
+     * @param RequestFactoryInterface|null $requestFactory
+     * @param StreamFactoryInterface|null  $streamFactory
+     */
+    public function __construct(string $baseUri, ?string $apiKey, ClientInterface $httpClient, ?RequestFactoryInterface $requestFactory = null, ?StreamFactoryInterface $streamFactory = null)
+    {
+        if ($httpClient instanceof RequestFactoryInterface) {
+            $requestFactory = $httpClient;
+        }
+
+        if ($httpClient instanceof StreamFactoryInterface) {
+            $streamFactory = $httpClient;
+        }
+
+        $this->baseClient = new BaseClient($baseUri, $apiKey, $httpClient, $requestFactory, $streamFactory);
+    }
+
+    {{#apiInfo}}{{#apis}}
+    /**
+     * @return \{{invokerPackage}}\Api\{{classname}}
+     */
+    public function {{classVarName}}(): \{{invokerPackage}}\Api\{{classname}}
+    {
+        if (!array_key_exists('{{classVarName}}', $this->services)) {
+            $this->services['{{classVarName}}'] = new \{{invokerPackage}}\Api\{{classname}}($this->baseClient);
+        }
+
+        return $this->services['{{classVarName}}'];
+    }
+    {{/apis}}{{/apiInfo}}
+}

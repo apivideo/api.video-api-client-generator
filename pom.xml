@@ -33,7 +33,8 @@
             <id>php</id>
             <properties>
                 <folder>php</folder>
-                <generatorName>php</generatorName>
+                <generatorName>video.api.client.generator.Php</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
         <profile>
