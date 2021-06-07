@@ -66,7 +66,7 @@ public class Go extends GoClientCodegen {
                 }
 
                 operation.queryParams.forEach(queryParam -> {
-                    if(queryParam.vendorExtensions.containsKey("x-key-value-serialized-param")) additionalImports.add("fmt");
+                    if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
                 });
 
                 // overwrite operationId & nickname values of the operation with the x-client-action

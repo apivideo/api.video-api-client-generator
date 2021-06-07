@@ -159,7 +159,7 @@ paths:
             parameter.
           required: false
           style: deepObject
-          x-key-value-serialized-param: true
+          x-is-deep-object: true
           explode: true
           schema:
             type: object
