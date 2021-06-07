@@ -3526,7 +3526,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/pagination_link'
+            $ref: '#/components/schemas/pagination-link'
       example:
         itemsTotal: 123
         pagesTotal: 7
@@ -4193,6 +4193,7 @@ components:
           description: 'When the token expires, displayed in ISO-8601 format.'
           format: date-time
           example: '2019-12-16T09:25:51+00:00'
+          nullable: true
     authenticate-payload:
       title: ApiKey
       required:
@@ -4639,7 +4640,6 @@ components:
       title: PlayerThemeUploadLogoPayload
       required:
         - file
-        - link
       type: object
       properties:
         file:
@@ -4650,8 +4650,8 @@ components:
         link:
           type: string
           format: string
-          description: The path to the file you want to upload and use as a logo.
-          example: path/to/my/logo/mylogo.jpg
+          description: A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address.
+          example: https://my-company.com
     raw-statistics-list-sessions-response:
       title: VideoSessions
       type: object

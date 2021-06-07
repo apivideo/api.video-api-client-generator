@@ -1,0 +1,48 @@
+{{>partial_header}}
+import pathlib
+from setuptools import setup, find_packages  # noqa: H301
+
+NAME = "{{{projectName}}}"
+VERSION = "{{packageVersion}}"
+{{#apiInfo}}
+{{#apis}}
+{{#-last}}
+# To install the library, run the following
+#
+# python setup.py install
+#
+# prerequisite: setuptools
+# http://pypi.python.org/pypi/setuptools
+
+REQUIRES = [
+  "python_dateutil >= 2.5.3",
+  "setuptools >= 21.0.0",
+  "urllib3 >= 1.25.3"
+]
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
+
+
+setup(
+    name=NAME,
+    version=VERSION,
+    description="{{appShortDescription}}",
+    author="{{#infoName}}{{infoName}}{{/infoName}}{{^infoName}}OpenAPI Generator community{{/infoName}}",
+    author_email="{{#infoEmail}}{{infoEmail}}{{/infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}",
+    url="{{packageUrl}}",
+    keywords=["{{{appName}}}", "sdk", "api client", "video", "live", "hls"],
+    python_requires=">=3.6",
+    install_requires=REQUIRES,
+    packages=find_packages(exclude=["test", "tests"]),
+    include_package_data=True,
+    {{#licenseInfo}}license="{{licenseInfo}}",
+    {{/licenseInfo}}long_description=README,
+    long_description_content_type="text/markdown",
+)
+{{/-last}}
+{{/apis}}
+{{/apiInfo}}

@@ -1,10 +1,9 @@
+artifactVersion: 1.0.5
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
 groupId: video.api
 artifactDescription: api.video java API client
-artifactVersion: 1.0.3
-httpUserAgent: api.video client (java; v:1.0.1; )
 artifactUrl: https://github.com/apivideo/java-api-client
 scmConnection: scm:git:git://github.com/apivideo/java-api-client.git
 scmDeveloperConnection: scm:git:ssh://github.com:apivideo/java-api-client.git
@@ -12,7 +11,7 @@ scmUrl: https://github.com/apivideo/java-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video
-developerEmail: ecosystem-team@api.video
+developerEmail: ecosystem@api.video
 licenseName: MIT License
 licenseUrl: http://www.opensource.org/licenses/mit-license.php
 library: okhttp-gson

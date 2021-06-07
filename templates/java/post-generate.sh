@@ -1,2 +1,3 @@
+cp -R ../../templates/java/statics/.github ./
 cp -R ../../templates/java/statics/* ./
-mvn package test
+mvn package -D skipTests

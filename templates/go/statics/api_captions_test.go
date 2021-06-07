@@ -24,7 +24,7 @@ var captionJSONResponses = []string{
 	}`,
 }
 
-var captionStructs = []Subtitle{
+var captionStructs = []Caption{
 	{
 		Uri:     PtrString("/videos/vi2ZEQZrOQckdYZ3X5sjPse8/captions/en"),
 		Src:     PtrString("https://cdn.api.video/vod/vi2ZEQZrOQckdYZ3X5sjPse8/captions/en.vtt"),
@@ -78,8 +78,8 @@ func TestCaptions_List(t *testing.T) {
 	}
 
 	expected := &CaptionsListResponse{
-		Data:       &captionStructs,
-		Pagination: &paginationStruct,
+		Data:       captionStructs,
+		Pagination: paginationStruct,
 	}
 	if !reflect.DeepEqual(captions, expected) {
 		t.Errorf("Captions.List\n got=%#v\nwant=%#v", captions, expected)
