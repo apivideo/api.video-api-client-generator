@@ -24,12 +24,12 @@ To see the list of available profiles, see the "profile" column in the table of 
 
 | Language | Profile | CI tests | CI package release | Repository |
 | ------- | ------ | ---- | ---- | ---- |
-| Java    |  java      | :heavy_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/java-api-client) |
-| NodeJs/Typescript        | nodejs        | :heavy_check_mark:  | :heavy_check_mark: | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
-| Php | php | :heavy_check_mark:  | - | [php-api-client](https://github.com/apivideo/php-api-client) |
-| C# | csharp | :white_check_mark:  | :white_check_mark: | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
-| Go | go | :heavy_check_mark:  | - |  [go-api-client](https://github.com/apivideo/go-api-client) |
-| Python | python | :heavy_check_mark:  | :heavy_check_mark: | [python-api-client](https://github.com/apivideo/python-api-client) |
+| Java    |  java      | :white_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/java-api-client) |
+| NodeJs/Typescript        | nodejs        | :white_check_mark:  | :white_check_mark: | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
+| Php | php | :white_check_mark:  | - | [php-api-client](https://github.com/apivideo/php-api-client) |
+| C# | csharp | :heavy_check_mark:  | :heavy_check_mark: | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
+| Go | go | :white_check_mark:  | - |  [go-api-client](https://github.com/apivideo/go-api-client) |
+| Python | python | :white_check_mark:  | :white_check_mark: | [python-api-client](https://github.com/apivideo/python-api-client) |
 
 ## Template files
 

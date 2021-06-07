@@ -17,10 +17,10 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name: Install gpg secret key
         run: |
-          cat <(echo -e "${{ secrets.GPG_SECRET_KET }}") | gpg --batch --import
+          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
       - name: Publish to Central Repository
-        env: 
+        env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         run: |
