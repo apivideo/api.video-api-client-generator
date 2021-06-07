@@ -193,7 +193,8 @@ use {{invokerPackage}}\VideoUploader;
         {{#isExplode}}
         if (${{paramName}} !== null) {
         {{#style}}
-            if('form' === '{{style}}' && is_array(${{paramName}})) {
+            {{#vendorExtensions.isForm}}
+            if(is_array(${{paramName}})) {
                 foreach(${{paramName}} as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -201,6 +202,21 @@ use {{invokerPackage}}\VideoUploader;
             else {
                 $queryParams['{{baseName}}'] = ${{paramName}};
             }
+            {{/vendorExtensions.isForm}}
+            {{#vendorExtensions.isDeepObject}}
+            if(is_array(${{paramName}})) {
+                $queryParams["{{paramName}}"] = array();
+                foreach(${{paramName}} as $key => $value) {
+                    $queryParams['{{paramName}}'][$key] = $value;
+                }
+            }
+            else {
+                throw new \InvalidArgumentException('invalid value for "${{paramName}}" when calling {{classname}}.{{operationId}}, must be an array.');
+            }
+            {{/vendorExtensions.isDeepObject}}
+            {{^vendorExtensions.isFormOrDeepObject}}
+            $queryParams['{{baseName}}'] = ${{paramName}};
+            {{/vendorExtensions.isFormOrDeepObject}}
         {{/style}}
         {{^style}}
             $queryParams['{{baseName}}'] = ${{paramName}};
