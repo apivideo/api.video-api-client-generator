@@ -22,14 +22,14 @@ To see the list of available profiles, see the "profile" column in the table of 
 <a name="supported-languages"></a>
 ## Supported languages
 
-| Language | Profile | Status | Repository |
-| ------- | ------ | ---- | ---- |
-| Java    |  java      | released | [java-api-client](https://github.com/apivideo/java-api-client) |
-| NodeJs        | nodejs        | released | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
-| Php | php | to be started | - |
-| C# | csharp | private beta | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
-| Go | go | private beta |  [go-api-client](https://github.com/apivideo/go-api-client) |
-| Python | python | private beta | [python-api-client](https://github.com/apivideo/python-api-client) |
+| Language | Profile | CI tests | CI package release | Repository |
+| ------- | ------ | ---- | ---- | ---- |
+| Java    |  java      | :heavy_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/java-api-client) |
+| NodeJs/Typescript        | nodejs        | :heavy_check_mark:  | :heavy_check_mark: | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
+| Php | php | :heavy_check_mark:  | - | [php-api-client](https://github.com/apivideo/php-api-client) |
+| C# | csharp | :white_check_mark:  | :white_check_mark: | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
+| Go | go | :heavy_check_mark:  | - |  [go-api-client](https://github.com/apivideo/go-api-client) |
+| Python | python | :heavy_check_mark:  | :heavy_check_mark: | [python-api-client](https://github.com/apivideo/python-api-client) |
 
 ## Template files
 
