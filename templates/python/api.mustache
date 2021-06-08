@@ -230,7 +230,7 @@ class {{classname}}(_EndPoint):
             params = self._gather_params(kwargs, location_map, attribute_map, openapi_types, collection_format_map)
 {{#vendorExtensions.x-client-chunk-upload}}
             res = None
-            for content_range, chunk in self._chunk_file(params['file']):
+            for content_range, chunk, isLast in self._chunk_file(params['file']):
                 res = self.api_client.call_api(
                     "{{{path}}}",
                     "{{httpMethod}}",
@@ -240,7 +240,7 @@ class {{classname}}(_EndPoint):
                     body=params['body'],
                     post_params=params['form'],
                     files=chunk,
-                    response_type={{#returnType}}({{{returnType}}},){{/returnType}}{{^returnType}}None{{/returnType}},
+                    response_type={{#returnType}}({{{returnType}}},) if isLast else None{{/returnType}}{{^returnType}}None{{/returnType}},
                     async_req=kwargs['async_req'],
                     _return_http_data_only=kwargs['_return_http_data_only'],
                     _preload_content=kwargs['_preload_content'],
