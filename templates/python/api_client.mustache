@@ -502,7 +502,9 @@ class ApiClient(object):
         for k, v in params.items() if isinstance(params, dict) else params:  # noqa: E501
             if k in collection_formats:
                 collection_format = collection_formats[k]
-                if collection_format == 'multi':
+                if collection_format == 'deepObject':
+                    new_params.extend((k+'['+value+']', v[value]) for value in v)
+                elif collection_format == 'multi':
                     new_params.extend((k, value) for value in v)
                 else:
                     if collection_format == 'ssv':

@@ -95,7 +95,15 @@ export default class {{classname}} {
 
     {{/-first}}
     if ({{paramName}} !== undefined) {
+      {{# vendorExtensions.x-is-deep-object }}
+      if (typeof {{paramName}} !== 'object') {
+          throw new Error(`${ {{paramName}} } is not an object`);
+      }
+      Object.keys({{paramName}}).forEach((k) => urlSearchParams.append("{{baseName}}["+k+"]", ObjectSerializer.serialize({{paramName}}[k], "string", "")));
+      {{/ vendorExtensions.x-is-deep-object }}
+      {{^ vendorExtensions.x-is-deep-object }}
       urlSearchParams.append("{{baseName}}", ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"));
+      {{/ vendorExtensions.x-is-deep-object }}
     }
     {{#-last}}
 

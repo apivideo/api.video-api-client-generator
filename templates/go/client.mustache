@@ -256,7 +256,6 @@ func (c *Client) prepareRangeRequests(
 
 		if fileSize > c.chunkSize && c.chunkSize != 0 {
 			ranges := fmt.Sprintf("bytes %d-%d/%d", startByte, (startByte+bytesread)-1, fileSize)
-			fmt.Println(ranges)
 			req.Header.Set("Content-Range", ranges)
 			startByte = startByte + bytesread
 		}

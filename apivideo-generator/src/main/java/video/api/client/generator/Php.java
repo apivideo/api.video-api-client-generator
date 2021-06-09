@@ -138,6 +138,17 @@ public class Php extends AbstractPhpCodegen {
                 } else {
                     throw new RuntimeException("Missing x-client-action value for operation " + operation.operationId);
                 }
+
+                operation.queryParams.forEach(param -> {
+                    if("form".equals(param.style)) {
+                        param.vendorExtensions.put("isForm", true);
+                        param.vendorExtensions.put("isFormOrDeepObject", true);
+                    }
+                    else if("deepObject".equals(param.style)) {
+                        param.vendorExtensions.put("isDeepObject", true);
+                        param.vendorExtensions.put("isFormOrDeepObject", true);
+                    }
+                });
             }
         }
 

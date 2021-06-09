@@ -128,6 +128,9 @@ public class Python extends PythonClientCodegen {
                     throw new RuntimeException("Missing x-client-action value for operation " + operation.operationId);
                 }
 
+                applyToAllParams(operation, (params) -> params.forEach(pp -> {
+                    if("deepObject".equals(pp.style)) pp.collectionFormat = "deepObject";
+                }));
                 applyToAllParams(operation, (params) -> params.removeIf(pp -> getVendorExtensionBooleanValue(pp, VENDOR_X_CLIENT_IGNORE)) );
                 operation.responses.forEach(response -> populateOperationResponse(operation, response));
             }

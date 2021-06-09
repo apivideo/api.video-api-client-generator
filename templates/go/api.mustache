@@ -246,16 +246,16 @@ func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#r
 		}
 	{{/isCollectionFormatMulti}}
 	{{^isCollectionFormatMulti}}
-    {{#vendorExtensions.x-key-value-serialized-param}}
+    {{#vendorExtensions.x-is-deep-object}}
         if r.{{paramName}} != nil && len(*r.{{paramName}}) > 0 {
             for k, v := range *r.{{paramName}} {
 				localVarQueryParams.Add(fmt.Sprintf("{{baseName}}[%s]", k), v)
             }
         }
-    {{/vendorExtensions.x-key-value-serialized-param}}
-    {{^vendorExtensions.x-key-value-serialized-param}}
+    {{/vendorExtensions.x-is-deep-object}}
+    {{^vendorExtensions.x-is-deep-object}}
 		localVarQueryParams.Add("{{baseName}}", parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
-    {{/vendorExtensions.x-key-value-serialized-param}}
+    {{/vendorExtensions.x-is-deep-object}}
 	{{/isCollectionFormatMulti}}
 	}
 	{{/required}}

@@ -159,7 +159,7 @@ paths:
             parameter.
           required: false
           style: deepObject
-          x-key-value-serialized-param: true
+          x-is-deep-object: true
           explode: true
           schema:
             type: object
@@ -2905,15 +2905,15 @@ paths:
             Metadata and Dynamic Metadata filter. Send an array of key value
             pairs you want to filter sessios with.
           required: false
-          style: form
+          style: deepObject
+          x-is-deep-object: true
           explode: true
           schema:
-            type: array
-            items:
+            type: object
+            additionalProperties:
               type: string
           example: >-
-            [{"key": "Author", "value": "John Doe"}, {"key": "Format", "value":
-            "Tutorial"}]
+            metadata[Author]=John Doe&metadata[Format]=Tutorial
         - $ref: '#/components/parameters/current-page'
         - $ref: '#/components/parameters/page-size'
       responses:
@@ -4835,6 +4835,17 @@ components:
           description: 'When the video session ended, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T12:45:01.109+00'
+        metadata:
+          type: array
+          description: >-
+            A list of key value pairs that you use to provide metadata for your
+            video. These pairs can be made dynamic, allowing you to segment your
+            audience. You can also just use the pairs as another way to tag and
+            categorize your videos.
+          example: '[{"key": "Author", "value": "John Doe"}]'
+          items:
+            $ref: '#/components/schemas/metadata'
+
     video-session-location:
       title: VideoSessionLocation
       type: object
@@ -4847,6 +4858,7 @@ components:
           type: string
           description: The city of the viewer.
           example: Paris
+          nullable: true
       description: The location of the viewer.
     video-session-referrer:
       title: VideoSessionReferrer
@@ -4856,6 +4868,7 @@ components:
           type: string
           description: The link the viewer used to reach the video session.
           example: 'https://api.video'
+          nullable: true
         medium:
           type: string
           description: >-

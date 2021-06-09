@@ -2,5 +2,5 @@ licenseName: MIT
 srcBasePath: src
 variableNamingConvention: camelCase
 invokerPackage: ApiVideo\Client
-artifactVersion: 0.0.1
+artifactVersion: 0.0.2
 developerEmail: ecosystem@api.video
