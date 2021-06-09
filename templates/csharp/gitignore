@@ -360,3 +360,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.openapi-generator
+.openapi-generator-ignore
+post-generate.sh
