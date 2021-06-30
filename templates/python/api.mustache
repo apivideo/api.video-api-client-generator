@@ -2,6 +2,8 @@
 import os  # noqa: F401
 import re  # noqa: F401
 import sys  # noqa: F401
+from types import MethodType
+from types import FunctionType
 
 from {{packageName}}.api_client import ApiClient
 from {{packageName}}.endpoint import EndPoint as _EndPoint
@@ -75,7 +77,10 @@ class {{classname}}(_EndPoint):
                 _request_timeout (float/tuple): timeout setting for this request. If one
                     number provided, it will be total request timeout. It can also
                     be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
+                    Default is None.{{#vendorExtensions.x-client-chunk-upload}}
+                _progress_listener (method): method called each time a chunk is uploaded. Takes 2 parameters:
+                    the first one is the number of bytes uploaded, the second one is the total number of bytes.
+                    Default is None.{{/vendorExtensions.x-client-chunk-upload}}
                 async_req (bool): execute request asynchronously
 
             Returns:
@@ -108,7 +113,8 @@ class {{classname}}(_EndPoint):
                     'async_req',
                     '_preload_content',
                     '_request_timeout',
-                    '_return_http_data_only'
+                    '_return_http_data_only'{{#vendorExtensions.x-client-chunk-upload}},
+                    '_progress_listener',{{/vendorExtensions.x-client-chunk-upload}}
                 ],
 {{#requiredParams}}
 {{#-first}}
@@ -183,7 +189,8 @@ class {{classname}}(_EndPoint):
                 'async_req': (bool,),
                 '_preload_content': (bool,),
                 '_request_timeout': (none_type, int, (int,), [int]),
-                '_return_http_data_only': (bool,)
+                '_return_http_data_only': (bool,){{#vendorExtensions.x-client-chunk-upload}},
+                '_progress_listener': (none_type, MethodType, FunctionType),{{/vendorExtensions.x-client-chunk-upload}}
             }
             attribute_map = {
 {{#allParams}}
@@ -230,7 +237,10 @@ class {{classname}}(_EndPoint):
             params = self._gather_params(kwargs, location_map, attribute_map, openapi_types, collection_format_map)
 {{#vendorExtensions.x-client-chunk-upload}}
             res = None
-            for content_range, chunk, isLast in self._chunk_file(params['file']):
+            progress_listener = kwargs.get('_progress_listener', None)
+            for content_range, chunk, isLast, offset, file_size in self._chunk_file(params['file']):
+                if progress_listener is not None:
+                    progress_listener(offset, file_size)
                 res = self.api_client.call_api(
                     "{{{path}}}",
                     "{{httpMethod}}",
