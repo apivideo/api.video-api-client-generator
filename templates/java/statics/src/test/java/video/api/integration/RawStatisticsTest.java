@@ -47,7 +47,7 @@ public class RawStatisticsTest {
         @Test
         @Order(1)
         public void uploadVideo() throws ApiException {
-            File mp4File = new File(this.getClass().getResource("/assets/sample.mp4").getFile());
+            File mp4File = new File(this.getClass().getResource("/assets/558k.mp4").getFile());
             apiClient.videos().upload(testVideo.getVideoId(), mp4File);
         }
 

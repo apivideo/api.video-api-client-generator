@@ -1,4 +1,4 @@
-artifactVersion: 1.0.6
+artifactVersion: 1.0.7
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
@@ -21,6 +21,9 @@ artifactId: java-api-client
 hideGenerationTimestamp: true
 serializableModel: "true"
 java8: "true"
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
 
 files:
   page.mustache:
