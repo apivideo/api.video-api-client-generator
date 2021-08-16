@@ -32,7 +32,8 @@ public class RawStatisticsTest {
     @DisplayName("list video sessions")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    class UploadByChunk {
+    @Disabled
+    class ListVideoSessions {
         private Video testVideo;
 
         @BeforeAll
