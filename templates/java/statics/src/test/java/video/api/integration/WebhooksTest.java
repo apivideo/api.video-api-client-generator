@@ -44,10 +44,14 @@ public class WebhooksTest {
     public void listWebhooks() throws ApiException {
         Page<Webhook> webhooks = apiClient.webhooks().list().execute();
 
-        assertThat(webhooks.getItems()).hasSize(1);
-        assertThat(webhooks.getItems().get(0).getWebhookId()).isEqualTo(this.webhook.getWebhookId());
-        assertThat(webhooks.getItems().get(0).getEvents()).hasSize(1);
-        assertThat(webhooks.getItems().get(0).getUrl()).isEqualTo("https://webhooks.test-java-api-client");
+        List<Webhook> filteredWebhooks = webhooks.getItems().stream()
+                .filter(webhook -> webhook.getWebhookId().equals(this.webhook.getWebhookId()))
+                .collect(Collectors.toList());
+        
+        assertThat(filteredWebhooks).hasSize(1);
+        assertThat(filteredWebhooks.get(0).getWebhookId()).isEqualTo(this.webhook.getWebhookId());
+        assertThat(filteredWebhooks.get(0).getEvents()).hasSize(1);
+        assertThat(filteredWebhooks.get(0).getUrl()).isEqualTo("https://webhooks.test-java-api-client");
     }
 
     @Test
