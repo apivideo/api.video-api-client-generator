@@ -1,4 +1,4 @@
-packageVersion: 0.0.12
+packageVersion: 0.0.13
 licenseInfo: MIT
 packageName: apivideo
 projectName: api.video
@@ -11,6 +11,9 @@ ignoredFiles:
   - travis.mustache
   - git_push.sh.mustache
   - model_test.mustache
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
 files:
   post-generate.sh:
     destinationFilename: post-generate.sh
