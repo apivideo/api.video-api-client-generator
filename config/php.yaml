@@ -2,5 +2,8 @@ licenseName: MIT
 srcBasePath: src
 variableNamingConvention: camelCase
 invokerPackage: ApiVideo\Client
-artifactVersion: 0.0.2
+artifactVersion: 0.0.4
 developerEmail: ecosystem@api.video
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024

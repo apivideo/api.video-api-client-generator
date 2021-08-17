@@ -195,7 +195,6 @@ public class Php extends AbstractPhpCodegen {
         // Tests resources
         supportingFiles.add(new SupportingFile("tests/resources/caption.vtt", "", "tests/resources/caption.vtt"));
         supportingFiles.add(new SupportingFile("tests/resources/chapters.vtt", "", "tests/resources/chapters.vtt"));
-        supportingFiles.add(new SupportingFile("tests/resources/earth.mp4", "", "tests/resources/earth.mp4"));
         supportingFiles.add(new SupportingFile("tests/resources/logo.png", "", "tests/resources/logo.png"));
         supportingFiles.add(new SupportingFile("tests/resources/thumbnail.jpeg", "", "tests/resources/thumbnail.jpeg"));
 
