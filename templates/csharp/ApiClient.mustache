@@ -27,6 +27,10 @@ namespace {{packageName}}.Client
     /// </summary>
     {{>visibility}} partial class ApiClient
     {
+        private const int DEFAULT_CHUNK_SIZE = {{ defaultChunkSize }};
+        private const int MIN_CHUNK_SIZE = {{ minChunkSize }};
+        private const int MAX_CHUNK_SIZE = {{ maxChunkSize }};
+
         private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -113,13 +117,22 @@ namespace {{packageName}}.Client
         }
 
 
+        private int _uploadChunkSize = DEFAULT_CHUNK_SIZE;
+        
         /// <summary>
         /// Gets or sets the file upload chunk size
         /// </summary>
-        public int UploadChunkSize{
-            get;
-            set;
-        } = 100 * 1024 * 1024;
+        public int UploadChunkSize
+        {
+            get => _uploadChunkSize;
+            set { 
+                if ((value < MIN_CHUNK_SIZE) && (value > MAX_CHUNK_SIZE))
+                {
+                    throw new Exception("Invalid chunk size value. Must be greater than " + MIN_CHUNK_SIZE + " bytes and lower than " + MAX_CHUNK_SIZE + " bytes.");
+                }
+                _uploadChunkSize = value;
+            }
+        }
 
         // Creates and sets up a RestRequest prior to a call.
         private RestRequest PrepareRequest(

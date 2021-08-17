@@ -49,10 +49,10 @@ namespace VideoApiTests.Integration
         [TestMethod]
         public void UploadVideoByChunk()
         {
-            var mp4File = File.OpenRead("../../../resources/assets/sample.mp4");
+            var mp4File = File.OpenRead("../../../resources/assets/10m.mp4");
 
             long fileSize = mp4File.Length;
-            int chunkSize = 1024 * 100;
+            int chunkSize = 1024 * 1024 * 5;
 
             apiClient.SetUploadChunkSize(chunkSize);
             var upl = new UploadProgressListener();
@@ -62,7 +62,7 @@ namespace VideoApiTests.Integration
             upl.totalBytes.Should().Be(fileSize);
             upl.totalUploaded.Should().Be(fileSize);
             upl.chunkCount.Should().Be((int)Math.Ceiling((float)fileSize / chunkSize));
-            upl.seenChunkNums.Should().BeEquivalentTo(1, 2, 3, 4, 5, 6);
+            upl.seenChunkNums.Should().BeEquivalentTo(1, 2, 3);
 
             Console.WriteLine(testVideo);
         }
@@ -70,7 +70,7 @@ namespace VideoApiTests.Integration
         [TestMethod]
         public void UploadVideoWithoutChunk()
         {
-            var mp4File = File.OpenRead("../../../resources/assets/sample.mp4");
+            var mp4File = File.OpenRead("../../../resources/assets/558k.mp4");
 
             long fileSize = mp4File.Length;
             int chunkSize = (int)fileSize + 1;

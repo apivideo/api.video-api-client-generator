@@ -1,4 +1,4 @@
-artifactVersion: 0.0.8
+artifactVersion: 0.0.9
 licenseName: MIT
 sourceFolder: src/
 groupId: video.api
@@ -11,6 +11,9 @@ developerEmail: ecosystem@api.video
 packageName: ApiVideo
 artifactUrl: https://github.com/apivideo/csharp-api-client
 targetFramework: v4.5.2
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
 
 files:
   page.mustache:
