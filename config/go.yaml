@@ -9,6 +9,10 @@ gitRepoId: go-api-client
 ignoredFiles:
   - configuration.mustache
   - response.mustache
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
+
 files:
   post-generate.sh:
     destinationFilename: post-generate.sh

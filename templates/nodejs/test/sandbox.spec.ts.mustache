@@ -32,7 +32,8 @@ describe('ApiVideoClient', () => {
     // Create client for Sandbox and authenticate
     const client = new ApiVideoClient({
         apiKey: process.env.API_KEY,
-        baseUri: process.env.BASE_URI
+        baseUri: process.env.BASE_URI,
+        chunkSize: 5*1024*1024
     });
 
 

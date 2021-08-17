@@ -42,10 +42,10 @@ public class VideosTest {
 
         @Test
         public void uploadVideo() throws ApiException {
-            File mp4File = new File(this.getClass().getResource("/assets/sample.mp4").getFile());
+            File mp4File = new File(this.getClass().getResource("/assets/10m.mp4").getFile());
 
             long fileSize = mp4File.length();
-            int chunkSize = 1024 * 100;
+            int chunkSize = 1024 * 1024 * 5;
 
             apiClient.getHttpClient().setUploadChunkSize(chunkSize);
 
@@ -66,7 +66,7 @@ public class VideosTest {
             assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
             assertThat(chunkCountAtomic.get())
                     .isEqualTo(new Double(Math.ceil((float) fileSize / chunkSize)).longValue());
-            assertThat(seenChunkNums).containsExactly(1, 2, 3, 4, 5, 6);
+            assertThat(seenChunkNums).containsExactly(1, 2, 3);
 
             System.out.println(testVideo);
         }
@@ -91,12 +91,10 @@ public class VideosTest {
 
         @Test
         public void uploadVideo() throws ApiException {
-            File mp4File = new File(this.getClass().getResource("/assets/sample.mp4").getFile());
+            File mp4File = new File(this.getClass().getResource("/assets/558k.mp4").getFile());
 
             long fileSize = mp4File.length();
-            long chunkSize = fileSize + 1;
-
-            apiClient.getHttpClient().setUploadChunkSize(chunkSize);
+            long chunkSize = apiClient.getHttpClient().getUploadChunkSize();
 
             AtomicLong totalUploadedAtomic = new AtomicLong(0);
             AtomicLong totalBytesAtomic = new AtomicLong(0);

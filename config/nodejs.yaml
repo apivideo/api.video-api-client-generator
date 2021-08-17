@@ -1,7 +1,7 @@
 licenseName: MIT
 supportsES6: true
 npmName: "@api.video/nodejs-client"
-npmVersion: 2.0.6
+npmVersion: 2.0.7
 npmDescription: api.video nodejs client
 npmAuthor: api.video ecosystem team
 
@@ -16,6 +16,9 @@ testPackage: test
 #docPackage: doc/
 apiDocFileFolder: doc/api
 modelDocFileFolder: doc/model
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
 
 ignoredFiles:
   # This shouldn't be needed.
