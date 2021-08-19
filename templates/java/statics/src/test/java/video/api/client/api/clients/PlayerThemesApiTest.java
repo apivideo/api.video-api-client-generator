@@ -205,10 +205,6 @@ public class PlayerThemesApiTest extends AbstractApiTest {
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
             assertThat(res.getUpdatedAt()).isEqualTo("2020-01-13T11:12:14+00:00");
-            assertThat(res.getShapeRadius()).isEqualTo(3);
-            assertThat(res.getShapeAspect()).isEqualTo("flat");
-            assertThat(res.getShapeBackgroundTop()).isEqualTo("rgba(50, 50, 50, .7)");
-            assertThat(res.getShapeBackgroundBottom()).isEqualTo("rgba(50, 50, 50, .8)");
             assertThat(res.getText()).isEqualTo("rgba(255, 255, 255, .95)");
             assertThat(res.getLink()).isEqualTo("rgba(255, 0, 0, .95)");
             assertThat(res.getLinkHover()).isEqualTo("rgba(255, 255, 255, .75)");
@@ -266,10 +262,6 @@ public class PlayerThemesApiTest extends AbstractApiTest {
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
             assertThat(res.getUpdatedAt()).isEqualTo("2020-01-13T11:12:14+00:00");
-            assertThat(res.getShapeRadius()).isEqualTo(3);
-            assertThat(res.getShapeAspect()).isEqualTo("flat");
-            assertThat(res.getShapeBackgroundTop()).isEqualTo("rgba(50, 50, 50, .7)");
-            assertThat(res.getShapeBackgroundBottom()).isEqualTo("rgba(50, 50, 50, .8)");
             assertThat(res.getText()).isEqualTo("rgba(255, 255, 255, .95)");
             assertThat(res.getLink()).isEqualTo("rgba(255, 0, 0, .95)");
             assertThat(res.getLinkHover()).isEqualTo("rgba(255, 255, 255, .75)");
@@ -325,10 +317,6 @@ public class PlayerThemesApiTest extends AbstractApiTest {
             assertThat(res.getPlayerId()).isEqualTo("pl45d5vFFGrfdsdsd156dGhh");
             assertThat(res.getCreatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
             assertThat(res.getUpdatedAt()).isEqualTo("2020-01-13T10:09:17+00:00");
-            assertThat(res.getShapeRadius()).isEqualTo(3);
-            assertThat(res.getShapeAspect()).isEqualTo("flat");
-            assertThat(res.getShapeBackgroundTop()).isEqualTo("rgba(50, 50, 50, .7)");
-            assertThat(res.getShapeBackgroundBottom()).isEqualTo("rgba(50, 50, 50, .8)");
             assertThat(res.getText()).isEqualTo("rgba(255, 255, 255, .95)");
             assertThat(res.getLink()).isEqualTo("rgba(255, 0, 0, .95)");
             assertThat(res.getLinkHover()).isEqualTo("rgba(255, 255, 255, .75)");

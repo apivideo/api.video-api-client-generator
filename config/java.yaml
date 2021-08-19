@@ -1,4 +1,4 @@
-artifactVersion: 1.0.7
+artifactVersion: 1.0.8
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
