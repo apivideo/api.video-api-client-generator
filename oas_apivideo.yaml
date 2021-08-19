@@ -2489,11 +2489,6 @@ paths:
                       - playerId: pl4fgtjy4tjyKDK545DRdfg
                         createdAt: '2020-01-13T10:09:17+00:00'
                         updatedAt: '2020-01-13T10:09:17+00:00'
-                        shapeMargin: 10
-                        shapeRadius: 3
-                        shapeAspect: flat
-                        shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-                        shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
                         text: 'rgba(255, 255, 255, .95)'
                         link: 'rgba(255, 0, 0, .95)'
                         linkHover: 'rgba(255, 255, 255, .75)'
@@ -2512,11 +2507,6 @@ paths:
                       - playerId: pl54fgtjy4tjyKDK45DRdfg
                         createdAt: '2020-01-13T10:09:17+00:00'
                         updatedAt: '2020-01-13T10:09:17+00:00'
-                        shapeMargin: 10
-                        shapeRadius: 3
-                        shapeAspect: flat
-                        shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-                        shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
                         text: 'rgba(255, 255, 255, .95)'
                         link: 'rgba(255, 0, 0, .95)'
                         linkHover: 'rgba(255, 255, 255, .75)'
@@ -2597,10 +2587,6 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T10:09:17+00:00'
-                    shapeRadius: 3
-                    shapeAspect: flat
-                    shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-                    shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
                     text: 'rgba(255, 255, 255, .95)'
                     link: 'rgba(255, 0, 0, .95)'
                     linkHover: 'rgba(255, 255, 255, .75)'
@@ -2651,10 +2637,6 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T11:12:14+00:00'
-                    shapeRadius: 3
-                    shapeAspect: flat
-                    shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-                    shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
                     text: 'rgba(255, 255, 255, .95)'
                     link: 'rgba(255, 0, 0, .95)'
                     linkHover: 'rgba(255, 255, 255, .75)'
@@ -2761,10 +2743,6 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T11:12:14+00:00'
-                    shapeRadius: 3
-                    shapeAspect: flat
-                    shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
-                    shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
                     text: 'rgba(255, 255, 255, .95)'
                     link: 'rgba(255, 0, 0, .95)'
                     linkHover: 'rgba(255, 255, 255, .75)'
@@ -3788,21 +3766,6 @@ components:
           description: 'When the player was last updated, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:18:47+00:00'
-        shapeMargin:
-          type: integer
-          description: Deprecated
-        shapeRadius:
-          type: integer
-          description: Deprecated
-        shapeAspect:
-          type: string
-          description: Deprecated
-        shapeBackgroundTop:
-          type: string
-          description: Deprecated
-        shapeBackgroundBottom:
-          type: string
-          description: Deprecated
         linkActive:
           type: string
           description: Deprecated
