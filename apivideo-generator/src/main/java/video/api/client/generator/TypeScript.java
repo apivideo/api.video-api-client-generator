@@ -1,6 +1,7 @@
 package video.api.client.generator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Sets;
 import io.swagger.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.ArraySchema;
@@ -164,6 +165,79 @@ public class TypeScript extends DefaultCodegen {
     }
 
     @Override
+    public void setParameterExampleValue(CodegenParameter codegenParameter) {
+        super.setParameterExampleValue((codegenParameter));
+        if(codegenParameter.example == null) {
+            if(codegenParameter.isBodyParam) {
+                List<CodegenProperty> vars = codegenParameter.vars;
+                StringBuilder stringBuilder = new StringBuilder("{\n");
+                vars.stream().forEach(v -> {
+                    stringBuilder.append("\t\t\t");
+                    stringBuilder.append(v.name);
+                    stringBuilder.append(": ");
+                    stringBuilder.append(getPropertyExample(v));
+                    stringBuilder.append(",");
+                    if(v.description != null) {
+                        stringBuilder.append(" // ");
+                        stringBuilder.append(v.description);
+                    }
+                    stringBuilder.append("\n");
+                });
+                stringBuilder.append("\t\t}");
+                codegenParameter.example = stringBuilder.toString();
+            }
+        }
+    }
+
+
+    private String getPropertyExample(CodegenProperty prop) {
+
+        if(prop.example != null && !prop.example.equals("null")) {
+            if(prop.isFile || prop.isDateTime || prop.isDateTime || prop.isUuid || prop.isUri || prop.isString) {
+                return "\"" + prop.example + "\"";
+            }
+            if(prop.isArray) {
+                System.out.println(prop.example);
+            }
+            return prop.example;
+        }
+        if (prop.vendorExtensions != null && prop.vendorExtensions.containsKey("x-example")) {
+            return io.swagger.v3.core.util.Json.pretty(prop.vendorExtensions.get("x-example"));
+        } else if (Boolean.TRUE.equals(prop.isBoolean)) {
+            return "true";
+        } else if (Boolean.TRUE.equals(prop.isLong)) {
+            return "789";
+        } else if (Boolean.TRUE.equals(prop.isInteger)) {
+            return "56";
+        } else if (Boolean.TRUE.equals(prop.isFloat)) {
+            return "3.4";
+        } else if (Boolean.TRUE.equals(prop.isDouble)) {
+            return "1.2";
+        } else if (Boolean.TRUE.equals(prop.isNumber)) {
+            return "8.14";
+        } else if (Boolean.TRUE.equals(prop.isBinary)) {
+            return "BINARY_DATA_HERE";
+        } else if (Boolean.TRUE.equals(prop.isByteArray)) {
+            return "BYTE_ARRAY_DATA_HERE";
+        } else if (Boolean.TRUE.equals(prop.isFile)) {
+            return "\"/path/to/file.txt\"";
+        } else if (Boolean.TRUE.equals(prop.isDate)) {
+            return "\"2013-10-20\"";
+        } else if (Boolean.TRUE.equals(prop.isDateTime)) {
+            return "\"2013-10-20T19:20:30+01:00\"";
+        } else if (Boolean.TRUE.equals(prop.isUuid)) {
+            return "\"38400000-8cf0-11bd-b23e-10b96e4ef00d\"";
+        } else if (Boolean.TRUE.equals(prop.isUri)) {
+            return "\"https://openapi-generator.tech\"";
+        } else if (Boolean.TRUE.equals(prop.isString)) {
+            return "\"" + prop.name + "_example\"";
+        } else if (Boolean.TRUE.equals(prop.isFreeFormObject)) {
+            return "Object";
+        }
+        return "null";
+    }
+
+    @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
@@ -208,6 +282,7 @@ public class TypeScript extends DefaultCodegen {
         }
         return legacyPostProcessOperationsWithModels(objs, allModels);
     }
+
 
     /**
      * - Move up some attributes from the operation to the response

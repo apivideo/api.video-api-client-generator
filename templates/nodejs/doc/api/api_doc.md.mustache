@@ -33,13 +33,8 @@ Method | HTTP request | Description
 
     {{#allParams}}
         {{^vendorExtensions.x-client-doc-hidden}}
-        const {{{paramName}}} = '{{{example}}}'; // {{{description}}}
+        {{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
         {{/vendorExtensions.x-client-doc-hidden}}
-        {{#isModel}}
-            {{#vars}}
-                {{{paramName}}}.{{setter}}({{#unescape}}{{example}}{{/unescape}}); // {{ unescapedDescription }}
-            {{/vars}}
-        {{/isModel}}
     {{/allParams}}
 
     {{#returnType}}
