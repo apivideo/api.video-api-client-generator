@@ -269,10 +269,6 @@ public class TypeScript extends DefaultCodegen {
                                 .forEach(p -> p.vendorExtensions.put("x-client-doc-hidden", true))
                 );
 
-                if(getVendorExtensionBooleanValue(operation, "x-client-paginated")) {
-                    handlePagination(allModels, operation);
-                }
-
                 operation
                     .allParams
                     .stream()
@@ -287,28 +283,7 @@ public class TypeScript extends DefaultCodegen {
         return legacyPostProcessOperationsWithModels(objs, allModels);
     }
 
-    private void handlePagination(List<Object> allModels, CodegenOperation operation) {
-        Optional<Map> map = allModels.stream().filter(m -> ((CodegenModel) ((Map) m).get("model")).classname.equals(operation.returnType)).map(a -> (Map) a).findFirst();
-        map.ifPresent(a -> {
-            CodegenModel model = (CodegenModel) a.get("model");
-            System.out.println(model);
-            model.allVars.stream().filter(v -> v.name.equals("data")).findFirst().ifPresent(codegenProperty -> {
-                Map<String, String> paginationProperties = new HashMap<>();
-                paginationProperties.put("type", codegenProperty.complexType);
-                paginationProperties.put("getter", codegenProperty.getter);
-                operation.vendorExtensions.put("x-pagination", paginationProperties);
-            });
-        });
-    }
 
-    private boolean getVendorExtensionBooleanValue(CodegenParameter parameter, String name) {
-        return parameter.vendorExtensions.containsKey(name) && (boolean) parameter.vendorExtensions.get(name);
-    }
-
-    private boolean getVendorExtensionBooleanValue(CodegenOperation operation, String name) {
-        return operation.vendorExtensions.containsKey(name) && (boolean) operation.vendorExtensions.get(name);
-    }
-    
     /**
      * - Move up some attributes from the operation to the response
      * - Generate payload JSON files from the operation response example (to be used in unit tests)

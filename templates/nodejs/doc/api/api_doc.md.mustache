@@ -38,7 +38,7 @@ Method | HTTP request | Description
     {{/allParams}}
 
     {{#returnType}}
-        // {{#vendorExtensions.x-client-paginated}}Page<{{vendorExtensions.x-pagination.type}}>{{/vendorExtensions.x-client-paginated}}{{^vendorExtensions.x-client-paginated}}{{returnType}}{{/vendorExtensions.x-client-paginated}}
+        // {{returnType}}
     {{/returnType}}
     {{^vendorExtensions.x-group-parameters}}
         const result = await client.{{classVarName}}.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});
@@ -75,8 +75,7 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
 {{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type
-{{#returnType}}{{#vendorExtensions.x-client-paginated}}[**Page**](../model/pagination.md)<[**{{vendorExtensions.x-pagination.type}}**](../model/{{vendorExtensions.x-pagination.type}}.md)>{{/vendorExtensions.x-client-paginated}}{{/returnType}}
-{{^vendorExtensions.x-client-paginated}}{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}{{/vendorExtensions.x-client-paginated}}
+{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
 
 ### HTTP request headers
 
