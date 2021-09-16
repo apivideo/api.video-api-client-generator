@@ -59,7 +59,7 @@ Method | HTTP request | Description
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
-{{#allParams}} **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}[**{{dataType}}**]({{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{^isContainer}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}{{/isContainer}}{{#allowableValues}} [enum: {{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}}
+{{#allParams}} **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{^isContainer}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}{{/isContainer}}{{#allowableValues}} [enum: {{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}}
 {{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}
 
 ### Upload chunks
@@ -75,7 +75,7 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
 {{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type
-{{#returnType}}{{#vendorExtensions.x-client-paginated}}[**Page**](pagination.md)<[**{{vendorExtensions.x-pagination.type}}**]({{vendorExtensions.x-pagination.type}}.md)>{{/vendorExtensions.x-client-paginated}}{{/returnType}}
+{{#returnType}}{{#vendorExtensions.x-client-paginated}}[**Page**](../model/pagination.md)<[**{{vendorExtensions.x-pagination.type}}**](../model/{{vendorExtensions.x-pagination.type}}.md)>{{/vendorExtensions.x-client-paginated}}{{/returnType}}
 {{^vendorExtensions.x-client-paginated}}{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}{{/vendorExtensions.x-client-paginated}}
 
 ### HTTP request headers
