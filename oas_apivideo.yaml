@@ -4315,13 +4315,6 @@ components:
           example: '[{"key": "Author", "value": "John Doe"}]'
           items:
             $ref: '#/components/schemas/metadata'
-        publishedAt:
-          type: string
-          description: >-
-            The API uses ISO-8601 format for time, and includes 3 places for
-            milliseconds.
-          format: date-time
-          example: '2020-07-14T23:36:18.598Z'
       example:
         title: Maths video
         description: An amazing video explaining string theory.
