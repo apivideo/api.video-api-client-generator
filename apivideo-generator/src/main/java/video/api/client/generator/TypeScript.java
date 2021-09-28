@@ -243,6 +243,14 @@ public class TypeScript extends DefaultCodegen {
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
+
+            if (ops.stream().anyMatch(o -> o.vendorExtensions.containsKey("x-client-chunk-upload"))) {
+                List<Map<String, Object>> imports = (List<Map<String, Object>>) objs.get("imports");
+                Map<String, Object> imp = new HashMap<>();
+                imp.put("import", "src/model.UploadProgressEvent");
+                imp.put("classname", "BadRequest");
+                imports.add(imp);
+            }
             // if all operations of a path have x-client-hidden, add x-client-hidden on the path
             if (ops.stream().allMatch(op -> Boolean.TRUE.equals(op.vendorExtensions.get(VENDOR_X_CLIENT_HIDDEN)))) {
                 objs.put(VENDOR_X_CLIENT_HIDDEN, true);

@@ -60,7 +60,7 @@ Method | HTTP request | Description
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
 {{#allParams}} **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{^isContainer}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}{{/isContainer}}{{#allowableValues}} [enum: {{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}}
-{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}
+{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}**progressListener?** | **(event: UploadProgressEvent) => void \| undefined** | Optional upload progress listener | [default to undefined]
 
 ### Upload chunks
 
