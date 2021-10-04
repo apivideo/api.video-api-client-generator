@@ -4120,6 +4120,14 @@ components:
       title: Quality
       type: object
       properties:
+        type:
+          type: string
+          description: >-
+            The type of video (hls or mp4).
+          example: hls
+          enum:
+            - hls
+            - mp4
         quality:
           type: string
           description: >-
