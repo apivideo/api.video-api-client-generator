@@ -73,7 +73,6 @@ use {{invokerPackage}}\VideoUploader;
         {{#vendorExtensions.x-client-chunk-upload}}
         $videoUploader = new VideoUploader($this->client);
         $model = $videoUploader->{{vendorExtensions.x-client-action}}({{^vendorExtensions.x-group-parameters}}{{#allParams}}${{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}$queryParams{{/vendorExtensions.x-group-parameters}});
-        ModelPreprocessor::execute($model);
 
         return $model;
         {{/vendorExtensions.x-client-chunk-upload}}
@@ -82,7 +81,6 @@ use {{invokerPackage}}\VideoUploader;
 
         {{#returnType}}
         $model = new {{returnType}}($this->client->request($request));
-        ModelPreprocessor::execute($model);
 
         return $model;
         {{/returnType}}

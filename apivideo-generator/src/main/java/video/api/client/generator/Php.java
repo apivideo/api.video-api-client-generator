@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.*;
+import java.util.function.Consumer;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 
@@ -123,6 +124,17 @@ public class Php extends AbstractPhpCodegen {
         super.preprocessOpenAPI(openAPI);
     }
 
+    private void applyToAllParams(CodegenOperation operation, Consumer<List<CodegenParameter>> consumer) {
+        if (operation.allParams != null) {
+            consumer.accept(operation.headerParams);
+            consumer.accept(operation.bodyParams);
+            consumer.accept(operation.pathParams);
+            consumer.accept(operation.formParams);
+            consumer.accept(operation.cookieParams);
+            consumer.accept(operation.allParams);
+        }
+    }
+
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
 
@@ -156,6 +168,25 @@ public class Php extends AbstractPhpCodegen {
     }
 
     @Override
+    public Map<String, Object> postProcessModels(Map<String, Object> objs) {
+        Map<String, Object> res = super.postProcessModels(objs);
+        List<Map> models = (List<Map>) res.get("models");
+
+        models.forEach(model -> {
+            ((CodegenModel)model.get("model")).vars.forEach(var -> {
+                if(var.isArray && var.complexType != null) {
+                    var.vendorExtensions.put("x-type-complex-array", true);
+                } else if(var.isPrimitiveType) {
+                    var.vendorExtensions.put("x-type-primitive", true);
+                } else {
+                    var.vendorExtensions.put("x-type-other", true);
+                }
+            });
+        });
+        return res;
+    }
+
+    @Override
     public void processOpts() {
         super.processOpts();
 
@@ -164,7 +195,6 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("src/Client.mustache", toSrcPath(invokerPackage, srcBasePath), "Client.php"));
         supportingFiles.add(new SupportingFile("src/BaseClient.mustache", toSrcPath(invokerPackage, srcBasePath), "BaseClient.php"));
         supportingFiles.add(new SupportingFile("src/ObjectSerializer.mustache", toSrcPath(invokerPackage, srcBasePath), "ObjectSerializer.php"));
-        supportingFiles.add(new SupportingFile("src/ModelPreprocessor.php", toSrcPath(invokerPackage, srcBasePath), "ModelPreprocessor.php"));
         supportingFiles.add(new SupportingFile("src/VideoUploader.php", toSrcPath(invokerPackage, srcBasePath), "VideoUploader.php"));
 
         // Exceptions
