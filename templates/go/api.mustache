@@ -230,6 +230,8 @@ func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#r
 	}
 	{{/isCollectionFormatMulti}}
 	{{^isCollectionFormatMulti}}
+
+        localVarQueryParams.Add("{{baseName}}", parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
 	{{/isCollectionFormatMulti}}
 	{{/required}}
 	{{^required}}
