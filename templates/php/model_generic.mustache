@@ -77,9 +77,10 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
 
         {{/parentSchema}}
         {{#vars}}
-        $this->container['{{name}}'] = $data['{{name}}'] ?? {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
-        {{/vars}}
-        {{#discriminator}}
+        {{#vendorExtensions.x-type-other}}$this->container['{{name}}'] = isset($data['{{name}}']) ? new {{complexType}}($data['{{name}}']) : {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
+{{/vendorExtensions.x-type-other}}{{#vendorExtensions.x-type-primitive}}$this->container['{{name}}'] = $data['{{name}}'] ?? {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
+{{/vendorExtensions.x-type-primitive}}{{#vendorExtensions.x-type-complex-array}}$this->container['{{name}}'] = isset($data['{{name}}']) ?  array_map(function(array $value): {{complexType}} { return new {{complexType}}($value); }, $data['{{name}}']) : {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
+{{/vendorExtensions.x-type-complex-array}}{{/vars}}{{#discriminator}}
 
         // Initialize discriminator property with the model name.
         $this->container['{{discriminatorName}}'] = static::$openAPIModelName;
