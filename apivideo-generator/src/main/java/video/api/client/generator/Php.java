@@ -153,6 +153,7 @@ public class Php extends AbstractPhpCodegen {
 
                 operation.queryParams.forEach(param -> {
                     if("form".equals(param.style)) {
+                        param.vendorExtensions.put("isArray", param.isArray);
                         param.vendorExtensions.put("isForm", true);
                         param.vendorExtensions.put("isFormOrDeepObject", true);
                     }

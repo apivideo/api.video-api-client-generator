@@ -187,19 +187,17 @@ use {{invokerPackage}}\VideoUploader;
         $multipart = false;
 
         {{#queryParams}}
-        // query params
+        // {{baseName}} query params
         {{#isExplode}}
         if (${{paramName}} !== null) {
         {{#style}}
             {{#vendorExtensions.isForm}}
-            if(is_array(${{paramName}})) {
-                foreach(${{paramName}} as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['{{baseName}}'] = ${{paramName}};
-            }
+            {{#vendorExtensions.isArray}}
+            $queryParams['{{baseName}}'] = is_array(${{paramName}}) ? implode(',', ${{paramName}}) : ${{paramName}};
+            {{/vendorExtensions.isArray}}
+            {{^vendorExtensions.isArray}}
+            $queryParams['{{baseName}}'] = ${{paramName}};
+            {{/vendorExtensions.isArray}}
             {{/vendorExtensions.isForm}}
             {{#vendorExtensions.isDeepObject}}
             if(is_array(${{paramName}})) {
@@ -229,8 +227,8 @@ use {{invokerPackage}}\VideoUploader;
             $queryParams['{{baseName}}'] = ${{paramName}};
         }
         {{/isExplode}}
-        {{/queryParams}}
 
+        {{/queryParams}}
         {{#headerParams}}
         // header params
         {{#collectionFormat}}
@@ -242,7 +240,6 @@ use {{invokerPackage}}\VideoUploader;
             $headerParams['{{baseName}}'] = ObjectSerializer::toHeaderValue(${{paramName}});
         }
         {{/headerParams}}
-
         {{#pathParams}}
         // path params
         {{#collectionFormat}}
