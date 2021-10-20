@@ -36,6 +36,34 @@ describe('ApiVideoClient', () => {
         chunkSize: 5*1024*1024
     });
 
+    // Create
+    const streamUploadVideo = 'Nodejs - stream upload';
+    const { videoId: streamUploadVideoId } = await client.videos.create({
+      title: streamUploadVideo,
+    });
+
+    // Stream upload
+    const streamUploadSession = client.videos.createUploadStreamSession(streamUploadVideoId);
+    await streamUploadSession.uploadPart("test/data/10m.mp4.part.a");
+    await streamUploadSession.uploadPart("test/data/10m.mp4.part.b");
+    await streamUploadSession.uploadLastPart("test/data/10m.mp4.part.c")
+      .then((video) => {
+        expect(video.title).to.equals(streamUploadVideo);
+      });
+    await client.videos.delete(streamUploadVideoId);
+
+
+    // Create an upload token
+    const { token: streamUploadToken } = await client.uploadTokens.createToken();
+    // Stream upload
+    const streamUploadWithTokenSession = client.videos.createUploadWithUploadTokenStreamSession(streamUploadToken as string);
+    await streamUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.a");
+    await streamUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.b");
+    await streamUploadWithTokenSession.uploadLastPart("test/data/10m.mp4.part.c")
+      .then((video) => {
+        expect(video.title).to.equals("10m.mp4.part.a");
+        client.videos.delete(video.videoId);
+      });
 
     // Create
     const videoTitle = 'Course #4 - Part B';
