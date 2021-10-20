@@ -9,6 +9,7 @@ import org.openapitools.codegen.CodegenParameter;
 import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.JavaClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
+import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -150,6 +151,7 @@ public class Java extends JavaClientCodegen {
     public void processOpts() {
         super.processOpts();
         additionalProperties.put("unescape", new UnescapeLambda());
+        additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("indented_16", new IndentedLambda(16, " "));
 
         List<String> skippedFiles = Arrays.asList(

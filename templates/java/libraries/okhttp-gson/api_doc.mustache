@@ -82,6 +82,22 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
     .{{{paramName}}}({{{paramName}}}){{/optionalParams}}
     .execute();{{/vendorExtensions.x-group-parameters}}
 ```
+
+### Stream uploads
+
+TODO
+
+```java
+{{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};
+
+{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession session = apiVideoClient.create{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
+
+session.uploadPart(new File("sample.mp4.part1"));
+session.uploadPart(new File("sample.mp4.part2"));
+// ...
+{{returnType}} result = session.uploadLastPart(new File("sample.mp4.partn"));
+```
+
 {{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type

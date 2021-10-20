@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
+import video.api.client.api.clients.VideosApi;
 import video.api.client.api.models.*;
 
 import java.io.File;
@@ -74,6 +75,69 @@ public class VideosTest {
         @AfterAll
         public void deleteVideo() throws ApiException {
             apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("stream upload")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class StreamUpload {
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] stream upload")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
+            File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
+            File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
+
+            VideosApi.UploadStreamSession uploadStreamSession = apiClient.videos().createUploadStreamSession(this.testVideo.getVideoId());
+
+            uploadStreamSession.uploadPart(part1);
+            uploadStreamSession.uploadPart(part2);
+            uploadStreamSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("stream upload with upload token")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class StreamUploadWithUploadToken {
+        private UploadToken uploadToken;
+        private Video result;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
+            File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
+            File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
+
+            VideosApi.UploadWithUploadTokenStreamSession uploadStreamSession = apiClient.videos()
+                    .createUploadWithUploadTokenStreamSession(this.uploadToken.getToken());
+
+            uploadStreamSession.uploadPart(part1);
+            uploadStreamSession.uploadPart(part2);
+            this.result = uploadStreamSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(result.getVideoId());
         }
     }
 
