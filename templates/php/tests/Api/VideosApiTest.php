@@ -3,6 +3,7 @@
 namespace ApiVideo\Client\Tests\Api;
 
 use ApiVideo\Client\Client;
+use ApiVideo\Client\Model\TokenCreationPayload;
 use ApiVideo\Client\Model\VideoCreationPayload;
 use ApiVideo\Client\Model\VideosListResponse;
 use ApiVideo\Client\Model\VideoThumbnailPickPayload;
@@ -68,6 +69,56 @@ class VideosApiTest extends AbstractApiTest
         $videoStatus = $this->client->videos()->getStatus($uploadedVideo->getVideoId());
 
         $this->assertContains($videoStatus->getIngest()->getStatus(), ['uploaded', 'uploading']);
+    }
+
+    public function testStreamUpload() {
+        $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
+        $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
+        $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
+
+        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Stream upload'));
+
+        $session = $this->client->videos()->createUploadStreamSession($createdVideo->getVideoId());
+
+        $session->uploadPart($part1);
+        $session->uploadPart( $part2);
+        $video = $session->uploadLastPart($part3);
+
+        $this->assertEquals('Stream upload', $video->getTitle());
+    }
+
+    public function testStreamUploadWithUploadToken() {
+        $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
+        $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
+        $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
+
+        $uploadToken = $this->client->uploadTokens()->createToken(new TokenCreationPayload())->getToken();
+
+        $session = $this->client->videos()->createUploadWithUploadTokenStreamSession($uploadToken);
+
+        $session->uploadPart($part1);
+        $session->uploadPart( $part2);
+        $video = $session->uploadLastPart($part3);
+
+        $this->assertEquals('10m.mp4.part.a', $video->getTitle());
+    }
+
+    public function testStreamUploadWithUploadTokenExistingVideo() {
+        $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
+        $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
+        $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
+
+        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Stream upload using upload token'));
+        $uploadToken = $this->client->uploadTokens()->createToken(new TokenCreationPayload())->getToken();
+
+        print_r($uploadToken);
+        $session = $this->client->videos()->createUploadWithUploadTokenStreamSession($uploadToken, $createdVideo->getVideoId());
+
+        $session->uploadPart($part1);
+        $session->uploadPart( $part2);
+        $video = $session->uploadLastPart($part3);
+
+        $this->assertEquals('Stream upload using upload token', $video->getTitle());
     }
 
     public function testTags() {

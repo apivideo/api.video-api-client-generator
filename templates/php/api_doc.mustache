@@ -15,14 +15,13 @@ Method | HTTP request | Description
 
 {{{notes}}}{{/notes}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+
 ```php
-{{#vendorExtensions.x-group-parameters}}
-{{vendorExtensions.x-client-action}}({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): {{returnType}}{{^returnType}}void{{/returnType}}
-{{/vendorExtensions.x-group-parameters}}
-{{^vendorExtensions.x-group-parameters}}
-{{vendorExtensions.x-client-action}}({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): {{returnType}}{{^returnType}}void{{/returnType}}
-{{/vendorExtensions.x-group-parameters}}
+{{#unescape}}{{this}}{{/unescape}}
 ```
+{{/vendorExtensions.code-sample}}
 
 ### Arguments
 
@@ -57,10 +56,5 @@ Note: `$queryParams` argument is an associative array with the keys listed below
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**](../Model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
 
-### Authorization
 
-{{^authMethods}}No authorization required.{{/authMethods}}{{#authMethods}}[{{{name}}}](../../README.md){{^-last}}, {{/-last}}{{/authMethods}}
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md){{/operation}}{{/operations}}
+{{/operation}}{{/operations}}

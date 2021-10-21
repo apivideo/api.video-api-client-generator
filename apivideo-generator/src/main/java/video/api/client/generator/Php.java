@@ -12,6 +12,7 @@ import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.meta.features.*;
 import org.openapitools.codegen.languages.AbstractPhpCodegen;
+import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -27,6 +28,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 
@@ -144,6 +146,20 @@ public class Php extends AbstractPhpCodegen {
 
 
             for (CodegenOperation operation : ops) {
+                if(operation.vendorExtensions.containsKey("x-readme")) {
+                    Map<String, List> xReadme = (Map<String, List>) operation.vendorExtensions.get("x-readme");
+                    if(xReadme.containsKey("code-samples")) {
+                        List<Map<String, String>> codeSamples = xReadme.get("code-samples");
+                        Optional<Map<String, String>> first = codeSamples.stream().filter(codeSample -> "php".equals(codeSample.get("language"))).findFirst();
+                        first.ifPresent(map -> operation.vendorExtensions.put("code-sample", map.get("code")));
+                    }
+                }
+
+                operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()
+                        .filter(p -> Boolean.TRUE.equals(p.vendorExtensions.get("x-client-copy-from-response")))
+                        .peek(a -> a.vendorExtensions.put("getter", toGetter(a.paramName)))
+                        .collect(Collectors.toList()));
+
                 // overwrite operationId & nickname values of the operation with the x-client-action
                 if(StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
                     operation.operationId = camelize((String) operation.vendorExtensions.get("x-client-action"));
@@ -191,12 +207,16 @@ public class Php extends AbstractPhpCodegen {
     public void processOpts() {
         super.processOpts();
 
+        additionalProperties.put("titlecase", new TitlecaseLambda());
+        additionalProperties.put("unescape", new UnescapeLambda());
+
         supportingFiles.add(new SupportingFile("src/Request.php", toSrcPath(invokerPackage, srcBasePath), "Request.php"));
         supportingFiles.add(new SupportingFile("src/Authenticator.php", toSrcPath(invokerPackage, srcBasePath), "Authenticator.php"));
         supportingFiles.add(new SupportingFile("src/Client.mustache", toSrcPath(invokerPackage, srcBasePath), "Client.php"));
         supportingFiles.add(new SupportingFile("src/BaseClient.mustache", toSrcPath(invokerPackage, srcBasePath), "BaseClient.php"));
         supportingFiles.add(new SupportingFile("src/ObjectSerializer.mustache", toSrcPath(invokerPackage, srcBasePath), "ObjectSerializer.php"));
         supportingFiles.add(new SupportingFile("src/VideoUploader.php", toSrcPath(invokerPackage, srcBasePath), "VideoUploader.php"));
+        supportingFiles.add(new SupportingFile("src/StreamUploadSession.php", toSrcPath(invokerPackage, srcBasePath), "StreamUploadSession.php"));
 
         // Exceptions
         supportingFiles.add(new SupportingFile("src/Exception/ExceptionInterface.php", toSrcPath(invokerPackage, srcBasePath), "Exception/ExceptionInterface.php"));

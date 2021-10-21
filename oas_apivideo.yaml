@@ -360,6 +360,33 @@ paths:
                           max: 100
       security:
         - bearerAuth: []
+      x-readme:
+        code-samples:
+          - language: php
+            code: |
+              <?php
+
+              require __DIR__ . '/vendor/autoload.php';
+
+              $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+              $client = new \ApiVideo\Client(
+                                  'https://sandbox.api.video',
+                                  'YOUR_API_TOKEN',
+                                  $httpClient
+                              );
+
+              // list all videos (all pages)
+              $allVideos = [];
+              do {
+                  $currentPage = $client->videos()->list([]);
+                  $allVideos = array_merge($allVideos, $currentPage->getData());
+              } while($currentPage->getPagination()->getCurrentPage() < $currentPage->getPagination()->getPagesTotal());
+
+              // list videos that have all the given tags (only first results page)
+              $videosWithTag = $client->videos()->list(['tags' => ['TAG2','TAG1']]);
+
+              // list videos that have all the given metadata values (only first results page)
+              $videosWithMetadata = $client->videos()->list(['metadata' => ['key1' => 'key1value1', 'key2' => 'key2value1']]);
     post:
       tags:
         - Videos
@@ -518,6 +545,31 @@ paths:
                         name: metadata
       security:
         - bearerAuth: []
+      x-readme:
+        code-samples:
+          - language: php
+            code: |
+              <?php
+
+              use ApiVideo\Client\Model\Metadata;
+              use ApiVideo\Client\Model\VideoCreationPayload;
+
+              require __DIR__ . '/vendor/autoload.php';
+
+              $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+              $client = new \ApiVideo\Client(
+                                  'https://sandbox.api.video',
+                                  'YOUR_API_TOKEN',
+                                  $httpClient
+                              );
+
+              $myVideo = $client->videos()->create((new VideoCreationPayload())
+                  ->setTitle('Video B')
+                  ->setTags(array("TAG1", "TAG2"))
+                  ->setMetadata(array(
+                      new Metadata(['key' => 'key1', 'value' => 'key1value1']),
+                      new Metadata(['key' => 'key2', 'value' => 'key2value1']))));
+
   '/videos/{videoId}/source':
     post:
       tags:
@@ -653,6 +705,38 @@ paths:
                     status: 404
       security:
         - bearerAuth: []
+      x-readme:
+        code-samples:
+          - language: php
+            code: |
+              <?php
+
+              use ApiVideo\Client\Model\VideoCreationPayload;
+
+              require __DIR__ . '/vendor/autoload.php';
+
+              $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+              $client = new \ApiVideo\Client(
+                                  'https://sandbox.api.video',
+                                  'YOUR_API_TOKEN',
+                                  $httpClient
+                              );
+
+              // create a new video & upload a video file
+              $myVideo = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video'));
+              $client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__ . '/../../../tests/resources/558k.mp4'));
+
+              // create a new video & upload a video file using stream upload (the file is uploaded by parts)
+              $myVideo2 = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video (stream upload)'));
+
+              $streamSession = $client->videos()->createUploadStreamSession($myVideo2->getVideoId());
+
+              $streamSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.a'));
+              $streamSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.b'));
+
+              $streamSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
+
+
   '/videos/{videoId}/thumbnail':
     post:
       tags:
@@ -1077,6 +1161,32 @@ paths:
                     status: 404
       security:
         - bearerAuth: []
+      x-readme:
+        code-samples:
+          - language: php
+            code: |
+              <?php
+
+              use ApiVideo\Client\Model\Metadata;
+              use ApiVideo\Client\Model\VideoUpdatePayload;
+
+              require __DIR__ . '/../../../vendor/autoload.php';
+
+              $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+              $client = new \ApiVideo\Client(
+                                  'https://sandbox.api.video',
+                                  'YOUR_API_TOKEN',
+                                  $httpClient
+                              );
+
+              $client->videos()->update("vi6DEWhlgoHU3Ig5tgPlYkBc", (new VideoUpdatePayload())
+                  ->setTitle("The new title")
+                  ->setPublic(false)
+                  ->setDescription("A new description")
+                  ->setTags(["tag1", "tag2"])
+                  ->setMetadata(array(
+                      new Metadata(["key" => "aa", 'value' => "bb"]),
+                      new Metadata(["key" => "aa2", 'value' => "bb2"]))));
   '/videos/{videoId}/status':
     get:
       tags:
