@@ -67,7 +67,34 @@ func main() {
     {{/returnType}}
 }
 ```
+{{#vendorExtensions.x-client-chunk-upload}}
+### Stream uploads
 
+TODO
+
+```go
+{{^vendorExtensions.x-group-parameters}}{{#allParams}}{{^isFile}}
+{{paramName}} := {{{vendorExtensions.x-go-example}}} // {{{dataType}}} | {{{description}}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}{{/isFile}}{{/allParams}}{{/vendorExtensions.x-group-parameters}}
+
+part1, err := os.Open("10m.mp4.part.a")
+part2, err := os.Open("10m.mp4.part.b")
+part3, err := os.Open("10m.mp4.part.c")
+
+{{#titlecase}}{{operationId}}{{/titlecase}}stream = client.{{classname}}.Create{{operationId}}Stream({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, nil{{/vendorExtensions.x-client-copy-from-response}})
+{{#vendorExtensions.x-client-copy-from-response}}
+// or, if you want to upload to an existing video:
+// {{#titlecase}}{{operationId}}{{/titlecase}}stream = client.{{classname}}.Create{{operationId}}Stream({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, videoId{{/vendorExtensions.x-client-copy-from-response}})
+{{/vendorExtensions.x-client-copy-from-response}}
+_, err = stream.UploadPartFile(part1)
+_, err = stream.UploadPartFile(part2)
+res, err := stream.UploadLastPartFile(part3)
+
+err = part1.Close()
+err = part2.Close()
+err = part3.Close()
+
+```
+{{/vendorExtensions.x-client-chunk-upload}}
 ### Path Parameters
 
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#pathParams}}{{#-last}}

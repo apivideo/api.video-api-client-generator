@@ -204,6 +204,63 @@ func (c *Client) prepareRequest(
 	return req, nil
 }
 
+
+func (c *Client) prepareStreamRequest(
+	ctx context.Context,
+	urlStr string,
+	fileName string,
+	fileReader io.Reader,
+	fileSize int64,
+	headerParams map[string]string,
+	queryParams url.Values,
+	formParams map[string]string,
+	startByte int64,
+	isLast bool) (*http.Request, error) {
+
+	body := new(bytes.Buffer)
+	writer := multipart.NewWriter(body)
+	partWriter, err := writer.CreateFormFile("file", fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	io.Copy(partWriter, fileReader)
+	if err != nil {
+		return nil, err
+	}
+
+	for key, val := range formParams {
+		err = writer.WriteField(key, val)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := c.prepareRequest(ctx, http.MethodPost, urlStr, body, headerParams, queryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+
+	var ranges string
+	if isLast {
+		ranges = fmt.Sprintf("bytes %d-%d/%d", startByte, (startByte+fileSize)-1, startByte+fileSize)
+	} else {
+		ranges = fmt.Sprintf("bytes %d-%d/*", startByte, (startByte+fileSize)-1)
+	}
+
+	req.Header.Set("Content-Range", ranges)
+
+	return req, nil
+}
+
 func (c *Client) prepareRangeRequests(
 	ctx context.Context,
 	urlStr string,

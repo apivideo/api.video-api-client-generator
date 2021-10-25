@@ -54,8 +54,16 @@ public class Go extends GoClientCodegen {
             for (CodegenOperation operation : ops) {
                 seenModelNames.add(operation.returnType);
 
+                operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()
+                        .filter(p -> Boolean.TRUE.equals(p.vendorExtensions.get("x-client-copy-from-response")))
+                        .peek(a -> a.vendorExtensions.put("getter", StringUtils.capitalize(a.paramName)))
+                        .collect(Collectors.toList()));
+
                 if(operation.formParams.stream().anyMatch(p -> p.dataFormat.equals("binary"))) {
                     operation.vendorExtensions.put("x-upload", true);
+                }
+                if(operation.vendorExtensions.containsKey("x-client-chunk-upload")) {
+                    objs.put("x-client-chunk-upload", true);
                 }
                 if(!operation.bodyParams.isEmpty()) {
                     operation.bodyParams.forEach(bodyParam -> {

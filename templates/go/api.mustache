@@ -1,6 +1,5 @@
 {{>partial_header}}
 package {{packageName}}
-
 {{#operations}}
 import (
 	"context"
@@ -13,6 +12,22 @@ import (
 var (
 	_ context.Context
 )
+{{#x-client-chunk-upload}}
+
+// VideosService communicating with the Videos
+// endpoints of the api.video API
+type IUploadStream interface {
+    UploadPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+    UploadPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+    UploadPartFile(file *os.File) (*Video, error)
+    UploadPartWithContextFile(ctx context.Context, file *os.File) (*Video, error)
+    UploadLastPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+    UploadLastPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+    UploadLastPartFile(file *os.File) (*Video, error)
+    UploadLastPartWithContextFile(ctx context.Context, file *os.File) (*Video, error)
+}
+
+{{/x-client-chunk-upload}}
 
 {{#operation}}
 {{#vendorExtensions.x-group-parameters}}
@@ -53,8 +68,17 @@ type {{classname}}ServiceI interface {
     {{/vendorExtensions.x-group-parameters}}{{^vendorExtensions.x-group-parameters}}{{nickname}}WithContext(ctx context.Context{{#requiredParams}}, {{paramName}} {{{dataType}}}{{/requiredParams}}) ({{#returnType}}*{{{.}}}, {{/returnType}}error){{/vendorExtensions.x-group-parameters}}
     {{/vendorExtensions.x-upload}}
 
-    {{#vendorExtensions.x-upload}}
+    {{#vendorExtensions.x-client-chunk-upload}}
 
+	/*
+	 * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}{{#pathParams}}
+	 * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
+	 * @return IUploadStream
+	 */
+     Create{{nickname}}Stream({{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}} *{{dataType}}{{/vendorExtensions.x-client-copy-from-response}}) (IUploadStream, error)
+    {{/vendorExtensions.x-client-chunk-upload}}
+
+    {{#vendorExtensions.x-upload}}
 	/*
 	 * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}{{#pathParams}}
 	 * @param {{paramName}}{{#description}} {{{.}}}{{/description}}{{/pathParams}}
@@ -119,6 +143,101 @@ func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context
     return s.{{nickname}}WithContext(ctx, {{#allParams}}{{^isFile}}{{paramName}}, {{/isFile}}{{/allParams}}file.Name(), io.Reader(file){{#vendorExtensions.x-client-chunk-upload}}, fileSize{{/vendorExtensions.x-client-chunk-upload}})
 }
 {{/vendorExtensions.x-upload}}
+
+
+{{#vendorExtensions.x-client-chunk-upload}}
+// VideosService communicating with the Videos
+// endpoints of the api.video API
+type {{nickname}}Stream struct {
+	client *Client
+    {{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}
+    {{/isFile}}{{/allParams}}	currentIndex int64{{#vendorExtensions.x-client-copy-from-response}}
+    {{paramName}} *{{dataType}}{{/vendorExtensions.x-client-copy-from-response}}
+}
+
+
+func (s *{{{classname}}}Service) Create{{nickname}}Stream({{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}} *{{dataType}}{{/vendorExtensions.x-client-copy-from-response}}) (IUploadStream, error) {
+	return &{{nickname}}Stream{client: s.client, {{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}} : {{paramName}}{{/vendorExtensions.x-client-copy-from-response}}, currentIndex: 0}, nil
+}
+
+
+func (s *{{nickname}}Stream) UploadAPart(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64, isLast bool) (*Video, error) {
+	localVarPath := "{{{path}}}"{{#pathParams}}
+	localVarPath = strings.Replace(localVarPath, "{"+"{{baseName}}"+"}", url.PathEscape(parameterToString(s.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")), -1){{/pathParams}}
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}{{#formParams}}{{#isFile}}{{#-first}}
+	localVarFormParams := make(map[string]string){{/-first}}{{/isFile}}{{/formParams}}
+
+{{#queryParams}}
+    {{#required}}
+        {{^isCollectionFormatMulti}}
+            localVarQueryParams.Add("{{baseName}}", parameterToString(s.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+        {{/isCollectionFormatMulti}}
+    {{/required}}
+{{/queryParams}}
+
+{{#vendorExtensions.x-client-copy-from-response}}
+    if s.{{paramName}} != nil {
+        localVarFormParams["{{baseName}}"] = parameterToString(*s.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}")
+    }
+{{/vendorExtensions.x-client-copy-from-response}}
+
+	request, err := s.client.prepareStreamRequest(context.Background(), localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams, s.currentIndex, isLast)
+
+    if err != nil {
+		return nil, err
+	}
+
+    s.currentIndex = s.currentIndex + fileSize
+
+	res := new(Video)
+
+	_, err = s.client.do(request, res)
+{{#vendorExtensions.x-client-copy-from-response}}
+    if s.{{paramName}} == nil {
+        s.{{paramName}} = &res.{{vendorExtensions.getter}}
+    }
+{{/vendorExtensions.x-client-copy-from-response}}
+if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+func (s *{{nickname}}Stream) UploadPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+    return s.UploadAPart(ctx, fileName, fileReader, fileSize, false)
+}
+func (s *{{nickname}}Stream) UploadLastPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+    return s.UploadAPart(ctx, fileName, fileReader, fileSize, true)
+}
+func (s *{{nickname}}Stream) UploadPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *{{nickname}}Stream) UploadPartFile(file *os.File) (*Video, error) {
+	return s.UploadPartWithContextFile(context.Background(), file)
+}
+func (s *{{nickname}}Stream) UploadPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _  := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+func (s *{{nickname}}Stream) UploadLastPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadLastPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *{{nickname}}Stream) UploadLastPartFile(file *os.File) (*Video, error) {
+	return s.UploadLastPartWithContextFile(context.Background(), file)
+}
+func (s *{{nickname}}Stream) UploadLastPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _  := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadLastPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+
+
+{{/vendorExtensions.x-client-chunk-upload}}
 
 /*
  * {{operationId}}{{#summary}} {{{.}}}{{/summary}}{{^summary}} Method for {{operationId}}{{/summary}}
