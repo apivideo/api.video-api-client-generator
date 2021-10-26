@@ -25,6 +25,87 @@ namespace VideoApiTests.Integration
 
         }
     }
+
+    [TestClass]
+    public class StreamUploadWithTokenTest
+    {
+        ApiVideoClient apiClient;
+        private UploadToken uploadToken;
+
+        [TestInitialize]
+        public void init()
+        {
+            this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
+            this.uploadToken = this.apiClient.UploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        [TestMethod]
+        public void StreamUpload()
+        {
+            ApiVideo.Api.VideosApi.UploadWithUploadTokenStreamSession uploadWithUploadTokenStreamSession = this.apiClient.Videos().createUploadWithUploadTokenStreamSession(uploadToken.token);
+
+            var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
+            var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
+            var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
+
+            uploadWithUploadTokenStreamSession.uploadPart(part1);
+            uploadWithUploadTokenStreamSession.uploadPart(part2);
+            Video video = uploadWithUploadTokenStreamSession.uploadLastPart(part3);
+
+            part1.Close();
+            part2.Close();
+            part3.Close();
+
+            this.apiClient.Videos().delete(video.videoid);
+        }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            this.apiClient.UploadTokens().deleteToken(this.uploadToken.token);
+        }
+    }
+
+
+    [TestClass]
+    public class StreamUploadTest
+    {
+        ApiVideoClient apiClient;
+        Video testVideo;
+
+        [TestInitialize]
+        public void init()
+        {
+            this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
+            this.testVideo = this.apiClient.Videos().create(new VideoCreationPayload() { title = "C# upload stream" });
+        }
+
+        [TestMethod]
+        public void StreamUpload()
+        {
+            ApiVideo.Api.VideosApi.UploadStreamSession uploadStreamSession = this.apiClient.Videos().createUploadStreamSession(testVideo.videoid);
+
+            var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
+            var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
+            var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
+
+            uploadStreamSession.uploadPart(part1);
+            uploadStreamSession.uploadPart(part2);
+            Video video = uploadStreamSession.uploadLastPart(part3);
+
+            part1.Close();
+            part2.Close();
+            part3.Close();
+
+        }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            this.apiClient.Videos().delete(this.testVideo.videoid);
+        }
+    }
+
     [TestClass]
     public class VideosTest
     {
@@ -36,7 +117,7 @@ namespace VideoApiTests.Integration
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"), ApiVideo.Client.Environment.SANDBOX);
             this.testVideo = apiClient.Videos()
-                    .create(new VideoCreationPayload() { title = "[Java-SDK-tests] sdk tests", _public = false});
+                    .create(new VideoCreationPayload() { title = "[C#-SDK-tests] sdk tests", _public = false});
             Console.WriteLine("Video "+this.testVideo.videoid+" created");
         }
         [TestCleanup]

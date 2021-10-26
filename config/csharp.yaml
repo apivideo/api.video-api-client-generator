@@ -1,4 +1,4 @@
-artifactVersion: 0.0.12
+artifactVersion: 0.0.13
 licenseName: MIT
 sourceFolder: src/
 groupId: video.api
@@ -34,5 +34,8 @@ files:
   IUploadProgressListener.mustache:
     folder: src/ApiVideo/Model
     destinationFilename: IUploadProgressListener.cs
+  IUploadPartProgressListener.mustache:
+    folder: src/ApiVideo/Model
+    destinationFilename: IUploadPartProgressListener.cs
   post-generate.sh:
     destinationFilename: post-generate.sh
