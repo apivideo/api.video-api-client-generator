@@ -1,0 +1,38 @@
+{{>licenseInfo}}
+
+package {{package}};
+
+import org.junit.Test;
+
+import {{invokerPackage}}.ApiException;
+{{#imports}}import {{import}};
+{{/imports}}
+import {{modelPackage}}.Page;
+
+{{^fullJavaUtil}}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;{{/fullJavaUtil}}
+
+
+/**
+ * API tests for {{classname}}
+ */
+public class {{classname}}Test extends AbstractApiTest {
+
+    private final {{classname}} api = apiClientMock.{{classname}};
+
+    {{#operations}}{{#operation}}
+    @Test
+    public void {{vendorExtensions.x-client-action}}RequiredParametersTest() {
+        {{^vendorExtensions.x-group-parameters}}
+        Utils.assertThrows(ApiException.class,
+                "Missing the required parameter 'videoId' when calling {{vendorExtensions.x-client-action}}",
+                () -> api.{{vendorExtensions.x-client-action}}({{#allParams}}null{{^-last}}, {{/-last}}{{/allParams}}));
+        {{/vendorExtensions.x-group-parameters}}
+    }
+
+    {{/operation}}
+    {{/operations}}
+}

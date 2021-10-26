@@ -1,0 +1,98 @@
+{{>licenseInfo}}
+package {{invokerPackage}}.auth;
+
+import com.android.volley.Response;
+
+import {{invokerPackage}}.Pair;
+import {{apiPackage}}.AuthenticationApi;
+import {{invokerPackage}}.ApiException;
+import {{invokerPackage}}.models.AccessToken;
+import {{invokerPackage}}.models.AuthenticatePayload;
+
+import java.util.List;
+import java.util.Map;
+
+public class ApiVideoAuth implements Authentication {
+
+    private String apiKey;
+    private String tokenPrefix = "Bearer";
+    private String paramName;
+    private final String location;
+
+    private final AuthenticationApi authenticationApi;
+    private String cachedAccessToken;
+    private Long tokenExpirationMs;
+
+    public ApiVideoAuth(String location, String paramName) {
+        this.paramName = paramName;
+        this.location = location;
+        this.authenticationApi = new AuthenticationApi();
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getParamName() {
+        return paramName;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public void getAccessToken(final Response.Listener<String> responseListener, final Response.ErrorListener errorListener) throws ApiException {
+        if (!isTokenValid()) {
+            retrieveAccessToken(responseListener, errorListener);
+        }
+        responseListener.onResponse(this.cachedAccessToken);
+    }
+
+    private void retrieveAccessToken(Response.Listener<String> responseListener, Response.ErrorListener errorListener) throws ApiException {
+        authenticationApi.authenticate(new AuthenticatePayload().apiKey(apiKey), new Response.Listener<AccessToken>() {
+            @Override
+            public void onResponse(AccessToken token) {
+                Integer expires = token.getExpiresIn();
+                tokenExpirationMs = System.currentTimeMillis() + (expires - 60) * 1000L;
+                cachedAccessToken = token.getAccessToken();
+                responseListener.onResponse(cachedAccessToken);
+            }
+        }, errorListener);
+    }
+
+    private boolean isTokenValid() {
+        return tokenExpirationMs != null && tokenExpirationMs > System.currentTimeMillis();
+    }
+
+    @Override
+    public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, final Response.Listener<?> responseListener, final Response.ErrorListener errorListener) throws ApiException {
+        getAccessToken(new Response.Listener<String>() {
+            @Override
+            public void onResponse(String token) {
+                String value;
+                if (token == null) {
+                    return;
+                }
+                if (tokenPrefix != null) {
+                    value = tokenPrefix + " " + token;
+                } else {
+                    value = token;
+                }
+                if ("query".equals(location)) {
+                    queryParams.add(new Pair(paramName, value));
+                } else if ("header".equals(location)) {
+                    headerParams.put(paramName, value);
+                }
+                responseListener.onResponse(null);
+            }
+        }, errorListener);
+    }
+
+    public void setBasePath(String basePath) {
+        this.authenticationApi.setBasePath(basePath);
+    }
+}

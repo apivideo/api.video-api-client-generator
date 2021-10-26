@@ -1,0 +1,58 @@
+artifactVersion: 1.0.10
+invokerPackage: video.api.client.api
+apiPackage: video.api.client.api.clients
+modelPackage: video.api.client.api.models
+groupId: video.api
+artifactDescription: api.video Android API client
+artifactUrl: https://github.com/apivideo/android-api-client
+scmConnection: scm:git:git://github.com/apivideo/android-api-client.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/android-api-client.git
+scmUrl: https://github.com/apivideo/android-api-client
+developerName: api.video ecosystem team
+developerOrganization: api.video
+developerOrganizationUrl: https://api.video
+developerEmail: ecosystem@api.video
+licenseName: MIT License
+licenseUrl: http://www.opensource.org/licenses/mit-license.php
+library: volley
+dateLibrary: threetenbp
+sourceFolder: src/main/java
+artifactId: android-api-client
+hideGenerationTimestamp: true
+serializableModel: "true"
+java8: "true"
+gson: "true"
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
+
+files:
+  page.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Page.java
+  EmptyArrayFixTypeAdapterFactory.mustache:
+    folder: src/main/java/video/api/client/api
+    destinationFilename: EmptyArrayFixTypeAdapterFactory.java
+  UploadChunkRequestBody.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadChunkRequestBody.java
+  ChunkFileInputStream.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: ChunkFileInputStream.java
+  UploadProgressListener.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadProgressListener.java
+  UploadPartProgressListener.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadPartProgressListener.java
+  ApiVideoClient.mustache:
+    folder: src/main/java/video/api/client
+    destinationFilename: ApiVideoClient.java
+  auth/apivideoauth.mustache:
+    folder: src/main/java/video/api/client/api/auth
+    destinationFilename: ApiVideoAuth.java
+  pagination.md.mustache:
+    folder: docs
+    destinationFilename: Pagination.md
+  post-generate.sh:
+    destinationFilename: post-generate.sh

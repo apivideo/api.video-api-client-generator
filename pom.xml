@@ -61,6 +61,14 @@
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
+        <profile>
+            <id>android</id>
+            <properties>
+                <folder>android</folder>
+                <generatorName>video.api.client.generator.Android</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>

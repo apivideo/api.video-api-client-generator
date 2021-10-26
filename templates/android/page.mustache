@@ -1,0 +1,117 @@
+package {{modelPackage}};
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Supplier;
+
+public class Page<T> implements Iterable<Page<T>> {
+    private List<T> items;
+    private Integer currentPage;
+    private Integer pageSize;
+    private Integer pagesTotal;
+    private Integer itemsTotal;
+    private Integer currentPageItems;
+    private List<PaginationLink> links;
+    private Supplier<Page<T>> getNextPage;
+    private Page<T> that;
+
+    public Page(List<T> items, Pagination pagination, Supplier<Page<T>> getNextPage) {
+        this.items = items;
+        if (pagination != null) {
+            this.currentPage = pagination.getCurrentPage();
+            this.pageSize = pagination.getPageSize();
+            this.pagesTotal = pagination.getPagesTotal();
+            this.itemsTotal = pagination.getItemsTotal();
+            this.currentPageItems = pagination.getCurrentPageItems();
+            this.links = pagination.getLinks();
+            this.getNextPage = getNextPage;
+            this.that = this;
+        }
+    }
+
+    public List<T> getItems() {
+        return items;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public Integer getPagesTotal() {
+        return pagesTotal;
+    }
+
+    public Integer getItemsTotal() {
+        return itemsTotal;
+    }
+
+    public Integer getCurrentPageItems() {
+        return currentPageItems;
+    }
+
+    public List<PaginationLink> getLinks() {
+        return links;
+    }
+
+    private Supplier<Page<T>> getGetNextPage() {
+        return getNextPage;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class Page<> {\n");
+        sb.append("    items: ").append(toIndentedString(items)).append("\n");
+        sb.append("    currentPage: ").append(toIndentedString(currentPage)).append("\n");
+        sb.append("    pageSize: ").append(toIndentedString(pageSize)).append("\n");
+        sb.append("    itemsTotal: ").append(toIndentedString(itemsTotal)).append("\n");
+        sb.append("    currentPageItems: ").append(toIndentedString(currentPageItems)).append("\n");
+        sb.append("    links: ").append(toIndentedString(links)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces (except the first line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    @Override
+    public Iterator<Page<T>> iterator() {
+        return new Iterator<Page<T>>() {
+            private boolean first = true;
+
+            @Override
+            public boolean hasNext() {
+                return first || currentPage < pagesTotal;
+            }
+
+            @Override
+            public Page<T> next() {
+                if (first) {
+                    first = false;
+                    return that;
+                }
+                Page<T> next = getNextPage.get();
+                items = next.getItems();
+                currentPage = next.getCurrentPage();
+                pageSize = next.getPageSize();
+                pagesTotal = next.getPagesTotal();
+                itemsTotal = next.getItemsTotal();
+                currentPageItems = next.getCurrentPageItems();
+                links = next.getLinks();
+                getNextPage = next.getGetNextPage();
+                return that;
+            }
+        };
+    }
+}

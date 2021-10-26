@@ -1,0 +1,135 @@
+{{#useAndroidMavenGradlePlugin}}
+group = '{{groupId}}'
+project.version = '{{artifactVersion}}'
+{{/useAndroidMavenGradlePlugin}}
+
+buildscript {
+    ext {
+        kotlin_version = "1.5.31"
+    }
+    repositories {
+        mavenLocal()
+        google()
+        maven {
+            url 'https://dl.google.com/dl/android/maven2'
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        {{#useAndroidMavenGradlePlugin}}
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        {{/useAndroidMavenGradlePlugin}}
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'com.android.library'
+{{#useAndroidMavenGradlePlugin}}
+apply plugin: 'com.github.dcendents.android-maven'
+{{/useAndroidMavenGradlePlugin}}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        minSdkVersion 20
+        targetSdkVersion 31
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument ("INTEGRATION_TESTS_API_TOKEN", "${System.getenv('INTEGRATION_TESTS_API_TOKEN')}")
+    }
+    compileOptions {
+        {{#supportJava6}}
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+        {{/supportJava6}}
+        {{^supportJava6}}
+        {{#java8}}
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        {{/java8}}
+        {{^java8}}
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+        {{/java8}}
+        {{/supportJava6}}
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    // Rename the aar correctly
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (outputFile != null && outputFileName.endsWith('.aar')) {
+                outputFileName = "${archivesBaseName}-${version}.aar"
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+ext {
+    swagger_annotations_version = "1.6.2"
+    gson_version = "2.8.6"
+    httpmime_version = "4.3.6"
+    volley_version = "1.2.1"
+    junit_version = "4.13.2"
+    robolectric_version = "4.5.1"
+    concurrent_unit_version = "0.4.6"
+}
+
+dependencies {
+    implementation "io.swagger:swagger-annotations:$swagger_annotations_version"
+    implementation "androidx.annotation:annotation:1.2.0"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation 'io.gsonfire:gson-fire:1.8.4'
+    implementation 'com.squareup.okio:okio:2.10.0'
+    implementation "org.apache.httpcomponents:httpmime:$httpmime_version"
+    api "com.android.volley:volley:${volley_version}"
+    {{#threetenbp}}
+    implementation 'org.threeten:threetenbp:1.4.3'
+    {{/threetenbp}}
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.robolectric:robolectric:${robolectric_version}"
+    testImplementation 'org.mockito:mockito-all:1.10.19'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+afterEvaluate {
+    android.libraryVariants.all { variant ->
+        def task = project.tasks.create "jar${variant.name.capitalize()}", Jar
+        task.description = "Create jar artifact for ${variant.name}"
+        task.dependsOn variant.javaCompile
+        task.from variant.javaCompile.destinationDir
+        task.destinationDir = project.file("${project.buildDir}/outputs/jar")
+        task.archiveName = "${project.name}-${variant.baseName}-${version}.jar"
+        artifacts.add('archives', task);
+    }
+}
+
+{{#useAndroidMavenGradlePlugin}}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+{{/useAndroidMavenGradlePlugin}}

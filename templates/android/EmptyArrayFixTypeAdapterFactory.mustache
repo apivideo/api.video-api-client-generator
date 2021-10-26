@@ -1,0 +1,55 @@
+package {{invokerPackage}};
+
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * GSon adapter to deal with empty objects returned as "[]" by the API, instead of "{}" or "null"
+ * If an attribute is not a list and if it's value from the API is [], it will replace it by "null"
+ */
+class EmptyArrayFixTypeAdapterFactory implements TypeAdapterFactory {
+
+    private static final TypeAdapterFactory instance = new EmptyArrayFixTypeAdapterFactory();
+
+    private EmptyArrayFixTypeAdapterFactory() {
+    }
+
+    static TypeAdapterFactory get() {
+        return instance;
+    }
+
+    @Override
+    public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> typeToken) {
+        return List.class.isAssignableFrom(typeToken.getRawType())
+                ? null // if the expected type is a list, do nothing
+                : new EmptyArrayFixTypeAdapter<>(gson.getDelegateAdapter(this, typeToken)).nullSafe();
+    }
+
+    private static final class EmptyArrayFixTypeAdapter<E> extends TypeAdapter<E> {
+
+        private final TypeAdapter<E> delegateTypeAdapter;
+
+        private EmptyArrayFixTypeAdapter(final TypeAdapter<E> delegateTypeAdapter) {
+            this.delegateTypeAdapter = delegateTypeAdapter;
+        }
+
+        @Override
+        public void write(final JsonWriter out, final E value) throws IOException {
+            delegateTypeAdapter.write(out, value);
+        }
+
+        @Override
+        public E read(final JsonReader in) {
+            JsonElement jsonElement = JsonParser.parseReader(in);
+
+            return jsonElement.isJsonArray() && jsonElement.getAsJsonArray().size() == 0
+                    ? null // if the value is [], returns null
+                    : delegateTypeAdapter.fromJsonTree(jsonElement);
+        }
+    }
+}

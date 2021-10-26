@@ -26,6 +26,7 @@ To see the list of available profiles, see the "profile" column in the table of 
 
 | Language | Profile | CI tests | CI package release | Repository |
 | ------- | ------ | ---- | ---- | ---- |
+| Android    |  android      | :white_check_mark:  | :white_check_mark: | [android-api-client](https://github.com/apivideo/android-api-client) |
 | Java    |  java      | :white_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/java-api-client) |
 | NodeJs/Typescript        | nodejs        | :white_check_mark:  | :white_check_mark: | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
 | Php | php | :white_check_mark:  | - | [php-api-client](https://github.com/apivideo/php-api-client) |
