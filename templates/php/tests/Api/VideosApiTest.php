@@ -71,30 +71,30 @@ class VideosApiTest extends AbstractApiTest
         $this->assertContains($videoStatus->getIngest()->getStatus(), ['uploaded', 'uploading']);
     }
 
-    public function testStreamUpload() {
+    public function testProgressiveUpload() {
         $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
         $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
         $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
 
-        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Stream upload'));
+        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Progressive upload'));
 
-        $session = $this->client->videos()->createUploadStreamSession($createdVideo->getVideoId());
+        $session = $this->client->videos()->createUploadProgressiveSession($createdVideo->getVideoId());
 
         $session->uploadPart($part1);
         $session->uploadPart( $part2);
         $video = $session->uploadLastPart($part3);
 
-        $this->assertEquals('Stream upload', $video->getTitle());
+        $this->assertEquals('Progressive upload', $video->getTitle());
     }
 
-    public function testStreamUploadWithUploadToken() {
+    public function testProgressiveUploadWithUploadToken() {
         $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
         $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
         $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
 
         $uploadToken = $this->client->uploadTokens()->createToken(new TokenCreationPayload())->getToken();
 
-        $session = $this->client->videos()->createUploadWithUploadTokenStreamSession($uploadToken);
+        $session = $this->client->videos()->createUploadWithUploadTokenProgressiveSession($uploadToken);
 
         $session->uploadPart($part1);
         $session->uploadPart( $part2);
@@ -103,22 +103,22 @@ class VideosApiTest extends AbstractApiTest
         $this->assertEquals('10m.mp4.part.a', $video->getTitle());
     }
 
-    public function testStreamUploadWithUploadTokenExistingVideo() {
+    public function testProgressiveUploadWithUploadTokenExistingVideo() {
         $part1 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.a');
         $part2 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.b');
         $part3 = new SplFileObject(__DIR__ . '/../resources/10m.mp4.part.c');
 
-        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Stream upload using upload token'));
+        $createdVideo = $this->client->videos()->create((new VideoCreationPayload())->setTitle('Progressive upload using upload token'));
         $uploadToken = $this->client->uploadTokens()->createToken(new TokenCreationPayload())->getToken();
 
         print_r($uploadToken);
-        $session = $this->client->videos()->createUploadWithUploadTokenStreamSession($uploadToken, $createdVideo->getVideoId());
+        $session = $this->client->videos()->createUploadWithUploadTokenProgressiveSession($uploadToken, $createdVideo->getVideoId());
 
         $session->uploadPart($part1);
         $session->uploadPart( $part2);
         $video = $session->uploadLastPart($part3);
 
-        $this->assertEquals('Stream upload using upload token', $video->getTitle());
+        $this->assertEquals('Progressive upload using upload token', $video->getTitle());
     }
 
     public function testTags() {

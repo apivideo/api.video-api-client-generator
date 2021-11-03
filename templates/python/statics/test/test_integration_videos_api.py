@@ -83,7 +83,7 @@ class TestVideosApi(TestCase):
         part2 = open('10m.mp4.part.a', 'rb')
         part3 = open('10m.mp4.part.a', 'rb')
 
-        session = self.api.create_upload_stream_session(video.video_id)
+        session = self.api.create_upload_progressive_session(video.video_id)
         session.uploadPart(part1)
         session.uploadPart(part2)
         session.uploadLastPart(part3)
@@ -103,7 +103,7 @@ class TestVideosApi(TestCase):
         part2 = open('10m.mp4.part.a', 'rb')
         part3 = open('10m.mp4.part.a', 'rb')
 
-        session = self.api.create_upload_with_upload_token_stream_session(token)
+        session = self.api.create_upload_with_upload_token_progressive_session(token)
         session.uploadPart(part1)
         session.uploadPart(part2)
         res = session.uploadLastPart(part3)

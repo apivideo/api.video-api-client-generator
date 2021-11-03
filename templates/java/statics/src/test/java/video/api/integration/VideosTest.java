@@ -79,15 +79,15 @@ public class VideosTest {
     }
 
     @Nested
-    @DisplayName("stream upload")
+    @DisplayName("progressive upload")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    class StreamUpload {
+    class ProgressiveUpload {
         private Video testVideo;
 
         @BeforeAll
         public void createVideo() throws ApiException {
             this.testVideo = apiClient.videos()
-                    .create(new VideoCreationPayload().title("[Java-SDK-tests] stream upload")._public(false));
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] progressive upload")._public(false));
         }
 
         @Test
@@ -96,11 +96,11 @@ public class VideosTest {
             File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
             File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
 
-            VideosApi.UploadStreamSession uploadStreamSession = apiClient.videos().createUploadStreamSession(this.testVideo.getVideoId());
+            VideosApi.UploadProgressiveSession uploadProgressiveSession = apiClient.videos().createUploadProgressiveSession(this.testVideo.getVideoId());
 
-            uploadStreamSession.uploadPart(part1);
-            uploadStreamSession.uploadPart(part2);
-            uploadStreamSession.uploadLastPart(part3);
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            uploadProgressiveSession.uploadLastPart(part3);
         }
 
         @AfterAll
@@ -110,9 +110,9 @@ public class VideosTest {
     }
 
     @Nested
-    @DisplayName("stream upload with upload token")
+    @DisplayName("progressive upload with upload token")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    class StreamUploadWithUploadToken {
+    class ProgressiveUploadWithUploadToken {
         private UploadToken uploadToken;
         private Video result;
 
@@ -127,12 +127,12 @@ public class VideosTest {
             File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
             File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
 
-            VideosApi.UploadWithUploadTokenStreamSession uploadStreamSession = apiClient.videos()
-                    .createUploadWithUploadTokenStreamSession(this.uploadToken.getToken());
+            VideosApi.UploadWithUploadTokenProgressiveSession uploadProgressiveSession = apiClient.videos()
+                    .createUploadWithUploadTokenProgressiveSession(this.uploadToken.getToken());
 
-            uploadStreamSession.uploadPart(part1);
-            uploadStreamSession.uploadPart(part2);
-            this.result = uploadStreamSession.uploadLastPart(part3);
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            this.result = uploadProgressiveSession.uploadLastPart(part3);
         }
 
         @AfterAll

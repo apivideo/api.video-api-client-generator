@@ -37,29 +37,29 @@ describe('ApiVideoClient', () => {
     });
 
     // Create
-    const streamUploadVideo = 'Nodejs - stream upload';
-    const { videoId: streamUploadVideoId } = await client.videos.create({
-      title: streamUploadVideo,
+    const progressiveUploadVideo = 'Nodejs - progressive upload';
+    const { videoId: progressiveUploadVideoId } = await client.videos.create({
+      title: progressiveUploadVideo,
     });
 
-    // Stream upload
-    const streamUploadSession = client.videos.createUploadStreamSession(streamUploadVideoId);
-    await streamUploadSession.uploadPart("test/data/10m.mp4.part.a");
-    await streamUploadSession.uploadPart("test/data/10m.mp4.part.b");
-    await streamUploadSession.uploadLastPart("test/data/10m.mp4.part.c")
+    // Progressive upload
+    const progressiveUploadSession = client.videos.createUploadProgressiveSession(progressiveUploadVideoId);
+    await progressiveUploadSession.uploadPart("test/data/10m.mp4.part.a");
+    await progressiveUploadSession.uploadPart("test/data/10m.mp4.part.b");
+    await progressiveUploadSession.uploadLastPart("test/data/10m.mp4.part.c")
       .then((video) => {
-        expect(video.title).to.equals(streamUploadVideo);
+        expect(video.title).to.equals(progressiveUploadVideo);
       });
-    await client.videos.delete(streamUploadVideoId);
+    await client.videos.delete(progressiveUploadVideoId);
 
 
     // Create an upload token
-    const { token: streamUploadToken } = await client.uploadTokens.createToken();
-    // Stream upload
-    const streamUploadWithTokenSession = client.videos.createUploadWithUploadTokenStreamSession(streamUploadToken as string);
-    await streamUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.a");
-    await streamUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.b");
-    await streamUploadWithTokenSession.uploadLastPart("test/data/10m.mp4.part.c")
+    const { token: progressiveUploadToken } = await client.uploadTokens.createToken();
+    // Progressive upload
+    const progressiveUploadWithTokenSession = client.videos.createUploadWithUploadTokenProgressiveSession(progressiveUploadToken as string);
+    await progressiveUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.a");
+    await progressiveUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.b");
+    await progressiveUploadWithTokenSession.uploadLastPart("test/data/10m.mp4.part.c")
       .then((video) => {
         expect(video.title).to.equals("10m.mp4.part.a");
         client.videos.delete(video.videoId);

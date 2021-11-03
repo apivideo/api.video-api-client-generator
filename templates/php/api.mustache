@@ -11,7 +11,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use {{invokerPackage}}\Request;
 use {{invokerPackage}}\ObjectSerializer;
 use {{invokerPackage}}\VideoUploader;
-use {{invokerPackage}}\StreamUploadSession;
+use {{invokerPackage}}\ProgressiveUploadSession;
 
 /**
  * @category Class
@@ -299,7 +299,7 @@ use {{invokerPackage}}\StreamUploadSession;
 
 
     {{#vendorExtensions.x-client-chunk-upload}}
-    public function create{{#lambda.titlecase}}{{vendorExtensions.x-client-action}}{{/lambda.titlecase}}StreamSession({{#allParams}}{{^isFile}}{{#required}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{/required}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{dataType}} ${{paramName}} = null{{/vendorExtensions.x-client-copy-from-response}}) {
+    public function create{{#lambda.titlecase}}{{vendorExtensions.x-client-action}}{{/lambda.titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{#required}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{/required}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{dataType}} ${{paramName}} = null{{/vendorExtensions.x-client-copy-from-response}}) {
         $resourcePath = '{{{path}}}';
         {{#pathParams}}
         // path params
@@ -364,7 +364,7 @@ use {{invokerPackage}}\StreamUploadSession;
         {{/-last}}
         {{/queryParams}}
 
-        return new StreamUploadSession($this->client, $resourcePath{{#vendorExtensions.x-client-copy-from-response}}, ${{paramName}}{{/vendorExtensions.x-client-copy-from-response}});
+        return new ProgressiveUploadSession($this->client, $resourcePath{{#vendorExtensions.x-client-copy-from-response}}, ${{paramName}}{{/vendorExtensions.x-client-copy-from-response}});
     }
 
     {{/vendorExtensions.x-client-chunk-upload}}

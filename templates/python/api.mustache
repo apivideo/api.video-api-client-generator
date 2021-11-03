@@ -260,8 +260,8 @@ class {{classname}}(_EndPoint):
             return res  # return the last response
 
 
-    def create_{{operationId}}_stream_session(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}=None{{/vendorExtensions.x-client-copy-from-response}}):
-        class StreamSession:
+    def create_{{operationId}}_progressive_session(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}=None{{/vendorExtensions.x-client-copy-from-response}}):
+        class ProgressiveSession:
             current_index = 0{{#requiredParams}}{{^isFile}}
             parent = None
             {{paramName}} = None{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}
@@ -474,7 +474,7 @@ class {{classname}}(_EndPoint):
 {{/vendorExtensions.x-client-copy-from-response}}
                 return res
 
-        return StreamSession(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}{{/vendorExtensions.x-client-copy-from-response}})
+        return ProgressiveSession(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}{{/vendorExtensions.x-client-copy-from-response}})
 {{/vendorExtensions.x-client-chunk-upload}}
 {{^vendorExtensions.x-client-chunk-upload}}
             return self.api_client.call_api(

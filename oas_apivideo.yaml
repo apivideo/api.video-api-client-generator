@@ -726,15 +726,15 @@ paths:
               $myVideo = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video'));
               $client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__ . '/../../../tests/resources/558k.mp4'));
 
-              // create a new video & upload a video file using stream upload (the file is uploaded by parts)
-              $myVideo2 = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video (stream upload)'));
+              // create a new video & upload a video file using progressive upload (the file is uploaded by parts)
+              $myVideo2 = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video (progressive upload)'));
 
-              $streamSession = $client->videos()->createUploadStreamSession($myVideo2->getVideoId());
+              $progressiveSession = $client->videos()->createUploadProgressiveSession($myVideo2->getVideoId());
 
-              $streamSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.a'));
-              $streamSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.b'));
+              $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.a'));
+              $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.b'));
 
-              $streamSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
+              $progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
 
 
   '/videos/{videoId}/thumbnail':

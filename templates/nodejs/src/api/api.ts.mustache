@@ -14,7 +14,7 @@ import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from '../ObjectSerializer';
 import HttpClient, { QueryOptions } from '../HttpClient';
-import StreamSession from 'model/StreamSession';
+import ProgressiveSession from 'model/ProgressiveSession';
 {{#imports}}
 import {{classname}} from '../model/{{classname}}';
 {{/imports}}
@@ -36,11 +36,11 @@ export default class {{classname}} {
   /**
    {{#summary}}
    * {{&summary}}
-   * This will create a stream upload session. TODO{{/summary}}{{#allParams}}{{^isFile}}
+   * This will create a progressive upload session. TODO{{/summary}}{{#allParams}}{{^isFile}}
    * @param {{paramName}} {{description}}{{/isFile}}{{/allParams}}
    */
-  public create{{#titlecase}}{{nickname}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}): StreamSession<{{{returnType}}}> {
-    class {{#titlecase}}{{nickname}}{{/titlecase}}StreamSession<Type> {
+  public create{{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}): ProgressiveSession<{{{returnType}}}> {
+    class {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<Type> {
         private httpClient: HttpClient;
         private currentOffset = 0;{{#vendorExtensions.x-client-copy-from-response}}
         private {{paramName}}?: string;{{/vendorExtensions.x-client-copy-from-response}}
@@ -169,7 +169,7 @@ export default class {{classname}} {
         }
     }
 
-    return new {{#titlecase}}{{nickname}}{{/titlecase}}StreamSession<{{{returnType}}}>(this.httpClient);
+    return new {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<{{{returnType}}}>(this.httpClient);
   }
   {{/vendorExtensions.x-client-chunk-upload}}
   {{#vendorExtensions.x-group-parameters}}

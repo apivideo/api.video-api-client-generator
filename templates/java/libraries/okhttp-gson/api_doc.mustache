@@ -83,14 +83,14 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
     .execute();{{/vendorExtensions.x-group-parameters}}
 ```
 
-### Stream uploads
+### Progressive uploads
 
 TODO
 
 ```java
 {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};
 
-{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession session = apiVideoClient.create{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
+{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession session = apiVideoClient.create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
 
 session.uploadPart(new File("sample.mp4.part1"));
 session.uploadPart(new File("sample.mp4.part2"));

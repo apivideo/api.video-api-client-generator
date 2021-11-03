@@ -27,7 +27,7 @@ namespace VideoApiTests.Integration
     }
 
     [TestClass]
-    public class StreamUploadWithTokenTest
+    public class ProgressiveUploadWithTokenTest
     {
         ApiVideoClient apiClient;
         private UploadToken uploadToken;
@@ -40,17 +40,17 @@ namespace VideoApiTests.Integration
         }
 
         [TestMethod]
-        public void StreamUpload()
+        public void ProgressiveUpload()
         {
-            ApiVideo.Api.VideosApi.UploadWithUploadTokenStreamSession uploadWithUploadTokenStreamSession = this.apiClient.Videos().createUploadWithUploadTokenStreamSession(uploadToken.token);
+            ApiVideo.Api.VideosApi.UploadWithUploadTokenProgressiveSession uploadWithUploadTokenProgressiveSession = this.apiClient.Videos().createUploadWithUploadTokenProgressiveSession(uploadToken.token);
 
             var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
             var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
             var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
 
-            uploadWithUploadTokenStreamSession.uploadPart(part1);
-            uploadWithUploadTokenStreamSession.uploadPart(part2);
-            Video video = uploadWithUploadTokenStreamSession.uploadLastPart(part3);
+            uploadWithUploadTokenProgressiveSession.uploadPart(part1);
+            uploadWithUploadTokenProgressiveSession.uploadPart(part2);
+            Video video = uploadWithUploadTokenProgressiveSession.uploadLastPart(part3);
 
             part1.Close();
             part2.Close();
@@ -68,7 +68,7 @@ namespace VideoApiTests.Integration
 
 
     [TestClass]
-    public class StreamUploadTest
+    public class ProgressiveUploadTest
     {
         ApiVideoClient apiClient;
         Video testVideo;
@@ -81,17 +81,17 @@ namespace VideoApiTests.Integration
         }
 
         [TestMethod]
-        public void StreamUpload()
+        public void ProgressiveUpload()
         {
-            ApiVideo.Api.VideosApi.UploadStreamSession uploadStreamSession = this.apiClient.Videos().createUploadStreamSession(testVideo.videoid);
+            ApiVideo.Api.VideosApi.UploadProgressiveSession uploadProgressiveSession = this.apiClient.Videos().createUploadProgressiveSession(testVideo.videoid);
 
             var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
             var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
             var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
 
-            uploadStreamSession.uploadPart(part1);
-            uploadStreamSession.uploadPart(part2);
-            Video video = uploadStreamSession.uploadLastPart(part3);
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            Video video = uploadProgressiveSession.uploadLastPart(part3);
 
             part1.Close();
             part2.Close();

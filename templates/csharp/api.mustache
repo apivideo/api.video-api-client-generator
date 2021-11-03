@@ -346,7 +346,7 @@ namespace {{packageName}}.{{apiPackage}}
         }
 
 
-        public class {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession {
+        public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession {
             private long index = 0;
             {{#vendorExtensions.x-client-copy-from-response}}
             private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
@@ -354,7 +354,7 @@ namespace {{packageName}}.{{apiPackage}}
             private {{{dataType}}} {{paramName}};{{/isFile}}{{/allParams}}
             private VideosApi videosApi;
 
-            public {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession(VideosApi videosApi, {{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
+            public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession(VideosApi videosApi, {{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
                 {{#allParams}}{{^isFile}}this.{{paramName}} = {{paramName}};{{/isFile}}{{/allParams}}
                 this.videosApi = videosApi;
             }
@@ -379,8 +379,8 @@ namespace {{packageName}}.{{apiPackage}}
             }
         }
 
-        public {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession create{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
-            return new {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession(this, {{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}});
+        public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
+            return new {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession(this, {{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}});
         }
         {{/vendorExtensions.x-client-chunk-upload}}
         

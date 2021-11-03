@@ -7,7 +7,7 @@ use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Psr\Http\Client\ClientExceptionInterface;
 use SplFileObject;
 
-final class StreamUploadSession
+final class ProgressiveUploadSession
 {
     /**
      * @var BaseClient

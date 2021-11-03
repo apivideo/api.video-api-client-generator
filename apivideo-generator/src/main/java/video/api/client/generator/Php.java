@@ -216,7 +216,7 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("src/BaseClient.mustache", toSrcPath(invokerPackage, srcBasePath), "BaseClient.php"));
         supportingFiles.add(new SupportingFile("src/ObjectSerializer.mustache", toSrcPath(invokerPackage, srcBasePath), "ObjectSerializer.php"));
         supportingFiles.add(new SupportingFile("src/VideoUploader.php", toSrcPath(invokerPackage, srcBasePath), "VideoUploader.php"));
-        supportingFiles.add(new SupportingFile("src/StreamUploadSession.php", toSrcPath(invokerPackage, srcBasePath), "StreamUploadSession.php"));
+        supportingFiles.add(new SupportingFile("src/ProgressiveUploadSession.php", toSrcPath(invokerPackage, srcBasePath), "ProgressiveUploadSession.php"));
 
         // Exceptions
         supportingFiles.add(new SupportingFile("src/Exception/ExceptionInterface.php", toSrcPath(invokerPackage, srcBasePath), "Exception/ExceptionInterface.php"));

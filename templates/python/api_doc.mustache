@@ -35,7 +35,7 @@ Name | Type | Description  | Notes
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
 
 {{#vendorExtensions.x-client-chunk-upload}}
-### Stream uploads
+### Progressive uploads
 
 TODO
 
@@ -46,7 +46,7 @@ part1 = open('10m.mp4.part.a', 'rb')
 part2 = open('10m.mp4.part.a', 'rb')
 part3 = open('10m.mp4.part.a', 'rb')
 
-{{#titlecase}}{{operationId}}{{/titlecase}}session = api_instance.create_{{operationId}}_stream_session({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
+{{#titlecase}}{{operationId}}{{/titlecase}}session = api_instance.create_{{operationId}}_progressive_session({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
 
 session.uploadPart(part1)
 session.uploadPart(part2)

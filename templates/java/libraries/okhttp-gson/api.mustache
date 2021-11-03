@@ -160,7 +160,7 @@ public class {{classname}} {
     }
 
     {{#vendorExtensions.x-client-chunk-upload}}
-    private okhttp3.Call {{operationId}}ChunkCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{{dataType}}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long chunkStart, long chunkEnd, long totalBytes, Integer chunksCount, Integer chunkNum, UploadProgressListener progressListener, UploadPartProgressListener partProgressListener, final ApiCallback _callback, boolean isStreamUpload) throws ApiException {
+    private okhttp3.Call {{operationId}}ChunkCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{{dataType}}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long chunkStart, long chunkEnd, long totalBytes, Integer chunksCount, Integer chunkNum, UploadProgressListener progressListener, UploadPartProgressListener partProgressListener, final ApiCallback _callback, boolean isProgressiveUpload) throws ApiException {
         Object localVarPostBody = {{#bodyParam}}{{paramName}}{{/bodyParam}}{{^bodyParam}}null{{/bodyParam}};
 
 
@@ -200,7 +200,7 @@ public class {{classname}} {
         {{/vendorExtensions.x-client-chunk-upload}}
         {{#vendorExtensions.x-client-chunk-upload}}
         if ({{paramName}} != null) {
-            if(isStreamUpload) {
+            if(isProgressiveUpload) {
                 localVarFormParams.put("{{baseName}}", new UploadChunkRequestBody({{paramName}}, chunkEnd - chunkStart + 1, partProgressListener));
             } else {
                 localVarFormParams.put("{{baseName}}", new UploadChunkRequestBody({{paramName}}, chunksCount, chunkNum, totalBytes, chunkStart, chunkEnd + 1, progressListener));
@@ -295,7 +295,7 @@ public class {{classname}} {
     @Deprecated
     {{/isDeprecated}}
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call {{operationId}}ChunkValidateBeforeCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{{dataType}}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long chunkStart, long chunkEnd, long totalBytes, Integer chunksCount, Integer chunkNum, UploadProgressListener progressListener, UploadPartProgressListener partProgressListener, final ApiCallback _callback, boolean isStreamUpload) throws ApiException {
+    private okhttp3.Call {{operationId}}ChunkValidateBeforeCall({{#allParams}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{{dataType}}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long chunkStart, long chunkEnd, long totalBytes, Integer chunksCount, Integer chunkNum, UploadProgressListener progressListener, UploadPartProgressListener partProgressListener, final ApiCallback _callback, boolean isProgressiveUpload) throws ApiException {
         {{^performBeanValidation}}
         {{#allParams}}{{#required}}
         // verify the required parameter '{{paramName}}' is set
@@ -303,7 +303,7 @@ public class {{classname}} {
             throw new ApiException("Missing the required parameter '{{paramName}}' when calling {{operationId}}(Async)");
         }
         {{/required}}{{/allParams}}
-        okhttp3.Call localVarCall = {{operationId}}ChunkCall({{#allParams}}{{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkStart, chunkEnd, totalBytes, chunksCount, chunkNum, progressListener, partProgressListener, _callback, isStreamUpload);
+        okhttp3.Call localVarCall = {{operationId}}ChunkCall({{#allParams}}{{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkStart, chunkEnd, totalBytes, chunksCount, chunkNum, progressListener, partProgressListener, _callback, isProgressiveUpload);
         return localVarCall;
 
         {{/performBeanValidation}}
@@ -450,14 +450,14 @@ public class {{classname}} {
     }
 
 
-    public class {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession {
+    public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession {
         private long index = 0;
         {{#vendorExtensions.x-client-copy-from-response}}
         private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
         private {{{dataType}}} {{paramName}};{{/isFile}}{{/allParams}}
 
-        public {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
+        public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
             {{#allParams}}{{^isFile}}this.{{paramName}} = {{paramName}};{{/isFile}}{{/allParams}}
         }
 
@@ -489,8 +489,8 @@ public class {{classname}} {
         }
     }
 
-    public {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession create{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
-        return new {{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}});
+    public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
+        return new {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}});
     }
     {{/vendorExtensions.x-client-chunk-upload}}
 

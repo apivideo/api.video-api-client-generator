@@ -73,7 +73,7 @@ Large files are broken into chunks for upload. You can control the size of the c
     });
 ```
 
-### Stream uploads
+### Progressive uploads
 
 TODO
 
@@ -87,7 +87,7 @@ try {
     {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}
         {{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
     {{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}}
-        const uploadSession = client.create{{#titlecase}}{{operationId}}{{/titlecase}}StreamSession({{#allParams}}{{^isFile}}{{{paramName}}}{{/isFile}}{{/allParams}});
+        const uploadSession = client.create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{paramName}}}{{/isFile}}{{/allParams}});
 
         await uploadSession.uploadPart('test/data/10m.mp4.part.a');
         await uploadSession.uploadPart('test/data/10m.mp4.part.b');
