@@ -13,7 +13,7 @@ final class ProgressiveUploadSession
      * @var BaseClient
      */
     private $client;
-    private $currentIndex;
+    private $currentPart;
     private $endpoint;
     private $videoId;
 
@@ -26,7 +26,7 @@ final class ProgressiveUploadSession
     {
         $this->client = $client;
         $this->endpoint = $endpoint;
-        $this->currentIndex = 0;
+        $this->currentPart = 1;
         $this->videoId = $videoId;
     }
 
@@ -84,7 +84,7 @@ final class ProgressiveUploadSession
             [
                 'Accept' => 'application/json',
                 'Content-Type' => sprintf('multipart/form-data; boundary="%s"', $builder->getBoundary()),
-                'Content-Range' => sprintf('bytes %s-%s/%s', $this->currentIndex, $this->currentIndex + $fileSize - 1, $isLast ? $this->currentIndex + $fileSize : "*"),
+                'Content-Range' => sprintf('part %s/%s', $this->currentPart, $isLast ? $this->currentPart : "*"),
             ]
         );
         $request->setStream($builder->build());
@@ -93,7 +93,7 @@ final class ProgressiveUploadSession
 
         $this->videoId = $response['videoId'] ?? null;
 
-        $this->currentIndex += $fileSize;
+        $this->currentPart++;
 
         fclose($handle);
 

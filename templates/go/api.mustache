@@ -151,13 +151,13 @@ func (s *{{{classname}}}Service) {{nickname}}FileWithContext(ctx context.Context
 type {{nickname}}Stream struct {
 	client *Client
     {{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}
-    {{/isFile}}{{/allParams}}	currentIndex int64{{#vendorExtensions.x-client-copy-from-response}}
+    {{/isFile}}{{/allParams}}	part int32{{#vendorExtensions.x-client-copy-from-response}}
     {{paramName}} *{{dataType}}{{/vendorExtensions.x-client-copy-from-response}}
 }
 
 
 func (s *{{{classname}}}Service) Create{{nickname}}Stream({{#allParams}}{{^isFile}}{{paramName}} {{^required}}*{{/required}}{{{dataType}}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}} *{{dataType}}{{/vendorExtensions.x-client-copy-from-response}}) (IUploadStream, error) {
-	return &{{nickname}}Stream{client: s.client, {{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}} : {{paramName}}{{/vendorExtensions.x-client-copy-from-response}}, currentIndex: 0}, nil
+	return &{{nickname}}Stream{client: s.client, {{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}} : {{paramName}}{{/vendorExtensions.x-client-copy-from-response}}, part: 1}, nil
 }
 
 
@@ -183,13 +183,13 @@ func (s *{{nickname}}Stream) UploadAPart(ctx context.Context, fileName string, f
     }
 {{/vendorExtensions.x-client-copy-from-response}}
 
-	request, err := s.client.prepareStreamRequest(context.Background(), localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams, s.currentIndex, isLast)
+	request, err := s.client.prepareProgressiveUploadRequest(context.Background(), localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams, s.part, isLast)
 
     if err != nil {
 		return nil, err
 	}
 
-    s.currentIndex = s.currentIndex + fileSize
+    s.part = s.part + 1
 
 	res := new(Video)
 

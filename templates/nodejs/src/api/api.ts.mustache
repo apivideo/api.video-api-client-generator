@@ -36,13 +36,13 @@ export default class {{classname}} {
   /**
    {{#summary}}
    * {{&summary}}
-   * This will create a progressive upload session. TODO{{/summary}}{{#allParams}}{{^isFile}}
+   * This will create a progressive upload session.{{/summary}}{{#allParams}}{{^isFile}}
    * @param {{paramName}} {{description}}{{/isFile}}{{/allParams}}
    */
   public create{{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}): ProgressiveSession<{{{returnType}}}> {
     class {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<Type> {
         private httpClient: HttpClient;
-        private currentOffset = 0;{{#vendorExtensions.x-client-copy-from-response}}
+        private currentPart = 1;{{#vendorExtensions.x-client-copy-from-response}}
         private {{paramName}}?: string;{{/vendorExtensions.x-client-copy-from-response}}
 
         constructor(httpClient: HttpClient) {
@@ -144,7 +144,7 @@ export default class {{classname}} {
             }
             {{/vendorExtensions.x-client-copy-from-response}}
             queryParams.body = formData;
-            queryParams.headers['Content-Range'] = `bytes ${this.currentOffset}-${this.currentOffset + length - 1}/${isLast ? length + this.currentOffset : "*"}`;
+            queryParams.headers['Content-Range'] = `part ${this.currentPart}/${isLast ? this.currentPart : "*"}`;
             const call = this.httpClient.call(localVarPath, queryParams);
             if (progressListener) {
               call.on('uploadProgress', (progress: any) => {
@@ -158,7 +158,7 @@ export default class {{classname}} {
                 });
               });
             }
-            this.currentOffset += length;
+            this.currentPart++;
             return call.then(response => ObjectSerializer.deserialize(
                 ObjectSerializer.parse(response.body, response.headers["content-type"]),
                 "{{{returnType}}}", "{{returnFormat}}"
@@ -342,6 +342,9 @@ export default class {{classname}} {
       let stream;
       let chunkNumber = 0;
 
+      const partsCount = Math.ceil(length / chunkSize);
+      let part = 1;
+
       for (let offset = 0; offset < length; offset += chunkSize, chunkNumber++) {
         // default the upload size to be as large as possible.
         uploadChunkSize = chunkSize;
@@ -359,9 +362,8 @@ export default class {{classname}} {
         chunkFormData.append(filename, stream, filename);
 
         queryParams.body = chunkFormData;
-        queryParams.headers['Content-Range'] = `bytes ${offset}-${
-          offset + uploadChunkSize - 1
-        }/${length}`;
+        queryParams.headers['Content-Range'] = `part ${part}/${partsCount}`;
+        part++;
 
         const call = this.httpClient.call(localVarPath, queryParams);
 

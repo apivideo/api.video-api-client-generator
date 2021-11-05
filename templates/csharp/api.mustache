@@ -156,7 +156,11 @@ namespace {{packageName}}.{{apiPackage}}
                 {
                     chunkNum++;
                     byte[] buffer = new byte[chunkSize];
-                    localVarHeaderParams["Content-Range"] = "bytes " + i + "-" + (Math.Min(i+chunkSize,totalBytes)-1) + "/" + totalBytes;
+                    if(i + chunkSize >= totalBytes) {
+                        localVarHeaderParams["Content-Range"] = "part " + chunkNum + "/" + chunkNum;
+                    } else {
+                        localVarHeaderParams["Content-Range"] = "part " + chunkNum + "/*";
+                    }
                     
                     file.Read(buffer, 0, chunkSize);
 
@@ -227,7 +231,7 @@ namespace {{packageName}}.{{apiPackage}}
         }
 
         {{#vendorExtensions.x-client-chunk-upload}}
-         public{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long lastIndex, bool isLast) {
+         public{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}int part, bool isLast) {
              {{#allParams}}
             {{#bodyParam}}
             if ({{paramName}} == null)
@@ -316,10 +320,10 @@ namespace {{packageName}}.{{apiPackage}}
 
             if(isLast)
             {
-                localVarHeaderParams["Content-Range"] = "bytes " + lastIndex + "-" + (lastIndex + totalBytes - 1) + "/" + (lastIndex + totalBytes);
+                localVarHeaderParams["Content-Range"] = "part " + part + "/" + part;
             } else
             {
-                localVarHeaderParams["Content-Range"] = "bytes " + lastIndex + "-" + (lastIndex + totalBytes - 1) + "/*";
+                localVarHeaderParams["Content-Range"] = "part " + part + "/*";
             }
 
             // make the HTTP request
@@ -347,7 +351,7 @@ namespace {{packageName}}.{{apiPackage}}
 
 
         public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession {
-            private long index = 0;
+            private int partNum = 1;
             {{#vendorExtensions.x-client-copy-from-response}}
             private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
             {{#allParams}}{{^isFile}}
@@ -368,9 +372,9 @@ namespace {{packageName}}.{{apiPackage}}
             }
 
             public Video uploadPart(System.IO.Stream part, bool isLastPart) {
-                long lastIndex = index;
-                index += part.Length;
-                ApiResponse<Video> localVarResp = this.videosApi.{{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastIndex, isLastPart);
+                int lastPartNum = partNum;
+                partNum++;
+                ApiResponse<Video> localVarResp = this.videosApi.{{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastPartNum, isLastPart);
                 {{#vendorExtensions.x-client-copy-from-response}}
                 if(this.{{paramName}} == null) {
                     this.{{paramName}} = localVarResp.Data.{{#lower}}{{paramName}}{{/lower}};

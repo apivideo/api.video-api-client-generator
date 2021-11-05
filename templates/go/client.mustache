@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+    "math"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -205,7 +206,7 @@ func (c *Client) prepareRequest(
 }
 
 
-func (c *Client) prepareStreamRequest(
+func (c *Client) prepareProgressiveUploadRequest(
 	ctx context.Context,
 	urlStr string,
 	fileName string,
@@ -214,7 +215,7 @@ func (c *Client) prepareStreamRequest(
 	headerParams map[string]string,
 	queryParams url.Values,
 	formParams map[string]string,
-	startByte int64,
+	part int32,
 	isLast bool) (*http.Request, error) {
 
 	body := new(bytes.Buffer)
@@ -251,9 +252,9 @@ func (c *Client) prepareStreamRequest(
 
 	var ranges string
 	if isLast {
-		ranges = fmt.Sprintf("bytes %d-%d/%d", startByte, (startByte+fileSize)-1, startByte+fileSize)
+		ranges = fmt.Sprintf("part %d/%d", part, part)
 	} else {
-		ranges = fmt.Sprintf("bytes %d-%d/*", startByte, (startByte+fileSize)-1)
+		ranges = fmt.Sprintf("part %d/*", part)
 	}
 
 	req.Header.Set("Content-Range", ranges)
@@ -280,6 +281,8 @@ func (c *Client) prepareRangeRequests(
 
 	var requests []*http.Request
 	startByte := int64(0)
+    part := 1
+    partCount := int64(math.Ceil(float64(fileSize) / float64(c.chunkSize)))
 	for {
 		body := new(bytes.Buffer)
 		writer := multipart.NewWriter(body)
@@ -320,7 +323,7 @@ func (c *Client) prepareRangeRequests(
 		req.Header.Set("Content-Type", writer.FormDataContentType())
 
 		if fileSize > c.chunkSize && c.chunkSize != 0 {
-			ranges := fmt.Sprintf("bytes %d-%d/%d", startByte, (startByte+bytesread)-1, fileSize)
+			ranges := fmt.Sprintf("part %d/%d", part, partCount)
 			req.Header.Set("Content-Range", ranges)
 			startByte = startByte + bytesread
 		}
@@ -330,6 +333,8 @@ func (c *Client) prepareRangeRequests(
 		if startByte == fileSize || fileSize < c.chunkSize {
 			break
 		}
+
+        part = part + 1
 	}
 	return requests, nil
 }

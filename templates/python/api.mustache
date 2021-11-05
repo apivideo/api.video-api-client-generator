@@ -262,7 +262,7 @@ class {{classname}}(_EndPoint):
 
     def create_{{operationId}}_progressive_session(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}=None{{/vendorExtensions.x-client-copy-from-response}}):
         class ProgressiveSession:
-            current_index = 0{{#requiredParams}}{{^isFile}}
+            current_part = 1{{#requiredParams}}{{^isFile}}
             parent = None
             {{paramName}} = None{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}
             {{paramName}} = None{{/vendorExtensions.x-client-copy-from-response}}
@@ -448,15 +448,15 @@ class {{classname}}(_EndPoint):
                 self.parent._validate_inputs(kwargs, params_map, allowed_values, validations, openapi_types)
                 params = self.parent._gather_params(kwargs, location_map, attribute_map, openapi_types, collection_format_map)
 
-                index = self.current_index
-                self.current_index = self.current_index + file_size
+                part = self.current_part
+                self.current_part = self.current_part + 1
 
                 res = self.parent.api_client.call_api(
                     "{{{path}}}",
                     "{{httpMethod}}",
                     params['path'],
                     params['query'],
-                    {**params['header'], 'Content-Range': "bytes " + str(index) + "-" + str(index + file_size - 1) + "/" + ("*" if not is_last else str(index + file_size))},
+                    {**params['header'], 'Content-Range': "part " + str(part) + "/" + ("*" if not is_last else str(part))},
                     body=params['body'],
                     post_params=params['form'],
                     files={"file": [ChunkIO(file.read(), file.name)]},

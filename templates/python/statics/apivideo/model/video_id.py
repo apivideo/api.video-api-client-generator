@@ -109,7 +109,6 @@ class VideoId(ModelNormal):
 
         Args:
             video_id (str): The unique identifier of the video object.
-            title (str): The title of the video content. 
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -180,7 +179,6 @@ class VideoId(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.video_id = video_id
-        self.title = title
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

@@ -70,7 +70,9 @@ func main() {
 {{#vendorExtensions.x-client-chunk-upload}}
 ### Progressive uploads
 
-TODO
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
 
 ```go
 {{^vendorExtensions.x-group-parameters}}{{#allParams}}{{^isFile}}

@@ -85,7 +85,8 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
 
 ### Progressive uploads
 
-TODO
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
 
 ```java
 {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};

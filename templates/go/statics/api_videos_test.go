@@ -418,7 +418,7 @@ func skipIfNoApiKey(t *testing.T) {
 func createRealClient() *Client {
 	return (&Builder{
 		baseURL:         os.Getenv("BASE_URI"),
-		uploadChunkSize: defaultChunkSize,
+		uploadChunkSize: minChunkSize,
 		apiKey:          os.Getenv("API_KEY"),
 	}).Build()
 }
@@ -434,7 +434,7 @@ func TestVideos_Integration_CreateUploadStream(t *testing.T) {
 	}
 	stream, err := cl.Videos.CreateUploadStream(video.VideoId)
 
-	parts := []string{"./10m.mp4.part.a", "./10m.mp4.part.b", "./10m.mp4.part.d"}
+	parts := []string{"./test-assets/10m.mp4.part.a", "./test-assets/10m.mp4.part.b", "./test-assets/10m.mp4.part.d"}
 
 	var lastPart *Video
 	for i, part := range parts {
@@ -461,6 +461,24 @@ func TestVideos_Integration_CreateUploadStream(t *testing.T) {
 
 	if lastPart.Title != video.Title {
 		t.Fatalf("invalid title in result: %v != %v", lastPart.Title, video.Title)
+	}
+}
+
+func TestVideos_Integration_UploadChunk(t *testing.T) {
+	skipIfNoApiKey(t)
+
+	cl := createRealClient()
+
+	video, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload by chunk GO"})
+	if err != nil {
+		t.Errorf("Videos.Create error: %v", err)
+	}
+
+	f, _ := os.Open("./test-assets/10m.mp4")
+	v, err := cl.Videos.UploadFile(video.VideoId, f)
+
+	if v.Title != video.Title {
+		t.Fatalf("invalid title in result: %v != %v", v.Title, video.Title)
 	}
 }
 

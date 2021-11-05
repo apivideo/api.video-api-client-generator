@@ -201,7 +201,7 @@ public class {{classname}} {
         {{#vendorExtensions.x-client-chunk-upload}}
         if ({{paramName}} != null) {
             if(isProgressiveUpload) {
-                localVarFormParams.put("{{baseName}}", new UploadChunkRequestBody({{paramName}}, chunkEnd - chunkStart + 1, partProgressListener));
+                localVarFormParams.put("{{baseName}}", new UploadChunkRequestBody({{paramName}}, totalBytes, partProgressListener));
             } else {
                 localVarFormParams.put("{{baseName}}", new UploadChunkRequestBody({{paramName}}, chunksCount, chunkNum, totalBytes, chunkStart, chunkEnd + 1, progressListener));
             }
@@ -223,7 +223,7 @@ public class {{classname}} {
 
         {{/headerParams}}
         {{#vendorExtensions.x-client-chunk-upload}}
-        localVarHeaderParams.put("Content-Range", "bytes " + chunkStart + "-" + chunkEnd + "/" + (totalBytes > 0 ? totalBytes : "*"));
+        localVarHeaderParams.put("Content-Range", "part " + chunkNum + "/" + (chunksCount != null ? chunksCount : "*"));
 
 
         {{/vendorExtensions.x-client-chunk-upload}}
@@ -442,16 +442,17 @@ public class {{classname}} {
         {{/vendorExtensions.x-client-chunk-upload}}
     }
     {{#vendorExtensions.x-client-chunk-upload}}
-     public{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}long lastIndex, boolean isLast, UploadPartProgressListener uploadProgressListener) throws ApiException {
-        okhttp3.Call localVarCall = {{operationId}}ChunkValidateBeforeCall({{#allParams}}{{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastIndex,
-            lastIndex + file.length() - 1, isLast ? lastIndex + file.length() : 0, 1, 1, null, uploadProgressListener, null, true);
+     public{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}Integer part, boolean isLast, UploadPartProgressListener uploadProgressListener) throws ApiException {
+        long fileSize = file.length();
+        okhttp3.Call localVarCall = {{operationId}}ChunkValidateBeforeCall({{#allParams}}{{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}0, fileSize, fileSize, isLast ? part : null, part, null,
+                uploadProgressListener, null, true);
         {{#returnType}}Type localVarReturnType = new TypeToken<{{{returnType}}}>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);{{/returnType}}{{^returnType}}return localVarApiClient.execute(localVarCall);{{/returnType}}
     }
 
 
     public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession {
-        private long index = 0;
+        private Integer part = 1;
         {{#vendorExtensions.x-client-copy-from-response}}
         private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
@@ -478,9 +479,9 @@ public class {{classname}} {
         }
 
         public Video uploadPart(File part, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
-            long lastIndex = index;
-            index += part.length();
-            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastIndex, isLastPart, uploadProgressListener);
+            Integer lastPart = this.part;
+            this.part++;
+            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastPart, isLastPart, uploadProgressListener);
             {{#vendorExtensions.x-client-copy-from-response}}
             if(this.{{paramName}} == null) {
                 this.{{paramName}} = localVarResp.getData().{{vendorExtensions.getter}}();
