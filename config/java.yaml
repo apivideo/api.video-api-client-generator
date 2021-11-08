@@ -41,6 +41,9 @@ files:
   UploadProgressListener.mustache:
     folder: src/main/java/video/api/client/api/upload
     destinationFilename: UploadProgressListener.java
+  UploadPartProgressListener.mustache:
+    folder: src/main/java/video/api/client/api/upload
+    destinationFilename: UploadPartProgressListener.java
   ApiVideoClient.mustache:
     folder: src/main/java/video/api/client
     destinationFilename: ApiVideoClient.java
