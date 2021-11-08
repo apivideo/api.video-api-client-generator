@@ -3,7 +3,7 @@ invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
 groupId: video.api
-artifactDescription: api.video java API client
+artifactDescription: api.video Java API client
 artifactUrl: https://github.com/apivideo/java-api-client
 scmConnection: scm:git:git://github.com/apivideo/java-api-client.git
 scmDeveloperConnection: scm:git:ssh://github.com:apivideo/java-api-client.git
