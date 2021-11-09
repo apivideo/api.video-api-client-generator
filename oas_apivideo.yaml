@@ -884,7 +884,7 @@ paths:
                         value: John Doe
                       - key: Format
                         value: Tutorial
-                    scheduledAt: 2020-03-03T12:52:03.085+00:00
+                    createdAt: 2020-03-03T12:52:03.085+00:00
                     publishedAt: 2020-07-14T23:36:18.598+00:00
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
@@ -5821,7 +5821,7 @@ components:
             value: John Doe
           - key: Format
             value: Tutorial
-        scheduledAt: 4251-03-03T12:52:03.085Z
+        createdAt: 4251-03-03T12:52:03.085Z
         publishedAt: 4665-07-14T23:36:18.598Z
         actions:
           - video_delete
