@@ -693,10 +693,10 @@ func TestVideos_ChunkedUpload(t *testing.T) {
 	defer teardown()
 	var count int64
 	headers := []string{
-		"bytes 0-2097151/8388608",
-		"bytes 2097152-4194303/8388608",
-		"bytes 4194304-6291455/8388608",
-		"bytes 6291456-8388607/8388608",
+		"part 1/4",
+		"part 2/4",
+		"part 3/4",
+		"part 4/4",
 	}
 	mux.HandleFunc("/videos/vi4k0jvEUuaTdRAEjQ4Jfagz/source", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodPost)
