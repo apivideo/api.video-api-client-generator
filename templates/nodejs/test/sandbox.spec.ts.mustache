@@ -73,7 +73,7 @@ describe('ApiVideoClient', () => {
 
     // upload a video resource
     await client.videos
-      .upload(videoId, 'test/data/small.webm')
+      .upload(videoId, 'test/data/558k.mp4')
       .then((video) => {
         expect(title).to.equals(videoTitle);
       });
@@ -250,6 +250,6 @@ describe('ApiVideoClient', () => {
     expect(token).to.be.a('string');
 
     // Upload a video with a token
-    await client.videos.uploadWithUploadToken(token as string, 'test/data/small.webm');
+    await client.videos.uploadWithUploadToken(token as string, 'test/data/558k.mp4');
   });
 });
