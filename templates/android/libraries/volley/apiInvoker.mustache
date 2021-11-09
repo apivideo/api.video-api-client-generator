@@ -220,7 +220,7 @@ public class ApiInvoker {
 
   public static void initializeInstance(Cache cache, Network network, int threadPoolSize, ResponseDelivery delivery, int connectionTimeout) {
     INSTANCE = new ApiInvoker(cache, network, threadPoolSize, delivery, connectionTimeout);
-    setUserAgent("api.video client (android; v:{{ artifactVersion }}; )");
+    setUserAgent("api.video {{ userAgent }} (android; v:{{ artifactVersion }}; )");
 
     // Setup authentications (key: authentication name, value: authentication).
     INSTANCE.authentications = new HashMap<String, Authentication>();
@@ -507,8 +507,6 @@ public class ApiInvoker {
        } else if (body != null) {
           if (body instanceof HttpEntity) {
              request = new PostRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
-          } else if (body instanceof InputStream) {
-             request = new PostRequest(url, headers, null, new InputStreamEntity((InputStream) body), stringRequest, errorListener);
           } else {
              request = new PostRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
           }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <SwitchPreference
+        android:defaultValue="true"
+        app:key="@string/environment_key"
+        app:summaryOff="@string/production"
+        app:summaryOn="@string/sandbox"
+        app:title="@string/environment" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        app:key="@string/auth_type_key"
+        app:summaryOff="@string/token"
+        app:summaryOn="@string/api_key"
+        app:title="@string/auth_type" />
+
+    <EditTextPreference
+        android:defaultValue="@string/default_api_key"
+        android:dialogTitle="@string/api_key"
+        android:key="@string/api_key_key"
+        android:title="@string/api_key"
+        app:useSimpleSummaryProvider="true" />
+
+    <EditTextPreference
+        android:defaultValue="@string/default_token"
+        android:dialogTitle="@string/token"
+        android:key="@string/token_key"
+        android:title="@string/token"
+        app:useSimpleSummaryProvider="true" />
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:dialogTitle="@string/video_id"
+        android:key="@string/video_id_key"
+        android:title="@string/video_id"
+        app:useSimpleSummaryProvider="true" />
+
+    <Preference
+        android:key="@string/file_chooser_key"
+        android:title="@string/choose_a_file" />
+
+</androidx.preference.PreferenceScreen>

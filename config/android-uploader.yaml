@@ -1,13 +1,13 @@
 artifactVersion: 1.0.10
-userAgent: client
-invokerPackage: video.api.client.api
-apiPackage: video.api.client.api.clients
-modelPackage: video.api.client.api.models
+userAgent: uploader
+invokerPackage: video.api.uploader.api
+apiPackage: video.api.uploader
+modelPackage: video.api.uploader.api.models
 groupId: video.api
-artifactDescription: api.video Android API client
-artifactUrl: https://github.com/apivideo/android-api-client
-scmConnection: scm:git:git://github.com/apivideo/android-api-client.git
-scmDeveloperConnection: scm:git:ssh://github.com:apivideo/android-api-client.git
+artifactDescription: api.video Android API video uploader
+artifactUrl: https://github.com/apivideo/android-uploader
+scmConnection: scm:git:git://github.com/apivideo/android-video-uploader.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/android-video-uploader.git
 scmUrl: https://github.com/apivideo/android-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
@@ -18,7 +18,7 @@ licenseUrl: http://www.opensource.org/licenses/mit-license.php
 library: volley
 dateLibrary: threetenbp
 sourceFolder: src/main/java
-artifactId: android-api-client
+artifactId: android-uploader
 hideGenerationTimestamp: true
 serializableModel: "true"
 java8: "true"
@@ -29,36 +29,27 @@ maxChunkSize: 128 * 1024 * 1024
 
 files:
   Environment.mustache:
-    folder: src/main/java/video/api/client/api/models
+    folder: src/main/java/video/api/uploader/api/models
     destinationFilename: Environment.java
-  page.mustache:
-    folder: src/main/java/video/api/client/api/models
-    destinationFilename: Page.java
   EmptyArrayFixTypeAdapterFactory.mustache:
-    folder: src/main/java/video/api/client/api
+    folder: src/main/java/video/api/uploader/api
     destinationFilename: EmptyArrayFixTypeAdapterFactory.java
   UploadChunkRequestBody.mustache:
-    folder: src/main/java/video/api/client/api/upload
+    folder: src/main/java/video/api/uploader/api/upload
     destinationFilename: UploadChunkRequestBody.java
   ChunkFileInputStream.mustache:
-    folder: src/main/java/video/api/client/api/upload
+    folder: src/main/java/video/api/uploader/api/upload
     destinationFilename: ChunkFileInputStream.java
   UploadProgressListener.mustache:
-    folder: src/main/java/video/api/client/api/upload
+    folder: src/main/java/video/api/uploader/api/upload
     destinationFilename: UploadProgressListener.java
   UploadPartProgressListener.mustache:
-    folder: src/main/java/video/api/client/api/upload
+    folder: src/main/java/video/api/uploader/api/upload
     destinationFilename: UploadPartProgressListener.java
-  ApiVideoClient.mustache:
-    folder: src/main/java/video/api/client
-    destinationFilename: ApiVideoClient.java
   auth/apivideoauth.mustache:
-    folder: src/main/java/video/api/client/api/auth
+    folder: src/main/java/video/api/uploader/api/auth
     destinationFilename: ApiVideoAuth.java
-  pagination.md.mustache:
-    folder: docs
-    destinationFilename: Pagination.md
-  README-client.mustache:
+  README-uploader.mustache:
     destinationFilename: README.md
-  post-generate-client.sh:
+  post-generate-uploader.sh:
     destinationFilename: post-generate.sh
