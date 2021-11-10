@@ -31,7 +31,7 @@ namespace VideoApiTests.Client
                                 .Should()
                                 .Throw<ApiException>()
                                 .WithMessage("Missing required parameter 'videoId' when calling VideosApi->delete");
-            api.Invoking(x => x.delete("vi4k0jvEUuaTdRAEjQ4Jfrgz"))
+            api.Invoking(x => x.delete("vi4blUQJFrYWbaG44NChkH27"))
                                 .Should()
                                 .NotThrow();
         }
@@ -42,7 +42,7 @@ namespace VideoApiTests.Client
             InitDeleteTests();
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            api.Invoking(x => x.delete("vi4k0jvEUuaTdRAEjQ4Jfrgz"))
+            api.Invoking(x => x.delete("vi4blUQJFrYWbaG44NChkH27"))
                                 .Should()
                                 .Throw<ApiException>()
                                 .Where(x => x.ErrorCode == 404)
@@ -65,7 +65,7 @@ namespace VideoApiTests.Client
                                 .Should()
                                 .Throw<ApiException>()
                                 .WithMessage("Missing required parameter 'videoId' when calling VideosApi->get");
-            api.Invoking(x => x.get("vi4k0jvEUuaTdRAEjQ4Jfrgz"))
+            api.Invoking(x => x.get("vi4blUQJFrYWbaG44NChkH27"))
                                 .Should()
                                 .NotThrow();
         }
@@ -78,7 +78,7 @@ namespace VideoApiTests.Client
 
             Video res = api.get("videoId_example");
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining string theory");
@@ -89,13 +89,13 @@ namespace VideoApiTests.Client
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
             res.publishedat.Should().Be("2019-12-16T08:25:51+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
             
         }
 
@@ -211,7 +211,7 @@ namespace VideoApiTests.Client
 
             Video res = page.Items[0];
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Prklg");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory");
@@ -224,11 +224,11 @@ namespace VideoApiTests.Client
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/c188ed58-3403-46a2-b91b-44603d10b2c9?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/c188ed58-3403-46a2-b91b-44603d10b2c9?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]
@@ -278,9 +278,9 @@ namespace VideoApiTests.Client
             InitUpdateTests();
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Video res = api.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload());
+            Video res = api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload());
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory");
@@ -291,13 +291,13 @@ namespace VideoApiTests.Client
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
             res.publishedat.Should().Be("2019-12-16T08:25:51+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]
@@ -366,9 +366,9 @@ namespace VideoApiTests.Client
             InitPickThumbnailTests();
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Video res = api.pickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoThumbnailPickPayload() { timecode = "10:10:10" });
+            Video res = api.pickThumbnail("vi4blUQJFrYWbaG44NChkH27", new VideoThumbnailPickPayload() { timecode = "10:10:10" });
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining string theory");
@@ -377,15 +377,15 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
+            res.publishedat.Should().Be("4665-07-14T23:36:18.598+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]
@@ -394,7 +394,7 @@ namespace VideoApiTests.Client
             InitPickThumbnailTests();
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            api.Invoking(x => x.pickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoThumbnailPickPayload() { timecode = "10:10:10" }))
+            api.Invoking(x => x.pickThumbnail("vi4blUQJFrYWbaG44NChkH27", new VideoThumbnailPickPayload() { timecode = "10:10:10" }))
                                 .Should()
                                 .Throw<ApiException>()
                                 .Where(x => x.ErrorCode == 404)
@@ -436,7 +436,7 @@ namespace VideoApiTests.Client
 
             Video res = api.create(new VideoCreationPayload() { title = "title" });
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl4k0jvEUuaTdRAEjQ4Jfrgz");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory");
@@ -447,13 +447,13 @@ namespace VideoApiTests.Client
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
             res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]
@@ -502,9 +502,9 @@ namespace VideoApiTests.Client
             InitUploadTests();
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            Video res = api.uploadWithUploadToken("vi4k0jvEUuaTdRAEjQ4Jfrgz", new MemoryStream());
+            Video res = api.uploadWithUploadToken("vi4blUQJFrYWbaG44NChkH27", new MemoryStream());
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory.");
@@ -513,15 +513,15 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
+            res.publishedat.Should().Be("4665-07-14T23:36:18.598+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
         #endregion
 
@@ -557,9 +557,9 @@ namespace VideoApiTests.Client
             InitUploadTests();
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            Video res = api.upload("vi4k0jvEUuaTdRAEjQ4Jfrgz", new MemoryStream());
+            Video res = api.upload("vi4blUQJFrYWbaG44NChkH27", new MemoryStream());
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory.");
@@ -568,15 +568,15 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
+            res.publishedat.Should().Be("4665-07-14T23:36:18.598+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]
@@ -638,9 +638,9 @@ namespace VideoApiTests.Client
             InitUploadThumbnailTests();
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Video res = api.uploadThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz", new MemoryStream());
+            Video res = api.uploadThumbnail("vi4blUQJFrYWbaG44NChkH27", new MemoryStream());
 
-            res.videoid.Should().Be("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            res.videoid.Should().Be("vi4blUQJFrYWbaG44NChkH27");
             res.playerid.Should().Be("pl45KFKdlddgk654dspkze");
             res.title.Should().Be("Maths video");
             res.description.Should().Be("An amazing video explaining the string theory");
@@ -649,15 +649,15 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("2020-07-14T23:36:18.598Z");
+            res.publishedat.Should().Be("2020-07-14T23:36:18.598+00:00");
             res.source.Should().NotBeNull();
-            res.source.uri.Should().Be("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source");
+            res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
-            res.assets.hls.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8");
-            res.assets.iframe.Should().Be("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4");
-            res.assets.player.Should().Be("https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae");
-            res.assets.thumbnail.Should().Be("https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg");
+            res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
+            res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
+            res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
 
         [TestMethod]

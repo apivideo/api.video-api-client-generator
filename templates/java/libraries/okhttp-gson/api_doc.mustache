@@ -82,6 +82,23 @@ apiVideoClient.{{classVarName}}().{{{operationId}}}{{^vendorExtensions.x-group-p
     .{{{paramName}}}({{{paramName}}}){{/optionalParams}}
     .execute();{{/vendorExtensions.x-group-parameters}}
 ```
+
+### Progressive uploads
+
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+```java
+{{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};
+
+{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession session = apiVideoClient.create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
+
+session.uploadPart(new File("sample.mp4.part1"));
+session.uploadPart(new File("sample.mp4.part2"));
+// ...
+{{returnType}} result = session.uploadLastPart(new File("sample.mp4.partn"));
+```
+
 {{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type

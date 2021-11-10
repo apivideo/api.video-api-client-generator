@@ -23,7 +23,7 @@ namespace VideoApiTests.Integration
         public void createAndListWebhook()
         {
             webhook = apiClient.Webhooks()
-                    .create(new WebhooksCreationPayload() { url = "https://webhooks.test-java-api-client", events = new List<string> { "video.encoding.quality.completed", } });
+                    .create(new WebhooksCreationPayload() { url = "https://webhooks.test-java-api-client.fr", events = new List<string> { "video.encoding.quality.completed", } });
             
 
             Page<Webhook> list = apiClient.Webhooks().list().execute();

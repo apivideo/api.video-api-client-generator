@@ -35,7 +35,7 @@ public class WebhooksTest {
         this.webhook = apiClient.webhooks()
                 .create(new WebhooksCreationPayload()
                         .events(Collections.singletonList("video.encoding.quality.completed"))
-                        .url("https://webhooks.test-java-api-client"));
+                        .url("https://webhooks.test-java-api-client.fr"));
 
         assertThat(webhook.getWebhookId()).isNotNull();
     }
@@ -53,7 +53,7 @@ public class WebhooksTest {
         assertThat(filteredWebhooks).hasSize(1);
         assertThat(filteredWebhooks.get(0).getWebhookId()).isEqualTo(this.webhook.getWebhookId());
         assertThat(filteredWebhooks.get(0).getEvents()).hasSize(1);
-        assertThat(filteredWebhooks.get(0).getUrl()).isEqualTo("https://webhooks.test-java-api-client");
+        assertThat(filteredWebhooks.get(0).getUrl()).isEqualTo("https://webhooks.test-java-api-client.fr");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class WebhooksTest {
 
         assertThat(webhook.getWebhookId()).isEqualTo(this.webhook.getWebhookId());
         assertThat(webhook.getEvents()).hasSize(1);
-        assertThat(webhook.getUrl()).isEqualTo("https://webhooks.test-java-api-client");
+        assertThat(webhook.getUrl()).isEqualTo("https://webhooks.test-java-api-client.fr");
     }
 
     @AfterAll

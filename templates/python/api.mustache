@@ -6,7 +6,8 @@ from types import MethodType
 from types import FunctionType
 
 from {{packageName}}.api_client import ApiClient
-from {{packageName}}.endpoint import EndPoint as _EndPoint
+from {{packageName}}.endpoint import EndPoint as _EndPoint, ChunkIO
+from {{packageName}}.model.video_id import VideoId
 from {{packageName}}.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
@@ -257,6 +258,223 @@ class {{classname}}(_EndPoint):
                     _request_timeout=kwargs['_request_timeout'],
                     collection_formats=params['collection_format'])
             return res  # return the last response
+
+
+    def create_{{operationId}}_progressive_session(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}=None{{/vendorExtensions.x-client-copy-from-response}}):
+        class ProgressiveSession:
+            current_part = 1{{#requiredParams}}{{^isFile}}
+            parent = None
+            {{paramName}} = None{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}
+            {{paramName}} = None{{/vendorExtensions.x-client-copy-from-response}}
+
+            def __init__(self, parent, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}=None{{/vendorExtensions.x-client-copy-from-response}}):{{#requiredParams}}{{^isFile}}
+                self.{{paramName}} = {{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}
+                self.{{paramName}} = {{paramName}}{{/vendorExtensions.x-client-copy-from-response}}
+                self.parent = parent
+
+            def uploadPart(self, file):
+                return self.__upload(file, False)
+
+            def uploadLastPart(self, file):
+                return self.__upload(file, True)
+
+            def __upload(self, file, is_last):
+                kwargs = {}
+                file.seek(0, 2)
+                file_size = file.tell()
+                file.seek(0, 0)
+                kwargs['async_req'] = kwargs.get(
+                    'async_req', False
+                )
+                kwargs['_return_http_data_only'] = kwargs.get(
+                    '_return_http_data_only', True
+                )
+                kwargs['_preload_content'] = kwargs.get(
+                    '_preload_content', True
+                )
+                kwargs['_request_timeout'] = kwargs.get(
+                    '_request_timeout', None
+                )
+                {{#vendorExtensions.x-client-copy-from-response}}
+                if self.{{paramName}}:
+                    kwargs['{{paramName}}'] = \
+                        self.{{paramName}}
+                {{/vendorExtensions.x-client-copy-from-response}}
+
+    {{#requiredParams}}{{^isFile}}
+                kwargs['{{paramName}}'] = \
+                    self.{{paramName}}
+    {{/isFile}}{{/requiredParams}}
+                kwargs['file'] = \
+                    file
+
+                params_map = {
+                    'all': [
+    {{#allParams}}
+                        '{{paramName}}',
+    {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+                        '{{paramName}}',
+    {{/vendorExtensions.x-client-copy-from-response}}
+                        'async_req',
+                        '_preload_content',
+                        '_request_timeout',
+                        '_return_http_data_only'{{#vendorExtensions.x-client-chunk-upload}},
+                        '_progress_listener',{{/vendorExtensions.x-client-chunk-upload}}
+                    ],
+    {{#requiredParams}}
+    {{#-first}}
+                    'required': [
+    {{/-first}}
+                        '{{paramName}}',
+    {{#-last}}
+                    ],
+    {{/-last}}
+    {{/requiredParams}}
+    {{^requiredParams}}
+                    'required': [],
+    {{/requiredParams}}
+                    'nullable': [
+    {{#allParams}}
+    {{#isNullable}}
+                        '{{paramName}}',
+    {{/isNullable}}
+    {{/allParams}}
+                        '_request_timeout'
+                    ],
+                    'enum': [
+    {{#allParams}}
+    {{#isEnum}}
+                        '{{paramName}}',
+    {{/isEnum}}
+    {{/allParams}}
+                    ],
+                    'validation': [
+    {{#allParams}}
+    {{#hasValidation}}
+                        '{{paramName}}',
+    {{/hasValidation}}
+    {{/allParams}}
+                    ]
+                }
+                validations = {
+    {{#allParams}}
+    {{#hasValidation}}
+                    ('{{paramName}}',): {
+    {{#maxLength}}
+                        'max_length': {{maxLength}},{{/maxLength}}{{#minLength}}
+                        'min_length': {{minLength}},{{/minLength}}{{#maxItems}}
+                        'max_items': {{maxItems}},{{/maxItems}}{{#minItems}}
+                        'min_items': {{minItems}},{{/minItems}}{{#maximum}}
+                        {{#exclusiveMaximum}}'exclusive_maximum'{{/exclusiveMaximum}}'inclusive_maximum'{{^exclusiveMaximum}}{{/exclusiveMaximum}}: {{maximum}},{{/maximum}}{{#minimum}}
+                        {{#exclusiveMinimum}}'exclusive_minimum'{{/exclusiveMinimum}}'inclusive_minimum'{{^exclusiveMinimum}}{{/exclusiveMinimum}}: {{minimum}},{{/minimum}}{{#pattern}}
+                        'regex': {
+                            'pattern': r'{{{vendorExtensions.x-regex}}}',  # noqa: E501{{#vendorExtensions.x-modifiers}}
+                            {{#-first}}'flags': (re.{{.}}{{/-first}}{{^-first}}          re.{{.}}{{/-first}}{{^-last}} | {{/-last}}{{#-last}}){{/-last}}{{/vendorExtensions.x-modifiers}}
+                        },{{/pattern}}
+                    },
+    {{/hasValidation}}
+    {{/allParams}}
+                }
+                allowed_values = {
+    {{#allParams}}
+    {{#isEnum}}
+                    ('{{paramName}}',): {
+    {{#isNullable}}
+                        'None': None,{{/isNullable}}{{#allowableValues}}{{#enumVars}}
+                        "{{name}}": {{{value}}}{{^-last}},{{/-last}}{{/enumVars}}{{/allowableValues}}
+                    },
+    {{/isEnum}}
+    {{/allParams}}
+                }
+                openapi_types = {
+    {{#allParams}}
+                    '{{paramName}}':
+                        ({{{dataType}}},),
+    {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+                    '{{paramName}}':
+                        (str,),
+{{/vendorExtensions.x-client-copy-from-response}}
+                    'async_req': (bool,),
+                    '_preload_content': (bool,),
+                    '_request_timeout': (none_type, int, (int,), [int]),
+                    '_return_http_data_only': (bool,){{#vendorExtensions.x-client-chunk-upload}},
+                    '_progress_listener': (none_type, MethodType, FunctionType),{{/vendorExtensions.x-client-chunk-upload}}
+                }
+                attribute_map = {
+    {{#allParams}}
+    {{^isBodyParam}}
+                    '{{paramName}}': '{{baseName}}',
+    {{/isBodyParam}}
+    {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+                    '{{paramName}}': '{{baseName}}',
+    {{/vendorExtensions.x-client-copy-from-response}}
+                }
+                location_map = {
+    {{#allParams}}
+                    '{{paramName}}': '{{#isFormParam}}form{{/isFormParam}}{{#isQueryParam}}query{{/isQueryParam}}{{#isPathParam}}path{{/isPathParam}}{{#isHeaderParam}}header{{/isHeaderParam}}{{#isCookieParam}}cookie{{/isCookieParam}}{{#isBodyParam}}body{{/isBodyParam}}',
+    {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+                    '{{paramName}}': 'form',
+    {{/vendorExtensions.x-client-copy-from-response}}
+                }
+                collection_format_map = {
+    {{#allParams}}
+    {{#collectionFormat}}
+                    '{{paramName}}': '{{collectionFormat}}',
+    {{/collectionFormat}}
+    {{/allParams}}
+                }
+
+                for key, value in kwargs.items():
+                    if key not in params_map['all']:
+                        raise ApiTypeError(
+                            "Got an unexpected parameter '%s'"
+                            " to method `{{operationId}}`" %
+                            (key, )
+                        )
+                    if (key not in params_map['nullable'] and value is None):
+                        raise ApiValueError(
+                            "Value may not be None for non-nullable parameter `%s`"
+                            " when calling `{{operationId}}`" %
+                            (key, )
+                        )
+
+                for key in params_map['required']:
+                    if key not in kwargs.keys():
+                        raise ApiValueError(
+                            "Missing the required parameter `%s` when calling "
+                            "`{{operationId}}`" % (key, )
+                        )
+
+                self.parent._validate_inputs(kwargs, params_map, allowed_values, validations, openapi_types)
+                params = self.parent._gather_params(kwargs, location_map, attribute_map, openapi_types, collection_format_map)
+
+                part = self.current_part
+                self.current_part = self.current_part + 1
+
+                res = self.parent.api_client.call_api(
+                    "{{{path}}}",
+                    "{{httpMethod}}",
+                    params['path'],
+                    params['query'],
+                    {**params['header'], 'Content-Range': "part " + str(part) + "/" + ("*" if not is_last else str(part))},
+                    body=params['body'],
+                    post_params=params['form'],
+                    files={"file": [ChunkIO(file.read(), file.name)]},
+                    response_type=({{{returnType}}},) if is_last else (VideoId,),
+                    async_req=kwargs['async_req'],
+                    _return_http_data_only=kwargs['_return_http_data_only'],
+                    _preload_content=kwargs['_preload_content'],
+                    _request_timeout=kwargs['_request_timeout'],
+                    collection_formats=params['collection_format'])
+{{#vendorExtensions.x-client-copy-from-response}}
+
+                if res.{{paramName}} is not None:
+                    self.{{paramName}} = res.{{paramName}}
+
+{{/vendorExtensions.x-client-copy-from-response}}
+                return res
+
+        return ProgressiveSession(self, {{#requiredParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/requiredParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}{{/vendorExtensions.x-client-copy-from-response}})
 {{/vendorExtensions.x-client-chunk-upload}}
 {{^vendorExtensions.x-client-chunk-upload}}
             return self.api_client.call_api(

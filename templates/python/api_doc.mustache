@@ -34,6 +34,34 @@ Name | Type | Description  | Notes
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
 
+{{#vendorExtensions.x-client-chunk-upload}}
+### Progressive uploads
+
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+
+```python
+{{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};
+
+part1 = open('10m.mp4.part.a', 'rb')
+part2 = open('10m.mp4.part.a', 'rb')
+part3 = open('10m.mp4.part.a', 'rb')
+
+{{#titlecase}}{{operationId}}{{/titlecase}}session = api_instance.create_{{operationId}}_progressive_session({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
+
+session.uploadPart(part1)
+session.uploadPart(part2)
+
+video = session.uploadLastPart(part3)
+
+part1.close()
+part2.close()
+part3.close()
+
+```
+{{/vendorExtensions.x-client-chunk-upload}}
+
 ### HTTP request headers
 
  - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}

@@ -9,6 +9,8 @@ import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.CSharpClientCodegen;
 import org.openapitools.codegen.languages.JavaClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
+import org.openapitools.codegen.templating.mustache.LowercaseLambda;
+import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +36,8 @@ public class Csharp extends CSharpClientCodegen {
         super.processOpts();
         additionalProperties.put("unescape", new UnescapeLambda());
         additionalProperties.put("indented_16", new IndentedLambda(16, " "));
+        additionalProperties.put("titlecase", new TitlecaseLambda());
+        additionalProperties.put("lower", new LowercaseLambda());
 
         List<String> skippedFiles = Arrays.asList(
                 "ExceptionFactory.mustache",

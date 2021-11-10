@@ -21,19 +21,30 @@ public class UploadChunkRequestBody extends RequestBody {
     private final long chunkLength;
     private final String fileName;
 
-    public UploadChunkRequestBody(File file, Integer chunksCount, Integer chunkNum, long totalBytes, long chunkStart, long chunkEnd, UploadProgressListener progressListener) throws ApiException {
+    public UploadChunkRequestBody(File file, Integer chunksCount, Integer chunkNum, long totalBytes, long chunkStart,
+            long chunkEnd, UploadProgressListener progressListener) throws ApiException {
         this.chunkLength = chunkEnd - chunkStart;
         this.fileName = file.getName();
 
         try {
-            this.inputStream = new ChunkedInputStream(
-                    file,
-                    chunkStart,
-                    chunkEnd,
-                    progress -> {
-                        if (progressListener != null)
-                            progressListener.onProgress(progress, totalBytes, chunksCount, chunkNum);
-                    });
+            this.inputStream = new ChunkedInputStream(file, chunkStart, chunkEnd, progress -> {
+                if (progressListener != null)
+                    progressListener.onProgress(progress, totalBytes, chunksCount, chunkNum);
+            });
+        } catch (IOException e) {
+            throw new ApiException(e);
+        }
+    }
+
+    public UploadChunkRequestBody(File file, long totalBytes, UploadPartProgressListener progressListener) throws ApiException {
+        this.chunkLength = totalBytes;
+        this.fileName = file.getName();
+
+        try {
+            this.inputStream = new ChunkedInputStream(file, 0, totalBytes, progress -> {
+                if (progressListener != null)
+                    progressListener.onProgress(progress, totalBytes);
+            });
         } catch (IOException e) {
             throw new ApiException(e);
         }
@@ -88,7 +99,7 @@ public class UploadChunkRequestBody extends RequestBody {
         public int read() throws IOException {
             if (start + pos < end) {
                 pos++;
-                if(start + pos % 1024 == 0) {
+                if (start + pos % 1024 == 0) {
                     progressListener.accept(start + pos);
                 }
                 return source.read();

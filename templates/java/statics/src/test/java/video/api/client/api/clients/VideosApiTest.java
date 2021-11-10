@@ -36,7 +36,7 @@ public class VideosApiTest extends AbstractApiTest {
             assertThatThrownBy(() -> api.delete(null)).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'videoId' when calling delete");
 
-            assertThatNoException().isThrownBy(() -> api.delete("vi4k0jvEUuaTdRAEjQ4Jfrgz"));
+            assertThatNoException().isThrownBy(() -> api.delete("vi4blUQJFrYWbaG44NChkH27"));
         }
 
         @Test
@@ -44,7 +44,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.delete("vi4k0jvEUuaTdRAEjQ4Jfrgz")).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.delete("vi4blUQJFrYWbaG44NChkH27")).isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
         }
@@ -63,7 +63,7 @@ public class VideosApiTest extends AbstractApiTest {
             assertThatThrownBy(() -> api.get(null)).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'videoId' when calling get");
 
-            assertThatNoException().isThrownBy(() -> api.get("vi4k0jvEUuaTdRAEjQ4Jfrgz"));
+            assertThatNoException().isThrownBy(() -> api.get("vi4blUQJFrYWbaG44NChkH27"));
         }
 
         @Test
@@ -73,7 +73,7 @@ public class VideosApiTest extends AbstractApiTest {
 
             Video res = api.get("videoId_example");
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining string theory");
@@ -85,18 +85,14 @@ public class VideosApiTest extends AbstractApiTest {
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
             assertThat(res.getPublishedAt()).isEqualTo("2019-12-16T08:25:51+00:00");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
 
         @Test
@@ -149,14 +145,12 @@ public class VideosApiTest extends AbstractApiTest {
                     new Metadata("Format", "Tutorial"));
             assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598Z");
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
-            assertThat(res.getAssets()).isEqualTo(new VideoAssets().iframe(
-                    "<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+            assertThat(res.getAssets()).isEqualTo(new VideoAssets()
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
     }
 
@@ -173,7 +167,7 @@ public class VideosApiTest extends AbstractApiTest {
             assertThatThrownBy(() -> api.getStatus(null)).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'videoId' when calling getStatus");
 
-            assertThatNoException().isThrownBy(() -> api.getStatus("vi4k0jvEUuaTdRAEjQ4Jfrgz"));
+            assertThatNoException().isThrownBy(() -> api.getStatus("vi4blUQJFrYWbaG44NChkH27"));
         }
 
         @Test
@@ -181,7 +175,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            VideoStatus res = api.getStatus("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            VideoStatus res = api.getStatus("vi4blUQJFrYWbaG44NChkH27");
 
             assertThat(res.getIngest().getStatus()).isEqualTo(VideoStatusIngest.StatusEnum.UPLOADED);
             assertThat(res.getIngest().getFilesize()).isEqualTo(273579401);
@@ -213,7 +207,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.getStatus("vi4k0jvEUuaTdRAEjQ4Jfrgz")).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.getStatus("vi4blUQJFrYWbaG44NChkH27")).isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
         }
@@ -240,7 +234,7 @@ public class VideosApiTest extends AbstractApiTest {
 
             Video res1 = page.getItems().get(0);
 
-            assertThat(res1.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Prklg");
+            assertThat(res1.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res1.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res1.getTitle()).isEqualTo("Maths video");
             assertThat(res1.getDescription()).isEqualTo("An amazing video explaining the string theory");
@@ -256,15 +250,11 @@ public class VideosApiTest extends AbstractApiTest {
                     .isEqualTo(new VideoSource().uri("/videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source"));
 
             assertThat(res1.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/c188ed58-3403-46a2-b91b-44603d10b2c9?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/c188ed58-3403-46a2-b91b-44603d10b2c9?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
 
         }
 
@@ -295,7 +285,7 @@ public class VideosApiTest extends AbstractApiTest {
             assertThatThrownBy(() -> api.update(null, new VideoUpdatePayload())).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'videoId' when calling update");
 
-            assertThatNoException().isThrownBy(() -> api.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload()));
+            assertThatNoException().isThrownBy(() -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
         }
 
         @Test
@@ -303,9 +293,9 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Video res = api.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload());
+            Video res = api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload());
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining the string theory");
@@ -317,18 +307,14 @@ public class VideosApiTest extends AbstractApiTest {
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
             assertThat(res.getPublishedAt()).isEqualTo("2019-12-16T08:25:51+00:00");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
 
         @Test
@@ -336,7 +322,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            assertThatThrownBy(() -> api.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload()))
+            assertThatThrownBy(() -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
                     .hasMessage("This attribute must be a ISO-8601 date.");
@@ -347,7 +333,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload()))
+            assertThatThrownBy(() -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
@@ -375,7 +361,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .isInstanceOf(ApiException.class).hasMessage(
                             "Missing the required parameter 'videoThumbnailPickPayload.timecode' when calling pickThumbnail");
 
-            assertThatNoException().isThrownBy(() -> api.pickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz",
+            assertThatNoException().isThrownBy(() -> api.pickThumbnail("vi4blUQJFrYWbaG44NChkH27",
                     new VideoThumbnailPickPayload().timecode("10:10:10")));
         }
 
@@ -384,10 +370,10 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Video res = api.pickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz",
+            Video res = api.pickThumbnail("vi4blUQJFrYWbaG44NChkH27",
                     new VideoThumbnailPickPayload().timecode("00:00:00"));
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining string theory");
@@ -398,19 +384,15 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getMetadata())
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
-            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598Z");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598+00:00");
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
 
         @Test
@@ -418,7 +400,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.pickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfrgz",
+            assertThatThrownBy(() -> api.pickThumbnail("vi4blUQJFrYWbaG44NChkH27",
                     new VideoThumbnailPickPayload().timecode("00:00:00"))).isInstanceOf(ApiException.class)
                             .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                             .hasMessage("The requested resource was not found.");
@@ -451,7 +433,7 @@ public class VideosApiTest extends AbstractApiTest {
 
             Video res = api.create(new VideoCreationPayload().title("title"));
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl4k0jvEUuaTdRAEjQ4Jfrgz");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining the string theory");
@@ -463,18 +445,14 @@ public class VideosApiTest extends AbstractApiTest {
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
             assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598Z");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
 
         @Test
@@ -513,9 +491,9 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus201Test() throws ApiException {
             answerOnAnyRequest(201, readResourceFile(PAYLOADS_PATH + "responses/201.json"));
 
-            Video res = api.upload("vi4k0jvEUuaTdRAEjQ4Jfrgz", new File(""));
+            Video res = api.upload("vi4blUQJFrYWbaG44NChkH27", new File(""));
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining the string theory.");
@@ -526,19 +504,17 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getMetadata())
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
-            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598Z");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598+00:00");
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
+
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+
         }
 
         @Test
@@ -546,7 +522,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            assertThatThrownBy(() -> api.upload("vi4k0jvEUuaTdRAEjQ4Jfrgz", new File("")))
+            assertThatThrownBy(() -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
                     .hasMessage("The source of the video is already uploaded.");
@@ -557,7 +533,7 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.upload("vi4k0jvEUuaTdRAEjQ4Jfrgz", new File("")))
+            assertThatThrownBy(() -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")))
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
@@ -590,7 +566,7 @@ public class VideosApiTest extends AbstractApiTest {
 
             Video res = api.uploadThumbnail("videoId_example", new File(""));
 
-            assertThat(res.getVideoId()).isEqualTo("vi4k0jvEUuaTdRAEjQ4Jfrgz");
+            assertThat(res.getVideoId()).isEqualTo("vi4blUQJFrYWbaG44NChkH27");
             assertThat(res.getPlayerId()).isEqualTo("pl45KFKdlddgk654dspkze");
             assertThat(res.getTitle()).isEqualTo("Maths video");
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining the string theory");
@@ -601,19 +577,15 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getMetadata())
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
-            assertThat(res.getPublishedAt()).isEqualTo("2020-07-14T23:36:18.598Z");
-            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
+            assertThat(res.getPublishedAt()).isEqualTo("2020-07-14T23:36:18.598+00:00");
+            assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
-                    .hls(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8"))
-                    .iframe("<iframe src=\"//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .mp4(URI.create(
-                            "https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4"))
-                    .player(URI.create(
-                            "https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae"))
-                    .thumbnail(URI.create(
-                            "https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg")));
+                    .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
+                    .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
         }
 
         @Test

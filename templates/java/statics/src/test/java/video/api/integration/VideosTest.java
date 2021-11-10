@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
+import video.api.client.api.clients.VideosApi;
 import video.api.client.api.models.*;
 
 import java.io.File;
@@ -74,6 +75,69 @@ public class VideosTest {
         @AfterAll
         public void deleteVideo() throws ApiException {
             apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("progressive upload")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ProgressiveUpload {
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] progressive upload")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
+            File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
+            File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
+
+            VideosApi.UploadProgressiveSession uploadProgressiveSession = apiClient.videos().createUploadProgressiveSession(this.testVideo.getVideoId());
+
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            uploadProgressiveSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("progressive upload with upload token")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ProgressiveUploadWithUploadToken {
+        private UploadToken uploadToken;
+        private Video result;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
+            File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
+            File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
+
+            VideosApi.UploadWithUploadTokenProgressiveSession uploadProgressiveSession = apiClient.videos()
+                    .createUploadWithUploadTokenProgressiveSession(this.uploadToken.getToken());
+
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            this.result = uploadProgressiveSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(result.getVideoId());
         }
     }
 

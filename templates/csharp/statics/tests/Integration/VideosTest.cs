@@ -25,6 +25,87 @@ namespace VideoApiTests.Integration
 
         }
     }
+
+    [TestClass]
+    public class ProgressiveUploadWithTokenTest
+    {
+        ApiVideoClient apiClient;
+        private UploadToken uploadToken;
+
+        [TestInitialize]
+        public void init()
+        {
+            this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
+            this.uploadToken = this.apiClient.UploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        [TestMethod]
+        public void ProgressiveUpload()
+        {
+            ApiVideo.Api.VideosApi.UploadWithUploadTokenProgressiveSession uploadWithUploadTokenProgressiveSession = this.apiClient.Videos().createUploadWithUploadTokenProgressiveSession(uploadToken.token);
+
+            var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
+            var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
+            var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
+
+            uploadWithUploadTokenProgressiveSession.uploadPart(part1);
+            uploadWithUploadTokenProgressiveSession.uploadPart(part2);
+            Video video = uploadWithUploadTokenProgressiveSession.uploadLastPart(part3);
+
+            part1.Close();
+            part2.Close();
+            part3.Close();
+
+            this.apiClient.Videos().delete(video.videoid);
+        }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            this.apiClient.UploadTokens().deleteToken(this.uploadToken.token);
+        }
+    }
+
+
+    [TestClass]
+    public class ProgressiveUploadTest
+    {
+        ApiVideoClient apiClient;
+        Video testVideo;
+
+        [TestInitialize]
+        public void init()
+        {
+            this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
+            this.testVideo = this.apiClient.Videos().create(new VideoCreationPayload() { title = "C# upload stream" });
+        }
+
+        [TestMethod]
+        public void ProgressiveUpload()
+        {
+            ApiVideo.Api.VideosApi.UploadProgressiveSession uploadProgressiveSession = this.apiClient.Videos().createUploadProgressiveSession(testVideo.videoid);
+
+            var part1 = File.OpenRead("../../../resources/assets/10m.mp4.part.a");
+            var part2 = File.OpenRead("../../../resources/assets/10m.mp4.part.b");
+            var part3 = File.OpenRead("../../../resources/assets/10m.mp4.part.c");
+
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            Video video = uploadProgressiveSession.uploadLastPart(part3);
+
+            part1.Close();
+            part2.Close();
+            part3.Close();
+
+        }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            this.apiClient.Videos().delete(this.testVideo.videoid);
+        }
+    }
+
     [TestClass]
     public class VideosTest
     {
@@ -36,7 +117,7 @@ namespace VideoApiTests.Integration
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"), ApiVideo.Client.Environment.SANDBOX);
             this.testVideo = apiClient.Videos()
-                    .create(new VideoCreationPayload() { title = "[Java-SDK-tests] sdk tests", _public = false});
+                    .create(new VideoCreationPayload() { title = "[C#-SDK-tests] sdk tests", _public = false});
             Console.WriteLine("Video "+this.testVideo.videoid+" created");
         }
         [TestCleanup]

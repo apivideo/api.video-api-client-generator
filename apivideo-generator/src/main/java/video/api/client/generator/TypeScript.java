@@ -12,6 +12,7 @@ import org.openapitools.codegen.*;
 import org.openapitools.codegen.meta.GeneratorMetadata;
 import org.openapitools.codegen.meta.Stability;
 import org.openapitools.codegen.meta.features.DocumentationFeature;
+import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 import org.openapitools.codegen.utils.ModelUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 import static org.openapitools.codegen.utils.StringUtils.underscore;
@@ -34,7 +36,7 @@ public class TypeScript extends DefaultCodegen {
 
     private static final String PLATFORM_SWITCH = "platform";
     private static final String PLATFORM_SWITCH_DESC = "Specifies the platform the code should run on. The default is 'node' for the 'request' framework and 'browser' otherwise.";
-    private static final String[] PLATFORMS = { "browser", "node", "deno" };
+    private static final String[] PLATFORMS = {"browser", "node", "deno"};
     private static final String FILE_CONTENT_DATA_TYPE = "fileContentDataType";
     private static final String FILE_CONTENT_DATA_TYPE_DESC = "Specifies the type to use for the content of a file - i.e. Blob (Browser, Deno) / Buffer (node)";
 
@@ -151,10 +153,10 @@ public class TypeScript extends DefaultCodegen {
         cliOptions.add(new CliOption(NPM_REPOSITORY, "Use this property to set an url your private npmRepo in the package.json"));
         cliOptions.add(new CliOption(CodegenConstants.MODEL_PROPERTY_NAMING, CodegenConstants.MODEL_PROPERTY_NAMING_DESC).defaultValue("camelCase"));
         cliOptions.add(new CliOption(CodegenConstants.SUPPORTS_ES6, CodegenConstants.SUPPORTS_ES6_DESC).defaultValue("false"));
-        cliOptions.add(new CliOption(FILE_CONTENT_DATA_TYPE,FILE_CONTENT_DATA_TYPE_DESC).defaultValue("Buffer"));
+        cliOptions.add(new CliOption(FILE_CONTENT_DATA_TYPE, FILE_CONTENT_DATA_TYPE_DESC).defaultValue("Buffer"));
 
         CliOption platformOption = new CliOption(PLATFORM_SWITCH, PLATFORM_SWITCH_DESC);
-        for (String option: PLATFORMS) {
+        for (String option : PLATFORMS) {
             platformOption.addEnum(option, option);
         }
         platformOption.defaultValue(PLATFORMS[0]);
@@ -167,8 +169,8 @@ public class TypeScript extends DefaultCodegen {
     @Override
     public void setParameterExampleValue(CodegenParameter codegenParameter) {
         super.setParameterExampleValue((codegenParameter));
-        if(codegenParameter.example == null) {
-            if(codegenParameter.isBodyParam) {
+        if (codegenParameter.example == null) {
+            if (codegenParameter.isBodyParam) {
                 List<CodegenProperty> vars = codegenParameter.vars;
                 StringBuilder stringBuilder = new StringBuilder("{\n");
                 vars.stream().forEach(v -> {
@@ -177,7 +179,7 @@ public class TypeScript extends DefaultCodegen {
                     stringBuilder.append(": ");
                     stringBuilder.append(getPropertyExample(v));
                     stringBuilder.append(",");
-                    if(v.description != null) {
+                    if (v.description != null) {
                         stringBuilder.append(" // ");
                         stringBuilder.append(v.description);
                     }
@@ -192,11 +194,11 @@ public class TypeScript extends DefaultCodegen {
 
     private String getPropertyExample(CodegenProperty prop) {
 
-        if(prop.example != null && !prop.example.equals("null")) {
-            if(prop.isFile || prop.isDateTime || prop.isDateTime || prop.isUuid || prop.isUri || prop.isString) {
+        if (prop.example != null && !prop.example.equals("null")) {
+            if (prop.isFile || prop.isDateTime || prop.isDateTime || prop.isUuid || prop.isUri || prop.isString) {
                 return "\"" + prop.example + "\"";
             }
-            if(prop.isArray) {
+            if (prop.isArray) {
                 System.out.println(prop.example);
             }
             return prop.example;
@@ -257,6 +259,11 @@ public class TypeScript extends DefaultCodegen {
             }
 
             for (CodegenOperation operation : ops) {
+                operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()
+                        .filter(p -> Boolean.TRUE.equals(p.vendorExtensions.get("x-client-copy-from-response")))
+                        .peek(a -> a.vendorExtensions.put("getter", toGetter(a.paramName)))
+                        .collect(Collectors.toList()));
+
                 // overwrite operationId & nickname values of the operation with the x-client-action
                 if (StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
                     operation.operationId = (String) operation.vendorExtensions.get("x-client-action");
@@ -278,10 +285,10 @@ public class TypeScript extends DefaultCodegen {
                 );
 
                 operation
-                    .allParams
-                    .stream()
-                    .filter(p -> p.isModel && p.getRequiredVars().size() == 0)
-                    .forEach(p -> p.vendorExtensions.put("x-optional-object", true))
+                        .allParams
+                        .stream()
+                        .filter(p -> p.isModel && p.getRequiredVars().size() == 0)
+                        .forEach(p -> p.vendorExtensions.put("x-optional-object", true))
                 ;
 
                 operation.responses.forEach(response -> populateOperationResponse(operation, response));
@@ -371,15 +378,15 @@ public class TypeScript extends DefaultCodegen {
      */
     SupportingFile createSupportingFileTemplateDefinition(String templateFile) {
         Path templatePath = Paths.get(templateFile);
-        LOGGER.info("templateFile="+templateFile);
+        LOGGER.info("templateFile=" + templateFile);
 
         String destinationFilename = templatePath.getFileName().toString().replace(".mustache", "");
-        LOGGER.info("destinationFilename="+destinationFilename);
+        LOGGER.info("destinationFilename=" + destinationFilename);
 
         Path parent = templatePath.getParent();
 
         String folder = parent != null ? parent.toString() : "";
-        LOGGER.info("folder="+folder);
+        LOGGER.info("folder=" + folder);
 
         return new SupportingFile(templateFile, folder, destinationFilename);
     }
@@ -390,7 +397,7 @@ public class TypeScript extends DefaultCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
-
+        additionalProperties.put("titlecase", new TitlecaseLambda());
         if (additionalProperties.containsKey(TypeScript.TEST_PACKAGE)) {
             testPackage = (String) additionalProperties.get(TypeScript.TEST_PACKAGE);
         }
@@ -406,11 +413,11 @@ public class TypeScript extends DefaultCodegen {
         if (additionalProperties.containsKey(TypeScript.MODEL_DOC_FILE_FOLDER)) {
             modelDocFileFolder = (String) additionalProperties.get(TypeScript.MODEL_DOC_FILE_FOLDER);
         }
-    
+
         if (additionalProperties.containsKey(TypeScript.API_TEST_FILE_FOLDER)) {
             apiTestFileFolder = (String) additionalProperties.get(TypeScript.API_TEST_FILE_FOLDER);
         }
-    
+
         if (additionalProperties.containsKey(TypeScript.MODEL_TEST_FILE_FOLDER)) {
             modelTestFileFolder = (String) additionalProperties.get(TypeScript.MODEL_TEST_FILE_FOLDER);
         }
@@ -429,7 +436,7 @@ public class TypeScript extends DefaultCodegen {
             additionalProperties.put("platform", propPlatform);
         }
         Map<String, Boolean> platforms = new HashMap<>();
-        for (String platform: PLATFORMS) {
+        for (String platform : PLATFORMS) {
             platforms.put(platform, platform.equals(propPlatform));
         }
         additionalProperties.put("platforms", platforms);
@@ -455,13 +462,13 @@ public class TypeScript extends DefaultCodegen {
 
         supportingFiles.clear();
 
-        LOGGER.info("templateDir()="+templateDir());
+        LOGGER.info("templateDir()=" + templateDir());
 
         try {
             Files
                     .walk(Paths.get(templateDir()))
                     .filter(Files::isRegularFile)
-                    .forEach(x -> supportingFiles.add(createSupportingFileTemplateDefinition(x.toString().replace(templateDir()+File.separator, ""))))
+                    .forEach(x -> supportingFiles.add(createSupportingFileTemplateDefinition(x.toString().replace(templateDir() + File.separator, ""))))
             ;
         } catch (IOException ioException) {
             LOGGER.error(ioException.getMessage());
@@ -601,7 +608,7 @@ public class TypeScript extends DefaultCodegen {
         // sanitize name
         name = sanitizeName(name);
 
-        if ("_" .equals(name)) {
+        if ("_".equals(name)) {
             name = "_u";
         }
 
@@ -795,8 +802,8 @@ public class TypeScript extends DefaultCodegen {
     }
 
     public void setModelPropertyNaming(String naming) {
-        if ("original" .equals(naming) || "camelCase" .equals(naming) ||
-                "PascalCase" .equals(naming) || "snake_case" .equals(naming)) {
+        if ("original".equals(naming) || "camelCase".equals(naming) ||
+                "PascalCase".equals(naming) || "snake_case".equals(naming)) {
             this.modelPropertyNaming = naming;
         } else {
             throw new IllegalArgumentException("Invalid model property naming '" +
@@ -829,7 +836,7 @@ public class TypeScript extends DefaultCodegen {
 
     @Override
     public String toEnumValue(String value, String datatype) {
-        if ("number" .equals(datatype)) {
+        if ("number".equals(datatype)) {
             return value;
         } else {
             return "\'" + escapeText(value) + "\'";
@@ -853,7 +860,7 @@ public class TypeScript extends DefaultCodegen {
         }
 
         // number
-        if ("number" .equals(datatype)) {
+        if ("number".equals(datatype)) {
             String varName = "NUMBER_" + name;
 
             varName = varName.replaceAll("-", "MINUS_");

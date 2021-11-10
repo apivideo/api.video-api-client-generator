@@ -36,6 +36,34 @@ describe('ApiVideoClient', () => {
         chunkSize: 5*1024*1024
     });
 
+    // Create
+    const progressiveUploadVideo = 'Nodejs - progressive upload';
+    const { videoId: progressiveUploadVideoId } = await client.videos.create({
+      title: progressiveUploadVideo,
+    });
+
+    // Progressive upload
+    const progressiveUploadSession = client.videos.createUploadProgressiveSession(progressiveUploadVideoId);
+    await progressiveUploadSession.uploadPart("test/data/10m.mp4.part.a");
+    await progressiveUploadSession.uploadPart("test/data/10m.mp4.part.b");
+    await progressiveUploadSession.uploadLastPart("test/data/10m.mp4.part.c")
+      .then((video) => {
+        expect(video.title).to.equals(progressiveUploadVideo);
+      });
+    await client.videos.delete(progressiveUploadVideoId);
+
+
+    // Create an upload token
+    const { token: progressiveUploadToken } = await client.uploadTokens.createToken();
+    // Progressive upload
+    const progressiveUploadWithTokenSession = client.videos.createUploadWithUploadTokenProgressiveSession(progressiveUploadToken as string);
+    await progressiveUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.a");
+    await progressiveUploadWithTokenSession.uploadPart("test/data/10m.mp4.part.b");
+    await progressiveUploadWithTokenSession.uploadLastPart("test/data/10m.mp4.part.c")
+      .then((video) => {
+        expect(video.title).to.equals("10m.mp4.part.a");
+        client.videos.delete(video.videoId);
+      });
 
     // Create
     const videoTitle = 'Course #4 - Part B';
@@ -45,7 +73,7 @@ describe('ApiVideoClient', () => {
 
     // upload a video resource
     await client.videos
-      .upload(videoId, 'test/data/small.webm')
+      .upload(videoId, 'test/data/558k.mp4')
       .then((video) => {
         expect(title).to.equals(videoTitle);
       });
@@ -222,6 +250,6 @@ describe('ApiVideoClient', () => {
     expect(token).to.be.a('string');
 
     // Upload a video with a token
-    await client.videos.uploadWithUploadToken(token as string, 'test/data/small.webm');
+    await client.videos.uploadWithUploadToken(token as string, 'test/data/558k.mp4');
   });
 });

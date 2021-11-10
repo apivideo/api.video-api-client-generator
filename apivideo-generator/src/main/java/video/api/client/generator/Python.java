@@ -27,6 +27,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
@@ -120,6 +121,10 @@ public class Python extends PythonClientCodegen {
             }
 
             for (CodegenOperation operation : ops) {
+                operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()
+                        .filter(p -> Boolean.TRUE.equals(p.vendorExtensions.get("x-client-copy-from-response")))
+                        .peek(a -> a.vendorExtensions.put("getter", toGetter(a.paramName)))
+                        .collect(Collectors.toList()));
 
                 if(StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
                     operation.operationId = underscore((String) operation.vendorExtensions.get("x-client-action"));
