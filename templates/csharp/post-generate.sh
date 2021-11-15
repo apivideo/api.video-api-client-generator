@@ -1,7 +1,7 @@
 cp -R ../../templates/csharp/statics/.github ./
 cp -R ../../templates/csharp/statics/* ./
 cp -R ../../templates/common-resources/test-assets/* tests/resources/assets/
-cp ../../templates/common-resources/CoC.md ./
+cp ../../templates/common-resources/CODE_OF_CONDUCT.md ./
 cp ../../templates/common-resources/LICENSE ./
 mv src/ApiVideo ApiVideo
 rm -Rf src
