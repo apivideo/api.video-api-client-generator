@@ -76,6 +76,7 @@ Then manually install the following JARs:
 
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
+{{^android}}
 ```java
 {{#apiInfo}}{{#apis}}{{#-first}}{{#operations}}{{#operation}}{{#-first}}
 import video.api.client.ApiVideoClient;
@@ -105,6 +106,57 @@ public class Example {
 }
 {{/-first}}{{/operation}}{{/operations}}{{/-first}}{{/apis}}{{/apiInfo}}
 ```
+{{/android}}
+{{#android}}
+```kotlin
+{{#apiInfo}}{{#apis}}{{#-first}}{{#operations}}{{#operation}}{{#-first}}
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import video.api.client.ApiVideoClient
+import {{{invokerPackage}}}.ApiException
+import {{{invokerPackage}}}.models.*
+import java.io.File
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+
+class MainActivity : AppCompatActivity() {
+    private val executor: ExecutorService = Executors.newSingleThreadExecutor()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val apiVideoClient = ApiVideoClient("YOUR_API_TOKEN")
+        // if you rather like to use the sandbox environment:
+        // val apiVideoClient = ApiVideoClient("YOU_SANDBOX_API_TOKEN", Environments.SANDBOX)
+
+        val myVideoFile = File("my-video.mp4")
+
+        /**
+         * Notice: you must not call API from the UI/main thread. Dispatch with Thread, Executors or Kotlin coroutines.
+         */
+        executor.execute {
+            try {
+                var video = apiVideoClient.videos().create(VideoCreationPayload().title("my video"))
+                video = apiVideoClient.videos().upload(video.videoId, myVideoFile)
+                Log.i("Example", "$video")
+            } catch (e: ApiException) {
+                Log.e("Example", "Exception when calling VideoApi")
+                e.message?.let {
+                    Log.e("Example", "Reason: ${it}")
+                }
+            }
+        }
+    }
+}
+{{/-first}}{{/operation}}{{/operations}}{{/-first}}{{/apis}}{{/apiInfo}}
+```
+{{/android}}
 
 # Documentation
 
@@ -151,13 +203,23 @@ ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
 ### Public endpoints
 
 Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API token:
+{{#android}}
 ```java
 ApiVideoClient apiVideoClient = new ApiVideoClient();
 ```
+{{/android}}
+{{#android}}
+```kotlin
+val apiVideoClient = ApiVideoClient();
+```
+{{/android}}
 
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+{{#android}}
+Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
+{{/android}}
 
 ## Have you gotten use from this API client?
 

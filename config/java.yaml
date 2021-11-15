@@ -50,5 +50,5 @@ files:
   pagination.md.mustache:
     folder: docs
     destinationFilename: Pagination.md
-  post-generate.sh:
+  post-generate-java.sh:
     destinationFilename: post-generate.sh
