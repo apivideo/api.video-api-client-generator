@@ -1,4 +1,4 @@
-artifactVersion: 0.0.9
+artifactVersion: 1.0.0
 licenseName: MIT
 generateInterfaces: true
 structPrefix: true
