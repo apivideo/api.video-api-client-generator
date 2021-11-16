@@ -4,6 +4,7 @@ npmName: "@api.video/nodejs-client"
 npmVersion: 2.0.13
 npmDescription: api.video nodejs client
 npmAuthor: api.video ecosystem team
+gitRepoId: api.video-nodejs-client
 
 # Defines the output folder for each kind of specific templates.
 # The naming is quite confusing because it was based on java "package" naming,

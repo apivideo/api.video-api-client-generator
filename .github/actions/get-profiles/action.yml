@@ -9,6 +9,12 @@ runs:
   steps:
     - id: get-profiles
       run: |
-        PROFILES=$(echo $(cat $GITHUB_ACTION_PATH/profiles.json) | sed 's/ //g' )
-        echo "::set-output name=profiles::$PROFILES"
+        res=""
+        for file in config/*
+        do
+            if [[ -f $file ]]; then
+                res+="{'name': '"`echo $file  | sed -n 's/.*\/\([^/]*\)\.yaml/\1/p'`"', 'repository': '"`sed -ne "s/gitRepoId: \([^']*\)/\1/p" $file`"'},"
+            fi
+        done
+        echo "::set-output name=profiles::["`echo $res | sed 's/.$//'`"]"
       shell: bash

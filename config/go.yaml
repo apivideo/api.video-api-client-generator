@@ -5,7 +5,7 @@ structPrefix: true
 packageName: apivideosdk
 goImportAlias: apivideosdk
 gitUserId: apivideo
-gitRepoId: go-api-client
+gitRepoId: api.video-go-client
 ignoredFiles:
   - configuration.mustache
   - response.mustache
