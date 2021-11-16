@@ -1,18 +1,33 @@
-[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video)
-
-[![badge](https://img.shields.io/github/stars/apivideo/api-client-generator?style=social)](https://github.com/apivideo/api-client-generator)
-
-[![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
-
+[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/api.video-api-client-generator?style=social)](https://github.com/apivideo/api.video-api-client-generator) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
+<h1 align="center">api.video API client generator</h1>
 
-[api.video](https://api.video) is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.
+[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# API client generator
 
-## Description
+# Table of contents
+
+- [Project description](#project-description)
+- [Getting started](#getting-started)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+- [Documentation](#documentation)
+  - [Supported languages](#supported-languages)
+  - [Template files](#template-files)
+  - [Configuration files](#configuration-files)
+  - [Generator sub-class](#generator-sub-class)
+  - [Development](#development)
+    - [Configuration](#configuration)
+      - [CLI](#cli)
+      - [File](#file)
+- [Contribution](#contribution)
+
+# Project description
 
 API client generation tool based on [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). Generates client source code in several languages based on [mustache templates](https://mustache.github.io/).
+
+
+# Getting started
 
 ## Requirements
 
@@ -30,6 +45,9 @@ mvn package -P [profile]
 To see the list of available profiles, see the "profile" column in the table of [supported languages](#supported-languages). 
 
 <a name="supported-languages"></a>
+
+# Documentation
+
 ## Supported languages
 
 | Language | Profile | CI tests | CI package release | Repository |
@@ -151,3 +169,8 @@ The `yml` config file -- is loaded in the `CodegenConfigurator` class via the `f
 
 Each entry under the `files` key of the `yml` configuration file is used to build a `TemplateDefinition` object.
 If not specified otherwise the file is treated as a `SupportingFile`.
+
+
+# Contribution
+
+Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.
