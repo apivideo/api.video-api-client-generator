@@ -125,7 +125,12 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        setUserAgent("api.video client (java; v:{{ artifactVersion }}; )");
+        {{#android}}
+        setUserAgent("api.video {{ userAgent }} (android; v:{{ artifactVersion }}; )");
+        {{/android}}
+        {{^android}}
+        setUserAgent("api.video {{ userAgent }} (java; v:{{ artifactVersion }}; )");
+        {{/android}}
     }
 
     /**

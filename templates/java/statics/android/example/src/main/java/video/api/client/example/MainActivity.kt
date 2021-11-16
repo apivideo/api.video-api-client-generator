@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import video.api.client.ApiVideoClient
 import video.api.client.api.ApiException
+import video.api.client.api.models.Environment
 import video.api.client.api.models.Video
 import video.api.client.api.models.VideoCreationPayload
 import video.api.client.api.upload.UploadProgressListener
@@ -89,9 +90,9 @@ class MainActivity : AppCompatActivity() {
                         true
                     )
                 ) {
-                    ApiVideoClient.Environment.SANDBOX
+                    Environment.SANDBOX
                 } else {
-                    ApiVideoClient.Environment.PRODUCTION
+                    Environment.PRODUCTION
                 }
             ).apply {
                 this.httpClient.writeTimeout = 60000 // 1 min

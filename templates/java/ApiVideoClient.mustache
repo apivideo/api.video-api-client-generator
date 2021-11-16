@@ -2,29 +2,13 @@ package video.api.client;
 
 import {{invokerPackage}}.*;
 import {{apiPackage}}.*;
+import {{modelPackage}}.Environment;
 import okhttp3.OkHttpClient;
 
 public class ApiVideoClient {
     private final ApiClient apiClient;
 {{# apiInfo.apis }}{{^x-client-hidden}}
     private final {{classFilename}} {{classVarName}};{{/x-client-hidden}}{{/ apiInfo.apis }}
-
-
-{{# apiInfo.apis }}
-    {{#-first}}
-    public enum Environment {
-        PRODUCTION("{{vendorExtensions.x-client-base-paths.production}}"),
-        SANDBOX("{{vendorExtensions.x-client-base-paths.sandbox}}");
-
-        private final String basePath;
-
-        Environment(String basePath) {
-            this.basePath = basePath;
-        }
-    }
-    {{/-first}}
-{{/apiInfo.apis}}
-
 
     /**
      * Build an instance that targets production environment without authentication

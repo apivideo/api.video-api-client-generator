@@ -1,4 +1,5 @@
 artifactVersion: 1.0.11
+userAgent: client
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
@@ -21,11 +22,15 @@ hideGenerationTimestamp: true
 serializableModel: "true"
 java8: "true"
 android: "true"
+client: "true"
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
 
 files:
+  Environment.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Environment.java
   page.mustache:
     folder: src/main/java/video/api/client/api/models
     destinationFilename: Page.java

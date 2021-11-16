@@ -1,0 +1,16 @@
+package {{modelPackage}};
+
+{{# apiInfo.apis }}
+{{#-first}}
+public enum Environment {
+    PRODUCTION("{{vendorExtensions.x-client-base-paths.production}}"),
+    SANDBOX("{{vendorExtensions.x-client-base-paths.sandbox}}");
+
+    public final String basePath;
+
+    Environment(String basePath) {
+        this.basePath = basePath;
+    }
+}
+{{/-first}}
+{{/apiInfo.apis}}

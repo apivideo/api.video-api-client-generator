@@ -38,7 +38,7 @@ public class Example {
     {{#authMethods}}
     ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
+    // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", Environment.SANDBOX);
     {{/authMethods}}
 
     {{{classname}}} apiInstance = client.{{classVarName}}();

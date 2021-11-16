@@ -23,6 +23,16 @@
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
+         <profile>
+            <id>android-uploader</id>
+            <properties>
+                <configFileName>android-uploader</configFileName>
+                <outputFolder>android-uploader</outputFolder>
+                <templateFolder>java</templateFolder>
+                <generatorName>video.api.client.generator.JavaUploader</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
         <profile>
             <id>java</id>
             <properties>
