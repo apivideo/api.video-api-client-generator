@@ -5,11 +5,7 @@ import com.google.common.collect.Maps;
 import io.swagger.util.Json;
 import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
-import org.openapitools.codegen.CodegenConstants;
-import org.openapitools.codegen.CodegenModel;
-import org.openapitools.codegen.CodegenOperation;
-import org.openapitools.codegen.CodegenParameter;
-import org.openapitools.codegen.CodegenResponse;
+import org.openapitools.codegen.*;
 import org.openapitools.codegen.config.GlobalSettings;
 import org.openapitools.codegen.languages.GoClientCodegen;
 
@@ -33,6 +29,13 @@ public class Go extends GoClientCodegen {
     public Go() {
         apiNameSuffix = "";
         typeMapping.put("DateTime", "string");
+    }
+
+    public CodegenProperty fromProperty(String name, Schema p) {
+        if(p == null) {
+            return new CodegenProperty();
+        }
+        return super.fromProperty(name, p);
     }
 
     @Override
@@ -64,13 +67,6 @@ public class Go extends GoClientCodegen {
                 }
                 if(operation.vendorExtensions.containsKey("x-client-chunk-upload")) {
                     objs.put("x-client-chunk-upload", true);
-                }
-                if(!operation.bodyParams.isEmpty()) {
-                    operation.bodyParams.forEach(bodyParam -> {
-                        if(!operation.requiredParams.contains(bodyParam)) {
-                            operation.requiredParams.add(bodyParam);
-                        }
-                    });
                 }
 
                 operation.queryParams.forEach(queryParam -> {

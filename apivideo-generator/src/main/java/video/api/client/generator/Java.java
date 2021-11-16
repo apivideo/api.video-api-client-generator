@@ -203,7 +203,12 @@ public class Java extends JavaClientCodegen {
             });
         });
     }
-
+    @Override
+    public Map<String, Object> postProcessModels(Map<String, Object> objs) {
+        Map<String, Object> stringObjectMap = super.postProcessModels(objs);
+        ((ArrayList)stringObjectMap.get("imports")).removeIf((v) -> ((Map)v).values().contains("org.openapitools.jackson.nullable.JsonNullable"));
+        return stringObjectMap;
+    }
 
     private void applyToAllParams(CodegenOperation operation, Consumer<List<CodegenParameter>> consumer) {
         if (operation.allParams != null) {

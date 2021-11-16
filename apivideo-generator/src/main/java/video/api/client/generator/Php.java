@@ -76,7 +76,7 @@ public class Php extends AbstractPhpCodegen {
         Collections.sort(sortedLanguageSpecificPrimitives);
         String primitives = "'" + StringUtils.join(sortedLanguageSpecificPrimitives, "', '") + "'";
         additionalProperties.put("primitives", primitives);
-
+        this.languageSpecificPrimitives.remove("\\DateTime");
         cliOptions.add(new CliOption(CodegenConstants.HIDE_GENERATION_TIMESTAMP, CodegenConstants.ALLOW_UNICODE_IDENTIFIERS_DESC)
                 .defaultValue(Boolean.TRUE.toString()));
     }

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
+import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.CSharpClientCodegen;
 import org.openapitools.codegen.languages.JavaClientCodegen;
@@ -24,6 +25,11 @@ public class Csharp extends CSharpClientCodegen {
 
     public static final String VENDOR_X_CLIENT_IGNORE = "x-client-ignore";
     public static final List<String> PARAMETERS_TO_HIDE_IN_CLIENT_DOC = Arrays.asList("currentPage", "pageSize");
+
+    public Csharp() {
+        super();
+        this.reservedWords.remove("Version");
+    }
 
     @Override
     public void postProcessParameter(CodegenParameter parameter) {
@@ -48,6 +54,7 @@ public class Csharp extends CSharpClientCodegen {
                 "Configuration.mustache");
         supportingFiles.removeIf(e -> skippedFiles.contains(e.getTemplateFile()));
     }
+
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
@@ -136,11 +143,14 @@ public class Csharp extends CSharpClientCodegen {
 
         models.forEach(model -> {
             ((CodegenModel)model.get("model")).vars.forEach(var -> {
+                if(var.name.equals("_AccessToken")) var.name = "AccessToken";
                 if (var.defaultValue != null) {
                     ((CodegenModel)model.get("model")).vendorExtensions.put("x-has-defaults", true);
                 }
             });
         });
+
+
         return res;
     }
 
