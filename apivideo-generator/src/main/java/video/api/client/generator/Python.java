@@ -71,6 +71,12 @@ public class Python extends PythonClientCodegen {
         supportingFiles.removeIf(a -> a.getFolder().equals("apivideo/models"));
     }
 
+
+    public CodegenProperty fromProperty(String name, Schema p) {
+        if(p == null) return null;
+        return super.fromProperty(name, p);
+    }
+
     public void preprocessOpenAPI(OpenAPI openAPI) {
         Map<String, PathItem> pathItems = openAPI.getPaths();
         io.swagger.v3.oas.models.Paths newPaths = new io.swagger.v3.oas.models.Paths();
