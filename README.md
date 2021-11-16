@@ -53,6 +53,8 @@ To see the list of available profiles, see the "profile" column in the table of 
 | Language | Profile | CI tests | CI package release | Repository |
 | ------- | ------ | ---- | ---- | ---- |
 | Java    |  java      | :white_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/java-api-client) |
+| Android    |  android      | :white_check_mark:  | :white_check_mark: | [android-api-client](https://github.com/apivideo/android-api-client) |
+| Android    |  android-uploader      | :white_check_mark:  | :white_check_mark: | [android-video-uploader](https://github.com/apivideo/android-video-uploader) |
 | NodeJs/Typescript        | nodejs        | :white_check_mark:  | :white_check_mark: | [nodejs-api-client](https://github.com/apivideo/nodejs-api-client) |
 | Php | php | :white_check_mark:  | - | [php-api-client](https://github.com/apivideo/php-api-client) |
 | C# | csharp | :white_check_mark:  | :white_check_mark: | [csharp-api-client](https://github.com/apivideo/csharp-api-client) |
