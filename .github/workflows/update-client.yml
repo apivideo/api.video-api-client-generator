@@ -26,8 +26,8 @@ jobs:
         profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
 
     env:
-      CLIENT_PATH: generated-clients/${{ matrix.profile }}
-      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
+      CLIENT_PATH: generated-clients/${{ matrix.profile.name }}
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile.repository }}
 
     steps:
       - name: Check out repository code
@@ -63,7 +63,7 @@ jobs:
           rm -Rf !(.git|examples|.|..)
 
       - name: Generate client
-        run: mvn package -P ${{ matrix.profile }}
+        run: mvn package -P ${{ matrix.profile.name }}
 
       # Make changes to pull request here
       - uses: peter-evans/create-pull-request@v3
@@ -81,8 +81,8 @@ jobs:
           delete-branch: true
           labels: ${{ join(github.event.pull_request.labels.*.name) }}
           assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
-#          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }} #TODO 
-#          draft: true
+  #          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }} #TODO
+  #          draft: true
 
   merge_client_pr:
     # this job will only run if the PR has been merged
@@ -94,7 +94,7 @@ jobs:
       matrix:
         profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
     env:
-      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile.repository }}
 
     steps:
       - run: |
@@ -126,7 +126,7 @@ jobs:
       matrix:
         profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
     env:
-      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile }}-api-client
+      CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile.repository }}
 
     steps:
       - run: |

@@ -5,9 +5,10 @@ apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
 groupId: video.api
 artifactDescription: api.video Java API client
-artifactUrl: https://github.com/apivideo/java-api-client
-scmConnection: scm:git:git://github.com/apivideo/java-api-client.git
-scmDeveloperConnection: scm:git:ssh://github.com:apivideo/java-api-client.git
+artifactUrl: https://github.com/apivideo/api.video-java-client
+scmConnection: scm:git:git://github.com/apivideo/api.video-java-client.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-java-client.git
+gitRepoId: api.video-java-client
 scmUrl: https://github.com/apivideo/java-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video

@@ -5,7 +5,8 @@ projectName: api.video
 appShortDescription: api.video Python API client
 infoName: api.video ecosystem team
 infoEmail: ecosystem@api.video
-packageUrl: https://github.com/apivideo/python-api-client
+packageUrl: https://github.com/apivideo/api.video-python-client
+gitRepoId: api.video-python-client
 ignoredFiles:
   - gitlab-ci.mustache
   - travis.mustache

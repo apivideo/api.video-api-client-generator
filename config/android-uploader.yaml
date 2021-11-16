@@ -4,6 +4,7 @@ invokerPackage: video.api.uploader.api
 apiPackage: video.api.uploader
 modelPackage: video.api.uploader.api.models
 groupId: video.api
+gitRepoId: android-video-uploader
 artifactDescription: api.video Android API video uploader
 artifactUrl: https://github.com/apivideo/android-video-uploader
 scmConnection: scm:git:git://github.com/apivideo/android-video-uploader.git

@@ -4,6 +4,7 @@ variableNamingConvention: camelCase
 invokerPackage: ApiVideo\Client
 artifactVersion: 1.0.0
 developerEmail: ecosystem@api.video
+gitRepoId: api.video-php-client
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
