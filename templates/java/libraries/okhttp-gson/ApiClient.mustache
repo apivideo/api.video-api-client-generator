@@ -49,11 +49,13 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.text.DateFormat;
+{{^threetenbp}}
 {{#java8}}
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 {{/java8}}
+{{/threetenbp}}
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -123,7 +125,12 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        setUserAgent("api.video client (java; v:{{ artifactVersion }}; )");
+        {{#android}}
+        setUserAgent("api.video {{ userAgent }} (android; v:{{ artifactVersion }}; )");
+        {{/android}}
+        {{^android}}
+        setUserAgent("api.video {{ userAgent }} (java; v:{{ artifactVersion }}; )");
+        {{/android}}
     }
 
     /**

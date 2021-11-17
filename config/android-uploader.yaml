@@ -1,0 +1,51 @@
+artifactVersion: 0.1.0
+userAgent: uploader
+invokerPackage: video.api.uploader.api
+apiPackage: video.api.uploader
+modelPackage: video.api.uploader.api.models
+groupId: video.api
+gitRepoId: android-video-uploader
+artifactDescription: api.video Android API video uploader
+artifactUrl: https://github.com/apivideo/android-video-uploader
+scmConnection: scm:git:git://github.com/apivideo/android-video-uploader.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/android-video-uploader.git
+scmUrl: https://github.com/apivideo/android-video-uploader
+developerName: api.video ecosystem team
+developerOrganization: api.video
+developerOrganizationUrl: https://api.video
+developerEmail: ecosystem@api.video
+licenseName: MIT License
+licenseUrl: http://www.opensource.org/licenses/mit-license.php
+library: okhttp-gson
+dateLibrary: threetenbp
+artifactId: android-video-uploader
+hideGenerationTimestamp: true
+serializableModel: "true"
+java8: "true"
+android: "true"
+uploader: "true"
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
+
+files:
+  Environment.mustache:
+    folder: src/main/java/video/api/uploader/api/models
+    destinationFilename: Environment.java
+  ApiVideoAuthInterceptor.mustache:
+    folder: src/main/java/video/api/uploader/api/auth
+    destinationFilename: ApiVideoAuthInterceptor.java
+  EmptyArrayFixTypeAdapterFactory.mustache:
+    folder: src/main/java/video/api/uploader/api
+    destinationFilename: EmptyArrayFixTypeAdapterFactory.java
+  UploadChunkRequestBody.mustache:
+    folder: src/main/java/video/api/uploader/api/upload
+    destinationFilename: UploadChunkRequestBody.java
+  UploadProgressListener.mustache:
+    folder: src/main/java/video/api/uploader/api/upload
+    destinationFilename: UploadProgressListener.java
+  UploadPartProgressListener.mustache:
+    folder: src/main/java/video/api/uploader/api/upload
+    destinationFilename: UploadPartProgressListener.java
+  post-generate-android-uploader.sh:
+    destinationFilename: post-generate.sh

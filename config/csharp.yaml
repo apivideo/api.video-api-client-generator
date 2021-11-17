@@ -10,6 +10,7 @@ developerOrganizationUrl: https://api.video
 developerEmail: ecosystem@api.video
 packageName: ApiVideo
 artifactUrl: https://github.com/apivideo/csharp-api-client
+gitRepoId: api.video-csharp-client
 targetFramework: v4.5.2
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024

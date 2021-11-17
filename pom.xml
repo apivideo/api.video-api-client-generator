@@ -14,9 +14,31 @@
 
     <profiles>
         <profile>
+            <id>android</id>
+            <properties>
+                <configFileName>android</configFileName>
+                <outputFolder>android</outputFolder>
+                <templateFolder>java</templateFolder>
+                <generatorName>video.api.client.generator.Java</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
+         <profile>
+            <id>android-uploader</id>
+            <properties>
+                <configFileName>android-uploader</configFileName>
+                <outputFolder>android-uploader</outputFolder>
+                <templateFolder>java</templateFolder>
+                <generatorName>video.api.client.generator.JavaUploader</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
+        <profile>
             <id>java</id>
             <properties>
-                <folder>java</folder>
+                <configFileName>java</configFileName>
+                <outputFolder>java</outputFolder>
+                <templateFolder>java</templateFolder>
                 <generatorName>video.api.client.generator.Java</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -24,7 +46,9 @@
         <profile>
             <id>nodejs</id>
             <properties>
-                <folder>nodejs</folder>
+                <configFileName>nodejs</configFileName>
+                <outputFolder>nodejs</outputFolder>
+                <templateFolder>nodejs</templateFolder>
                 <generatorName>video.api.client.generator.TypeScript</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -32,7 +56,9 @@
         <profile>
             <id>php</id>
             <properties>
-                <folder>php</folder>
+                <configFileName>php</configFileName>
+                <outputFolder>php</outputFolder>
+                <templateFolder>php</templateFolder>
                 <generatorName>video.api.client.generator.Php</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -40,7 +66,9 @@
         <profile>
             <id>csharp</id>
             <properties>
-                <folder>csharp</folder>
+                <configFileName>csharp</configFileName>
+                <outputFolder>csharp</outputFolder>
+                <templateFolder>csharp</templateFolder>
                 <generatorName>video.api.client.generator.Csharp</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -48,7 +76,9 @@
         <profile>
             <id>python</id>
             <properties>
-                <folder>python</folder>
+                <configFileName>python</configFileName>
+                <outputFolder>python</outputFolder>
+                <templateFolder>python</templateFolder>
                 <generatorName>video.api.client.generator.Python</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -56,7 +86,9 @@
         <profile>
             <id>go</id>
             <properties>
-                <folder>go</folder>
+                <configFileName>go</configFileName>
+                <outputFolder>go</outputFolder>
+                <templateFolder>go</templateFolder>
                 <generatorName>video.api.client.generator.Go</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
@@ -110,9 +142,9 @@
                         <configuration>
                             <inputSpec>oas_apivideo.yaml</inputSpec>
                             <generatorName>${generatorName}</generatorName>
-                            <templateDirectory>${project.basedir}/templates/${folder}</templateDirectory>
-                            <configurationFile>${project.basedir}/config/${folder}.yaml</configurationFile>
-                            <output>generated-clients/${folder}</output>
+                            <templateDirectory>${project.basedir}/templates/${templateFolder}</templateDirectory>
+                            <configurationFile>${project.basedir}/config/${configFileName}.yaml</configurationFile>
+                            <output>generated-clients/${outputFolder}</output>
                         </configuration>
                     </execution>
                 </executions>
@@ -133,8 +165,8 @@
                         <phase>package</phase>
                         <configuration>
                             <target name="postGenerationScript" if="postGenerationScript">
-                                <chmod file="generated-clients/${folder}/${postGenerationScript}" perm="+x"/>
-                                <exec failonerror="true" executable="${postGenerationScript}" dir="generated-clients/${folder}"></exec>
+                                <chmod file="generated-clients/${outputFolder}/${postGenerationScript}" perm="+x"/>
+                                <exec failonerror="true" executable="${postGenerationScript}" dir="generated-clients/${outputFolder}"></exec>
                             </target>
                         </configuration>
                         <goals>

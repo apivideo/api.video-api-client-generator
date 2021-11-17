@@ -1,12 +1,14 @@
 artifactVersion: 1.0.11
+userAgent: client
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
 groupId: video.api
 artifactDescription: api.video Java API client
-artifactUrl: https://github.com/apivideo/java-api-client
-scmConnection: scm:git:git://github.com/apivideo/java-api-client.git
-scmDeveloperConnection: scm:git:ssh://github.com:apivideo/java-api-client.git
+artifactUrl: https://github.com/apivideo/api.video-java-client
+scmConnection: scm:git:git://github.com/apivideo/api.video-java-client.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-java-client.git
+gitRepoId: api.video-java-client
 scmUrl: https://github.com/apivideo/java-api-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
@@ -21,11 +23,15 @@ artifactId: java-api-client
 hideGenerationTimestamp: true
 serializableModel: "true"
 java8: "true"
+client: "true"
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
 
 files:
+  Environment.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Environment.java
   page.mustache:
     folder: src/main/java/video/api/client/api/models
     destinationFilename: Page.java
@@ -50,5 +56,5 @@ files:
   pagination.md.mustache:
     folder: docs
     destinationFilename: Pagination.md
-  post-generate.sh:
+  post-generate-java.sh:
     destinationFilename: post-generate.sh
