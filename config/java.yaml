@@ -9,7 +9,7 @@ artifactUrl: https://github.com/apivideo/api.video-java-client
 scmConnection: scm:git:git://github.com/apivideo/api.video-java-client.git
 scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-java-client.git
 gitRepoId: api.video-java-client
-scmUrl: https://github.com/apivideo/java-api-client
+scmUrl: https://github.com/apivideo/api.video-java-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video

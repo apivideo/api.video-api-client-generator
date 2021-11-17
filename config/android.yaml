@@ -6,10 +6,10 @@ modelPackage: video.api.client.api.models
 groupId: video.api
 gitRepoId: api.video-android-client
 artifactDescription: api.video Android API client
-artifactUrl: https://github.com/apivideo/android-api-client
-scmConnection: scm:git:git://github.com/apivideo/android-api-client.git
-scmDeveloperConnection: scm:git:ssh://github.com:apivideo/android-api-client.git
-scmUrl: https://github.com/apivideo/android-api-client
+artifactUrl: https://github.com/apivideo/api.video-android-client
+scmConnection: scm:git:git://github.com/apivideo/api.video-android-client.git
+scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-android-client.git
+scmUrl: https://github.com/apivideo/api.video-android-client
 developerName: api.video ecosystem team
 developerOrganization: api.video
 developerOrganizationUrl: https://api.video
