@@ -1,0 +1,14 @@
+name: Run unit tests
+on: [push]
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set API key
+        run: |
+          sed -i -e "s/INTEGRATION_TESTS_API_TOKEN/${INTEGRATION_TESTS_API_TOKEN}/" ./Tests/ApiVideoClient/Integration/Parameters.swift
+        env:
+          INTEGRATION_TESTS_API_TOKEN: ${{ secrets.INTEGRATION_TESTS_API_TOKEN }}
+      - name: Running tests
+        run: swift test

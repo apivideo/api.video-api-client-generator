@@ -1,0 +1,40 @@
+library: alamofire
+generateAliasAsModel: true
+removeMigrationProjectNameClass: true
+swiftPackagePath: "Sources"
+userAgent: client
+gitRepoId: api.video-ios-client
+additionalProperties:
+  projectName: ApiVideoClient
+  podVersion: 1.0.11
+  podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
+  podSummary: "The official iOS client library for api.video"
+  podRepo: https://github.com/apivideo/api.video-ios-client
+  podHomepage: https://docs.api.video
+  podSocialMediaUrl: https://twitter.com/api_video
+  podLicense: "{ :type => 'MIT' }"
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
+
+files:
+  Auth/ApiVideoCredential.mustache:
+    folder: Sources/Auth
+    destinationFilename: ApiVideoCredential.swift
+  Auth/ApiVideoAuthenticator.mustache:
+    folder: Sources/Auth
+    destinationFilename: ApiVideoAuthenticator.swift
+  Environment.mustache:
+    folder: Sources/Models
+    destinationFilename: Environment.swift
+  Upload/ChunkInputStream.mustache:
+    folder: Sources/Upload
+    destinationFilename: ChunkInputStream.swift
+  Upload/FileChunksBuilder.mustache:
+    folder: Sources/Upload
+    destinationFilename: FileChunksBuilder.swift
+  Upload/FileReaders.mustache:
+    folder: Sources/Upload
+    destinationFilename: FileReaders.swift
+  post-generate.sh:
+    destinationFilename: post-generate.sh
