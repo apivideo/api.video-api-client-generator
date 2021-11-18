@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.config.GlobalSettings;
 import org.openapitools.codegen.languages.GoClientCodegen;
+import org.openapitools.codegen.templating.mustache.LowercaseLambda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -206,6 +207,8 @@ public class Go extends GoClientCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
+
+        additionalProperties.put("lower", new LowercaseLambda());
 
         List<String> ignoredFiles = (List<String>) Optional.ofNullable(additionalProperties.get("ignoredFiles")).orElse(Collections.emptyList());
         supportingFiles.removeIf(e -> ignoredFiles.contains(e.getTemplateFile()));

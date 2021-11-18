@@ -12,6 +12,7 @@ import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.meta.features.*;
 import org.openapitools.codegen.languages.AbstractPhpCodegen;
+import org.openapitools.codegen.templating.mustache.LowercaseLambda;
 import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -209,6 +210,7 @@ public class Php extends AbstractPhpCodegen {
 
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("unescape", new UnescapeLambda());
+        additionalProperties.put("lower", new LowercaseLambda());
 
         supportingFiles.add(new SupportingFile("src/Request.php", toSrcPath(invokerPackage, srcBasePath), "Request.php"));
         supportingFiles.add(new SupportingFile("src/Authenticator.php", toSrcPath(invokerPackage, srcBasePath), "Authenticator.php"));
