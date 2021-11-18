@@ -231,7 +231,8 @@ public class Python extends PythonClientCodegen {
         return new ImmutableMap.Builder<String, Mustache.Lambda>()
                 .put("lowercase", new LowercaseLambda().generator(this))
                 .put("underscore", new UnderscoreLambda())
-                .put("underscorePath", new UnderscoreLambda(true));
+                .put("underscorePath", new UnderscoreLambda(true))
+                .put("lower", new LowercaseLambda());
     }
 
     @Override

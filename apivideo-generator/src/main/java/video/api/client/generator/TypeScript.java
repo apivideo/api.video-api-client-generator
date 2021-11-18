@@ -12,6 +12,7 @@ import org.openapitools.codegen.*;
 import org.openapitools.codegen.meta.GeneratorMetadata;
 import org.openapitools.codegen.meta.Stability;
 import org.openapitools.codegen.meta.features.DocumentationFeature;
+import org.openapitools.codegen.templating.mustache.LowercaseLambda;
 import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 import org.openapitools.codegen.utils.ModelUtils;
 import org.slf4j.Logger;
@@ -398,6 +399,8 @@ public class TypeScript extends DefaultCodegen {
     public void processOpts() {
         super.processOpts();
         additionalProperties.put("titlecase", new TitlecaseLambda());
+        additionalProperties.put("lower", new LowercaseLambda());
+
         if (additionalProperties.containsKey(TypeScript.TEST_PACKAGE)) {
             testPackage = (String) additionalProperties.get(TypeScript.TEST_PACKAGE);
         }
