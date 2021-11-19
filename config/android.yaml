@@ -58,3 +58,5 @@ files:
     destinationFilename: Pagination.md
   post-generate-android.sh:
     destinationFilename: post-generate.sh
+  maven-push.gradle.mustache:
+    destinationFilename: maven-push.gradle
