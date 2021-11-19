@@ -18,8 +18,10 @@ jobs:
         run: echo $GPG_KEYRING_FILE_CONTENT | base64 --decode > ~/secring.gpg
         env:
           GPG_KEYRING_FILE_CONTENT: "${{ secrets.GPG_KEYRING_FILE_CONTENT }}"
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Publish package
-        run: gradle publish -Psigning.secretKeyRingFile=$(echo ~/secring.gpg) -Psigning.password=$GPG_PASSPHRASE -Psigning.keyId=$GPG_KEY_ID
+        run: ./gradlew publish -Psigning.secretKeyRingFile=$(echo ~/secring.gpg) -Psigning.password=$GPG_PASSPHRASE -Psigning.keyId=$GPG_KEY_ID
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}

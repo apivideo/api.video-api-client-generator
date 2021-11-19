@@ -49,3 +49,5 @@ files:
     destinationFilename: UploadPartProgressListener.java
   post-generate-android-uploader.sh:
     destinationFilename: post-generate.sh
+  maven-push.gradle.mustache:
+    destinationFilename: maven-push.gradle
