@@ -29,6 +29,7 @@ public class Csharp extends CSharpClientCodegen {
     public Csharp() {
         super();
         this.reservedWords.remove("Version");
+        packageGuid = "{" + java.util.UUID.nameUUIDFromBytes(this.packageVersion.getBytes()).toString().toUpperCase(Locale.ROOT) + "}";
     }
 
     @Override
