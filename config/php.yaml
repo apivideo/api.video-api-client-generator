@@ -2,7 +2,7 @@ licenseName: MIT
 srcBasePath: src
 variableNamingConvention: camelCase
 invokerPackage: ApiVideo\Client
-artifactVersion: 1.0.0
+artifactVersion: 1.1.0
 developerEmail: ecosystem@api.video
 gitRepoId: api.video-php-client
 defaultChunkSize: 50 * 1024 * 1024

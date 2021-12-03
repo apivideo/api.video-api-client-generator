@@ -1,4 +1,4 @@
-artifactVersion: 1.0.11
+artifactVersion: 1.1.0
 userAgent: client
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients

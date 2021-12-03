@@ -1,4 +1,4 @@
-artifactVersion: 0.1.1
+artifactVersion: 0.2.0
 userAgent: uploader
 invokerPackage: video.api.uploader.api
 apiPackage: video.api.uploader
