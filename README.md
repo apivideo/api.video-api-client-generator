@@ -172,7 +172,3 @@ The `yml` config file -- is loaded in the `CodegenConfigurator` class via the `f
 Each entry under the `files` key of the `yml` configuration file is used to build a `TemplateDefinition` object.
 If not specified otherwise the file is treated as a `SupportingFile`.
 
-
-# Contribution
-
-Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.
