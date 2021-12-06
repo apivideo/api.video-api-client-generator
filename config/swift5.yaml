@@ -1,3 +1,7 @@
+changelog:
+  - 0.1.0 (2021-12-06):
+      - Initial release
+
 library: alamofire
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
@@ -7,7 +11,6 @@ client: "true"
 gitRepoId: api.video-ios-client
 additionalProperties:
   projectName: ApiVideoClient
-  podVersion: 1.0.11
   podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
   podSummary: "The official iOS client library for api.video"
   podRepo: https://github.com/apivideo/api.video-ios-client

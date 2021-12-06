@@ -26,7 +26,7 @@ public class ChangeLog {
             return (v.getDate() != null)
                     ? String.format("## [%s] - %s\n%s", v.name, v.date, changes)
                     : String.format("## [%s]\n%s", v.name, changes);
-        }).collect(Collectors.joining("\n\n"));
+        }).collect(Collectors.joining("\n\n")) + "\n";
 
         try {
             FileWriter fileWriter = new FileWriter(outputFile.toFile());

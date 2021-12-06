@@ -150,5 +150,10 @@ public class Swift5 extends Swift5ClientCodegen {
     public void processOpts() {
         super.processOpts();
         additionalProperties.put("titlecase", new TitlecaseLambda());
+
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("podVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
     }
 }
