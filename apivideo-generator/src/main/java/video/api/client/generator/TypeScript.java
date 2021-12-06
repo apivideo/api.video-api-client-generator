@@ -398,6 +398,11 @@ public class TypeScript extends DefaultCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
+
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("npmVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("lower", new LowercaseLambda());
 

@@ -15,6 +15,16 @@ import java.util.function.Function;
 
 public class JavaUploader extends Java {
 
+    @Override
+    public void processOpts() {
+        super.processOpts();
+
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("artifactVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
+    }
+
     /**
      * Filter the OpenAPI description file entries in order to keep only stuff related to video upload & authentication
      * @param openAPI

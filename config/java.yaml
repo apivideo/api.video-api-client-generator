@@ -1,4 +1,9 @@
-artifactVersion: 1.1.0
+changelog:
+  - 1.1.0 (2021-12-06):
+      - Add `name attribute in player themes
+  - 0.0.11 (2021-11-15):
+      - Add support of `progressive uploads`
+
 userAgent: client
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients

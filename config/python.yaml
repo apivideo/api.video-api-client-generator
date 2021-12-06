@@ -1,4 +1,9 @@
-packageVersion: 1.1.0
+changelog:
+  - 1.1.0 (2021-12-06):
+    - Add `name` attribute in player themes
+  - 1.0.0 (2021-11-15):
+    - Add support of `progressive uploads`
+
 licenseInfo: MIT
 packageName: apivideo
 projectName: api.video
