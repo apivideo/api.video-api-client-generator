@@ -2,15 +2,15 @@ library: alamofire
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
-userAgent: client
-client: "true"
-gitRepoId: api.video-ios-client
+userAgent: uploader
+uploader: "true"
+gitRepoId: api.video-ios-uploader
 additionalProperties:
-  projectName: ApiVideoClient
+  projectName: ApiVideoUploader
   podVersion: 1.0.11
   podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
-  podSummary: "The official iOS client library for api.video"
-  podRepo: https://github.com/apivideo/api.video-ios-client
+  podSummary: "The official iOS video uploader for api.video "
+  podRepo: https://github.com/apivideo/api.video-ios-uploader
   podHomepage: https://docs.api.video
   podSocialMediaUrl: https://twitter.com/api_video
   podLicense: "{ :type => 'MIT' }"
@@ -37,5 +37,5 @@ files:
   Upload/FileReaders.mustache:
     folder: Sources/Upload
     destinationFilename: FileReaders.swift
-  post-generate.sh:
+  post-generate-uploader.sh:
     destinationFilename: post-generate.sh

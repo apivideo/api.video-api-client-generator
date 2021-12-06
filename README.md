@@ -61,6 +61,7 @@ To see the list of available profiles, see the "profile" column in the table of 
 | Go | go | :white_check_mark:  | - |  [go-api-client](https://github.com/apivideo/api.video-go-client) |
 | Python | python | :white_check_mark:  | :white_check_mark: | [python-api-client](https://github.com/apivideo/api.video-python-client) |
 | Swift5 | swift5 | :white_check_mark:  | :white_check_mark: | [ios-api-client](https://github.com/apivideo/api.video-ios-client) |
+| Swift5 | swift5-uploader | :white_check_mark:  | :white_check_mark: | [ios-video-uploader](https://github.com/apivideo/api.video-ios-uploader) |
 
 ## Template files
 

@@ -103,6 +103,16 @@
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
+        <profile>
+            <id>swift5-uploader</id>
+            <properties>
+                <configFileName>swift5-uploader</configFileName>
+                <outputFolder>swift5-uploader</outputFolder>
+                <templateFolder>swift5</templateFolder>
+                <generatorName>video.api.client.generator.Swift5Uploader</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
