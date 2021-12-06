@@ -1,7 +1,7 @@
 licenseName: MIT
 supportsES6: true
 npmName: "@api.video/nodejs-client"
-npmVersion: 2.0.14
+npmVersion: 2.1.0
 npmDescription: api.video nodejs client
 npmAuthor: api.video ecosystem team
 gitRepoId: api.video-nodejs-client
