@@ -1,0 +1,47 @@
+changelog:
+  - 0.1.0 (2021-12-06):
+    - Initial release of generated version
+  - 0.0.3 (2021-11-22):
+    - Fix large upload request time out
+    - Fix callback on wrong token
+
+library: alamofire
+generateAliasAsModel: true
+removeMigrationProjectNameClass: true
+swiftPackagePath: "Sources"
+userAgent: uploader
+uploader: "true"
+gitRepoId: api.video-ios-uploader
+additionalProperties:
+  projectName: ApiVideoUploader
+  podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
+  podSummary: "The official iOS video uploader for api.video "
+  podRepo: https://github.com/apivideo/api.video-ios-uploader
+  podHomepage: https://docs.api.video
+  podSocialMediaUrl: https://twitter.com/api_video
+  podLicense: "{ :type => 'MIT' }"
+defaultChunkSize: 50 * 1024 * 1024
+minChunkSize: 5 * 1024 * 1024
+maxChunkSize: 128 * 1024 * 1024
+
+files:
+  Auth/ApiVideoCredential.mustache:
+    folder: Sources/Auth
+    destinationFilename: ApiVideoCredential.swift
+  Auth/ApiVideoAuthenticator.mustache:
+    folder: Sources/Auth
+    destinationFilename: ApiVideoAuthenticator.swift
+  Environment.mustache:
+    folder: Sources/Models
+    destinationFilename: Environment.swift
+  Upload/ChunkInputStream.mustache:
+    folder: Sources/Upload
+    destinationFilename: ChunkInputStream.swift
+  Upload/FileChunksBuilder.mustache:
+    folder: Sources/Upload
+    destinationFilename: FileChunksBuilder.swift
+  Upload/FileReaders.mustache:
+    folder: Sources/Upload
+    destinationFilename: FileReaders.swift
+  post-generate-uploader.sh:
+    destinationFilename: post-generate.sh

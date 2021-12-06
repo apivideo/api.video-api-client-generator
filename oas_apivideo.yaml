@@ -5830,7 +5830,6 @@ components:
           example: true
       required:
         - videoId
-        - title
       example:
         videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
         title: Maths video
