@@ -208,6 +208,10 @@ public class Go extends GoClientCodegen {
     public void processOpts() {
         super.processOpts();
 
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("artifactVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
         additionalProperties.put("lower", new LowercaseLambda());
 
         List<String> ignoredFiles = (List<String>) Optional.ofNullable(additionalProperties.get("ignoredFiles")).orElse(Collections.emptyList());

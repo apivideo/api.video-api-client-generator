@@ -60,6 +60,10 @@ public class Python extends PythonClientCodegen {
     public void processOpts() {
         super.processOpts();
 
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("packageVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
         List<String> ignoredFiles = (List<String>) additionalProperties.get("ignoredFiles");
         supportingFiles.removeIf(e -> ignoredFiles.contains(e.getTemplateFile()));
         supportingFiles.add(new SupportingFile("auth_api_client.mustache", packagePath(), "auth_api_client.py"));

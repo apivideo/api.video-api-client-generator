@@ -41,6 +41,11 @@ public class Csharp extends CSharpClientCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
+
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("artifactVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
         additionalProperties.put("unescape", new UnescapeLambda());
         additionalProperties.put("indented_16", new IndentedLambda(16, " "));
         additionalProperties.put("titlecase", new TitlecaseLambda());

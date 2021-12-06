@@ -208,6 +208,11 @@ public class Php extends AbstractPhpCodegen {
     public void processOpts() {
         super.processOpts();
 
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("artifactVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
+
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("unescape", new UnescapeLambda());
         additionalProperties.put("lower", new LowercaseLambda());

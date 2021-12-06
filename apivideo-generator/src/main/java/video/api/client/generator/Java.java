@@ -151,6 +151,10 @@ public class Java extends JavaClientCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
+        ChangeLog changelog = ChangeLog.parse(additionalProperties);
+        additionalProperties.put("artifactVersion", changelog.getLastVersion().getName());
+        changelog.writeTo(this.getOutputDir());
+
         additionalProperties.put("unescape", new UnescapeLambda());
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("lower", new LowercaseLambda());

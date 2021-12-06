@@ -1,8 +1,13 @@
+changelog:
+  - 1.1.0 (2021-12-06):
+    - Add `name` attribute in player themes
+  - 1.0.0 (2021-11-15):
+    - Add support of `progressive uploads`
+
 licenseName: MIT
 srcBasePath: src
 variableNamingConvention: camelCase
 invokerPackage: ApiVideo\Client
-artifactVersion: 1.1.0
 developerEmail: ecosystem@api.video
 gitRepoId: api.video-php-client
 defaultChunkSize: 50 * 1024 * 1024
