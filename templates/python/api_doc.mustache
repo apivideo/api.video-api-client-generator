@@ -45,8 +45,8 @@ The last chunk is sent by calling a different method, so api.video knows that it
 {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}{{{paramName}}} = {{{example}}}; // {{{description}}}{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}};
 
 part1 = open('10m.mp4.part.a', 'rb')
-part2 = open('10m.mp4.part.a', 'rb')
-part3 = open('10m.mp4.part.a', 'rb')
+part2 = open('10m.mp4.part.b', 'rb')
+part3 = open('10m.mp4.part.c', 'rb')
 
 {{#titlecase}}{{operationId}}{{/titlecase}}session = api_instance.create_{{operationId}}_progressive_session({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
 
