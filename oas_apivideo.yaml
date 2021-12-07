@@ -4480,7 +4480,7 @@ paths:
       tags:
         - Player Themes
       summary: Upload a logo
-      description: The uploaded image maximum size should be 200x100 and its weight should be 200KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+      description: The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
       operationId: POST_players-playerId-logo
       parameters:
         - name: playerId
