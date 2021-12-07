@@ -1,7 +1,7 @@
 name: Release Java package to Maven Central Repository
 on:
   release:
-    types: [created]
+    types: [published]
 jobs:
   deploy:
     runs-on: ubuntu-latest
