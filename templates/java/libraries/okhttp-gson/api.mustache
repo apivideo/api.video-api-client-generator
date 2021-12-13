@@ -475,7 +475,7 @@ public class {{classname}} {
     }
 
 
-    public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession {
+    public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession implements IProgressiveUploadSession {
         private Integer part = 1;
         {{#vendorExtensions.x-client-copy-from-response}}
         private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
@@ -486,22 +486,27 @@ public class {{classname}} {
             {{#allParams}}{{^isFile}}this.{{paramName}} = {{paramName}};{{/isFile}}{{/allParams}}
         }
 
+        @Override
         public Video uploadPart(File part) throws ApiException {
             return uploadPart(part, false, null);
         }
 
+        @Override
         public Video uploadLastPart(File part) throws ApiException {
             return uploadPart(part, true, null);
         }
 
+        @Override
         public Video uploadPart(File part, UploadPartProgressListener uploadProgressListener) throws ApiException {
             return uploadPart(part, false, uploadProgressListener);
         }
 
+        @Override
         public Video uploadLastPart(File part, UploadPartProgressListener uploadProgressListener) throws ApiException {
             return uploadPart(part, true, uploadProgressListener);
         }
 
+        @Override
         public Video uploadPart(File part, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
             Integer lastPart = this.part;
             this.part++;
