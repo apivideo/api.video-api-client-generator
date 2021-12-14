@@ -1,4 +1,6 @@
 changelog:
+  - 0.1.1 (2021-12-14):
+      - Add a protocol for progressive upload session
   - 0.1.0 (2021-12-06):
     - Initial release of generated version
   - 0.0.3 (2021-11-22):
@@ -34,6 +36,9 @@ files:
   Environment.mustache:
     folder: Sources/Models
     destinationFilename: Environment.swift
+  Upload/ProgressiveUploadSessioning.mustache:
+    folder: Sources/Upload
+    destinationFilename: ProgressiveUploadSessioning.swift
   Upload/ChunkInputStream.mustache:
     folder: Sources/Upload
     destinationFilename: ChunkInputStream.swift

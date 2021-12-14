@@ -138,7 +138,7 @@ extension {{projectName}}API {
         return Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
     }
    
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: ProgressiveUploadSessioning {
         private var partId = 1
         private var fileReader = FilePartsReader(){{#vendorExtensions.x-client-copy-from-response}}
         private var {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}
