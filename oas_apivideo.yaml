@@ -5920,7 +5920,7 @@ components:
           example: '2020-01-31T10:18:47+00:00'
         linkActive:
           type: string
-          description: Deprecated
+          description: 'RGBA color for the play button when hovered.'
         assets:
           type: object
           properties:
