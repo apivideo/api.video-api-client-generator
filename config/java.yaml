@@ -1,4 +1,7 @@
 changelog:
+  - 1.2.0 (2022-01-03):
+      - Add watermark endpoints
+      - Add video clips
   - 1.1.1 (2021-12-13):
       - Add an interface for progressive upload session
   - 1.1.0 (2021-12-06):

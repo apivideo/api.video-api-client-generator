@@ -59,7 +59,7 @@ public class ApiVideoClient {
         this(new ApiClient(client, environment.basePath));
     }
 
-    private ApiVideoClient(ApiClient apiClient) {
+    public ApiVideoClient(ApiClient apiClient) {
         this.apiClient = apiClient;
 {{# apiInfo.apis }}{{^x-client-hidden}}
         this.{{classVarName}} = new {{classFilename}}(this.apiClient);{{/x-client-hidden}}{{/ apiInfo.apis }}

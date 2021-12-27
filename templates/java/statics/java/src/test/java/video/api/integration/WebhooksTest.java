@@ -2,9 +2,7 @@ package video.api.integration;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
-import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
-import video.api.client.api.models.Environment;
 import video.api.client.api.models.Page;
 import video.api.client.api.models.Webhook;
 import video.api.client.api.models.WebhooksCreationPayload;
@@ -19,16 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @EnabledIfEnvironmentVariable(named = "INTEGRATION_TESTS_API_TOKEN", matches = ".+")
-public class WebhooksTest {
+public class WebhooksTest extends AbstractTest {
 
-    private ApiVideoClient apiClient;
     private Webhook webhook;
-
-    public WebhooksTest() {
-        this.apiClient = new ApiVideoClient(System.getenv().get("INTEGRATION_TESTS_API_TOKEN"),
-                Environment.SANDBOX);
-    }
-
+    
     @Test
     @Order(1)
     @DisplayName("create a webhook")
@@ -50,7 +42,7 @@ public class WebhooksTest {
         List<Webhook> filteredWebhooks = webhooks.getItems().stream()
                 .filter(webhook -> webhook.getWebhookId().equals(this.webhook.getWebhookId()))
                 .collect(Collectors.toList());
-        
+
         assertThat(filteredWebhooks).hasSize(1);
         assertThat(filteredWebhooks.get(0).getWebhookId()).isEqualTo(this.webhook.getWebhookId());
         assertThat(filteredWebhooks.get(0).getEvents()).hasSize(1);
