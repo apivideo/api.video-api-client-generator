@@ -55,7 +55,7 @@ describe('ApiVideoClient', () => {
     expect(watermarkVideo.title).to.be.eq('Nodejs - watermark');
 
     // list watermarks
-    const watermarks = await client.watermarks.list("createdAt", "desc");
+    const watermarks = await client.watermarks.list({sortBy: 'createdAt', sortOrder: 'desc'});
     expect(watermarks.data).to.has.length.greaterThan(0);
 
     // delete watermark & watermarked video

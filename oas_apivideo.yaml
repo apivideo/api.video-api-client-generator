@@ -911,11 +911,11 @@ paths:
                       currentPageItems: 11
                       links:
                         - rel: self
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: https://ws.api.video/watermarks?currentPage=1
                         - rel: first
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: https://ws.api.video/watermarks?currentPage=1
                         - rel: last
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: https://ws.api.video/watermarks?currentPage=1
         "400":
           description: Bad Request
           content:
@@ -7117,10 +7117,10 @@ components:
       properties:
         startTimecode:
           type: string
-          pattern: \d{2}:\d{2}:\d{2}(\.\d{2})?
+          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
         endTimecode:
           type: string
-          pattern: \d{2}:\d{2}:\d{2}(\.\d{2})?
+          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
     video-source-live-stream-link:
       type: object
       properties:
