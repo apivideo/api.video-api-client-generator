@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "video.api.uploader.example"
-        minSdk 21
+        minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
