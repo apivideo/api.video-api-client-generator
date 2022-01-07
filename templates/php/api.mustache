@@ -193,12 +193,7 @@ use {{invokerPackage}}\ProgressiveUploadSession;
         if (${{paramName}} !== null) {
         {{#style}}
             {{#vendorExtensions.isForm}}
-            {{#vendorExtensions.isArray}}
-            $queryParams['{{baseName}}'] = is_array(${{paramName}}) ? implode(',', ${{paramName}}) : ${{paramName}};
-            {{/vendorExtensions.isArray}}
-            {{^vendorExtensions.isArray}}
             $queryParams['{{baseName}}'] = ${{paramName}};
-            {{/vendorExtensions.isArray}}
             {{/vendorExtensions.isForm}}
             {{#vendorExtensions.isDeepObject}}
             if(is_array(${{paramName}})) {
