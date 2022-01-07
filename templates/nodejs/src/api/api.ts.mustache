@@ -244,7 +244,12 @@ export default class {{classname}} {
       Object.keys({{paramName}}).forEach((k) => urlSearchParams.append("{{baseName}}["+k+"]", ObjectSerializer.serialize({{paramName}}[k], "string", "")));
       {{/ vendorExtensions.x-is-deep-object }}
       {{^ vendorExtensions.x-is-deep-object }}
+      {{#isArray}}
+      const {{paramName}}Serialized = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}");
+      {{paramName}}Serialized.forEach((v: string) => urlSearchParams.append("{{baseName}}", v));
+      {{/isArray}}{{^isArray}}
       urlSearchParams.append("{{baseName}}", ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}", "{{dataFormat}}"));
+      {{/isArray}}
       {{/ vendorExtensions.x-is-deep-object }}
     }
     {{#-last}}
