@@ -108,5 +108,20 @@ public class UploadChunkRequestBody extends RequestBody {
             progressListener.accept(start + pos);
             return -1;
         }
+
+        @Override
+        public int read(byte b[], int off, int len) throws IOException {
+            if (start + pos < end) {
+                int maxLen = (int) Math.min(len, end - (start + pos));
+
+                int readLen = source.read(b, off, maxLen);
+                pos += readLen;
+                progressListener.accept(start + pos);
+                return readLen;
+            }
+
+            progressListener.accept(start + pos);
+            return -1;
+        }
     }
 }
