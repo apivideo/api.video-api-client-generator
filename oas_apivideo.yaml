@@ -165,7 +165,7 @@ paths:
           schema:
             type: string
           example: My Video.mp4
-        - name: tags
+        - name: tags[]
           in: query
           description: A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
           required: false
