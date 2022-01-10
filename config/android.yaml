@@ -2,6 +2,7 @@ changelog:
   - 1.0.0 (2022-01-07):
     - Add watermark endpoints
     - Add video clips
+    - Fix tags[] query parameter format of GET /videos
   - 0.2.2 (2022-01-06):
     - Increase chunked and progressive upload speed
     - Update min Sdk version to Android API 24

@@ -2,6 +2,7 @@ changelog:
   - 1.2.0 (2022-01-07):
       - Add watermark endpoints
       - Add video clips
+      - Fix tags[] query parameter format of GET /videos
   - 1.1.1 (2021-12-13):
       - Add an interface for progressive upload session
   - 1.1.0 (2021-12-06):
