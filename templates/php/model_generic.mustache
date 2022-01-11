@@ -24,6 +24,10 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
                 {{#vars}}'{{name}}' => '{{getter}}'{{^-last}},
                 {{/-last}}{{/vars}}
             ],
+            [
+                {{#vars}}'{{name}}' => {{#vendorExtensions.x-optional-nullable}}'is{{#titlecase}}{{baseName}}{{/titlecase}}Defined'{{/vendorExtensions.x-optional-nullable}}{{^vendorExtensions.x-optional-nullable}}null{{/vendorExtensions.x-optional-nullable}}{{^-last}},
+                {{/-last}}{{/vars}}
+            ],
             {{#discriminator}}'{{discriminatorName}}'{{/discriminator}}{{^discriminator}}null{{/discriminator}}
         );
     }
@@ -77,10 +81,11 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
 
         {{/parentSchema}}
         {{#vars}}
-        {{#vendorExtensions.x-type-other}}$this->container['{{name}}'] = isset($data['{{name}}']) ? new {{complexType}}($data['{{name}}']) : {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
+        {{#vendorExtensions.x-optional-nullable}}if(array_key_exists('{{baseName}}', $this->container)) $this->container = $data['{{baseName}}']; // {{name}} can be null or undefined
+{{/vendorExtensions.x-optional-nullable}}{{^vendorExtensions.x-optional-nullable}}{{#vendorExtensions.x-type-other}}$this->container['{{name}}'] = isset($data['{{name}}']) ? new {{complexType}}($data['{{name}}']) : {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
 {{/vendorExtensions.x-type-other}}{{#vendorExtensions.x-type-primitive}}$this->container['{{name}}'] = $data['{{name}}'] ?? {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
 {{/vendorExtensions.x-type-primitive}}{{#vendorExtensions.x-type-complex-array}}$this->container['{{name}}'] = isset($data['{{name}}']) ?  array_map(function(array $value): {{complexType}} { return new {{complexType}}($value); }, $data['{{name}}']) : {{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
-{{/vendorExtensions.x-type-complex-array}}{{/vars}}{{#discriminator}}
+{{/vendorExtensions.x-type-complex-array}}{{/vendorExtensions.x-optional-nullable}}{{/vars}}{{#discriminator}}
 
         // Initialize discriminator property with the model name.
         $this->container['{{discriminatorName}}'] = static::$openAPIModelName;
@@ -189,7 +194,17 @@ class {{classname}} {{#parentSchema}}extends {{{parent}}}{{/parentSchema}}{{^par
     public function {{getter}}()
     {
         return $this->container['{{name}}'];
-    }
+    }{{#vendorExtensions.x-optional-nullable}}
+
+    /**
+     * Gets a boolean indicating if the nullable field {{name}} is defined
+     *
+     * @return boolean
+     */
+    public function is{{#titlecase}}{{baseName}}{{/titlecase}}Defined()
+    {
+        return array_key_exists('{{baseName}}', $this->container);
+    }{{/vendorExtensions.x-optional-nullable}}
 
     /**
      * Sets {{name}}
