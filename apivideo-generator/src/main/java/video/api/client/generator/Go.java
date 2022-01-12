@@ -244,6 +244,11 @@ public class Go extends GoClientCodegen {
                     var.isString = true;
                     var.isDateTime = false;
                 }
+                if(var.vendorExtensions.containsKey("x-optional-nullable")) {
+                    var.dataType = "Nullable" + Character.toUpperCase(var.dataType.charAt(0))
+                            + var.dataType.substring(1);
+                    var.isNullable = true;
+                }
             });
         });
         return stringObjectMap;
