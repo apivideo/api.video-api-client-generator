@@ -25,6 +25,9 @@ files:
   page.mustache:
     folder: src/ApiVideo/Model
     destinationFilename: Page.cs
+  OptionalNullable.mustache:
+    folder: src/ApiVideo/Model
+    destinationFilename: OptionalNullable.cs
   pagination.md.mustache:
     folder: docs
     destinationFilename: Pagination.md
@@ -37,6 +40,9 @@ files:
   EmptyArrayFixTypeConverter.mustache:
     folder: src/ApiVideo/Client/
     destinationFilename: EmptyArrayFixTypeConverter.cs
+  NullableStringTypeConverter.mustache:
+    folder: src/ApiVideo/Client/
+    destinationFilename: NullableStringTypeConverter.cs
   IUploadProgressListener.mustache:
     folder: src/ApiVideo/Model
     destinationFilename: IUploadProgressListener.cs

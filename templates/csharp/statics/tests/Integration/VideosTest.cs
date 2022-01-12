@@ -106,6 +106,57 @@ namespace VideoApiTests.Integration
         }
     }
 
+
+    [TestClass]
+    public class VideosUpdateTest
+    {
+        ApiVideoClient apiClient;
+        private Video video;
+        private PlayerTheme playerTheme;
+
+        [TestInitialize]
+        public void init()
+        {
+            this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
+            VideoCreationPayload payload = new VideoCreationPayload();
+            payload.title = "C# video update";
+            this.video = this.apiClient.Videos().create(payload);
+
+            PlayerThemeCreationPayload playerPayload = new PlayerThemeCreationPayload();
+            playerPayload.name = "test c#";
+            this.playerTheme = this.apiClient.PlayerThemes().create(playerPayload);
+        }
+
+        [TestMethod]
+        public void Update()
+        {
+            Video updated;
+
+            VideoUpdatePayload updatePayload = new VideoUpdatePayload();
+            updatePayload.playerid = this.playerTheme.playerid;
+            updatePayload.title = "player id set";
+            updated = this.apiClient.Videos().update(this.video.videoid, updatePayload);
+            updated.playerid.Should().Be(this.playerTheme.playerid);
+
+            VideoUpdatePayload updatePayloadUnset = new VideoUpdatePayload();
+            updatePayloadUnset.title = "player id not set";
+            updated = this.apiClient.Videos().update(this.video.videoid, updatePayloadUnset);
+            updated.playerid.Should().Be(this.playerTheme.playerid);
+
+            VideoUpdatePayload updatePayloadNull = new VideoUpdatePayload();
+            updatePayloadNull.playerid = null;
+            updatePayloadNull.title = "player id null";
+            updated = this.apiClient.Videos().update(this.video.videoid, updatePayloadNull);
+            updated.playerid.Should().BeNull();
+        }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            this.apiClient.Videos().delete(this.video.videoid);
+        }
+    }
+
     [TestClass]
     public class VideosTest
     {

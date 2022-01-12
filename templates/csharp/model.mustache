@@ -15,14 +15,36 @@ namespace {{packageName}}.Model {
   [DataContract]
   public class {{classname}}{{#parent}} : {{{parent}}}{{/parent}} {
     {{#vars}}
+{{^vendorExtensions.x-optional-nullable}}    /// <summary>
+    /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}
+    /// </summary>{{#description}}
+    /// <value>{{{description}}}</value>{{/description}}{{/vendorExtensions.x-optional-nullable}}
+    [DataMember(Name="{{baseName}}", EmitDefaultValue=false)]
+    [JsonProperty(PropertyName = "{{baseName}}")]{{#vendorExtensions.x-optional-nullable}}
+    public OptionalNullable<{{#isBoolean}}Nullable<{{/isBoolean}}{{{dataType}}}{{#isBoolean}}>{{/isBoolean}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}}> {{#lambda.lowercase}}{{name}}_optional{{/lambda.lowercase}} { get; set; } = null;
+
     /// <summary>
     /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}
     /// </summary>{{#description}}
     /// <value>{{{description}}}</value>{{/description}}
-    [DataMember(Name="{{baseName}}", EmitDefaultValue=false)]
-    [JsonProperty(PropertyName = "{{baseName}}")]
-    public {{{dataType}}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}} {{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} { get; set; }
+    public {{#isBoolean}}Nullable<{{/isBoolean}}{{{dataType}}}{{#isBoolean}}>{{/isBoolean}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}} {{#lambda.lowercase}}{{name}}{{/lambda.lowercase}}
+    {
+        get
+        {
+            return this.{{#lambda.lowercase}}{{name}}_optional{{/lambda.lowercase}} != null ? this.{{#lambda.lowercase}}{{name}}_optional{{/lambda.lowercase}}.value : null;
+        }
+
+        set
+        {
+            this.{{#lambda.lowercase}}{{name}}_optional{{/lambda.lowercase}} = new OptionalNullable<{{#isBoolean}}<{{/isBoolean}}{{{dataType}}}{{#isBoolean}}>{{/isBoolean}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}}>(value);
+        }
+    }
+
+    {{/vendorExtensions.x-optional-nullable}}{{^vendorExtensions.x-optional-nullable}}
+    public {{#isBoolean}}Nullable<{{/isBoolean}}{{{dataType}}}{{#isBoolean}}>{{/isBoolean}}{{#isDateTime}}{{^isNullable}}?{{/isNullable}}{{/isDateTime}} {{#lambda.lowercase}}{{name}}{{/lambda.lowercase}} { get; set; }
+{{/vendorExtensions.x-optional-nullable}}
     {{/vars}}
+
 
 {{#vendorExtensions.x-has-defaults}}
     /// <summary>
