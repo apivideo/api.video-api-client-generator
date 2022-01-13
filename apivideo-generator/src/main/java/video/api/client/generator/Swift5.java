@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
+import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.Swift5ClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
@@ -155,5 +156,32 @@ public class Swift5 extends Swift5ClientCodegen {
         additionalProperties.put("podVersion", changelog.getLastVersion().getName());
         changelog.writeTo(this.getOutputDir());
 
+    }
+
+
+    @Override
+    public Map<String, Object> postProcessModels(Map<String, Object> objs) {
+        Map<String, Object> stringObjectMap = super.postProcessModels(objs);
+
+        List<Map<String, Object>> models = (List)objs.get("models");
+        models.forEach(map -> {
+            CodegenModel model = ((CodegenModel)map.get("model"));
+            model.vars.forEach(var -> {
+                if(var.vendorExtensions.containsKey("x-optional-nullable") && var.dataType.equals("String")) {
+                    var.dataType = "NullableString";
+                    var.datatypeWithEnum = "NullableString";
+                    var.baseType = "NullableString";
+                    var.isNullable = true;
+                }
+            });
+        });
+        return stringObjectMap;
+    }
+
+    public String constructExampleCode(CodegenProperty codegenParameter, HashMap<String, CodegenModel> modelMaps, Set<String> visitedModels) {
+        if (codegenParameter.dataType.equals("NullableString")) { // array
+            return "NullableString(value: \"" + codegenParameter.example + "\")";
+        }
+        return super.constructExampleCode(codegenParameter, modelMaps, visitedModels);
     }
 }

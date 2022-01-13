@@ -47,5 +47,8 @@ files:
   Upload/FileReaders.mustache:
     folder: Sources/Upload
     destinationFilename: FileReaders.swift
+  NullableString.mustache:
+    folder: Sources/Models
+    destinationFilename: NullableString.swift
   post-generate.sh:
     destinationFilename: post-generate.sh
