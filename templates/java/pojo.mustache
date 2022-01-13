@@ -57,22 +57,19 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#vendorE
   {{#gson}}
   @SerializedName(SERIALIZED_NAME_{{nameInSnakeCase}})
   {{/gson}}
-  {{#vendorExtensions.x-is-jackson-optional-nullable}}
-  {{#isContainer}}
-  private JsonNullable<{{{datatypeWithEnum}}}> {{name}} = JsonNullable.<{{{datatypeWithEnum}}}>undefined();
-  {{/isContainer}}
+  {{#vendorExtensions.x-optional-nullable}}
   {{^isContainer}}
-  private JsonNullable<{{{datatypeWithEnum}}}> {{name}} = JsonNullable.<{{{datatypeWithEnum}}}>{{#defaultValue}}of({{{.}}}){{/defaultValue}}{{^defaultValue}}undefined(){{/defaultValue}};
+  private Nullable<{{{datatypeWithEnum}}}> {{name}};
   {{/isContainer}}
-  {{/vendorExtensions.x-is-jackson-optional-nullable}}
-  {{^vendorExtensions.x-is-jackson-optional-nullable}}
+  {{/vendorExtensions.x-optional-nullable}}
+  {{^vendorExtensions.x-optional-nullable}}
   {{#isContainer}}
   private {{{datatypeWithEnum}}} {{name}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
   {{/isContainer}}
   {{^isContainer}}
   {{#isDiscriminator}}protected{{/isDiscriminator}}{{^isDiscriminator}}private{{/isDiscriminator}} {{{datatypeWithEnum}}} {{name}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
   {{/isContainer}}
-  {{/vendorExtensions.x-is-jackson-optional-nullable}}
+  {{/vendorExtensions.x-optional-nullable}}
 
   {{/vars}}
   {{#parcelableModel}}
@@ -108,10 +105,16 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#vendorE
 
   {{^isReadOnly}}
   public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
-    {{#vendorExtensions.x-is-jackson-optional-nullable}}this.{{name}} = JsonNullable.<{{{datatypeWithEnum}}}>of({{name}});
-    {{/vendorExtensions.x-is-jackson-optional-nullable}}{{^vendorExtensions.x-is-jackson-optional-nullable}}this.{{name}} = {{name}};{{/vendorExtensions.x-is-jackson-optional-nullable}}
+    {{#vendorExtensions.x-optional-nullable}}this.{{name}} = new Nullable<{{{datatypeWithEnum}}}>({{name}});
+    {{/vendorExtensions.x-optional-nullable}}{{^vendorExtensions.x-optional-nullable}}this.{{name}} = {{name}};{{/vendorExtensions.x-optional-nullable}}
     return this;
   }
+  {{#vendorExtensions.x-optional-nullable}}
+  public {{classname}} unset{{nameInCamelCase}}() {
+      this.{{name}} = null;
+      return this;
+  }
+  {{/vendorExtensions.x-optional-nullable}}
   {{#isArray}}
 
   public {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
@@ -197,17 +200,12 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#vendorE
 {{/vendorExtensions.x-is-jackson-optional-nullable}}
 {{^vendorExtensions.x-is-jackson-optional-nullable}}{{#jackson}}{{> jackson_annotations}}{{/jackson}}{{/vendorExtensions.x-is-jackson-optional-nullable}}
   public {{{datatypeWithEnum}}} {{getter}}() {
-    {{#vendorExtensions.x-is-jackson-optional-nullable}}
-    {{#isReadOnly}}{{! A readonly attribute doesn't have setter => jackson will set null directly if explicitly returned by API, so make sure we have an empty JsonNullable}}
-    if ({{name}} == null) {
-      {{name}} = JsonNullable.<{{{datatypeWithEnum}}}>{{#defaultValue}}of({{{.}}}){{/defaultValue}}{{^defaultValue}}undefined(){{/defaultValue}};
-    }
-    {{/isReadOnly}}
-    return {{name}}.orElse(null);
-    {{/vendorExtensions.x-is-jackson-optional-nullable}}
-    {{^vendorExtensions.x-is-jackson-optional-nullable}}
+    {{#vendorExtensions.x-optional-nullable}}
+    return {{name}} == null ? null : {{name}}.getValue();
+    {{/vendorExtensions.x-optional-nullable}}
+    {{^vendorExtensions.x-optional-nullable}}
     return {{name}};
-    {{/vendorExtensions.x-is-jackson-optional-nullable}}
+    {{/vendorExtensions.x-optional-nullable}}
   }
 
   {{#vendorExtensions.x-is-jackson-optional-nullable}}
@@ -225,12 +223,12 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#vendorE
 
   {{^isReadOnly}}
   public void {{setter}}({{{datatypeWithEnum}}} {{name}}) {
-    {{#vendorExtensions.x-is-jackson-optional-nullable}}
-    this.{{name}} = JsonNullable.<{{{datatypeWithEnum}}}>of({{name}});
-    {{/vendorExtensions.x-is-jackson-optional-nullable}}
-    {{^vendorExtensions.x-is-jackson-optional-nullable}}
+    {{#vendorExtensions.x-optional-nullable}}
+    this.{{name}} = new Nullable<>({{name}});
+    {{/vendorExtensions.x-optional-nullable}}
+    {{^vendorExtensions.x-optional-nullable}}
     this.{{name}} = {{name}};
-    {{/vendorExtensions.x-is-jackson-optional-nullable}}
+    {{/vendorExtensions.x-optional-nullable}}
   }
   {{/isReadOnly}}
 

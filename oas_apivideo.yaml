@@ -6525,6 +6525,7 @@ components:
       properties:
         playerId:
           type: string
+          x-optional-nullable: true
           description: The unique ID for the player you want to associate with your video.
           example: pl4k0jvEUuaTdRAEjQ4Jfrgz
         title:

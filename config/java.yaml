@@ -36,6 +36,9 @@ minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
 
 files:
+  Nullable.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Nullable.java
   Environment.mustache:
     folder: src/main/java/video/api/client/api/models
     destinationFilename: Environment.java

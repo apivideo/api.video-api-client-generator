@@ -231,3 +231,20 @@ class ProgressiveUploadWithTokenTests: UploadWithTokenTestCase {
         uploadPart(file: SharedResources.v10m_partc!, isLastPart: true)
     }
 }
+
+class UpdateTests: XCTestCase {
+    func testPlayerIdEncoding() {
+        do {
+            let json1 = try CodableHelper.jsonEncoder.encode(VideoUpdatePayload(playerId: nil, title: "title"))
+            XCTAssertFalse(String(decoding: json1, as: UTF8.self).contains("playerId"))
+
+            let json2 = try CodableHelper.jsonEncoder.encode(VideoUpdatePayload(playerId: NullableString.NULL, title: "title"))
+            XCTAssertTrue(String(decoding: json2, as: UTF8.self).contains("\"playerId\" : null"))
+
+            let json3 = try CodableHelper.jsonEncoder.encode(VideoUpdatePayload(playerId: NullableString(value: "1234"), title: "title"))
+            XCTAssertTrue(String(decoding: json3, as: UTF8.self).contains("\"playerId\" : \"1234\""))
+        } catch {
+
+        }
+    }
+}

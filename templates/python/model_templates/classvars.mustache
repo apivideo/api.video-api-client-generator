@@ -106,10 +106,10 @@
             'value': ({{{dataType}}},),
 {{/isArray}}
 {{#requiredVars}}
-            '{{name}}': ({{{dataType}}},),  # noqa: E501
+            '{{name}}': ({{{dataType}}},{{#vendorExtensions.x-optional-nullable}} type(None),{{/vendorExtensions.x-optional-nullable}}),  # noqa: E501
 {{/requiredVars}}
 {{#optionalVars}}
-            '{{name}}': ({{{dataType}}},),  # noqa: E501
+            '{{name}}': ({{{dataType}}},{{#vendorExtensions.x-optional-nullable}} type(None),{{/vendorExtensions.x-optional-nullable}}),  # noqa: E501
 {{/optionalVars}}
         }
 

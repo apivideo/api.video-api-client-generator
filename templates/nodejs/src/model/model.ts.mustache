@@ -19,7 +19,7 @@ export default class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
   * {{{description}}}
   */
 {{/description}}
-  '{{name}}'{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}};
+  '{{name}}'{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{#vendorExtensions.x-optional-nullable}} | null{{/vendorExtensions.x-optional-nullable}};
 {{/vars}}
 
   {{#discriminator}}
