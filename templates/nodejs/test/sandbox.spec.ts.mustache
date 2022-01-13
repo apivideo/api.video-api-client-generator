@@ -36,6 +36,33 @@ describe('ApiVideoClient', () => {
         chunkSize: 5*1024*1024
     });
 
+    // Upload a watermark
+    const watermark = await client.watermarks
+      .upload('test/data/test.jpg');
+    expect(watermark.watermarkId).to.be.a('string');
+
+    // create a video with watermark
+    const watermarkVideo = await client.videos.create({
+      title: 'Nodejs - watermark',
+      watermark: {
+        id: watermark.watermarkId,
+        top: "0px",
+        left: "0px",
+        width: "100px",
+        height: "100px"
+      }
+    });
+    expect(watermarkVideo.title).to.be.eq('Nodejs - watermark');
+
+    // list watermarks
+    const watermarks = await client.watermarks.list({sortBy: 'createdAt', sortOrder: 'desc'});
+    expect(watermarks.data).to.has.length.greaterThan(0);
+
+    // delete watermark & watermarked video
+    await client.watermarks.delete(watermark.watermarkId!);
+    await client.videos.delete(watermarkVideo.videoId);
+
+
     // Create
     const progressiveUploadVideo = 'Nodejs - progressive upload';
     const { videoId: progressiveUploadVideoId } = await client.videos.create({
