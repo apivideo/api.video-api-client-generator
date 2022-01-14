@@ -18,6 +18,13 @@ Method | HTTP request | Description
 
 {{{notes}}}{{/notes}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+```csharp
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
+{{^vendorExtensions.code-sample}}
 ### Example
 ```csharp
 using System.Diagnostics;
@@ -61,6 +68,7 @@ namespace Example
     }
 }
 ```
+{{/vendorExtensions.code-sample}}
 
 ### Parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}

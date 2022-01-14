@@ -365,6 +365,7 @@ public class {{classname}} {
     {{^vendorExtensions.x-group-parameters}}
     /**
      * {{summary}}
+     *
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}{{#returnType}}
      * @return {{returnType}}{{/returnType}}
@@ -397,6 +398,7 @@ public class {{classname}} {
 
     /**
      * {{summary}}
+     *
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}{{#returnType}}
      * @param uploadProgressListener An upload progress listener
@@ -431,6 +433,7 @@ public class {{classname}} {
 
     {{^vendorExtensions.x-group-parameters}}/**
      * {{summary}}
+ *
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
      * @return ApiResponse&lt;{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}&gt;
@@ -528,6 +531,7 @@ public class {{classname}} {
 
     /**
      * {{summary}}
+     *
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
      * @param uploadProgressListener An upload progress listener
@@ -790,6 +794,7 @@ public class {{classname}} {
 
     /**
      * {{summary}}
+     *
      * {{notes}}{{#requiredParams}}
      * @param {{paramName}} {{description}} (required){{/requiredParams}}
      * @return API{{operationId}}Request

@@ -25,6 +25,13 @@ Method | HTTP request | Description
 
 {{{unespacedNotes}}}{{/notes}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+```go
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
+{{^vendorExtensions.code-sample}}
 ### Example
 
 ```go
@@ -67,6 +74,7 @@ func main() {
     {{/returnType}}
 }
 ```
+{{/vendorExtensions.code-sample}}
 {{#vendorExtensions.x-client-chunk-upload}}
 ### Progressive uploads
 

@@ -19,6 +19,13 @@ Method | HTTP request | Description
 
 {{notes}}{{/notes}}{{/unescape}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+```java
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
+{{^vendorExtensions.code-sample}}
 ### Example
 ```java
 // Import classes:
@@ -64,6 +71,7 @@ public class Example {
   }
 }
 ```
+{{/vendorExtensions.code-sample}}
 
 ### Parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}

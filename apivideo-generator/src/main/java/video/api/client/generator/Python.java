@@ -62,6 +62,7 @@ public class Python extends PythonClientCodegen {
 
         ChangeLog changelog = ChangeLog.parse(additionalProperties);
         additionalProperties.put("packageVersion", changelog.getLastVersion().getName());
+        additionalProperties.put("unescape", new UnescapeLambda());
         changelog.writeTo(this.getOutputDir());
 
         List<String> ignoredFiles = (List<String>) additionalProperties.get("ignoredFiles");
@@ -121,6 +122,8 @@ public class Python extends PythonClientCodegen {
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "python");
+
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");

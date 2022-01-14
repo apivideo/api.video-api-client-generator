@@ -20,6 +20,13 @@ Method | HTTP request | Description
 
 {{notes}}{{/notes}}{{/unescape}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+```js
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
+{{^vendorExtensions.code-sample}}
 ### Example
 ```js
 (async () => {
@@ -54,6 +61,7 @@ Method | HTTP request | Description
     }
 })();
 ```
+{{/vendorExtensions.code-sample}}
 
 ### Parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}

@@ -2937,6 +2937,40 @@ paths:
               
           - language: csharp
             code: |
+              //dependency addition instructions
+              //https://github.com/apivideo/api.video-java-client
+              // Import classes:
+              import video.api.client.ApiVideoClient;
+              import video.api.client.api.ApiException;
+              import video.api.client.api.models.*;
+              import video.api.client.api.clients.UploadTokensApi;
+              import java.util.*;
+              
+              public class Example {
+                public static void main(String[] args) {
+                  ApiVideoClient client = new ApiVideoClient(\"YOUR_API_TOKEN\");
+                  // if you rather like to use the sandbox environment:
+                  // ApiVideoClient client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);
+              
+                  UploadTokensApi apiInstance = client.uploadTokens();
+                  
+                  String uploadToken = \"to1tcmSFHeYY5KzyhOqVKMKb\"; // The unique identifier for the token you want information about.
+              
+                  try {
+                    UploadToken result = apiInstance.getToken(uploadToken);
+                    System.out.println(result);
+                  } catch (ApiException e) {
+                    System.err.println(\"Exception when calling UploadTokensApi#getToken\");
+                    System.err.println(\"Status code: \" + e.getCode());
+                    System.err.println(\"Reason: \" + e.getMessage());
+                    System.err.println(\"Response headers: \" + e.getResponseHeaders());
+                    e.printStackTrace();
+                  }
+                }
+              }
+              
+          - language: csharp
+            code: |
               //install via Nuget
               //Install-Package ApiVideo
               using System.Diagnostics;
@@ -4218,6 +4252,40 @@ paths:
                   except apivideo.ApiException as e:
                       print("Exception when calling LiveStreamsApi->get: %s\n" % e)
           - language: java
+            code: |
+              //dependency addition instructions
+              //https://github.com/apivideo/api.video-java-client
+              // Import classes:
+              import video.api.client.ApiVideoClient;
+              import video.api.client.api.ApiException;
+              import video.api.client.api.models.*;
+              import video.api.client.api.clients.LiveStreamsApi;
+              import java.util.*;
+              
+              public class Example {
+                public static void main(String[] args) {
+                  ApiVideoClient client = new ApiVideoClient(\"YOUR_API_TOKEN\");
+                  // if you rather like to use the sandbox environment:
+                  // ApiVideoClient client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);
+              
+                  LiveStreamsApi apiInstance = client.liveStreams();
+                  
+                  String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"; // The unique ID for the live stream you want to watch.
+              
+                  try {
+                    LiveStream result = apiInstance.get(liveStreamId);
+                    System.out.println(result);
+                  } catch (ApiException e) {
+                    System.err.println(\"Exception when calling LiveStreamsApi#get\");
+                    System.err.println(\"Status code: \" + e.getCode());
+                    System.err.println(\"Reason: \" + e.getMessage());
+                    System.err.println(\"Response headers: \" + e.getResponseHeaders());
+                    e.printStackTrace();
+                  }
+                }
+              }
+              
+          - language: csharp
             code: |
               //dependency addition instructions
               //https://github.com/apivideo/api.video-java-client

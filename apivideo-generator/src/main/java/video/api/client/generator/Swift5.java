@@ -33,6 +33,8 @@ public class Swift5 extends Swift5ClientCodegen {
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "swift5");
+
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
@@ -151,6 +153,7 @@ public class Swift5 extends Swift5ClientCodegen {
     public void processOpts() {
         super.processOpts();
         additionalProperties.put("titlecase", new TitlecaseLambda());
+        additionalProperties.put("unescape", new UnescapeLambda());
 
         ChangeLog changelog = ChangeLog.parse(additionalProperties);
         additionalProperties.put("podVersion", changelog.getLastVersion().getName());

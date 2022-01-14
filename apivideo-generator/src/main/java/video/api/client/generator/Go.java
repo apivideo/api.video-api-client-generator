@@ -41,6 +41,8 @@ public class Go extends GoClientCodegen {
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "go");
+
         Map<String, CodegenModel> model = new HashMap<>();
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         Set<String> additionalImports = new HashSet<>();
@@ -213,6 +215,7 @@ public class Go extends GoClientCodegen {
         changelog.writeTo(this.getOutputDir());
 
         additionalProperties.put("lower", new LowercaseLambda());
+        additionalProperties.put("unescape", new UnescapeLambda());
 
         List<String> ignoredFiles = (List<String>) Optional.ofNullable(additionalProperties.get("ignoredFiles")).orElse(Collections.emptyList());
         supportingFiles.removeIf(e -> ignoredFiles.contains(e.getTemplateFile()));

@@ -140,6 +140,7 @@ public class Php extends AbstractPhpCodegen {
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "php");
 
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
