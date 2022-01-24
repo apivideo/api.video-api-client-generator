@@ -1,4 +1,6 @@
 changelog:
+  - 1.2.1 (2022-01-24):
+      - Add applicationName parameter (to allow user agent extension)
   - 1.2.0 (2022-01-07):
       - Add watermark endpoints
       - Add video clips

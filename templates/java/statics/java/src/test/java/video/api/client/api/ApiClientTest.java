@@ -8,6 +8,7 @@ import video.api.client.api.models.VideoUpdatePayload;
 
 import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @DisplayName("VideosDelegatedUploadApi")
@@ -35,4 +36,13 @@ public class ApiClientTest {
 
         assertThat(requestBodyToString(apiClient, videoUpdatePayload)).isEqualTo("[text={\"title\":\"title\"}]");
     }
+
+    @Test
+    public void applicationNameVerification() {
+        ApiClient apiClient = new ApiClient("path");
+        assertThatThrownBy(() -> apiClient.setApplicationName("bad application name"));
+        assertThatThrownBy(() -> apiClient.setApplicationName("012345678901234567890123456789012345678901234567890"));
+        apiClient.setApplicationName("great-application-name/2.0.0");
+    }
+
 }
