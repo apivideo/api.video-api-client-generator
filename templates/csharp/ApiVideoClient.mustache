@@ -118,6 +118,15 @@ namespace {{packageName}}.Client
         {
             this.apiClient.RestClient.Timeout = newTimeOut;
         }
+
+        /// <summary>
+        /// Set the application name
+        /// </summary>
+        /// <param name="applicationName">the application name</param>
+        public void setApplicationName(string applicationName)
+        {
+            this.apiClient.setApplicationName(applicationName);
+        }
     }
 
     /// <summary>

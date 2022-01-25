@@ -66,6 +66,7 @@ public class ApiClient {
     private static final long DEFAULT_CHUNK_SIZE = {{defaultChunkSize}};
     private static final long MIN_CHUNK_SIZE = {{minChunkSize}};
     private static final long MAX_CHUNK_SIZE = {{maxChunkSize}};
+    private static final String DEFAULT_USER_AGENT =  "api.video {{ userAgent }} ({{#android}}android{{/android}}{{^android}}java{{/android}}; v:{{ artifactVersion }}; )";
     private boolean debugging = false;
     private String basePath;
     private Map<String, String> defaultHeaderMap = new HashMap<>();
@@ -128,12 +129,17 @@ public class ApiClient {
     private void init() {
         verifyingSsl = true;
         json = new JSON();
-        {{#android}}
-        setUserAgent("api.video {{ userAgent }} (android; v:{{ artifactVersion }}; )");
-        {{/android}}
-        {{^android}}
-        setUserAgent("api.video {{ userAgent }} (java; v:{{ artifactVersion }}; )");
-        {{/android}}
+        setUserAgent(DEFAULT_USER_AGENT);
+    }
+
+    public void setApplicationName(String applicationName) {
+        if(applicationName == null) {
+            setUserAgent(DEFAULT_USER_AGENT);
+        }
+        if(!applicationName.matches("^[\\w-/\\.]{1,50}$")) {
+            throw new IllegalArgumentException("Invalid application name. Allowed characters: A-Z, a-z, 0-9, '-', '_', '/'. Max length: 50.");
+        }
+        setUserAgent(DEFAULT_USER_AGENT + " " + applicationName);
     }
 
     /**
