@@ -2,8 +2,6 @@
 //  VideoTableViewCell.swift
 //  Example
 //
-//  Created by Romain Petit on 26/01/2022.
-//
 
 import UIKit
 
