@@ -14,6 +14,7 @@
 		2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD52274B9E77007B9FC9 /* Assets.xcassets */; };
 		2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */; };
 		21A2E574275E5D4A00ED880F /* ApiVideoUploader in Frameworks */ = {isa = PBXBuildFile; productRef = 21A2E573275E5D4A00ED880F /* ApiVideoUploader */; };
+		C70E513C27A9719900B31115 /* UploaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E513B27A9719900B31115 /* UploaderManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2136DD55274B9E77007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2136DD57274B9E77007B9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21A2E572275E5D3300ED880F /* swift5-uploader */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "swift5-uploader"; path = ..; sourceTree = "<group>"; };
+		C70E513B27A9719900B31115 /* UploaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				2136DD52274B9E77007B9FC9 /* Assets.xcassets */,
 				2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */,
 				2136DD57274B9E77007B9FC9 /* Info.plist */,
+				C70E513B27A9719900B31115 /* UploaderManager.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				2136DD4E274B9E74007B9FC9 /* ViewController.swift in Sources */,
 				2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */,
 				2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */,
+				C70E513C27A9719900B31115 /* UploaderManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +316,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L8HGKJVJ5;
+				DEVELOPMENT_TEAM = VY3VXRC7P4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -340,7 +344,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L8HGKJVJ5;
+				DEVELOPMENT_TEAM = VY3VXRC7P4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
