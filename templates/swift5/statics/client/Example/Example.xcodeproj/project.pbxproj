@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD49274B9E74007B9FC9 /* AppDelegate.swift */; };
 		2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */; };
-		2136DD4E274B9E74007B9FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4D274B9E74007B9FC9 /* ViewController.swift */; };
+		2136DD4E274B9E74007B9FC9 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */; };
 		2136DD51274B9E74007B9FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD4F274B9E74007B9FC9 /* Main.storyboard */; };
 		2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD52274B9E77007B9FC9 /* Assets.xcassets */; };
 		2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */; };
-		213D8762274E5AC7000B674E /* ApiVideoClient in Frameworks */ = {isa = PBXBuildFile; productRef = 213D8761274E5AC7000B674E /* ApiVideoClient */; };
+		C76439BC27A2F69F007FB307 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76439BB27A2F69F007FB307 /* XCTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C7BC280227A16604007406AB /* ApiVideoClient in Frameworks */ = {isa = PBXBuildFile; productRef = C7BC280127A16604007406AB /* ApiVideoClient */; };
+		C7BC280427A17CD2007406AB /* UploaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280327A17CD2007406AB /* UploaderViewController.swift */; };
+		C7BC280727A17FEB007406AB /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */; };
+		C7BC280A27A18CC3007406AB /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280927A18CC3007406AB /* ClientManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2136DD46274B9E74007B9FC9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2136DD49274B9E74007B9FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2136DD4D274B9E74007B9FC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		2136DD50274B9E74007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2136DD52274B9E77007B9FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2136DD55274B9E77007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2136DD57274B9E77007B9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2136DD5F274B9EED007B9FC9 /* swift5 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = swift5; path = ..; sourceTree = "<group>"; };
+		C76439BB27A2F69F007FB307 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C7BC280327A17CD2007406AB /* UploaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderViewController.swift; sourceTree = "<group>"; };
+		C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		C7BC280927A18CC3007406AB /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				213D8762274E5AC7000B674E /* ApiVideoClient in Frameworks */,
+				C76439BC27A2F69F007FB307 /* XCTest.framework in Frameworks */,
+				C7BC280227A16604007406AB /* ApiVideoClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,13 +70,15 @@
 		2136DD48274B9E74007B9FC9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				C7BC280827A18111007406AB /* Controller */,
+				C7BC280527A17FD4007406AB /* Cell */,
 				2136DD49274B9E74007B9FC9 /* AppDelegate.swift */,
 				2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */,
-				2136DD4D274B9E74007B9FC9 /* ViewController.swift */,
 				2136DD4F274B9E74007B9FC9 /* Main.storyboard */,
 				2136DD52274B9E77007B9FC9 /* Assets.xcassets */,
 				2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */,
 				2136DD57274B9E77007B9FC9 /* Info.plist */,
+				C7BC280927A18CC3007406AB /* ClientManager.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -83,8 +94,26 @@
 		213D8760274E5AC7000B674E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C76439BB27A2F69F007FB307 /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C7BC280527A17FD4007406AB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C7BC280827A18111007406AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */,
+				C7BC280327A17CD2007406AB /* UploaderViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,7 +133,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				213D8761274E5AC7000B674E /* ApiVideoClient */,
+				C7BC280127A16604007406AB /* ApiVideoClient */,
 			);
 			productName = Example;
 			productReference = 2136DD46274B9E74007B9FC9 /* Example.app */;
@@ -161,9 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2136DD4E274B9E74007B9FC9 /* ViewController.swift in Sources */,
+				2136DD4E274B9E74007B9FC9 /* VideosViewController.swift in Sources */,
 				2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */,
+				C7BC280A27A18CC3007406AB /* ClientManager.swift in Sources */,
+				C7BC280427A17CD2007406AB /* UploaderViewController.swift in Sources */,
 				2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */,
+				C7BC280727A17FEB007406AB /* VideoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +344,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L8HGKJVJ5;
+				DEVELOPMENT_TEAM = VY3VXRC7P4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -340,7 +372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L8HGKJVJ5;
+				DEVELOPMENT_TEAM = VY3VXRC7P4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -385,7 +417,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		213D8761274E5AC7000B674E /* ApiVideoClient */ = {
+		C7BC280127A16604007406AB /* ApiVideoClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ApiVideoClient;
 		};

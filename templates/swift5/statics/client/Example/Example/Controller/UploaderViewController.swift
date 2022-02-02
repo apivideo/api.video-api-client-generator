@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  UploaderViewController.swift
 //  Example
 //
 
 import UIKit
 import AVKit
-import ApiVideoUploader
+import ApiVideoClient
+import SwiftUI
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class UploaderViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     let imagePickerController = UIImagePickerController()
     
     let paramBackgroundView: UIView = {
@@ -40,7 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let apiKeyLabel: UILabel = {
         let api = UILabel()
-        api.text = "Your Token :"
+        api.text = "Your Api key :"
         return api
     }()
     
@@ -71,7 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+        title = "Uploader"
         view.addSubview(paramBackgroundView)
         paramBackgroundView.backgroundColor = .darkGray
         paramBackgroundView.layer.cornerRadius = 10
@@ -91,92 +92,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.uplaodButton.addTarget(self, action: #selector(uploadVideo), for: .touchUpInside)
         self.selectEnvironmentSwitch.addTarget(self, action: #selector(toggleSwitch), for: .touchUpInside)
         
-        selectEnvironmentSwitch.isOn = UploaderManager.environmentToBool()
+        selectEnvironmentSwitch.isOn = ClientManager.environmentToBool()
         if(!selectEnvironmentSwitch.isOn){
             selectedEnvironmentLabel.text = "Sandbox"
         }
         
-        apiKeyTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: .editingChanged)
+        apiKeyTextField.addTarget(self, action: #selector(UploaderViewController.textFieldDidChange(_:)), for: .editingChanged)
         apiKeyTextField.delegate = self
-        apiKeyTextField.text = UploaderManager.token
-        
+        apiKeyTextField.text = ClientManager.apiKey
+                
         constraints()
-        
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        UploaderManager.token = textField.text!
-    }
-    
-    @objc func selectVideo() {
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        imagePickerController.mediaTypes = ["public.movie"]
-        imagePickerController.allowsEditing = false
-        imagePickerController.videoQuality = .typeHigh
-        
-        // for IOS 11 and more
-        if #available(iOS 11.0, *) {
-            imagePickerController.videoExportPreset = AVAssetExportPresetPassthrough
-        }
-        
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    @objc func uploadVideo(){
-        if(videoUrl != nil){
-            upload(url: videoUrl!)
-        }else{
-            print("error video")
-        }
-        
-    }
-    
-    @objc func toggleSwitch(){
-        if(selectEnvironmentSwitch.isOn){
-            UploaderManager.environment = Environment.production
-            selectedEnvironmentLabel.text = "Production"
-            
-        }else{
-            UploaderManager.environment = Environment.sandbox
-            selectedEnvironmentLabel.text = "Sandbox"
-        }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let url = info[.mediaURL] as! URL
-        videoUrl = url
-        thumbnailImageView.image = getThumbnailImage(forUrl: url)
-        imagePickerController.dismiss(animated: true, completion: nil)
-    }
-    
-    func upload(url: URL) {
-        VideosAPI.uploadWithUploadToken(token: UploaderManager.token, file: url,
-                                        onProgressReady: { progress in
-            print("Progress: \(progress)")
-        }) { video, error in
-            if let video = video {
-                print("Nice! Upload success! \(video)")
-                self.thumbnailImageView.image = nil
-            }
-            if let error = error {
-                print("Upload error: \(error)")
-            }
-        }
-    }
-    
-    func getThumbnailImage(forUrl url: URL) -> UIImage? {
-        let asset: AVAsset = AVAsset(url: url)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        
-        do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
-            return UIImage(cgImage: thumbnailImage)
-        } catch let error {
-            print(error)
-        }
-        
-        return nil
     }
     
     func constraints(){
@@ -190,7 +115,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         titleSelectVideoLabel.translatesAutoresizingMaskIntoConstraints = false
         selectVideoButton.translatesAutoresizingMaskIntoConstraints = false
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         paramBackgroundView.widthAnchor.constraint(equalToConstant: view.frame.width - 20).isActive = true
         paramBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         paramBackgroundView.heightAnchor.constraint(equalToConstant: 150).isActive = true
@@ -238,20 +163,94 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         uplaodButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         uplaodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         uplaodButton.topAnchor.constraint(equalTo: selectVideoButton.bottomAnchor, constant: 20).isActive = true
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-}
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+
+        // uplaodButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 40).isActive = true
+        
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    @objc func selectVideo() {
+            imagePickerController.sourceType = .photoLibrary
+            imagePickerController.delegate = self
+            imagePickerController.mediaTypes = ["public.movie"]
+            imagePickerController.allowsEditing = false
+            imagePickerController.videoQuality = .typeHigh
+            
+            // for IOS 11 and more
+            if #available(iOS 11.0, *) {
+                //desable video compressing to get the highest video quality
+                imagePickerController.videoExportPreset = AVAssetExportPresetPassthrough
+            }
+            
+            present(imagePickerController, animated: true, completion: nil)
+        }
+ 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let url = info[.mediaURL] as! URL
+        videoUrl = url
+        thumbnailImageView.image = getThumbnailImage(forUrl: url)
+        imagePickerController.dismiss(animated: true, completion: nil)
     }
+    
+    func upload(url: URL) {
+        VideosAPI.create(videoCreationPayload: VideoCreationPayload(title: "my video")) { video, error in
+            if let video = video {
+                VideosAPI.upload(
+                    videoId: video.videoId,
+                    file: url,
+                    onProgressReady: { progress in
+                        print("Progress: \(progress)")
+                    }) { video, error in
+                        if video != nil {
+                        self.thumbnailImageView.image = nil
+                    }
+                    if let error = error {
+                        print("Upload error: \(error)")
+                    }
+                }
+            }
+            if let error = error {
+                print("Create error: \(error)")
+            }
+        }
+    }
+    
+    @objc func uploadVideo(){
+        if(videoUrl != nil){
+            upload(url: videoUrl!)
+        }else{
+            print("error video")
+        }
+    
+    }
+    
+    @objc func toggleSwitch(){
+        if(selectEnvironmentSwitch.isOn){
+            ClientManager.environment = Environment.production
+            selectedEnvironmentLabel.text = "Production"
+            
+        }else{
+            ClientManager.environment = Environment.sandbox
+            selectedEnvironmentLabel.text = "Sandbox"
+        }
+    }
+    
+    
+    func getThumbnailImage(forUrl url: URL) -> UIImage? {
+        let asset: AVAsset = AVAsset(url: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+
+        do {
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+            return UIImage(cgImage: thumbnailImage)
+        } catch let error {
+            print(error)
+        }
+
+        return nil
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        ClientManager.apiKey = textField.text!
+    }
+
 }
