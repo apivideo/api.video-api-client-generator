@@ -21,4 +21,16 @@ public class Utils {
 
         return file;
     }
+
+    /**
+     * Get API key from envrionment variables
+     */
+    public static String getApiKey() throws IOException {
+        String env = InstrumentationRegistry.getArguments().getString("environmentVariables");
+        String apiKey = env.replaceAll("INTEGRATION_TESTS_API_TOKEN=", "");
+        if (apiKey == "null") {
+            throw new IOException("API Key not found");
+        }
+        return apiKey;
+    }
 }

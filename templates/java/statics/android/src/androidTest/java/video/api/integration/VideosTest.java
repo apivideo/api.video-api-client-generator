@@ -2,13 +2,13 @@ package video.api.integration;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
-import video.api.client.ApiVideoClient;
-import video.api.client.api.ApiException;
-import video.api.client.api.clients.VideosApi;
-import video.api.client.api.models.*;
-import video.api.integration.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +19,21 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import video.api.client.ApiVideoClient;
+import video.api.client.api.ApiException;
+import video.api.client.api.clients.VideosApi;
+import video.api.client.api.models.Environment;
+import video.api.client.api.models.Metadata;
+import video.api.client.api.models.Page;
+import video.api.client.api.models.TokenCreationPayload;
+import video.api.client.api.models.UploadToken;
+import video.api.client.api.models.Video;
+import video.api.client.api.models.VideoCreationPayload;
+import video.api.client.api.models.VideoStatus;
+import video.api.client.api.models.VideoThumbnailPickPayload;
+import video.api.client.api.models.VideoUpdatePayload;
+import video.api.integration.utils.Utils;
+
 @DisplayName("Integration tests of api.videos() methods")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @EnabledIfEnvironmentVariable(named = "INTEGRATION_TESTS_API_TOKEN", matches = ".+")
@@ -26,9 +41,8 @@ public class VideosTest {
 
     final ApiVideoClient apiClient;
 
-    public VideosTest() {
-        this.apiClient = new ApiVideoClient(System.getenv().get("INTEGRATION_TESTS_API_TOKEN"),
-                Environment.SANDBOX);
+    public VideosTest() throws IOException {
+        this.apiClient = new ApiVideoClient(Utils.getApiKey(), Environment.SANDBOX);
     }
 
     @Nested

@@ -43,6 +43,7 @@ if(hasProperty('target') && target == 'android') {
 
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
             testInstrumentationRunnerArgument("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
+            testInstrumentationRunnerArgument("environmentVariables", "INTEGRATION_TESTS_API_TOKEN=${System.getenv("INTEGRATION_TESTS_API_TOKEN")}")
         }
 
         compileOptions {
