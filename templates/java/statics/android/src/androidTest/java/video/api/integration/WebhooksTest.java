@@ -2,18 +2,27 @@ package video.api.integration;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import video.api.client.ApiVideoClient;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.Environment;
 import video.api.client.api.models.Page;
 import video.api.client.api.models.Webhook;
 import video.api.client.api.models.WebhooksCreationPayload;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import video.api.integration.utils.Utils;
 
 
 @DisplayName("Integration tests of api.webhooks() methods")
@@ -25,9 +34,8 @@ public class WebhooksTest {
     private final ApiVideoClient apiClient;
     private Webhook webhook;
 
-    public WebhooksTest() {
-        this.apiClient = new ApiVideoClient(System.getenv().get("INTEGRATION_TESTS_API_TOKEN"),
-                Environment.SANDBOX);
+    public WebhooksTest() throws IOException {
+        this.apiClient = new ApiVideoClient(Utils.getApiKey(), Environment.SANDBOX);
     }
 
     @Test

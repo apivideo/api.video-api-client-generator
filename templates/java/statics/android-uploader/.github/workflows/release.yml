@@ -1,7 +1,9 @@
 name: Release Android package to Maven Central Repository
+
 on:
   release:
     types: [ published ]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
