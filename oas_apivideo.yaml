@@ -6077,6 +6077,9 @@ components:
           description: >-
             RGBA color for all controls when hovered. Default: rgba(255, 255,
             255, 1)
+        linkActive:
+          type: string
+          description: 'RGBA color for the play button when hovered.'
         trackPlayed:
           type: string
           description: >-
@@ -6129,9 +6132,6 @@ components:
           description: 'When the player was last updated, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:18:47+00:00'
-        linkActive:
-          type: string
-          description: 'RGBA color for the play button when hovered.'
         assets:
           type: object
           properties:
@@ -6165,6 +6165,9 @@ components:
           description: >-
             RGBA color for all controls when hovered. Default: rgba(255, 255,
             255, 1)
+        linkActive:
+          type: string
+          description: 'RGBA color for the play button when hovered.'
         trackPlayed:
           type: string
           description: >-
@@ -6254,6 +6257,9 @@ components:
           description: >-
             RGBA color for all controls when hovered. Default: rgba(255, 255,
             255, 1)
+        linkActive:
+          type: string
+          description: 'RGBA color for the play button when hovered.'
         trackPlayed:
           type: string
           description: >-
