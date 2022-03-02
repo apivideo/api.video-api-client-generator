@@ -35,6 +35,7 @@ describe('ApiVideoClient', () => {
         baseUri: process.env.BASE_URI,
         chunkSize: 5*1024*1024,
         applicationName: "client-integration-tests",
+        applicationVersion: "{{ npmVersion }}"
     });
 
     // Upload a watermark
