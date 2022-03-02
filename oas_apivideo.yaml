@@ -57,27 +57,27 @@ paths:
         code-samples:
           - language: go
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: node
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: php
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: python
             code: |
-              # With the api.video API clients, authentication is taken care of with each client created.
+              #With the api.video API clients, authentication is taken care of with each client created.
               # You get to skip this step!
           - language: java
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: csharp
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: swift
             code: |
@@ -130,27 +130,27 @@ paths:
         code-samples:
           - language: go
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: node
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: php
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: python
             code: |
-              # With the api.video API clients, authentication is taken care of with each client created.
+              #With the api.video API clients, authentication is taken care of with each client created.
               # You get to skip this step!
           - language: java
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: csharp
             code: |
-              // With the api.video API clients, authentication is taken care of with each client created.
+              //With the api.video API clients, authentication is taken care of with each client created.
               // You get to skip this step!
           - language: swift
             code: |
@@ -364,9 +364,9 @@ paths:
           - language: php
             code: |
               <?php
-
               require __DIR__ . '/vendor/autoload.php';
 
+              // instantiate the client
               $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
               $client = new \ApiVideo\Client(
                                   'https://sandbox.api.video',
@@ -409,6 +409,26 @@ paths:
                   .metadata(Map.of("key1", "value1", "key2", "value2"))
                   .execute()
                   .getItems();
+          - language: node
+            code: |-
+              // instantiate the client
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+
+              // list all videos (all pages)
+              let allVideos = [];
+              for(let currentPage=1 ; ; currentPage++) {
+                const res = await client.videos.list({ currentPage });
+                allVideos = [...allVideos, ...res.data];
+                if(currentPage >= res.pagination.pagesTotal) {
+                  break;
+                }
+              }
+
+              // list videos that have all the given tags (only first results page)
+              const videosWithTags = await client.videos.list({ tags: ["tag1", "tag2"] });
+
+              // list videos that have all the given metadata values (only first results page)
+              const videosWithMetadata = await client.videos.list({ metadata: { "key1": "value1", "key2": "value2" } })
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
@@ -868,7 +888,7 @@ paths:
                     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" 
                   // string | Enter the videoId you want to use to upload your video.
                     file := os.NewFile(1234, "some_file") 
-                  // *os.File | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\\\"/videos\\\\\" endpoint and add the \\\\\"source\\\\\" parameter when you create a new video.
+                  // *os.File | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
                   
                   
                     res, err := client.Videos.UploadFile(videoId, file)
@@ -895,7 +915,7 @@ paths:
                     const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
                     
                     const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the videoId you want to use to upload your video.
-                    const file = 'BINARY_DATA_HERE'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\\\"/videos\\\\\" endpoint and add the \\\\\"source\\\\\" parameter when you create a new video.
+                    const file = 'BINARY_DATA_HERE'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
                     
                     // Video
                     const result = await client.videos.upload(videoId, file);
@@ -952,7 +972,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = videos_api.VideosApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Jfrgz" # str | Enter the videoId you want to use to upload your video.
-                  file = open('/path/to/file', 'rb') # file_type | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \"/videos\" endpoint and add the \"source\" parameter when you create a new video.
+                  file = open('/path/to/file', 'rb') # file_type | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
 
                   # example passing only required values which don't have defaults set
                   try:
@@ -981,7 +1001,7 @@ paths:
                   VideosApi apiInstance = client.videos();
 
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Jfrgz"; // Enter the videoId you want to use to upload your video.
-                  File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \"/videos\" endpoint and add the \"source\" parameter when you create a new video.
+                  File file = new File("/path/to/file"); // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
 
                   try {
                     Video result = apiInstance.upload(videoId, file);
@@ -1015,7 +1035,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | Enter the videoId you want to use to upload your video.
-                          var file = BINARY_DATA_HERE;  // System.IO.Stream | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \"/videos\" endpoint and add the \"source\" parameter when you create a new video.
+                          var file = BINARY_DATA_HERE;  // System.IO.Stream | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
                           var apiVideosInstance = apiInstance.Videos();
                           try
                           {
@@ -1493,12 +1513,12 @@ paths:
               func main() {
                   client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
                   // if you rather like to use the sandbox environment:
-                  // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\").Build()
-              
-                  videoId := \"videoId_example\" // string | Unique identifier of the chosen video 
-                  file := os.NewFile(1234, \"some_file\") // *os.File | The image to be added as a thumbnail.
-              
-              
+                  // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+
+                  videoId := "videoId_example" // string | Unique identifier of the chosen video 
+                  file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
+
+
                   res, err := client.Videos.UploadThumbnailFile(videoId, file)
 
                   // you can also use a Reader instead of a File:
@@ -1523,7 +1543,7 @@ paths:
 
                       const videoId = 'videoId_example'; // Unique identifier of the chosen video 
                       const file = 'BINARY_DATA_HERE'; // The image to be added as a thumbnail.
-              
+
                       // Video
                       const result = await client.videos.uploadThumbnail(videoId, file);
                       console.log(result);
@@ -1547,9 +1567,9 @@ paths:
               with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
                   # Create an instance of the API class
                   api_instance = videos_api.VideosApi(api_client)
-                  video_id = \"videoId_example\" # str | Unique identifier of the chosen video 
+                  video_id = "videoId_example" # str | Unique identifier of the chosen video 
                   file = open('/path/to/file', 'rb') # file_type | The image to be added as a thumbnail.
-              
+
                   # example passing only required values which don't have defaults set
                   try:
                       # Upload a thumbnail
@@ -1576,10 +1596,10 @@ paths:
                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
                  VideosApi apiInstance = client.videos();
-              
-                 String videoId = \"videoId_example\"; // Unique identifier of the chosen video 
-                 File file = new File(\"/path/to/file\"); // The image to be added as a thumbnail.
-              
+
+                 String videoId = "videoId_example"; // Unique identifier of the chosen video 
+                 File file = new File("/path/to/file"); // The image to be added as a thumbnail.
+
                  try {
                    Video result = apiInstance.uploadThumbnail(videoId, file);
                    System.out.println(result);
@@ -1751,7 +1771,7 @@ paths:
                     const videoThumbnailPickPayload = {
                     timecode: "timecode_example", 
                     // Frame in video to be used as a placeholder before the video plays. 
-                    //Example: '\"00:01:00.000\" for 1 minute into the video.' Valid Patterns: \"hh:mm:ss.ms\" \"hh:mm:ss:frameNumber\" \"124\" (integer value is reported as seconds) If selection is out of range, \"00:00:00.00\" will be chosen.
+                    //Example: '"00:01:00.000" for 1 minute into the video.' Valid Patterns: "hh:mm:ss.ms" "hh:mm:ss:frameNumber" "124" (integer value is reported as seconds) If selection is out of range, "00:00:00.00" will be chosen.
                 }; 
 
                     // Video
@@ -2950,30 +2970,29 @@ paths:
               import video.api.client.api.models.*;
               import video.api.client.api.clients.UploadTokensApi;
               import java.util.*;
-              
+
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient(\"YOUR_API_TOKEN\");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
                   // if you rather like to use the sandbox environment:
-                  // ApiVideoClient client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);
-              
+                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
+
                   UploadTokensApi apiInstance = client.uploadTokens();
                   
-                  String uploadToken = \"to1tcmSFHeYY5KzyhOqVKMKb\"; // The unique identifier for the token you want information about.
-              
+                  String uploadToken = "to1tcmSFHeYY5KzyhOqVKMKb"; // The unique identifier for the token you want information about.
+
                   try {
                     UploadToken result = apiInstance.getToken(uploadToken);
                     System.out.println(result);
                   } catch (ApiException e) {
-                    System.err.println(\"Exception when calling UploadTokensApi#getToken\");
-                    System.err.println(\"Status code: \" + e.getCode());
-                    System.err.println(\"Reason: \" + e.getMessage());
-                    System.err.println(\"Response headers: \" + e.getResponseHeaders());
+                    System.err.println("Exception when calling UploadTokensApi#getToken");
+                    System.err.println("Status code: " + e.getCode());
+                    System.err.println("Reason: " + e.getMessage());
+                    System.err.println("Response headers: " + e.getResponseHeaders());
                     e.printStackTrace();
                   }
                 }
               }
-              
           - language: csharp
             code: |
               //install via Nuget
@@ -4004,7 +4023,7 @@ paths:
                       const liveStreamCreationPayload = {
                     name: "My Live Stream Video", // Add a name for your live stream here.
                     record: true, // Whether you are recording or not. True for record, false for not record.
-                    _public: true, // BETA FEATURE Please limit all public = false (\"private\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+                    _public: true, // BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
                     playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
                   }; 
 
@@ -4277,30 +4296,29 @@ paths:
               import video.api.client.api.models.*;
               import video.api.client.api.clients.LiveStreamsApi;
               import java.util.*;
-              
+
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient(\"YOUR_API_TOKEN\");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
                   // if you rather like to use the sandbox environment:
-                  // ApiVideoClient client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);
-              
+                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
+
                   LiveStreamsApi apiInstance = client.liveStreams();
                   
-                  String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"; // The unique ID for the live stream you want to watch.
-              
+                  String liveStreamId = "li400mYKSgQ6xs7taUeSaEKr"; // The unique ID for the live stream you want to watch.
+
                   try {
                     LiveStream result = apiInstance.get(liveStreamId);
                     System.out.println(result);
                   } catch (ApiException e) {
-                    System.err.println(\"Exception when calling LiveStreamsApi#get\");
-                    System.err.println(\"Status code: \" + e.getCode());
-                    System.err.println(\"Reason: \" + e.getMessage());
-                    System.err.println(\"Response headers: \" + e.getResponseHeaders());
+                    System.err.println("Exception when calling LiveStreamsApi#get");
+                    System.err.println("Status code: " + e.getCode());
+                    System.err.println("Reason: " + e.getMessage());
+                    System.err.println("Response headers: " + e.getResponseHeaders());
                     e.printStackTrace();
                   }
                 }
               }
-              
           - language: csharp
             code: |
               //install via Nuget
@@ -4591,7 +4609,7 @@ paths:
                       const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
                       const liveStreamUpdatePayload = {
                     name: "My Live Stream Video", // The name you want to use for your live stream.
-                    _public: true, // BETA FEATURE Please limit all public = false (\"private\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+                    _public: true, // BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
                     record: true, // Use this to indicate whether you want the recording on or off. On is true, off is false.
                     playerId: "pl45KFKdlddgk654dspkze", // The unique ID for the player associated with a live stream that you want to update.
                   }; 
@@ -4789,9 +4807,9 @@ paths:
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
-                  liveStreamId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" // string | The unique ID for the live stream you want to upload.
-                  file := os.NewFile(1234, \"some_file\") // *os.File | The image to be added as a thumbnail.
-              
+                  liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to upload.
+                  file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
+
                   
                   res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId, file)
 
@@ -4869,9 +4887,9 @@ paths:
 
                   LiveStreamsApi apiInstance = client.liveStreams();
                   
-                  String liveStreamId = \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"; // The unique ID for the live stream you want to upload.
-                  File file = new File(\"/path/to/file\"); // The image to be added as a thumbnail.
-              
+                  String liveStreamId = "vi4k0jvEUuaTdRAEjQ4Jfrgz"; // The unique ID for the live stream you want to upload.
+                  File file = new File("/path/to/file"); // The image to be added as a thumbnail.
+
                   try {
                     LiveStream result = apiInstance.uploadThumbnail(liveStreamId, file);
                     System.out.println(result);
@@ -8897,7 +8915,7 @@ paths:
                   req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}
                   
                   req.LiveStreamId("vi4k0jvEUuaTdRAEjQ4Jfrgz") // string | The unique identifier for the live stream you want to retrieve analytics for.
-                  req.Period("2019-01-01") // string | Period must have one of the following formats:  - For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range: \"2018-01-01/2018-01-15\" 
+                  req.Period("2019-01-01") // string | Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15" 
                   req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
                   req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
@@ -8922,7 +8940,7 @@ paths:
                       const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
 
                       const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the live stream you want to retrieve analytics for.
-                      const period = '2019-01-01'; // Period must have one of the following formats:  - For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range: \"2018-01-01/2018-01-15\" 
+                      const period = '2019-01-01'; // Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15" 
                       const currentPage = '2'; // Choose the number of search results to return per page. Minimum value: 1
                       const pageSize = '30'; // Results per page. Allowed values 1-100, default is 25.
 
@@ -8988,7 +9006,7 @@ paths:
                   RawStatisticsApi apiInstance = client.rawStatistics();
                   
                   String liveStreamId = "vi4k0jvEUuaTdRAEjQ4Jfrgz"; // The unique identifier for the live stream you want to retrieve analytics for.
-                  String period = "2019-01-01"; // Period must have one of the following formats:  - For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range: \"2018-01-01/2018-01-15\" 
+                  String period = "2019-01-01"; // Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15" 
                   Integer currentPage = 1; // Choose the number of search results to return per page. Minimum value: 1
                   Integer pageSize = 25; // Results per page. Allowed values 1-100, default is 25.
 
@@ -9027,7 +9045,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var liveStreamId = vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | The unique identifier for the live stream you want to retrieve analytics for.
-                          var period = 2019-01-01;  // string | Period must have one of the following formats:  - For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range: \"2018-01-01/2018-01-15\"  (optional) 
+                          var period = 2019-01-01;  // string | Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15"  (optional) 
                           var currentPage = 2;  // int? | Choose the number of search results to return per page. Minimum value: 1 (optional)  (default to 1)
                           var pageSize = 30;  // int? | Results per page. Allowed values 1-100, default is 25. (optional)  (default to 25)
                           var apiRawStatisticsInstance = apiInstance.RawStatistics();
@@ -9576,10 +9594,10 @@ paths:
       summary: Create Webhook
       description: |-
         Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events: 
-        * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
-        * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
-        * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true.
-        * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
+        * ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+        * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+        * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+        * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
       operationId: POST-webhooks
       requestBody:
         required: true
@@ -9671,7 +9689,7 @@ paths:
                       const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
 
                       const webhooksCreationPayload = {
-                    events: ["video.encoding.quality.completed"], // A list of the webhooks that you are subscribing to. There are Currently four webhook options: * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \\\\\"type\\\\\": \\\\\"video.encoding.quality.completed\\\\\", \\\\\"emittedAt\\\\\": \\\\\"2021-01-29T16:46:25.217+01:00\\\\\", \\\\\"videoId\\\\\": \\\\\"viXXXXXXXX\\\\\", \\\\\"encoding\\\\\": \\\\\"hls\\\\\", \\\\\"quality\\\\\": \\\\\"720p\\\\\"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
+                    events: ["video.encoding.quality.completed"], // A list of the webhooks that you are subscribing to. There are Currently four webhook options: * ```video.encoding.quality.completed```  Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ "type": "video.encoding.quality.completed", "emittedAt": "2021-01-29T16:46:25.217+01:00", "videoId": "viXXXXXXXX", "encoding": "hls", "quality": "720p"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a lives tream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  Occurs when a live stream is recorded and submitted for encoding.
                     url: "https://example.com/webhooks", // The url to which HTTP notifications are sent. It could be any http or https URL.
                   }; 
 
@@ -11343,10 +11361,10 @@ components:
           type: array
           description: |-
             A list of the webhooks that you are subscribing to. There are Currently four webhook options:
-            * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
-            * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
-            * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true.
-            * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
+            * ```video.encoding.quality.completed```  Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+            * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+            * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+            * ```video.source.recorded```  Occurs when a live stream is recorded and submitted for encoding.
           example:
             - video.encoding.quality.completed
           items:
