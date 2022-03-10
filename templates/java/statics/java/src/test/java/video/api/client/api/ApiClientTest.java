@@ -42,7 +42,11 @@ public class ApiClientTest {
         ApiClient apiClient = new ApiClient("path");
         assertThatThrownBy(() -> apiClient.setApplicationName("bad application name"));
         assertThatThrownBy(() -> apiClient.setApplicationName("012345678901234567890123456789012345678901234567890"));
-        apiClient.setApplicationName("great-application-name/2.0.0");
+        apiClient.setApplicationName("great-application-name");
+
+        assertThatThrownBy(() -> apiClient.setApplicationName(null, "1.2.3"));
+        assertThatThrownBy(() -> apiClient.setApplicationName("great-application-name", "aa"));
+        apiClient.setApplicationName("great-application-name", "1.2.3");
     }
 
 }
