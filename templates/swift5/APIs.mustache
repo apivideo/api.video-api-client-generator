@@ -17,10 +17,11 @@ import Vapor
 
 enum {{projectName}}Error: Error {
     case invalidApplicationName
+    case invalidApplicationVersion
+    case missingApplicationName
 }
 
 public class {{projectName}} {
-    private static let DEFAULT_USER_AGENT = "api.video {{ userAgent }} (iOS; v:{{ podVersion }}; )";
 
     public static var apiKey: String? = nil
     public static var basePath = "{{basePath}}"
@@ -28,7 +29,7 @@ public class {{projectName}} {
     internal static var customHeaders: [String: String] = [:]
     {{/useVapor}}
     {{^useVapor}}
-    internal  static var customHeaders:[String: String] = ["User-Agent": {{projectName}}.DEFAULT_USER_AGENT]
+    internal  static var customHeaders:[String: String] = ["AV-Origin-Client": "{{ originClient }}:{{ podVersion }}"]
     private static var chunkSize: Int = {{defaultChunkSize}}{{#useAlamofire}}
     internal static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory(){{/useAlamofire}}{{#useURLSession}}
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
@@ -49,16 +50,38 @@ public class {{projectName}} {
         return {{projectName}}.chunkSize
     }
 
-    public static func setApplicationName(applicationName: String) throws {
-        let pattern = #"^[\w\-.\/]{1,50}$"#
+
+    public static func setApplicationName(applicationName: String, applicationVersion: String?) throws {
+        if(applicationName.isEmpty) {
+            if(applicationVersion != nil && !applicationVersion!.isEmpty) {
+                throw {{projectName}}Error.missingApplicationName
+            }
+            {{projectName}}.customHeaders["AV-Origin-App"] = nil
+            return
+        }
+
+        let pattern = #"^[\w\-]{1,50}$"#
         let regex = try! NSRegularExpression(pattern: pattern, options: .anchorsMatchLines)
         let stringRange = NSRange(location: 0, length: applicationName.utf16.count)
         let matches = regex.matches(in: applicationName, range: stringRange)
         if(matches.isEmpty) {
             throw {{projectName}}Error.invalidApplicationName
         }
-        {{projectName}}.customHeaders["User-Agent"] = {{projectName}}.DEFAULT_USER_AGENT + " " + applicationName
+
+        if(applicationVersion != nil && !applicationVersion!.isEmpty) {
+            let pattern2 = #"^[\w\-]{1,50}$"#
+            let regex2 = try! NSRegularExpression(pattern: pattern2, options: .anchorsMatchLines)
+            let stringRange2 = NSRange(location: 0, length: applicationVersion!.utf16.count)
+            let matches2 = regex2.matches(in: applicationVersion!, range: stringRange2)
+            if(matches2.isEmpty) {
+                throw {{projectName}}Error.invalidApplicationVersion
+            }
+            {{projectName}}.customHeaders["AV-Origin-App"] = applicationName + ":" + applicationVersion!
+            return
+        }
+        {{projectName}}.customHeaders["AV-Origin-App"] = applicationName
     }
+
     {{/useVapor}}
 }{{^useVapor}}
 
