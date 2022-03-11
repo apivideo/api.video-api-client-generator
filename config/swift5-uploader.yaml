@@ -1,4 +1,6 @@
 changelog:
+  - 0.1.4 (2022-03-11):
+      - Add Origin identification headers
   - 0.1.3 (2022-01-24):
       - Add applicationName parameter (to allow user agent extension)
   - 0.1.2 (2021-12-14):
@@ -15,7 +17,7 @@ library: alamofire
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
-userAgent: uploader
+originClient: ios-uploader
 uploader: "true"
 gitRepoId: api.video-ios-uploader
 additionalProperties:

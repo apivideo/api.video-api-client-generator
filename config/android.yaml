@@ -1,4 +1,6 @@
 changelog:
+  - 1.0.2 (2022-03-10):
+      - Add Origin identification headers
   - 1.0.1 (2022-01-24):
       - Add applicationName parameter (to allow user agent extension)
   - 1.0.0 (2022-01-07):
@@ -16,7 +18,7 @@ changelog:
   - 0.1.0 (2021-11-19):
     - Initial release
 
-userAgent: client
+originClient: android
 invokerPackage: video.api.client.api
 apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
