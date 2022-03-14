@@ -2,19 +2,21 @@
   "name": "{{ npmName }}",
   "version": "{{ npmVersion }}",
   "description": "{{ npmDescription }}",
-  "author": "{{ npmAuthor }}",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/apivideo/{{gitRepoId}}"
-  },
-  "bugs:": "https://github.com/apivideo/{{gitRepoId}}/issues",
-  "keywords": [
+   "keywords": [
+    "api.video",
     "api",
     "video",
     "client",
     "rest"
   ],
+  "homepage": "https://github.com/apivideo/{{gitRepoId}}#readme",
+  "bugs:": "https://github.com/apivideo/{{gitRepoId}}/issues",
   "license": "{{ licenseName }}",
+  "author": "api.video <ecosystem@api.video> (https://api.video/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apivideo/{{gitRepoId}}"
+  },
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "files": ["lib/", "doc/", "test/sandbox.spec.ts"],
