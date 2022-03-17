@@ -260,6 +260,15 @@ namespace VideoApiTests.Integration
                                 new Metadata() { key = "thirdKey", value = "thirdValue" }
                             );
 
+            var metadata = new Dictionary<string, string>()
+            {
+                { "firstKey", "firstValue" },
+                { "secondKey", "secondValue" },
+            };
+
+            Page<Video> page = apiClient.Videos().list().Metadata(metadata).execute();
+
+            page.ItemsTotal.Should().BeGreaterThan(0);
 
             Video updated3 = apiClient.Videos().update(testVideo.videoid,
                     new VideoUpdatePayload()
