@@ -475,8 +475,8 @@ public class ApiClient {
             return params;
         }
 
-        if(value instanceof HashMap) {
-            HashMap map = (HashMap)value;
+        if (value instanceof Map) {
+            Map map = (Map) value;
             map.forEach((k, v) -> {
                 if(k != null) params.add(new Pair(name + "[" + k + "]", v == null ? null : v.toString()));
             });

@@ -633,6 +633,13 @@ namespace {{packageName}}.Client
                 var valueCollection = value as IEnumerable;
                 parameters.AddRange(from object item in valueCollection select new KeyValuePair<string, string>(name, ParameterToString(item)));
             }
+            else if (value is IDictionary dict)
+            {
+                foreach (DictionaryEntry entry in dict)
+                {
+                    parameters.Add(new KeyValuePair<string, string>(name + "[" + entry.Key + "]", ParameterToString(entry.Value)));
+                }
+            }
             else
             {
                 parameters.Add(new KeyValuePair<string, string>(name, ParameterToString(value)));
