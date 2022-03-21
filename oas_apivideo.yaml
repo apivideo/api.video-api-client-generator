@@ -11742,6 +11742,20 @@ components:
           description: The total number of bytes received, listed for each chunk of the upload.
           items:
             $ref: '#/components/schemas/bytes-range'
+        receivedParts:
+          type: object
+          properties:
+            parts:
+              type: array
+              description: The parts that are have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2].
+              example: '[1, 2, 3]'
+              items:
+                type: integer
+            total:
+              type: integer
+              nullable: true
+              description: Contains the number of expected parts. The total will be listed as "null" until the total number of parts is known.
+              example: 3
       description: Details about the capturing, transferring, and storing of your video for use immediately or in the future.
     video-status-encoding-metadata:
       title: VideoStatusEncodingMetadata
@@ -11774,6 +11788,7 @@ components:
           type: string
           description: The method used to compress and decompress digital audio for your video.
         aspectRatio:
+          nullable: true
           type: string
     video-status-encoding:
       title: VideoStatusEncoding

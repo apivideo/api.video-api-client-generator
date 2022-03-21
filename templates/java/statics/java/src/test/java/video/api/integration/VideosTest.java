@@ -71,6 +71,7 @@ public class VideosTest extends AbstractTest {
 
     @Nested
     @DisplayName("progressive upload")
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class ProgressiveUpload {
         private Video testVideo;
@@ -82,6 +83,7 @@ public class VideosTest extends AbstractTest {
         }
 
         @Test
+        @Order(1)
         public void uploadVideo() throws ApiException {
             File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
             File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
@@ -93,6 +95,15 @@ public class VideosTest extends AbstractTest {
             uploadProgressiveSession.uploadPart(part1);
             uploadProgressiveSession.uploadPart(part2);
             uploadProgressiveSession.uploadLastPart(part3);
+        }
+
+        @Test
+        @Order(2)
+        public void getStatus() throws ApiException {
+            VideoStatus status = apiClient.videos().getStatus(testVideo.getVideoId());
+
+            assertThat(status.getIngest().getReceivedParts().getTotal()).isEqualTo(3);
+            assertThat(status.getIngest().getReceivedParts().getParts()).containsExactly(1, 2, 3);
         }
 
         @AfterAll
