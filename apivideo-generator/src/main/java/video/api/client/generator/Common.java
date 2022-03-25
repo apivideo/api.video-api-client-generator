@@ -1,11 +1,14 @@
 package video.api.client.generator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenOperation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Common {
     public static void replaceDescriptionsAndSamples(Map<String, Object> objs, String language) {
@@ -35,12 +38,26 @@ public class Common {
                     }
                 }
 
-                if(operation.vendorExtensions.containsKey("x-readme")) {
+                if (operation.vendorExtensions.containsKey("x-readme")) {
                     Map<String, List> xReadme = (Map<String, List>) operation.vendorExtensions.get("x-readme");
-                    if(xReadme.containsKey("code-samples")) {
+                    if (xReadme.containsKey("code-samples")) {
                         List<Map<String, String>> codeSamples = xReadme.get("code-samples");
                         Optional<Map<String, String>> first = codeSamples.stream().filter(codeSample -> language.equals(codeSample.get("language"))).findFirst();
-                        first.ifPresent(map -> operation.vendorExtensions.put("code-sample", map.get("code")));
+                        first.ifPresent(map -> {
+                            String code = map.get("code");
+                            String[] lines = code.split("\n");
+                            int toSkip = 0;
+                            for (String line : lines) {
+                                if (!StringUtils.isBlank(line)
+                                        && !line.startsWith("// First")
+                                        && !line.startsWith("// Documentation")) {
+                                    break;
+                                }
+                                toSkip++;
+                            }
+                            operation.vendorExtensions.put("code-sample", String.join("\n", Arrays.asList(lines).subList(toSkip, lines.length)));
+
+                        });
                     }
                 }
             }

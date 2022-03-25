@@ -3,22 +3,34 @@
 
 All URIs are relative to *{{basePath}}*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-{{#operations}}{{#operation}}[**{{operationId}}**]({{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+| Method | Description | HTTP request |
+| ------------- | ------------- | ------------- |
+{{#operations}}{{#operation}}| [**{{operationId}}**]({{classname}}.md#{{operationId}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** {{path}} |
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
 <a name="{{operationId}}"></a>
-## **{{operationId}}**{{#comment}}{{^vendorExtensions.x-group-parameters}}
+## **`{{operationId}}` - {{summary}}**{{#comment}}{{^vendorExtensions.x-group-parameters}}
 > {{#returnType}}{{returnType}} {{/returnType}}{{operationId}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}}){{/vendorExtensions.x-group-parameters}}{{#vendorExtensions.x-group-parameters}}
 > {{#returnType}}{{returnType}} {{/returnType}}{{operationId}}({{#requiredParams}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}){{#optionalParams}}.{{paramName}}({{paramName}}){{/optionalParams}}.execute();{{/vendorExtensions.x-group-parameters}}
 {{/comment}}
 
-{{#unescape}}{{summary}}{{#notes}}
+{{#unescape}}{{#unescapedNotes}}
 
-{{notes}}{{/notes}}{{/unescape}}
+{{unescapedNotes}}{{/unescapedNotes}}{{/unescape}}
+
+### Parameters
+{{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
+| Name | Type | Description |
+| ------------- | ------------- | ------------- |{{/-last}}{{/allParams}}
+{{#allParams}} | **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{description}} |
+{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}| **progressListener?** | **(event: UploadProgressEvent) => void \| undefined** | Optional upload progress listener |{{/vendorExtensions.x-client-chunk-upload}}
+
+### Return type
+
+Promise<{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}>.
+
 
 {{#vendorExtensions.code-sample}}
 ### Example
@@ -29,56 +41,46 @@ Method | HTTP request | Description
 {{^vendorExtensions.code-sample}}
 ### Example
 ```js
-(async () => {
-    try {
-    {{^authMethods}}
-        const client = new ApiVideoClient();
-    {{/authMethods}}
-    {{#authMethods}}
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
-    {{/authMethods}}
+{{^authMethods}}
+    const client = new ApiVideoClient();
+{{/authMethods}}
+{{#authMethods}}
+    const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+{{/authMethods}}
 
-    {{#allParams}}
-        {{^vendorExtensions.x-client-doc-hidden}}
-        {{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
-        {{/vendorExtensions.x-client-doc-hidden}}
-    {{/allParams}}
+{{#allParams}}
+    {{^vendorExtensions.x-client-doc-hidden}}
+    {{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
+    {{/vendorExtensions.x-client-doc-hidden}}
+{{/allParams}}
 
-    {{#returnType}}
-        // {{returnType}}
-    {{/returnType}}
-    {{^vendorExtensions.x-group-parameters}}
-        const result = await client.{{classVarName}}.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});
-    {{/vendorExtensions.x-group-parameters}}
-    {{#vendorExtensions.x-group-parameters}}
-        const result = await client.{{classVarName}}.{{{operationId}}}({ {{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}} })
-    {{/vendorExtensions.x-group-parameters}}
-    {{#returnType}}
-        console.log(result);
-    {{/returnType}}
-    } catch (e) {
-        console.error(e);
-    }
+{{#returnType}}
+    // {{returnType}}
+{{/returnType}}
+{{^vendorExtensions.x-group-parameters}}
+    const result = await client.{{classVarName}}.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});
+{{/vendorExtensions.x-group-parameters}}
+{{#vendorExtensions.x-group-parameters}}
+    const result = await client.{{classVarName}}.{{{operationId}}}({ {{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}} })
+{{/vendorExtensions.x-group-parameters}}
+{{#returnType}}
+    console.log(result);
+{{/returnType}}
 })();
 ```
 {{/vendorExtensions.code-sample}}
 
-### Parameters
-{{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
-{{#allParams}} **{{paramName}}** | {{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{^isContainer}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}{{/isContainer}}{{#allowableValues}} [enum: {{#values}}{{{.}}}{{^-last}}, {{/-last}}{{/values}}]{{/allowableValues}}
-{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}**progressListener?** | **(event: UploadProgressEvent) => void \| undefined** | Optional upload progress listener | [default to undefined]
 
+{{#vendorExtensions.x-client-chunk-upload}}
 ### Upload chunks
 
 Large files are broken into chunks for upload. You can control the size of the chunks using the `chunkSize` parameter when you instanciate the ApiVideoClient:
 
 ```js
-    const client = new ApiVideoClient({
-        apiKey: "YOUR_API_TOKEN",
-        chunkSize: 50 * 1024 * 1024, // 50mb chunks
-    });
+const client = new ApiVideoClient({
+    apiKey: "YOUR_API_TOKEN",
+    chunkSize: 50 * 1024 * 1024, // 50mb chunks
+});
 ```
 
 ### Progressive uploads
@@ -87,47 +89,33 @@ Progressive uploads make it possible to upload a video source "progressively," i
 The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
 
 ```js
-(async () => {
-try {
-    {{^authMethods}}
-        const client = new ApiVideoClient();{{/authMethods}}{{#authMethods}}
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
-    {{/authMethods}}
-    {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}
-        {{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
-    {{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}}
-        const uploadSession = client.create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{paramName}}}{{/isFile}}{{/allParams}});
+{{^authMethods}}const client = new ApiVideoClient();{{/authMethods}}{{#authMethods}}const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });{{/authMethods}}
+{{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}{{^isFile}}
+{{#isBodyParam}}const {{{paramName}}} = {{{example}}}; {{/isBodyParam}}{{^isBodyParam}}const {{{paramName}}} = '{{{example}}}'; // {{{description}}}{{/isBodyParam}}
+{{/isFile}}{{/vendorExtensions.x-client-doc-hidden}}{{/allParams}}
+const uploadSession = client.create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{paramName}}}{{/isFile}}{{/allParams}});
 
-        await uploadSession.uploadPart('test/data/10m.mp4.part.a');
-        await uploadSession.uploadPart('test/data/10m.mp4.part.b');
-        const res = await uploadSession.uploadLastPart('test/data/10m.mp4.part.c'); {{#returnType}} // {{returnType}} {{/returnType}}
+await uploadSession.uploadPart('test/data/10m.mp4.part.a');
+await uploadSession.uploadPart('test/data/10m.mp4.part.b');
+const res = await uploadSession.uploadLastPart('test/data/10m.mp4.part.c'); {{#returnType}} // {{returnType}} {{/returnType}}
 
-    {{#returnType}}
-        console.log(result);
-    {{/returnType}}
-    } catch (e) {
-        console.error(e);
-    }
-})();
+{{#returnType}}
+console.log(result);
+{{/returnType}}
 ```
 {{/vendorExtensions.x-client-chunk-upload}}
-
-### Return type
-{{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**](../model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
-
-### HTTP request headers
-
- - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}
- - **Accept**: {{#produces}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/produces}}{{^produces}}Not defined{{/produces}}
 
 {{#responses.0}}
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 {{#responses}}
-**{{code}}** | {{message}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
+| **{{code}}** | {{message}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
 {{/responses}}
 {{/responses.0}}
+
+
+---
 
 {{/operation}}
 {{/operations}}
