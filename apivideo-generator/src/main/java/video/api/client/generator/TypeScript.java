@@ -242,6 +242,8 @@ public class TypeScript extends DefaultCodegen {
 
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "node");
+
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
@@ -405,6 +407,7 @@ public class TypeScript extends DefaultCodegen {
 
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("lower", new LowercaseLambda());
+        additionalProperties.put("unescape", new UnescapeLambda());
 
         if (additionalProperties.containsKey(TypeScript.TEST_PACKAGE)) {
             testPackage = (String) additionalProperties.get(TypeScript.TEST_PACKAGE);

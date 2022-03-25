@@ -17,9 +17,17 @@ Method | HTTP request | Description
 
 {{{notes}}}{{/notes}}
 
+{{#vendorExtensions.code-sample}}
+### Example
+```python
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
+{{^vendorExtensions.code-sample}}
 ### Example
 
 {{> api_doc_example }}
+{{/vendorExtensions.code-sample}}
 
 ### Parameters
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}

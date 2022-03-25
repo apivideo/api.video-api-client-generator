@@ -35,19 +35,22 @@ public class Java extends JavaClientCodegen {
         super.postProcessParameter(parameter);
     }
 
+
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        Common.replaceDescriptionsAndSamples(objs, "java");
 
         Map<String, Object> operations = (Map<String, Object>) objs.get("operations");
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
-            if(ops.stream().allMatch(op -> Boolean.TRUE.equals(op.vendorExtensions.get("x-client-hidden")))) {
+            if (ops.stream().allMatch(op -> Boolean.TRUE.equals(op.vendorExtensions.get("x-client-hidden")))) {
                 objs.put("x-client-hidden", true);
             }
 
             for (CodegenOperation operation : ops) {
-                if(StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
+
+                if (StringUtils.isNotBlank((String) operation.vendorExtensions.get("x-client-action"))) {
                     operation.operationId = (String) operation.vendorExtensions.get("x-client-action");
                     operation.nickname = operation.operationId;
                 } else {
@@ -60,13 +63,13 @@ public class Java extends JavaClientCodegen {
                         .collect(Collectors.toList()));
 
 
-                applyToAllParams(operation, (params) -> params.removeIf(pp -> getVendorExtensionBooleanValue(pp, VENDOR_X_CLIENT_IGNORE)) );
+                applyToAllParams(operation, (params) -> params.removeIf(pp -> getVendorExtensionBooleanValue(pp, VENDOR_X_CLIENT_IGNORE)));
 
                 applyToAllParams(operation, (params) ->
-                    params.stream()
-                            .flatMap(p -> p.vars.stream())
-                            .filter(p -> PARAMETERS_TO_HIDE_IN_CLIENT_DOC.contains(p.baseName))
-                            .forEach(p -> p.vendorExtensions.put("x-client-doc-hidden", true))
+                        params.stream()
+                                .flatMap(p -> p.vars.stream())
+                                .filter(p -> PARAMETERS_TO_HIDE_IN_CLIENT_DOC.contains(p.baseName))
+                                .forEach(p -> p.vendorExtensions.put("x-client-doc-hidden", true))
                 );
 
                 operation.allParams.stream()
@@ -86,12 +89,12 @@ public class Java extends JavaClientCodegen {
                             }
                         });
 
-                if(getVendorExtensionBooleanValue(operation, "x-client-paginated")) {
+                if (getVendorExtensionBooleanValue(operation, "x-client-paginated")) {
                     handlePagination(allModels, operation);
                 }
 
                 operation.allParams.stream().forEach(param -> {
-                    switch(param.dataType) {
+                    switch (param.dataType) {
                         case "URI":
                             param.vendorExtensions.put("testConstructor", "URI.create(\"https://api.video\")");
                         case "File":
@@ -125,10 +128,10 @@ public class Java extends JavaClientCodegen {
         response.vendorExtensions.put("lambda", additionalProperties.get("lambda"));
 
         String responseExample = getResponseExample(response);
-        if(responseExample != null) {
+        if (responseExample != null) {
             try {
                 Map<String, String> exampleMap = Json.mapper().readerFor(Map.class).readValue(responseExample);
-                if(exampleMap.containsKey("title")) {
+                if (exampleMap.containsKey("title")) {
                     response.vendorExtensions.put("x-example-response", exampleMap);
                 }
                 response.vendorExtensions.put("x-example-response-json", responseExample);
@@ -181,15 +184,15 @@ public class Java extends JavaClientCodegen {
             return null;
         }
         Map content = (Map) map.get("content");
-        if(content == null) {
+        if (content == null) {
             return null;
         }
         Collection<Map> values = content.values();
         for (Map v : values) {
             Map examples = (Map) v.get("examples");
-            if(examples == null) continue;
+            if (examples == null) continue;
             Map res = (Map) examples.get("response");
-            if(res == null) continue;
+            if (res == null) continue;
             return Json.pretty((Map) res.get("value"));
         }
 
@@ -209,10 +212,11 @@ public class Java extends JavaClientCodegen {
             });
         });
     }
+
     @Override
     public Map<String, Object> postProcessModels(Map<String, Object> objs) {
         Map<String, Object> stringObjectMap = super.postProcessModels(objs);
-        ((ArrayList)stringObjectMap.get("imports")).removeIf((v) -> ((Map)v).values().contains("org.openapitools.jackson.nullable.JsonNullable"));
+        ((ArrayList) stringObjectMap.get("imports")).removeIf((v) -> ((Map) v).values().contains("org.openapitools.jackson.nullable.JsonNullable"));
         return stringObjectMap;
     }
 
