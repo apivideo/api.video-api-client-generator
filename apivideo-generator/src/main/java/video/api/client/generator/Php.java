@@ -148,15 +148,6 @@ public class Php extends AbstractPhpCodegen {
 
 
             for (CodegenOperation operation : ops) {
-                if(operation.vendorExtensions.containsKey("x-readme")) {
-                    Map<String, List> xReadme = (Map<String, List>) operation.vendorExtensions.get("x-readme");
-                    if(xReadme.containsKey("code-samples")) {
-                        List<Map<String, String>> codeSamples = xReadme.get("code-samples");
-                        Optional<Map<String, String>> first = codeSamples.stream().filter(codeSample -> "php".equals(codeSample.get("language"))).findFirst();
-                        first.ifPresent(map -> operation.vendorExtensions.put("code-sample", map.get("code")));
-                    }
-                }
-
                 operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()
                         .filter(p -> Boolean.TRUE.equals(p.vendorExtensions.get("x-client-copy-from-response")))
                         .peek(a -> a.vendorExtensions.put("getter", toGetter(a.paramName)))

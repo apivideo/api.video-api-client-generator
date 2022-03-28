@@ -372,7 +372,7 @@ paths:
               $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
               $client = new \ApiVideo\Client(
                                   'https://sandbox.api.video',
-                                  'YOUR_API_TOKEN',
+                                  'YOUR_API_KEY',
                                   $httpClient
                               );
 
@@ -391,7 +391,7 @@ paths:
           - language: java
             code: |-
               // instantiate the client
-              ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+              ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
               VideosApi videosApi = client.videos();
 
               // list all videos (all pages)
@@ -417,7 +417,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#list
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               // list all videos (all pages)
               let allVideos = [];
@@ -546,7 +546,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -569,7 +569,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#create
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               // create a simple video
               const video = await client.videos.create({ title: "Maths video" });
@@ -610,7 +610,7 @@ paths:
               $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
               $client = new \ApiVideo\Client(
                                   'https://sandbox.api.video',
-                                  'YOUR_API_TOKEN',
+                                  'YOUR_API_KEY',
                                   $httpClient
                               );
 
@@ -672,7 +672,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -909,7 +909,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
 
@@ -939,7 +939,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#upload
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the videoId you want to use to upload your video.
               const file = './my-video.mp4'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
@@ -966,7 +966,7 @@ paths:
               $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
               $client = new \ApiVideo\Client(
                                   'https://sandbox.api.video',
-                                  'YOUR_API_TOKEN',
+                                  'YOUR_API_KEY',
                                   $httpClient
                               );
 
@@ -1025,7 +1025,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -1141,7 +1141,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
 
@@ -1161,7 +1161,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/WatermarksApi.md#upload
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               // Upload a watermark
               const watermark = await client.watermarks.upload('test/data/test.jpg');
@@ -1188,7 +1188,7 @@ paths:
                 $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
                 $client = new \ApiVideo\Client(
                                     'https://sandbox.api.video',
-                                    'YOUR_API_TOKEN',
+                                    'YOUR_API_KEY',
                                     $httpClient
                                 );
 
@@ -1246,7 +1246,7 @@ paths:
 
               public class Example {
                public static void main(String[] args) {
-                 ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                 ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                  // if you rather like to use the sandbox environment:
                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -1395,7 +1395,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/WatermarksApi.md#list
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
 
               // retrieve the first page of all watermarks
               const watermarks = await client.watermarks.list({});
@@ -1447,7 +1447,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/WatermarksApi.md#list
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
 
               const watermarkId = 'watermark_1Bji68oeAAwR44dAb5ZhML'; // The watermark ID for the watermark you want to delete.
 
@@ -1570,7 +1570,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
 
@@ -1597,7 +1597,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#uploadThumbnail
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'videoId_example'; // Unique identifier of the chosen video 
               const file = './thumbnail.jpg'; // The image to be added as a thumbnail.
@@ -1643,7 +1643,7 @@ paths:
 
               public class Example {
                public static void main(String[] args) {
-                 ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                 ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                  // if you rather like to use the sandbox environment:
                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -1799,7 +1799,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -1823,7 +1823,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#pickThumbnail
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
               const videoThumbnailPickPayload = {
@@ -1873,7 +1873,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -2025,7 +2025,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -2048,7 +2048,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#getStatus
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want the status for.
               const result = await client.videos.getStatus(videoId); 
@@ -2088,7 +2088,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -2194,7 +2194,7 @@ paths:
                   apivideosdk "github.com/apivideo/api.video-go-client"
               )
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -2211,7 +2211,7 @@ paths:
               // Documentation : https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#delete
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // the id of the video to delete
               await client.videos.delete(videoId); 
@@ -2247,7 +2247,7 @@ paths:
                 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
                   
@@ -2416,7 +2416,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -2440,7 +2440,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#update
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want to update.
 
@@ -2513,7 +2513,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -2591,7 +2591,7 @@ paths:
               $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
               $client = new \ApiVideo\Client(
                                   'https://sandbox.api.video',
-                                  'YOUR_API_TOKEN',
+                                  'YOUR_API_KEY',
                                   $httpClient
                               );
 
@@ -2700,7 +2700,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -2723,7 +2723,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#getStatus
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want the status for.
               const result = await client.videos.getStatus(videoId); 
@@ -2763,7 +2763,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -2906,7 +2906,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -2929,7 +2929,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/UploadTokensApi.md#list
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
                
               const uploadTokens = await client.uploadTokens.list();
                       
@@ -2969,7 +2969,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -3002,7 +3002,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -3108,7 +3108,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -3131,7 +3131,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/UploadTokensApi.md#createToken
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
 
               const tokenCreationPayload = {
                 ttl: 56, // Time in seconds that the token will be active. A value of 0 means that the token has no expiration date. The default is to have no expiration.
@@ -3178,7 +3178,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -3290,7 +3290,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -3313,7 +3313,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/UploadTokensApi.md#getToken
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
 
               const uploadTokenId = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token you want information about.
 
@@ -3354,7 +3354,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -3453,7 +3453,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -3473,7 +3473,7 @@ paths:
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/UploadTokensApi.md#deleteToken
 
               // instantiate the client 
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" }); 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" }); 
 
               const uploadToken = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
                 
@@ -3512,7 +3512,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -3660,7 +3660,7 @@ paths:
               // The following example show how to do it from the backend, but you should rather use the standard upload method in this case.
 
               // instantiate the client
-              const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const token = 'to4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the unique identifier for the token you want to use to upload a video.
               const file = './my-video.mp4'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
@@ -3802,7 +3802,7 @@ paths:
                 )
                 
                 func main() {
-                    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                     // if you rather like to use the sandbox environment:
                     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                     req := apivideosdk.LiveStreamsApiListRequest{}
@@ -3832,7 +3832,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const streamKey = '30087931-229e-42cf-b5f9-e91bcc1f7332'; // The unique stream key that allows you to stream videos.
                       const name = 'My Video'; // You can filter live streams by their name or a part of their name.
@@ -3883,7 +3883,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -4000,160 +4000,144 @@ paths:
         code-samples:
           - language: go
             code: |
-              //install the Go API client
-              //go get github.com/apivideo/api.video-go-client
-              package main
+              // First install the go client with go get github.com/apivideo/api.video-go-client
+              // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Create
+                                
+              // instantiate the client 
+              client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
 
-              import (
-                  "context"
-                  "fmt"
-                  "os"
-                  apivideosdk "github.com/apivideo/api.video-go-client"
-              )
+              liveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}
+              liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your live stream here.
+              liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
+              liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
+              liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
 
-              func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
-                  // if you rather like to use the sandbox environment:
-                  // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-                      
-                  liveStreamCreationPayload := *apivideosdk.NewLiveStreamCreationPayload("My Live Stream Video") // LiveStreamCreationPayload | 
+              res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
-                  
-                  res, err := client.LiveStreams.Create(liveStreamCreationPayload)
-
-                  if err != nil {
-                      fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\
-              ", err)
-                  }
-                  // response from `Create`: LiveStream
-                  fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\
-              ", res)
+              if err != nil {
+                  fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v", err)
               }
+
+              fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v", res)
           - language: node
             code: |
-              //install the module with npm or yarn
-              //npm install @api.video/nodejs-client --save
-              //yarn add @api.video/nodejs-client
-              (async () => {
-                  try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+              // First install the "@api.video/nodejs-client" npm package
+              // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#create
 
-                      const liveStreamCreationPayload = {
-                    name: "My Live Stream Video", // Add a name for your live stream here.
-                    record: true, // Whether you are recording or not. True for record, false for not record.
-                    _public: true, // BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-                    playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
-                  }; 
+              // instantiate the client 
+              const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
-                      // LiveStream
-                      const result = await client.liveStreams.create(liveStreamCreationPayload);
-                      console.log(result);
-                  } catch (e) {
-                      console.error(e);
-                  }
-              })();
+              const liveStreamCreationPayload = {
+                  record: false, // Whether you are recording or not. True for record, false for not record.
+                  name: "My Live Stream", // Add a name for your live stream here.
+                  _public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. 
+                  playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
+              }; 
+
+              const liveStream = await client.liveStreams.create(liveStreamCreationPayload);
           - language: python
             code: |
-              #install the api.video API client library
-              #pip install api.video
-              import apivideo
-              from apivideo.api import live_streams_api
-              from apivideo.model.bad_request import BadRequest
-              from apivideo.model.live_stream_creation_payload import LiveStreamCreationPayload
-              from apivideo.model.live_stream import LiveStream
-              from pprint import pprint
+              # First install the api client with "pip install api.video"
+              # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#create
 
-              # Enter a context with an instance of the API client
-              with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
-                  # Create an instance of the API class
-                  api_instance = live_streams_api.LiveStreamsApi(api_client)
+              from apivideo.api.live_streams_api import LiveStreamsApi
+              from apivideo.model.live_stream_creation_payload import LiveStreamCreationPayload
+              from apivideo import AuthenticatedApiClient, ApiException
+
+              with AuthenticatedApiClient("YOUR_API_KEY") as api_client:
                   live_stream_creation_payload = LiveStreamCreationPayload(
+                      record=False,
                       name="My Live Stream Video",
-                      record=True,
                       public=True,
                       player_id="pl4f4ferf5erfr5zed4fsdd",
-                  ) # LiveStreamCreationPayload | 
+                  ) 
 
-                  # example passing only required values which don't have defaults set
                   try:
-                      # Create live stream
-                      api_response = api_instance.create(live_stream_creation_payload)
-                      pprint(api_response)
-                  except apivideo.ApiException as e:
-                      print("Exception when calling LiveStreamsApi->create: %s\
-              " % e)
+                      live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)
+                      print(live_stream)
+                  except ApiException as e:
+                      print("Exception when calling LiveStreamsApi->create: %s" % e)
           - language: java
-            code: |
-              //dependency addition instructions
-              //https://github.com/apivideo/api.video-java-client
-              // Import classes:
-              import video.api.client.ApiVideoClient;
-              import video.api.client.api.ApiException;
-              import video.api.client.api.models.*;
-              import video.api.client.api.clients.LiveStreamsApi;
-              import java.util.*;
+            code: |+
+              // First add the "video.api:java-api-client" maven dependency to your project
+              // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#create
+                                
+              // instantiate the client 
+              ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
 
-              public class Example {
-                public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
-                  // if you rather like to use the sandbox environment:
-                  // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
-
-                  LiveStreamsApi apiInstance = client.liveStreams();
-                  
-                  LiveStreamCreationPayload liveStreamCreationPayload = new LiveStreamCreationPayload(); // 
-                  liveStreamCreationPayload.setName("My Live Stream Video"); // Add a name for your live stream here.
-                  liveStreamCreationPayload.setRecord(true); // Whether you are recording or not. True for record, false for not record.
-                  liveStreamCreationPayload.setPublic(); // BETA FEATURE Please limit all public &#x3D; false (&quot;private&quot;) livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-                  liveStreamCreationPayload.setPlayerId("pl4f4ferf5erfr5zed4fsdd"); // The unique identifier for the player.
+              LiveStreamCreationPayload liveStreamCreationPayload = new LiveStreamCreationPayload(); 
+              liveStreamCreationPayload.setRecord(true); // Whether you are recording or not. True for record, false for not record.
+              liveStreamCreationPayload.setName("My Live Stream Video"); // Add a name for your live stream here.
+              liveStreamCreationPayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it.
+              liveStreamCreationPayload.setPlayerId("pl4f4ferf5erfr5zed4fsdd"); // The unique identifier for the player.
 
 
-                  try {
-                    LiveStream result = apiInstance.create(liveStreamCreationPayload);
-                    System.out.println(result);
-                  } catch (ApiException e) {
-                    System.err.println("Exception when calling LiveStreamsApi#create");
-                    System.err.println("Status code: " + e.getCode());
-                    System.err.println("Reason: " + e.getMessage());
-                    System.err.println("Response headers: " + e.getResponseHeaders());
-                    e.printStackTrace();
-                  }
-                }
+              try {
+                LiveStream liveStream = client.liveStreams().create(liveStreamCreationPayload);
+                System.out.println(liveStream);
+              } catch (ApiException e) {
+                e.printStackTrace();
               }
           - language: csharp
-            code: |
-              //install via Nuget
-              //Install-Package ApiVideo
-              using System.Diagnostics;
-              using ApiVideo.Client;
-
-              namespace Example
+            code: |+
+              // First add the "ApiVideo" NuGet package to your project
+              // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#create
+                                
+              var apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
+              
+              var liveStreamCreationPayload = new LiveStreamCreationPayload()
               {
-                  public class createExample
-                  {
-                      public static void Main()
-                      {
-                          var basePath = ApiVideoClient.Client.Environment.SANDBOX;
-                          var apiKey = "YOUR_API_KEY";
+                  record = false,
+                  name = "My Live Stream Video",
+                  _public = true,
+                  playerid = "pl4f4ferf5erfr5zed4fsdd",
+              };
+              
+              try
+              {
+                  var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);
+              }
+              catch (ApiException e)
+              {
+                  // Manage create error here
+              }
+          - language: php
+            code: |
+              // First install the api client: "composer require api-video/php-api-client"
+              // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#create
 
-                          var apiInstance = new ApiVideoClient(apiKey,basePath);
+              // instantiate the client 
+              $client = new \ApiVideo\Client\Client(
+                  'https://ws.api.video',
+                  'YOUR_API_KEY',
+                  new \Symfony\Component\HttpClient\Psr18Client()
+              );
 
-                          var liveStreamCreationPayload = new LiveStreamCreationPayload(); // LiveStreamCreationPayload | 
-                          var apiLiveStreamsInstance = apiInstance.LiveStreams();
-                          try
-                          {
-                              // Create live stream
-                              LiveStream result = apiLiveStreamsInstance.create(liveStreamCreationPayload);
-                              Debug.WriteLine(result);
-                          }
-                          catch (ApiException  e)
-                          {
-                              Debug.Print("Exception when calling LiveStreamsApi.create: " + e.Message );
-                              Debug.Print("Status Code: "+ e.ErrorCode);
-                              Debug.Print(e.StackTrace);
-                          }
-                      }
-                  }
+              $liveStream = $client->liveStreams()->create((new \ApiVideo\Client\Model\LiveStreamCreationPayload())
+                  ->setRecord(false)
+                  ->setName("My Live Stream Video")
+                  ->setPublic(true)
+                  ->setPlayerId("pl4f4ferf5erfr5zed4fsdd"));
+          - language: swift
+            code: |
+              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#create
+              
+              ApiVideoClient.apiKey = "YOUR_API_KEY"
+
+              let liveStreamCreationPayload = LiveStreamCreationPayload(
+                  name: "My Live Stream Video",
+                  record: false,
+                  _public: true,
+                  playerId: "pl4f4ferf5erfr5zed4fsdd")
+    
+              LiveStreamsAPI.create(liveStreamCreationPayload: liveStreamCreationPayload) { liveStream, error in
+                 if let liveStream = liveStream  {
+                     // Do something with the livestream
+                 }
+                 if let error = error {
+                    // Manage create error here
+                 }
               }
   /live-streams/{liveStreamId}:
     get:
@@ -4214,7 +4198,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -4238,7 +4222,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to watch.
 
@@ -4284,7 +4268,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -4317,7 +4301,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -4409,7 +4393,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -4430,7 +4414,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to remove.
 
@@ -4474,7 +4458,7 @@ paths:
                 
                 public class Example {
                   public static void main(String[] args) {
-                    ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                    ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                     // if you rather like to use the sandbox environment:
                     // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
                 
@@ -4597,7 +4581,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -4622,7 +4606,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
                       const liveStreamUpdatePayload = {
@@ -4683,7 +4667,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -4821,7 +4805,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -4849,7 +4833,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique ID for the live stream you want to upload.
                       const file = 'BINARY_DATA_HERE'; // The image to be added as a thumbnail.
@@ -4899,7 +4883,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -5011,7 +4995,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -5035,7 +5019,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique identifier for the live stream you want to delete. 
 
@@ -5083,7 +5067,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -5205,7 +5189,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -5230,7 +5214,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want captions for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -5279,7 +5263,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -5414,7 +5398,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -5443,7 +5427,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to add a caption to.
                       const language = 'en'; // A valid BCP 47 language representation.
@@ -5495,7 +5479,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -5606,7 +5590,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -5628,7 +5612,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklgc'; // The unique identifier for the video you want to delete a caption from.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -5675,7 +5659,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -5822,7 +5806,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -5848,7 +5832,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to have automatic captions for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -5906,7 +5890,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -6045,7 +6029,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -6070,7 +6054,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want captions for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -6119,7 +6103,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -6240,7 +6224,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -6265,7 +6249,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to show a chapter for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -6314,7 +6298,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -6446,7 +6430,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -6475,7 +6459,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to upload a chapter for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -6527,7 +6511,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -6638,7 +6622,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -6660,7 +6644,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to delete a chapter from.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -6707,7 +6691,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -6838,7 +6822,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -6863,7 +6847,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to show a chapter for.
                       const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -6912,7 +6896,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -7112,7 +7096,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                   req := apivideosdk.PlayerThemesApiListRequest{}
@@ -7140,7 +7124,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const sortBy = 'createdAt'; // createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
                       const sortOrder = 'asc'; // Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones.
@@ -7194,7 +7178,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -7319,7 +7303,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -7343,7 +7327,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerThemeCreationPayload = {
                     text: "text_example", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
@@ -7421,7 +7405,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -7568,7 +7552,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -7592,7 +7576,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player you want to retrieve. 
 
@@ -7640,7 +7624,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -7746,7 +7730,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -7767,7 +7751,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player you want to delete.
 
@@ -7812,7 +7796,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -7947,7 +7931,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -7972,7 +7956,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player.
                       const playerThemeUpdatePayload = {
@@ -8053,7 +8037,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -8200,7 +8184,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -8229,7 +8213,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerId = 'pl14Db6oMJRH6SRVoOwORacK'; // The unique identifier for the player.
                       const file = 'BINARY_DATA_HERE'; // The name of the file you want to use for your logo.
@@ -8290,7 +8274,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -8399,7 +8383,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -8420,7 +8404,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const playerId = 'pl14Db6oMJRH6SRVoOwORacK'; // The unique identifier for the player.
 
@@ -8465,7 +8449,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -8647,7 +8631,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                   req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}
@@ -8676,7 +8660,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to retrieve session information for.
                       const period = 'period_example'; // Period must have one of the following formats:  - For a day : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 - For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15 
@@ -8742,7 +8726,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -8927,7 +8911,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                   req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}
@@ -8955,7 +8939,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the live stream you want to retrieve analytics for.
                       const period = '2019-01-01'; // Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15" 
@@ -9017,7 +9001,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -9241,7 +9225,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                   req := apivideosdk.RawStatisticsApiListSessionEventsRequest{}
@@ -9268,7 +9252,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const sessionId = 'psEmFwGQUAXR2lFHj5nDOpy'; // A unique identifier you can use to reference and track a session with.
                       const currentPage = '2'; // Choose the number of search results to return per page. Minimum value: 1
@@ -9328,7 +9312,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -9465,7 +9449,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                   req := apivideosdk.WebhooksApiListRequest{}
@@ -9492,7 +9476,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const events = 'video.encoding.quality.completed'; // The webhook event that you wish to filter on.
                       const currentPage = '2'; // Choose the number of search results to return per page. Minimum value: 1
@@ -9543,7 +9527,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -9680,7 +9664,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -9704,7 +9688,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const webhooksCreationPayload = {
                     events: ["video.encoding.quality.completed"], // A list of the webhooks that you are subscribing to. There are Currently four webhook options: * ```video.encoding.quality.completed```  Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ "type": "video.encoding.quality.completed", "emittedAt": "2021-01-29T16:46:25.217+01:00", "videoId": "viXXXXXXXX", "encoding": "hls", "quality": "720p"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a lives tream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  Occurs when a live stream is recorded and submitted for encoding.
@@ -9759,7 +9743,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -9867,7 +9851,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -9891,7 +9875,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const webhookId = 'webhookId_example'; // The unique webhook you wish to retreive details on.
 
@@ -9937,7 +9921,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
@@ -10042,7 +10026,7 @@ paths:
               )
 
               func main() {
-                  client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+                  client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
                       
@@ -10063,7 +10047,7 @@ paths:
               //yarn add @api.video/nodejs-client
               (async () => {
                   try {
-                      const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+                      const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
                       const webhookId = 'webhookId_example'; // The webhook you wish to delete.
 
@@ -10108,7 +10092,7 @@ paths:
 
               public class Example {
                 public static void main(String[] args) {
-                  ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+                  ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                   // if you rather like to use the sandbox environment:
                   // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", ApiVideoClient.Environment.SANDBOX);
 
