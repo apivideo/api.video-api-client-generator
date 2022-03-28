@@ -19,7 +19,7 @@
   - [API Endpoints](#api-endpoints){{#apiInfo}}{{#apis}}{{^x-client-hidden}}    - [{{classname}}](#{{#lower}}{{classname}}{{/lower}}){{/x-client-hidden}}
 {{/apis}}{{/apiInfo}}  - [Models](#models)
   - [Authorization](#authorization)
-    - [API token](#api-token)
+    - [API key](#api-key)
     - [Public endpoints](#public-endpoints)
   - [Recommendation](#recommendation)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
@@ -160,7 +160,7 @@ All URIs are relative to *{{{basePath}}}*
 
 #### Retrieve an instance of {{classname}}:
 ```java
-ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
 {{classname}} {{classVarName}} = client.{{# lambda.titlecase }}{{classVarName}}{{/ lambda.titlecase }}()
 ```
 
@@ -179,17 +179,17 @@ Method | HTTP request | Description
 
 ## Authorization
 
-### API token
+### API key
 
-Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
-The access token generation mechanism is automatically handled by the client. All you have to do is provide an API token when instantiating the ApiVideoClient:
+Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key when instantiating the ApiVideoClient:
 ```java
-ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
 ```
 
 ### Public endpoints
 
-Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API token:
+Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API key:
 ```java
 ApiVideoClient apiVideoClient = new ApiVideoClient();
 ```

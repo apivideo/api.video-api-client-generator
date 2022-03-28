@@ -21,7 +21,7 @@
   - [API Endpoints](#api-endpoints){{#apiInfo}}{{#apis}}{{^x-client-hidden}}    - [{{classname}}](#{{#lower}}{{classname}}{{/lower}}){{/x-client-hidden}}
 {{/apis}}{{/apiInfo}}  - [Models](#models)
   - [Authorization](#documentation-for-authorization)
-    - [API token](#api-token)
+    - [API key](#api-key)
     - [Public endpoints](#public-endpoints)
   - [Recommendation](#recommendation)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
@@ -89,9 +89,9 @@ import {{{invokerPackage}}}.models.*;
 
 public class Example {
   public static void main(String[] args) {
-    ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+    ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient apiVideoClient = new ApiVideoClient("YOU_SANDBOX_API_TOKEN", Environment.SANDBOX);
+    // ApiVideoClient apiVideoClient = new ApiVideoClient("YOU_SANDBOX_API_KEY", Environment.SANDBOX);
 
     File myVideoFile = new File("my-video.mp4");
 
@@ -135,9 +135,9 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val apiVideoClient = ApiVideoClient("YOUR_API_TOKEN")
+        val apiVideoClient = ApiVideoClient("YOUR_API_KEY")
         // if you rather like to use the sandbox environment:
-        // val apiVideoClient = ApiVideoClient("YOU_SANDBOX_API_TOKEN", Environment.SANDBOX)
+        // val apiVideoClient = ApiVideoClient("YOU_SANDBOX_API_KEY", Environment.SANDBOX)
 
         val myVideoFile = File("my-video.mp4")
 
@@ -189,10 +189,10 @@ class MainActivity : AppCompatActivity() {
         val videoApi = VideosApi()
         // if you rather like to use the sandbox environment:
         // val videoApi = VideosApi(Environment.SANDBOX)
-        // If you rather like to upload with your "YOUR_API_TOKEN" (upload)
-        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION.basePath)
+        // If you rather like to upload with your "YOUR_API_KEY" (upload)
+        // val videoApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION.basePath)
         // if you rather like to use the sandbox environment:
-        // val videoApi = VideosApi("YOUR_API_TOKEN", Environment.SANDBOX.basePath)
+        // val videoApi = VideosApi("YOUR_API_KEY", Environment.SANDBOX.basePath)
 
         
         val myVideoFile = File("my-video.mp4")
@@ -254,20 +254,20 @@ All URIs are relative to *{{basePath}}*
 #### Retrieve an instance of {{classname}}:
 {{^android}}
 ```java
-ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
 {{classname}} {{classVarName}} = client.{{classVarName}}()
 ```
 {{/android}}
 {{#android}}
 {{#client}}
 ```kotlin
-val client = ApiVideoClient("YOUR_API_TOKEN")
+val client = ApiVideoClient("YOUR_API_KEY")
 val {{classVarName}} = client.{{classVarName}}()
 ```
 {{/client}}
 {{#uploader}}
 ```kotlin
-val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
+val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 ```
 {{/uploader}}
 {{/android}}
@@ -289,31 +289,31 @@ Method | HTTP request | Description
 
 ## Documentation for Authorization
 
-### API token
+### API key
 
-Most endpoints required to be authenticated using the API token mechanism described in our [documentation](https://docs.api.video/reference#authentication).
-The access token generation mechanism is automatically handled by the client. All you have to do is provide an API token when instantiating the ApiVideoClient:
+Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key when instantiating the ApiVideoClient:
 {{^android}}
 ```java
-ApiVideoClient client = new ApiVideoClient("YOUR_API_TOKEN");
+ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
 ```
 {{/android}}
 {{#android}}
 {{#client}}
 ```kotlin
-val client = ApiVideoClient("YOUR_API_TOKEN")
+val client = ApiVideoClient("YOUR_API_KEY")
 ```
 {{/client}}
 {{#uploader}}
 ```kotlin
-val videosApi = VideosApi("YOUR_API_TOKEN", Environment.PRODUCTION)
+val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 ```
 {{/uploader}}
 {{/android}}
 
 ### Public endpoints
 
-Some endpoints don't require authentication. These one can be called with a client instantiated without API token:
+Some endpoints don't require authentication. These one can be called with a client instantiated without API key:
 {{^android}}
 ```java
 ApiVideoClient client = new ApiVideoClient();

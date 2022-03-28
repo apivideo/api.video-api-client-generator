@@ -1,5 +1,7 @@
 package video.api.client.generator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.samskivert.mustache.Mustache;
+import com.samskivert.mustache.Template;
 import io.swagger.util.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
@@ -13,6 +15,7 @@ import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -36,6 +39,17 @@ public class Csharp extends CSharpClientCodegen {
         this.modelTestTemplateFiles.remove("model_test.mustache");
     }
 
+    public static class MultilineComments implements Mustache.Lambda {
+        @Override
+        public void execute(Template.Fragment fragment, Writer writer) throws IOException {
+            String text = fragment.execute();
+            writer.write(text
+                    .replaceAll("\n", "\n        /// ")
+                    .replaceAll("\r", "\r        /// "));
+        }
+    }
+
+
     @Override
     public void processOpts() {
         super.processOpts();
@@ -48,6 +62,7 @@ public class Csharp extends CSharpClientCodegen {
         additionalProperties.put("indented_16", new IndentedLambda(16, " "));
         additionalProperties.put("titlecase", new TitlecaseLambda());
         additionalProperties.put("lower", new LowercaseLambda());
+        additionalProperties.put("multiline_comment", new MultilineComments());
 
         List<String> skippedFiles = Arrays.asList(
                 "ExceptionFactory.mustache",

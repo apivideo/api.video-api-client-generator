@@ -36,7 +36,7 @@ import video.api.integration.utils.Utils;
 
 @DisplayName("Integration tests of api.videos() methods")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@EnabledIfEnvironmentVariable(named = "INTEGRATION_TESTS_API_TOKEN", matches = ".+")
+@EnabledIfEnvironmentVariable(named = "INTEGRATION_TESTS_API_KEY", matches = ".+")
 public class VideosTest {
 
     final ApiVideoClient apiClient;

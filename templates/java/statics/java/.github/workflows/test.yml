@@ -17,4 +17,4 @@ jobs:
         run: |
           mvn package test
         env:
-          INTEGRATION_TESTS_API_TOKEN: ${{ secrets.INTEGRATION_TESTS_API_TOKEN }}
+          INTEGRATION_TESTS_API_KEY: ${{ secrets.INTEGRATION_TESTS_API_TOKEN }}

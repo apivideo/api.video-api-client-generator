@@ -10,7 +10,7 @@ internal class UploadTestCase: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_TOKEN", "Can't get API key")
+        try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
         ApiVideoClient.apiKey = Parameters.apiKey
         ApiVideoClient.basePath = Environment.sandbox.rawValue
         try? ApiVideoClient.setApplicationName(applicationName: "client-integration-tests", applicationVersion: nil)
@@ -125,7 +125,7 @@ internal class UploadWithTokenTestCase: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_TOKEN", "Can't get API key")
+        try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
         ApiVideoClient.apiKey = Parameters.apiKey
         ApiVideoClient.basePath = Environment.sandbox.rawValue
 

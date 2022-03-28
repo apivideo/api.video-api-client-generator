@@ -71,7 +71,7 @@ require __DIR__ . '/vendor/autoload.php';
 $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
 $client = new \ApiVideo\Client\Client(
     'https://sandbox.api.video',
-    'YOUR_API_TOKEN',
+    'YOUR_API_KEY',
     $httpClient
 );
 ?>
@@ -136,7 +136,7 @@ Method | HTTP request | Description
 
 ## Authentication
 
-Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API token:
+Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API key:
 
 ```php
 <?php

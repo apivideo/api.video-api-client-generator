@@ -23,7 +23,7 @@ The `iterator()` method returns a `Iterator<Page<T>>` which allows to iterator o
 ## Example
 
 ```java
-ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_TOKEN");
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
 
 try {
     for (Page<Video> page : apiVideoClient.videos().list().execute()) {
