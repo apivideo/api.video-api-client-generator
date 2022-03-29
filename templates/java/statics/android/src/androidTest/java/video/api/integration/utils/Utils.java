@@ -27,7 +27,7 @@ public class Utils {
      */
     public static String getApiKey() throws IOException {
         String env = InstrumentationRegistry.getArguments().getString("environmentVariables");
-        String apiKey = env.replaceAll("INTEGRATION_TESTS_API_TOKEN=", "");
+        String apiKey = env.replaceAll("INTEGRATION_TESTS_API_KEY=", "");
         if (apiKey == "null") {
             throw new IOException("API Key not found");
         }

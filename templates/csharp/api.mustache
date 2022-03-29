@@ -40,7 +40,7 @@ namespace {{packageName}}.{{apiPackage}}
 
         {{#operation}}
         /// <summary>
-        /// {{summary}} {{notes}}
+        /// {{summary}} {{#multiline_comment}}{{notes}}{{/multiline_comment}}
         /// </summary>
         /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
         {{#allParams}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
@@ -57,7 +57,7 @@ namespace {{packageName}}.{{apiPackage}}
         }
 
         /// <summary>
-        /// {{summary}} {{notes}}
+        /// {{summary}} {{#multiline_comment}}{{notes}}{{/multiline_comment}}
         /// </summary>
         /// <exception cref="{{packageName}}.Client.ApiException">Thrown when fails to make API call</exception>
         {{#allParams}}/// <param name="{{paramName}}">{{description}}{{^required}} (optional{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/required}}</param>
@@ -390,7 +390,7 @@ namespace {{packageName}}.{{apiPackage}}
         
         {{#vendorExtensions.x-group-parameters}}
         /// <summary>
-        /// {{notes}}
+        /// {{#multiline_comment}}{{notes}}{{/multiline_comment}}
         /// </summary>{{#requiredParams}}
         /// <param name="{{paramName}}">{{description}} (required)</param>{{/requiredParams}}
         /// <returns>API{{operationId}}Request</returns>

@@ -48,9 +48,9 @@ import (
 )
 
 func main() {
-    client := {{packageName}}.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := {{packageName}}.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     {{#vendorExtensions.x-group-parameters}}req := {{packageName}}.{{#structPrefix}}{{&classname}}{{/structPrefix}}Api{{operationId}}Request{}
     {{/vendorExtensions.x-group-parameters}}
     {{#vendorExtensions.x-group-parameters}}{{#allParams}}

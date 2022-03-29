@@ -38,6 +38,11 @@ public class Common {
                     }
                 }
 
+                if(operation.notes != null) {
+                    operation.notes = operation.notes.replaceAll("\n", "\n\n");
+                    operation.unescapedNotes = operation.unescapedNotes.replaceAll("\n", "\n\n");
+                }
+
                 if (operation.vendorExtensions.containsKey("x-readme")) {
                     Map<String, List> xReadme = (Map<String, List>) operation.vendorExtensions.get("x-readme");
                     if (xReadme.containsKey("code-samples")) {
@@ -55,7 +60,10 @@ public class Common {
                                 }
                                 toSkip++;
                             }
-                            operation.vendorExtensions.put("code-sample", String.join("\n", Arrays.asList(lines).subList(toSkip, lines.length)));
+
+                            if(!Arrays.stream(lines).map(String::trim).allMatch(l -> l.startsWith("//") || l.startsWith("#") || l.length() == 0 )) {
+                                operation.vendorExtensions.put("code-sample", String.join("\n", Arrays.asList(lines).subList(toSkip, lines.length)));
+                            }
 
                         });
                     }

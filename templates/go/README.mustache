@@ -43,10 +43,10 @@ import (
 
 func main() {
     //Connect to production environment
-    client := {{packageName}}.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := {{packageName}}.ClientBuilder("YOUR_API_KEY").Build()
 
     // if you rather like to use the sandbox environment:
-    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
 
 
     //List Videos
