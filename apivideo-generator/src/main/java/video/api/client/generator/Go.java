@@ -52,6 +52,8 @@ public class Go extends GoClientCodegen {
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
+            ops.sort(Common.getCodegenOperationComparator());
+
             // if all operations of a path have x-client-hidden, add x-client-hidden on the path
             if(ops.stream().allMatch(op -> Boolean.TRUE.equals(op.vendorExtensions.get(VENDOR_X_CLIENT_HIDDEN)))) {
                 objs.put(VENDOR_X_CLIENT_HIDDEN, true);

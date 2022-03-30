@@ -146,6 +146,7 @@ public class Php extends AbstractPhpCodegen {
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
+            ops.sort(Common.getCodegenOperationComparator());
 
             for (CodegenOperation operation : ops) {
                 operation.vendorExtensions.put("x-client-copy-from-response", operation.allParams.stream()

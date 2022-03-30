@@ -44,6 +44,8 @@ public class Java extends JavaClientCodegen {
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
+            ops.sort(Common.getCodegenOperationComparator());
+
             if (ops.stream().allMatch(op -> Boolean.TRUE.equals(op.vendorExtensions.get("x-client-hidden")))) {
                 objs.put("x-client-hidden", true);
             }

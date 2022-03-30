@@ -106,26 +106,15 @@ $client->videos()->upload(
 
 ## API Endpoints
 
-All URIs are relative to `{{basePath}}`.
-
 {{#apiInfo}}
 {{#apis}}
 {{^x-client-hidden}}
 
 ### {{classname}}
 
-#### Retrieve an instance of {{classname}}
-
-```php
-// The $client must already be initialized
-${{classVarName}} = $client->{{classVarName}}();
-```
-
-#### Endpoints
-
-Method | HTTP request | Description
+Method | Description | HTTP request
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}**]({{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}()**]({{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** `{{path}}`
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 

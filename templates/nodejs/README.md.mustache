@@ -85,9 +85,9 @@ const ApiVideoClient = require('@api.video/nodejs-client');
 
 ### {{classname}}
 
-Method | HTTP request | Description
+Method | Description | HTTP request
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}()**]({{apiDocFileFolder}}/{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}()**]({{apiDocFileFolder}}/{{classname}}.md#{{operationId}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** {{path}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
