@@ -248,6 +248,7 @@ public class TypeScript extends DefaultCodegen {
         if (operations != null) {
             List<CodegenOperation> ops = (List<CodegenOperation>) operations.get("operation");
 
+            ops.sort(Common.getCodegenOperationComparator());
 
             if (ops.stream().anyMatch(o -> o.vendorExtensions.containsKey("x-client-chunk-upload"))) {
                 List<Map<String, Object>> imports = (List<Map<String, Object>>) objs.get("imports");

@@ -4,48 +4,41 @@
 
 All URIs are relative to {{basePath}}.
 
-Method | HTTP request | Description
+Method | Description | HTTP request
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}[**{{vendorExtensions.x-client-action}}()**]({{classname}}.md#{{vendorExtensions.x-client-action}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}[**{{vendorExtensions.x-client-action}}()**]({{classname}}.md#{{vendorExtensions.x-client-action}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** `{{path}}`
 {{/operation}}{{/operations}}{{#operations}}{{#operation}}
 
-## {{vendorExtensions.x-client-action}}()
+## **`{{vendorExtensions.x-client-action}}()` - {{summary}}**
 
-{{#notes}}
+{{#unescape}}{{#unescapedNotes}}
 
-{{{notes}}}{{/notes}}
-
-{{#vendorExtensions.code-sample}}
-### Example
-
-```php
-{{#unescape}}{{this}}{{/unescape}}
-```
-{{/vendorExtensions.code-sample}}
+{{unescapedNotes}}{{/unescapedNotes}}{{/unescape}}
 
 ### Arguments
 
 {{#vendorExtensions.x-group-parameters}}
 
-{{#allParams}}{{#-first}}{{^isQueryParam}}Name | Type | Description  | Example | Notes
-------------- | ------------- | ------------- | ------------- | -------------{{/isQueryParam}}{{/-first}}{{/allParams}}
-{{#allParams}}{{^isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{#allParams}}{{#-first}}{{^isQueryParam}}Name | Type | Description | Notes
+------------- | ------------- | ------------- | ------------- {{/isQueryParam}}{{/-first}}{{/allParams}}
+{{#allParams}}{{^isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+`queryParams` | array | (see below) |
 {{/isQueryParam}}{{/allParams}}
 
-Note: `$queryParams` argument is an associative array with the keys listed below.
+Note: `queryParams` argument is an associative array with the keys listed below.
 
-{{#allParams}}{{#-last}}Name | Type | Description  | Example | Notes
-------------- | ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
-{{#allParams}}{{#isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{#allParams}}{{#-last}}Name | Type | Description | Notes
+------------- | ------------- | ------------- | ------------- {{/-last}}{{/allParams}}
+{{#allParams}}{{#isQueryParam}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
 {{/isQueryParam}}{{/allParams}}
 
 {{/vendorExtensions.x-group-parameters}}
 
 {{^vendorExtensions.x-group-parameters}}
 
-{{#allParams}}{{#-last}}Name | Type | Description  | Example | Notes
-------------- | ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
-{{#allParams}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{#isFile}}`new \SplFileObject('path')`{{/isFile}}{{^isFile}}`{{{example}}}`{{/isFile}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
+{{#allParams}}{{#-last}}Name | Type | Description | Notes
+------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
+{{#allParams}} `{{paramName}}` | {{#isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{{dataType}}}**](../Model/{{baseType}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} |{{^required}} [optional]{{/required}}{{#defaultValue}} [default to {{defaultValue}}]{{/defaultValue}}
 {{/allParams}}
 
 {{/vendorExtensions.x-group-parameters}}
@@ -55,6 +48,14 @@ Note: `$queryParams` argument is an associative array with the keys listed below
 ### Return type
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**](../Model/{{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
+
+{{#vendorExtensions.code-sample}}
+### Example
+
+```php
+{{#unescape}}{{this}}{{/unescape}}
+```
+{{/vendorExtensions.code-sample}}
 
 
 {{/operation}}{{/operations}}
