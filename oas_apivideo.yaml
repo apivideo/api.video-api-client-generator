@@ -2336,7 +2336,7 @@ paths:
             code: |-
               <?php
               // First install the api client: "composer require api-video/php-api-client"
-              // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus
+              // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#get
 
               require __DIR__ . '/vendor/autoload.php';
 
@@ -2346,8 +2346,8 @@ paths:
                   new \Symfony\Component\HttpClient\Psr18Client()
               );
 
-              $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want the status for.
-              $videoStatus = $client->videos()->getStatus($videoId);  
+              $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want details about.
+              $videoStatus = $client->videos()->get($videoId);
           - language: swift
             code: |+
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -12592,6 +12592,7 @@ components:
         filesize:
           type: integer
           description: The size of your file in bytes.
+          nullable: true
           example: 200000
         receivedBytes:
           type: array
@@ -12620,29 +12621,37 @@ components:
         width:
           type: integer
           description: The width of the video in pixels.
+          nullable: true
         height:
           type: integer
           description: The height of the video in pixels.
+          nullable: true
         bitrate:
           type: number
           description: The number of bits processed per second.
+          nullable: true
         duration:
           type: integer
           description: The length of the video.
+          nullable: true
         framerate:
           type: integer
           description: The frequency with which consecutive images or frames appear on a display. Shown in this API as frames per second (fps).
+          nullable: true
           example: 60
         samplerate:
           type: integer
           description: How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz.
+          nullable: true
           example: 48000
         videoCodec:
           type: string
           description: 'The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library. '
+          nullable: true
         audioCodec:
           type: string
           description: The method used to compress and decompress digital audio for your video.
+          nullable: true
         aspectRatio:
           nullable: true
           type: string
