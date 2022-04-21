@@ -87,7 +87,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("2019-12-16T08:25:51.000Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -220,7 +219,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("2019-12-16T08:25:51.000Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source");
             res.assets.Should().NotBeNull();
@@ -289,7 +287,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("2019-12-16T08:25:51.000Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -377,7 +374,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -445,7 +441,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -513,7 +508,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -568,7 +562,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("4665-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
@@ -649,7 +642,6 @@ namespace VideoApiTests.Client
             res.mp4support.Should().BeTrue();
             res.tags.Should().BeEquivalentTo(new List<string>() { "maths", "string theory", "video" });
             res.metadata.Should().BeEquivalentTo(new List<Metadata>() { new Metadata() { key = "Author", value = "John Doe" }, new Metadata() { key = "Format", value = "Tutorial" } });
-            res.publishedat.Should().Be("2020-07-14T23:36:18.598Z");
             res.source.Should().NotBeNull();
             res.source.uri.Should().Be("/videos/vi4blUQJFrYWbaG44NChkH27/source");
             res.assets.Should().NotBeNull();
