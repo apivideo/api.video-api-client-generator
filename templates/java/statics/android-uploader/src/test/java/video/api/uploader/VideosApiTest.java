@@ -65,7 +65,6 @@ public class VideosApiTest extends AbstractApiTest {
                     .containsExactlyElementsIn(
                             Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")))
                     .inOrder();
-            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598Z");
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
                     .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
@@ -113,7 +112,6 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getMetadata())
                     .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
 
-            assertThat(res.getPublishedAt()).isEqualTo("4665-07-14T23:36:18.598+00:00");
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
