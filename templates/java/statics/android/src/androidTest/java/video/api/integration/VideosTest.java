@@ -43,6 +43,7 @@ public class VideosTest {
 
     public VideosTest() throws IOException {
         this.apiClient = new ApiVideoClient(Utils.getApiKey(), Environment.SANDBOX);
+        this.apiClient.setApplicationName("client-integration-tests");
     }
 
     @Nested
