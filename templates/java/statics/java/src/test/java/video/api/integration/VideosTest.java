@@ -189,6 +189,50 @@ public class VideosTest extends AbstractTest {
     }
 
     @Nested
+    @DisplayName("upload without chunk with upload token")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class UploadWithUploadToken {
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Java-SDK-tests] upload without chunk with upload token"));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File mp4File = new File(this.getClass().getResource("/assets/558k.mp4").getFile());
+
+            long fileSize = mp4File.length();
+            long chunkSize = apiClient.getHttpClient().getUploadChunkSize();
+
+            AtomicLong totalUploadedAtomic = new AtomicLong(0);
+            AtomicLong totalBytesAtomic = new AtomicLong(0);
+            AtomicLong chunkCountAtomic = new AtomicLong(0);
+            HashSet<Integer> seenChunkNums = new HashSet<>();
+
+            apiClient.videos().uploadWithUploadToken(testVideo.getVideoId(), mp4File,
+                    (bytesWritten, totalBytes, chunkCount, chunkNum) -> {
+                        totalUploadedAtomic.set(bytesWritten);
+                        totalBytesAtomic.set(totalBytes);
+                        chunkCountAtomic.set(chunkCount);
+                        seenChunkNums.add(chunkNum);
+                    });
+
+            assertThat(totalBytesAtomic.get()).isEqualTo(fileSize);
+            assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
+            assertThat(chunkCountAtomic.get()).isEqualTo(1);
+            assertThat(seenChunkNums).containsExactly(1);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
     @DisplayName("update")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class Update {
