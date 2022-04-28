@@ -51,7 +51,7 @@ public class {{projectName}} {
     }
 
 
-    public static func setApplicationName(applicationName: String, applicationVersion: String?) throws {
+    public static func setApplicationName(applicationName: String, applicationVersion: String? = nil) throws {
         if(applicationName.isEmpty) {
             if(applicationVersion != nil && !applicationVersion!.isEmpty) {
                 throw {{projectName}}Error.missingApplicationName
@@ -77,9 +77,9 @@ public class {{projectName}} {
                 throw {{projectName}}Error.invalidApplicationVersion
             }
             {{projectName}}.customHeaders["AV-Origin-App"] = applicationName + ":" + applicationVersion
-            return
+        } else {
+            {{projectName}}.customHeaders["AV-Origin-App"] = applicationName
         }
-        {{projectName}}.customHeaders["AV-Origin-App"] = applicationName
     }
 
     {{/useVapor}}
