@@ -369,11 +369,6 @@ extension {{projectName}}API {
      {{{.}}}{{/notes}}{{#subresourceOperation}}
      subresourceOperation: {{.}}{{/subresourceOperation}}{{#defaultResponse}}
      defaultResponse: {{.}}{{/defaultResponse}}
-     {{#authMethods}}
-     - {{#isBasic}}BASIC{{/isBasic}}{{#isOAuth}}OAuth{{/isOAuth}}{{#isApiKey}}API Key{{/isApiKey}}:
-       - type: {{type}}{{#keyParamName}} {{keyParamName}} {{#isKeyInQuery}}(QUERY){{/isKeyInQuery}}{{#isKeyInHeaer}}(HEADER){{/isKeyInHeaer}}{{/keyParamName}}
-       - name: {{name}}
-       {{/authMethods}}
      {{#hasResponseHeaders}}
      - responseHeaders: [{{#responseHeaders}}{{{baseName}}}({{{dataType}}}){{^-last}}, {{/-last}}{{/responseHeaders}}]
      {{/hasResponseHeaders}}
@@ -449,11 +444,6 @@ extension {{projectName}}API {
      {{{.}}}{{/notes}}{{#subresourceOperation}}
      subresourceOperation: {{.}}{{/subresourceOperation}}{{#defaultResponse}}
      defaultResponse: {{.}}{{/defaultResponse}}
-     {{#authMethods}}
-     - {{#isBasic}}BASIC{{/isBasic}}{{#isOAuth}}OAuth{{/isOAuth}}{{#isApiKey}}API Key{{/isApiKey}}:
-       - type: {{type}}{{#keyParamName}} {{keyParamName}} {{#isKeyInQuery}}(QUERY){{/isKeyInQuery}}{{#isKeyInHeaer}}(HEADER){{/isKeyInHeaer}}{{/keyParamName}}
-       - name: {{name}}
-       {{/authMethods}}
      {{#hasResponseHeaders}}
      - responseHeaders: [{{#responseHeaders}}{{{baseName}}}({{{dataType}}}){{^-last}}, {{/-last}}{{/responseHeaders}}]
      {{/hasResponseHeaders}}
@@ -494,11 +484,6 @@ extension {{projectName}}API {
      - {{{.}}}{{/notes}}{{#subresourceOperation}}
      - subresourceOperation: {{.}}{{/subresourceOperation}}{{#defaultResponse}}
      - defaultResponse: {{.}}{{/defaultResponse}}
-     {{#authMethods}}
-     - {{#isBasic}}BASIC{{/isBasic}}{{#isOAuth}}OAuth{{/isOAuth}}{{#isApiKey}}API Key{{/isApiKey}}:
-       - type: {{type}}{{#keyParamName}} {{keyParamName}} {{#isKeyInQuery}}(QUERY){{/isKeyInQuery}}{{#isKeyInHeaer}}(HEADER){{/isKeyInHeaer}}{{/keyParamName}}
-       - name: {{name}}
-       {{/authMethods}}
      {{#hasResponseHeaders}}
      - responseHeaders: [{{#responseHeaders}}{{{baseName}}}({{{dataType}}}){{^-last}}, {{/-last}}{{/responseHeaders}}]
      {{/hasResponseHeaders}}
@@ -574,11 +559,6 @@ extension {{projectName}}API {
      - {{{.}}}{{/notes}}{{#subresourceOperation}}
      - subresourceOperation: {{.}}{{/subresourceOperation}}{{#defaultResponse}}
      - defaultResponse: {{.}}{{/defaultResponse}}
-     {{#authMethods}}
-     - {{#isBasic}}BASIC{{/isBasic}}{{#isOAuth}}OAuth{{/isOAuth}}{{#isApiKey}}API Key{{/isApiKey}}:
-       - type: {{type}}{{#keyParamName}} {{keyParamName}} {{#isKeyInQuery}}(QUERY){{/isKeyInQuery}}{{#isKeyInHeaer}}(HEADER){{/isKeyInHeaer}}{{/keyParamName}}
-       - name: {{name}}
-       {{/authMethods}}
      {{#hasResponseHeaders}}
      - responseHeaders: [{{#responseHeaders}}{{{baseName}}}({{{dataType}}}){{^-last}}, {{/-last}}{{/responseHeaders}}]
      {{/hasResponseHeaders}}

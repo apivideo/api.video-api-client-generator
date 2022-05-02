@@ -92,7 +92,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
             
@@ -224,7 +224,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -292,7 +292,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -379,7 +379,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -446,7 +446,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -513,7 +513,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -567,7 +567,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }
@@ -647,7 +647,7 @@ namespace VideoApiTests.Client
             res.assets.Should().NotBeNull();
             res.assets.hls.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8");
             res.assets.iframe.Should().Be("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>");
-            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4");
+            res.assets.mp4.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4");
             res.assets.player.Should().Be("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27");
             res.assets.thumbnail.Should().Be("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg");
         }

@@ -84,7 +84,7 @@ public class Common {
                             String code = map.get("code");
                             String[] lines = code.split("\n");
 
-                            List<String> list = Arrays.stream(lines).filter(l -> !l.startsWith("// Documentation:")).collect(Collectors.toList());
+                            List<String> list = Arrays.stream(lines).filter(l -> !l.startsWith("// Documentation:") && !l.startsWith("# Documentation:")).collect(Collectors.toList());
 
                             int toSkip = 0;
                             for (String line : list) {
