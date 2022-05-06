@@ -8,6 +8,7 @@ import {
   openSync,
   read,
   closeSync,
+  ReadStream,
 } from 'fs';
 import { promisify } from 'util';
 import { URLSearchParams } from 'url';
@@ -18,6 +19,9 @@ import ProgressiveSession from '../model/ProgressiveSession';
 {{#imports}}
 import {{classname}} from '../model/{{classname}}';
 {{/imports}}
+import { Readable, Stream } from 'stream';
+import { Blob } from 'buffer';
+import { readableToBuffer } from "../HttpClient";
 {{#operations}}
 
 /**
@@ -71,6 +75,7 @@ export default class {{classname}} {
             {{#isFile}}
             {{#platforms}}
             {{#node}}
+
             if (!existsSync({{paramName}})) {
               throw new Error(`${ {{paramName}} } must be a readable source file`);
             }
@@ -199,7 +204,7 @@ export default class {{classname}} {
    * @param {{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
   {{/vendorExtensions.x-group-parameters}}
     const queryParams: QueryOptions = {};
     queryParams.headers = {};
@@ -213,6 +218,7 @@ export default class {{classname}} {
     {{#isFile}}
     {{#platforms}}
     {{#node}}
+    {{#vendorExtensions.x-client-chunk-upload}}
     if (!existsSync({{paramName}})) {
       throw new Error(`${ {{paramName}} } must be a readable source file`);
     }
@@ -221,6 +227,19 @@ export default class {{classname}} {
     if (length <= 0) {
       throw new Error(`${ {{paramName}} } is empty`);
     }
+    {{/vendorExtensions.x-client-chunk-upload}}
+    {{^vendorExtensions.x-client-chunk-upload}}
+    let {{paramName}}Name = 'file';
+    let {{paramName}}Buffer = {{paramName}};
+    if (typeof {{paramName}} === 'string') {
+        {{paramName}}Name = path.basename({{paramName}});
+        {{paramName}}Buffer = createReadStream({{paramName}});
+    }
+    if ({{paramName}} instanceof Readable) {
+        {{paramName}}Buffer = await readableToBuffer({{paramName}});
+    }
+
+    {{/vendorExtensions.x-client-chunk-upload}}
     {{/node}}
     {{/platforms}}
     {{/isFile}}
@@ -359,8 +378,6 @@ export default class {{classname}} {
           uploadChunkSize = length - offset;
         }
 
-        console.log(`Uploading ${offset}-${offset + uploadChunkSize}...`);
-
         const filename = path.basename({{paramName}});
         const chunkFormData = new FormData();
         stream = createReadStream(file, { start: offset, end: uploadChunkSize + offset - 1});
@@ -398,12 +415,7 @@ export default class {{classname}} {
       {{^vendorExtensions.x-client-chunk-upload}}
       {{#platforms}}
       {{#node}}
-      const filename = path.basename({{paramName}});
-      formData.append(
-        filename,
-        Buffer.isBuffer({{paramName}}) ? {{paramName}} : createReadStream({{paramName}}),
-        filename,
-      );
+      formData.append({{paramName}}Name, {{paramName}}Buffer, {{paramName}}Name);
       {{/node}}
       {{^node}}
       formData.append('{{baseName}}', {{paramName}}, {{paramName}}.name);
