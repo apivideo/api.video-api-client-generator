@@ -477,7 +477,7 @@ public class {{classname}} {
 
 
     public class {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession implements IProgressiveUploadSession {
-        private Integer part = 1;
+        private Integer partId = 1;
         {{#vendorExtensions.x-client-copy-from-response}}
         private {{dataType}} {{paramName}}; {{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
@@ -509,9 +509,22 @@ public class {{classname}} {
 
         @Override
         public Video uploadPart(File part, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
-            Integer lastPart = this.part;
-            this.part++;
-            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}lastPart, isLastPart, uploadProgressListener);
+            return uploadPart(part, this.partId++, isLastPart, uploadProgressListener);
+        }
+
+        @Override
+        public Video uploadPart(File part, Integer partId, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            return uploadPart(part, partId, false, uploadProgressListener);
+        }
+
+        @Override
+        public Video uploadLastPart(File part, Integer partId, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            return uploadPart(part, partId, true, uploadProgressListener);
+        }
+
+        @Override
+        public Video uploadPart(File part, Integer partId, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}partId, isLastPart, uploadProgressListener);
             {{#vendorExtensions.x-client-copy-from-response}}
             if(this.{{paramName}} == null) {
                 this.{{paramName}} = localVarResp.getData().{{vendorExtensions.getter}}();
