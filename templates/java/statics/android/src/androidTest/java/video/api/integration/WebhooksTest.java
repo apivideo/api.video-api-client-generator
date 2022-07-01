@@ -36,6 +36,7 @@ public class WebhooksTest {
 
     public WebhooksTest() throws IOException {
         this.apiClient = new ApiVideoClient(Utils.getApiKey(), Environment.SANDBOX);
+        this.apiClient.setApplicationName("client-integration-tests");
     }
 
     @Test
