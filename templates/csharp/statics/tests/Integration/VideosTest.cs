@@ -36,7 +36,7 @@ namespace VideoApiTests.Integration
         public void init()
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
-            this.apiClient.setApplicationName("client-integration-tests");
+            this.apiClient.setApplicationName("client-integration-tests", "0");
             this.uploadToken = this.apiClient.UploadTokens().createToken(new TokenCreationPayload());
         }
 
@@ -78,7 +78,7 @@ namespace VideoApiTests.Integration
         public void init()
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
-            this.apiClient.setApplicationName("client-integration-tests");
+            this.apiClient.setApplicationName("client-integration-tests", "0");
             this.testVideo = this.apiClient.Videos().create(new VideoCreationPayload() { title = "C# upload stream" });
         }
 
@@ -120,7 +120,7 @@ namespace VideoApiTests.Integration
         public void init()
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"));
-            this.apiClient.setApplicationName("client-integration-tests");
+            this.apiClient.setApplicationName("client-integration-tests", "0");
 
             VideoCreationPayload payload = new VideoCreationPayload();
             payload.title = "C# video update";
@@ -171,7 +171,7 @@ namespace VideoApiTests.Integration
         public void init()
         {
             this.apiClient = new ApiVideoClient(System.Environment.GetEnvironmentVariable("API_KEY"), ApiVideo.Client.Environment.SANDBOX);
-            this.apiClient.setApplicationName("client-integration-tests");
+            this.apiClient.setApplicationName("client-integration-tests", "0");
 
             this.testVideo = apiClient.Videos()
                     .create(new VideoCreationPayload() { title = "[C#-SDK-tests] sdk tests", _public = false});
