@@ -24,7 +24,7 @@ export default class HttpClient {
   private baseRequest: Got;
   private chunkSize: number;
 
-  constructor(params: { apiKey?: string; baseUri: string; chunkSize: number, applicationName?: string, applicationVersion?: string }) {
+  constructor(params: { apiKey?: string; baseUri: string; chunkSize: number, applicationName?: string, applicationVersion?: string; sdkName?: string; sdkVersion?: string; }) {
     this.apiKey = params.apiKey;
     this.baseUri = params.baseUri;
     this.chunkSize = params.chunkSize;
@@ -32,7 +32,16 @@ export default class HttpClient {
     this.headers = {
       Accept: 'application/json, */*;q=0.8',
       'AV-Origin-Client': 'nodejs:{{ npmVersion }}',
-      ...(params.applicationName ? { 'AV-Origin-App': `${params.applicationName}${params.applicationVersion ? ":"+params.applicationVersion:""}`} : {}),
+      ...(params.applicationName && params.applicationVersion
+        ? {
+            'AV-Origin-App': `${params.applicationName}:${params.applicationVersion}`,
+          }
+        : {}),
+      ...(params.sdkName && params.sdkVersion
+        ? {
+            'AV-Origin-Sdk': `${params.sdkName}:${params.sdkVersion}`,
+          }
+        : {}),
     };
     this.baseRequest = got.extend({
       prefixUrl: this.baseUri,
