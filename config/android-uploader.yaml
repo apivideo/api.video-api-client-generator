@@ -1,15 +1,17 @@
 changelog:
+  - 1.0.0 (2022-07-05):
+    - Add SDK origin header
   - 0.2.7 (2022-05-17):
-      - Publicized chunk maxChunkSize
-      - Add a progressive upload API to upload a specific part
+    - Publicized chunk maxChunkSize
+    - Add a progressive upload API to upload a specific part
   - 0.2.6 (2022-04-21):
-      - Fix `video.publishedAt` type
+    - Fix `video.publishedAt` type
   - 0.2.5 (2022-03-17):
-      - Fix metadata query param in GET /videos
+    - Fix metadata query param in GET /videos
   - 0.2.4 (2022-03-10):
-      - Add Origin identification headers
+    - Add Origin identification headers
   - 0.2.3 (2022-01-24):
-      - Add applicationName parameter (to allow user agent extension)
+    - Add applicationName parameter (to allow user agent extension)
   - 0.2.2 (2022-01-06):
     - Increase chunked and progressive upload speed
     - Update min Sdk version to Android API 24
