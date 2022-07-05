@@ -13,7 +13,7 @@ internal class UploadTestCase: XCTestCase {
         try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
         ApiVideoClient.apiKey = Parameters.apiKey
         ApiVideoClient.basePath = Environment.sandbox.rawValue
-        try? ApiVideoClient.setApplicationName(name: "client-integration-tests")
+        try? ApiVideoClient.setApplicationName(name: "client-integration-tests", version: "0")
 
         continueAfterFailure = false
     }
