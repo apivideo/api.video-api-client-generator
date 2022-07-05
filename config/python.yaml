@@ -1,8 +1,10 @@
 changelog:
+  - 1.2.7 (2022-07-05):
+    - Add SDK origin header
   - 1.2.6 (2022-06-29):
-      - Remove non-cp1252 char in README
+    - Remove non-cp1252 char in README
   - 1.2.5 (2022-04-21):
-      - Fix `video.publishedAt` type
+    - Fix `video.publishedAt` type
   - 1.2.4 (2022-04-01):
     - Fix nullable fields in `status` endpoint result
   - 1.2.3 (2022-03-21):

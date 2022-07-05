@@ -1,6 +1,8 @@
 changelog:
+  - 1.2.5 (2022-07-05):
+    - Add SDK origin header
   - 1.2.4 (2022-04-01):
-      - Fix nullable fields in `status` endpoint result
+    - Fix nullable fields in `status` endpoint result
   - 1.2.3 (2022-03-21):
     - Add `ingest.receivedParts` attribute in GET /videos/{video_id}/status
   - 1.2.2 (2022-03-11):

@@ -1,12 +1,14 @@
 changelog:
+  - 1.2.5 (2022-07-05):
+    - Add SDK origin header
   - 1.2.4 (2022-04-21):
-      - Fix `video.publishedAt` type
+    - Fix `video.publishedAt` type
   - 1.2.3 (2022-03-21):
-      - Add `ingest.receivedParts` attribute in GET /videos/{video_id}/status
+    - Add `ingest.receivedParts` attribute in GET /videos/{video_id}/status
   - 1.2.2 (2022-03-09):
-      - Add Origin identification headers
+    - Add Origin identification headers
   - 1.2.1 (2022-01-24):
-      - Add applicationName parameter (to allow user agent extension)
+    - Add applicationName parameter (to allow user agent extension)
   - 1.2.0 (2022-01-07):
     - Add watermark endpoints
     - Add video clips
