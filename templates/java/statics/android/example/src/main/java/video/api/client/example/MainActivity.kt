@@ -1,8 +1,8 @@
 package video.api.client.example
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,25 +11,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import video.api.client.ApiVideoClient
+import video.api.client.api.ApiCallback
 import video.api.client.api.ApiException
 import video.api.client.api.models.Environment
 import video.api.client.api.models.Video
 import video.api.client.api.models.VideoCreationPayload
-import video.api.client.api.upload.UploadProgressListener
+import video.api.client.api.services.UploadService
+import video.api.client.api.services.UploadServiceListener
 import video.api.client.example.databinding.ActivityMainBinding
-import java.io.File
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private val executor: ExecutorService = Executors.newSingleThreadExecutor()
-    private var uploadTask: Future<*>? = null
+class MainActivity : AppCompatActivity(), UploadServiceListener {
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var service: UploadService
+    private val client: ApiVideoClient by lazy { ApiVideoClient(apiKey, environment) }
+    private val environment: Environment
+        get() = if (PreferenceManager.getDefaultSharedPreferences(applicationContext)
+                .getBoolean(
+                    getString(R.string.environment_key),
+                    true
+                )
+        ) {
+            Environment.SANDBOX
+        } else {
+            Environment.PRODUCTION
+        }
+    private val apiKey: String?
+        get() = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+            .getString(getString(R.string.api_key_key), null)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportFragmentManager
@@ -37,129 +49,59 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.settingsLayout, SettingsFragment())
             .commit()
 
-        binding.uploadButton.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Log.i(getString(R.string.app_name), "onUploadFile")
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    when {
-                        ContextCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        ) == PackageManager.PERMISSION_GRANTED -> {
-                            uploadFile()
-                        }
-                        shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                            Utils.showAlertDialog(
-                                this,
-                                getString(R.string.permission),
-                                getString(R.string.permission_required)
-                            )
-                            requestPermissionLauncher.launch(
-                                Manifest.permission.READ_EXTERNAL_STORAGE
-                            )
-                        }
-                        else -> {
-                            requestPermissionLauncher.launch(
-                                Manifest.permission.READ_EXTERNAL_STORAGE
-                            )
-                        }
-                    }
-                } else { // No need for permission
-                    uploadFile()
-                }
-            } else {
-                uploadTask?.cancel(true)
-            }
-        }
-    }
+        startService()
 
-    private fun uploadFile() {
-        val filePath = Utils.getFilePathFromPrefs(this)
-        if (filePath.isNullOrBlank()) {
-            Utils.showAlertDialog(
-                this,
-                getString(R.string.success),
-                getString(R.string.no_file)
-            )
-        } else {
-            val apiVideoClient = ApiVideoClient(
-                PreferenceManager.getDefaultSharedPreferences(this)
-                    .getString(getString(R.string.api_key_key), null),
-                if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
-                        getString(R.string.environment_key),
-                        true
+        binding.pickFiles.setOnClickListener {
+            Log.i(getString(R.string.app_name), "Checking permissions")
+            when {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    launchFilePickerIntent()
+                }
+                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                    Utils.showAlertDialog(
+                        this,
+                        getString(R.string.permission),
+                        getString(R.string.permission_required)
                     )
-                ) {
-                    Environment.SANDBOX
-                } else {
-                    Environment.PRODUCTION
+                    requestPermissionLauncher.launch(
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                 }
-            ).apply {
-                this.httpClient.writeTimeout = 60000 // 1 min
-            }
-
-            binding.progressBar.visibility = View.VISIBLE
-            binding.progressBar.progress = 0
-            /**
-             *  Dispatch API calls from main thread to avoid to stuck main thread:
-             *  Use executor or create a thread.
-             */
-            uploadTask = executor.submit {
-                try {
-                    Log.i(getString(R.string.app_name), "Upload file: $filePath")
-                    val videoFile = File(filePath)
-                    var video =
-                        apiVideoClient.videos().create(
-                            VideoCreationPayload().title(
-                                PreferenceManager.getDefaultSharedPreferences(this)
-                                    .getString(getString(R.string.title_key), null)
-                            )
-                        )
-                    video = apiVideoClient.videos().upload(
-                        video.videoId,
-                        videoFile
-                    ) { bytesWritten, totalBytes, _, _ ->
-                        runOnUiThread {
-                            binding.progressBar.progress =
-                                (100 * bytesWritten / totalBytes).toInt()
-                        }
-                    }
-                    onUploadSuccess(video)
-                } catch (e: Exception) {
-                    onUploadFailed(e)
+                else -> {
+                    requestPermissionLauncher.launch(
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                 }
             }
         }
+
+        binding.cancel.setOnClickListener { service.cancelAll() }
     }
 
-    private fun onUploadSuccess(video: Video) {
-        runOnUiThread {
-            binding.uploadButton.isChecked = false
-            binding.progressBar.visibility = View.GONE
-            Utils.showAlertDialog(
-                this,
-                getString(R.string.success),
-                getString(R.string.file_uploaded)
-            )
+    private fun launchFilePickerIntent() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "video/mp4"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         }
-        Log.i(getString(R.string.app_name), "File has been successfully upload: $video")
+        filesPickerResult.launch(intent)
     }
 
-    private fun onUploadFailed(e: Exception) {
-        runOnUiThread {
-            binding.uploadButton.isChecked = false
-            binding.progressBar.visibility = View.GONE
-            Utils.showAlertDialog(
-                this,
-                getString(R.string.error),
-                getString(R.string.upload_failed, e.message ?: e)
-            )
-        }
-        Log.e(getString(R.string.app_name), "Exception when calling VideoApi")
-        if (e is ApiException) {
-            Log.e(getString(R.string.app_name), "Status code: " + e.code)
-        }
-        Log.e(getString(R.string.app_name), "Reason: " + e.message, e)
+    private fun startService() {
+        UploadService.startService(
+            this,
+            CustomUploaderService::class.java,
+            apiKey = apiKey,
+            environment = environment,
+            timeout = 60000, // 1 min
+            { service ->
+                this.service = service
+                this.service.addListener(this)
+            },
+            { Log.e(TAG, "Upload service has been disconnected") }
+        )
     }
 
     private val requestPermissionLauncher =
@@ -167,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                uploadFile()
+                launchFilePickerIntent()
             } else {
                 Utils.showAlertDialog(
                     this,
@@ -176,4 +118,145 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+
+    private var filesPickerResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                binding.progressBar.visibility = View.VISIBLE
+
+                result.data?.let { data ->
+                    // Multiple files
+                    data.clipData?.let { clipData ->
+                        for (i in 0 until clipData.itemCount) {
+                            clipData.getItemAt(i).uri?.let { uri ->
+                                val path = Utils.getFilePath(this, uri)!!
+                                createVideo(
+                                    path
+                                ) { video -> service.upload(video.videoId, path) }
+                            }
+                        }
+                    } ?: run {
+                        // Single file
+                        data.data?.let { uri ->
+                            val path = Utils.getFilePath(this, uri)!!
+                            createVideo(
+                                path
+                            ) { video -> service.upload(video.videoId, path) }
+                        }
+                    }
+                } ?: Log.e(TAG, "No data received")
+            }
+        }
+
+    /**
+     * Create a video id from path
+     */
+    private fun createVideo(path: String, onVideoCreated: (Video) -> Unit) {
+        val videoName = path.split("/").last()
+        client.videos().createAsync(VideoCreationPayload().apply { title = videoName },
+            object : ApiCallback<Video> {
+                override fun onFailure(
+                    e: ApiException?,
+                    statusCode: Int,
+                    responseHeaders: MutableMap<String, MutableList<String>>?
+                ) {
+                    runOnUiThread {
+                        Utils.showAlertDialog(
+                            this@MainActivity,
+                            getString(R.string.error),
+                            getString(R.string.failed_to_create_video, e?.localizedMessage)
+                        )
+                    }
+                }
+
+                override fun onSuccess(
+                    result: Video?,
+                    statusCode: Int,
+                    responseHeaders: MutableMap<String, MutableList<String>>?
+                ) {
+                    onVideoCreated(result!!)
+                }
+
+                override fun onUploadProgress(
+                    bytesWritten: Long,
+                    contentLength: Long,
+                    done: Boolean
+                ) {
+                    // Nothing to do
+                }
+
+                override fun onDownloadProgress(
+                    bytesRead: Long,
+                    contentLength: Long,
+                    done: Boolean
+                ) {
+                    // Nothing to do
+                }
+
+            })
+    }
+
+    override fun onUploadStarted(id: String) {
+        Log.i(TAG, "Started to upload: $id")
+
+        runOnUiThread {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.progressBar.progress = 0
+            binding.cancel.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onUploadComplete(video: Video) {
+        Log.i(
+            TAG,
+            "File has been successfully upload: ${video.videoId}"
+        )
+
+        runOnUiThread {
+            Utils.showAlertDialog(
+                this,
+                getString(R.string.success),
+                getString(R.string.file_uploaded)
+            )
+        }
+    }
+
+    override fun onUploadProgress(id: String, progress: Int) {
+        runOnUiThread {
+            binding.progressBar.progress = progress
+        }
+    }
+
+    override fun onUploadError(id: String, e: Exception) {
+        Log.i(
+            TAG,
+            "Failed to send send $id",
+            e
+        )
+
+        runOnUiThread {
+            Utils.showAlertDialog(
+                this,
+                getString(R.string.error),
+                getString(R.string.upload_failed, e.message ?: e)
+            )
+        }
+    }
+
+    override fun onUploadCancelled(id: String) {
+        // Nothing
+    }
+
+    override fun onLastUpload() {
+        Log.i(TAG, "Last upload")
+
+        runOnUiThread {
+            binding.progressBar.visibility = View.GONE
+            binding.cancel.visibility = View.GONE
+        }
+    }
+
+    companion object {
+        private const val TAG = "UploadActivity"
+    }
 }

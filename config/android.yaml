@@ -1,4 +1,6 @@
 changelog:
+  - 1.2.0 (2022-08-22):
+    - Add an upload Service
   - 1.1.0 (2022-07-12):
     - Add Async APIs
   - 1.0.6 (2022-07-05):
@@ -95,3 +97,21 @@ files:
     destinationFilename: post-generate.sh
   maven-push.gradle.mustache:
     destinationFilename: maven-push.gradle
+  Environment.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: Environment.java
+  android/services/Extensions.mustache:
+    folder: src/main/java/video/api/client/api/services
+    destinationFilename: Extensions.kt
+  android/services/NotificationUtils.mustache:
+    folder: src/main/java/video/api/client/api/services
+    destinationFilename: NotificationUtils.kt
+  android/services/UploadService.mustache:
+    folder: src/main/java/video/api/client/api/services
+    destinationFilename: UploadService.kt
+  android/services/UploadServiceListener.mustache:
+    folder: src/main/java/video/api/client/api/services
+    destinationFilename: UploadServiceListener.kt
+  android/services/UploadTask.mustache:
+    folder: src/main/java/video/api/client/api/services
+    destinationFilename: UploadTask.kt
