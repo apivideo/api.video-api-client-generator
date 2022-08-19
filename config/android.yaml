@@ -97,9 +97,6 @@ files:
     destinationFilename: post-generate.sh
   maven-push.gradle.mustache:
     destinationFilename: maven-push.gradle
-  Environment.mustache:
-    folder: src/main/java/video/api/client/api/models
-    destinationFilename: Environment.java
   android/services/Extensions.mustache:
     folder: src/main/java/video/api/client/api/services
     destinationFilename: Extensions.kt
