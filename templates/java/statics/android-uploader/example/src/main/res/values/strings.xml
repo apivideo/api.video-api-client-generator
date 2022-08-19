@@ -1,19 +1,9 @@
 <resources>
     <string name="app_name">VideoUploader</string>
-    <string name="default_api_key">YOUR API KEY</string>
-    <string name="api_key_key">api_key_key</string>
-    <string name="api_key">API key</string>
     <string name="environment_key">api_endpoint_key</string>
     <string name="production">Production</string>
     <string name="sandbox">Sandbox</string>
     <string name="environment">Environment</string>
-    <string name="upload_a_file">Upload a file</string>
-    <string name="choose_a_file">Choose a file</string>
-    <string name="file_chooser_key">file_chooser_key</string>
-    <string name="file_path_key">file_key</string>
-    <string name="video_id_key">video_id_key</string>
-    <string name="video_id">Video Id</string>
-    <string name="default_title">My new video</string>
     <string name="success">Success</string>
     <string name="file_uploaded">File has been successfully uploaded</string>
     <string name="error">Error</string>
@@ -21,10 +11,10 @@
     <string name="no_file">No file selected</string>
     <string name="permission">Permission</string>
     <string name="permission_required">Permission READ_EXTERNAL_STORAGE is required to upload a file</string>
-    <string name="stop">Stop</string>
     <string name="token">Token</string>
     <string name="token_key">token_key</string>
     <string name="default_token" />
-    <string name="auth_type_key">auth_type_key</string>
-    <string name="auth_type">Authentification type</string>
+    <string name="pick_files">Pick files</string>
+    <string name="cancel">Cancel</string>
+    <string name="upload_success_notification_text">File uploaded</string>
 </resources>

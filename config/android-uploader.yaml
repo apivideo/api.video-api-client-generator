@@ -1,4 +1,6 @@
 changelog:
+  - 1.1.0 (2022-08-22):
+    - Add an upload Service
   - 1.0.0 (2022-07-05):
     - Add SDK origin header
   - 0.2.7 (2022-05-17):
@@ -81,3 +83,18 @@ files:
     destinationFilename: post-generate.sh
   maven-push.gradle.mustache:
     destinationFilename: maven-push.gradle
+  android/services/Extensions.mustache:
+    folder: src/main/java/video/api/uploader/api/services
+    destinationFilename: Extensions.kt
+  android/services/NotificationUtils.mustache:
+    folder: src/main/java/video/api/uploader/api/services
+    destinationFilename: NotificationUtils.kt
+  android/services/UploadService.mustache:
+    folder: src/main/java/video/api/uploader/api/services
+    destinationFilename: UploadService.kt
+  android/services/UploadServiceListener.mustache:
+    folder: src/main/java/video/api/uploader/api/services
+    destinationFilename: UploadServiceListener.kt
+  android/services/UploadTask.mustache:
+    folder: src/main/java/video/api/uploader/api/services
+    destinationFilename: UploadTask.kt

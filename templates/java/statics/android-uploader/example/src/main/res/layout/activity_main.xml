@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="video.api.uploader.example.MainActivity">
 
     <LinearLayout
         android:id="@+id/settingsLayout"
@@ -14,14 +14,12 @@
         android:orientation="vertical">
     </LinearLayout>
 
-    <ToggleButton
-        android:id="@+id/uploadButton"
+    <Button
+        android:id="@+id/pickFiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textOff="@string/upload_a_file"
-        android:textOn="@string/stop">
-    </ToggleButton>
+        android:text="@string/pick_files" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -29,5 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/cancel"
+        android:visibility="gone" />
+
 
 </LinearLayout>
