@@ -337,7 +337,7 @@ val videosApi = VideosApi()
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 {{#android}}
-Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, most APIs comes with an asynchronous counterpart (`createAsync` for `create`).
+Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, APIs come with an asynchronous counterpart (`createAsync` for `create`) except the upload endpoint. In this case, you can use the customisable `UploadService` that manages background uploads and as well as notifications.
 {{/android}}
 
 ## Have you gotten use from this API client?

@@ -1,4 +1,4 @@
-package video.api.client.example
+package video.api.uploader.example
 
 import android.Manifest
 import android.content.Intent
@@ -10,20 +10,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import video.api.client.ApiVideoClient
-import video.api.client.api.ApiCallback
-import video.api.client.api.ApiException
-import video.api.client.api.models.Environment
-import video.api.client.api.models.Video
-import video.api.client.api.models.VideoCreationPayload
-import video.api.client.api.services.UploadService
-import video.api.client.api.services.UploadServiceListener
-import video.api.client.example.databinding.ActivityMainBinding
+import video.api.uploader.api.models.Environment
+import video.api.uploader.api.models.Video
+import video.api.uploader.api.services.UploadService
+import video.api.uploader.api.services.UploadServiceListener
+import video.api.uploader.example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), UploadServiceListener {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var service: UploadService
-    private val client: ApiVideoClient by lazy { ApiVideoClient(apiKey, environment) }
     private val environment: Environment
         get() = if (PreferenceManager.getDefaultSharedPreferences(applicationContext)
                 .getBoolean(
@@ -35,9 +30,9 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         } else {
             Environment.PRODUCTION
         }
-    private val apiKey: String?
+    private val token: String
         get() = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-            .getString(getString(R.string.api_key_key), null)
+            .getString(getString(R.string.token_key), getString(R.string.default_token))!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,14 +88,14 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         UploadService.startService(
             this,
             CustomUploaderService::class.java,
-            apiKey = apiKey,
+            apiKey = null, // As we are using upload token we don't require the API key
             environment = environment,
             timeout = 60000, // 1 min
-            { service ->
+            onServiceCreated = { service ->
                 this.service = service
                 this.service.addListener(this)
             },
-            { Log.e(TAG, "Upload service has been disconnected") }
+            onServiceDisconnected = { Log.e(TAG, "Upload service has been disconnected") }
         )
     }
 
@@ -130,71 +125,20 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
                         for (i in 0 until clipData.itemCount) {
                             clipData.getItemAt(i).uri?.let { uri ->
                                 val path = Utils.getFilePath(this, uri)!!
-                                createVideo(
-                                    path
-                                ) { video -> service.upload(video.videoId, path) }
+                                service.uploadWithUploadToken(token, path)
                             }
                         }
                     } ?: run {
                         // Single file
                         data.data?.let { uri ->
                             val path = Utils.getFilePath(this, uri)!!
-                            createVideo(
-                                path
-                            ) { video -> service.upload(video.videoId, path) }
+                            service.uploadWithUploadToken(token, path)
                         }
                     }
                 } ?: Log.e(TAG, "No data received")
             }
         }
 
-    /**
-     * Create a video id from path
-     */
-    private fun createVideo(path: String, onVideoCreated: (Video) -> Unit) {
-        val videoName = path.split("/").last()
-        client.videos().createAsync(VideoCreationPayload().apply { title = videoName },
-            object : ApiCallback<Video> {
-                override fun onFailure(
-                    e: ApiException?,
-                    statusCode: Int,
-                    responseHeaders: MutableMap<String, MutableList<String>>?
-                ) {
-                    runOnUiThread {
-                        Utils.showAlertDialog(
-                            this@MainActivity,
-                            getString(R.string.error),
-                            getString(R.string.failed_to_create_video, e?.localizedMessage)
-                        )
-                    }
-                }
-
-                override fun onSuccess(
-                    result: Video?,
-                    statusCode: Int,
-                    responseHeaders: MutableMap<String, MutableList<String>>?
-                ) {
-                    onVideoCreated(result!!)
-                }
-
-                override fun onUploadProgress(
-                    bytesWritten: Long,
-                    contentLength: Long,
-                    done: Boolean
-                ) {
-                    // Nothing to do
-                }
-
-                override fun onDownloadProgress(
-                    bytesRead: Long,
-                    contentLength: Long,
-                    done: Boolean
-                ) {
-                    // Nothing to do
-                }
-
-            })
-    }
 
     override fun onUploadStarted(id: String) {
         Log.i(TAG, "Started to upload: $id")

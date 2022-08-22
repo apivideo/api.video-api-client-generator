@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="video.api.client.api">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <service android:name="video.api.integration.services.UploadServiceWithoutNotifications" />
+    </application>
+</manifest>

@@ -1,4 +1,4 @@
-package video.api.client.example
+package video.api.uploader.example
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

@@ -1,6 +1,5 @@
-package video.api.client.example
+package video.api.uploader.example
 
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.database.Cursor
@@ -31,11 +30,6 @@ object Utils {
             cursor?.close()
         }
         return null
-    }
-
-    fun getFilePathFromPrefs(activity: Activity): String? {
-        return activity.getPreferences(Context.MODE_PRIVATE)
-            .getString(activity.getString(R.string.file_path_key), "")
     }
 
     fun showAlertDialog(
