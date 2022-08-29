@@ -56,6 +56,7 @@ open class UploadService(
     private val uploadFuturesMap = ConcurrentHashMap<String, Future<Video>>()
     private val binder = UploadServiceBinder()
     private lateinit var videosApi: VideosApi
+    private var isBind: Boolean = false
 
     private val executor = Executors.newSingleThreadExecutor()
     private val listener = object : UploadServiceListener {
@@ -99,10 +100,10 @@ open class UploadService(
             }
         }
 
-        override fun onUploadComplete(video: Video) {
+        override fun onUploadComplete(id: String, video: Video) {
             _numOfUploaded++
             onUploadSuccessNotification(video)?.let { notify(it) }
-            listeners.forEach { it.onUploadComplete(video) }
+            listeners.forEach { it.onUploadComplete(id, video) }
 
             if (!hasRemaining) {
                 onLastUploadNotification()?.let { notify(it) }
@@ -111,7 +112,9 @@ open class UploadService(
         }
 
         override fun onLastUpload() {
-            // Not used
+           if (!isBind) {
+               stopSelf()
+           }
         }
     }
 
@@ -363,6 +366,22 @@ open class UploadService(
     }
 
     /**
+     * Creates a [ProgressiveUploadSession] for a video id
+     *
+     * @param videoId The video id
+     */
+    fun createProgressiveUploadSession(videoId: String) =
+        createProgressiveUploadSession(videosApi.createUploadProgressiveSession(videoId))
+
+    /**
+     * Creates a [ProgressiveUploadSession] for an upload token
+     *
+     * @param token The upload token
+     */
+    fun createUploadTokenProgressiveUploadSession(token: String) =
+        createProgressiveUploadSession(videosApi.createUploadWithUploadTokenProgressiveSession(token))
+
+    /**
      * Creates a [ProgressiveUploadSession].
      *
      * @param session The progressive upload session either for upload token or video id
@@ -597,7 +616,15 @@ open class UploadService(
 
         videosApi = VideosApi(apiClient)
 
+
+        isBind = true
+
         return binder
+    }
+
+    override fun onUnbind(intent: Intent?): Boolean {
+        isBind = false
+        return super.onUnbind(intent)
     }
 
     private fun notify(notification: Notification) {
@@ -622,7 +649,7 @@ open class UploadService(
         const val TAG = "UploadService"
 
         const val DEFAULT_NOTIFICATION_CHANNEL_ID =
-            "video.api.uploader.service"
+            "{{apiPackage}}.service"
         const val DEFAULT_NOTIFICATION_ID = 3333
 
         const val BASE_PATH_KEY = "base_path_key"
@@ -633,7 +660,7 @@ open class UploadService(
         const val APP_NAME_KEY = "app_name_key"
         const val APP_VERSION_KEY = "app_version_key"
 
-        /**
+       /**
          * Start a child of [UploadService].
          *
          * @param context The context of the application
@@ -660,7 +687,9 @@ open class UploadService(
             appVersion: String? = null,
             sdkName: String? = null,
             sdkVersion: String? = null
-        ) {
+        ): ServiceConnection {
+            context.startService(Intent(context, serviceClass))
+
             val connection = object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName?, binder: IBinder) {
                     if (binder is UploadService.UploadServiceBinder) {
@@ -688,6 +717,22 @@ open class UploadService(
                 connection,
                 Context.BIND_AUTO_CREATE
             )
+
+            return connection
+        }
+
+        fun unbindService(
+            context: Context,
+            serviceConnection: ServiceConnection
+        ) {
+            context.unbindService(serviceConnection)
+        }
+
+        fun stopService(
+            context: Context,
+            serviceClass: Class<out UploadService>
+        ) {
+            context.stopService(Intent(context, serviceClass))
         }
     }
 
