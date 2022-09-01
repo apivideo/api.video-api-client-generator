@@ -8,14 +8,14 @@ interface UploadServiceListener {
      *
      * @param id The unique upload id
      */
-    fun onUploadStarted(id: String)
+    fun onUploadStarted(id: String) {}
 
     /**
      * Call to update upload progress on a file
      *
      * @param id The unique upload id
      */
-    fun onUploadProgress(id: String, progress: Int)
+    fun onUploadProgress(id: String, progress: Int) {}
 
     /**
      * Call when the upload failed
@@ -23,24 +23,25 @@ interface UploadServiceListener {
      * @param id The unique upload id
      * @param e The reason why upload failed
      */
-    fun onUploadError(id: String, e: Exception)
+    fun onUploadError(id: String, e: Exception) {}
 
     /**
      * Call when the upload has been cancelled
      *
      * @param id The unique upload id
      */
-    fun onUploadCancelled(id: String)
+    fun onUploadCancelled(id: String) {}
 
     /**
      * Call when the file was successfully uploaded
      *
+     * @param id The unique upload id
      * @param video The uploaded video
      */
-    fun onUploadComplete(video: Video)
+    fun onUploadComplete(id: String, video: Video) {}
 
     /**
      * Call when there are no more file to upload
      */
-    fun onLastUpload()
+    fun onLastUpload() {}
 }

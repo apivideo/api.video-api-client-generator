@@ -25,7 +25,7 @@ class UploadTask(
                     val progress = (bytesWritten.toFloat() / totalBytes * 100).toInt()
                     listener.onUploadProgress(id, progress)
                 }
-            listener.onUploadComplete(video)
+            listener.onUploadComplete(id, video)
             video
         } catch (e: Exception) {
             if (e.rootCause is InterruptedIOException) {

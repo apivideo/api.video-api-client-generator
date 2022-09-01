@@ -2,6 +2,7 @@ package video.api.uploader.example
 
 import android.Manifest
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import video.api.uploader.example.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), UploadServiceListener {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var service: UploadService
+    private lateinit var serviceConnection: ServiceConnection
     private val environment: Environment
         get() = if (PreferenceManager.getDefaultSharedPreferences(applicationContext)
                 .getBoolean(
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
             .replace(R.id.settingsLayout, SettingsFragment())
             .commit()
 
-        startService()
+        bindService()
 
         binding.pickFiles.setOnClickListener {
             Log.i(getString(R.string.app_name), "Checking permissions")
@@ -76,6 +78,11 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         binding.cancel.setOnClickListener { service.cancelAll() }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService()
+    }
+
     private fun launchFilePickerIntent() {
         val intent = Intent(Intent.ACTION_PICK).apply {
             type = "video/mp4"
@@ -84,8 +91,8 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         filesPickerResult.launch(intent)
     }
 
-    private fun startService() {
-        UploadService.startService(
+    private fun bindService() {
+        serviceConnection = UploadService.startService(
             this,
             CustomUploaderService::class.java,
             apiKey = null, // As we are using upload token we don't require the API key
@@ -97,6 +104,11 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
             },
             onServiceDisconnected = { Log.e(TAG, "Upload service has been disconnected") }
         )
+    }
+
+    private fun unbindService() {
+        this.service.removeListener(this)
+        UploadService.unbindService(this, serviceConnection)
     }
 
     private val requestPermissionLauncher =
@@ -150,10 +162,10 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         }
     }
 
-    override fun onUploadComplete(video: Video) {
+    override fun onUploadComplete(id: String, video: Video) {
         Log.i(
             TAG,
-            "File has been successfully upload: ${video.videoId}"
+            "File has been successfully upload $id: ${video.videoId}"
         )
 
         runOnUiThread {
