@@ -93,7 +93,7 @@ public class UploadServiceTest {
                 }
 
                 @Override
-                public void onUploadComplete(@NonNull Video video) {
+                public void onUploadComplete(@NonNull String id, @NonNull Video video) {
                     successLatch.countDown();
                 }
 
@@ -138,7 +138,7 @@ public class UploadServiceTest {
                 }
 
                 @Override
-                public void onUploadComplete(@NonNull Video video) {
+                public void onUploadComplete(@NonNull String id, @NonNull Video video) {
                     successLatch.countDown();
                 }
 
@@ -186,7 +186,7 @@ public class UploadServiceTest {
                 }
 
                 @Override
-                public void onUploadComplete(@NonNull Video video) {
+                public void onUploadComplete(@NonNull String id, @NonNull Video video) {
                     successLatch.countDown();
                 }
 
@@ -261,7 +261,7 @@ public class UploadServiceTest {
                 }
 
                 @Override
-                public void onUploadComplete(@NonNull Video video) {
+                public void onUploadComplete(@NonNull String id, @NonNull Video video) {
                     successLatch.countDown();
                 }
 
@@ -335,7 +335,7 @@ public class UploadServiceTest {
                 }
 
                 @Override
-                public void onUploadComplete(@NonNull Video video) {
+                public void onUploadComplete(@NonNull String id, @NonNull Video video) {
                     successLatch.countDown();
                 }
 

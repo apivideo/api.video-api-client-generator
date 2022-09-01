@@ -19,7 +19,7 @@ class CustomUploaderService : UploadService(
     /**
      * You can override each of [UploadService] notification methods to customize notifications.
      */
-    override fun onUploadSuccessNotification(video: Video): Notification {
+    override fun onUploadSuccessNotification(id: String, video: Video): Notification {
         // Return your custom the notification
         return NotificationCompat.Builder(this, channelId)
             .setStyle(notificationIconResourceId, notificationColorResourceId)

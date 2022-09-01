@@ -102,7 +102,7 @@ open class UploadService(
 
         override fun onUploadComplete(id: String, video: Video) {
             _numOfUploaded++
-            onUploadSuccessNotification(video)?.let { notify(it) }
+            onUploadSuccessNotification(id, video)?.let { notify(it) }
             listeners.forEach { it.onUploadComplete(id, video) }
 
             if (!hasRemaining) {
@@ -274,7 +274,7 @@ open class UploadService(
      * @param video The video instance (contains info incl. the video id)
      * @return The notification to be displayed or null
      */
-    open fun onUploadSuccessNotification(video: Video): Notification? = null
+    open fun onUploadSuccessNotification(id: String, video: Video): Notification? = null
 
     /**
      * Called when the queue has no more file to upload
