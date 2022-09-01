@@ -17,7 +17,7 @@ public class UploadServiceWithoutNotifications extends UploadService {
 
     @Nullable
     @Override
-    public Notification onUploadSuccessNotification(@NonNull Video video) {
+    public Notification onUploadSuccessNotification(@NonNull String id, @NonNull Video video) {
         return null;
     }
 
