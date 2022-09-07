@@ -349,8 +349,12 @@ func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#r
 	}
 	{{/isCollectionFormatMulti}}
 	{{^isCollectionFormatMulti}}
-
-        localVarQueryParams.Add("{{baseName}}", parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+    {{#vendorExtensions.x-group-parameters}}
+    localVarQueryParams.Add("{{baseName}}", parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+    {{/vendorExtensions.x-group-parameters}}
+    {{^vendorExtensions.x-group-parameters}}
+    localVarQueryParams.Add("{{baseName}}", parameterToString({{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))
+    {{/vendorExtensions.x-group-parameters}}
 	{{/isCollectionFormatMulti}}
 	{{/required}}
 	{{^required}}

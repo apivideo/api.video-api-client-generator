@@ -74,6 +74,12 @@ public class Go extends GoClientCodegen {
                     objs.put("x-client-chunk-upload", true);
                 }
 
+                if(operation.vendorExtensions.containsKey("x-group-parameters")) {
+                    operation.queryParams.forEach(q -> {
+                        q.vendorExtensions.put("x-group-parameters", true);
+                    });
+                }
+
                 operation.queryParams.forEach(queryParam -> {
                     if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
                 });

@@ -41,10 +41,10 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.listLiveStreamSessions(null).execute()).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.listLiveStreamSessions(null, "2022-01").execute()).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'liveStreamId' when calling listLiveStreamSessions");
 
-            assertThatNoException().isThrownBy(() -> api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz").execute());
+            assertThatNoException().isThrownBy(() -> api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz", "2022-01").execute());
         }
 
         @Test
@@ -52,7 +52,7 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<LiveStreamSession> page = api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz").execute();
+            Page<LiveStreamSession> page = api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz", "2022-01").execute();
 
             assertThat(page.getCurrentPage()).isEqualTo(1);
             assertThat(page.getPageSize()).isEqualTo(25);
@@ -76,7 +76,7 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz").execute())
+            assertThatThrownBy(() -> api.listLiveStreamSessions("vi4k0jvEUuaTdRAEjQ4Jfrgz", "2022-01").execute())
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
@@ -187,10 +187,10 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.listVideoSessions(null).execute()).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.listVideoSessions(null, "2022-01").execute()).isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'videoId' when calling listVideoSessions");
 
-            assertThatNoException().isThrownBy(() -> api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg").execute());
+            assertThatNoException().isThrownBy(() -> api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg", "2022-01").execute());
         }
 
         @Test
@@ -198,7 +198,7 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void responseWithStatus200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<VideoSession> page = api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg").execute();
+            Page<VideoSession> page = api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg", "2022-01").execute();
 
             assertThat(page.getCurrentPage()).isEqualTo(1);
             assertThat(page.getPageSize()).isEqualTo(25);
@@ -222,7 +222,7 @@ public class RawStatisticsApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg").execute())
+            assertThatThrownBy(() -> api.listVideoSessions("vi4k0jvEUuaTdRAEjQ4Prklg", "2022-01").execute())
                     .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");

@@ -13,7 +13,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: Authenticate
+      summary: Advanced - Authenticate (1/2)
       description: |-
         To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
         All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
@@ -87,7 +87,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: Refresh token
+      summary: Advanced - Refresh token (2/2)
       description: |
         Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token. 
       operationId: POST_auth-refresh
@@ -939,6 +939,7 @@ paths:
       x-client-action: upload
       x-client-chunk-upload: true
       x-readme:
+        explorer-enabled: false
         code-samples:
           - language: go
             code: |
@@ -1694,6 +1695,7 @@ paths:
         - apiKey: []
       x-client-action: uploadThumbnail
       x-readme:
+        explorer-enabled: false
         code-samples:
           - language: go
             code: |
@@ -9298,7 +9300,7 @@ paths:
             - For a year: 2018
             For a range period: 
             -  Date range: 2018-01-01/2018-01-15
-          required: false
+          required: true
           style: form
           explode: true
           schema:
@@ -9609,7 +9611,7 @@ paths:
             - For a year: "2018"
             For a range period: 
             -  Date range: "2018-01-01/2018-01-15"
-          required: false
+          required: true
           style: form
           explode: true
           schema:
