@@ -81,7 +81,7 @@ public class RawStatisticsTest extends AbstractTest {
             Map<String, String> metadata = new HashMap<>();
             metadata.put("user", "python_test");
             Thread.sleep(5000);
-            Page<VideoSession> sessions = apiClient.rawStatistics().listVideoSessions(this.testVideo.getVideoId())
+            Page<VideoSession> sessions = apiClient.rawStatistics().listVideoSessions(this.testVideo.getVideoId(), "2022-01")
                     .metadata(metadata).execute();
 
             assertThat(sessions.getItems()).hasSize(1);

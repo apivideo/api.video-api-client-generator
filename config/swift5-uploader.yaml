@@ -1,4 +1,6 @@
 changelog:
+  - 1.0.1 (2022-09-13):
+    - period parameter is now mandatory in analytics endpoints
   - 1.0.0 (2022-07-05):
     - Add SDK origin header
   - 0.1.5 (2022-04-21):

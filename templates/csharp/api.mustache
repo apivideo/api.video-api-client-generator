@@ -478,7 +478,7 @@ namespace {{packageName}}.{{apiPackage}}
             {{/vendorExtensions.x-client-paginated}}
 
             private API{{operationId}}Request copy() {
-                API{{operationId}}Request copy = new API{{operationId}}Request({{className}} this.currentApiInstance{{#allParams}}{{#required}}{{#-first}}, {{/-first}}{{paramName}}{{/required}}{{/allParams}});
+                API{{operationId}}Request copy = new API{{operationId}}Request({{className}} this.currentApiInstance{{#requiredParams}}{{#-first}}, {{/-first}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}});
                 {{#allParams}}
                 {{^required}}
                 copy.{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{paramName}});
