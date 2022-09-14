@@ -20,6 +20,6 @@ jobs:
           msbuild /r ApiVideo.csproj
           msbuild -t:pack
           cd bin/Debug
-          nuget push `ls` -Source nuget.org -ApiKey $NUGET_KEY -NonInteractive
+          nuget push `ls ApiVideo*nupkg` -Source nuget.org -ApiKey $NUGET_KEY -NonInteractive
         env:
           NUGET_KEY: ${{ secrets.NUGET_KEY }}
