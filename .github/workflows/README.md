@@ -20,7 +20,7 @@ This list could be configured in any other way. Or even inferred from the root `
 
 ### `update_client_pr`
 
-When a PR is created on **generator** targeting the `master` branch,
+When a PR is created on **generator** targeting the `main` branch,
 it generates a **client** for each *profiles* referenced in the *profile* `matrix`.
 
 Then for each client :

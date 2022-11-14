@@ -1,10 +1,10 @@
 name: Update clients PRs
 on:
-  # Trigger the workflow on pull requests targeting the master branch
+  # Trigger the workflow on pull requests targeting the main branch
   pull_request:
     types: [assigned, unassigned, opened, reopened, synchronize, edited, labeled, unlabeled, edited, closed]
     branches:
-      - master
+      - main
 
 jobs:
   get_available_profiles:
