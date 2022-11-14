@@ -45,7 +45,7 @@ class NotificationUtils(
             val channel = NotificationChannel(
                 channelId,
                 name,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_LOW
             )
             if (descriptionResourceId != 0) {
                 channel.description = service.getString(descriptionResourceId)
