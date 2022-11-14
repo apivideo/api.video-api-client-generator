@@ -17,4 +17,6 @@
     <string name="pick_files">Pick files</string>
     <string name="cancel">Cancel</string>
     <string name="upload_success_notification_text">File uploaded</string>
+    <string name="accept">Accept</string>
+    <string name="denied">Denied</string>
 </resources>
