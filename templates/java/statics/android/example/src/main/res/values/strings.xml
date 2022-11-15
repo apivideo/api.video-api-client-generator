@@ -18,4 +18,6 @@
     <string name="failed_to_create_video">Failed to create a video %1s</string>
     <string name="cancel">Cancel</string>
     <string name="upload_success_notification_text">File uploaded</string>
+    <string name="accept">Accept</string>
+    <string name="denied">Denied</string>
 </resources>

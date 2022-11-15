@@ -1,15 +1,12 @@
 package video.api.uploader.example
 
-import android.Manifest
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import video.api.uploader.api.models.Environment
 import video.api.uploader.api.models.Video
@@ -19,6 +16,25 @@ import video.api.uploader.example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), UploadServiceListener {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val storePermissionManager = ReadStorePermissionManager(this,
+        onGranted = { launchFilePickerIntent() },
+        onShowPermissionRationale = { permission, onRequiredPermissionLastTime ->
+            // Explain why we need permissions
+            showDialog(
+                title = "Permission needed",
+                message = "Explain why you need to grant $permission permission to stream",
+                positiveButtonText = R.string.accept,
+                onPositiveButtonClick = { onRequiredPermissionLastTime() },
+                negativeButtonText = R.string.denied
+            )
+        },
+        onDenied = {
+            showDialog(
+                "Permission denied",
+                "You need to grant permission to stream"
+            )
+        }
+    )
     private lateinit var service: UploadService
     private lateinit var serviceConnection: ServiceConnection
     private val environment: Environment
@@ -49,30 +65,8 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         bindService()
 
         binding.pickFiles.setOnClickListener {
-            Log.i(getString(R.string.app_name), "Checking permissions")
-            when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    launchFilePickerIntent()
-                }
-                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                    Utils.showAlertDialog(
-                        this,
-                        getString(R.string.permission),
-                        getString(R.string.permission_required)
-                    )
-                    requestPermissionLauncher.launch(
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                }
-                else -> {
-                    requestPermissionLauncher.launch(
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                }
-            }
+            Log.i(getString(R.string.app_name), "Requesting permission")
+            storePermissionManager.requestPermission()
         }
 
         binding.cancel.setOnClickListener { service.cancelAll() }
@@ -118,8 +112,7 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
             if (isGranted) {
                 launchFilePickerIntent()
             } else {
-                Utils.showAlertDialog(
-                    this,
+                this.showDialog(
                     getString(R.string.permission),
                     getString(R.string.permission_required)
                 )
@@ -136,14 +129,14 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
                     data.clipData?.let { clipData ->
                         for (i in 0 until clipData.itemCount) {
                             clipData.getItemAt(i).uri?.let { uri ->
-                                val path = Utils.getFilePath(this, uri)!!
+                                val path = this.getFilePath(uri)!!
                                 service.uploadWithUploadToken(token, path)
                             }
                         }
                     } ?: run {
                         // Single file
                         data.data?.let { uri ->
-                            val path = Utils.getFilePath(this, uri)!!
+                            val path = this.getFilePath(uri)!!
                             service.uploadWithUploadToken(token, path)
                         }
                     }
@@ -169,8 +162,7 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         )
 
         runOnUiThread {
-            Utils.showAlertDialog(
-                this,
+            this.showDialog(
                 getString(R.string.success),
                 getString(R.string.file_uploaded)
             )
@@ -191,8 +183,7 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         )
 
         runOnUiThread {
-            Utils.showAlertDialog(
-                this,
+            this.showDialog(
                 getString(R.string.error),
                 getString(R.string.upload_failed, e.message ?: e)
             )
