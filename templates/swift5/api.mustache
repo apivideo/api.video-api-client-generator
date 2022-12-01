@@ -58,15 +58,9 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)) -> URLSessionTask? {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
         {{#vendorExtensions.x-client-chunk-upload}}
-        let fileReader: FileChunksReader
-        do {
-            fileReader = try FileChunksReader(fileURL: file.encodeToJSON() as! URL)
-        } catch {
-            completion(nil, error)
-            return nil
-        }
+        let fileReader = try FileChunksReader(fileURL: file.encodeToJSON() as! URL)
         if (fileReader.getTotalNumberOfChunks() == 1) {
         {{/vendorExtensions.x-client-chunk-upload}}
             return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}).execute(apiResponseQueue) { result in
@@ -104,7 +98,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    private class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}ChunksReader{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#hasParams}}{{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)) -> URLSessionTask? {
+    private class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}ChunksReader{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#hasParams}}{{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)) -> RequestTask {
         return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady).execute(apiResponseQueue) { result in
             switch result {
             {{#returnType}}
@@ -149,21 +143,16 @@ extension {{projectName}}API {
             {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}
         }
         
-        public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> URLSessionTask? {
-            return uploadPart(file: file, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
+            return try uploadPart(file: file, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
-        public func uploadLastPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> URLSessionTask? {
-            return uploadPart(file: file, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        public func uploadLastPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
+            return try uploadPart(file: file, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
-        private func uploadPart(file: URL, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> URLSessionTask? {
-            do {
-                try fileReader.append(fileURL: file, isLastPart: isLastPart)
-            } catch {
-                completion(nil, error)
-                return nil
-            }
+        private func uploadPart(file: URL, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
+            try fileReader.append(fileURL: file, isLastPart: isLastPart)
             return {{operationId}}({{#allParams}}{{^isFile}}{{paramName}}: self.{{paramName}}, {{/isFile}}{{/allParams}}file: fileReader, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: self.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: {{#vendorExtensions.x-client-copy-from-response}}{ video, error in
                 if let video = video {
                     self.videoId = video.videoId
@@ -263,7 +252,7 @@ extension {{projectName}}API {
     {{/isDeprecated}}
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> AnyPublisher<{{{returnType}}}{{^returnType}}Void{{/returnType}}, Error> {
-        var task: URLSessionTask?
+        var task: RequestTask
         return Future<{{{returnType}}}{{^returnType}}Void{{/returnType}}, Error> { promise in
             task = {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
                 switch result {
@@ -301,7 +290,7 @@ extension {{projectName}}API {
     {{/isDeprecated}}
     @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) async throws{{#returnType}} -> {{{returnType}}}{{/returnType}} {
-        var task: URLSessionTask?
+        var task: RequestTask
         return try await withTaskCancellationHandler {
             try Task.checkCancellation()
             return try await withCheckedThrowingContinuation { continuation in
@@ -343,7 +332,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    open class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<{{{returnType}}}{{^returnType}}Void{{/returnType}}, ErrorResponse>) -> Void)) -> URLSessionTask? {
+    open class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<{{{returnType}}}{{^returnType}}Void{{/returnType}}, ErrorResponse>) -> Void)) -> RequestTask {
         return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
             switch result {
             {{#returnType}}

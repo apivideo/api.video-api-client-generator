@@ -194,18 +194,22 @@ class UploaderViewController: UIViewController, UIImagePickerControllerDelegate,
     func upload(url: URL) {
         VideosAPI.create(videoCreationPayload: VideoCreationPayload(title: "my video")) { video, error in
             if let video = video {
-                VideosAPI.upload(
-                    videoId: video.videoId,
-                    file: url,
-                    onProgressReady: { progress in
-                        print("Progress: \(progress)")
-                    }) { video, error in
+                do {
+                    try VideosAPI.upload(
+                            videoId: video.videoId,
+                            file: url,
+                            onProgressReady: { progress in
+                                print("Progress: \(progress)")
+                            }) { video, error in
                         if video != nil {
-                        self.thumbnailImageView.image = nil
+                            self.thumbnailImageView.image = nil
+                        }
+                        if let error = error {
+                            print("Upload error: \(error)")
+                        }
                     }
-                    if let error = error {
-                        print("Upload error: \(error)")
-                    }
+                } catch {
+                    print("Upload error: \(error)")
                 }
             }
             if let error = error {
