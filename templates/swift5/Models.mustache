@@ -18,6 +18,10 @@ protocol JSONEncodable {
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum ParameterError: Error {
     case outOfRange
     case IO
+    case emptyRequest
+    case fileSizeNotAvailable
+    case invalidName
+    case invalidVersion
 }
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum DownloadException: Error {

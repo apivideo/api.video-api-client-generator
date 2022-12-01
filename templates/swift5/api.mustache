@@ -615,7 +615,7 @@ extension {{projectName}}API {
 
         return localVariableRequestBuilder.init(method: "{{httpMethod}}", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, onProgressReady: { progress in
             if let fileSize = file.fileSize {
-                let diff = progress.totalUnitCount - Int64(nextChunk.chunk.maxSize)
+                let diff = progress.totalUnitCount - Int64(nextChunk.chunk.capacity)
                 progress.totalUnitCount = fileSize
                 progress.completedUnitCount = Int64((chunkId - 1) * {{projectName}}.getChunkSize()) + progress.completedUnitCount - diff
             }

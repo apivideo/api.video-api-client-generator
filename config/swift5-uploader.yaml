@@ -51,12 +51,9 @@ files:
   Upload/ProgressiveUploadSessioning.mustache:
     folder: Sources/Upload
     destinationFilename: ProgressiveUploadSessioning.swift
-  Upload/ChunkInputStream.mustache:
+  Upload/FileChunkInputStream.mustache:
     folder: Sources/Upload
-    destinationFilename: ChunkInputStream.swift
-  Upload/FileChunksBuilder.mustache:
-    folder: Sources/Upload
-    destinationFilename: FileChunksBuilder.swift
+    destinationFilename: FileChunkInputStream.swift
   Upload/FileReaders.mustache:
     folder: Sources/Upload
     destinationFilename: FileReaders.swift

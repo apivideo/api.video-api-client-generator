@@ -15,11 +15,6 @@ import Vapor
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} typealias {{projectName}} = {{projectName}}API
 {{/removeMigrationProjectNameClass}}
 
-enum {{projectName}}Error: Error {
-    case invalidName
-    case invalidVersion
-}
-
 public class {{projectName}} {
     public static var apiKey: String? = nil
     public static var basePath = "{{basePath}}"
@@ -72,11 +67,11 @@ public class {{projectName}} {
 
     static func setName(key: String, name: String, version: String) throws {
         if(!isValidName(name: name)) {
-            throw {{projectName}}Error.invalidName
+            throw ParameterError.invalidName
         }
  
         if(!isValidVersion(version: version)) {
-            throw {{projectName}}Error.invalidVersion
+            throw ParameterError.invalidVersion
         }
         {{projectName}}.customHeaders[key] = name + ":" + version
     }
