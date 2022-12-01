@@ -31,6 +31,8 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
      */
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func createAlamofireSession(interceptor: RequestInterceptor? = nil) -> Alamofire.Session {
         let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = ApiVideoClient.timeout
+        configuration.timeoutIntervalForResource = ApiVideoClient.timeout
         configuration.httpAdditionalHeaders = buildHeaders()
         return Alamofire.Session(configuration: configuration,
                                  interceptor: interceptor)

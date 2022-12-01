@@ -33,6 +33,7 @@ public class {{projectName}} {
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
     internal static var credential = ApiVideoCredential()
     public static var apiResponseQueue: DispatchQueue = .main
+    public static var timeout: TimeInterval = 60
 
     public static func setChunkSize(chunkSize: Int) throws {
         if (chunkSize > {{maxChunkSize}}) {
