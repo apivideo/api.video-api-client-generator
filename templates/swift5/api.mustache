@@ -129,36 +129,45 @@ extension {{projectName}}API {
      * - returns: a progressive {{operationId}} session
      */
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
-        return Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
+        Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
     }
    
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: ProgressiveUploadSessioning {
-        private var partId = 1
-        private var fileReader = FilePartsReader(){{#vendorExtensions.x-client-copy-from-response}}
+        private var partId = 1{{#vendorExtensions.x-client-copy-from-response}}
         private var {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
-        private var {{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}
+        private let {{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}
 
         public init({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) {
             {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}
         }
         
-        public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
-            return try uploadPart(file: file, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            uploadPart(file: file, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
-        public func uploadLastPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
-            return try uploadPart(file: file, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        public func uploadLastPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            uploadPart(file: file, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
-        private func uploadPart(file: URL, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) throws -> RequestTask {
-            try fileReader.append(fileURL: file, isLastPart: isLastPart)
-            return {{operationId}}({{#allParams}}{{^isFile}}{{paramName}}: self.{{paramName}}, {{/isFile}}{{/allParams}}file: fileReader, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: self.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: {{#vendorExtensions.x-client-copy-from-response}}{ video, error in
-                if let video = video {
-                    self.videoId = video.videoId
+        private func uploadPart(file: URL, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            let chunkId = partId
+            partId += 1
+            var numOfChunks: Int? = nil
+            if (isLastPart) {
+                numOfChunks = chunkId
+            }
+            return {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: chunkId, numOfChunks: numOfChunks, onProgressReady: onProgressReady).execute(apiResponseQueue) { result in
+                switch result {
+                case let .success(response):
+                    {{#vendorExtensions.x-client-copy-from-response}}
+                    self.videoId = response.body.videoId
+                    {{/vendorExtensions.x-client-copy-from-response}}
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
                 }
-                completion(video, error)
-            }{{/vendorExtensions.x-client-copy-from-response}}{{^vendorExtensions.x-client-copy-from-response}}completion{{/vendorExtensions.x-client-copy-from-response}})
+            }
         }
     }
 
@@ -483,6 +492,8 @@ extension {{projectName}}API {
      - parameter {{paramName}}: ({{#isFormParam}}form{{/isFormParam}}{{#isQueryParam}}query{{/isQueryParam}}{{#isPathParam}}path{{/isPathParam}}{{#isHeaderParam}}header{{/isHeaderParam}}{{#isBodyParam}}body{{/isBodyParam}}) {{description}} {{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}
      {{/allParams}}
      {{#vendorExtensions.x-client-chunk-upload}}
+     - parameter chunkId: chunk or part id. If nil, it is not add to the request.
+     - parameter numOfChunks: total number of chunks or parts. If nil, it is not add to the request. In case, it is not nil, chunkId must not be nil.
      - parameter onProgressReady: progress handler to receive request progress.
      {{/vendorExtensions.x-client-chunk-upload}}
      - returns: RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {{description}}
@@ -490,7 +501,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = "\({{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}APIHelper.mapValueToPathItem({{paramName}}){{/isEnum}})"
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -526,11 +537,15 @@ extension {{projectName}}API {
         ]){{/hasQueryParams}}{{^hasQueryParams}}
         let localVariableUrlComponents = URLComponents(string: localVariableURLString){{/hasQueryParams}}
 
-        let localVariableNillableHeaders: [String: Any?] = [{{^headerParams}}{{^hasFormParams}}
+        {{#vendorExtensions.x-client-chunk-upload}}var{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}let{{/vendorExtensions.x-client-chunk-upload}} localVariableNillableHeaders: [String: Any?] = [{{^headerParams}}{{^hasFormParams}}
             :{{/hasFormParams}}{{/headerParams}}{{#hasFormParams}}
             "Content-Type": {{^consumes}}"multipart/form-data"{{/consumes}}{{#consumes.0}}"{{{mediaType}}}"{{/consumes.0}},{{/hasFormParams}}{{#headerParams}}
             {{> _param}},{{/headerParams}}
-        ]
+        ]{{#vendorExtensions.x-client-chunk-upload}}
+
+        if let chunkId = chunkId {
+            localVariableNillableHeaders["Content-Range"] = "part \(chunkId)/" + (numOfChunks != nil ? "\(numOfChunks!)" : "*")
+        }{{/vendorExtensions.x-client-chunk-upload}}
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 

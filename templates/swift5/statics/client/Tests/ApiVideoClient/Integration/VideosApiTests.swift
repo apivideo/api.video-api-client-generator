@@ -88,26 +88,22 @@ class ProgressiveUploadTests: UploadTestCase {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
 
-        do {
-            if (isLastPart) {
-                try progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
-                    observedProgress = progress
-                }) { video, error in
-                    XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-                    XCTAssertNotNil(video, "Failed to upload a video")
-                    expectation.fulfill()
-                }
-            } else {
-                try progressiveUploadSession!.uploadPart(file: file, onProgressReady: { progress in
-                    observedProgress = progress
-                }) { video, error in
-                    XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-                    XCTAssertNotNil(video, "Failed to upload a video")
-                    expectation.fulfill()
-                }
+        if (isLastPart) {
+            progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                XCTAssertNotNil(video, "Failed to upload a video")
+                expectation.fulfill()
             }
-        } catch {
-            XCTFail("Failed to upload a part due to \(error)")
+        } else {
+            progressiveUploadSession!.uploadPart(file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                XCTAssertNotNil(video, "Failed to upload a video")
+                expectation.fulfill()
+            }
         }
         
         wait(for: [expectation], timeout: timeout)
@@ -210,26 +206,22 @@ class ProgressiveUploadWithTokenTests: UploadWithTokenTestCase {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
 
-        do {
-            if (isLastPart) {
-                try progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
-                    observedProgress = progress
-                }) { video, error in
-                    XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-                    XCTAssertNotNil(video, "Failed to upload a video")
-                    expectation.fulfill()
-                }
-            } else {
-                try progressiveUploadSession!.uploadPart(file: file, onProgressReady: { progress in
-                    observedProgress = progress
-                }) { video, error in
-                    XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-                    XCTAssertNotNil(video, "Failed to upload a video")
-                    expectation.fulfill()
-                }
+        if (isLastPart) {
+            progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                XCTAssertNotNil(video, "Failed to upload a video")
+                expectation.fulfill()
             }
-        } catch {
-            XCTFail("Failed to upload a part due to \(error)")
+        } else {
+            progressiveUploadSession!.uploadPart(file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                XCTAssertNotNil(video, "Failed to upload a video")
+                expectation.fulfill()
+            }
         }
         
         wait(for: [expectation], timeout: timeout)
