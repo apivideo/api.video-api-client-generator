@@ -3,7 +3,7 @@
 
 import Foundation
 
-class FileChunkInputStream: InputStream {
+public class FileChunkInputStream: InputStream {
     private let inputStream: InputStream
     private let offset: Int64
     let capacity: Int
@@ -35,7 +35,7 @@ class FileChunkInputStream: InputStream {
         return bytesRead
     }
 
-    override var hasBytesAvailable: Bool {
+    override public var hasBytesAvailable: Bool {
         if (remainingBytes <= 0) {
             return false
         }
@@ -43,7 +43,7 @@ class FileChunkInputStream: InputStream {
         return inputStream.hasBytesAvailable
     }
 
-    override var streamError: Error? {
+    override public var streamError: Error? {
         return inputStream.streamError
     }
 }

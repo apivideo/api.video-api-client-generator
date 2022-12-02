@@ -63,7 +63,7 @@ protocol JSONEncodable {
     }
 }
 
-{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} final class RequestTask{{#useAsyncAwait}}: @unchecked Sendable{{/useAsyncAwait}} {
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class RequestTask{{#useAsyncAwait}}: @unchecked Sendable{{/useAsyncAwait}} {
     private var lock = NSRecursiveLock()
 {{#useAlamofire}}
     private var request: Request?
@@ -79,6 +79,18 @@ protocol JSONEncodable {
         defer { lock.unlock() }
         request?.cancel()
         request = nil
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var state: Request.State {
+        request?.state ?? .initialized
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var uploadProgress: Progress? {
+        request?.uploadProgress
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var downloadProgress: Progress? {
+        request?.downloadProgress
     }
 {{/useAlamofire}}
 {{^useAlamofire}}
