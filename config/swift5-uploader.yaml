@@ -54,11 +54,11 @@ files:
   Upload/FileChunkInputStream.mustache:
     folder: Sources/Upload
     destinationFilename: FileChunkInputStream.swift
-  Upload/ChunkRequestTask.mustache:
+  Upload/RequestTaskQueue.mustache:
     folder: Sources/Upload
-    destinationFilename: ChunkRequestTask.swift
-  Upload/ChunkInputStreamRequestTask.mustache:
+    destinationFilename: RequestTaskQueue.swift
+  Upload/UploadChunkRequestTaskQueue.mustache:
     folder: Sources/Upload
-    destinationFilename: ChunkInputStreamRequestTask.swift
+    destinationFilename: UploadChunkRequestTaskQueue.swift
   post-generate-uploader.sh:
     destinationFilename: post-generate.sh
