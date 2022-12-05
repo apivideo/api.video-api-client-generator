@@ -52,9 +52,9 @@ files:
   Environment.mustache:
     folder: Sources/Models
     destinationFilename: Environment.swift
-  Upload/ProgressiveUploadSessioning.mustache:
+  Upload/ProgressiveUploadSessionProtocol.mustache:
     folder: Sources/Upload
-    destinationFilename: ProgressiveUploadSessioning.swift
+    destinationFilename: ProgressiveUploadSessionProtocol.swift
   Upload/FileChunkInputStream.mustache:
     folder: Sources/Upload
     destinationFilename: FileChunkInputStream.swift

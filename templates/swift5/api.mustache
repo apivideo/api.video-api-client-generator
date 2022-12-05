@@ -93,7 +93,7 @@ extension {{projectName}}API {
         Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
     }
    
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: RequestTaskQueue<Video>, ProgressiveUploadSessioning {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: RequestTaskQueue<Video>, ProgressiveUploadSessionProtocol {
         private var partId = 1{{#vendorExtensions.x-client-copy-from-response}}
         private var {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
@@ -105,21 +105,31 @@ extension {{projectName}}API {
         }
         
         public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
-            uploadPart(file: file, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+            let chunkId = partId
+            partId += 1
+            return uploadPart(file: file, partId: chunkId, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
         public func uploadLastPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
-            uploadPart(file: file, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
-        }
-        
-        private func uploadPart(file: URL, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
             let chunkId = partId
             partId += 1
+            return uploadLastPart(file: file, partId: chunkId, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
+        public func uploadPart(file: URL, partId: Int, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            uploadPart(file: file, partId: partId, isLastPart: false, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
+        public func uploadLastPart(file: URL, partId: Int, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            uploadPart(file: file, partId: partId, isLastPart: true, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
+        public func uploadPart(file: URL, partId: Int, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
             var numOfChunks: Int? = nil
             if (isLastPart) {
-                numOfChunks = chunkId
+                numOfChunks = partId
             }
-            let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: chunkId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
+            let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: partId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
             execute(requestBuilder, apiResponseQueue: apiResponseQueue, completion: completion)
             return requestBuilder.requestTask
         }
