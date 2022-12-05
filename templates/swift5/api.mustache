@@ -89,11 +89,11 @@ extension {{projectName}}API {
      *
      * - returns: a progressive {{operationId}} session
      */
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
         Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
     }
    
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: ProgressiveUploadSessioning {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: RequestTaskQueue<Video>, ProgressiveUploadSessioning {
         private var partId = 1{{#vendorExtensions.x-client-copy-from-response}}
         private var {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}
         {{#allParams}}{{^isFile}}
@@ -101,6 +101,7 @@ extension {{projectName}}API {
 
         public init({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) {
             {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}
+            super.init(queueLabel: {{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
         }
         
         public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
@@ -118,17 +119,9 @@ extension {{projectName}}API {
             if (isLastPart) {
                 numOfChunks = chunkId
             }
-            return {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: chunkId, numOfChunks: numOfChunks, onProgressReady: onProgressReady).execute(apiResponseQueue) { result in
-                switch result {
-                case let .success(response):
-                    {{#vendorExtensions.x-client-copy-from-response}}
-                    self.videoId = response.body.videoId
-                    {{/vendorExtensions.x-client-copy-from-response}}
-                    completion(response.body, nil)
-                case let .failure(error):
-                    completion(nil, error)
-                }
-            }
+            let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: chunkId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
+            execute(requestBuilder, apiResponseQueue: apiResponseQueue, completion: completion)
+            return requestBuilder.requestTask
         }
     }
 
