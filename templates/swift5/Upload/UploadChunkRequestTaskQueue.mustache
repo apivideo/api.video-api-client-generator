@@ -18,7 +18,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
                   fileSize: Int64,
                   queueLabel: String,
                   onProgressReady: ((Progress) -> Void)? = nil,
-                  apiResponseQueue: DispatchQueue = ApiVideoClient.apiResponseQueue,
+                  apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                   completion: @escaping (_ data: Video?, _ error: Error?) -> Void) {
         _uploadProgress = Progress(totalUnitCount: fileSize)
         self.requestBuilders = requestBuilders
@@ -37,7 +37,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
     internal convenience init(videoId: String,
                               file: URL,
                               onProgressReady: ((Progress) -> Void)? = nil,
-                              apiResponseQueue: DispatchQueue = ApiVideoClient.apiResponseQueue,
+                              apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                               completion: @escaping (_ data: Video?, _ error: Error?) -> Void) throws {
         let chunkInputStreams = try FileChunkInputStreamsBuilder(file: file).build()
         let numOfChunks = chunkInputStreams.count
@@ -54,7 +54,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
     internal convenience init(token: String,
                               file: URL,
                               onProgressReady: ((Progress) -> Void)? = nil,
-                              apiResponseQueue: DispatchQueue = ApiVideoClient.apiResponseQueue,
+                              apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                               completion: @escaping (_ data: Video?, _ error: Error?) -> Void) throws {
         let chunkInputStreams = try FileChunkInputStreamsBuilder(file: file).build()
         let numOfChunks = chunkInputStreams.count
