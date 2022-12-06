@@ -151,17 +151,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func upload(url: URL) {
-        VideosAPI.uploadWithUploadToken(token: UploaderManager.token, file: url,
-                                        onProgressReady: { progress in
-            print("Progress: \(progress)")
-        }) { video, error in
-            if let video = video {
-                print("Nice! Upload success! \(video)")
-                self.thumbnailImageView.image = nil
+        do {
+            try VideosAPI.uploadWithUploadToken(token: UploaderManager.token, file: url,
+                    onProgressReady: { progress in
+                        print("Progress: \(progress)")
+                    }) { video, error in
+                if let video = video {
+                    print("Nice! Upload success! \(video)")
+                    self.thumbnailImageView.image = nil
+                }
+                if let error = error {
+                    print("Upload error: \(error)")
+                }
             }
-            if let error = error {
-                print("Upload error: \(error)")
-            }
+        } catch {
+            print("Upload error: \(error)")
         }
     }
     

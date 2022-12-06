@@ -15,11 +15,6 @@ import Vapor
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} typealias {{projectName}} = {{projectName}}API
 {{/removeMigrationProjectNameClass}}
 
-enum {{projectName}}Error: Error {
-    case invalidName
-    case invalidVersion
-}
-
 public class {{projectName}} {
     public static var apiKey: String? = nil
     public static var basePath = "{{basePath}}"
@@ -33,6 +28,7 @@ public class {{projectName}} {
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
     internal static var credential = ApiVideoCredential()
     public static var apiResponseQueue: DispatchQueue = .main
+    public static var timeout: TimeInterval = 60
 
     public static func setChunkSize(chunkSize: Int) throws {
         if (chunkSize > {{maxChunkSize}}) {
@@ -71,11 +67,11 @@ public class {{projectName}} {
 
     static func setName(key: String, name: String, version: String) throws {
         if(!isValidName(name: name)) {
-            throw {{projectName}}Error.invalidName
+            throw ParameterError.invalidName
         }
  
         if(!isValidVersion(version: version)) {
-            throw {{projectName}}Error.invalidVersion
+            throw ParameterError.invalidVersion
         }
         {{projectName}}.customHeaders[key] = name + ":" + version
     }
@@ -93,14 +89,15 @@ public class {{projectName}} {
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class RequestBuilder<T> {
     var headers: [String: String]
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let parameters: [String: Any]?
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var parameters: [String: Any]?
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let method: String
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let URLString: String
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let requestTask: RequestTask = RequestTask()
 
     /// Optional block to obtain a reference to the request's progress instance when available.{{#useURLSession}}
     /// With the URLSession http client the request's progress only works on iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0.
     /// If you need to get the request's progress in older OS versions, please use Alamofire http client.{{/useURLSession}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let onProgressReady: ((Progress) -> Void)?
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var onProgressReady: ((Progress) -> Void)?
 
     required {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:], onProgressReady: ((Progress) -> Void)? = nil) {
         self.method = method
@@ -119,8 +116,8 @@ public class {{projectName}} {
     }
 
     @discardableResult
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> URLSessionTask? {
-        return nil
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
+        return requestTask
     }
 
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func addHeader(name: String, value: String) -> Self {

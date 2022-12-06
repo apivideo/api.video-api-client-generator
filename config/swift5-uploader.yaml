@@ -1,4 +1,7 @@
 changelog:
+  - 1.1.0 (2022-12-06):
+    - Refactor upload by chunk and progressive upload. It is now possible to cancel an upload.
+    - Add timeout API
   - 1.0.1 (2022-09-13):
     - period parameter is now mandatory in analytics endpoints
   - 1.0.0 (2022-07-05):
@@ -48,17 +51,17 @@ files:
   Environment.mustache:
     folder: Sources/Models
     destinationFilename: Environment.swift
-  Upload/ProgressiveUploadSessioning.mustache:
+  Upload/ProgressiveUploadSessionProtocol.mustache:
     folder: Sources/Upload
-    destinationFilename: ProgressiveUploadSessioning.swift
-  Upload/ChunkInputStream.mustache:
+    destinationFilename: ProgressiveUploadSessionProtocol.swift
+  Upload/FileChunkInputStream.mustache:
     folder: Sources/Upload
-    destinationFilename: ChunkInputStream.swift
-  Upload/FileChunksBuilder.mustache:
+    destinationFilename: FileChunkInputStream.swift
+  Upload/RequestTaskQueue.mustache:
     folder: Sources/Upload
-    destinationFilename: FileChunksBuilder.swift
-  Upload/FileReaders.mustache:
+    destinationFilename: RequestTaskQueue.swift
+  Upload/UploadChunkRequestTaskQueue.mustache:
     folder: Sources/Upload
-    destinationFilename: FileReaders.swift
+    destinationFilename: UploadChunkRequestTaskQueue.swift
   post-generate-uploader.sh:
     destinationFilename: post-generate.sh

@@ -45,12 +45,16 @@ internal class UploadTestCase: XCTestCase {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
 
-        VideosAPI.upload(videoId: self.videoId!, file: file, onProgressReady: { progress in
-            observedProgress = progress
-        }) { video, error in
-            XCTAssertNotNil(video, "Failed to upload a video")
-            XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-            expectation.fulfill()
+        do {
+            try VideosAPI.upload(videoId: self.videoId!, file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNotNil(video, "Failed to upload a video")
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                expectation.fulfill()
+            }
+        } catch {
+            XCTFail("Failed to upload a video due to \(error)")
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -83,7 +87,7 @@ class ProgressiveUploadTests: UploadTestCase {
     internal func uploadPart(file: URL, timeout: TimeInterval = 60, isLastPart: Bool = false) {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
-        
+
         if (isLastPart) {
             progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
                 observedProgress = progress
@@ -159,12 +163,16 @@ internal class UploadWithTokenTestCase: XCTestCase {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
 
-        VideosAPI.uploadWithUploadToken(token: self.token!, file: file, onProgressReady: { progress in
-            observedProgress = progress
-        }) { video, error in
-            XCTAssertNotNil(video, "Failed to upload a video")
-            XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
-            expectation.fulfill()
+        do {
+            try VideosAPI.uploadWithUploadToken(token: self.token!, file: file, onProgressReady: { progress in
+                observedProgress = progress
+            }) { video, error in
+                XCTAssertNotNil(video, "Failed to upload a video")
+                XCTAssertNil(error, "Failed to upload a video due to \(String(describing: error))")
+                expectation.fulfill()
+            }
+        } catch {
+            XCTFail("Failed to upload a video with upload token due to \(error)")
         }
 
         wait(for: [expectation], timeout: timeout)
@@ -197,7 +205,7 @@ class ProgressiveUploadWithTokenTests: UploadWithTokenTestCase {
     internal func uploadPart(file: URL, timeout: TimeInterval = 60, isLastPart: Bool = false) {
         let expectation = XCTestExpectation(description: "Upload a video")
         var observedProgress: Progress? = nil
-        
+
         if (isLastPart) {
             progressiveUploadSession!.uploadLastPart(file: file, onProgressReady: { progress in
                 observedProgress = progress

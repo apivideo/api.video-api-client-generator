@@ -4,7 +4,8 @@
 // https://openapi-generator.tech
 //
 
-import Foundation
+import Foundation{{#useAlamofire}}
+import Alamofire{{/useAlamofire}}
 
 protocol JSONEncodable {
     func encodeToJSON() -> Any
@@ -17,6 +18,10 @@ protocol JSONEncodable {
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum ParameterError: Error {
     case outOfRange
     case IO
+    case emptyRequest
+    case fileSizeNotAvailable
+    case invalidName
+    case invalidVersion
 }
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum DownloadException: Error {
@@ -56,4 +61,52 @@ protocol JSONEncodable {
         }
         self.init(statusCode: response.statusCode, header: header, body: body)
     }
+}
+
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class RequestTask{{#useAsyncAwait}}: @unchecked Sendable{{/useAsyncAwait}} {
+    private var lock = NSRecursiveLock()
+{{#useAlamofire}}
+    private var request: Request?
+
+    internal func set(request: Request) {
+        lock.lock()
+        defer { lock.unlock() }
+        self.request = request
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func cancel() {
+        lock.lock()
+        defer { lock.unlock() }
+        request?.cancel()
+        request = nil
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var state: Request.State {
+        request?.state ?? .initialized
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var uploadProgress: Progress? {
+        request?.uploadProgress
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var downloadProgress: Progress? {
+        request?.downloadProgress
+    }
+{{/useAlamofire}}
+{{^useAlamofire}}
+    private var task: URLSessionTask?
+
+    internal func set(task: URLSessionTask) {
+        lock.lock()
+        defer { lock.unlock() }
+        self.task = task
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func cancel() {
+        lock.lock()
+        defer { lock.unlock() }
+        task?.cancel()
+        task = nil
+    }
+{{/useAlamofire}}
 }
