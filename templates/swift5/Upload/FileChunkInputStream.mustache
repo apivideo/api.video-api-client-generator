@@ -58,7 +58,7 @@ class FileChunkInputStreamsBuilder {
     }
 
     public func build() -> [FileChunkInputStream] {
-        let chunkSize = ApiVideoClient.getChunkSize()
+        let chunkSize = {{projectName}}.getChunkSize()
         var chunkInputStreams: [FileChunkInputStream] = []
         for offset in stride(from: 0, through: fileSize, by: chunkSize) {
             chunkInputStreams.append(FileChunkInputStream(file: file, offset: offset, capacity: min(chunkSize, Int(fileSize - offset))))
