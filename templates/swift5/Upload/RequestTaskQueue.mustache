@@ -2,15 +2,17 @@ import Foundation
 import Alamofire
 
 public class RequestTaskQueue<T>: RequestTask {
-    private let executeQueue: DispatchQueue
-    private let executeLock = NSLock()
+    private let operationQueue: OperationQueue
+    private let operationLock = NSLock()
     private var requestBuilders: [RequestBuilder<T>] = []
 
     private let _downloadProgress = Progress(totalUnitCount: 0)
     private let _uploadProgress = Progress(totalUnitCount: 0)
 
     internal init(queueLabel: String) {
-        executeQueue = DispatchQueue(label: "video.api.UploadQueue.\(queueLabel)")
+        operationQueue = OperationQueue()
+        operationQueue.name = "video.api.RequestQueue.\(queueLabel)"
+        operationQueue.maxConcurrentOperationCount = 1
         super.init()
     }
 
@@ -51,25 +53,50 @@ public class RequestTaskQueue<T>: RequestTask {
                           apiResponseQueue: DispatchQueue = ApiVideoClient.apiResponseQueue,
                           completion: @escaping (_ data: T?, _ error: Error?) -> Void) -> Void {
         requestBuilders.append(requestBuilder)
-        return executeQueue.async {
-            self.executeLock.lock()
-            self.willExecuteRequestBuilder(requestBuilder: requestBuilder)
-            requestBuilder.execute(apiResponseQueue) { result in
-                switch result {
-                case let .success(response):
-                    completion(response.body, nil)
-                case let .failure(error):
-                    completion(nil, error)
-                }
-                self.executeLock.unlock()
-            }
-        }
+        return operationQueue.addOperation(RequestOperation(lock: operationLock, requestBuilder: requestBuilder, apiResponseQueue: apiResponseQueue, willExecuteRequestBuilder: willExecuteRequestBuilder, completion: completion))
     }
+    
 
     override public func cancel() {
-        executeQueue.suspend()
         requestBuilders.forEach {
             $0.requestTask.cancel()
         }
+        operationQueue.cancelAllOperations()
+    }
+}
+
+final class RequestOperation<T>: Operation {
+    private let lock: NSLock
+    private let requestBuilder: RequestBuilder<T>
+    private let apiResponseQueue: DispatchQueue
+    private let completion: (_ data: T?, _ error: Error?) -> Void
+    private let willExecuteRequestBuilder: (_: RequestBuilder<T>) -> Void
+    
+    init(lock: NSLock, requestBuilder: RequestBuilder<T>, apiResponseQueue: DispatchQueue, willExecuteRequestBuilder: @escaping (_: RequestBuilder<T>) -> Void, completion: @escaping (_ data: T?, _ error: Error?) -> Void) {
+        self.lock = lock
+        self.requestBuilder = requestBuilder
+        self.apiResponseQueue = apiResponseQueue
+        self.willExecuteRequestBuilder = willExecuteRequestBuilder
+        self.completion = completion
+        super.init()
+    }
+    
+    override func main() {
+        self.lock.lock()
+        guard !isCancelled else {
+            self.lock.unlock()
+            return
+        }
+        self.willExecuteRequestBuilder(requestBuilder)
+        requestBuilder.execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                self.completion(response.body, nil)
+            case let .failure(error):
+                self.completion(nil, error)
+            }
+            self.lock.unlock()
+        }
+
     }
 }

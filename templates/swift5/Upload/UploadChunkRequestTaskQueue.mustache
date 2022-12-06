@@ -12,6 +12,8 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
     private var videoId: String?
     private let _uploadProgress: Progress
 
+    private var hasSentError = false
+
     internal init(requestBuilders: [RequestBuilder<Video>],
                   fileSize: Int64,
                   queueLabel: String,
@@ -85,8 +87,11 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
 
     private func completionHook(_ data: Video?, _ error: Error?) -> Void {
         if let error = error {
-            cancel()
-            completion(nil, error)
+            if !hasSentError {
+                hasSentError = true
+                cancel()
+                completion(nil, error)
+            }
         } else {
             videoId = data?.videoId
             if (requestBuilders.allSatisfy {
