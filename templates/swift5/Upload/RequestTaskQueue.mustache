@@ -50,7 +50,7 @@ public class RequestTaskQueue<T>: RequestTask {
     }
 
     internal func execute(_ requestBuilder: RequestBuilder<T>,
-                          apiResponseQueue: DispatchQueue = ApiVideoClient.apiResponseQueue,
+                          apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                           completion: @escaping (_ data: T?, _ error: Error?) -> Void) -> Void {
         requestBuilders.append(requestBuilder)
         return operationQueue.addOperation(RequestOperation(lock: operationLock, requestBuilder: requestBuilder, apiResponseQueue: apiResponseQueue, willExecuteRequestBuilder: willExecuteRequestBuilder, completion: completion))
