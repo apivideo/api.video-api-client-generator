@@ -3,7 +3,6 @@ import Alamofire
 
 public class RequestTaskQueue<T>: RequestTask {
     private let operationQueue: OperationQueue
-    private let operationLock = NSLock()
     private var requestBuilders: [RequestBuilder<T>] = []
 
     private let _downloadProgress = Progress(totalUnitCount: 0)
@@ -53,7 +52,7 @@ public class RequestTaskQueue<T>: RequestTask {
                           apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                           completion: @escaping (_ data: T?, _ error: Error?) -> Void) -> Void {
         requestBuilders.append(requestBuilder)
-        return operationQueue.addOperation(RequestOperation(lock: operationLock, requestBuilder: requestBuilder, apiResponseQueue: apiResponseQueue, willExecuteRequestBuilder: willExecuteRequestBuilder, completion: completion))
+        return operationQueue.addOperation(RequestOperation(requestBuilder: requestBuilder, apiResponseQueue: apiResponseQueue, willExecuteRequestBuilder: willExecuteRequestBuilder, completion: completion))
     }
     
 
@@ -66,14 +65,13 @@ public class RequestTaskQueue<T>: RequestTask {
 }
 
 final class RequestOperation<T>: Operation {
-    private let lock: NSLock
     private let requestBuilder: RequestBuilder<T>
     private let apiResponseQueue: DispatchQueue
     private let completion: (_ data: T?, _ error: Error?) -> Void
     private let willExecuteRequestBuilder: (_: RequestBuilder<T>) -> Void
-    
-    init(lock: NSLock, requestBuilder: RequestBuilder<T>, apiResponseQueue: DispatchQueue, willExecuteRequestBuilder: @escaping (_: RequestBuilder<T>) -> Void, completion: @escaping (_ data: T?, _ error: Error?) -> Void) {
-        self.lock = lock
+    private let group = DispatchGroup()
+
+    init(requestBuilder: RequestBuilder<T>, apiResponseQueue: DispatchQueue, willExecuteRequestBuilder: @escaping (_: RequestBuilder<T>) -> Void, completion: @escaping (_ data: T?, _ error: Error?) -> Void) {
         self.requestBuilder = requestBuilder
         self.apiResponseQueue = apiResponseQueue
         self.willExecuteRequestBuilder = willExecuteRequestBuilder
@@ -82,11 +80,11 @@ final class RequestOperation<T>: Operation {
     }
     
     override func main() {
-        self.lock.lock()
         guard !isCancelled else {
-            self.lock.unlock()
             return
         }
+        group.enter()
+
         self.willExecuteRequestBuilder(requestBuilder)
         requestBuilder.execute(apiResponseQueue) { result in
             switch result {
@@ -95,8 +93,9 @@ final class RequestOperation<T>: Operation {
             case let .failure(error):
                 self.completion(nil, error)
             }
-            self.lock.unlock()
+            self.group.leave()
         }
-
+        // Make task synchronous
+        group.wait()
     }
 }
