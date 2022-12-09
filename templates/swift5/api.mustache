@@ -87,7 +87,7 @@ extension {{projectName}}API {
     /**
      * Create a progressive {{operationId}} session
      *
-     * - returns: a progressive {{operationId}} session
+     - returns: a progressive {{operationId}} session
      */
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
         Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
@@ -103,6 +103,14 @@ extension {{projectName}}API {
             {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}
             super.init(queueLabel: {{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
         }
+
+        {{#vendorExtensions.x-client-copy-from-response}}
+        override func willExecuteRequestBuilder(requestBuilder: RequestBuilder<Video>) -> Void {
+            if let {{paramName}} = {{paramName}} {
+                uploadAddVideoIdParameterWithRequestBuilder(requestBuilder: requestBuilder, {{paramName}}: {{paramName}})
+            }
+        }
+        {{/vendorExtensions.x-client-copy-from-response}}
         
         public func uploadPart(file: URL, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
             let chunkId = partId
@@ -130,11 +138,30 @@ extension {{projectName}}API {
                 numOfChunks = partId
             }
             let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: partId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
-            execute(requestBuilder, apiResponseQueue: apiResponseQueue, completion: completion)
+            execute(requestBuilder, apiResponseQueue: apiResponseQueue) { data, error in{{#vendorExtensions.x-client-copy-from-response}}
+                if let data = data {
+                    self.videoId = data.videoId
+                }{{/vendorExtensions.x-client-copy-from-response}}
+                completion(data, error)
+            }
             return requestBuilder.requestTask
         }
     }
-
+    {{#vendorExtensions.x-client-copy-from-response}}
+    /**
+     * Add a videoId to the request builder if it does not exist already.
+     - parameter requestBuilder: the request builder
+     - parameter videoId: the videoId to add to the request
+     */
+    internal class func uploadAddVideoIdParameterWithRequestBuilder(requestBuilder: RequestBuilder<Video>, {{paramName}}: {{{dataType}}}) {
+        guard let parameters = requestBuilder.parameters else {
+            return
+        }
+        if (!parameters.keys.contains("videoId")) {
+            requestBuilder.parameters!["videoId"] = videoId
+        }
+    }
+    {{/vendorExtensions.x-client-copy-from-response}}
 
     {{/vendorExtensions.x-client-chunk-upload}}
 {{/useAsyncAwait}}

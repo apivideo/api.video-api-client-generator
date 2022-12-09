@@ -69,7 +69,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
 
     override func willExecuteRequestBuilder(requestBuilder: RequestBuilder<Video>) -> Void {
         if let videoId = videoId {
-            uploadAddVideoIdParameterWithRequestBuilder(requestBuilder: requestBuilder, videoId: videoId)
+            VideosAPI.uploadAddVideoIdParameterWithRequestBuilder(requestBuilder: requestBuilder, videoId: videoId)
         }
         requestBuilder.onProgressReady = progressReadyHook
     }
@@ -99,20 +99,6 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
             }) {
                 completion(data, nil)
             }
-        }
-    }
-
-    /**
-    * Add a videoId to the request builder if it does not exist already.
-    - parameter requestBuilder: the request builder
-    - parameter videoId: the videoId to add to the request
-    */
-    private func uploadAddVideoIdParameterWithRequestBuilder(requestBuilder: RequestBuilder<Video>, videoId: String) {
-        guard let parameters = requestBuilder.parameters else {
-            return
-        }
-        if (!parameters.keys.contains("videoId")) {
-            requestBuilder.parameters!["videoId"] = videoId
         }
     }
 }
