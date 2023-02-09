@@ -70,6 +70,108 @@ public class VideosTest extends AbstractTest {
     }
 
     @Nested
+    @DisplayName("upload with upload token by chunk")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class UploadWithUploadTokenByChunk {
+        private UploadToken uploadToken;
+        private Video result;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File mp4File = new File(this.getClass().getResource("/assets/10m.mp4").getFile());
+
+            long fileSize = mp4File.length();
+            int chunkSize = 1024 * 1024 * 5;
+
+            apiClient.getHttpClient().setUploadChunkSize(chunkSize);
+
+            AtomicLong totalUploadedAtomic = new AtomicLong(0);
+            AtomicLong totalBytesAtomic = new AtomicLong(0);
+            AtomicLong chunkCountAtomic = new AtomicLong(0);
+            HashSet<Integer> seenChunkNums = new HashSet<>();
+
+            result = apiClient.videos().uploadWithUploadToken(this.uploadToken.getToken(), mp4File,
+                    (bytesWritten, totalBytes, chunkCount, chunkNum) -> {
+                        totalUploadedAtomic.set(bytesWritten);
+                        totalBytesAtomic.set(totalBytes);
+                        chunkCountAtomic.set(chunkCount);
+                        seenChunkNums.add(chunkNum);
+                    });
+
+            assertThat(totalBytesAtomic.get()).isEqualTo(fileSize);
+            assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
+            assertThat(chunkCountAtomic.get())
+                    .isEqualTo(new Double(Math.ceil((float) fileSize / chunkSize)).longValue());
+            assertThat(seenChunkNums).containsExactly(1, 2, 3);
+
+            System.out.println(result);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(result.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("upload with upload token and video id by chunk")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class UploadWithUploadTokenAndVideoIdByChunk {
+        private UploadToken uploadToken;
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+            this.testVideo = apiClient.videos()
+            .create(new VideoCreationPayload().title("[Java-SDK-tests] upload with chunk")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File mp4File = new File(this.getClass().getResource("/assets/10m.mp4").getFile());
+
+            long fileSize = mp4File.length();
+            int chunkSize = 1024 * 1024 * 5;
+
+            apiClient.getHttpClient().setUploadChunkSize(chunkSize);
+
+            AtomicLong totalUploadedAtomic = new AtomicLong(0);
+            AtomicLong totalBytesAtomic = new AtomicLong(0);
+            AtomicLong chunkCountAtomic = new AtomicLong(0);
+            HashSet<Integer> seenChunkNums = new HashSet<>();
+
+            apiClient.videos().uploadWithUploadToken(this.uploadToken.getToken(), 
+                    mp4File, 
+                    this.testVideo.getVideoId(),
+                    (bytesWritten, totalBytes, chunkCount, chunkNum) -> {
+                        totalUploadedAtomic.set(bytesWritten);
+                        totalBytesAtomic.set(totalBytes);
+                        chunkCountAtomic.set(chunkCount);
+                        seenChunkNums.add(chunkNum);
+                    });
+
+            assertThat(totalBytesAtomic.get()).isEqualTo(fileSize);
+            assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
+            assertThat(chunkCountAtomic.get())
+                    .isEqualTo(new Double(Math.ceil((float) fileSize / chunkSize)).longValue());
+            assertThat(seenChunkNums).containsExactly(1, 2, 3);
+
+            System.out.println(testVideo);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
     @DisplayName("progressive upload")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)

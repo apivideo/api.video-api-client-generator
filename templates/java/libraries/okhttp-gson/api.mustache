@@ -392,7 +392,42 @@ public class {{classname}} {
         {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}});{{#returnType}}
         return localVarResp.getData();{{/returnType}}
     }
+
     {{#vendorExtensions.x-client-chunk-upload}}
+    {{#vendorExtensions.x-client-copy-from-response}}
+    /**
+     * {{summary}}
+     *
+     * {{notes}}{{#allParams}}
+     * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}{{#returnType}}
+     * @param uploadProgressListener An upload progress listener
+     * @return {{returnType}}{{/returnType}}
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     {{#responses.0}}
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        {{#responses}}
+        <tr><td> {{code}} </td><td> {{message}} </td><td> {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} </td></tr>
+        {{/responses}}
+     </table>
+     {{/responses.0}}
+     {{#isDeprecated}}
+     * @deprecated
+     {{/isDeprecated}}
+        {{#externalDocs}}
+     * {{description}}
+     * @see <a href="{{url}}">{{summary}} Documentation</a>
+        {{/externalDocs}}
+     */
+    {{#isDeprecated}}
+    @Deprecated
+    {{/isDeprecated}}
+    public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, {{dataType}} {{paramName}}, UploadProgressListener uploadProgressListener) throws ApiException {
+        {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, {{paramName}}, uploadProgressListener);{{#returnType}}
+        return localVarResp.getData();{{/returnType}}
+    }
+    {{/vendorExtensions.x-client-copy-from-response}}
 
     /**
      * {{summary}}
@@ -423,7 +458,7 @@ public class {{classname}} {
     @Deprecated
     {{/isDeprecated}}
     public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, UploadProgressListener uploadProgressListener) throws ApiException {
-        {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, uploadProgressListener);{{#returnType}}
+        {{#returnType}}ApiResponse<{{{returnType}}}> localVarResp = {{/returnType}}{{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, {{#vendorExtensions.x-client-copy-from-response}}null, {{/vendorExtensions.x-client-copy-from-response}}uploadProgressListener);{{#returnType}}
         return localVarResp.getData();{{/returnType}}
     }
     {{/vendorExtensions.x-client-chunk-upload}}
@@ -431,7 +466,7 @@ public class {{classname}} {
 
     {{^vendorExtensions.x-group-parameters}}/**
      * {{summary}}
- *
+     *
      * {{notes}}{{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}{{/isContainer}}){{/required}}{{/allParams}}
      * @return ApiResponse&lt;{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}&gt;
@@ -463,7 +498,7 @@ public class {{classname}} {
         return localVarApiClient.execute(localVarCall, localVarReturnType);{{/returnType}}{{^returnType}}return localVarApiClient.execute(localVarCall);{{/returnType}}
         {{/vendorExtensions.x-client-chunk-upload}}
         {{#vendorExtensions.x-client-chunk-upload}}
-        return {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, null);
+        return {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, {{#vendorExtensions.x-client-copy-from-response}}null, {{/vendorExtensions.x-client-copy-from-response}}null);
         {{/vendorExtensions.x-client-chunk-upload}}
     }
     {{#vendorExtensions.x-client-chunk-upload}}
@@ -568,11 +603,7 @@ public class {{classname}} {
     {{#isDeprecated}}
     @Deprecated
     {{/isDeprecated}}
-    public ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, UploadProgressListener uploadProgressListener) throws ApiException {
-        {{#vendorExtensions.x-client-copy-from-response}}
-        {{dataType}} {{paramName}} = null;
-        {{/vendorExtensions.x-client-copy-from-response}}
-
+    public ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}WithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, {{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}UploadProgressListener uploadProgressListener) throws ApiException {
         {{#allParams}}
         {{#vendorExtensions.x-client-chunk-upload}}
         if({{paramName}} == null) {
