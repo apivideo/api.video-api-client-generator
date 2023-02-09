@@ -58,13 +58,13 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{dataType}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
         {{#vendorExtensions.x-client-chunk-upload}}
         if (try file.isMultiChunk) {
-            return try UploadChunkRequestTaskQueue({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}, file: file, onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
+            return try UploadChunkRequestTaskQueue({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}, file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         } else {
         {{/vendorExtensions.x-client-chunk-upload}}
-            return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}).execute(apiResponseQueue) { result in
+            return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}).execute(apiResponseQueue) { result in
                 switch result {
                 {{#returnType}}
                 case let .success(response):
@@ -89,7 +89,7 @@ extension {{projectName}}API {
      *
      - returns: a progressive {{operationId}} session
      */
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
         Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
     }
    
@@ -99,8 +99,9 @@ extension {{projectName}}API {
         {{#allParams}}{{^isFile}}
         private let {{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}
 
-        public init({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}) {
-            {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}
+        public init({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}) {
+            {{#allParams}}{{^isFile}}self.{{paramName}} = {{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+            self.{{paramName}} = {{paramName}}{{/vendorExtensions.x-client-copy-from-response}}
             super.init(queueLabel: {{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}})
         }
 
@@ -140,7 +141,9 @@ extension {{projectName}}API {
             let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: partId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
             execute(requestBuilder, apiResponseQueue: apiResponseQueue) { data, error in{{#vendorExtensions.x-client-copy-from-response}}
                 if let data = data {
-                    self.videoId = data.videoId
+                    if self.videoId == nil {
+                        self.videoId = data.videoId
+                    }
                 }{{/vendorExtensions.x-client-copy-from-response}}
                 completion(data, error)
             }
