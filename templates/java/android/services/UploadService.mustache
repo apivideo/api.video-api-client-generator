@@ -330,19 +330,21 @@ open class UploadService(
      *
      * @param token The video id or the token of the video
      * @param filePath The path of the file to upload
+     * @param videoId The optional video id if it was already created, otherwise it will be created if you pass null
      * @return the unique upload id
      */
-    fun uploadWithUploadToken(token: String, filePath: String) =
-        uploadWithUploadToken(token, File(filePath))
+    fun uploadWithUploadToken(token: String, filePath: String, videoId: String? = null) =
+        uploadWithUploadToken(token, File(filePath), videoId)
 
     /**
      * Upload a file from its upload token
      *
      * @param token The video id or the token of the video
      * @param file The file to upload
+     * @param videoId The optional video id if it was already created, otherwise it will be created if you pass null
      * @return the unique upload id
      */
-    fun uploadWithUploadToken(token: String, file: File): String {
+    fun uploadWithUploadToken(token: String, file: File, videoId: String? = null): String {
         _totalNumOfUploads++
 
         val id = UUID.randomUUID().toString()
@@ -354,6 +356,7 @@ open class UploadService(
                     videosApi.uploadWithUploadToken(
                         token,
                         fileToUpload,
+                        videoId,
                         progressListener
                     )
                 },
@@ -377,9 +380,10 @@ open class UploadService(
      * Creates a [ProgressiveUploadSession] for an upload token
      *
      * @param token The upload token
+     * @param videoId The optional video id if it was already created, otherwise it will be created if you pass null
      */
-    fun createUploadTokenProgressiveUploadSession(token: String) =
-        createProgressiveUploadSession(videosApi.createUploadWithUploadTokenProgressiveSession(token))
+    fun createUploadTokenProgressiveUploadSession(token: String, videoId: String? = null) =
+        createProgressiveUploadSession(videosApi.createUploadWithUploadTokenProgressiveSession(token, videoId))
 
     /**
      * Creates a [ProgressiveUploadSession].
