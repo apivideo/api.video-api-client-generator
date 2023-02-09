@@ -520,7 +520,12 @@ public class {{classname}} {
 
         public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
             {{#allParams}}{{^isFile}}this.{{paramName}} = {{paramName}};{{/isFile}}{{/allParams}}
-        }
+        }{{#vendorExtensions.x-client-copy-from-response}}
+
+        public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}, {{dataType}} {{paramName}}) {
+            {{#allParams}}{{^isFile}}this.{{paramName}} = {{paramName}};{{/isFile}}{{/allParams}}
+            this.{{paramName}} = {{paramName}};
+        }{{/vendorExtensions.x-client-copy-from-response}}
 
         @Override
         public Video uploadPart(File part) throws ApiException {
@@ -571,6 +576,12 @@ public class {{classname}} {
     public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}) {
         return new {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}});
     }
+
+    {{#vendorExtensions.x-client-copy-from-response}}
+    public {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession create{{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{{dataType}}} {{paramName}}{{/isFile}}{{/allParams}}, {{dataType}} {{paramName}}) {
+        return new {{#titlecase}}{{operationId}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{/isFile}}{{/allParams}}, {{paramName}});
+    }
+    {{/vendorExtensions.x-client-copy-from-response}}
     {{/vendorExtensions.x-client-chunk-upload}}
 
     {{#vendorExtensions.x-client-chunk-upload}}

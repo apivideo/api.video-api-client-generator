@@ -247,6 +247,40 @@ public class VideosTest extends AbstractTest {
     }
 
     @Nested
+    @DisplayName("progressive upload with upload token and video id")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ProgressiveUploadWithUploadTokenAndVideoId {
+        private UploadToken uploadToken;
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+            this.testVideo = apiClient.videos()
+            .create(new VideoCreationPayload().title("[Java-SDK-tests] progressive upload")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException {
+            File part1 = new File(this.getClass().getResource("/assets/10m.mp4.part.a").getFile());
+            File part2 = new File(this.getClass().getResource("/assets/10m.mp4.part.b").getFile());
+            File part3 = new File(this.getClass().getResource("/assets/10m.mp4.part.c").getFile());
+
+            VideosApi.UploadWithUploadTokenProgressiveSession uploadProgressiveSession = apiClient.videos()
+                    .createUploadWithUploadTokenProgressiveSession(this.uploadToken.getToken(), testVideo.getVideoId());
+
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            uploadProgressiveSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
     @DisplayName("upload without chunk")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class Upload {
