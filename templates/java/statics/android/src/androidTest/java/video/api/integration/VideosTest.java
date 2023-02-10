@@ -96,6 +96,108 @@ public class VideosTest {
     }
 
     @Nested
+    @DisplayName("upload with upload token by chunk")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class UploadWithUploadTokenByChunk {
+        private UploadToken uploadToken;
+        private Video result;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException, IOException {
+            File mp4File = Utils.getFileFromAsset("10m.mp4");
+
+            long fileSize = mp4File.length();
+            int chunkSize = 1024 * 1024 * 5;
+
+            apiClient.getHttpClient().setUploadChunkSize(chunkSize);
+
+            AtomicLong totalUploadedAtomic = new AtomicLong(0);
+            AtomicLong totalBytesAtomic = new AtomicLong(0);
+            AtomicLong chunkCountAtomic = new AtomicLong(0);
+            HashSet<Integer> seenChunkNums = new HashSet<>();
+
+            result = apiClient.videos().uploadWithUploadToken(this.uploadToken.getToken(), mp4File,
+                    (bytesWritten, totalBytes, chunkCount, chunkNum) -> {
+                        totalUploadedAtomic.set(bytesWritten);
+                        totalBytesAtomic.set(totalBytes);
+                        chunkCountAtomic.set(chunkCount);
+                        seenChunkNums.add(chunkNum);
+                    });
+
+            assertThat(totalBytesAtomic.get()).isEqualTo(fileSize);
+            assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
+            assertThat(chunkCountAtomic.get())
+                    .isEqualTo(new Double(Math.ceil((float) fileSize / chunkSize)).longValue());
+            assertThat(seenChunkNums).containsExactly(1, 2, 3);
+
+            System.out.println(result);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(result.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("upload with upload token and video id by chunk")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class UploadWithUploadTokenAndVideoIdByChunk {
+        private UploadToken uploadToken;
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Android-SDK-tests] progressive upload")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException, IOException {
+            File mp4File = Utils.getFileFromAsset("10m.mp4");
+
+            long fileSize = mp4File.length();
+            int chunkSize = 1024 * 1024 * 5;
+
+            apiClient.getHttpClient().setUploadChunkSize(chunkSize);
+
+            AtomicLong totalUploadedAtomic = new AtomicLong(0);
+            AtomicLong totalBytesAtomic = new AtomicLong(0);
+            AtomicLong chunkCountAtomic = new AtomicLong(0);
+            HashSet<Integer> seenChunkNums = new HashSet<>();
+
+            apiClient.videos().uploadWithUploadToken(this.uploadToken.getToken(),
+                    mp4File,
+                    testVideo.getVideoId(),
+                    (bytesWritten, totalBytes, chunkCount, chunkNum) -> {
+                        totalUploadedAtomic.set(bytesWritten);
+                        totalBytesAtomic.set(totalBytes);
+                        chunkCountAtomic.set(chunkCount);
+                        seenChunkNums.add(chunkNum);
+                    });
+
+            assertThat(totalBytesAtomic.get()).isEqualTo(fileSize);
+            assertThat(totalUploadedAtomic.get()).isEqualTo(fileSize);
+            assertThat(chunkCountAtomic.get())
+                    .isEqualTo(new Double(Math.ceil((float) fileSize / chunkSize)).longValue());
+            assertThat(seenChunkNums).containsExactly(1, 2, 3);
+
+            System.out.println(testVideo);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
+        }
+    }
+
+    @Nested
     @DisplayName("progressive upload")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class ProgressiveUpload {
@@ -155,6 +257,40 @@ public class VideosTest {
         @AfterAll
         public void deleteVideo() throws ApiException {
             apiClient.videos().delete(result.getVideoId());
+        }
+    }
+
+    @Nested
+    @DisplayName("progressive upload with upload token and video id")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class ProgressiveUploadWithUploadTokenAndVideoId {
+        private UploadToken uploadToken;
+        private Video testVideo;
+
+        @BeforeAll
+        public void createVideo() throws ApiException {
+            this.uploadToken = apiClient.uploadTokens().createToken(new TokenCreationPayload());
+            this.testVideo = apiClient.videos()
+                    .create(new VideoCreationPayload().title("[Android-SDK-tests] progressive upload")._public(false));
+        }
+
+        @Test
+        public void uploadVideo() throws ApiException, IOException {
+            File part1 = Utils.getFileFromAsset("10m.mp4.part.a");
+            File part2 = Utils.getFileFromAsset("10m.mp4.part.b");
+            File part3 = Utils.getFileFromAsset("10m.mp4.part.c");
+
+            VideosApi.UploadWithUploadTokenProgressiveSession uploadProgressiveSession = apiClient.videos()
+                    .createUploadWithUploadTokenProgressiveSession(this.uploadToken.getToken(), testVideo.getVideoId());
+
+            uploadProgressiveSession.uploadPart(part1);
+            uploadProgressiveSession.uploadPart(part2);
+            uploadProgressiveSession.uploadLastPart(part3);
+        }
+
+        @AfterAll
+        public void deleteVideo() throws ApiException {
+            apiClient.videos().delete(testVideo.getVideoId());
         }
     }
 
