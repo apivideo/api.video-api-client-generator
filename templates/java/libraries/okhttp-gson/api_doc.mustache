@@ -29,7 +29,9 @@ Method | HTTP request | Description
 ### Example
 ```java
 // Import classes:
+{{#client}}
 import video.api.client.ApiVideoClient;
+{{/client}}
 import {{{invokerPackage}}}.ApiException;
 import {{{invokerPackage}}}.models.*;
 import {{{package}}}.{{{classname}}};
@@ -37,18 +39,32 @@ import java.util.*;
 
 public class Example {
   public static void main(String[] args) {
+    {{#client}}
     {{^authMethods}}
     ApiVideoClient client = new ApiVideoClient();
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient(ApiVideoClient.BasePaths.SANDBOX);
+    // ApiVideoClient client = new ApiVideoClient(Environment.SANDBOX);
     {{/authMethods}}
     {{#authMethods}}
     ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
     // if you rather like to use the sandbox environment:
-    // ApiVideoClient client = new ApiVideoClient("YOU_SANDBOX_API_KEY", Environment.SANDBOX);
+    // ApiVideoClient client = new ApiVideoClient("YOUR_SANDBOX_API_KEY", Environment.SANDBOX);
     {{/authMethods}}
 
     {{{classname}}} apiInstance = client.{{classVarName}}();
+    {{/client}}
+    {{^client}}
+    {{^authMethods}}
+    {{{classname}}} apiInstance = {{classVarName}}();
+    // if you rather like to use the sandbox environment:
+    //  {{{classname}}} apiInstance = new {{classVarName}}(Environment.SANDBOX);
+    {{/authMethods}}
+    {{#authMethods}}
+    {{{classname}}} apiInstance = new {{classVarName}}("YOUR_API_KEY");
+    // if you rather like to use the sandbox environment:
+    // {{{classname}}} apiInstance = new {{classVarName}}("YOUR_SANDBOX_API_KEY", Environment.SANDBOX);
+    {{/authMethods}}
+    {{/client}}
     {{#allParams}}{{^vendorExtensions.x-client-doc-hidden}}
     {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{description}}}{{/vendorExtensions.x-client-doc-hidden}}{{#isModel}}
     {{#vars}}
