@@ -3,6 +3,7 @@ package video.api.client.example
 import android.app.Notification
 import androidx.core.app.NotificationCompat
 import video.api.client.api.models.Video
+import video.api.client.api.notifications.setStyle
 import video.api.client.api.services.UploadService
 
 class CustomUploaderService : UploadService(
@@ -22,7 +23,7 @@ class CustomUploaderService : UploadService(
     override fun onUploadSuccessNotification(id: String, video: Video): Notification {
         // Return your custom the notification
         return NotificationCompat.Builder(this, channelId)
-            .setStyle(notificationIconResourceId, notificationColorResourceId)
+            .setStyle(this, notificationIconResourceId, notificationColorResourceId)
             .setContentTitle(getString(R.string.upload_success_notification_text))
             .build()
     }

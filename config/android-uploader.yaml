@@ -88,12 +88,18 @@ files:
     destinationFilename: post-generate.sh
   maven-push.gradle.mustache:
     destinationFilename: maven-push.gradle
+  android/notifications/NotificationExtensions.mustache:
+    folder: src/main/java/video/api/uploader/api/notifications
+    destinationFilename: NotificationExtensions.kt
+  android/notifications/NotificationUtils.mustache:
+    folder: src/main/java/video/api/uploader/api/notifications
+    destinationFilename: NotificationUtils.kt
   android/services/Extensions.mustache:
     folder: src/main/java/video/api/uploader/api/services
     destinationFilename: Extensions.kt
-  android/services/NotificationUtils.mustache:
+  android/services/ServiceNotificationUtils.mustache:
     folder: src/main/java/video/api/uploader/api/services
-    destinationFilename: NotificationUtils.kt
+    destinationFilename: ServiceNotificationUtils.kt
   android/services/UploadService.mustache:
     folder: src/main/java/video/api/uploader/api/services
     destinationFilename: UploadService.kt
@@ -103,3 +109,30 @@ files:
   android/services/UploadTask.mustache:
     folder: src/main/java/video/api/uploader/api/services
     destinationFilename: UploadTask.kt
+  android/work/stores/NotificationConfigurationStore.mustache:
+    folder: src/main/java/video/api/uploader/api/work/stores
+    destinationFilename: NotificationConfigurationStore.kt
+  android/work/stores/ProgressiveUploadSessionStore.mustache:
+    folder: src/main/java/video/api/uploader/api/work/stores
+    destinationFilename: ProgressiveUploadSessionStore.kt
+  android/work/stores/VideosApiStore.mustache:
+    folder: src/main/java/video/api/uploader/api/work/stores
+    destinationFilename: VideosApiStore.kt
+  android/work/workers/AbstractUploadWorker.mustache:
+    folder: src/main/java/video/api/uploader/api/work/workers
+    destinationFilename: AbstractUploadWorker.kt
+  android/work/workers/ProgressiveUploadWorker.mustache:
+    folder: src/main/java/video/api/uploader/api/work/workers
+    destinationFilename: ProgressiveUploadWorker.kt
+  android/work/workers/UploadWorker.mustache:
+    folder: src/main/java/video/api/uploader/api/work/workers
+    destinationFilename: UploadWorker.kt
+  android/work/OperationWithRequest.mustache:
+    folder: src/main/java/video/api/uploader/api/work
+    destinationFilename: OperationWithRequest.kt
+  android/work/UploadWorkerHelper.mustache:
+    folder: src/main/java/video/api/uploader/api/work
+    destinationFilename: UploadWorkerHelper.kt
+  android/work/WorkManagerExtensions.mustache:
+    folder: src/main/java/video/api/uploader/api/work
+    destinationFilename: WorkManagerExtensions.kt

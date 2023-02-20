@@ -7,8 +7,9 @@ import android.app.Service
 import android.content.Context
 import android.os.Build
 import androidx.annotation.StringRes
+import {{invokerPackage}}.notifications.NotificationUtils
 
-class NotificationUtils(
+class ServiceNotificationUtils(
     private val service: Service,
     private val channelId: String,
     private val notificationId: Int
@@ -38,19 +39,10 @@ class NotificationUtils(
     fun createNotificationChannel(
         @StringRes nameResourceId: Int,
         @StringRes descriptionResourceId: Int
-    ) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = service.getString(nameResourceId)
-
-            val channel = NotificationChannel(
-                channelId,
-                name,
-                NotificationManager.IMPORTANCE_LOW
-            )
-            if (descriptionResourceId != 0) {
-                channel.description = service.getString(descriptionResourceId)
-            }
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
+    ) = NotificationUtils.createNotificationChannel(
+        service,
+        channelId,
+        nameResourceId,
+        descriptionResourceId
+    )
 }
