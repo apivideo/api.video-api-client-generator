@@ -1,8 +1,12 @@
 package {{invokerPackage}}.work
 
+import androidx.work.Data
 import androidx.work.WorkManager
+import {{invokerPackage}}.JSON
+import {{invokerPackage}}.models.Video
 import {{invokerPackage}}.upload.IProgressiveUploadSession
 import {{invokerPackage}}.work.stores.ProgressiveUploadSessionStore
+import {{invokerPackage}}.work.workers.AbstractUploadWorker
 import {{invokerPackage}}.work.workers.ProgressiveUploadWorker
 import {{invokerPackage}}.work.workers.UploadWorker
 import java.io.File
@@ -128,3 +132,21 @@ fun WorkManager.uploadPart(
  */
 fun WorkManager.cancelProgressiveUploadSession(session: IProgressiveUploadSession) =
     UploadWorkerHelper.cancelProgressiveUploadSession(this, session)
+
+/**
+ * Extension functions for [Data] to deserialize the [Video].
+ *
+ * @return The [Video] object
+ */
+fun Data.toVideo() = JSON().deserialize(
+    this.getString(
+        AbstractUploadWorker.VIDEO_KEY
+    ), Video::class.java
+) as Video
+
+/**
+ * Extension functions for [Data] to deserialize the [Video].
+ *
+ * @return The [Video] object
+ */
+fun Data.toProgress(): Int = this.getInt(AbstractUploadWorker.PROGRESS_KEY, 0)

@@ -19,6 +19,8 @@ import video.api.client.api.models.VideoCreationPayload
 import video.api.client.api.work.workers.AbstractUploadWorker.Companion.PROGRESS_KEY
 import video.api.client.api.work.workers.AbstractUploadWorker
 import video.api.client.api.work.stores.VideosApiStore
+import video.api.client.api.work.toProgress
+import video.api.client.api.work.toVideo
 import video.api.client.api.work.upload
 import video.api.client.work.example.databinding.ActivityMainBinding
 
@@ -131,16 +133,13 @@ class MainActivity : AppCompatActivity() {
                         WorkInfo.State.RUNNING -> {
                             onUploadProgress(
                                 operationWithRequest.request.id.toString(),
-                                workInfo.progress.getInt(PROGRESS_KEY, 0)
+                                workInfo.progress.toProgress()
                             )
                         }
                         WorkInfo.State.SUCCEEDED -> {
                             onUploadComplete(
-                                operationWithRequest.request.id.toString(), JSON().deserialize(
-                                    workInfo.outputData.getString(
-                                        AbstractUploadWorker.VIDEO_KEY
-                                    ), Video::class.java
-                                )
+                                operationWithRequest.request.id.toString(),
+                                workInfo.outputData.toVideo()
                             )
                         }
                         WorkInfo.State.FAILED -> {
