@@ -24,8 +24,29 @@ object UploadWorkerHelper {
      * @param file The file to upload
      */
     @JvmStatic
-    fun upload(context: Context, videoId: String, file: File) =
+    fun upload(
+        context: Context,
+        videoId: String,
+        file: File,
+    ) =
         upload(WorkManager.getInstance(context), videoId, file)
+
+    /**
+     * Enqueues a work to upload a file.
+     *
+     * @param context The application context
+     * @param videoId The video id
+     * @param file The file to upload
+     * @param workerClass The worker class to use. Default is [UploadWorker].
+     */
+    @JvmStatic
+    fun upload(
+        context: Context,
+        videoId: String,
+        file: File,
+        workerClass: Class<out UploadWorker> = UploadWorker::class.java
+    ) =
+        upload(WorkManager.getInstance(context), videoId, file, workerClass)
 
     /**
      * Enqueues a work to upload a file.
@@ -35,8 +56,28 @@ object UploadWorkerHelper {
      * @param file The file to upload
      */
     @JvmStatic
-    fun upload(workManager: WorkManager, videoId: String, file: File) =
-        upload(workManager, file, null, videoId)
+    fun upload(
+        workManager: WorkManager,
+        videoId: String,
+        file: File,
+    ) =
+        upload(workManager, videoId, file, UploadWorker::class.java)
+
+    /**
+     * Enqueues a work to upload a file.
+     *
+     * @param workManager The WorkManager instance
+     * @param videoId The video id
+     * @param file The file to upload
+     * @param workerClass The worker class to use. Default is [UploadWorker].
+     */
+    fun upload(
+        workManager: WorkManager,
+        videoId: String,
+        file: File,
+        workerClass: Class<out UploadWorker>
+    ) =
+        upload(workManager, file, null, videoId, workerClass)
 
     /**
      * Enqueues a work to upload a file with upload token.
@@ -51,8 +92,32 @@ object UploadWorkerHelper {
         context: Context,
         token: String,
         file: File,
-        videoId: String? = null
-    ) = uploadWithUploadToken(WorkManager.getInstance(context), token, file, videoId)
+        videoId: String? = null,
+    ) = uploadWithUploadToken(
+        WorkManager.getInstance(context),
+        token,
+        file,
+        videoId,
+        UploadWorker::class.java
+    )
+
+    /**
+     * Enqueues a work to upload a file with upload token.
+     *
+     * @param context The application context
+     * @param token The upload token
+     * @param file The file to upload
+     * @param videoId The video id. Can be null if the video is not created yet.
+     * @param workerClass The worker class to use. Default is [UploadWorker].
+     */
+    @JvmStatic
+    fun uploadWithUploadToken(
+        context: Context,
+        token: String,
+        file: File,
+        videoId: String? = null,
+        workerClass: Class<out UploadWorker>
+    ) = uploadWithUploadToken(WorkManager.getInstance(context), token, file, videoId, workerClass)
 
     /**
      * Enqueues a work to upload a file with upload token.
@@ -67,20 +132,45 @@ object UploadWorkerHelper {
         workManager: WorkManager,
         token: String,
         file: File,
-        videoId: String? = null
-    ) = upload(workManager, file, token, videoId)
+        videoId: String? = null,
+    ) = uploadWithUploadToken(
+        workManager,
+        token,
+        file,
+        videoId,
+        UploadWorker::class.java
+    )
+
+    /**
+     * Enqueues a work to upload a file with upload token.
+     *
+     * @param workManager The WorkManager instance
+     * @param token The upload token
+     * @param file The file to upload
+     * @param videoId The video id. Can be null if the video is not created yet.
+     * @param workerClass The worker class to use. Default is [UploadWorker].
+     */
+    @JvmStatic
+    fun uploadWithUploadToken(
+        workManager: WorkManager,
+        token: String,
+        file: File,
+        videoId: String? = null,
+        workerClass: Class<out UploadWorker>,
+    ) = upload(workManager, file, token, videoId, workerClass)
 
     private fun upload(
         workManager: WorkManager,
         file: File,
         token: String? = null,
         videoId: String? = null,
+        workerClass: Class<out UploadWorker>
     ): OperationWithRequest {
         require((token != null) || (videoId != null)) {
             "You must provide either a token or a videoId"
         }
 
-        val workRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
+        val workRequest = OneTimeWorkRequest.Builder(workerClass)
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -162,8 +252,32 @@ object UploadWorkerHelper {
         context: Context,
         session: IProgressiveUploadSession,
         file: File,
+        isLastPart: Boolean
+    ) = uploadPart(
+        WorkManager.getInstance(context),
+        session,
+        file,
+        isLastPart,
+        ProgressiveUploadWorker::class.java
+    )
+
+    /**
+     * Enqueues a work to upload a part of a file.
+     *
+     * @param context The application context
+     * @param session The progressive upload session
+     * @param file The file to upload
+     * @param isLastPart True if this is the last part of the file
+     * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
+     */
+    @JvmStatic
+    private fun uploadPart(
+        context: Context,
+        session: IProgressiveUploadSession,
+        file: File,
         isLastPart: Boolean,
-    ) = uploadPart(WorkManager.getInstance(context), session, file, isLastPart)
+        workerClass: Class<out ProgressiveUploadWorker>
+    ) = uploadPart(WorkManager.getInstance(context), session, file, isLastPart, workerClass)
 
     /**
      * Enqueues a work to upload a part of a file.
@@ -178,11 +292,35 @@ object UploadWorkerHelper {
         workManager: WorkManager,
         session: IProgressiveUploadSession,
         file: File,
+        isLastPart: Boolean
+    ) = uploadPart(
+        workManager,
+        session,
+        file,
+        isLastPart,
+        ProgressiveUploadWorker::class.java
+    )
+
+    /**
+     * Enqueues a work to upload a part of a file.
+     *
+     * @param workManager The WorkManager instance
+     * @param session The progressive upload session
+     * @param file The file to upload
+     * @param isLastPart True if this is the last part of the file
+     * @param workerClass The worker class to use. Default is [ProgressiveUploadWorker].
+     */
+    @JvmStatic
+    fun uploadPart(
+        workManager: WorkManager,
+        session: IProgressiveUploadSession,
+        file: File,
         isLastPart: Boolean,
+        workerClass: Class<out ProgressiveUploadWorker>
     ): OperationWithRequest {
         val sessionIndex = ProgressiveUploadSessionStore.add(session)
 
-        val workRequest = OneTimeWorkRequest.Builder(ProgressiveUploadWorker::class.java)
+        val workRequest = OneTimeWorkRequest.Builder(workerClass)
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
