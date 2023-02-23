@@ -284,7 +284,7 @@ public class UploadServiceTest {
             };
 
             uploadService.addListener(listener);
-            uploadService.uploadWithUploadToken(testUploadToken.getToken(), mp4File);
+            uploadService.uploadWithUploadToken(testUploadToken.getToken(), mp4File, null);
 
             successLatch.await(60, TimeUnit.SECONDS);
             assertThat(progressAtomic.get()).isEqualTo(100);
