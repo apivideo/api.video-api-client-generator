@@ -13,15 +13,15 @@ import {
 import { promisify } from 'util';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
-import ObjectSerializer from '../ObjectSerializer';
-import HttpClient, { QueryOptions } from '../HttpClient';
-import ProgressiveSession from '../model/ProgressiveSession';
+import ObjectSerializer from '../ObjectSerializer.js';
+import HttpClient, { QueryOptions } from '../HttpClient.js';
+import ProgressiveSession from '../model/ProgressiveSession.js';
 {{#imports}}
-import {{classname}} from '../model/{{classname}}';
+import {{classname}} from '../model/{{classname}}.js';
 {{/imports}}
 import { Readable, Stream } from 'stream';
 import { Blob } from 'buffer';
-import { readableToBuffer } from "../HttpClient";
+import { readableToBuffer } from "../HttpClient.js";
 {{#operations}}
 
 /**

@@ -78,7 +78,4 @@ class ApiVideoClient {
   }
 }
 
-export { {{# apiInfo.apis }}{{^x-client-hidden}}{{classFilename}}, {{/x-client-hidden}}{{/ apiInfo.apis }} {{#models}}{{#model}}{{classname}}, {{/model}}{{/models}} };
-
-
-export default ApiVideoClient;
+export = ApiVideoClient;
