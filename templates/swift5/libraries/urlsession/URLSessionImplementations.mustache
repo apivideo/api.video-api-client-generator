@@ -41,6 +41,11 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var taskDidReceiveChallenge: {{projectName}}ChallengeHandler?
 
     /**
+     To observe upload or download progress
+     */
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var progressObservation: NSKeyValueObservation?
+
+    /**
      May be assigned if you want to do any of those things:
      - control the task completion
      - intercept and handle errors like authorization
@@ -49,8 +54,8 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     @available(*, deprecated, message: "Please override execute() method to intercept and handle errors like authorization or retry the request. Check the Wiki for more info. https://github.com/OpenAPITools/openapi-generator/wiki/FAQ#how-do-i-implement-bearer-token-authentication-with-urlsession-on-the-swift-api-client")
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var taskCompletionShouldRetry: ((Data?, URLResponse?, Error?, @escaping (Bool) -> Void) -> Void)?
 
-    required {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:]) {
-        super.init(method: method, URLString: URLString, parameters: parameters, headers: headers)
+    required {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:], onProgressReady: ((Progress) -> Void)? = nil) {
+        super.init(method: method, URLString: URLString, parameters: parameters, headers: headers, onProgressReady: onProgressReady)
     }
 
     /**
@@ -83,7 +88,7 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
         }
 
         var originalRequest = URLRequest(url: url)
-
+        originalRequest.timeoutInterval = {{projectName}}.timeout
         originalRequest.httpMethod = method.rawValue
 
         headers.forEach { key, value in
@@ -100,7 +105,7 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     }
 
     @discardableResult
-    override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> URLSessionTask? {
+    override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -163,7 +168,11 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
             }
 
             if #available(iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0, *) {
-                onProgressReady?(dataTask.progress)
+                if let onProgressReady = onProgressReady {
+                    progressObservation = dataTask.progress.observe(\.fractionCompleted) { progress, _ in
+                        onProgressReady(progress)
+                    }
+                }
             }
 
             taskIdentifier = dataTask.taskIdentifier
@@ -172,14 +181,14 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
 
             dataTask.resume()
 
-            return dataTask
+            requestTask.set(task: dataTask)
         } catch {
             apiResponseQueue.async {
                 completion(.failure(ErrorResponse.error(415, nil, nil, error)))
             }
-
-            return nil
         }
+
+        return requestTask
     }
 
     fileprivate func processRequestResponse(urlRequest: URLRequest, data: Data?, response: URLResponse?, error: Error?, completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
@@ -446,6 +455,17 @@ private class FormDataEncoding: ParameterEncoding {
 
         for (key, value) in parameters {
             switch value {
+            case let fileChunkInputStream as FileChunkInputStream:
+
+                urlRequest = configureInputStreamRequest(
+                    urlRequest: urlRequest,
+                    boundary: boundary,
+                    name: key,
+                    fileName: fileChunkInputStream.file.lastPathComponent,
+                    inputStream: fileChunkInputStream,
+                    length: UInt64(fileChunkInputStream.capacity)
+                )
+
             case let fileURL as URL:
 
                 urlRequest = try configureFileUploadRequest(
@@ -485,6 +505,39 @@ private class FormDataEncoding: ParameterEncoding {
         var body = urlRequest.httpBody.orEmpty
 
         body.append("\r\n--\(boundary)--\r\n")
+
+        urlRequest.httpBody = body
+
+        return urlRequest
+    }
+
+    private func configureInputStreamRequest(urlRequest: URLRequest, boundary: String, name: String, fileName: String, inputStream: InputStream, length: UInt64) -> URLRequest {
+
+        var urlRequest = urlRequest
+
+        var body = urlRequest.httpBody.orEmpty
+
+        let data = encodeInputStream(for: inputStream, withLength: length)
+
+        let mimetype = "video/quicktime"
+
+        // If we already added something then we need an additional newline.
+        if body.count > 0 {
+            body.append("\r\n")
+        }
+
+        // Value boundary.
+        body.append("--\(boundary)\r\n")
+
+        // Value headers.
+        body.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
+        body.append("Content-Type: \(mimetype)\r\n")
+
+        // Separate headers and body.
+        body.append("\r\n")
+
+        // The value data.
+        body.append(data)
 
         urlRequest.httpBody = body
 
@@ -564,6 +617,35 @@ private class FormDataEncoding: ParameterEncoding {
             }
         }
         return "application/octet-stream"
+    }
+
+    private func encodeInputStream(for inputStream: InputStream, withLength length: UInt64) -> Data {
+        inputStream.open()
+        defer { inputStream.close() }
+
+        let streamBufferSize = 1024
+        var encoded = Data()
+
+        while inputStream.hasBytesAvailable {
+            var buffer = [UInt8](repeating: 0, count: streamBufferSize)
+            let bytesRead = inputStream.read(&buffer, maxLength: streamBufferSize)
+
+            if let error = inputStream.streamError {
+                fatalError("Reading input stream failed with error \(error)")
+            }
+
+            if bytesRead > 0 {
+                encoded.append(buffer, count: bytesRead)
+            } else {
+                break
+            }
+        }
+
+        guard UInt64(encoded.count) == length else {
+            fatalError("Unexpected input stream length. Expected: \(length) Got: \(UInt64(encoded.count))")
+        }
+
+        return encoded
     }
 
 }

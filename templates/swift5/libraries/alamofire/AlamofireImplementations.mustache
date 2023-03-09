@@ -167,6 +167,10 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
     }
 
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
+        if let credential = self.credential {
+            request.authenticate(with: credential)
+        }
+
         let cleanupRequest = {
             managerStore[managerId] = nil
         }
@@ -255,6 +259,10 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class AlamofireDecodableRequestBuilder<T: Decodable>: AlamofireRequestBuilder<T> {
 
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
+        if let credential = self.credential {
+            request.authenticate(with: credential)
+        }
+
         let cleanupRequest = {
             managerStore[managerId] = nil
         }

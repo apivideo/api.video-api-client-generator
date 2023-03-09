@@ -23,6 +23,7 @@ public class {{projectName}} {
     {{/useVapor}}
     {{^useVapor}}
     internal static var defaultHeaders:[String: String] = ["AV-Origin-Client": "{{ originClient }}:{{ podVersion }}"]
+    internal static var credential: URLCredential?
     private static var chunkSize: Int = {{defaultChunkSize}}{{#useAlamofire}}
     internal static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory(){{/useAlamofire}}{{#useURLSession}}
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
@@ -101,6 +102,7 @@ public class {{projectName}} {
 }{{^useVapor}}
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class RequestBuilder<T> {
+    var credential: URLCredential?
     var headers: [String: String]
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var parameters: [String: Any]?
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} let method: String
@@ -137,6 +139,11 @@ public class {{projectName}} {
         if !value.isEmpty {
             headers[name] = value
         }
+        return self
+    }
+
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func addCredential() -> Self {
+        credential = {{projectName}}.credential
         return self
     }
 }

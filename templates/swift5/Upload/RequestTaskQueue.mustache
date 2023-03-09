@@ -1,12 +1,10 @@
 import Foundation
-import Alamofire
 
 public class RequestTaskQueue<T>: RequestTask {
     private let operationQueue: OperationQueue
     private var requestBuilders: [RequestBuilder<T>] = []
 
-    private let _downloadProgress = Progress(totalUnitCount: 0)
-    private let _uploadProgress = Progress(totalUnitCount: 0)
+    private let _progress = Progress(totalUnitCount: 0)
 
     internal init(queueLabel: String) {
         operationQueue = OperationQueue()
@@ -15,34 +13,20 @@ public class RequestTaskQueue<T>: RequestTask {
         super.init()
     }
 
-    override public var uploadProgress: Progress {
+    {{#useURLSession}}@available(iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0, *)
+    {{/useURLSession}}override public var progress: Progress {
         var completedUnitCount: Int64 = 0
         var totalUnitCount: Int64 = 0
         requestBuilders.forEach {
-            if let progress = $0.requestTask.uploadProgress {
+            if let progress = $0.requestTask.progress {
                 completedUnitCount += progress.completedUnitCount
                 totalUnitCount += progress.totalUnitCount
             }
         }
 
-        _uploadProgress.totalUnitCount = totalUnitCount
-        _uploadProgress.completedUnitCount = completedUnitCount
-        return _uploadProgress
-    }
-
-    override public var downloadProgress: Progress {
-        var completedUnitCount: Int64 = 0
-        var totalUnitCount: Int64 = 0
-        requestBuilders.forEach {
-            if let progress = $0.requestTask.downloadProgress {
-                completedUnitCount += progress.completedUnitCount
-                totalUnitCount += progress.totalUnitCount
-            }
-        }
-
-        _downloadProgress.totalUnitCount = totalUnitCount
-        _downloadProgress.completedUnitCount = completedUnitCount
-        return _downloadProgress
+        _progress.totalUnitCount = totalUnitCount
+        _progress.completedUnitCount = completedUnitCount
+        return _progress
     }
 
     internal func willExecuteRequestBuilder(requestBuilder: RequestBuilder<T>) -> Void {
@@ -61,6 +45,10 @@ public class RequestTaskQueue<T>: RequestTask {
             $0.requestTask.cancel()
         }
         operationQueue.cancelAllOperations()
+    }
+
+    override public var isFinished: Bool {
+        requestBuilders.allSatisfy { $0.requestTask.isFinished }
     }
 }
 
