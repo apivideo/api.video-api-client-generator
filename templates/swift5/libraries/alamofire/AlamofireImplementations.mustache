@@ -94,19 +94,7 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
     override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
         let managerId = UUID().uuidString
         // Create a new manager for each request to customize its request header
-        var manager: Alamofire.Session
-
-        if URLString.hasSuffix("/auth/api-key") {
-            manager = createAlamofireSession()
-        } else if let apiKey = {{projectName}}.apiKey {
-            // Create the interceptor
-            let authenticator = ApiVideoAuthenticator(apiKey: apiKey)
-            let interceptor = AuthenticationInterceptor(authenticator: authenticator, credential: {{projectName}}.credential)
-
-            manager = createAlamofireSession(interceptor: interceptor)
-        } else {
-            manager = createAlamofireSession()
-        }
+        let manager = createAlamofireSession()
         managerStore[managerId] = manager
 
         let xMethod = Alamofire.HTTPMethod(rawValue: method)

@@ -16,21 +16,36 @@ import Vapor
 {{/removeMigrationProjectNameClass}}
 
 public class {{projectName}} {
-    public static var apiKey: String? = nil
+    private static var apiKey: String? = nil
     public static var basePath = "{{basePath}}"
     {{#useVapor}}
-    internal static var customHeaders: [String: String] = [:]
+    internal static var defaultHeaders: HTTPHeaders = ["AV-Origin-Client": "{{ originClient }}:{{ podVersion }}"]
     {{/useVapor}}
     {{^useVapor}}
-    internal static var customHeaders:[String: String] = ["AV-Origin-Client": "{{ originClient }}:{{ podVersion }}"]
+    internal static var defaultHeaders:[String: String] = ["AV-Origin-Client": "{{ originClient }}:{{ podVersion }}"]
     private static var chunkSize: Int = {{defaultChunkSize}}{{#useAlamofire}}
     internal static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory(){{/useAlamofire}}{{#useURLSession}}
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
-    internal static var credential = ApiVideoCredential()
     public static var apiResponseQueue: DispatchQueue = .main
+    {{/useVapor}}
     public static var timeout: TimeInterval = 60
+    internal static var customHeaders:[String: String] {
+        var headers = defaultHeaders
+        if let apiKey = apiKey {
+            headers["Authorization"] = apiKey
+        }
+        return headers
+    }
 
-    public static func setChunkSize(chunkSize: Int) throws {
+    public static func setApiKey(_ apiKey: String?) {
+        if let apiKey = apiKey {
+            self.apiKey = "Basic " + "\(apiKey):".toBase64()
+        } else {
+            self.apiKey = nil
+        }
+    }
+
+    public static func setChunkSize(_ chunkSize: Int) throws {
         if (chunkSize > {{maxChunkSize}}) {
             throw ParameterError.outOfRange
         } else if (chunkSize < {{minChunkSize}}) {
@@ -55,25 +70,25 @@ public class {{projectName}} {
         }
     }
 
-    static func isValidVersion(version: String) -> Bool {
+    static func isValidVersion(_ version: String) -> Bool {
         let pattern = #"^\d{1,3}(\.\d{1,3}(\.\d{1,3})?)?$"#
         return isValid(pattern: pattern, field: version)
     }
 
-    static func isValidName(name: String) -> Bool {
+    static func isValidName(_ name: String) -> Bool {
         let pattern = #"^[\w\-]{1,50}$"#
         return isValid(pattern: pattern, field: name)
     }
 
     static func setName(key: String, name: String, version: String) throws {
-        if(!isValidName(name: name)) {
+        if(!isValidName(name)) {
             throw ParameterError.invalidName
         }
  
-        if(!isValidVersion(version: version)) {
+        if(!isValidVersion(version)) {
             throw ParameterError.invalidVersion
         }
-        {{projectName}}.customHeaders[key] = name + ":" + version
+        {{projectName}}.defaultHeaders[key] = name + ":" + version
     }
 
     public static func setSdkName(name: String, version: String) throws {
@@ -83,8 +98,6 @@ public class {{projectName}} {
     public static func setApplicationName(name: String, version: String) throws {
         try setName(key: "AV-Origin-App", name: name, version: version)
     }
-
-    {{/useVapor}}
 }{{^useVapor}}
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class RequestBuilder<T> {

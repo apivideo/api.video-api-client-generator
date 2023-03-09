@@ -11,7 +11,7 @@ internal class UploadTestCase: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
-        ApiVideoClient.apiKey = Parameters.apiKey
+        ApiVideoClient.setApiKey(Parameters.apiKey)
         ApiVideoClient.basePath = Environment.sandbox.rawValue
         try? ApiVideoClient.setApplicationName(name: "client-integration-tests", version: "0")
 
@@ -77,7 +77,7 @@ class UploadChunkTests: UploadTestCase {
     func testUpload() throws {
         createVideo()
 
-        try ApiVideoClient.setChunkSize(chunkSize: 1024 * 1024 * 5)
+        try ApiVideoClient.setChunkSize(1024 * 1024 * 5)
         uploadVideo(file: SharedResources.v10m!, timeout: 120)
     }
 }
@@ -155,7 +155,7 @@ internal class UploadWithTokenTestCase: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
-        ApiVideoClient.apiKey = Parameters.apiKey
+        ApiVideoClient.setApiKey(Parameters.apiKey)
         ApiVideoClient.basePath = Environment.sandbox.rawValue
 
         continueAfterFailure = false
@@ -220,7 +220,7 @@ class UploadWithTokenChunkTests: UploadWithTokenTestCase {
     func testUpload() throws {
         createUploadToken()
 
-        try ApiVideoClient.setChunkSize(chunkSize: 1024 * 1024 * 5)
+        try ApiVideoClient.setChunkSize(1024 * 1024 * 5)
         uploadVideo(file: SharedResources.v10m!, timeout: 120)
     }
 }
@@ -299,7 +299,7 @@ internal class UploadWithTokenAndVideoIdTestCase: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try XCTSkipIf(Parameters.apiKey == "INTEGRATION_TESTS_API_KEY", "Can't get API key")
-        ApiVideoClient.apiKey = Parameters.apiKey
+        ApiVideoClient.setApiKey(Parameters.apiKey)
         ApiVideoClient.basePath = Environment.sandbox.rawValue
 
         continueAfterFailure = false

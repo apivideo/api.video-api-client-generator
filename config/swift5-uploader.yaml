@@ -51,12 +51,6 @@ minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
 
 files:
-  Auth/ApiVideoCredential.mustache:
-    folder: Sources/Auth
-    destinationFilename: ApiVideoCredential.swift
-  Auth/ApiVideoAuthenticator.mustache:
-    folder: Sources/Auth
-    destinationFilename: ApiVideoAuthenticator.swift
   Environment.mustache:
     folder: Sources/Models
     destinationFilename: Environment.swift
