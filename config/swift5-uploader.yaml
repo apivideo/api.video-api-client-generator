@@ -31,7 +31,7 @@ changelog:
     - Fix large upload request time out
     - Fix callback on wrong token
 
-library: alamofire
+library: urlsession
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
