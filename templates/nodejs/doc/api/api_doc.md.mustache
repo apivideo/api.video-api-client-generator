@@ -25,7 +25,8 @@ All URIs are relative to *{{basePath}}*
 | Name | Type | Required | Description |
 | ------------- | ------------- | ------------- | ------------- |{{/-last}}{{/allParams}}
 {{#allParams}} | **{{paramName}}** | {{#isPrimitiveType}}**{{#isFile}}string \| Readable \| Buffer{{/isFile}}{{^isFile}}{{dataType}}{{/isFile}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{#required}}**yes**{{/required}}{{^required}}no{{/required}}| {{description}} |
-{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}| **progressListener** | **(event: UploadProgressEvent) => void \| undefined** | no | Optional upload progress listener |{{/vendorExtensions.x-client-chunk-upload}}
+{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}| **progressListener** | **(event: UploadProgressEvent) => void \| undefined** | no | Optional upload progress listener |{{/vendorExtensions.x-client-chunk-upload}}{{#vendorExtensions.x-client-copy-from-response}}
+| **{{paramName}}** | **string \| undefined** | no | Optional {{paramName}} |{{/vendorExtensions.x-client-copy-from-response}}
 
 ### Return type
 
