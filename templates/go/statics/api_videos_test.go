@@ -421,14 +421,13 @@ func skipIfNoApiKey(t *testing.T) {
 
 func createRealClient() *Client {
 	return (&Builder{
-		baseURL:         os.Getenv("BASE_URI"),
-		uploadChunkSize: minChunkSize,
-		apiKey:          os.Getenv("API_KEY"),
-		applicationName: "client-integration-tests",
+		baseURL:            os.Getenv("BASE_URI"),
+		uploadChunkSize:    minChunkSize,
+		apiKey:             os.Getenv("API_KEY"),
+		applicationName:    "client-integration-tests",
 		applicationVersion: "0",
 	}).Build()
 }
-
 
 func TestVideos_BadApplicationNameOrVersion(t *testing.T) {
 	cl := ClientBuilder("a").ApplicationName("bad application name").Build()
