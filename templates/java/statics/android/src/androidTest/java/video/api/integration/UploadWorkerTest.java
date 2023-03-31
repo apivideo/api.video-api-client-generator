@@ -19,6 +19,7 @@ import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -70,7 +71,7 @@ public class UploadWorkerTest {
 
             CountDownLatch successLatch = new CountDownLatch(1);
 
-            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, testVideo.getVideoId(), mp4File);
+            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, testVideo.getVideoId(), mp4File, Collections.emptyList());
             InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
                     workManager.getWorkInfoByIdLiveData(operationWithRequest.getRequest().getId()).observeForever(workInfo -> {
                         if (workInfo != null) {
@@ -92,7 +93,7 @@ public class UploadWorkerTest {
             CountDownLatch successLatch = new CountDownLatch(0);
             CountDownLatch errorLatch = new CountDownLatch(1);
 
-            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, "WRONG VIDEO ID", mp4File);
+            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, "WRONG VIDEO ID", mp4File, Collections.emptyList());
             InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
                     workManager.getWorkInfoByIdLiveData(operationWithRequest.getRequest().getId()).observeForever(workInfo -> {
                         if (workInfo != null) {
@@ -119,7 +120,7 @@ public class UploadWorkerTest {
             CountDownLatch cancelLatch = new CountDownLatch(1);
             CountDownLatch successLatch = new CountDownLatch(0);
 
-            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, testVideo.getVideoId(), mp4File);
+            OperationWithRequest operationWithRequest = UploadWorkerHelper.upload(workManager, testVideo.getVideoId(), mp4File, Collections.emptyList());
             InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
                     workManager.getWorkInfoByIdLiveData(operationWithRequest.getRequest().getId()).observeForever(workInfo -> {
                         if (workInfo != null) {
@@ -169,7 +170,7 @@ public class UploadWorkerTest {
 
             CountDownLatch successLatch = new CountDownLatch(1);
 
-            OperationWithRequest operationWithRequest = UploadWorkerHelper.uploadWithUploadToken(workManager, testUploadToken.getToken(), mp4File, null);
+            OperationWithRequest operationWithRequest = UploadWorkerHelper.uploadWithUploadToken(workManager, testUploadToken.getToken(), mp4File, null, Collections.emptyList());
             InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
                     workManager.getWorkInfoByIdLiveData(operationWithRequest.getRequest().getId()).observeForever(workInfo -> {
                         if (workInfo != null) {
@@ -216,9 +217,9 @@ public class UploadWorkerTest {
             CountDownLatch successLatch = new CountDownLatch(3);
 
             VideosApi.UploadProgressiveSession uploadProgressiveSession = apiClient.videos().createUploadProgressiveSession(this.testVideo.getVideoId());
-            OperationWithRequest operationWithRequest1 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part1, false);
-            OperationWithRequest operationWithRequest2 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part2, false);
-            OperationWithRequest operationWithRequest3 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part3, true);
+            OperationWithRequest operationWithRequest1 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part1, false, null, Collections.emptyList());
+            OperationWithRequest operationWithRequest2 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part2, false, null, Collections.emptyList());
+            OperationWithRequest operationWithRequest3 = UploadWorkerHelper.uploadPart(workManager, uploadProgressiveSession, part3, true, null, Collections.emptyList());
 
             InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
                 workManager.getWorkInfoByIdLiveData(operationWithRequest1.getRequest().getId()).observeForever(workInfo -> {
