@@ -144,6 +144,7 @@ abstract class AbstractUploadWorker(
         const val PROGRESS_KEY = "progress"
         const val VIDEO_KEY = "video"
         const val ERROR_KEY = "error"
+        const val FILE_PATH_KEY = "filePath"
 
         @OptIn(ExperimentalCoroutinesApi::class)
         internal val limitedCoroutineContext = Dispatchers.IO.limitedParallelism(1)
