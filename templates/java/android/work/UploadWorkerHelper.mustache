@@ -438,7 +438,7 @@ object UploadWorkerHelper {
         workManager.cancelAllWorkByTag(getTagForProgressiveUploadSession(session))
     }
 
-    private const val PREFIX_SESSION_ID = "sessionIndex="
+    private const val PREFIX_SESSION_ID = "session="
 
     /**
      * Returns the tag used to identify works related to a progressive upload session.
@@ -447,7 +447,6 @@ object UploadWorkerHelper {
      * @return The tag
      */
     fun getTagForProgressiveUploadSession(session: IProgressiveUploadSession): String {
-        val sessionIndex = ProgressiveUploadSessionStore.indexOf(session)
-        return "($PREFIX_SESSION_ID$sessionIndex)"
+        return "($PREFIX_SESSION_ID$session)"
     }
 }
