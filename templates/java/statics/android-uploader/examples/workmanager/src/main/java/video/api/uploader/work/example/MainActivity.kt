@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import video.api.uploader.api.JSON
 import video.api.uploader.api.models.Environment
 import video.api.uploader.api.models.Video
 import video.api.uploader.api.work.stores.VideosApiStore
@@ -17,7 +16,6 @@ import video.api.uploader.api.work.toProgress
 import video.api.uploader.api.work.toVideo
 import video.api.uploader.api.work.uploadWithUploadToken
 import video.api.uploader.api.work.workers.AbstractUploadWorker
-import video.api.uploader.api.work.workers.AbstractUploadWorker.Companion.PROGRESS_KEY
 import video.api.uploader.work.example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

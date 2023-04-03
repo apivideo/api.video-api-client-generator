@@ -154,3 +154,6 @@ files:
   android/work/WorkManagerExtensions.mustache:
     folder: src/main/java/video/api/client/api/work
     destinationFilename: WorkManagerExtensions.kt
+  android/work/DataExtensions.mustache:
+    folder: src/main/java/video/api/client/api/work
+    destinationFilename: DataExtensions.kt
