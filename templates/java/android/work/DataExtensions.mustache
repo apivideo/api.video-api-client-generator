@@ -1,0 +1,39 @@
+package {{invokerPackage}}.work
+
+import androidx.work.Data
+import {{invokerPackage}}.JSON
+import {{invokerPackage}}.models.Video
+import {{invokerPackage}}.work.workers.AbstractUploadWorker
+import java.io.File
+
+/**
+ * Extension functions for [Data] to deserialize the [Video].
+ *
+ * @return The [Video] object
+ */
+fun Data.toVideo() = JSON().deserialize(
+    this.getString(
+        AbstractUploadWorker.VIDEO_KEY
+    ), Video::class.java
+) as Video
+
+/**
+ * Extension functions for [Data] to retrieve the file.
+ *
+ * @return The [File]
+ */
+fun Data.toFile(): File {
+    val filePath = this.getString(AbstractUploadWorker.FILE_PATH_KEY)
+    return if (filePath != null) {
+        File(filePath)
+    } else {
+        throw IllegalStateException("File path is null")
+    }
+}
+
+/**
+ * Extension functions for [Data] to retrieve the progress.
+ *
+ * @return The progress
+ */
+fun Data.toProgress(): Int = this.getInt(AbstractUploadWorker.PROGRESS_KEY, 0)
