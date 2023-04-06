@@ -406,47 +406,10 @@ object UploadWorkerHelper {
             )
             .addTag("{{artifactId}}")
             .addTag("progressive")
-            .addTag(getTagForProgressiveUploadSession(session))
             .apply {
                 tags.forEach { addTag(it) }
             }
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
-    }
-
-    /**
-     * Cancels all works related to a progressive upload session.
-     *
-     * @param context The application context
-     * @param session The progressive upload session
-     */
-    @JvmStatic
-    fun cancelProgressiveUploadSession(context: Context, session: IProgressiveUploadSession) =
-        cancelProgressiveUploadSession(WorkManager.getInstance(context), session)
-
-    /**
-     * Cancels all works related to a progressive upload session.
-     *
-     * @param workManager The WorkManager instance
-     * @param session The progressive upload session
-     */
-    @JvmStatic
-    fun cancelProgressiveUploadSession(
-        workManager: WorkManager,
-        session: IProgressiveUploadSession
-    ) {
-        workManager.cancelAllWorkByTag(getTagForProgressiveUploadSession(session))
-    }
-
-    private const val PREFIX_SESSION_ID = "session="
-
-    /**
-     * Returns the tag used to identify works related to a progressive upload session.
-     *
-     * @param session The progressive upload session
-     * @return The tag
-     */
-    fun getTagForProgressiveUploadSession(session: IProgressiveUploadSession): String {
-        return "($PREFIX_SESSION_ID$session)"
     }
 }

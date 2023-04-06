@@ -147,11 +147,3 @@ fun WorkManager.uploadPart(
         tags,
         workerClass
     )
-
-/**
- * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.uploadPart].
- *
- * @param session The progressive upload session
- */
-fun WorkManager.cancelProgressiveUploadSession(session: IProgressiveUploadSession) =
-    UploadWorkerHelper.cancelProgressiveUploadSession(this, session)
