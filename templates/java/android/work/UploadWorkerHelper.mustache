@@ -406,6 +406,7 @@ object UploadWorkerHelper {
             )
             .addTag("{{artifactId}}")
             .addTag("progressive")
+            .addTag(getTagForUpload(session.videoId, session.token))
             .apply {
                 tags.forEach { addTag(it) }
             }

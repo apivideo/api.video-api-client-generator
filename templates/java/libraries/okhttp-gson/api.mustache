@@ -545,6 +545,17 @@ public class {{classname}} {
         }{{/vendorExtensions.x-client-copy-from-response}}
 
         @Override
+        public String getVideoId() {
+            return videoId;
+        }
+
+        @Override
+        public String getToken() { {{#vendorExtensions.x-client-copy-from-response}}
+            return token;{{/vendorExtensions.x-client-copy-from-response}}{{^vendorExtensions.x-client-copy-from-response}}
+            return null;{{/vendorExtensions.x-client-copy-from-response}}
+        }
+
+        @Override
         public Video uploadPart(File part) throws ApiException {
             return uploadPart(part, false, null);
         }
