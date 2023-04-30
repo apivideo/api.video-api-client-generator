@@ -41,16 +41,18 @@ export default class {{classname}} {
    {{#summary}}
    * {{&summary}}
    * This will create a progressive upload session.{{/summary}}{{#allParams}}{{^isFile}}
-   * @param {{paramName}} {{description}}{{/isFile}}{{/allParams}}
+   * @param {{paramName}} {{description}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}
+   * @param {{paramName}} optional {{paramName}} value{{/vendorExtensions.x-client-copy-from-response}}
    */
-  public create{{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}): ProgressiveSession<{{{returnType}}}> {
+  public create{{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession({{#allParams}}{{^isFile}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}} {{paramName}}?: string, {{/vendorExtensions.x-client-copy-from-response}}): ProgressiveSession<{{{returnType}}}> {
     class {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<Type> {
         private httpClient: HttpClient;
         private currentPart = 1;{{#vendorExtensions.x-client-copy-from-response}}
         private {{paramName}}?: string;{{/vendorExtensions.x-client-copy-from-response}}
 
-        constructor(httpClient: HttpClient) {
-          this.httpClient = httpClient;
+        constructor(httpClient: HttpClient{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}?: string{{/vendorExtensions.x-client-copy-from-response}}) {
+          this.httpClient = httpClient;{{#vendorExtensions.x-client-copy-from-response}}
+            this.{{paramName}} = {{paramName}};{{/vendorExtensions.x-client-copy-from-response}}
         }
 
         uploadPart(file: string, progressListener?: (event: UploadProgressEvent) => void) {
@@ -174,7 +176,7 @@ export default class {{classname}} {
         }
     }
 
-    return new {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<{{{returnType}}}>(this.httpClient);
+    return new {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<{{{returnType}}}>(this.httpClient{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}{{/vendorExtensions.x-client-copy-from-response}});
   }
   {{/vendorExtensions.x-client-chunk-upload}}
   {{#vendorExtensions.x-group-parameters}}
@@ -204,10 +206,15 @@ export default class {{classname}} {
    * @param {{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void, {{/vendorExtensions.x-client-chunk-upload}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}?: string, {{/vendorExtensions.x-client-copy-from-response}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
   {{/vendorExtensions.x-group-parameters}}
     const queryParams: QueryOptions = {};
     queryParams.headers = {};
+    {{#vendorExtensions.x-client-chunk-upload}}
+    const toRelay: { [key: string]: string | undefined } = {
+        {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}
+    };
+    {{/vendorExtensions.x-client-chunk-upload}}
     {{#allParams}}
     {{#required}}
     {{^isFile}}
@@ -301,8 +308,20 @@ export default class {{classname}} {
 
     {{#hasFormParams}}
     const formData = new FormData();
-    {{/hasFormParams}}
+
+    {{/hasFormParams}}{{#vendorExtensions.x-client-copy-from-response}}
+    Object.keys(toRelay).forEach((key) => {
+      if (toRelay[key] !== undefined) {
+        formData.append(key, toRelay[key]);
+      }
+    });
+    {{/vendorExtensions.x-client-copy-from-response}}
     {{#formParams}}
+    {{#vendorExtensions.x-client-copy-from-response}}
+      if ({{paramName}}) {
+        formData.append('{{paramName}}', {{paramName}});
+      }
+    {{/vendorExtensions.x-client-copy-from-response}}
     {{#isArray}}
     if ({{paramName}}) {
     {{#isCollectionFormatMulti}}
@@ -316,7 +335,6 @@ export default class {{classname}} {
     }
     {{/isArray}}
     {{^isArray}}
-
       {{^isFile}}
       if (typeof {{paramName}} !== undefined) {
          formData.append('{{baseName}}', {{paramName}});
@@ -362,7 +380,7 @@ export default class {{classname}} {
           ) as {{{returnType}}});
       }
       let uploadChunkSize = chunkSize;
-      let lastBody;
+      let lastBody: {{{returnType}}} | undefined = undefined;
       let stream;
       let chunkNumber = 0;
 
@@ -382,6 +400,12 @@ export default class {{classname}} {
         const chunkFormData = new FormData();
         stream = createReadStream(file, { start: offset, end: uploadChunkSize + offset - 1});
         chunkFormData.append(filename, stream, filename);
+
+        Object.keys(toRelay).forEach((key) => {
+          if (toRelay[key] !== undefined) {
+            chunkFormData.append(key, toRelay[key]);
+          }
+        });
 
         queryParams.body = chunkFormData;
         queryParams.headers['Content-Range'] = `part ${part}/${partsCount}`;
@@ -406,6 +430,12 @@ export default class {{classname}} {
             ObjectSerializer.parse(response.body, response.headers["content-type"]),
             "{{{returnType}}}", "{{returnFormat}}"
           ) as {{{returnType}}});
+
+          Object.keys(toRelay).forEach((key) => {
+            if ((lastBody as unknown as any)[key] !== undefined) {
+              toRelay[key] = (lastBody as unknown as any)[key];
+            }
+          });
 
         stream.close();
       }
