@@ -5052,8 +5052,7 @@ paths:
                   String liveStreamId = "li400mYKSgQ6xs7taUeSaEKr"; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
                   LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload(); // 
                   liveStreamUpdatePayload.setName("My Live Stream Video"); // The name you want to use for your live stream.
-                  liveStreamUpdatePayload.setPublic(); // BETA FEATURE Please limit all public &#x3D; false (&quot;private&quot;) livestreams to 3,000 users.
-              Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+                  liveStreamUpdatePayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
                   liveStreamUpdatePayload.setRecord(true); // Use this to indicate whether you want the recording on or off. On is true, off is false.
                   liveStreamUpdatePayload.setPlayerId("pl45KFKdlddgk654dspkze"); // The unique ID for the player associated with a live stream that you want to update.
 
@@ -11458,7 +11457,7 @@ components:
           example: true
         public:
           type: boolean
-          description: 'BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
           example: true
         assets:
           $ref: '#/components/schemas/live-stream-assets'
@@ -11961,7 +11960,7 @@ components:
           default: false
         public:
           type: boolean
-          description: 'BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
         playerId:
           type: string
           description: The unique identifier for the player.
@@ -11980,7 +11979,7 @@ components:
           example: My Live Stream Video
         public:
           type: boolean
-          description: 'BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
         record:
           type: boolean
           description: 'Use this to indicate whether you want the recording on or off. On is true, off is false.'
