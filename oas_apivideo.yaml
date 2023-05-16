@@ -11457,7 +11457,7 @@ components:
           example: true
         public:
           type: boolean
-          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
           example: true
         assets:
           $ref: '#/components/schemas/live-stream-assets'
@@ -11960,7 +11960,7 @@ components:
           default: false
         public:
           type: boolean
-          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
         playerId:
           type: string
           description: The unique identifier for the player.
@@ -11979,7 +11979,7 @@ components:
           example: My Live Stream Video
         public:
           type: boolean
-          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.'
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
         record:
           type: boolean
           description: 'Use this to indicate whether you want the recording on or off. On is true, off is false.'
