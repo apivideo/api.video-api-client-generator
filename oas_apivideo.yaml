@@ -165,8 +165,8 @@ paths:
     get:
       tags:
         - Videos
-      summary: List all videos
-      description: List all the videos that are associated with the currecnt workspace.
+      summary: List all video objects
+      description: List all the video objects that are associated with the current workspace.
       x-client-description:
         default: 'This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.'
       operationId: LIST-videos
