@@ -2072,7 +2072,7 @@ paths:
     get:
       tags:
         - Videos
-      summary: Retrieve a video
+      summary: Retrieve a video object
       description: Retrieve the video details by video id.
       x-client-description:
         default: 'This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.'
