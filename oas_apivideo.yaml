@@ -2475,18 +2475,18 @@ paths:
     patch:
       tags:
         - Videos
-      summary: Update a video
-      description: Update the parameters associated with a video id.
+      summary: Update a video object
+      description: Update the parameters associated with a video ID.
       x-client-description:
         default: |
-          Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide. 
+          Updates the parameters associated with a video ID. The video object you are updating is determined by the video ID you provide. 
 
           NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
       operationId: PATCH-video
       parameters:
         - name: videoId
           in: path
-          description: The video ID for the video you want to delete.
+          description: The video ID for the video you want to update.
           required: true
           style: simple
           explode: false
