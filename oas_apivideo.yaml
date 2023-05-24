@@ -2298,8 +2298,8 @@ paths:
     delete:
       tags:
         - Videos
-      summary: Delete a video
-      description: Delete a video by video id.
+      summary: Delete a video object
+      description: Delete a video object by video ID.
       x-client-description:
         default: 'If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.'
       operationId: DELETE-video
