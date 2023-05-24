@@ -2789,8 +2789,8 @@ paths:
     get:
       tags:
         - Videos
-      summary: Retrieve a video status
-      description: 'Upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.'
+      summary: Retrieve video status and details
+      description: 'Retrieve upload status and encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.'
       x-client-description:
         default: 'This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.'
       operationId: GET-video-status
