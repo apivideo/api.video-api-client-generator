@@ -465,9 +465,9 @@ paths:
     post:
       tags:
         - Videos
-      summary: Create a video
+      summary: Create a video object
       description: |
-        Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1)
+        Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
       operationId: POST-video
       requestBody:
         description: video to create
