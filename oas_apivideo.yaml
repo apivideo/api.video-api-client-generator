@@ -12192,11 +12192,11 @@ components:
           example: 10px
         width:
           type: string
-          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use initial'
+          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use `initial`.'
           example: initial
         height:
           type: string
-          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use initial'
+          description: 'Height of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use `initial`.'
           example: initial
         opacity:
           type: string
