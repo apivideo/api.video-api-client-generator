@@ -28,7 +28,7 @@ public class Swift5Uploader extends Swift5 {
         // rules defining which operations should be kept
         List<Function<Operation, Boolean>> operationsToKeepRules = Arrays.asList(
                 o -> o.getExtensions().containsKey("x-client-chunk-upload"),
-                o -> o.getTags().contains("Authentication")
+                o -> o.getTags().stream().map(String::toLowerCase).anyMatch(tag->tag.contains("authentication"))
         );
 
         // remove useless paths & methods
