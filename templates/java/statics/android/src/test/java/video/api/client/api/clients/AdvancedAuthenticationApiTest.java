@@ -14,12 +14,12 @@ import video.api.client.api.models.AuthenticatePayload;
 import video.api.client.api.models.RefreshTokenPayload;
 
 /**
- * API tests for AuthenticationApi
+ * API tests for AdvancedAuthenticationApi
  */
-@DisplayName("AuthenticationApi")
-public class AuthenticationApiTest extends AbstractApiTest {
+@DisplayName("AdvancedAuthenticationApi")
+public class AdvancedAuthenticationApiTest extends AbstractApiTest {
 
-    private final AuthenticationApi api = new AuthenticationApi(apiClientMock.getHttpClient());
+    private final AdvancedAuthenticationApi api = new AdvancedAuthenticationApi(apiClientMock.getHttpClient());
 
     @Nested
     @DisplayName("authenticate")
