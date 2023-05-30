@@ -23,7 +23,7 @@ public class AdvancedAuthenticationApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("authenticate")
     class authenticate {
-        private static final String PAYLOADS_PATH = "/payloads/authentication/authenticate/";
+        private static final String PAYLOADS_PATH = "/payloads/advancedauthentication/authenticate/";
 
         @Test
         @DisplayName("required parameters")
@@ -70,7 +70,7 @@ public class AdvancedAuthenticationApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("refresh")
     class refresh {
-        private static final String PAYLOADS_PATH = "/payloads/authentication/refresh/";
+        private static final String PAYLOADS_PATH = "/payloads/advancedauthentication/refresh/";
 
         @Test
         @DisplayName("required parameters")
