@@ -18,7 +18,7 @@ namespace {{packageName}}.Client
         private string ApiKey { get; set; }
         private string CachedAccessToken { get; set; }
         private long? TokenExpirationMs { get; set; }
-        private readonly AuthenticationApi authentication;
+        private readonly AdvancedAuthenticationApi authentication;
 
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace {{packageName}}.Client
         /// <param name="apiKey">the api key that will allow us to get the access token</param>
         /// <param name="apiClient">instance of the apiClient</param>
         public AuthenticationManager(string apiKey, ApiClient apiClient) {
-            this.authentication = new AuthenticationApi(apiClient);
+            this.authentication = new AdvancedAuthenticationApi(apiClient);
             this.ApiKey = apiKey;
 
         }
