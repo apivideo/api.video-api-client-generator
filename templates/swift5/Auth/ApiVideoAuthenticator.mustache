@@ -18,7 +18,7 @@ class ApiVideoAuthenticator: Authenticator {
     func refresh(_ credential: ApiVideoCredential,
                  for session: Session,
                  completion: @escaping (Result<ApiVideoCredential, Error>) -> Void) {
-        AuthenticationAPI.authenticate(authenticatePayload: AuthenticatePayload(apiKey: apiKey)) { accessToken, error in
+        AdvancedAuthenticationAPI.authenticate(authenticatePayload: AuthenticatePayload(apiKey: apiKey)) { accessToken, error in
             if let error = error {
                 completion(.failure(error))
             }
