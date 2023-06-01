@@ -9227,7 +9227,7 @@ paths:
           - deviceType
           - operatingSystem
           - browser
-        example: dimension=browser
+        example: browser
       - name: filter
         in: query
         description: Use this query parameter to filter your results to a specific
@@ -9857,7 +9857,7 @@ paths:
           - deviceType
           - operatingSystem
           - browser
-        example: dimension=browser
+        example: browser
       - name: filter
         in: query
         description: Use this query parameter to filter your results to a specific
