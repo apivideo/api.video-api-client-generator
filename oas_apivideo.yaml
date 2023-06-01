@@ -9231,13 +9231,13 @@ paths:
       - name: filter
         in: query
         description: Use this query parameter to filter your results to a specific
-          video in a project that you want analytics for.
+          video in a project that you want analytics for. You must use the `videoId:` prefix when specifying a video ID.
         required: false
         style: form
         explode: false
         schema:
           type: string
-        example: vi3q7HxhApxRF1c8F8r6VeaI
+        example: videoId:vi3q7HxhApxRF1c8F8r6VeaI
       responses:
         '200':
           description: Success
@@ -9861,13 +9861,13 @@ paths:
       - name: filter
         in: query
         description: Use this query parameter to filter your results to a specific
-          live stream in a project that you want analytics for.
+          live stream in a project that you want analytics for. You must use the `liveStreamId:` prefix when specifying a live stream ID.
         required: false
         style: form
         explode: false
         schema:
           type: string
-        example: li3q7HxhApxRF1c8F8r6VeaI
+        example: liveStreamId:li3q7HxhApxRF1c8F8r6VeaI
       responses:
         '200':
           description: Success
