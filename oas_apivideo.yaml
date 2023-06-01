@@ -9839,7 +9839,7 @@ paths:
         in: query
         description: |-
           Use this query parameter to define the dimension that you want analytics for.
-          - `liveStreamId`: Returns analytics based on the public video identifiers.
+          - `liveStreamId`: Returns analytics based on the public live stream identifiers.
           - `emittedAt`: Returns analytics based on the times of the play events.
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
           - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event.
