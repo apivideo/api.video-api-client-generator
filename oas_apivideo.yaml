@@ -1,22 +1,25 @@
 openapi: 3.0.0
+x-stoplight:
+  id: ybzk39fiws46g
 info:
   title: api.video
-  description: api.video is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.
+  description: 'api.video is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.'
   version: '1'
 servers:
-  - url: https://ws.api.video
+  - url: 'https://ws.api.video'
     description: Production server
-  - url: https://sandbox.api.video
-    description: Test server `all videos are watermarked, and deleted after 24 hours.
+  - url: 'https://sandbox.api.video'
+    description: 'Test server `all videos are watermarked, and deleted after 24 hours.'
 paths:
   /auth/api-key:
     post:
       tags:
-        - Authentication
-      summary: Advanced - Authenticate (1/2)
+        - Advanced authentication
+      summary: Get Bearer Token
       description: |-
-        To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
-        All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
+        Returns a bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-api-key
       requestBody:
         required: true
@@ -47,7 +50,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/authenticationinvalid_credentials
+                    type: 'https://docs.api.video/docs/authenticationinvalid_credentials'
                     title: The user credentials were incorrect.
                     name: ''
                     status: 400
@@ -86,10 +89,12 @@ paths:
   /auth/refresh:
     post:
       tags:
-        - Authentication
-      summary: Advanced - Refresh token (2/2)
-      description: |
-        Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token. 
+        - Advanced authentication
+      summary: Refresh Bearer Token
+      description: |-
+        Accepts the old bearer token and returns a new bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-refresh
       requestBody:
         required: true
@@ -121,7 +126,7 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/authenticationinvalid_credentials
+                    type: 'https://docs.api.video/docs/authenticationinvalid_credentials'
                     title: The user credentials were incorrect.
                     name: ''
       x-client-action: refresh
@@ -160,10 +165,10 @@ paths:
     get:
       tags:
         - Videos
-      summary: List all videos
-      description: Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
+      summary: List all video objects
+      description: List all the video objects that are associated with the current workspace.
       x-client-description:
-        default: This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.
+        default: 'This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.'
       operationId: LIST-videos
       parameters:
         - name: title
@@ -175,7 +180,7 @@ paths:
           schema:
             type: string
           example: My Video.mp4
-        - name: tags[]
+        - name: 'tags[]'
           in: query
           description: A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
           required: false
@@ -188,7 +193,7 @@ paths:
           example: '["captions", "dialogue"]'
         - name: metadata
           in: query
-          description: Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+          description: 'Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.'
           required: false
           style: deepObject
           x-is-deep-object: true
@@ -197,10 +202,10 @@ paths:
             type: object
             additionalProperties:
               type: string
-          example: metadata[Author]=John Doe&metadata[Format]=Tutorial
+          example: 'metadata[Author]=John Doe&metadata[Format]=Tutorial'
         - name: description
           in: query
-          description: If you described a video with a term or sentence, you can add it here to return videos containing this string.
+          description: 'If you described a video with a term or sentence, you can add it here to return videos containing this string.'
           required: false
           style: form
           explode: true
@@ -209,7 +214,7 @@ paths:
           example: New Zealand
         - name: liveStreamId
           in: query
-          description: If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
+          description: 'If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.'
           required: false
           style: form
           explode: true
@@ -268,11 +273,11 @@ paths:
                         source:
                           uri: /videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source
                         assets:
-                          iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                          player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                          hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                          thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                          mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                          iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                          player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                          hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                          thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                          mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
                       - videoId: vi4blUQJFrYWbaG44NChkH27
                         title: Video Title
                         description: A description for your video.
@@ -294,11 +299,11 @@ paths:
                         source:
                           uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                         assets:
-                          iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                          player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                          hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                          thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                          mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                          iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                          player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                          hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                          thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                          mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
                       - videoId: vi4blUQJFrYWbaG44NChkH27
                         playerId: pl45KFKdlddgk654dspkze
                         title: My Video Title
@@ -317,11 +322,11 @@ paths:
                         source:
                           uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                         assets:
-                          iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                          player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                          hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                          thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                          mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                          iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                          player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                          hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                          thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                          mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
                     pagination:
                       currentPage: 1
                       pageSize: 25
@@ -330,11 +335,11 @@ paths:
                       currentPageItems: 11
                       links:
                         - rel: self
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: 'https://ws.api.video/videos?currentPage=1'
                         - rel: first
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: 'https://ws.api.video/videos?currentPage=1'
                         - rel: last
-                          uri: https://ws.api.video/videos?currentPage=1
+                          uri: 'https://ws.api.video/videos?currentPage=1'
         '400':
           description: Bad Request
           content:
@@ -438,25 +443,21 @@ paths:
               // list videos that have all the given metadata values (only first results page)
               const videosWithMetadata = await client.videos.list({ metadata: { "key1": "value1", "key2": "value2" } })
           - language: csharp
-            code: |+
+            code: |
               // First add the "ApiVideo" NuGet package to your project
               // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#list
-
           - language: go
-            code: |+
+            code: |
               // First install the go client with "go get github.com/apivideo/api.video-go-client"
               // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#list
-
           - language: python
-            code: |+
+            code: |
               # First install the api client with "pip install api.video"
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#list
-
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#list
-
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
@@ -464,16 +465,9 @@ paths:
     post:
       tags:
         - Videos
-      summary: Create a video
+      summary: Create a video object
       description: |
-        We have tutorials on:
-        * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
-        * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-        * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
-        * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
-        * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
-
-        * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+        Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
       operationId: POST-video
       requestBody:
         description: video to create
@@ -512,11 +506,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '202':
           description: Accepted
           content:
@@ -532,21 +526,21 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/attributerequired
+                    type: 'https://docs.api.video/docs/attributerequired'
                     title: This attribute is required.
                     name: title
                     status: 400
                     problems:
-                      - type: https://docs.api.video/docs/attributerequired
+                      - type: 'https://docs.api.video/docs/attributerequired'
                         title: This attribute is required.
                         name: title
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be a ISO8601 date.
                         name: scheduledAt
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: tags
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: metadata
       security:
@@ -780,31 +774,15 @@ paths:
                   }
               }
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#create
-
-  /videos/{videoId}/source:
+  '/videos/{videoId}/source':
     post:
       tags:
         - Videos
       summary: Upload a video
-      description: |-
-        To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-        We offer 2 types of upload: 
-        * Regular upload 
-        * Progressive upload
-        The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
-          * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
-          * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
-          Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
-        ```bash
-        curl https://ws.api.video/videos/{videoId}/source \
-          -H 'Authorization: Bearer {access_token}' \
-          -F file=@/path/to/video.mp4
-
-          ```
-        Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
+      description: Ingest a video from a source or file.
       x-client-description:
         default: |
           To upload a video to the videoId you created. You can only upload your video to the videoId once.
@@ -829,30 +807,15 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         - name: Content-Range
           in: header
-          description: |
-            Content-Range can be used if you want to split your file. You can do this by parts, or by chunk.
-            * If you split your file by parts (recommended option), the `Content-Range` header value must match the following pattern: `part <part>/<total_parts>`:
-              * `<part>` is a positive integer representing the part number. The first sequential part number is always 1.
-              * `<total_parts>` is a positive integer representing the total parts of the video source. It can also be `*` if or as long as it is unknown. Technically, this value is required only one time and cannot differ in several requests.
-            * If you split your file by bytes, bear in mind byte ranges are inclusive, meaning that bytes 0-5242879 represents the first 5,242,880 bytes in a file or object. Also, the Content-Range header value must match the following pattern: `bytes <from_byte>-<to_byte>/<total_bytes>`:
-              * `<from_byte>` is a positive integer or 0. It represents the range start (aka lower bound), i.e., the first byte of the chunk compared to the total bytes composing the full video source. The first sequential range always starts at 0.
-              * `<to_byte>` is a positive integer representing the range end (aka upper bound), i.e., the last byte of the chunk compared to the total bytes composing the full video source.
-              * `<total_bytes>` is a positive integer representing the total bytes composing the full video source. It can also be `*` if or as long as it is unknown. Technically, this value is required only one time and cannot differ in several requests.
-            * Ordering and chunk or part size
-              * The order in which the chunks are received on our side does not matter. 
-                * Example: `part 3/*` then `part 2/*` then `part 1/3` works.
-              * The chunks can be sent concurrently. We have a lock mechanism to ensure they are still technically processed one by one to ensure the "completion" check behaves as expected.
-              * The only chunk that can be smaller than our minimum allowed chunk size (5 MiB) is the last sequential one (i.e., the last sequential range for the "byte-range" system and the last part for the "part" system.
-                * For instance, if your video is 10.5 MiB big, your last chunk would be 500 KiB, and that would work. 
-                * Another example is if your video is 2 MiB big, then your first and last chunk will be 2MiB and that will work as well.
           required: false
           style: simple
           explode: false
           schema:
-            pattern: /(?:bytes (?<from>\d+)-(?<to>\d+)|part (?<part>\d+))\/(?<total>\d+|\*)/
+            pattern: '/(?:bytes (?<from>\d+)-(?<to>\d+)|part (?<part>\d+))\/(?<total>\d+|\*)/'
             type: string
           example: bytes 209715200-419430399/524288000 OR part 2/3
           x-client-ignore: true
+          description: '`part <part>/<total_parts>` ; `bytes <from_byte>-<to_byte>/<total_bytes>`'
       requestBody:
         required: true
         content:
@@ -890,11 +853,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
           description: Bad Request
           content:
@@ -904,21 +867,21 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/filealreadyuploaded
+                    type: 'https://docs.api.video/docs/filealreadyuploaded'
                     title: The source of the video is already uploaded.
                     name: file
                     status: 400
                     problems:
-                      - type: https://docs.api.video/docs/filealreadyuploaded
+                      - type: 'https://docs.api.video/docs/filealreadyuploaded'
                         title: The source of the video is already uploaded.
                         name: file
-                      - type: https://docs.api.video/docs/filealreadyuploaded
+                      - type: 'https://docs.api.video/docs/filealreadyuploaded'
                         title: The video xxxx has already been uploaded.
                         name: video
-                      - type: https://docs.api.video/docs/filemissing
+                      - type: 'https://docs.api.video/docs/filemissing'
                         title: There is no uploaded file in the request.
                         name: file
-                      - type: https://docs.api.video/docs/multiplefilesuploaded
+                      - type: 'https://docs.api.video/docs/multiplefilesuploaded'
                         title: There is more than one uploaded file in the request.
                         name: file
         '404':
@@ -930,7 +893,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -1129,16 +1092,15 @@ paths:
                   }
               }
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
-
   /watermarks:
     post:
       tags:
         - Watermarks
       summary: Upload a watermark
-      description: Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+      description: Create a new watermark by uploading a `JPG` or a `PNG` image.
       operationId: POST_watermark
       requestBody:
         required: true
@@ -1168,8 +1130,8 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/fileextension
-                    title: Only [jpeg, jpg, JPG, JPEG, png, PNG] extensions are supported.
+                    type: 'https://docs.api.video/docs/fileextension'
+                    title: 'Only [jpeg, jpg, JPG, JPEG, png, PNG] extensions are supported.'
                     name: file
       security:
         - apiKey: []
@@ -1352,15 +1314,14 @@ paths:
                   }
               }
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#upload
-
     get:
       tags:
         - Watermarks
       summary: List all watermarks
-      description: List all watermarks. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+      description: List all watermarks associated with your workspace.
       operationId: LIST-watermarks
       x-client-action: list
       parameters:
@@ -1407,11 +1368,11 @@ paths:
                       currentPageItems: 11
                       links:
                         - rel: self
-                          uri: https://ws.api.video/watermarks?currentPage=1
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
                         - rel: first
-                          uri: https://ws.api.video/watermarks?currentPage=1
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
                         - rel: last
-                          uri: https://ws.api.video/watermarks?currentPage=1
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
         '400':
           description: Bad Request
           content:
@@ -1456,20 +1417,17 @@ paths:
               const watermarks2 = await client.watermarks.list({});
               createdAt
           - language: csharp
-            code: |+
+            code: |
               // First add the "ApiVideo" NuGet package to your project
               // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/WatermarksApi.md#list
-
           - language: go
-            code: |+
+            code: |
               // First install the go client with "go get github.com/apivideo/api.video-go-client"
               // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/WatermarksApi.md#list
-
           - language: java
-            code: |+
+            code: |
               // First add the "video.api:java-api-client" maven dependency to your project
               // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#list
-
           - language: php
             code: |-
               <?php
@@ -1494,21 +1452,19 @@ paths:
                   'sortOrder' => 'asc'
               )); 
           - language: python
-            code: |+
+            code: |
               # First install the api client with "pip install api.video"
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#list
-
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#list
-
-  /watermarks/{watermarkId}:
+  '/watermarks/{watermarkId}':
     delete:
       tags:
         - Watermarks
       summary: Delete a watermark
-      description: Delete a watermark. A watermark is a static image, directly burnt-into a video.
+      description: Delete a watermark.
       operationId: DELETE_watermark
       parameters:
         - name: watermarkId
@@ -1532,7 +1488,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: watermarkId
                     status: 404
@@ -1552,20 +1508,17 @@ paths:
 
               client.watermarks.delete(watermarkId);
           - language: csharp
-            code: |+
+            code: |
               // First add the "ApiVideo" NuGet package to your project
               // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/WatermarksApi.md#delete
-
           - language: go
-            code: |+
+            code: |
               // First install the go client with "go get github.com/apivideo/api.video-go-client"
               // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/WatermarksApi.md#delete
-
           - language: java
-            code: |+
+            code: |
               // First add the "video.api:java-api-client" maven dependency to your project
               // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#delete
-
           - language: php
             code: |-
               <?php
@@ -1584,26 +1537,19 @@ paths:
 
               $client->watermarks->delete(watermarkId);
           - language: python
-            code: |+
+            code: |
               # First install the api client with "pip install api.video"
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#delete
-
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#delete
-
-  /videos/{videoId}/thumbnail:
+  '/videos/{videoId}/thumbnail':
     post:
       tags:
         - Videos
       summary: Upload a thumbnail
-      description: |-
-        The thumbnail is the poster that appears in the player window before video playback begins.
-        This endpoint allows you to upload an image for the thumbnail.
-        To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. 
-        Note: There may be a short delay before the new thumbnail is delivered to our CDN.
-        Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
+      description: Upload a thumbnail for a certain video.
       x-client-description:
         default: |-
           The thumbnail is the poster that appears in the player window before video playback begins.
@@ -1660,11 +1606,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
           description: Bad Request
           content:
@@ -1675,8 +1621,8 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/fileextension
-                    title: Only [jpeg, jpg, JPG, JPEG] extensions are supported.
+                    type: 'https://docs.api.video/docs/fileextension'
+                    title: 'Only [jpeg, jpg, JPG, JPEG] extensions are supported.'
                     name: file
         '404':
           description: Not Found
@@ -1687,7 +1633,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -1861,17 +1807,14 @@ paths:
 
               $client->videos()->uploadThumbnail($videoId, $thumbnail); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadThumbnail
-
     patch:
       tags:
         - Videos
-      summary: Pick a thumbnail
-      description: |-
-        Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
-        Tutorials using [Thumbnail picking](https://api.video/blog/endpoints/video-pick-a-thumbnail).
+      summary: Set a thumbnail
+      description: Set a thumbnail from a specific time interval within a video.
       x-client-description:
         default: |
           Pick a thumbnail from the given time code. 
@@ -1883,7 +1826,7 @@ paths:
       parameters:
         - name: videoId
           in: path
-          description: Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
+          description: 'Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.'
           required: true
           style: simple
           explode: false
@@ -1926,11 +1869,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '404':
           description: Not Found
           content:
@@ -1940,7 +1883,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -1983,7 +1926,7 @@ paths:
               ", res)
               }
           - language: node
-            code: |+
+            code: |
               // First install the "@api.video/nodejs-client" npm package
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#pickThumbnail
 
@@ -1995,7 +1938,6 @@ paths:
               }; 
 
               const video = await client.videos.pickThumbnail(videoId, videoThumbnailPickPayload);
-
           - language: python
             code: |
               # First install the api client with "pip install api.video"
@@ -2123,18 +2065,17 @@ paths:
               $video = $client->videos()->pickThumbnail($videoId, (new \ApiVideo\Client\Model\VideoThumbnailPickPayload())
                   ->setTimecode("00:01:00.000")); // Frame in video to be used as a placeholder before the video plays. 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#pickThumbnail
-
-  /videos/{videoId}:
+  '/videos/{videoId}':
     get:
       tags:
         - Videos
-      summary: Retrieve a video
-      description: This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL. Tutorials using [video GET](https://api.video/blog/endpoints/video-get).
+      summary: Retrieve a video object
+      description: Retrieve the video details by video id.
       x-client-description:
-        default: This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
+        default: 'This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.'
       operationId: GET-video
       parameters:
         - name: videoId
@@ -2177,11 +2118,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '404':
           description: Not Found
           content:
@@ -2191,7 +2132,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -2351,17 +2292,16 @@ paths:
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want the status for.
               $videoStatus = $client->videos()->getStatus($videoId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#get
-
     delete:
       tags:
         - Videos
-      summary: Delete a video
-      description: If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. Tutorials using [video deletion](https://api.video/blog/endpoints/video-delete).
+      summary: Delete a video object
+      description: Delete a video object by video ID.
       x-client-description:
-        default: If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
+        default: 'If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.'
       operationId: DELETE-video
       parameters:
         - name: videoId
@@ -2385,7 +2325,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -2529,25 +2469,24 @@ paths:
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // the id of the video to delete
               $client->videos()->delete($videoId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#delete
-
     patch:
       tags:
         - Videos
-      summary: Update a video
-      description: 'Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it. Tutorials using [video update](https://api.video/blog/endpoints/video-update).'
+      summary: Update a video object
+      description: Update the parameters associated with a video ID.
       x-client-description:
         default: |
-          Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide. 
+          Updates the parameters associated with a video ID. The video object you are updating is determined by the video ID you provide. 
 
           NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
       operationId: PATCH-video
       parameters:
         - name: videoId
           in: path
-          description: The video ID for the video you want to delete.
+          description: The video ID for the video you want to update.
           required: true
           style: simple
           explode: false
@@ -2591,11 +2530,11 @@ paths:
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
           description: Bad Request
           content:
@@ -2605,18 +2544,18 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/attributeinvalid
+                    type: 'https://docs.api.video/docs/attributeinvalid'
                     title: This attribute must be a ISO-8601 date.
                     name: scheduledAt
                     status: 400
                     problems:
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be a ISO-8601 date.
                         name: scheduledAt
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: tags
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: metadata
         '404':
@@ -2628,7 +2567,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -2671,7 +2610,7 @@ paths:
               ", res)
               }
           - language: node
-            code: |+
+            code: |
               // First install the "@api.video/nodejs-client" npm package
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#update
 
@@ -2693,7 +2632,6 @@ paths:
 
 
               const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);
-
           - language: python
             code: |
               # First install the api client with "pip install api.video"
@@ -2844,18 +2782,17 @@ paths:
                       new \ApiVideo\Client\Model\Metadata(["key" => "aa", 'value' => "bb"]),
                       new \ApiVideo\Client\Model\Metadata(["key" => "aa2", 'value' => "bb2"])))); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#update
-
-  /videos/{videoId}/status:
+  '/videos/{videoId}/status':
     get:
       tags:
         - Videos
-      summary: Retrieve video status
-      description: This API provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
+      summary: Retrieve video status and details
+      description: 'Retrieve upload status and encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.'
       x-client-description:
-        default: This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
+        default: 'This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.'
       operationId: GET-video-status
       parameters:
         - name: videoId
@@ -2922,7 +2859,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -3082,18 +3019,15 @@ paths:
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want the status for.
               $videoStatus = $client->videos()->getStatus($videoId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#getStatus
-
   /upload-tokens:
     get:
       tags:
         - Upload Tokens
-      summary: List all active upload tokens.
-      description: |-
-        A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
-        Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+      summary: List all active upload tokens
+      description: Retrieve a list of all currently active delegated tokens.
       operationId: GET_upload-tokens
       parameters:
         - name: sortBy
@@ -3343,15 +3277,14 @@ paths:
 
               $uploadTokens = $client->uploadTokens()->list(); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#list
-
     post:
       tags:
         - Upload Tokens
       summary: Generate an upload token
-      description: Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+      description: 'Generates an upload token that can be used to replace the API Key. More information can be found [here](https://docs.api.video/reference/upload-tokens)'
       operationId: POST_upload-tokens
       requestBody:
         required: true
@@ -3544,16 +3477,15 @@ paths:
               $uploadToken = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
               $client->uploadTokens()->deleteToken($uploadToken); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#createToken
-
-  /upload-tokens/{uploadToken}:
+  '/upload-tokens/{uploadToken}':
     get:
       tags:
         - Upload Tokens
       summary: Retrieve upload token
-      description: You can retrieve details about a specific upload token if you have the unique identifier for the upload token. Add it in the path of the endpoint. Details include time-to-live (ttl), when the token was created, and when it will expire.
+      description: Retrieve details about a specific upload token by id.
       operationId: GET_upload-tokens-uploadToken
       parameters:
         - name: uploadToken
@@ -3741,10 +3673,9 @@ paths:
               $uploadTokenId = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token you want information about.
               $uploadToken = $client->uploadTokens()->getToken($uploadTokenId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#getToken
-
     delete:
       tags:
         - Upload Tokens
@@ -3920,18 +3851,17 @@ paths:
               $uploadTokenId = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token you want information about.
               $uploadToken = $client->uploadTokens()->getToken($uploadTokenId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#deleteToken
-
   /upload:
     post:
       tags:
         - Videos
-      summary: Upload with an upload token
-      description: "When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.\n\nExample with cURL:\n\n```curl\n$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'\n --header 'content-type: multipart/form-data'\n -F file=@video.mp4\n```\n\nOr in an HTML form, with a little JavaScript to convert the form into JSON:\n```html\n<!--form for user interaction-->\n<form name=\"videoUploadForm\" >\n  <label for=video>Video:</label>\n  <input type=file name=source/><br/>\n  <input value=\"Submit\" type=\"submit\">\n</form>\n<div></div>\n<!--JS takes the form data \n    uses FormData to turn the response into JSON.\n    then uses POST to upload the video file.\n    Update the token parameter in the url to your upload token.\n    -->\n<script>\n   var form = document.forms.namedItem(\"videoUploadForm\");\t\n   form.addEventListener('submit', function(ev) {\n\t ev.preventDefault();\n     var oOutput = document.querySelector(\"div\"),\n         oData = new FormData(form);\n     var oReq = new XMLHttpRequest();\n\t \n     oReq.open(\"POST\", \"https://ws.api.video/upload?token=toXXX\", true);\n     oReq.send(oData);\n\t oReq.onload = function(oEvent) {\n       if (oReq.status ==201) {\n         oOutput.innerHTML = \"Your video is uploaded!<br/>\"  + oReq.response;\n       } else {\n         oOutput.innerHTML = \"Error \" + oReq.status + \" occurred when trying to upload your file.<br \\/>\";\n       }\n     };\n   }, false);\t\n</script>\n```\n\n\n### Dealing with large files\n\nYou can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required."
+      summary: Upload with an delegated upload token
+      description: Uploading a video with the delegated upload token.
       x-client-description:
-        default: This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+        default: 'This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you''d better use the [standard upload method](#upload).'
       operationId: POST_upload
       parameters:
         - name: token
@@ -3945,12 +3875,12 @@ paths:
           example: to1tcmSFHeYY5KzyhOqVKMKb
         - name: Content-Range
           in: header
-          description: Content-Range represents the range of bytes that will be returned as a result of the request. Byte ranges are inclusive, meaning that bytes 0-999 represents the first 1000 bytes in a file or object.
+          description: 'Content-Range represents the range of bytes that will be returned as a result of the request. Byte ranges are inclusive, meaning that bytes 0-999 represents the first 1000 bytes in a file or object.'
           required: false
           style: simple
           explode: false
           schema:
-            pattern: ^bytes [0-9]*-[0-9]*\/[0-9]*$
+            pattern: '^bytes [0-9]*-[0-9]*\/[0-9]*$'
             type: string
           example: 'Content-Range: bytes 200-100/5000'
           x-client-ignore: true
@@ -3989,11 +3919,11 @@ paths:
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
                     assets:
-                      iframe: <iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
-                      hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
-                      thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
+                      iframe: '<iframe src="https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27'
+                      hls: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8'
+                      thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
+                      mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
           description: Bad Request
           content:
@@ -4006,10 +3936,9 @@ paths:
       x-readme:
         code-samples:
           - language: go
-            code: |+
+            code: |
               // First install the go client with "go get github.com/apivideo/api.video-go-client"
               // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
           - language: node
             code: |
               // First install the "@api.video/nodejs-client" npm package
@@ -4022,20 +3951,17 @@ paths:
                     
               const video = await client.videos.uploadWithUploadToken(token, file);
           - language: python
-            code: |+
+            code: |
               # First install the api client with "pip install api.video"
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
           - language: java
-            code: |+
+            code: |
               // First add the "video.api:java-api-client" maven dependency to your project
               // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
           - language: csharp
-            code: |+
+            code: |
               // First add the "ApiVideo" NuGet package to your project
               // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
           - language: php
             code: |-
               <?php
@@ -4055,16 +3981,15 @@ paths:
               $video = $client->videos()->pickThumbnail($videoId, (new \ApiVideo\Client\Model\VideoThumbnailPickPayload())
                   ->setTimecode("00:01:00.000")); // Frame in video to be used as a placeholder before the video plays. 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
-
   /live-streams:
     get:
       tags:
         - Live Streams
       summary: List all live streams
-      description: With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
+      description: Get the list of livestreams on the workspace.
       operationId: GET_live-streams
       parameters:
         - name: streamKey
@@ -4128,10 +4053,10 @@ paths:
                         record: true
                         broadcasting: false
                         assets:
-                          iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                          player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                          hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                          thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                          iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                          player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
+                          hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
+                          thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
                       - liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
                         createdAt: '2020-07-29T10:45:35.000Z'
                         updatedAt: '2020-07-29T10:45:35.000Z'
@@ -4141,10 +4066,10 @@ paths:
                         record: true
                         broadcasting: false
                         assets:
-                          iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                          player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
-                          hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-                          thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+                          iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                          player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
+                          hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
+                          thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
                     pagination:
                       currentPage: 1
                       currentPageItems: 19
@@ -4370,21 +4295,14 @@ paths:
                   'pageSize' => 30
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#list
-
     post:
       tags:
         - Live Streams
       summary: Create live stream
-      description: |-
-        A live stream will give you the 'connection point' to RTMP your video stream to api.video. 
-        It will also give you the details for viewers to watch the same livestream.  
-        The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. 
-        See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. 
-        Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
-        Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
+      description: Creates a livestream object.
       operationId: POST_live-streams
       requestBody:
         required: true
@@ -4411,10 +4329,10 @@ paths:
                     record: true
                     broadcasting: false
                     assets:
-                      iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
-                      hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-                      thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+                      iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
+                      hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
+                      thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
         '400':
           description: Bad Request
           content:
@@ -4571,12 +4489,12 @@ paths:
                     // Manage create error here
                  }
               }
-  /live-streams/{liveStreamId}:
+  '/live-streams/{liveStreamId}':
     get:
       tags:
         - Live Streams
       summary: Retrieve live stream
-      description: Supply a liveStreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
+      description: Get a livestream by id.
       operationId: GET_live-streams-liveStreamId
       parameters:
         - name: liveStreamId
@@ -4607,10 +4525,10 @@ paths:
                     record: true
                     broadcasting: false
                     assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                      iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
+                      hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
+                      thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
       security:
         - apiKey: []
       x-client-action: get
@@ -4800,15 +4718,14 @@ paths:
               $liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to retrieve.
               $liveStream = $client->liveStreams()->get($liveStreamId);
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#get
-
     delete:
       tags:
         - Live Streams
       summary: Delete a live stream
-      description: If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
+      description: 'If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.'
       operationId: DELETE_live-streams-liveStreamId
       parameters:
         - name: liveStreamId
@@ -4973,23 +4890,19 @@ paths:
               $liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique identifier of the live stream whose thumbnail you want to delete.
               $liveStream = $client->liveStreams()->deleteThumbnail($liveStreamId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#delete
-
     patch:
       tags:
         - Live Streams
       summary: Update a live stream
-      description: |-
-        Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). 
-        NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.    
-        The public=false "private livestream" is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+      description: Updates the livestream object.
       operationId: PATCH_live-streams-liveStreamId
       parameters:
         - name: liveStreamId
           in: path
-          description: The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+          description: 'The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.'
           required: true
           style: simple
           explode: false
@@ -5021,10 +4934,10 @@ paths:
                     record: true
                     broadcasting: false
                     assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                      iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+                      player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
+                      hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
+                      thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
         '400':
           description: Bad Request
           content:
@@ -5139,8 +5052,7 @@ paths:
                   String liveStreamId = "li400mYKSgQ6xs7taUeSaEKr"; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
                   LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload(); // 
                   liveStreamUpdatePayload.setName("My Live Stream Video"); // The name you want to use for your live stream.
-                  liveStreamUpdatePayload.setPublic(); // BETA FEATURE Please limit all public &#x3D; false (&quot;private&quot;) livestreams to 3,000 users.
-              Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+                  liveStreamUpdatePayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
                   liveStreamUpdatePayload.setRecord(true); // Use this to indicate whether you want the recording on or off. On is true, off is false.
                   liveStreamUpdatePayload.setPlayerId("pl45KFKdlddgk654dspkze"); // The unique ID for the player associated with a live stream that you want to update.
 
@@ -5219,16 +5131,15 @@ paths:
 
               $liveStream = $client->liveStreams()->update($liveStreamId, $liveStreamUpdatePayload); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
-
-  /live-streams/{liveStreamId}/thumbnail:
+  '/live-streams/{liveStreamId}/thumbnail':
     post:
       tags:
         - Live Streams
       summary: Upload a thumbnail
-      description: Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
+      description: Upload the thumbnail for the livestream.
       operationId: POST_live-streams-liveStreamId-thumbnail
       parameters:
         - name: liveStreamId
@@ -5263,8 +5174,8 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/fileextension
-                    title: Only [jpeg, jpg, JPG, JPEG] extensions are supported.
+                    type: 'https://docs.api.video/docs/fileextension'
+                    title: 'Only [jpeg, jpg, JPG, JPEG] extensions are supported.'
                     name: file
         '404':
           description: Not Found
@@ -5275,7 +5186,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: liveStreamId
                     status: 404
@@ -5321,7 +5232,7 @@ paths:
               ", res)
               }
           - language: node
-            code: |+
+            code: |
               // First install the "@api.video/nodejs-client" npm package
               // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#uploadThumbnail
 
@@ -5331,7 +5242,6 @@ paths:
               const file = './thumbnail.jpg'; // The image to be added as a thumbnail.
 
               const livestream = await client.liveStreams.uploadThumbnail(liveStreamId, file);
-
           - language: python
             code: |
               # First install the api client with "pip install api.video"
@@ -5448,10 +5358,9 @@ paths:
 
               $livestream = $client->liveStreams()->uploadThumbnail($liveStreamId, $file); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#uploadThumbnail
-
     delete:
       tags:
         - Live Streams
@@ -5484,7 +5393,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: liveStreamId
                     status: 404
@@ -5646,18 +5555,15 @@ paths:
               $liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to watch.
               $liveStream = $client->liveStreams()->get(liveStreamId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#deleteThumbnail
-
-  /videos/{videoId}/captions/{language}:
+  '/videos/{videoId}/captions/{language}':
     get:
       tags:
         - Captions
       summary: Retrieve a caption
-      description: |-
-        Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
-        Tutorials that use the [captions endpoint](https://api.video/blog/endpoints/captions).
+      description: Retrieve a caption for a video in a specific language.
       x-client-description:
         default: |-
           Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a error indicating the caption was not found.
@@ -5675,7 +5581,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation'
           required: true
           style: simple
           explode: false
@@ -5693,7 +5599,7 @@ paths:
                 response:
                   value:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
-                    src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt
+                    src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
                     default: false
         '404':
@@ -5860,17 +5766,14 @@ paths:
 
               $client->captions()->get($videoId, $language); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#get
-
     post:
       tags:
         - Captions
       summary: Upload a caption
-      description: |-
-        Upload a VTT file to add captions to your video.
-         Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+      description: 'Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/reference/captions)'
       operationId: POST_videos-videoId-captions-language
       parameters:
         - name: videoId
@@ -5908,7 +5811,7 @@ paths:
                 response:
                   value:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
-                    src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt
+                    src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
                     default: false
         '400':
@@ -6090,15 +5993,14 @@ paths:
 
               $caption = $client->captions()->upload($videoId, $language, $file); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#upload
-
     delete:
       tags:
         - Captions
       summary: Delete a caption
-      description: Delete a caption in a specific language by providing the video ID for the video you want to delete the caption from and the language the caption is in.
+      description: Delete a caption in a specific language by by video id.
       operationId: DELETE_videos-videoId-captions-language
       parameters:
         - name: videoId
@@ -6112,7 +6014,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklgc
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
           required: true
           style: simple
           explode: false
@@ -6280,15 +6182,14 @@ paths:
 
               $client->captions()->delete($videoId, $language); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#delete
-
     patch:
       tags:
         - Captions
       summary: Update a caption
-      description: 'To have the captions on automatically, use this PATCH to set default: true.'
+      description: Update caption settings.
       x-client-description:
         default: 'To have the captions on automatically, use this method to set default: true.'
       operationId: PATCH_videos-videoId-captions-language
@@ -6304,7 +6205,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
           required: true
           style: simple
           explode: false
@@ -6328,7 +6229,7 @@ paths:
                 response:
                   value:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
-                    src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt
+                    src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
                     default: true
         '400':
@@ -6535,16 +6436,15 @@ paths:
                
               $caption = $client->captions()->update($videoId, $language, $captionsUpdatePayload); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#update
-
-  /videos/{videoId}/captions:
+  '/videos/{videoId}/captions':
     get:
       tags:
         - Captions
       summary: List video captions
-      description: Retrieve a list of available captions for the videoId you provide.
+      description: Retrieve a list of available captions by video id.
       operationId: GET_videos-videoId-captions
       parameters:
         - name: videoId
@@ -6570,11 +6470,11 @@ paths:
                   value:
                     data:
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
-                        src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt
+                        src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                         srclang: en
                         default: false
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/fr
-                        src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/fr.vtt
+                        src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/fr.vtt'
                         srclang: fr
                         default: false
                     pagination:
@@ -6759,18 +6659,15 @@ paths:
                   'pageSize' => 30 // Results per page. Allowed values 1-100, default is 25.)
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#list
-
-  /videos/{videoId}/chapters/{language}:
+  '/videos/{videoId}/chapters/{language}':
     get:
       tags:
         - Chapters
       summary: Retrieve a chapter
-      description: |-
-        Retrieve a chapter for a video in a specific language. 
-        Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
+      description: 'Retrieve a chapter for by video id in a specific language. '
       operationId: GET_videos-videoId-chapters-language
       parameters:
         - name: videoId
@@ -6784,7 +6681,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
           required: true
           style: simple
           explode: false
@@ -6802,7 +6699,7 @@ paths:
                 response:
                   value:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters/fr
-                    src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt
+                    src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
                     language: fr
         '404':
           description: Not Found
@@ -6968,10 +6865,9 @@ paths:
 
               $client->chapters()->delete($videoId, $language); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#get
-
     post:
       tags:
         - Chapters
@@ -6992,7 +6888,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
           required: true
           style: simple
           explode: false
@@ -7016,7 +6912,7 @@ paths:
                 response:
                   value:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters/fr
-                    src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt
+                    src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
                     language: fr
         '400':
           description: Bad Request
@@ -7198,10 +7094,9 @@ paths:
 
               $chapter = $client->chapters()->upload($videoId, $language, $file); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#upload
-
     delete:
       tags:
         - Chapters
@@ -7220,7 +7115,7 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         - name: language
           in: path
-          description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
           required: true
           style: simple
           explode: false
@@ -7387,16 +7282,15 @@ paths:
 
               $client->chapters()->delete($videoId, $language); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#delete
-
-  /videos/{videoId}/chapters:
+  '/videos/{videoId}/chapters':
     get:
       tags:
         - Chapters
       summary: List video chapters
-      description: Retrieve a list of all chapters for a specified video.
+      description: Retrieve a list of all chapters for by video id.
       operationId: GET_videos-videoId-chapters
       parameters:
         - name: videoId
@@ -7422,10 +7316,10 @@ paths:
                   value:
                     data:
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters/fr
-                        src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt
+                        src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
                         language: fr
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters/en
-                        src: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/en.vtt
+                        src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/en.vtt'
                         language: en
                     pagination:
                       currentPage: 1
@@ -7609,18 +7503,15 @@ paths:
                   'pageSize' => 30 // Results per page. Allowed values 1-100, default is 25.)
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#list
-
   /players:
     get:
       tags:
         - Player Themes
       summary: List all player themes
-      description: |-
-        Retrieve a list of all the player themes you created, as well as details about each one.
-        Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
+      description: 'Retrieve a list of all the player themes you created, as well as details about each one.'
       operationId: GET_players
       parameters:
         - name: sortBy
@@ -7664,16 +7555,16 @@ paths:
                       - playerId: pl4fgtjy4tjyKDK545DRdfg
                         createdAt: '2020-01-13T10:09:17+00:00'
                         updatedAt: '2020-01-13T10:09:17+00:00'
-                        text: rgba(255, 255, 255, .95)
-                        link: rgba(255, 0, 0, .95)
-                        linkHover: rgba(255, 255, 255, .75)
-                        linkActive: rgba(255, 0, 0, .75)
-                        trackPlayed: rgba(255, 255, 255, .95)
-                        trackUnplayed: rgba(255, 255, 255, .1)
-                        trackBackground: rgba(0, 0, 0, 0)
-                        backgroundTop: rgba(72, 4, 45, 1)
-                        backgroundBottom: rgba(94, 95, 89, 1)
-                        backgroundText: rgba(255, 255, 255, .95)
+                        text: 'rgba(255, 255, 255, .95)'
+                        link: 'rgba(255, 0, 0, .95)'
+                        linkHover: 'rgba(255, 255, 255, .75)'
+                        linkActive: 'rgba(255, 0, 0, .75)'
+                        trackPlayed: 'rgba(255, 255, 255, .95)'
+                        trackUnplayed: 'rgba(255, 255, 255, .1)'
+                        trackBackground: 'rgba(0, 0, 0, 0)'
+                        backgroundTop: 'rgba(72, 4, 45, 1)'
+                        backgroundBottom: 'rgba(94, 95, 89, 1)'
+                        backgroundText: 'rgba(255, 255, 255, .95)'
                         enableApi: false
                         enableControls: false
                         forceAutoplay: false
@@ -7682,16 +7573,16 @@ paths:
                       - playerId: pl54fgtjy4tjyKDK45DRdfg
                         createdAt: '2020-01-13T10:09:17+00:00'
                         updatedAt: '2020-01-13T10:09:17+00:00'
-                        text: rgba(255, 255, 255, .95)
-                        link: rgba(255, 0, 0, .95)
-                        linkHover: rgba(255, 255, 255, .75)
-                        linkActive: rgba(255, 0, 0, .75)
-                        trackPlayed: rgba(255, 255, 255, .95)
-                        trackUnplayed: rgba(255, 255, 255, .1)
-                        trackBackground: rgba(0, 0, 0, 0)
-                        backgroundTop: rgba(72, 4, 45, 1)
-                        backgroundBottom: rgba(94, 95, 89, 1)
-                        backgroundText: rgba(255, 255, 255, .95)
+                        text: 'rgba(255, 255, 255, .95)'
+                        link: 'rgba(255, 0, 0, .95)'
+                        linkHover: 'rgba(255, 255, 255, .75)'
+                        linkActive: 'rgba(255, 0, 0, .75)'
+                        trackPlayed: 'rgba(255, 255, 255, .95)'
+                        trackUnplayed: 'rgba(255, 255, 255, .1)'
+                        trackBackground: 'rgba(0, 0, 0, 0)'
+                        backgroundTop: 'rgba(72, 4, 45, 1)'
+                        backgroundBottom: 'rgba(94, 95, 89, 1)'
+                        backgroundText: 'rgba(255, 255, 255, .95)'
                         enableApi: true
                         enableControls: true
                         forceAutoplay: true
@@ -7705,11 +7596,11 @@ paths:
                       currentPageItems: 4
                       links:
                         - rel: self
-                          uri: https://ws.api.video/players?currentPage=1
+                          uri: 'https://ws.api.video/players?currentPage=1'
                         - rel: first
-                          uri: https://ws.api.video/players?currentPage=1
+                          uri: 'https://ws.api.video/players?currentPage=1'
                         - rel: last
-                          uri: https://ws.api.video/players?currentPage=1
+                          uri: 'https://ws.api.video/players?currentPage=1'
         '400':
           description: Bad Request
           content:
@@ -7915,15 +7806,14 @@ paths:
                   'pageSize' => 30 // Results per page. Allowed values 1-100, default is 25.
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#list
-
     post:
       tags:
         - Player Themes
       summary: Create a player
-      description: Create a player for your video, and customise it.
+      description: 'Create a player for your video, and customise it.'
       operationId: POST_players
       requestBody:
         content:
@@ -7944,16 +7834,16 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T10:09:17+00:00'
-                    text: rgba(255, 255, 255, .95)
-                    link: rgba(255, 0, 0, .95)
-                    linkHover: rgba(255, 255, 255, .75)
-                    linkActive: rgba(255, 0, 0, .75)
-                    trackPlayed: rgba(255, 255, 255, .95)
-                    trackUnplayed: rgba(255, 255, 255, .1)
-                    trackBackground: rgba(0, 0, 0, 0)
-                    backgroundTop: rgba(72, 4, 45, 1)
-                    backgroundBottom: rgba(94, 95, 89, 1)
-                    backgroundText: rgba(255, 255, 255, .95)
+                    text: 'rgba(255, 255, 255, .95)'
+                    link: 'rgba(255, 0, 0, .95)'
+                    linkHover: 'rgba(255, 255, 255, .75)'
+                    linkActive: 'rgba(255, 0, 0, .75)'
+                    trackPlayed: 'rgba(255, 255, 255, .95)'
+                    trackUnplayed: 'rgba(255, 255, 255, .1)'
+                    trackBackground: 'rgba(0, 0, 0, 0)'
+                    backgroundTop: 'rgba(72, 4, 45, 1)'
+                    backgroundBottom: 'rgba(94, 95, 89, 1)'
+                    backgroundText: 'rgba(255, 255, 255, .95)'
                     enableApi: false
                     enableControls: false
                     forceAutoplay: false
@@ -8175,12 +8065,35 @@ paths:
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#create
 
-  /players/{playerId}:
+              ApiVideoClient.apiKey = "YOUR_API_KEY"
+
+              let videoCreationPayload = PlayerThemeCreationPayload(
+                text = "rgba(255, 0, 0, 1)", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
+                link = "rgba(0, 0, 255, 1)", // RGBA color for all controls. Default: rgba(255, 255, 255, 1)
+                linkHover = "rgba(0, 255, 255, 1)", // RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
+                trackPlayed = "rgba(255, 0, 255, 1)", // RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
+                trackUnplayed = "rgba(255, 255, 255, 1)", // RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
+                trackBackground = "rgba(255, 255, 255, 1)", // RGBA color playback bar: background. Default: rgba(255, 255, 255, .2)
+                backgroundTop = "rgba(0, 255, 255, 1)", // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)
+                backgroundBottom = "rgba(255, 255, 255, 1)", // RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)
+                backgroundText = "rgba(255, 255, 255, 1)", // RGBA color for title text. Default: rgba(255, 255, 255, 1)
+                enableApi = true, // enable/disable player SDK access. Default: true
+                enableControls = true, // enable/disable player controls. Default: true
+                forceAutoplay = true, // enable/disable player autoplay. Default: false
+                hideTitle = true, // enable/disable title. Default: false
+                forceLoop = true // enable/disable looping. Default: false
+              )
+
+
+              PlayerThemesAPI.create(playerThemeCreationPayload: playerThemeCreationPayload) { (response, error) in
+                  
+              }
+  '/players/{playerId}':
     get:
       tags:
         - Player Themes
       summary: Retrieve a player
-      description: Use a player ID to retrieve details about the player and display it for viewers.
+      description: Retreive a player theme by player id.
       operationId: GET_players-playerId
       parameters:
         - name: playerId
@@ -8205,16 +8118,16 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T11:12:14+00:00'
-                    text: rgba(255, 255, 255, .95)
-                    link: rgba(255, 0, 0, .95)
-                    linkHover: rgba(255, 255, 255, .75)
-                    linkActive: rgba(255, 0, 0, .75)
-                    trackPlayed: rgba(255, 255, 255, .95)
-                    trackUnplayed: rgba(255, 255, 255, .1)
-                    trackBackground: rgba(0, 0, 0, 0)
-                    backgroundTop: rgba(72, 4, 45, 1)
-                    backgroundBottom: rgba(94, 95, 89, 1)
-                    backgroundText: rgba(255, 255, 255, .95)
+                    text: 'rgba(255, 255, 255, .95)'
+                    link: 'rgba(255, 0, 0, .95)'
+                    linkHover: 'rgba(255, 255, 255, .75)'
+                    linkActive: 'rgba(255, 0, 0, .75)'
+                    trackPlayed: 'rgba(255, 255, 255, .95)'
+                    trackUnplayed: 'rgba(255, 255, 255, .1)'
+                    trackBackground: 'rgba(0, 0, 0, 0)'
+                    backgroundTop: 'rgba(72, 4, 45, 1)'
+                    backgroundBottom: 'rgba(94, 95, 89, 1)'
+                    backgroundText: 'rgba(255, 255, 255, .95)'
                     enableApi: false
                     enableControls: false
                     forceAutoplay: false
@@ -8229,7 +8142,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
@@ -8384,10 +8297,9 @@ paths:
               $playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player you want to retrieve. 
               $playerTheme = $client->playerThemes()->get($playerId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#get
-
     delete:
       tags:
         - Player Themes
@@ -8416,7 +8328,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
@@ -8563,10 +8475,9 @@ paths:
               $playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player you want to delete.
               $client->playerThemes()->delete($playerId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#delete
-
     patch:
       tags:
         - Player Themes
@@ -8604,16 +8515,16 @@ paths:
                     playerId: pl45d5vFFGrfdsdsd156dGhh
                     createdAt: '2020-01-13T10:09:17+00:00'
                     updatedAt: '2020-01-13T11:12:14+00:00'
-                    text: rgba(255, 255, 255, .95)
-                    link: rgba(255, 0, 0, .95)
-                    linkHover: rgba(255, 255, 255, .75)
-                    linkActive: rgba(255, 0, 0, .75)
-                    trackPlayed: rgba(255, 255, 255, .95)
-                    trackUnplayed: rgba(255, 255, 255, .1)
-                    trackBackground: rgba(0, 0, 0, 0)
-                    backgroundTop: rgba(72, 4, 45, 1)
-                    backgroundBottom: rgba(94, 95, 89, 1)
-                    backgroundText: rgba(255, 255, 255, .95)
+                    text: 'rgba(255, 255, 255, .95)'
+                    link: 'rgba(255, 0, 0, .95)'
+                    linkHover: 'rgba(255, 255, 255, .75)'
+                    linkActive: 'rgba(255, 0, 0, .75)'
+                    trackPlayed: 'rgba(255, 255, 255, .95)'
+                    trackUnplayed: 'rgba(255, 255, 255, .1)'
+                    trackBackground: 'rgba(0, 0, 0, 0)'
+                    backgroundTop: 'rgba(72, 4, 45, 1)'
+                    backgroundBottom: 'rgba(94, 95, 89, 1)'
+                    backgroundText: 'rgba(255, 255, 255, .95)'
                     enableApi: false
                     enableControls: false
                     forceAutoplay: false
@@ -8628,7 +8539,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
@@ -8853,16 +8764,15 @@ paths:
 
               $playerTheme = $client->playerThemes()->update($playerId, $playerThemeUpdatePayload); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#update
-
-  /players/{playerId}/logo:
+  '/players/{playerId}/logo':
     post:
       tags:
         - Player Themes
       summary: Upload a logo
-      description: The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+      description: Upload an image logo for a player.
       operationId: POST_players-playerId-logo
       parameters:
         - name: playerId
@@ -8897,8 +8807,8 @@ paths:
                 response:
                   value:
                     status: 400
-                    type: https://docs.api.video/docs/fileextension
-                    title: Only ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'] extensions are supported.
+                    type: 'https://docs.api.video/docs/fileextension'
+                    title: 'Only [''jpg'', ''JPG'', ''jpeg'', ''JPEG'', ''png'', ''PNG''] extensions are supported.'
                     name: file
         '404':
           description: Not Found
@@ -8909,7 +8819,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
@@ -9090,10 +9000,9 @@ paths:
 
               $playerTheme = $client->playerThemes()->uploadLogo($playerId, $file, $link); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#uploadLogo
-
     delete:
       tags:
         - Player Themes
@@ -9122,7 +9031,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
@@ -9269,16 +9178,15 @@ paths:
               $playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player whose logo you want to delete.
               $client->playerThemes()->deleteLogo($playerId); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
-
-  /analytics/videos/{videoId}:
+  '/analytics/videos/{videoId}':
     get:
       tags:
         - Raw statistics
       summary: List video player sessions
-      description: Retrieve all available user sessions for a specific video. Tutorials that use the [analytics endpoint](https://api.video/blog/endpoints/analytics).
+      description: 'Retrieve all available user sessions for a specific video. Tutorials that use the [analytics endpoint](https://api.video/blog/endpoints/analytics).'
       operationId: GET_analytics-videos-videoId
       parameters:
         - name: videoId
@@ -9308,7 +9216,7 @@ paths:
             format: period
         - name: metadata
           in: query
-          description: Metadata and [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) filter. Send an array of key value pairs you want to filter sessios with.
+          description: 'Metadata and [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) filter. Send an array of key value pairs you want to filter sessios with.'
           required: false
           style: deepObject
           x-is-deep-object: true
@@ -9317,7 +9225,7 @@ paths:
             type: object
             additionalProperties:
               type: string
-          example: metadata[Author]=John Doe&metadata[Format]=Tutorial
+          example: 'metadata[Author]=John Doe&metadata[Format]=Tutorial'
         - $ref: '#/components/parameters/current-page'
         - $ref: '#/components/parameters/page-size'
       responses:
@@ -9339,9 +9247,9 @@ paths:
                           country: France
                           city: Paris
                         referrer:
-                          url: https://api.video
+                          url: 'https://api.video'
                           medium: organic
-                          source: https://google.com
+                          source: 'https://google.com'
                           searchTerm: video encoding hosting and delivery
                         device:
                           type: desktop
@@ -9377,7 +9285,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -9581,11 +9489,10 @@ paths:
                   'pageSize' => 30 // Results per page. Allowed values 1-100, default is 25.
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listVideoSessions
-
-  /analytics/live-streams/{liveStreamId}:
+  '/analytics/live-streams/{liveStreamId}':
     get:
       tags:
         - Raw statistics
@@ -9677,7 +9584,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: liveStreamId
                     status: 404
@@ -9867,11 +9774,10 @@ paths:
               // RawStatisticsListLiveStreamAnalyticsResponse
               const liveStreamSessions = await client.rawStatistics.listLiveStreamSessions({ liveStreamId, period, currentPage, pageSize })
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listLiveStreamSessions
-
-  /analytics/sessions/{sessionId}/events:
+  '/analytics/sessions/{sessionId}/events':
     get:
       tags:
         - Raw statistics
@@ -10005,7 +9911,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
@@ -10189,16 +10095,15 @@ paths:
                   'pageSize' => 30 // Results per page. Allowed values 1-100, default is 25.
               )); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listSessionEvents
-
   /webhooks:
     get:
       tags:
         - Webhooks
       summary: List all webhooks
-      description: Requests to this endpoint return a list of your webhooks (with all their details). You can filter what the webhook list that the API returns using the parameters described below.
+      description: Retrieve a list of all webhooks configured for the current workspace.
       x-client-description:
         default: |-
           Thie method returns a list of your webhooks (with all their details). 
@@ -10231,12 +10136,12 @@ paths:
                         createdAt: '2021-01-08T14:12:18.000Z'
                         events:
                           - video.encoding.quality.completed
-                        url: http://clientnotificationserver.com/notif?myquery=query
+                        url: 'http://clientnotificationserver.com/notif?myquery=query'
                       - webhookId: webhook_XXXXXXXXXYYYYYY
                         createdAt: '2021-01-12T12:12:12.000Z'
                         events:
                           - video.encoding.quality.completed
-                        url: http://clientnotificationserver.com/notif?myquery=query2
+                        url: 'http://clientnotificationserver.com/notif?myquery=query2'
                     pagination:
                       currentPage: 1
                       pageSize: 25
@@ -10245,11 +10150,11 @@ paths:
                       currentPageItems: 11
                       links:
                         - rel: self
-                          uri: https://ws.api.video/webhooks?currentPage=1
+                          uri: 'https://ws.api.video/webhooks?currentPage=1'
                         - rel: first
-                          uri: https://ws.api.video/webhooks?currentPage=1
+                          uri: 'https://ws.api.video/webhooks?currentPage=1'
                         - rel: last
-                          uri: https://ws.api.video/webhooks?currentPage=1
+                          uri: 'https://ws.api.video/webhooks?currentPage=1'
       security:
         - apiKey: []
       x-group-parameters: true
@@ -10422,10 +10327,9 @@ paths:
               // WebhooksListResponse
               const webhooks = await client.webhooks.list({ events, currentPage, pageSize }); 
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#list
-
     post:
       tags:
         - Webhooks
@@ -10434,7 +10338,7 @@ paths:
         Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events: 
         * ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ "type": "video.encoding.quality.completed", "emittedAt": "2021-01-29T16:46:25.217+01:00", "videoId": "viXXXXXXXX", "encoding": "hls", "quality": "720p"} ```. This request says that the 720p HLS encoding was completed.
         * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
-        * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+        * ```live-stream.broadcast.ended```  This event fires when a live stream has finished broadcasting.
         * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
       operationId: POST-webhooks
       requestBody:
@@ -10457,7 +10361,7 @@ paths:
                     createdAt: '2021-01-08T14:12:18.000Z'
                     events:
                       - video.encoding.quality.completed
-                    url: http://clientnotificationserver.com/notif?myquery=query
+                    url: 'http://clientnotificationserver.com/notif?myquery=query'
         '400':
           description: Bad Request
           content:
@@ -10467,18 +10371,18 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/attributerequired
+                    type: 'https://docs.api.video/docs/attributerequired'
                     events: This attribute is required.
                     name: events
                     status: 400
                     problems:
-                      - type: https://docs.api.video/docs/attributerequired
+                      - type: 'https://docs.api.video/docs/attributerequired'
                         title: This attribute is required.
                         name: events
-                      - type: https://docs.api.video/docs/attributerequired
+                      - type: 'https://docs.api.video/docs/attributerequired'
                         title: This attribute is required.
                         name: url
-                      - type: https://docs.api.video/docs/attributeinvalid
+                      - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: events
       security:
@@ -10650,12 +10554,19 @@ paths:
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#create
 
-  /webhooks/{webhookId}:
+              ApiVideoClient.apiKey = "YOUR_API_KEY"
+
+              let webhooksCreationPayload = webhooks-creation-payload(events: ["events_example"], url: "url_example")
+
+              WebhooksAPI.create(webhooksCreationPayload: webhooksCreationPayload) { (response, error) in
+               
+              }
+  '/webhooks/{webhookId}':
     get:
       tags:
         - Webhooks
       summary: Retrieve Webhook details
-      description: This call provides the same JSON information provided on Webhook creation.
+      description: Retrieve webhook details by id.
       operationId: GET-Webhook
       parameters:
         - name: webhookId
@@ -10680,7 +10591,7 @@ paths:
                     createdAt: '2021-01-08T14:12:18.000Z'
                     events:
                       - video.encoding.quality.completed
-                    url: http://clientnotificationserver.com/notif?myquery=query
+                    url: 'http://clientnotificationserver.com/notif?myquery=query'
       security:
         - apiKey: []
       x-client-action: get
@@ -10832,10 +10743,9 @@ paths:
 
               $webhook = $client->webhooks()->get($webhookId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#get
-
     delete:
       tags:
         - Webhooks
@@ -10865,7 +10775,7 @@ paths:
               examples:
                 response:
                   value:
-                    type: https://docs.api.video/docs/resourcenot_found
+                    type: 'https://docs.api.video/docs/resourcenot_found'
                     title: The requested resource was not found.
                     name: webhookId
                     status: 404
@@ -11012,10 +10922,9 @@ paths:
               $webhookId = 'webhookId_example'; // The webhook you wish to delete.
               $client->webhooks()->delete($webhookId);  
           - language: swift
-            code: |+
+            code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#delete
-
 components:
   schemas:
     link:
@@ -11138,7 +11047,7 @@ components:
         createdAt:
           type: string
           format: date-time
-          description: When a video was created, presented in ISO-8601 format.
+          description: 'When a video was created, presented in ISO-8601 format.'
           example: '2019-06-24T11:45:01.109+00'
         title:
           type: string
@@ -11230,7 +11139,7 @@ components:
         createdAt:
           type: string
           format: date-time
-          description: When the watermark was created, presented in ISO-8601 format.
+          description: 'When the watermark was created, presented in ISO-8601 format.'
           example: '2019-06-24T11:45:01.109+00'
     watermarks-list-response:
       title: Watermarks
@@ -11311,12 +11220,12 @@ components:
           example: pl45KFKdlddgk654dspkze
         createdAt:
           type: string
-          description: When the player was created, presented in ISO-8601 format.
+          description: 'When the player was created, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:17:47+00:00'
         updatedAt:
           type: string
-          description: When the player was last updated, presented in ISO-8601 format.
+          description: 'When the player was last updated, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:18:47+00:00'
         assets:
@@ -11394,23 +11303,23 @@ components:
       example:
         name: My nice theme
         assets:
-          logo: https://cdn.api.video/player/pl14Db6oMJRH6SRVoOwORacK/logo.png
-          link: https://api.video
+          logo: 'https://cdn.api.video/player/pl14Db6oMJRH6SRVoOwORacK/logo.png'
+          link: 'https://api.video'
         shapeMargin: 10
         shapeRadius: 3
         shapeAspect: flat
-        shapeBackgroundTop: rgba(50, 50, 50, .7)
-        shapeBackgroundBottom: rgba(50, 50, 50, .8)
-        text: rgba(255, 255, 255, .95)
-        link: rgba(255, 0, 0, .95)
-        linkHover: rgba(255, 255, 255, .75)
-        linkActive: rgba(255, 0, 0, .75)
-        trackPlayed: rgba(255, 255, 255, .95)
-        trackUnplayed: rgba(255, 255, 255, .1)
-        trackBackground: rgba(0, 0, 0, 0)
-        backgroundTop: rgba(72, 4, 45, 1)
-        backgroundBottom: rgba(94, 95, 89, 1)
-        backgroundText: rgba(255, 255, 255, .95)
+        shapeBackgroundTop: 'rgba(50, 50, 50, .7)'
+        shapeBackgroundBottom: 'rgba(50, 50, 50, .8)'
+        text: 'rgba(255, 255, 255, .95)'
+        link: 'rgba(255, 0, 0, .95)'
+        linkHover: 'rgba(255, 255, 255, .75)'
+        linkActive: 'rgba(255, 0, 0, .75)'
+        trackPlayed: 'rgba(255, 255, 255, .95)'
+        trackUnplayed: 'rgba(255, 255, 255, .1)'
+        trackBackground: 'rgba(0, 0, 0, 0)'
+        backgroundTop: 'rgba(72, 4, 45, 1)'
+        backgroundBottom: 'rgba(94, 95, 89, 1)'
+        backgroundText: 'rgba(255, 255, 255, .95)'
         language: en
         enableApi: true
         enableControls: true
@@ -11482,7 +11391,7 @@ components:
           type: string
         default:
           type: boolean
-          description: Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles.
+          description: 'Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles.'
           example: false
           default: false
     video-session:
@@ -11510,9 +11419,9 @@ components:
           country: France
           city: Paris
         referrer:
-          url: https://api.video
+          url: 'https://api.video'
           medium: organic
-          source: https://google.com
+          source: 'https://google.com'
           searchTerm: video encoding hosting and delivery
         device:
           type: desktop
@@ -11540,7 +11449,7 @@ components:
           example: My Live Stream
         streamKey:
           type: string
-          description: The unique, private stream key that you use to begin streaming.
+          description: 'The unique, private stream key that you use to begin streaming.'
           example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         record:
           type: boolean
@@ -11548,7 +11457,7 @@ components:
           example: true
         public:
           type: boolean
-          description: BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
           example: true
         assets:
           $ref: '#/components/schemas/live-stream-assets'
@@ -11558,16 +11467,16 @@ components:
           example: pl45d5vFFGrfdsdsd156dGhh
         broadcasting:
           type: boolean
-          description: Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.
+          description: 'Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.'
           example: true
         createdAt:
           type: string
-          description: When the player was created, presented in ISO-8601 format.
+          description: 'When the player was created, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:17:47+00:00'
         updatedAt:
           type: string
-          description: When the player was last updated, presented in ISO-8601 format.
+          description: 'When the player was last updated, presented in ISO-8601 format.'
           format: date-time
           example: '2020-01-31T10:18:47+00:00'
       required:
@@ -11598,7 +11507,7 @@ components:
           example: play
         emittedAt:
           type: string
-          description: When an event occurred, presented in ISO-8601 format.
+          description: 'When an event occurred, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T11:45:01.109Z'
         at:
@@ -11617,7 +11526,7 @@ components:
           example: webhook_XXXXXXXXXXXXXXX
         createdAt:
           type: string
-          description: When an webhook was created, presented in ISO-8601 format.
+          description: 'When an webhook was created, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T11:45:01.109Z'
         events:
@@ -11629,7 +11538,7 @@ components:
         url:
           type: string
           description: URL of the webhook
-          example: http://clientnotificationserver.com/notif?myquery=query
+          example: 'http://clientnotificationserver.com/notif?myquery=query'
     video-status:
       title: VideoStatus
       type: object
@@ -11690,7 +11599,7 @@ components:
             - mp4
         quality:
           type: string
-          description: The quality of the video you have, in pixels. Choices include 360p, 480p, 720p, 1080p, and 2160p.
+          description: 'The quality of the video you have, in pixels. Choices include 360p, 480p, 720p, 1080p, and 2160p.'
           example: 720p
           enum:
             - 240p
@@ -11731,8 +11640,8 @@ components:
           type: string
         src:
           type: string
-          description: The link to your VTT file, which contains your chapters information for the video.
-          example: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt
+          description: 'The link to your VTT file, which contains your chapters information for the video.'
+          example: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
         language:
           type: string
     upload-token:
@@ -11750,12 +11659,12 @@ components:
           description: Time-to-live - how long the upload token is valid for.
         createdAt:
           type: string
-          description: When the token was created, displayed in ISO-8601 format.
+          description: 'When the token was created, displayed in ISO-8601 format.'
           format: date-time
           example: '2019-12-16T08:25:51.000Z'
         expiresAt:
           type: string
-          description: When the token expires, displayed in ISO-8601 format.
+          description: 'When the token expires, displayed in ISO-8601 format.'
           format: date-time
           example: '2019-12-16T09:25:51.000Z'
           nullable: true
@@ -11767,7 +11676,7 @@ components:
       properties:
         apiKey:
           type: string
-          description: Your account API key. You can use your sandbox API key, or you can use your production API key.
+          description: 'Your account API key. You can use your sandbox API key, or you can use your production API key.'
       example:
         apiKey: 9VxMaPgsaFg7EBqmuspSzF7
     refresh-token-payload:
@@ -11810,9 +11719,29 @@ components:
       x-client-all-args-constructor: true
     video-creation-payload:
       title: VideoCreationPayload
-      required:
-        - title
       type: object
+      example:
+        title: Maths video
+        description: An amazing video explaining string theory.
+        public: false
+        panoramic: false
+        mp4Support: true
+        playerId: pl45KFKdlddgk654dspkze
+        tags:
+          - maths
+          - string theory
+          - video
+        metadata:
+          - key: Author
+            value: John Doe
+          - key: Format
+            value: Tutorial
+        watermark:
+          id: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          bottom: 10px
+          right: 10px
+          width: 50%
+          opacity: 70%
       properties:
         title:
           type: string
@@ -11824,11 +11753,11 @@ components:
           example: A video about string theory.
         source:
           type: string
-          description: You can either add a video already on the web, by entering the URL of the video, or you can also enter the `videoId` of one of the videos you already have on your api.video acccount, and this will generate a copy of your video. Creating a copy of a video can be especially useful if you want to keep your original video and trim or apply a watermark onto the copy you would create.
-          example: https://www.myvideo.url.com/video.mp4 OR vi4k0jvEUuaTdRAEjQ4JfOyl
+          description: 'You can either add a video already on the web, by entering the URL of the video, or you can also enter the `videoId` of one of the videos you already have on your api.video acccount, and this will generate a copy of your video. Creating a copy of a video can be especially useful if you want to keep your original video and trim or apply a watermark onto the copy you would create.'
+          example: 'https://www.myvideo.url.com/video.mp4 OR vi4k0jvEUuaTdRAEjQ4JfOyl'
         public:
           type: boolean
-          description: Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
+          description: 'Default: True. If set to `false` the video will become private. More information on private videos can be found [here](https://docs.api.video/docs/private-videos)'
           example: true
           default: true
         panoramic:
@@ -11853,38 +11782,16 @@ components:
             type: string
         metadata:
           type: array
-          description: A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata).
+          description: 'A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata).'
           example: '[{"key": "Author", "value": "John Doe"}]'
           items:
             $ref: '#/components/schemas/metadata'
         clip:
-          description: 'Create a "trimmed video" from a new or an existing source by specifying a startTimecode and/or an endTimecode parameter. Select the video you would like to clip: in the `source` param above, mention either the URL to the video or the `videoId` if this video is already hosted on your api.video account.'
           $ref: '#/components/schemas/video-clip'
         watermark:
-          description: 'Specify the use of a given watermark. You can position it based on CSS inspired attributes. If the video you want to watermark is already hosted on your api.video account, select the video you would like to apply a watermark to: in the `source` param above, mention either the URL to the video or its `videoId`. See the specification for [creating a watermark](https://docs.api.video/reference/post_watermark).'
           $ref: '#/components/schemas/video-watermark'
-      example:
-        title: Maths video
-        description: An amazing video explaining string theory.
-        public: false
-        panoramic: false
-        mp4Support: true
-        playerId: pl45KFKdlddgk654dspkze
-        tags:
-          - maths
-          - string theory
-          - video
-        metadata:
-          - key: Author
-            value: John Doe
-          - key: Format
-            value: Tutorial
-        watermark:
-          id: watermark_1BWr2L5MTQwxGkuxKjzh6i
-          bottom: 10px
-          right: 10px
-          width: 50%
-          opacity: 70%
+      required:
+        - title
     video-upload-payload:
       required:
         - file
@@ -11892,7 +11799,7 @@ components:
       properties:
         file:
           type: string
-          description: The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
+          description: 'The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.'
           format: binary
           x-client-chunk-upload: 'true'
           example: '@/path/to/video.mp4'
@@ -11903,7 +11810,7 @@ components:
       type: object
       properties:
         timecode:
-          pattern: \d{2}:\d{2}:\d{2}(\.\d{2})?
+          pattern: '\d{2}:\d{2}:\d{2}(\.\d{2})?'
           type: string
           description: |-
             Frame in video to be used as a placeholder before the video plays. 
@@ -11923,7 +11830,7 @@ components:
       properties:
         file:
           type: string
-          description: The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.
+          description: 'The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.'
           format: binary
     video-update-payload:
       title: VideoUpdatePayload
@@ -11943,7 +11850,7 @@ components:
           example: A film about good books.
         public:
           type: boolean
-          description: Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
+          description: 'Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).'
           example: true
         panoramic:
           type: boolean
@@ -11961,7 +11868,7 @@ components:
             type: string
         metadata:
           type: array
-          description: A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+          description: 'A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.'
           items:
             $ref: '#/components/schemas/metadata'
       example:
@@ -12048,12 +11955,12 @@ components:
           example: My Live Stream Video
         record:
           type: boolean
-          description: Whether you are recording or not. True for record, false for not record.
+          description: 'Whether you are recording or not. True for record, false for not record.'
           example: true
           default: false
         public:
           type: boolean
-          description: BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
         playerId:
           type: string
           description: The unique identifier for the player.
@@ -12072,10 +11979,10 @@ components:
           example: My Live Stream Video
         public:
           type: boolean
-          description: BETA FEATURE Please limit all public = false ("private") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+          description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
         record:
           type: boolean
-          description: Use this to indicate whether you want the recording on or off. On is true, off is false.
+          description: 'Use this to indicate whether you want the recording on or off. On is true, off is false.'
           example: true
         playerId:
           type: string
@@ -12099,7 +12006,7 @@ components:
       properties:
         file:
           type: string
-          description: The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.
+          description: 'The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.'
           format: binary
     captions-update-payload:
       title: CaptionsUpdatePayload
@@ -12170,8 +12077,8 @@ components:
         link:
           type: string
           format: string
-          description: A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address.
-          example: https://my-company.com
+          description: 'A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address.'
+          example: 'https://my-company.com'
     raw-statistics-list-sessions-response:
       title: VideoSessions
       type: object
@@ -12237,7 +12144,7 @@ components:
             A list of the webhooks that you are subscribing to. There are Currently four webhook options:
             * ```video.encoding.quality.completed```  Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
             * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
-            * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+            * ```live-stream.broadcast.ended```  This event fires when a live stream has finished broadcasting.
             * ```video.source.recorded```  Occurs when a live stream is recorded and submitted for encoding.
           example:
             - video.encoding.quality.completed
@@ -12246,11 +12153,11 @@ components:
         url:
           type: string
           description: The the url to which HTTP notifications are sent. It could be any http or https URL.
-          example: https://example.com/webhooks
+          example: 'https://example.com/webhooks'
       example:
         events:
           - video.encoding.quality.completed
-        url: http://clientnotificationserver.com/notif?myquery=query
+        url: 'http://clientnotificationserver.com/notif?myquery=query'
     pagination-link:
       title: PaginationLink
       type: object
@@ -12285,11 +12192,11 @@ components:
           example: 10px
         width:
           type: string
-          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use initial'
+          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use `initial`.'
           example: initial
         height:
           type: string
-          description: 'Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use initial'
+          description: 'Height of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use `initial`.'
           example: initial
         opacity:
           type: string
@@ -12300,10 +12207,10 @@ components:
       properties:
         startTimecode:
           type: string
-          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
+          pattern: '^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$'
         endTimecode:
           type: string
-          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
+          pattern: '^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$'
     video-source-live-stream-link:
       type: object
       properties:
@@ -12342,7 +12249,7 @@ components:
       properties:
         hls:
           type: string
-          description: This is the manifest URL. For HTTP Live Streaming (HLS), when a HLS video stream is initiated, the first file to download is the manifest. This file has the extension M3U8, and provides the video player with information about the various bitrates available for streaming.
+          description: 'This is the manifest URL. For HTTP Live Streaming (HLS), when a HLS video stream is initiated, the first file to download is the manifest. This file has the extension M3U8, and provides the video player with information about the various bitrates available for streaming.'
           format: uri
         iframe:
           type: string
@@ -12352,17 +12259,17 @@ components:
           type: string
           description: Raw url of the player.
           format: uri
-          example: https://embed.api.video/1b9d6ae8-8f57-4b6d-8552-d636926b4f5f?token=831a9bd9-9f50-464c-a369-8e9d914371ae
+          example: 'https://embed.api.video/1b9d6ae8-8f57-4b6d-8552-d636926b4f5f?token=831a9bd9-9f50-464c-a369-8e9d914371ae'
         thumbnail:
           type: string
           description: Poster of the video.
           format: uri
-          example: https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg
+          example: 'https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg'
         mp4:
           type: string
           description: Available only if mp4Support is enabled. Raw mp4 url.
           format: uri
-          example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/source.mp4
+          example: 'https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/source.mp4'
       description: Collection of details about the video object that you can use to work with the video object.
     video-session-session:
       title: VideoSessionSession
@@ -12374,17 +12281,17 @@ components:
           example: psEmFwGQUAXR2lFHj5nDOpy
         loadedAt:
           type: string
-          description: When the video session started, presented in ISO-8601 format.
+          description: 'When the video session started, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T11:45:01.109Z'
         endedAt:
           type: string
-          description: When the video session ended, presented in ISO-8601 format.
+          description: 'When the video session ended, presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T12:45:01.109Z'
         metadata:
           type: array
-          description: A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.
+          description: 'A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.'
           example: '[{"key": "Author", "value": "John Doe"}]'
           items:
             $ref: '#/components/schemas/metadata'
@@ -12409,16 +12316,16 @@ components:
         url:
           type: string
           description: The link the viewer used to reach the video session.
-          example: https://api.video
+          example: 'https://api.video'
           nullable: true
         medium:
           type: string
-          description: How they arrived at the site, for example organic or paid. Organic meaning they found it themselves and paid meaning they followed a link from an advertisement.
+          description: 'How they arrived at the site, for example organic or paid. Organic meaning they found it themselves and paid meaning they followed a link from an advertisement.'
           example: organic
         source:
           type: string
           description: The source the referrer came from to the video session. For example if they searched through google to find the stream.
-          example: https://google.com
+          example: 'https://google.com'
         searchTerm:
           type: string
           description: The search term they typed to arrive at the video session.
@@ -12428,15 +12335,15 @@ components:
       properties:
         type:
           type: string
-          description: What the type is like desktop, laptop, mobile.
+          description: 'What the type is like desktop, laptop, mobile.'
           example: desktop
         vendor:
           type: string
-          description: If known, what the brand of the device is, like Apple, Dell, etc.
+          description: 'If known, what the brand of the device is, like Apple, Dell, etc.'
           example: Dell
         model:
           type: string
-          description: The specific model of the device, if known.
+          description: 'The specific model of the device, if known.'
           example: unknown
       description: What type of device the user is on when in the video session.
     video-session-os:
@@ -12449,7 +12356,7 @@ components:
           example: Microsoft Windows
         shortname:
           type: string
-          description: The nickname for the operating system, often representing the version.
+          description: 'The nickname for the operating system, often representing the version.'
           example: W10
         version:
           type: string
@@ -12481,21 +12388,21 @@ components:
           type: string
           description: The http live streaming (HLS) link for your live video stream.
           format: uri
-          example: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
+          example: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
         iframe:
           type: string
           description: The embed code for the iframe containing your live video stream.
-          example: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
+          example: '<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>'
         player:
           type: string
           description: A link to the video player that is playing your live stream.
           format: uri
-          example: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
+          example: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
         thumbnail:
           type: string
           description: A link to the thumbnail for your video.
           format: uri
-          example: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+          example: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
     live-stream-session-session:
       title: LiveStreamSessionSession
       type: object
@@ -12505,12 +12412,12 @@ components:
           description: A unique identifier for your session. You can use this to track what happens during a specific session.
         loadedAt:
           type: string
-          description: When the session started, with the date and time presented in ISO-8601 format.
+          description: 'When the session started, with the date and time presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T11:45:01.109Z'
         endedAt:
           type: string
-          description: When the session ended, with the date and time presented in ISO-8601 format.
+          description: 'When the session ended, with the date and time presented in ISO-8601 format.'
           format: date-time
           example: '2019-06-24T12:45:01.109Z'
     live-stream-session-location:
@@ -12533,15 +12440,15 @@ components:
         url:
           type: string
           description: The website the viewer of the live stream was referred to in order to view the live stream.
-          example: https://api.video
+          example: 'https://api.video'
         medium:
           type: string
-          description: The type of search that brought the viewer to the live stream. Organic would be they found it on their own, paid would be they found it via an advertisement.
+          description: 'The type of search that brought the viewer to the live stream. Organic would be they found it on their own, paid would be they found it via an advertisement.'
           example: organic
         source:
           type: string
           description: Where the viewer came from to see the live stream (usually where they searched from).
-          example: https://google.com
+          example: 'https://google.com'
         searchTerm:
           type: string
           description: What term they searched for that led them to the live stream.
@@ -12552,15 +12459,15 @@ components:
       properties:
         type:
           type: string
-          description: What the type is like desktop, laptop, mobile.
+          description: 'What the type is like desktop, laptop, mobile.'
           example: desktop
         vendor:
           type: string
-          description: If known, what the brand of the device is, like Apple, Dell, etc.
+          description: 'If known, what the brand of the device is, like Apple, Dell, etc.'
           example: Dell
         model:
           type: string
-          description: The specific model of the device, if known.
+          description: 'The specific model of the device, if known.'
           example: unknown
       description: What type of device the user is on when in the live stream session.
     live-stream-session-client:
@@ -12599,7 +12506,7 @@ components:
           example: 200000
         receivedBytes:
           type: array
-          description: The total number of bytes received, listed for each chunk of the upload.
+          description: 'The total number of bytes received, listed for each chunk of the upload.'
           items:
             $ref: '#/components/schemas/bytes-range'
         receivedParts:
@@ -12607,7 +12514,7 @@ components:
           properties:
             parts:
               type: array
-              description: The parts that have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2].
+              description: 'The parts that have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2].'
               example: '[1, 2, 3]'
               items:
                 type: integer
@@ -12616,7 +12523,7 @@ components:
               nullable: true
               description: Contains the number of expected parts. The total will be listed as "null" until the total number of parts is known.
               example: 3
-      description: Details about the capturing, transferring, and storing of your video for use immediately or in the future.
+      description: 'Details about the capturing, transferring, and storing of your video for use immediately or in the future.'
     video-status-encoding-metadata:
       title: VideoStatusEncodingMetadata
       type: object
@@ -12644,7 +12551,7 @@ components:
           example: 60
         samplerate:
           type: integer
-          description: How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz.
+          description: 'How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz.'
           nullable: true
           example: 48000
         videoCodec:
@@ -12688,7 +12595,7 @@ components:
     page-size:
       name: pageSize
       in: query
-      description: Results per page. Allowed values 1-100, default is 25.
+      description: 'Results per page. Allowed values 1-100, default is 25.'
       required: false
       style: form
       explode: true
@@ -12704,8 +12611,8 @@ components:
       type: http
       scheme: basic
 x-client-base-paths:
-  production: https://ws.api.video
-  sandbox: https://sandbox.api.video
+  production: 'https://ws.api.video'
+  sandbox: 'https://sandbox.api.video'
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

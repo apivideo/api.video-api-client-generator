@@ -13,17 +13,17 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * API tests for AuthenticationApi
+ * API tests for AdvancedAuthenticationApi
  */
-@DisplayName("AuthenticationApi")
-public class AuthenticationApiTest extends AbstractApiTest {
+@DisplayName("AdvancedAuthenticationApi")
+public class AdvancedAuthenticationApiTest extends AbstractApiTest {
 
-    private final AuthenticationApi api = new AuthenticationApi(apiClientMock.getHttpClient());
+    private final AdvancedAuthenticationApi api = new AdvancedAuthenticationApi(apiClientMock.getHttpClient());
 
     @Nested
     @DisplayName("authenticate")
     class authenticate {
-        private static final String PAYLOADS_PATH = "/payloads/authentication/authenticate/";
+        private static final String PAYLOADS_PATH = "/payloads/advancedauthentication/authenticate/";
 
         @Test
         @DisplayName("required parameters")
@@ -70,7 +70,7 @@ public class AuthenticationApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("refresh")
     class refresh {
-        private static final String PAYLOADS_PATH = "/payloads/authentication/refresh/";
+        private static final String PAYLOADS_PATH = "/payloads/advancedauthentication/refresh/";
 
         @Test
         @DisplayName("required parameters")
