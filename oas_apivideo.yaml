@@ -9181,7 +9181,7 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
-  "/analytics/videos/plays":
+  '/analytics/videos/plays':
     get:
       tags:
       - Analytics
@@ -9192,11 +9192,14 @@ paths:
       parameters:
       - name: period
         in: query
-        description: "Use this query parameter to filter results for a time period,
-          **within the last 30 days**. The value you provide must follow one of
-          the following formats: \n- For a day : 2018-01-01,\n- For a week: 2018-W01,\n-
-          For a month: 2018-01,\n- For a time interval: 2023-04-01/2023-04-05\n\nNote that filtering
-          for a specific time only, like `HH:MM:SS` is not supported."
+        description: |
+          Use this query parameter to filter results for a time period, **within the last 30 days**. The value you provide must follow one of the following formats:
+          - For a day : 2018-01-01,
+          - For a week: 2018-W01,
+          - For a month: 2018-01,
+          - For a time interval: 2023-04-01/2023-04-05
+          
+          Note that filtering for a specific time only, like `HH:MM:SS` is not supported.
         required: true
         style: form
         explode: true
@@ -9243,7 +9246,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/analytics-plays-response"
+                $ref: '#/components/schemas/analytics-plays-response'
               examples:
                 Dimension is videoId:
                   description: Breakdown video-plays by videoId for a project.
@@ -9281,7 +9284,7 @@ paths:
             application/json:
               schema:
                 title: Bad request error
-                "$ref": "#/components/schemas/analytics-plays-400-error"
+                $ref: '#/components/schemas/analytics-plays-400-error'
               examples:
                 Missing parameter:
                   description: This error occurs when a required query-parameter is missing.
@@ -9330,7 +9333,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/not-found"
+                $ref: '#/components/schemas/not-found'
               examples:
                 Endpoint not found:
                   value:
@@ -9342,7 +9345,6 @@ paths:
       - apiKey: []
       x-client-action: getVideosPlays
       x-group-parameters: true
-      x-client-paginated: true
       x-readme:
         code-samples:
         - language: go
@@ -9808,7 +9810,7 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listVideoSessions
-  "/analytics/live-streams/plays":
+  '/analytics/live-streams/plays':
     get:
       tags:
       - Analytics
@@ -9819,11 +9821,14 @@ paths:
       parameters:
       - name: period
         in: query
-        description: "Use this query parameter to filter results for a time period,
-          **within the last 30 days**. The value you provide must follow one of
-          the following formats: \n- For a day : 2018-01-01,\n- For a week: 2018-W01,\n-
-          For a month: 2018-01,\n- For a time interval: 2023-04-01/2023-04-05\n\nNote that filtering
-          for a specific time only, like `HH:MM:SS` is not supported."
+        description: |
+          Use this query parameter to filter results for a time period, **within the last 30 days**. The value you provide must follow one of the following formats:
+          - For a day : 2018-01-01,
+          - For a week: 2018-W01,
+          - For a month: 2018-01,
+          - For a time interval: 2023-04-01/2023-04-05
+          
+          Note that filtering for a specific time only, like `HH:MM:SS` is not supported.
         required: true
         style: form
         explode: true
@@ -9870,7 +9875,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/analytics-plays-response"
+                $ref: '#/components/schemas/analytics-plays-response'
               examples:
                 Dimension is liveStreamId:
                   description: Breakdown video-plays by liveStreamId for a project.
@@ -9908,7 +9913,7 @@ paths:
             application/json:
               schema:
                 title: Bad request error
-                "$ref": "#/components/schemas/analytics-plays-400-error"
+                $ref: '#/components/schemas/analytics-plays-400-error'
               examples:
                 Missing parameter:
                   description: This error occurs when a required query-parameter is missing.
@@ -9957,7 +9962,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/not-found"
+                $ref: '#/components/schemas/not-found'
               examples:
                 Endpoint not found:
                   value:
@@ -9969,7 +9974,6 @@ paths:
       - apiKey: []
       x-client-action: getLiveStreamsPlays
       x-group-parameters: true
-      x-client-paginated: true
       x-readme:
         code-samples:
         - language: go
