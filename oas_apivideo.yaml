@@ -9243,37 +9243,37 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/analytics-videos-plays-response"
+                "$ref": "#/components/schemas/analytics-plays-response"
               examples:
                 Dimension is videoId:
                   description: Breakdown video-plays by videoId for a project.
                   value:
                     data:
-                    - videoId: vi3q7HxhApxRF1c8F8r6VeaI
+                    - value: vi3q7HxhApxRF1c8F8r6VeaI
                       plays: 100
-                    - videoId: vi3q7HxhApxRF1c8F8r6VeaF
+                    - value: vi3q7HxhApxRF1c8F8r6VeaF
                       plays: 10
-                    - videoId: vi3q7HxhApxRF1c8F8r6VeaH
+                    - value: vi3q7HxhApxRF1c8F8r6VeaH
                       plays: 1
                 Dimension is country:
                   description: Breakdown video-plays by country for a project.
                   value:
                     data:
-                    - country: france
+                    - value: france
                       plays: 100
-                    - country: united states
+                    - value: united states
                       plays: 10
-                    - country: spain
+                    - value: spain
                       plays: 1
                 Dimension is emittedAt, filtered for a videoId:
                   description: Breakdown video-plays by country for a specific video.
                   value:
                     data:
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 100
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 10
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 1
         '400':
           description: Bad request error
@@ -9281,47 +9281,45 @@ paths:
             application/json:
               schema:
                 title: Bad request error
-                type: array
-                items:
-                  anyOf:
-                  - "$ref": "#/components/schemas/analytics-plays-missing-param"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-param"
-                  - "$ref": "#/components/schemas/analytics-plays-dimension-not-allowed"
-                  - "$ref": "#/components/schemas/analytics-plays-dimension-unknown"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-filter"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-duration"
+                "$ref": "#/components/schemas/analytics-plays-400-error"
               examples:
                 Missing parameter:
+                  description: This error occurs when a required query-parameter is missing.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid parameter:
+                  description: This error occurs when a required query-parameter format is invalid.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Dimension not allowed:
+                  description: This error occurs when the dimension you requested not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Dimension unknown:
+                  description: This error occurs when the dimension you requested is unknown.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid filter:
+                  description: This error occurs when the format of the filter you requested is invalid.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid duration:
+                  description: This error occurs when the duration you requested exceeds 30 days.
                   value:
                     type:
                     title:
@@ -9872,37 +9870,37 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/analytics-live-streams-plays-response"
+                "$ref": "#/components/schemas/analytics-plays-response"
               examples:
                 Dimension is liveStreamId:
                   description: Breakdown video-plays by liveStreamId for a project.
                   value:
                     data:
-                    - videoId: li3q7HxhApxRF1c8F8r6VeaI
+                    - value: li3q7HxhApxRF1c8F8r6VeaI
                       plays: 100
-                    - videoId: li3q7HxhApxRF1c8F8r6VeaB
+                    - value: li3q7HxhApxRF1c8F8r6VeaB
                       plays: 10
-                    - videoId: li3q7HxhApxRF1c8F8r6VeaD
+                    - value: li3q7HxhApxRF1c8F8r6VeaD
                       plays: 1
                 Dimension is country:
                   description: Breakdown video-plays by country for a project.
                   value:
                     data:
-                    - country: france
+                    - value: france
                       plays: 100
-                    - country: united states
+                    - value: united states
                       plays: 10
-                    - country: spain
+                    - value: spain
                       plays: 1
                 Dimension is emittedAt, filtered for a liveStreamId:
                   description: Breakdown video-plays by country for a specific live stream.
                   value:
                     data:
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 100
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 10
-                    - emittedAt: 1685491552
+                    - value: 1685491552
                       plays: 1
         '400':
           description: Bad request error
@@ -9910,47 +9908,45 @@ paths:
             application/json:
               schema:
                 title: Bad request error
-                type: array
-                items:
-                  anyOf:
-                  - "$ref": "#/components/schemas/analytics-plays-missing-param"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-param"
-                  - "$ref": "#/components/schemas/analytics-plays-dimension-not-allowed"
-                  - "$ref": "#/components/schemas/analytics-plays-dimension-unknown"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-filter"
-                  - "$ref": "#/components/schemas/analytics-plays-invalid-duration"
+                "$ref": "#/components/schemas/analytics-plays-400-error"
               examples:
                 Missing parameter:
+                  description: This error occurs when a required query-parameter is missing.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid parameter:
+                  description: This error occurs when a required query-parameter format is invalid.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Dimension not allowed:
+                  description: This error occurs when the dimension you requested not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Dimension unknown:
+                  description: This error occurs when the dimension you requested is unknown.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid filter:
+                  description: This error occurs when the format of the filter you requested is invalid.
                   value:
                     type:
                     title:
                     name:
                     status: 400
                 Invalid duration:
+                  description: This error occurs when the duration you requested exceeds 30 days.
                   value:
                     type:
                     title:
@@ -12736,250 +12732,33 @@ components:
           format: string
           description: 'A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address.'
           example: 'https://my-company.com'
-    analytics-videos-plays-response:
-      title: Video play analytics response
+    analytics-plays-response:
+      title: Play event analytics response
       type: object
       properties:
         data:
           type: array
           items:
-            oneOf:
-            - "$ref": "#/components/schemas/dimensions-videoid-response"
-            - "$ref": "#/components/schemas/dimensions-emittedAt-response"
-            - "$ref": "#/components/schemas/dimensions-country-response"
-            - "$ref": "#/components/schemas/dimensions-deviceType-response"
-            - "$ref": "#/components/schemas/dimensions-operatingSystem-response"
-            - "$ref": "#/components/schemas/dimensions-browser-response"
+            "$ref": "#/components/schemas/analytics-data"
       required:
       - data
-    analytics-live-streams-plays-response:
-      title: Video play analytics response
+    analytics-data:
+      title: Play event analytics data
       type: object
       properties:
-        data:
-          type: array
-          items:
-            oneOf:
-            - "$ref": "#/components/schemas/dimensions-liveStreamId-response"
-            - "$ref": "#/components/schemas/dimensions-emittedAt-response"
-            - "$ref": "#/components/schemas/dimensions-country-response"
-            - "$ref": "#/components/schemas/dimensions-deviceType-response"
-            - "$ref": "#/components/schemas/dimensions-operatingSystem-response"
-            - "$ref": "#/components/schemas/dimensions-browser-response"
-      required:
-      - data
-    dimensions-videoid-response:
-      title: videoId analytics response
-      type: object
-      properties:
-        videoid:
-          description: The public video identifier.
+        value:
+          description: Shows a value for the property you have specified for `dimension` in your request. For example, if you requested `dimension=videoId`, each `value` field in the response returns a different videoId.
           type: string
           example: vi3q7HxhApxRF1c8F8r6VeaI
         play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
+          description: Shows the number of play events for one specific `value`.
           type: number
           format: integer
           example: '100'
-    dimensions-liveStreamId-response:
-      title: liveStreamId analytics response
-      type: object
-      properties:
-        liveStreamId:
-          description: The public live stream identifier.
-          type: string
-          example: li3q7HxhApxRF1c8F8r6VeaI
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    dimensions-emittedAt-response:
-      title: emittedAt analytics response
-      type: object
-      properties:
-        emittedAt:
-          description: The UTC timestamp of the play event. The timestamp follows
-            the ISO-8601 format.
-          type: string
-          example: ''
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    dimensions-country-response:
-      title: country analytics response
-      type: object
-      properties:
-        country:
-          description: Returns the viewers' country. The list of supported country
-            names are based on the [GeoNames public database](https://www.geonames.org/countries/).
-          type: string
-          example: France
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    dimensions-deviceType-response:
-      title: deviceType analytics response
-      type: object
-      properties:
-        deviceType:
-          description: Returns the type of device used by the viewers during the play
-            event.
-          type: string
-          enum:
-          - computer
-          - phone
-          - tablet
-          - tv
-          - console
-          - wearable
-          - unknown
-          example: computer
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    dimensions-operatingSystem-response:
-      title: operatingSystem analytics response
-      type: object
-      properties:
-        operatingSystem:
-          description: Returns the operating system used by the viewers during the
-            play event.
-          type: string
-          enum:
-          - windows
-          - mac osx
-          - android
-          - ios
-          - linux
-          example: windows
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    dimensions-browser-response:
-      title: browser analytics response
-      type: object
-      properties:
-        browser:
-          description: Returns the browser used by the viewers during the play event.
-          type: string
-          enum:
-          - chrome
-          - firefox
-          - edge
-          - opera
-          example: chrome
-        play:
-          description: Returns the number of plays according to the dimension you
-            specify in your request.
-          type: number
-          format: integer
-          example: '100'
-    analytics-plays-missing-param:
-      title: Missing parameter
-      description: This error occurs when a required query-parameter is missing.
-      type: object
-      properties:
-        type:
-          description: A link to the error documentation.
-          type: string
-        title:
-          description: A description of the error that occurred.
-          type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
-        status:
-          description: The HTTP status code.
-          type: integer
-    analytics-plays-invalid-param:
-      title: Invalid parameter
-      description: This error occurs when a required query-parameter format is invalid.
-      type: object
-      properties:
-        type:
-          description: A link to the error documentation.
-          type: string
-        title:
-          description: A description of the error that occurred.
-          type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
-        status:
-          description: The HTTP status code.
-          type: integer
-    analytics-plays-dimension-not-allowed:
-      title: Dimension not allowed
-      description: This error occurs when the dimension you requested not allowed
-        for the endpoint. For example, the dimension `videoId` is not allowed for
-        the `/live-streams` endpoint.
-      type: object
-      properties:
-        type:
-          description: A link to the error documentation.
-          type: string
-        title:
-          description: A description of the error that occurred.
-          type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
-        status:
-          description: The HTTP status code.
-          type: integer
-    analytics-plays-dimension-unknown:
-      title: Dimension unknown
-      description: This error occurs when the dimension you requested is unknown.
-      type: object
-      properties:
-        type:
-          description: A link to the error documentation.
-          type: string
-        title:
-          description: A description of the error that occurred.
-          type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
-        status:
-          description: The HTTP status code.
-          type: integer
-    analytics-plays-invalid-filter:
-      title: Invalid filter
-      description: This error occurs when the format of the filter you requested is
-        invalid.
-      type: object
-      properties:
-        type:
-          description: A link to the error documentation.
-          type: string
-        title:
-          description: A description of the error that occurred.
-          type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
-        status:
-          description: The HTTP status code.
-          type: integer
-    analytics-plays-invalid-duration:
-      title: Invalid duration
-      description: This error occurs when the duration you requested exceeds 30 days.
+      required:
+      - value
+      - play
+    analytics-plays-400-error:
       type: object
       properties:
         type:
