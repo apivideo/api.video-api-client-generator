@@ -9272,11 +9272,11 @@ paths:
                   description: Breakdown video-plays by country for a specific video.
                   value:
                     data:
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:00.890Z
                       plays: 100
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:30.890Z
                       plays: 10
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:59.890Z
                       plays: 1
         '400':
           description: Bad request error
@@ -9901,11 +9901,11 @@ paths:
                   description: Breakdown video-plays by country for a specific live stream.
                   value:
                     data:
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:00.890Z
                       plays: 100
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:30.890Z
                       plays: 10
-                    - value: 1685491552
+                    - value: 2023-05-10T10:05:59.890Z
                       plays: 1
         '400':
           description: Bad request error
