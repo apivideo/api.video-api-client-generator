@@ -116,7 +116,7 @@ public class Java extends JavaClientCodegen {
                     }
                 });
 
-                String folder = getOutputDir() + "/tests/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
+                String folder = getOutputDir() + "/src/test/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
                 operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder));
 
             }
