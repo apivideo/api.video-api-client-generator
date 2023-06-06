@@ -258,5 +258,7 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("post-generate.sh", "", "post-generate.sh"));
 
         supportingFiles.add(new SupportingFile("composer.json", "", "composer.json"));
+
+        supportingFiles.add(new SupportingFile("phpunit.xml", "", "phpunit.xml"));
     }
 }
