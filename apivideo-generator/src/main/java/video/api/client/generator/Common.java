@@ -1,8 +1,15 @@
 package video.api.client.generator;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.util.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenOperation;
+import org.openapitools.codegen.CodegenResponse;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -105,5 +112,68 @@ public class Common {
                 }
             }
         }
+    }
+
+    public static void populateOperationResponse(CodegenOperation operation, CodegenResponse response, Map<String, Object> additionalProperties, String folder) {
+        response.vendorExtensions.put("allParams", operation.allParams);
+        response.vendorExtensions.put("x-client-action", operation.vendorExtensions.get("x-client-action"));
+        response.vendorExtensions.put("x-group-parameters", operation.vendorExtensions.get("x-group-parameters"));
+        response.vendorExtensions.put("x-client-paginated", operation.vendorExtensions.get("x-client-paginated"));
+        response.vendorExtensions.put("x-pagination", operation.vendorExtensions.get("x-pagination"));
+        response.vendorExtensions.put("x-is-error", response.is4xx || response.is5xx);
+        response.vendorExtensions.put("lambda", additionalProperties.get("lambda"));
+
+        List<String> responseExamples = getResponseExample(response);
+        if (responseExamples != null) {
+            int index = 0;
+            for (String responseExample : responseExamples) {
+                try {
+                    Map<String, String> exampleMap = Json.mapper().readerFor(Map.class).readValue(responseExample);
+                    if (exampleMap.containsKey("title")) {
+                        response.vendorExtensions.put("x-example-response", exampleMap);
+                    }
+                    response.vendorExtensions.put("x-example-response-json", responseExample);
+                } catch (JsonProcessingException ignored) {
+                }
+
+                if(folder != null) {
+                    try {
+                        Files.createDirectories(Paths.get(folder));
+                        PrintWriter out = new PrintWriter(folder + response.code + (responseExamples.size() > 1 ? "-" + index : "") + ".json");
+                        out.print(responseExample);
+                        out.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * returns the JSON example from an openapi response
+     */
+    public static List<String> getResponseExample(CodegenResponse response) {
+        Map map;
+        try {
+            map = Json.mapper().readerFor(Map.class).readValue(response.jsonSchema);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+        Map content = (Map) map.get("content");
+        if (content == null) {
+            return null;
+        }
+        Collection<Map> values = content.values();
+        for (Map v : values) {
+            Map examples = (Map<String, Map>) v.get("examples");
+            if (examples == null) continue;
+
+            Collection<Map> exampleValues = examples.values();
+
+            return exampleValues.stream().map(a -> Json.pretty(a.get("value"))).collect(Collectors.toList());
+        }
+
+        return null;
     }
 }
