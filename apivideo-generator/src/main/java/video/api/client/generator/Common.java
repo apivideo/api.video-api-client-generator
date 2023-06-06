@@ -145,6 +145,7 @@ public class Common {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    index++;
                 }
             }
         }
