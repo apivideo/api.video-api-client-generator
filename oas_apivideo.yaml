@@ -12787,6 +12787,7 @@ components:
           type: integer
         detail:
           description: A solution for the error.
+          type: string
         name:
           description: The name of the parameter that caused the error.
           type: string
