@@ -9289,45 +9289,51 @@ paths:
                 Missing parameter:
                   description: This error occurs when a required query-parameter is missing.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
                     status: 400
+                    detail: This value must be of type string.
+                    name: dimension
                 Invalid parameter:
                   description: This error occurs when a required query-parameter format is invalid.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be of the following structure(s): videoId:{videoId}'
+                    name: filter
                 Dimension not allowed:
-                  description: This error occurs when the dimension you requested not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
+                  description: This error occurs when the dimension you requested is not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be part of the following values: emittedAt,videoId,country,deviceType,operatingSystem,browser'
+                    name: dimension
                 Dimension unknown:
                   description: This error occurs when the dimension you requested is unknown.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be part of the following values: emittedAt,videoId,country,deviceType,operatingSystem,browser'
+                    name: dimension
                 Invalid filter:
                   description: This error occurs when the format of the filter you requested is invalid.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
-                Invalid duration:
-                  description: This error occurs when the duration you requested exceeds 30 days.
+                    detail: 'This value must be of the following structure(s): videoId:{videoId}'
+                    name: filter
+                Invalid videoId:
+                  description: This error occurs when the videoId you requested does not refer to an existing video.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: This value must refer to an existing video'
+                    name: filter
         '404':
           description: Not Found
           content:
@@ -9918,45 +9924,51 @@ paths:
                 Missing parameter:
                   description: This error occurs when a required query-parameter is missing.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
                     status: 400
+                    detail: This value must be of type string.
+                    name: dimension
                 Invalid parameter:
                   description: This error occurs when a required query-parameter format is invalid.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be of the following structure(s): liveStreamId:{liveStreamId}'
+                    name: filter
                 Dimension not allowed:
-                  description: This error occurs when the dimension you requested not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
+                  description: This error occurs when the dimension you requested is not allowed for the endpoint. For example, the dimension `videoId` is not allowed for the `/live-streams` endpoint.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be part of the following values: emittedAt,liveStreamId,country,deviceType,operatingSystem,browser'
+                    name: dimension
                 Dimension unknown:
                   description: This error occurs when the dimension you requested is unknown.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: 'This value must be part of the following values: emittedAt,liveStreamId,country,deviceType,operatingSystem,browser'
+                    name: dimension
                 Invalid filter:
                   description: This error occurs when the format of the filter you requested is invalid.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
-                Invalid duration:
-                  description: This error occurs when the duration you requested exceeds 30 days.
+                    detail: 'This value must be of the following structure(s): liveStreamId:{liveStreamId}'
+                    name: filter
+                Invalid liveStreamId:
+                  description: This error occurs when the liveStreamId you requested does not refer to an existing live stream.
                   value:
-                    type:
-                    title:
-                    name:
+                    type: https://docs.api.video/reference/request-invalid-query-parameter
+                    title: A query parameter is invalid.
                     status: 400
+                    detail: This value must refer to an existing live stream'
+                    name: filter
         '404':
           description: Not Found
           content:
@@ -12770,12 +12782,14 @@ components:
         title:
           description: A description of the error that occurred.
           type: string
-        name:
-          description: The name of the error that occurred.
-          type: string
         status:
           description: The HTTP status code.
           type: integer
+        detail:
+          description: A solution for the error.
+        name:
+          description: The name of the parameter that caused the error.
+          type: string
     raw-statistics-list-sessions-response:
       title: VideoSessions
       type: object
