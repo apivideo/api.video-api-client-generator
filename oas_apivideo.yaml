@@ -12754,14 +12754,13 @@ components:
           description: Shows a value for the property you have specified for `dimension` in your request. For example, if you requested `dimension=videoId`, each `value` field in the response returns a different videoId.
           type: string
           example: vi3q7HxhApxRF1c8F8r6VeaI
-        play:
+        plays:
           description: Shows the number of play events for one specific `value`.
-          type: number
-          format: integer
+          type: integer
           example: '100'
       required:
       - value
-      - play
+      - plays
     analytics-plays-400-error:
       type: object
       properties:
