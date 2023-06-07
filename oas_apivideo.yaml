@@ -9332,7 +9332,7 @@ paths:
                     type: https://docs.api.video/reference/request-invalid-query-parameter
                     title: A query parameter is invalid.
                     status: 400
-                    detail: This value must refer to an existing video'
+                    detail: This value must refer to an existing video
                     name: filter
         '404':
           description: Not Found
@@ -9967,7 +9967,7 @@ paths:
                     type: https://docs.api.video/reference/request-invalid-query-parameter
                     title: A query parameter is invalid.
                     status: 400
-                    detail: This value must refer to an existing live stream'
+                    detail: This value must refer to an existing live stream
                     name: filter
         '404':
           description: Not Found
