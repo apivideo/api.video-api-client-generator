@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import video.api.client.api.ApiException;
 import video.api.client.api.models.AnalyticsData;
 import video.api.client.api.models.AnalyticsPlaysResponse;
+import video.api.client.api.models.Page;
 
 /**
  * API tests for AnalyticsApi
@@ -60,7 +61,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByLiveStreamId200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
 
-            AnalyticsPlaysResponse res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "liveStreamId").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "liveStreamId").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaI");
             expected1.setPlays(100);
@@ -68,7 +69,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaD");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
@@ -76,7 +77,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByCountry200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
 
-            AnalyticsPlaysResponse res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "country").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "country").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("france");
             expected1.setPlays(100);
@@ -84,7 +85,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("spain");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
@@ -92,7 +93,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByEmittedAt200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
 
-            AnalyticsPlaysResponse res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "emittedAt").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "emittedAt").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("2023-05-10T10:05:00.890Z");
             expected1.setPlays(100);
@@ -100,7 +101,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("2023-05-10T10:05:59.890Z");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
@@ -150,7 +151,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByVideoId200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
 
-            AnalyticsPlaysResponse res = api.getVideosPlays("2023-04-01/2023-04-05", "videoId").execute();
+            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "videoId").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaI");
             expected1.setPlays(100);
@@ -158,7 +159,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaH");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
@@ -166,7 +167,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByCountry200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
 
-            AnalyticsPlaysResponse res = api.getVideosPlays("2023-04-01/2023-04-05", "country").execute();
+            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "country").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("france");
             expected1.setPlays(100);
@@ -174,7 +175,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("spain");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
@@ -182,7 +183,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByEmittedAt200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
 
-            AnalyticsPlaysResponse res = api.getVideosPlays("2023-04-01/2023-04-05", "emittedAt").execute();
+            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "emittedAt").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("2023-05-10T10:05:00.890Z");
             expected1.setPlays(100);
@@ -190,7 +191,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             expected2.setPlays(10);
             AnalyticsData expected3 = new AnalyticsData().value("2023-05-10T10:05:59.890Z");
             expected3.setPlays(1);
-            assertThat(res.getData()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
 
         @Test
