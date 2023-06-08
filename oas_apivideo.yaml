@@ -9240,6 +9240,8 @@ paths:
         schema:
           type: string
         example: videoId:vi3q7HxhApxRF1c8F8r6VeaI
+      - $ref: '#/components/parameters/current-page'
+      - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -9258,8 +9260,21 @@ paths:
                       plays: 10
                     - value: vi3q7HxhApxRF1c8F8r6VeaH
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 3
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=videoId&currentPage=1&pageSize=25"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=videoId&currentPage=1&pageSize=25"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=videoId&currentPage=1&pageSize=25"
                 Dimension is country:
-                  description: Breakdown video-plays by country for a project.
+                  description: Breakdown video-plays by country for a project, with pagination set.
                   value:
                     data:
                     - value: france
@@ -9268,8 +9283,23 @@ paths:
                       plays: 10
                     - value: spain
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 2
+                      pageSize: 2
+                      pagesTotal: 2
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
+                      - rel: next
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
                 Dimension is emittedAt, filtered for a videoId:
-                  description: Breakdown video-plays by country for a specific video.
+                  description: Breakdown video-plays by the time of play events, for a specific video.
                   value:
                     data:
                     - value: 2023-05-10T10:05:00.890Z
@@ -9278,6 +9308,19 @@ paths:
                       plays: 10
                     - value: 2023-05-10T10:05:59.890Z
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 3
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=videoId:vi3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=videoId:vi3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=videoId:vi3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
         '400':
           description: Bad request error
           content:
@@ -9875,6 +9918,8 @@ paths:
         schema:
           type: string
         example: liveStreamId:li3q7HxhApxRF1c8F8r6VeaI
+      - $ref: '#/components/parameters/current-page'
+      - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           description: Success
@@ -9893,8 +9938,8 @@ paths:
                       plays: 10
                     - value: li3q7HxhApxRF1c8F8r6VeaD
                       plays: 1
-                Dimension is country:
-                  description: Breakdown video-plays by country for a project.
+                Dimension is country, paginated:
+                  description: Breakdown video-plays by country for a project, with pagination.
                   value:
                     data:
                     - value: france
@@ -9903,8 +9948,23 @@ paths:
                       plays: 10
                     - value: spain
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 2
+                      pageSize: 2
+                      pagesTotal: 2
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
+                      - rel: next
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
                 Dimension is emittedAt, filtered for a liveStreamId:
-                  description: Breakdown video-plays by country for a specific live stream.
+                  description: Breakdown video-plays by the time of play events, for a specific live stream.
                   value:
                     data:
                     - value: 2023-05-10T10:05:00.890Z
@@ -9913,6 +9973,19 @@ paths:
                       plays: 10
                     - value: 2023-05-10T10:05:59.890Z
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 3
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=liveStreamId:li3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=liveStreamId:li3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=videoId&filter=liveStreamId:li3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
         '400':
           description: Bad request error
           content:
@@ -12756,8 +12829,11 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/analytics-data"
+        pagination:
+          $ref: '#/components/schemas/pagination'
       required:
       - data
+      - pagination
     analytics-data:
       title: Play event analytics data
       type: object
