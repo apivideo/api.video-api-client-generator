@@ -9939,6 +9939,19 @@ paths:
                       plays: 10
                     - value: li3q7HxhApxRF1c8F8r6VeaD
                       plays: 1
+                    pagination:
+                      currentPage: 1
+                      currentPageItems: 2
+                      pageSize: 2
+                      pagesTotal: 2
+                      itemsTotal: 3
+                      links:
+                      - rel: self
+                        uri: "/analytics/videos/plays?dimension=liveStreamId&currentPage=1&pageSize=2"
+                      - rel: first
+                        uri: "/analytics/videos/plays?dimension=liveStreamId&currentPage=2&pageSize=1"
+                      - rel: last
+                        uri: "/analytics/videos/plays?dimension=liveStreamId&currentPage=2&pageSize=1"
                 Dimension is country, paginated:
                   description: Breakdown video-plays by country for a project, with pagination.
                   value:
@@ -9960,8 +9973,6 @@ paths:
                         uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
                       - rel: first
                         uri: "/analytics/videos/plays?dimension=country&currentPage=1&pageSize=2"
-                      - rel: next
-                        uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
                       - rel: last
                         uri: "/analytics/videos/plays?dimension=country&currentPage=2&pageSize=1"
                 Dimension is emittedAt, filtered for a liveStreamId:
@@ -12830,7 +12841,7 @@ components:
         data:
           type: array
           items:
-            "$ref": "#/components/schemas/analytics-data"
+            $ref: '#/components/schemas/analytics-data'
         pagination:
           $ref: '#/components/schemas/pagination'
       required:
