@@ -21,10 +21,10 @@ import com.google.common.truth.Truth;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.threeten.bp.LocalDate;
 
 import video.api.client.api.ApiException;
 import video.api.client.api.models.AnalyticsData;
-import video.api.client.api.models.AnalyticsPlaysResponse;
 import video.api.client.api.models.Page;
 
 /**
@@ -45,15 +45,15 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.getLiveStreamsPlays("2023-04-01/2023-04-05", null).execute())
+            assertThatThrownBy(() -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), null).execute())
                     .isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'dimension' when calling getLiveStreamsPlays");
             assertThatThrownBy(() -> api.getLiveStreamsPlays(null, "liveStreamId").execute())
                     .isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'period' when calling getLiveStreamsPlays");
+                    .hasMessage("Missing the required parameter 'from' when calling getLiveStreamsPlays");
 
             assertThatNoException()
-                    .isThrownBy(() -> api.getLiveStreamsPlays("2023-04-01/2023-04-05", "liveStreamId").execute());
+                    .isThrownBy(() -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "liveStreamId").execute());
         }
 
         @Test
@@ -61,7 +61,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByLiveStreamId200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
 
-            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "liveStreamId").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "liveStreamId").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaI");
             expected1.setPlays(100);
@@ -77,7 +77,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByCountry200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
 
-            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "country").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "country").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("france");
             expected1.setPlays(100);
@@ -93,13 +93,13 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByEmittedAt200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
 
-            Page<AnalyticsData> res = api.getLiveStreamsPlays("2023-04-01/2023-04-05", "emittedAt").execute();
+            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "emittedAt").execute();
 
-            AnalyticsData expected1 = new AnalyticsData().value("2023-05-10T10:05:00.890Z");
+            AnalyticsData expected1 = new AnalyticsData().value("2023-06-10T10:00:00.000Z");
             expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("2023-05-10T10:05:30.890Z");
+            AnalyticsData expected2 = new AnalyticsData().value("2023-06-10T11:00:00.000Z");
             expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("2023-05-10T10:05:59.890Z");
+            AnalyticsData expected3 = new AnalyticsData().value("2023-06-10T12:00:00.000Z");
             expected3.setPlays(1);
             assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
@@ -110,7 +110,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-2.json"));
 
             ApiException e = assertThrows(ApiException.class,
-                    () -> api.getLiveStreamsPlays("2023-04-01/2023-04-05", "unknownDimension").execute());
+                    () -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "unknownDimension").execute());
             Truth.assertThat(e.getCode()).isEqualTo(400);
             Truth.assertThat(e).hasMessageThat().contains("A query parameter is invalid.");
         }
@@ -121,7 +121,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             answerOnAnyRequest(404, "");
 
             ApiException e = assertThrows(ApiException.class,
-                    () -> api.getLiveStreamsPlays("2023-04-01/2023-04-05", "country").execute());
+                    () -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "country").execute());
             Truth.assertThat(e.getCode()).isEqualTo(404);
             Truth.assertThat(e).hasMessageThat().contains("");
         }
@@ -137,13 +137,14 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.getVideosPlays("2023-04-01/2023-04-05", null).execute())
+            assertThatThrownBy(() -> api.getVideosPlays(LocalDate.parse("2023-04-01"), null).execute())
                     .isInstanceOf(ApiException.class)
                     .hasMessage("Missing the required parameter 'dimension' when calling getVideosPlays");
             assertThatThrownBy(() -> api.getVideosPlays(null, "videoId").execute()).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'period' when calling getVideosPlays");
+                    .hasMessage("Missing the required parameter 'from' when calling getVideosPlays");
 
-            assertThatNoException().isThrownBy(() -> api.getVideosPlays("2023-04-01/2023-04-05", "videoId").execute());
+            assertThatNoException()
+                    .isThrownBy(() -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "videoId").execute());
         }
 
         @Test
@@ -151,7 +152,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByVideoId200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
 
-            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "videoId").execute();
+            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "videoId").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaI");
             expected1.setPlays(100);
@@ -167,7 +168,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByCountry200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
 
-            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "country").execute();
+            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "country").execute();
 
             AnalyticsData expected1 = new AnalyticsData().value("france");
             expected1.setPlays(100);
@@ -183,13 +184,13 @@ public class AnalyticsApiTest extends AbstractApiTest {
         public void responseWithStatusByEmittedAt200Test() throws ApiException {
             answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
 
-            Page<AnalyticsData> res = api.getVideosPlays("2023-04-01/2023-04-05", "emittedAt").execute();
+            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "emittedAt").execute();
 
-            AnalyticsData expected1 = new AnalyticsData().value("2023-05-10T10:05:00.890Z");
+            AnalyticsData expected1 = new AnalyticsData().value("2023-06-10T10:00:00.000Z");
             expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("2023-05-10T10:05:30.890Z");
+            AnalyticsData expected2 = new AnalyticsData().value("2023-06-10T11:00:00.000Z");
             expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("2023-05-10T10:05:59.890Z");
+            AnalyticsData expected3 = new AnalyticsData().value("2023-06-10T12:00:00.000Z");
             expected3.setPlays(1);
             assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
         }
@@ -200,7 +201,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-2.json"));
 
             ApiException e = assertThrows(ApiException.class,
-                    () -> api.getVideosPlays("2023-04-01/2023-04-05", "unknownDimension").execute());
+                    () -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "unknownDimension").execute());
             Truth.assertThat(e.getCode()).isEqualTo(400);
             Truth.assertThat(e).hasMessageThat().contains("A query parameter is invalid.");
         }
@@ -211,7 +212,7 @@ public class AnalyticsApiTest extends AbstractApiTest {
             answerOnAnyRequest(404, "");
 
             ApiException e = assertThrows(ApiException.class,
-                    () -> api.getVideosPlays("2023-04-01/2023-04-05", "country").execute());
+                    () -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "country").execute());
             Truth.assertThat(e.getCode()).isEqualTo(404);
             Truth.assertThat(e).hasMessageThat().contains("");
         }
