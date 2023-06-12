@@ -9223,7 +9223,7 @@ paths:
         description: |-
           Use this query parameter to define the dimension that you want analytics for.
           - `videoId`: Returns analytics based on the public video identifiers.
-          - `emittedAt`: Returns analytics based on the times of the play events.
+          - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals.
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
           - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event.
           - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event.
@@ -9313,11 +9313,11 @@ paths:
                   description: Breakdown video-plays by the time of play events, for a specific video.
                   value:
                     data:
-                    - value: 2023-05-10T10:05:00.890Z
+                    - value: 2023-06-10T10:00:00.000Z
                       plays: 100
-                    - value: 2023-05-10T10:05:30.890Z
+                    - value: 2023-06-10T11:00:00.000Z
                       plays: 10
-                    - value: 2023-05-10T10:05:59.890Z
+                    - value: 2023-06-10T12:00:00.000Z
                       plays: 1
                     pagination:
                       currentPage: 1
@@ -9913,7 +9913,7 @@ paths:
         description: |-
           Use this query parameter to define the dimension that you want analytics for.
           - `liveStreamId`: Returns analytics based on the public live stream identifiers.
-          - `emittedAt`: Returns analytics based on the times of the play events.
+          - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals.
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
           - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event.
           - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event.
@@ -10001,11 +10001,11 @@ paths:
                   description: Breakdown video-plays by the time of play events, for a specific live stream.
                   value:
                     data:
-                    - value: 2023-05-10T10:05:00.890Z
+                    - value: 2023-06-10T10:00:00.000Z
                       plays: 100
-                    - value: 2023-05-10T10:05:30.890Z
+                    - value: 2023-06-10T11:00:00.000Z
                       plays: 10
-                    - value: 2023-05-10T10:05:59.890Z
+                    - value: 2023-06-10T12:00:00.000Z
                       plays: 1
                     pagination:
                       currentPage: 1
