@@ -9190,23 +9190,34 @@ paths:
         videos in a project.
       operationId: GET_analytics-videos-plays
       parameters:
-      - name: period
+      - name: from
         in: query
         description: |
-          Use this query parameter to filter results for a time period, **within the last 30 days**. The value you provide must follow one of the following formats:
-          - For a day : 2018-01-01,
-          - For a week: 2018-W01,
-          - For a month: 2018-01,
-          - For a time interval: 2023-04-01/2023-04-05
-          
-          Note that filtering for a specific time only, like `HH:MM:SS` is not supported.
+          Use this query parameter to set the start date for the time period that you want analytics for.
+          - The API returns analytics data including the day you set in `from`.
+          - The date you set must be **within the last 30 days**.
+          - The value you provide must follow the `YYYY-MM-DD` format.
         required: true
         style: form
         explode: true
         schema:
           type: string
-          format: period
-        example: 2023-04-01/2023-04-05
+          format: date
+        example: 2023-06-01
+      - name: to
+        in: query
+        description: |
+          Use this optional query parameter to set the end date for the time period that you want analytics for.
+          - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today.
+          - The date you set must be **within the last 30 days**.
+          - The value you provide must follow the `YYYY-MM-DD` format.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+        example: 2023-06-10
       - name: dimension
         in: query
         description: |-
@@ -9869,23 +9880,34 @@ paths:
         live streams in a project.
       operationId: GET_analytics-live-streams-plays
       parameters:
-      - name: period
+      - name: from
         in: query
         description: |
-          Use this query parameter to filter results for a time period, **within the last 30 days**. The value you provide must follow one of the following formats:
-          - For a day : 2018-01-01,
-          - For a week: 2018-W01,
-          - For a month: 2018-01,
-          - For a time interval: 2023-04-01/2023-04-05
-          
-          Note that filtering for a specific time only, like `HH:MM:SS` is not supported.
+          Use this query parameter to set the start date for the time period that you want analytics for.
+          - The API returns analytics data including the day you set in `from`.
+          - The date you set must be **within the last 30 days**.
+          - The value you provide must follow the `YYYY-MM-DD` format.
         required: true
         style: form
         explode: true
         schema:
           type: string
-          format: period
-        example: 2023-04-01/2023-04-05
+          format: date
+        example: 2023-06-01
+      - name: to
+        in: query
+        description: |
+          Use this optional query parameter to set the end date for the time period that you want analytics for.
+          - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today.
+          - The date you set must be **within the last 30 days**.
+          - The value you provide must follow the `YYYY-MM-DD` format.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+        example: 2023-06-10
       - name: dimension
         in: query
         description: |-
