@@ -36,13 +36,13 @@ var liveStreamsPlaysResponses = []string{
 	}`,
 	`{
 	  	"data" : [ {
-				"value" : "2023-05-10T10:05:00.890Z",
+				"value" : "2023-06-10T10:00:00.000Z",
 				"plays" : 100
 	  		}, {
-				"value" : "2023-05-10T10:05:30.890Z",
+				"value" : "2023-06-10T11:00:00.000Z",
 				"plays" : 10
 	  		}, {
-				"value" : "2023-05-10T10:05:59.890Z",
+				"value" : "2023-06-10T12:00:00.000Z",
 				"plays" : 1
 	  		}
 		]
@@ -66,9 +66,9 @@ var liveStreamsPlaysStructs = []AnalyticsPlaysResponse{
 	},
 	{
 		Data: []AnalyticsData{
-			{Value: "2023-05-10T10:05:00.890Z", Plays: 100},
-			{Value: "2023-05-10T10:05:30.890Z", Plays: 10},
-			{Value: "2023-05-10T10:05:59.890Z", Plays: 1},
+			{Value: "2023-06-10T10:00:00.000Z", Plays: 100},
+			{Value: "2023-06-10T11:00:00.000Z", Plays: 10},
+			{Value: "2023-06-10T12:00:00.000Z", Plays: 1},
 		},
 	},
 }
@@ -81,7 +81,7 @@ func TestAnalytics_GetLiveStreamsPlaysByLiveStreamId(t *testing.T) {
 		fmt.Fprint(w, liveStreamsPlaysResponses[0])
 	})
 
-	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("liveStreamId"))
+	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.From("2023-04-01").Dimension("liveStreamId"))
 	if err != nil {
 		t.Errorf("Analytics.GetLiveStreamsPlays error: %v", err)
 	}
@@ -100,7 +100,7 @@ func TestAnalytics_GetLiveStreamsPlaysByCountry(t *testing.T) {
 		fmt.Fprint(w, liveStreamsPlaysResponses[1])
 	})
 
-	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("country"))
+	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.From("2023-04-01").Dimension("country"))
 	if err != nil {
 		t.Errorf("Analytics.GetLiveStreamsPlays error: %v", err)
 	}
@@ -119,7 +119,7 @@ func TestAnalytics_GetLiveStreamsPlaysByEmittedAt(t *testing.T) {
 		fmt.Fprint(w, liveStreamsPlaysResponses[2])
 	})
 
-	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("emittedAt"))
+	plays, err := client.Analytics.GetLiveStreamsPlays(AnalyticsApiGetLiveStreamsPlaysRequest{}.From("2023-04-01").Dimension("emittedAt"))
 	if err != nil {
 		t.Errorf("Analytics.GetLiveStreamsPlays error: %v", err)
 	}
@@ -159,13 +159,13 @@ var videosPlaysResponses = []string{
 	}`,
 	`{
 	  	"data" : [ {
-				"value" : "2023-05-10T10:05:00.890Z",
+				"value" : "2023-06-10T10:00:00.000Z",
 				"plays" : 100
 	  		}, {
-				"value" : "2023-05-10T10:05:30.890Z",
+				"value" : "2023-06-10T11:00:00.000Z",
 				"plays" : 10
 	  		}, {
-				"value" : "2023-05-10T10:05:59.890Z",
+				"value" : "2023-06-10T12:00:00.000Z",
 				"plays" : 1
 	  		}
 		]
@@ -189,9 +189,9 @@ var videosPlaysStructs = []AnalyticsPlaysResponse{
 	},
 	{
 		Data: []AnalyticsData{
-			{Value: "2023-05-10T10:05:00.890Z", Plays: 100},
-			{Value: "2023-05-10T10:05:30.890Z", Plays: 10},
-			{Value: "2023-05-10T10:05:59.890Z", Plays: 1},
+			{Value: "2023-06-10T10:00:00.000Z", Plays: 100},
+			{Value: "2023-06-10T11:00:00.000Z", Plays: 10},
+			{Value: "2023-06-10T12:00:00.000Z", Plays: 1},
 		},
 	},
 }
@@ -204,7 +204,7 @@ func TestAnalytics_GetVideosPlaysByVideoId(t *testing.T) {
 		fmt.Fprint(w, videosPlaysResponses[0])
 	})
 
-	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("videoId"))
+	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.From("2023-04-01").Dimension("videoId"))
 	if err != nil {
 		t.Errorf("Analytics.GetVideosPlays error: %v", err)
 	}
@@ -223,7 +223,7 @@ func TestAnalytics_GetVideosPlaysByCountry(t *testing.T) {
 		fmt.Fprint(w, videosPlaysResponses[1])
 	})
 
-	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("country"))
+	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.From("2023-04-01").Dimension("country"))
 	if err != nil {
 		t.Errorf("Analytics.GetVideosPlays error: %v", err)
 	}
@@ -242,7 +242,7 @@ func TestAnalytics_GetVideosPlaysByEmittedAt(t *testing.T) {
 		fmt.Fprint(w, videosPlaysResponses[2])
 	})
 
-	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.Period("2023-04-01/2023-04-05").Dimension("emittedAt"))
+	plays, err := client.Analytics.GetVideosPlays(AnalyticsApiGetVideosPlaysRequest{}.From("2023-04-01").Dimension("emittedAt"))
 	if err != nil {
 		t.Errorf("Analytics.GetVideosPlays error: %v", err)
 	}
