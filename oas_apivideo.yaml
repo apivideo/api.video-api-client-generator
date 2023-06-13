@@ -9409,29 +9409,39 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\n//
-            Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions\n\npackage
-            main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n    apivideosdk
-            \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc main() {\n    client
-            := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n    // if you
-            rather like to use the sandbox environment:\n    // client := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n
-            \   req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}\n    \n
-            \   req.VideoId(\"vi4k0jvEUuaTdRAEjQ4Prklg\") // string | The unique identifier
-            for the video you want to retrieve session information for.\n    req.Period(\"period_example\")
-            // string | Period must have one of the following formats:  - For a day
-            : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 - For a year:
-            2018  For a range period: -  Date range: 2018-01-01/2018-01-15 \n    req.Metadata(map[string]string{\"key\":
-            \"Inner_example\"}) // map[string]string | Metadata and Dynamic Metadata
-            filter. Send an array of key value pairs you want to filter sessios with.\n
-            \   req.CurrentPage(int32(2)) // int32 | Choose the number of search results
-            to return per page. Minimum value: 1 (default to 1)\n    req.PageSize(int32(30))
-            // int32 | Results per page. Allowed values 1-100, default is 25. (default
-            to 25)\n\n    res, err := client.RawStatistics.ListVideoSessions(videoId
-            string, req)\n    \n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,
-            \"Error when calling `RawStatistics.ListVideoSessions``: %v\\\n\", err)\n
-            \   }\n    // response from `ListVideoSessions`: RawStatisticsListSessionsResponse\n
-            \   fmt.Fprintf(os.Stdout, \"Response from `RawStatistics.ListVideoSessions`:
-            %v\\\n\", res)\n}\n"
+          code: |
+            package main
+
+            import (
+                "context"
+                "fmt"
+                "os"
+                "time"
+                apivideosdk "github.com/apivideo/api.video-go-client"
+            )
+
+            func main() {
+                client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+                // if you rather like to use the sandbox environment:
+                // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+                req := apivideosdk.AnalyticsApiGetVideosPlaysRequest{}
+
+                req.From(time.Now()) // string | Use this query parameter to set the start date for the time period that you want analytics for. - The API returns analytics data including the day you set in `from`. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
+                req.Dimension("browser") // string | Use this query parameter to define the dimension that you want analytics for. - `videoId`: Returns analytics based on the public video identifiers. - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals. - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. - `browser`: Returns analytics based on the browser used by the viewers during the play event.
+                req.To(time.Now()) // string | Use this optional query parameter to set the end date for the time period that you want analytics for. - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
+                req.Filter("videoId:vi3q7HxhApxRF1c8F8r6VeaI") // string | Use this query parameter to filter your results to a specific video in a project that you want analytics for. You must use the `videoId:` prefix when specifying a video ID.
+                req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+                req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+                res, err := client.Analytics.GetVideosPlays(req)
+
+
+                if err != nil {
+                    fmt.Fprintf(os.Stderr, "Error when calling `Analytics.GetVideosPlays``: %v\n", err)
+                }
+                // response from `GetVideosPlays`: AnalyticsPlaysResponse
+                fmt.Fprintf(os.Stdout, "Response from `Analytics.GetVideosPlays`: %v\n", res)
+            }
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//
             Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listVideoSessions\n\nconst
@@ -9494,22 +9504,22 @@ paths:
             import video.api.client.api.models.*;
             import video.api.client.api.clients.AnalyticsApi;
             import java.util.*;
-            
+
             public class Example {
               public static void main(String[] args) {
                 ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
                 // if you rather like to use the sandbox environment:
                 // ApiVideoClient client = new ApiVideoClient("YOUR_SANDBOX_API_KEY", Environment.SANDBOX);
-            
+
                 AnalyticsApi apiInstance = client.analytics();
-                
+
                 LocalDate from = LocalDate.parse("2023-06-01"); // Use this query parameter to set the start date for the time period that you want analytics for. - The API returns analytics data including the day you set in `from`. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
                 String dimension = "videoId"; // Use this query parameter to define the dimension that you want analytics for. - `videoId`: Returns analytics based on the public video identifiers. - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals. - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. - `browser`: Returns analytics based on the browser used by the viewers during the play event.
                 LocalDate to = LocalDate.parse("2023-06-10"); // Use this optional query parameter to set the end date for the time period that you want analytics for. - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
                 String filter = "videoId:vi3q7HxhApxRF1c8F8r6VeaI"; // Use this query parameter to filter your results to a specific video in a project that you want analytics for. You must use the `videoId:` prefix when specifying a video ID.
                 Integer currentPage = 1; // Choose the number of search results to return per page. Minimum value: 1
                 Integer pageSize = 25; // Results per page. Allowed values 1-100, default is 25.
-            
+
                 try {
                   Page<AnalyticsData> result = apiInstance.getVideosPlays(from, dimension)
                         .to(to)
@@ -10110,29 +10120,39 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\n//
-            Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions\n\npackage
-            main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n    apivideosdk
-            \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc main() {\n    client
-            := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n    // if you
-            rather like to use the sandbox environment:\n    // client := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n
-            \   req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}\n    \n
-            \   req.VideoId(\"vi4k0jvEUuaTdRAEjQ4Prklg\") // string | The unique identifier
-            for the video you want to retrieve session information for.\n    req.Period(\"period_example\")
-            // string | Period must have one of the following formats:  - For a day
-            : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 - For a year:
-            2018  For a range period: -  Date range: 2018-01-01/2018-01-15 \n    req.Metadata(map[string]string{\"key\":
-            \"Inner_example\"}) // map[string]string | Metadata and Dynamic Metadata
-            filter. Send an array of key value pairs you want to filter sessios with.\n
-            \   req.CurrentPage(int32(2)) // int32 | Choose the number of search results
-            to return per page. Minimum value: 1 (default to 1)\n    req.PageSize(int32(30))
-            // int32 | Results per page. Allowed values 1-100, default is 25. (default
-            to 25)\n\n    res, err := client.RawStatistics.ListVideoSessions(videoId
-            string, req)\n    \n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,
-            \"Error when calling `RawStatistics.ListVideoSessions``: %v\\\n\", err)\n
-            \   }\n    // response from `ListVideoSessions`: RawStatisticsListSessionsResponse\n
-            \   fmt.Fprintf(os.Stdout, \"Response from `RawStatistics.ListVideoSessions`:
-            %v\\\n\", res)\n}\n"
+          code: |
+            package main
+
+            import (
+                "context"
+                "fmt"
+                "os"
+                "time"
+                apivideosdk "github.com/apivideo/api.video-go-client"
+            )
+
+            func main() {
+                client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+                // if you rather like to use the sandbox environment:
+                // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+                req := apivideosdk.AnalyticsApiGetLiveStreamsPlaysRequest{}
+
+                req.From(time.Now()) // string | Use this query parameter to set the start date for the time period that you want analytics for. - The API returns analytics data including the day you set in `from`. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
+                req.Dimension("browser") // string | Use this query parameter to define the dimension that you want analytics for. - `liveStreamId`: Returns analytics based on the public live stream identifiers. - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals. - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. - `browser`: Returns analytics based on the browser used by the viewers during the play event.
+                req.To(time.Now()) // string | Use this optional query parameter to set the end date for the time period that you want analytics for. - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
+                req.Filter("liveStreamId:li3q7HxhApxRF1c8F8r6VeaI") // string | Use this query parameter to filter your results to a specific live stream in a project that you want analytics for. You must use the `liveStreamId:` prefix when specifying a live stream ID.
+                req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+                req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+                res, err := client.Analytics.GetLiveStreamsPlays(req)
+
+
+                if err != nil {
+                    fmt.Fprintf(os.Stderr, "Error when calling `Analytics.GetLiveStreamsPlays``: %v\n", err)
+                }
+                // response from `GetLiveStreamsPlays`: AnalyticsPlaysResponse
+                fmt.Fprintf(os.Stdout, "Response from `Analytics.GetLiveStreamsPlays`: %v\n", res)
+            }
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//
             Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listVideoSessions\n\nconst
