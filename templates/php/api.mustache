@@ -37,25 +37,12 @@ use {{invokerPackage}}\ProgressiveUploadSession;
 {{#summary}}
      * {{.}}
 {{/summary}}
-     *
-{{#description}}
+     *{{#description}}
      * {{.}}
      *
-{{/description}}
-{{#servers}}
-{{#-first}}
-     * This operation contains host(s) defined in the OpenAP spec. Use 'hostIndex' to select the host.
-{{/-first}}
-     * URL: {{{url}}}
-{{#-last}}
-     *
-{{/-last}}
-{{/servers}}
-{{#allParams}}
-{{^isQueryParam}}
-     * @param  {{{dataType}}} ${{paramName}}{{#description}} {{description}}{{/description}}{{^description}} {{paramName}}{{/description}} {{#required}}(required){{/required}}{{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}
-{{/isQueryParam}}
-{{/allParams}}
+{{/description}}{{#allParams}}{{^isQueryParam}}
+     * @param  {{{dataType}}} ${{paramName}}{{#description}} {{description}}{{/description}}{{^description}} {{paramName}}{{/description}} {{#required}}(required){{/required}}{{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}{{/isQueryParam}}{{#isQueryParam}}{{#required}}
+     * @param  {{{dataType}}} ${{paramName}}{{#description}} {{description}}{{/description}}{{^description}} {{paramName}}{{/description}} (required){{/required}}{{/isQueryParam}}{{/allParams}}
 {{#vendorExtensions.x-group-parameters}}
      * @param  array $queryParams
 {{/vendorExtensions.x-group-parameters}}
@@ -65,7 +52,7 @@ use {{invokerPackage}}\ProgressiveUploadSession;
      * @return {{#returnType}}{{#responses}}{{#dataType}}{{^-first}}|{{/-first}}{{/dataType}}{{{dataType}}}{{/responses}}{{/returnType}}{{^returnType}}void{{/returnType}}
      */
     {{#vendorExtensions.x-group-parameters}}
-    public function {{vendorExtensions.x-client-action}}({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): {{returnType}}{{^returnType}}void{{/returnType}}
+    public function {{vendorExtensions.x-client-action}}({{#allParams}}{{#isQueryParam}}{{#required}}{{{dataType}}} ${{paramName}}{{^-last}}, {{/-last}}{{/required}}{{/isQueryParam}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): {{returnType}}{{^returnType}}void{{/returnType}}
     {{/vendorExtensions.x-group-parameters}}
     {{^vendorExtensions.x-group-parameters}}
     public function {{vendorExtensions.x-client-action}}({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): {{returnType}}{{^returnType}}void{{/returnType}}
@@ -78,7 +65,7 @@ use {{invokerPackage}}\ProgressiveUploadSession;
         return $model;
         {{/vendorExtensions.x-client-chunk-upload}}
         {{^vendorExtensions.x-client-chunk-upload}}
-        $request = $this->build{{operationId}}Request({{#allParams}}{{^isQueryParam}}${{paramName}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}{{#vendorExtensions.x-group-parameters}}$queryParams{{/vendorExtensions.x-group-parameters}});
+        $request = $this->build{{operationId}}Request({{#allParams}}{{#isQueryParam}}{{#required}}${{paramName}}{{^-last}}, {{/-last}}{{/required}}{{/isQueryParam}}{{^isQueryParam}}${{paramName}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}{{#vendorExtensions.x-group-parameters}}$queryParams{{/vendorExtensions.x-group-parameters}});
 
         {{#returnType}}
         $model = new {{returnType}}($this->client->request($request));
@@ -116,19 +103,15 @@ use {{invokerPackage}}\ProgressiveUploadSession;
      * @return Request
      */
     {{#vendorExtensions.x-group-parameters}}
-    private function build{{operationId}}Request({{#allParams}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): Request
+    private function build{{operationId}}Request({{#allParams}}{{#isQueryParam}}{{#required}}{{{dataType}}} ${{paramName}}{{^-last}}, {{/-last}}{{/required}}{{/isQueryParam}}{{^isQueryParam}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/isQueryParam}}{{/allParams}}array $queryParams = []): Request
     {{/vendorExtensions.x-group-parameters}}
     {{^vendorExtensions.x-group-parameters}}
     private function build{{operationId}}Request({{#allParams}}{{{dataType}}} ${{paramName}}{{^required}} = {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}): Request
     {{/vendorExtensions.x-group-parameters}}
     {
         {{#vendorExtensions.x-group-parameters}}
-        // unbox the parameters from the associative array
-        {{#allParams}}
-        {{#isQueryParam}}
-        ${{paramName}} = array_key_exists('{{paramName}}', $queryParams) ? $queryParams['{{paramName}}'] : {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};
-        {{/isQueryParam}}
-        {{/allParams}}
+        // unbox the parameters from the associative array{{#allParams}}{{#isQueryParam}}{{^required}}
+        ${{paramName}} = array_key_exists('{{paramName}}', $queryParams) ? $queryParams['{{paramName}}'] : {{#defaultValue}}{{{.}}}{{/defaultValue}}{{^defaultValue}}null{{/defaultValue}};{{/required}}{{/isQueryParam}}{{/allParams}}
 
         {{/vendorExtensions.x-group-parameters}}
         {{#allParams}}
@@ -193,7 +176,7 @@ use {{invokerPackage}}\ProgressiveUploadSession;
         if (${{paramName}} !== null) {
         {{#style}}
             {{#vendorExtensions.isForm}}
-            $queryParams['{{baseName}}'] = ${{paramName}};
+            $queryParams['{{baseName}}'] = {{^vendorExtensions.isDate}}${{paramName}}{{/vendorExtensions.isDate}}{{#vendorExtensions.isDate}}ObjectSerializer::sanitizeForSerialization(${{paramName}}, 'date'){{/vendorExtensions.isDate}};
             {{/vendorExtensions.isForm}}
             {{#vendorExtensions.isDeepObject}}
             if(is_array(${{paramName}})) {

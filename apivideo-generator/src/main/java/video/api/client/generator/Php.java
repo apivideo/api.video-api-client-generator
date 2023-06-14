@@ -172,6 +172,10 @@ public class Php extends AbstractPhpCodegen {
                         param.vendorExtensions.put("isFormOrDeepObject", true);
                     }
 
+                    if("date".equals(param.dataFormat)) {
+                        param.vendorExtensions.put("isDate", true);
+                    }
+
                     if(param.baseName.endsWith("[]")) {
                         param.baseName = param.baseName.substring(0, param.baseName.length() - 2);
                     }
