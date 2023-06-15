@@ -12395,6 +12395,25 @@ components:
           type: boolean
           description: 'Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.'
           example: true
+        restreams:
+          description: Returns the list of RTMP restream destinations.
+          nullable: true
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                description: Returns the name of a restream destination.
+                type: string
+                example: My RTMP server
+              serverUrl:
+                description: Returns the RTMP URL of a restream destination.
+                type: string
+                example: rtmp://...
+              streamKey:
+                description: Returns the unique key of the live stream that is set up for restreaming.
+                type: string
+                example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         createdAt:
           type: string
           description: 'When the player was created, presented in ISO-8601 format.'
