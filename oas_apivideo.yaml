@@ -11012,18 +11012,39 @@ components:
       type: object
       properties:
         type:
+          description: A link to the error documentation.
           type: string
         title:
+          description: A description of the error that occurred.
           type: string
         name:
+          description: The name of the parameter that caused the error.
           type: string
         status:
+          description: The HTTP status code.
           type: integer
         problems:
+          description: Returns any additional problems in the request in an array of objects.
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/bad-request'
+            $ref: '#/components/schemas/additional-bad-request-errors'
+    additional-bad-request-errors:
+      title: BadRequest
+      type: object
+      properties:
+        type:
+          description: A link to the error documentation.
+          type: string
+        title:
+          description: A description of the error that occurred.
+          type: string
+        name:
+          description: The name of the parameter that caused the error.
+          type: string
+        status:
+          description: The HTTP status code.
+          type: integer
     not-found:
       title: NotFound
       type: object
