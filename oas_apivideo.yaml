@@ -4000,7 +4000,7 @@ paths:
           explode: true
           schema:
             type: string
-          example: 30087931-229e-42cf-b5f9-e91bcc1f7332
+          example: dw-dew8-q6w9-k67w-1ws8
         - name: name
           in: query
           description: You can filter live streams by their name or a part of their name.
@@ -12335,7 +12335,7 @@ components:
         streamKey:
           type: string
           description: 'The unique, private stream key that you use to begin streaming.'
-          example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          example: dw-dew8-q6w9-k67w-1ws8
         record:
           type: boolean
           description: Whether you are recording or not.
@@ -12372,7 +12372,7 @@ components:
               streamKey:
                 description: Returns the unique key of the live stream that is set up for restreaming.
                 type: string
-                example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                example: dw-dew8-q6w9-k67w-1ws8
         createdAt:
           type: string
           description: 'When the player was created, presented in ISO-8601 format.'
@@ -12887,7 +12887,7 @@ components:
               streamKey:
                 description: Use this parameter to provide the unique key of the live stream that you want to restream.
                 type: string
-                example: 6546464651
+                example: dw-dew8-q6w9-k67w-1ws8
       example:
         name: Test live
         record: true
@@ -12895,10 +12895,10 @@ components:
         restreams:
            - name: YouTube
              serverUrl: rtmp://...
-             streamKey: 6546464651
+             streamKey: dw-dew8-q6w9-k67w-1ws8
            - name: Twitch
              serverUrl: rtmp://...
-             streamKey: 6546464651
+             streamKey: dw-dew8-q6w9-k67w-1ws8
     live-stream-update-payload:
       title: LiveStreamUpdatePayload
       type: object
@@ -12936,7 +12936,7 @@ components:
               streamKey:
                 description: Use this parameter to provide the unique key of the live stream that you want to restream.
                 type: string
-                example: 6546464651
+                example: dw-dew8-q6w9-k67w-1ws8
     captions-upload-payload:
       title: CaptionsUploadPayload
       required:
