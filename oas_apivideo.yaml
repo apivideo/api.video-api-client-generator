@@ -4048,6 +4048,13 @@ paths:
                         createdAt: '2020-01-31T10:17:47.000Z'
                         updatedAt: '2020-03-09T13:19:43.000Z'
                         streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
+                        restreams:
+                        - name: YouTube
+                          serverUrl: rtmp://youtube.broadcast.example.com
+                          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
+                        - name: Twitch
+                          serverUrl: rtmp://twitch.broadcast.example.com
+                          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
                         name: Live Stream From the browser
                         public: true
                         record: true
@@ -4061,6 +4068,13 @@ paths:
                         createdAt: '2020-07-29T10:45:35.000Z'
                         updatedAt: '2020-07-29T10:45:35.000Z'
                         streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                        restreams:
+                        - name: YouTube
+                          serverUrl: rtmp://youtube.broadcast.example.com
+                          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                        - name: Twitch
+                          serverUrl: rtmp://twitch.broadcast.example.com
+                          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                         name: Live From New York
                         public: true
                         record: true
@@ -4318,21 +4332,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/live-stream'
               examples:
-                response:
-                  value:
-                    liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-                    createdAt: '2020-07-29T10:45:35.000Z'
-                    updatedAt: '2020-07-29T10:45:35.000Z'
-                    streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
-                    name: Live From New York
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
-                      player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
-                      hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
-                      thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
+                live-stream-response-example:
+                  $ref: '#components/examples/live-stream-response-example'
         '400':
           description: Bad Request
           content:
@@ -4514,21 +4515,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/live-stream'
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: '2020-01-31T10:17:47.000Z'
-                    updatedAt: '2020-03-09T13:19:43.000Z'
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
-                      player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
-                      hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
-                      thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
+                live-stream-response-example:
+                  $ref: '#components/examples/live-stream-response-example'
       security:
         - apiKey: []
       x-client-action: get
@@ -4923,21 +4911,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/live-stream'
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: '2020-01-31T10:17:47.000Z'
-                    updatedAt: '2020-03-09T13:19:43.000Z'
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
-                      player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
-                      hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
-                      thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
+                live-stream-response-example:
+                  $ref: '#components/examples/live-stream-response-example'
         '400':
           description: Bad Request
           content:
@@ -11814,6 +11789,29 @@ paths:
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#delete
 components:
+  examples:
+    live-stream-response-example:
+        value:
+          liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
+          createdAt: '2020-07-29T10:45:35.000Z'
+          updatedAt: '2020-07-29T10:45:35.000Z'
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          restreams:
+          - name: YouTube
+            serverUrl: rtmp://youtube.broadcast.example.com
+            streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          - name: Twitch
+            serverUrl: rtmp://twitch.broadcast.example.com
+            streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          name: Live From New York
+          public: true
+          record: true
+          broadcasting: false
+          assets:
+            iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
+            player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
+            hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
+            thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
   schemas:
     link:
       type: object
@@ -12909,10 +12907,10 @@ components:
         playerId: pl4f4ferf5erfr5zed4fsdd
         restreams:
            - name: YouTube
-             serverUrl: rtmp://...
+             serverUrl: rtmp://youtube.broadcast.example.com
              streamKey: dw-dew8-q6w9-k67w-1ws8
            - name: Twitch
-             serverUrl: rtmp://...
+             serverUrl: rtmp://twitch.broadcast.example.com
              streamKey: dw-dew8-q6w9-k67w-1ws8
     live-stream-update-payload:
       title: LiveStreamUpdatePayload
@@ -12950,7 +12948,7 @@ components:
         serverUrl:
           description: Use this parameter to set the RTMP URL of the restream destination.
           type: string
-          example: rtmp://...
+          example: rtmp://my.broadcast.example.com
         streamKey:
           description: Use this parameter to provide the unique key of the live stream that you want to restream.
           type: string
@@ -12966,7 +12964,7 @@ components:
         serverUrl:
           description: Returns the RTMP URL of a restream destination.
           type: string
-          example: rtmp://...
+          example: rtmp://my.broadcast.example.com
         streamKey:
           description: Returns the unique key of the live stream that is set up for restreaming.
           type: string
