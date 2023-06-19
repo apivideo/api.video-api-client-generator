@@ -12400,7 +12400,7 @@ components:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/restreams-request-object'
+            $ref: '#/components/schemas/restreams-response-object'
         createdAt:
           type: string
           description: 'When the player was created, presented in ISO-8601 format.'
