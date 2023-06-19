@@ -150,7 +150,12 @@ func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 	}
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	return o.{{name}}
+{{#isArray}}
+    return *o.{{name}}
+{{/isArray}}
+{{^isArray}}
+    return o.{{name}}
+{{/isArray}}
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return *o.{{name}}.Get()
@@ -172,7 +177,12 @@ func (o *{{classname}}) Get{{name}}Ok() (*{{vendorExtensions.x-go-base-type}}, b
 	}
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	return &o.{{name}}, true
+{{#isArray}}
+    return o.{{name}}, true
+{{/isArray}}
+{{^isArray}}
+    return &o.{{name}}, true
+{{/isArray}}
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return o.{{name}}.Get(), o.{{name}}.IsSet()
@@ -196,7 +206,12 @@ func (o *{{classname}}) Has{{name}}() bool {
 func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	o.{{name}} = v
+{{#isArray}}
+    o.{{name}} = &v
+{{/isArray}}
+{{^isArray}}
+    o.{{name}} = v
+{{/isArray}}
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	o.{{name}}.Set(&v)
