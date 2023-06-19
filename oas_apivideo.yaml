@@ -12932,7 +12932,7 @@ components:
           description: The unique ID for the player associated with a live stream that you want to update.
           example: pl45KFKdlddgk654dspkze
         restreams:
-          description: Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
+          description: Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
           maxItems: 5
           type: array
           items:
