@@ -12400,20 +12400,7 @@ components:
           nullable: true
           type: array
           items:
-            type: object
-            properties:
-              name:
-                description: Returns the name of a restream destination.
-                type: string
-                example: My RTMP server
-              serverUrl:
-                description: Returns the RTMP URL of a restream destination.
-                type: string
-                example: rtmp://...
-              streamKey:
-                description: Returns the unique key of the live stream that is set up for restreaming.
-                type: string
-                example: dw-dew8-q6w9-k67w-1ws8
+            $ref: '#/components/schemas/restreams-request-object'
         createdAt:
           type: string
           description: 'When the player was created, presented in ISO-8601 format.'
@@ -12915,20 +12902,7 @@ components:
           maxItems: 5
           type: array
           items:
-            type: object
-            properties:
-              name:
-                description: Use this parameter to define a name for the restream destination.
-                type: string
-                example: My RTMP server
-              serverUrl:
-                description: Use this parameter to set the RTMP URL of the restream destination.
-                type: string
-                example: rtmp://...
-              streamKey:
-                description: Use this parameter to provide the unique key of the live stream that you want to restream.
-                type: string
-                example: dw-dew8-q6w9-k67w-1ws8
+            $ref: '#/components/schemas/restreams-request-object'
       example:
         name: Test live
         record: true
@@ -12964,20 +12938,39 @@ components:
           maxItems: 5
           type: array
           items:
-            type: object
-            properties:
-              name:
-                description: Use this parameter to define a name for the restream destination.
-                type: string
-                example: My RTMP server
-              serverUrl:
-                description: Use this parameter to set the RTMP URL of the restream destination.
-                type: string
-                example: rtmp://...
-              streamKey:
-                description: Use this parameter to provide the unique key of the live stream that you want to restream.
-                type: string
-                example: dw-dew8-q6w9-k67w-1ws8
+            $ref: '#/components/schemas/restreams-request-object'
+    restreams-request-object:
+      title: Restreams request object
+      type: object
+      properties:
+        name:
+          description: Use this parameter to define a name for the restream destination.
+          type: string
+          example: My RTMP server
+        serverUrl:
+          description: Use this parameter to set the RTMP URL of the restream destination.
+          type: string
+          example: rtmp://...
+        streamKey:
+          description: Use this parameter to provide the unique key of the live stream that you want to restream.
+          type: string
+          example: dw-dew8-q6w9-k67w-1ws8
+    restreams-response-object:
+      title: Restreams response object
+      type: object
+      properties:
+        name:
+          description: Returns the name of a restream destination.
+          type: string
+          example: My RTMP server
+        serverUrl:
+          description: Returns the RTMP URL of a restream destination.
+          type: string
+          example: rtmp://...
+        streamKey:
+          description: Returns the unique key of the live stream that is set up for restreaming.
+          type: string
+          example: dw-dew8-q6w9-k67w-1ws8
     captions-upload-payload:
       title: CaptionsUploadPayload
       required:
