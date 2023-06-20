@@ -12355,6 +12355,7 @@ components:
         restreams:
           description: Returns the list of RTMP restream destinations.
           type: array
+          nullable: false
           items:
             $ref: '#/components/schemas/restreams-response-object'
         createdAt:
@@ -12858,6 +12859,7 @@ components:
           description: Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
           maxItems: 5
           type: array
+          nullable: false
           items:
             $ref: '#/components/schemas/restreams-request-object'
       example:
@@ -12894,12 +12896,17 @@ components:
           description: Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
           maxItems: 5
           type: array
+          nullable: false
           items:
             $ref: '#/components/schemas/restreams-request-object'
     restreams-request-object:
       title: Restreams request object
       description: Adding restream destinations is optional. However, if you set a restream destination, you must provide all attributes for each destination.
       type: object
+      required:
+      - name
+      - serverUrl
+      - streamKey
       properties:
         name:
           description: Use this parameter to define a name for the restream destination.
