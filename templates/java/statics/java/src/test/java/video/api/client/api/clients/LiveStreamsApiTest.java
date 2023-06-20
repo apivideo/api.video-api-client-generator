@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.net.URI;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -112,15 +113,18 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     new PaginationLink().rel("last").uri(URI.create("/live-streams?currentPage=1&pageSize=25")));
 
             assertThat(res.getItems()).containsExactlyInAnyOrder(new LiveStream()
-                    .updatedAt(OffsetDateTime.parse("2020-03-09T13:19:43Z"))
-                    .createdAt(OffsetDateTime.parse("2020-01-31T10:17:47Z")).liveStreamId("li400mYKSgQ6xs7taUeSaEKr")
-                    .streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332").name("Live Stream From the browser").record(true)
-                    .broadcasting(false)._public(true)
-                    .assets(new LiveStreamAssets().iframe(
-                            "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                            .player(URI.create("https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"))
-                            .hls(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8")).thumbnail(
-                                    URI.create("https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg"))),
+                            .updatedAt(OffsetDateTime.parse("2020-03-09T13:19:43Z"))
+                            .createdAt(OffsetDateTime.parse("2020-01-31T10:17:47Z")).liveStreamId("li400mYKSgQ6xs7taUeSaEKr")
+                            .streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332").name("Live Stream From the browser").record(true)
+                            .broadcasting(false)._public(true)
+                            .assets(new LiveStreamAssets().iframe(
+                                    "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
+                                    .player(URI.create("https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"))
+                                    .hls(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8")).thumbnail(
+                                            URI.create("https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg")))
+                            .restreams(Arrays.asList(
+                                    new RestreamsResponseObject().name("YouTube").serverUrl("rtmp://youtube.broadcast.example.com").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385188"),
+                                    new RestreamsResponseObject().name("Twitch").serverUrl("rtmp://twitch.broadcast.example.com").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385188"))),
                     new LiveStream().updatedAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
                             .createdAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
                             .liveStreamId("li4pqNqGUkhKfWcBGpZVLRY5").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135")
@@ -130,7 +134,10 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
                                     .hls(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8"))
                                     .thumbnail(URI.create(
-                                            "https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg"))));
+                                            "https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")))
+                            .restreams(Arrays.asList(
+                                    new RestreamsResponseObject().name("YouTube").serverUrl("rtmp://youtube.broadcast.example.com").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135"),
+                                    new RestreamsResponseObject().name("Twitch").serverUrl("rtmp://twitch.broadcast.example.com").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135"))));
         }
     }
 
