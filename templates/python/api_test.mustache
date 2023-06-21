@@ -34,7 +34,8 @@ class {{#operations}}Test{{classname}}(MainTest):
 {{/summary}}
         """
 {{#responses.0.vendorExtensions.x-example-response-json}}
-        for status, json in self.load_json('{{#lambda.lowercase}}{{{baseName}}}{{/lambda.lowercase}}', '{{{operationId}}}'):
+        for file_name, json in self.load_json('{{#lambda.lowercase}}{{{baseName}}}{{/lambda.lowercase}}', '{{{operationId}}}'):
+            status = file_name.split("-")[0]
             responses.reset()
 
             kwargs = {

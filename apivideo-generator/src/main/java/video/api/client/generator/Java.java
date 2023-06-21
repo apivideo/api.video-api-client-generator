@@ -1,24 +1,19 @@
 package video.api.client.generator;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.swagger.util.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
-import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.JavaClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
 import org.openapitools.codegen.templating.mustache.LowercaseLambda;
 import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+import static video.api.client.generator.Common.populateOperationResponse;
 
 public class Java extends JavaClientCodegen {
 
@@ -113,44 +108,11 @@ public class Java extends JavaClientCodegen {
                     }
                 });
 
-                operation.responses.forEach(response -> populateOperationResponse(operation, response));
-
+                String folder = getOutputDir() + "/src/test/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder));
             }
         }
         return super.postProcessOperationsWithModels(objs, allModels);
-    }
-
-    private void populateOperationResponse(CodegenOperation operation, CodegenResponse response) {
-        response.vendorExtensions.put("allParams", operation.allParams);
-        response.vendorExtensions.put("x-client-action", operation.vendorExtensions.get("x-client-action"));
-        response.vendorExtensions.put("x-group-parameters", operation.vendorExtensions.get("x-group-parameters"));
-        response.vendorExtensions.put("x-client-paginated", operation.vendorExtensions.get("x-client-paginated"));
-        response.vendorExtensions.put("x-pagination", operation.vendorExtensions.get("x-pagination"));
-        response.vendorExtensions.put("x-is-error", response.is4xx || response.is5xx);
-        response.vendorExtensions.put("lambda", additionalProperties.get("lambda"));
-
-        String responseExample = getResponseExample(response);
-        if (responseExample != null) {
-            try {
-                Map<String, String> exampleMap = Json.mapper().readerFor(Map.class).readValue(responseExample);
-                if (exampleMap.containsKey("title")) {
-                    response.vendorExtensions.put("x-example-response", exampleMap);
-                }
-                response.vendorExtensions.put("x-example-response-json", responseExample);
-            } catch (JsonProcessingException ignored) {
-            }
-
-
-            try {
-                String folder = getOutputDir() + "/src/test/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
-                Files.createDirectories(Paths.get(folder));
-                PrintWriter out = new PrintWriter(folder + response.code + ".json");
-                out.print(responseExample);
-                out.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Override
@@ -178,28 +140,6 @@ public class Java extends JavaClientCodegen {
     }
 
 
-    private String getResponseExample(CodegenResponse response) {
-        Map map;
-        try {
-            map = Json.mapper().readerFor(Map.class).readValue(response.jsonSchema);
-        } catch (JsonProcessingException e) {
-            return null;
-        }
-        Map content = (Map) map.get("content");
-        if (content == null) {
-            return null;
-        }
-        Collection<Map> values = content.values();
-        for (Map v : values) {
-            Map examples = (Map) v.get("examples");
-            if (examples == null) continue;
-            Map res = (Map) examples.get("response");
-            if (res == null) continue;
-            return Json.pretty((Map) res.get("value"));
-        }
-
-        return null;
-    }
 
     private void handlePagination(List<Object> allModels, CodegenOperation operation) {
         Optional<Map> map = allModels.stream().filter(m -> ((CodegenModel) ((Map) m).get("model")).classname.equals(operation.returnType)).map(a -> (Map) a).findFirst();

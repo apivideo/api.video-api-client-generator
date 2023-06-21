@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.openapitools.codegen.utils.StringUtils.underscore;
+import static video.api.client.generator.Common.populateOperationResponse;
 
 public class Go extends GoClientCodegen {
 
@@ -105,7 +106,7 @@ public class Go extends GoClientCodegen {
                 );
 
 
-                operation.responses.forEach(response -> populateOperationResponse(operation, response));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, null));
 
             }
         }
@@ -154,61 +155,6 @@ public class Go extends GoClientCodegen {
         }
 
 
-    }
-    /**
-     * - Move up some attributes from the operation to the response
-     * - Generate payload JSON files from the operation response example (to be used in unit tests)
-     * @param operation
-     * @param response
-     */
-    private void populateOperationResponse(CodegenOperation operation, CodegenResponse response) {
-        response.vendorExtensions.put("allParams", operation.allParams);
-        response.vendorExtensions.put("x-client-action", operation.vendorExtensions.get("x-client-action"));
-        response.vendorExtensions.put("x-group-parameters", operation.vendorExtensions.get("x-group-parameters"));
-        response.vendorExtensions.put("x-client-paginated", operation.vendorExtensions.get("x-client-paginated"));
-        response.vendorExtensions.put("x-pagination", operation.vendorExtensions.get("x-pagination"));
-        response.vendorExtensions.put("x-is-error", response.is4xx || response.is5xx);
-        response.vendorExtensions.put("lambda", additionalProperties.get("lambda"));
-
-        String responseExample = getResponseExample(response);
-        if(responseExample != null) {
-            try {
-                Map<String, String> exampleMap = Json.mapper().readerFor(Map.class).readValue(responseExample);
-                if(exampleMap.containsKey("title")) {
-                    response.vendorExtensions.put("x-example-response", exampleMap);
-                }
-                response.vendorExtensions.put("x-example-response-json", responseExample);
-            } catch (JsonProcessingException ignored) {
-            }
-        }
-    }
-
-    /**
-     * returns the JSON example from an openapi response
-     * @param response
-     * @return
-     */
-    private String getResponseExample(CodegenResponse response) {
-        Map map;
-        try {
-            map = Json.mapper().readerFor(Map.class).readValue(response.jsonSchema);
-        } catch (JsonProcessingException e) {
-            return null;
-        }
-        Map content = (Map) map.get("content");
-        if(content == null) {
-            return null;
-        }
-        Collection<Map> values = content.values();
-        for (Map v : values) {
-            Map examples = (Map) v.get("examples");
-            if(examples == null) continue;
-            Map res = (Map) examples.get("response");
-            if(res == null) continue;
-            return Json.pretty(res.get("value"));
-        }
-
-        return null;
     }
 
     /**

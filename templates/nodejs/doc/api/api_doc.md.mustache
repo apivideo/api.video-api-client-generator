@@ -24,7 +24,7 @@ All URIs are relative to *{{basePath}}*
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
 | Name | Type | Required | Description |
 | ------------- | ------------- | ------------- | ------------- |{{/-last}}{{/allParams}}
-{{#allParams}} | **{{paramName}}** | {{#isPrimitiveType}}**{{#isFile}}string \| Readable \| Buffer{{/isFile}}{{^isFile}}{{dataType}}{{/isFile}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}| {{#required}}**yes**{{/required}}{{^required}}no{{/required}}| {{description}} |
+{{#allParams}} | **{{paramName}}** | {{^isEnum}}{{#isPrimitiveType}}**{{#isFile}}string \| Readable \| Buffer{{/isFile}}{{^isFile}}{{dataType}}{{/isFile}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{#isContainer}}**{{dataType}}**{{/isContainer}}{{#isFile}}**{{dataType}}**{{/isFile}}{{^isFile}}{{^isContainer}}[**{{dataType}}**](../model/{{baseType}}.md){{/isContainer}}{{/isFile}}{{/isPrimitiveType}}{{/isEnum}}{{#isEnum}}{{#allowableValues}}{{#enumVars}}{{#-first}}**{{/-first}}{{^-first}} \| {{/-first}}{{value}}{{#-last}}**{{/-last}}{{/enumVars}}{{/allowableValues}}{{/isEnum}}| {{#required}}**yes**{{/required}}{{^required}}no{{/required}}| {{description}} |
 {{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}| **progressListener** | **(event: UploadProgressEvent) => void \| undefined** | no | Optional upload progress listener |{{/vendorExtensions.x-client-chunk-upload}}
 
 ### Return type

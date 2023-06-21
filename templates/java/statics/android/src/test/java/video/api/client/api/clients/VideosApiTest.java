@@ -93,16 +93,17 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
                     .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
-                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27")).
-                            thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg")).
-                            mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
+                    .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
 
         @Test
@@ -127,7 +128,8 @@ public class VideosApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             ApiException e = assertThrows(ApiException.class, () -> api.uploadWithUploadToken(null, new File("")));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'token' when calling uploadWithUploadToken");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'token' when calling uploadWithUploadToken");
 
             e = assertThrows(ApiException.class, () -> api.uploadWithUploadToken("to1tcmSFHeYY5KzyhOqVKMKb", null));
             assertThat(e).hasMessageThat().contains("Missing the required parameter 'file' when calling upload");
@@ -148,16 +150,19 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getDescription()).isEqualTo("An amazing video explaining the string theory");
             assertThat(res.getPublic()).isEqualTo(false);
             assertThat(res.getPanoramic()).isEqualTo(false);
-            assertThat(res.getTags()).containsExactlyElementsIn(Arrays.asList("maths", "string theory", "video")).inOrder();
-            assertThat(res.getMetadata()).containsExactlyElementsIn(Arrays.asList(new Metadata("Author", "John Doe"),
-                    new Metadata("Format", "Tutorial"))).inOrder();
+            assertThat(res.getTags()).containsExactlyElementsIn(Arrays.asList("maths", "string theory", "video"))
+                    .inOrder();
+            assertThat(res.getMetadata())
+                    .containsExactlyElementsIn(
+                            Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")))
+                    .inOrder();
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source"));
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
                     .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
     }
 
@@ -186,8 +191,8 @@ public class VideosApiTest extends AbstractApiTest {
 
             assertThat(res.getIngest().getStatus()).isEqualTo(VideoStatusIngest.StatusEnum.UPLOADED);
             assertThat(res.getIngest().getFilesize()).isEqualTo(273579401);
-            assertThat(res.getIngest().getReceivedBytes()).
-                    isEqualTo(Arrays.asList(new BytesRange().from(0).to(134217727).total(273579401),
+            assertThat(res.getIngest().getReceivedBytes())
+                    .isEqualTo(Arrays.asList(new BytesRange().from(0).to(134217727).total(273579401),
                             new BytesRange().from(134217728).to(268435455).total(273579401),
                             new BytesRange().from(268435456).to(273579400).total(273579401)));
             assertThat(res.getEncoding().getPlayable()).isTrue();
@@ -249,18 +254,18 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res1.getPanoramic()).isEqualTo(false);
             assertThat(res1.getMp4Support()).isEqualTo(true);
             assertThat(res1.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res1.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
-            assertThat(res1.getSource()).
-                    isEqualTo(new VideoSource().uri("/videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source"));
+            assertThat(res1.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
+            assertThat(res1.getSource())
+                    .isEqualTo(new VideoSource().uri("/videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source"));
 
             assertThat(res1.getAssets()).isEqualTo(new VideoAssets()
                     .hls(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8"))
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
 
         }
 
@@ -286,7 +291,8 @@ public class VideosApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             ApiException e = assertThrows(ApiException.class, () -> api.update("1234", null));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoUpdatePayload' when calling update");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoUpdatePayload' when calling update");
 
             e = assertThrows(ApiException.class, () -> api.update(null, new VideoUpdatePayload()));
             assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoId' when calling update");
@@ -309,9 +315,9 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
@@ -319,7 +325,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
 
         @Test
@@ -327,7 +333,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
             assertThat(e.getCode()).isEqualTo(400);
             assertThat(e).hasMessageThat().contains("This attribute must be a ISO-8601 date.");
         }
@@ -337,7 +344,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
             assertThat(e.getCode()).isEqualTo(404);
             assertThat(e).hasMessageThat().contains("The requested resource was not found.");
         }
@@ -353,12 +361,14 @@ public class VideosApiTest extends AbstractApiTest {
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            ApiException e = assertThrows(ApiException.class, () -> api.pickThumbnail(null, new VideoThumbnailPickPayload().timecode("10:10:10")));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoId' when calling pickThumbnail");
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.pickThumbnail(null, new VideoThumbnailPickPayload().timecode("10:10:10")));
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoId' when calling pickThumbnail");
 
             e = assertThrows(ApiException.class, () -> api.pickThumbnail("1234", null));
-            assertThat(e).hasMessageThat().contains(
-                    "Missing the required parameter 'videoThumbnailPickPayload' when calling pickThumbnail");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoThumbnailPickPayload' when calling pickThumbnail");
 
             e = assertThrows(ApiException.class, () -> api.pickThumbnail("1234", new VideoThumbnailPickPayload()));
             assertThat(e).hasMessageThat().contains(
@@ -384,9 +394,9 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
@@ -394,7 +404,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
 
         @Test
@@ -420,10 +430,12 @@ public class VideosApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             ApiException e = assertThrows(ApiException.class, () -> api.create(null));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoCreationPayload' when calling create");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoCreationPayload' when calling create");
 
             e = assertThrows(ApiException.class, () -> api.create(new VideoCreationPayload()));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoCreationPayload.title' when calling create");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoCreationPayload.title' when calling create");
 
             assertDoesNotThrow(() -> api.create(new VideoCreationPayload().title("title")));
         }
@@ -443,9 +455,9 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
@@ -453,7 +465,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
 
         @Test
@@ -461,7 +473,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.create(new VideoCreationPayload().title("title")));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.create(new VideoCreationPayload().title("title")));
             assertThat(e.getCode()).isEqualTo(400);
             assertThat(e).hasMessageThat().contains("This attribute is required.");
         }
@@ -501,9 +514,9 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
@@ -511,7 +524,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
 
         }
 
@@ -520,7 +533,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")));
             assertThat(e.getCode()).isEqualTo(400);
             assertThat(e).hasMessageThat().contains("The source of the video is already uploaded.");
         }
@@ -530,7 +544,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.upload("vi4blUQJFrYWbaG44NChkH27", new File("")));
             assertThat(e.getCode()).isEqualTo(404);
             assertThat(e).hasMessageThat().contains("The requested resource was not found.");
         }
@@ -547,10 +562,12 @@ public class VideosApiTest extends AbstractApiTest {
             answerOnAnyRequest(201, "{}");
 
             ApiException e = assertThrows(ApiException.class, () -> api.uploadThumbnail(null, new File("")));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'videoId' when calling uploadThumbnail");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'videoId' when calling uploadThumbnail");
 
             e = assertThrows(ApiException.class, () -> api.uploadThumbnail("1234", null));
-            assertThat(e).hasMessageThat().contains("Missing the required parameter 'file' when calling uploadThumbnail");
+            assertThat(e).hasMessageThat()
+                    .contains("Missing the required parameter 'file' when calling uploadThumbnail");
 
             assertDoesNotThrow(() -> api.uploadThumbnail("videoId_example", new File("")));
         }
@@ -570,9 +587,9 @@ public class VideosApiTest extends AbstractApiTest {
             assertThat(res.getPanoramic()).isEqualTo(false);
             assertThat(res.getMp4Support()).isEqualTo(true);
             assertThat(res.getTags()).isEqualTo(Arrays.asList("maths", "string theory", "video"));
-            assertThat(res.getMetadata()).
-                    isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
-            
+            assertThat(res.getMetadata())
+                    .isEqualTo(Arrays.asList(new Metadata("Author", "John Doe"), new Metadata("Format", "Tutorial")));
+
             assertThat(res.getSource()).isEqualTo(new VideoSource().uri("/videos/vi4blUQJFrYWbaG44NChkH27/source"));
 
             assertThat(res.getAssets()).isEqualTo(new VideoAssets()
@@ -580,7 +597,7 @@ public class VideosApiTest extends AbstractApiTest {
                     .iframe("<iframe src=\"https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27"))
                     .thumbnail(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg"))
-                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4")));
+                    .mp4(URI.create("https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4")));
         }
 
         @Test
@@ -588,7 +605,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus400Test() throws ApiException {
             answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.uploadThumbnail("videoId_example", new File("")));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.uploadThumbnail("videoId_example", new File("")));
             assertThat(e.getCode()).isEqualTo(400);
             assertThat(e).hasMessageThat().contains("Only [jpeg, jpg, JPG, JPEG] extensions are supported.");
         }
@@ -598,7 +616,8 @@ public class VideosApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            ApiException e = assertThrows(ApiException.class, () -> api.uploadThumbnail("videoId_example", new File("")));
+            ApiException e = assertThrows(ApiException.class,
+                    () -> api.uploadThumbnail("videoId_example", new File("")));
             assertThat(e.getCode()).isEqualTo(404);
             assertThat(e).hasMessageThat().contains("The requested resource was not found.");
 
