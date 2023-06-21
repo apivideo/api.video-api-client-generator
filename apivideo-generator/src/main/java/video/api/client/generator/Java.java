@@ -1,26 +1,18 @@
 package video.api.client.generator;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.swagger.util.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
-import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.languages.JavaClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
 import org.openapitools.codegen.templating.mustache.LowercaseLambda;
 import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static video.api.client.generator.Common.getResponseExample;
 import static video.api.client.generator.Common.populateOperationResponse;
 
 public class Java extends JavaClientCodegen {
@@ -117,8 +109,7 @@ public class Java extends JavaClientCodegen {
                 });
 
                 String folder = getOutputDir() + "/src/test/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder));
-
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder));
             }
         }
         return super.postProcessOperationsWithModels(objs, allModels);

@@ -2,9 +2,11 @@ package video.api.client.generator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenResponse;
+import org.openapitools.codegen.utils.ModelUtils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -114,7 +116,7 @@ public class Common {
         }
     }
 
-    public static void populateOperationResponse(CodegenOperation operation, CodegenResponse response, Map<String, Object> additionalProperties, String folder) {
+    public static void populateOperationResponse(OpenAPI openApi, CodegenOperation operation, CodegenResponse response, Map<String, Object> additionalProperties, String folder) {
         response.vendorExtensions.put("allParams", operation.allParams);
         response.vendorExtensions.put("x-client-action", operation.vendorExtensions.get("x-client-action"));
         response.vendorExtensions.put("x-group-parameters", operation.vendorExtensions.get("x-group-parameters"));
@@ -123,7 +125,7 @@ public class Common {
         response.vendorExtensions.put("x-is-error", response.is4xx || response.is5xx);
         response.vendorExtensions.put("lambda", additionalProperties.get("lambda"));
 
-        List<String> responseExamples = getResponseExample(response);
+        List<String> responseExamples = getResponseExample(openApi, response);
         if (responseExamples != null) {
             int index = 0;
             for (String responseExample : responseExamples) {
@@ -154,7 +156,7 @@ public class Common {
     /**
      * returns the JSON example from an openapi response
      */
-    public static List<String> getResponseExample(CodegenResponse response) {
+    public static List<String> getResponseExample(OpenAPI openAPI, CodegenResponse response) {
         Map map;
         try {
             map = Json.mapper().readerFor(Map.class).readValue(response.jsonSchema);
@@ -172,7 +174,16 @@ public class Common {
 
             Collection<Map> exampleValues = examples.values();
 
-            return exampleValues.stream().map(a -> Json.pretty(a.get("value"))).collect(Collectors.toList());
+            return exampleValues.stream().map(exampleValue -> {
+                if(exampleValue.containsKey("$ref")) {
+                    String ref = (String) exampleValue.get("$ref");
+                    String prefix = "#/components/examples/";
+                    if(ref.startsWith(prefix)) {
+                        return Json.pretty(openAPI.getComponents().getExamples().get(ref.substring(prefix.length())));
+                    }
+                }
+                return Json.pretty(exampleValue.get("value"));
+            }).collect(Collectors.toList());
         }
 
         return null;

@@ -67,7 +67,7 @@ public class Swift5 extends Swift5ClientCodegen {
 
 
                 String folder = getOutputDir() + "/Tests/TestResources/payloads/" + operation.baseName.toLowerCase() + "/" + camelize((String) operation.vendorExtensions.get("x-client-action"), true) + "/responses/";
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder));
             }
         }
         return super.postProcessOperationsWithModels(objs, allModels);

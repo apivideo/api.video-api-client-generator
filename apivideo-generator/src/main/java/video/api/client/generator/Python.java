@@ -156,7 +156,7 @@ public class Python extends PythonClientCodegen {
                 applyToAllParams(operation, (params) -> params.removeIf(pp -> getVendorExtensionBooleanValue(pp, VENDOR_X_CLIENT_IGNORE)) );
 
                 String folder = getOutputDir() + "/test/payloads/" + operation.baseName.toLowerCase() + "/" + underscore((String) operation.vendorExtensions.get("x-client-action")) + "/responses/";
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder));
             }
         }
         return super.postProcessOperationsWithModels(objs, allModels);

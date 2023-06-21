@@ -106,7 +106,7 @@ public class Go extends GoClientCodegen {
                 );
 
 
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, null));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, null));
 
             }
         }

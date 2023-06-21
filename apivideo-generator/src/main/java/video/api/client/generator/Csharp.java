@@ -155,7 +155,7 @@ public class Csharp extends CSharpClientCodegen {
                 });
 
                 String folder = getOutputDir() + "/tests/resources/payloads/" + operation.baseName.toLowerCase() + "/" + operation.vendorExtensions.get("x-client-action") + "/responses/";
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder));
             }
         }
         return super.postProcessOperationsWithModels(objs, allModels);

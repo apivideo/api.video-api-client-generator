@@ -303,7 +303,7 @@ public class TypeScript extends DefaultCodegen {
                         (String) operation.vendorExtensions.get("x-client-action"),
                         "responses"
                 );
-                operation.responses.forEach(response -> populateOperationResponse(operation, response, additionalProperties, folder.toString()));
+                operation.responses.forEach(response -> populateOperationResponse(openAPI, operation, response, additionalProperties, folder.toString()));
 
             }
         }
