@@ -179,7 +179,7 @@ public class Common {
                     String ref = (String) exampleValue.get("$ref");
                     String prefix = "#/components/examples/";
                     if(ref.startsWith(prefix)) {
-                        return Json.pretty(openAPI.getComponents().getExamples().get(ref.substring(prefix.length())));
+                        return Json.pretty(openAPI.getComponents().getExamples().get(ref.substring(prefix.length())).getValue());
                     }
                 }
                 return Json.pretty(exampleValue.get("value"));
