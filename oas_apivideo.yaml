@@ -4340,6 +4340,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing path segment in serverUrl:
+                  description: This error occurs when `serverURL` in the `restreams` array has incorrect format and is missing a path segment.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: Missing required path.
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
       security:
         - apiKey: []
       x-client-action: create
@@ -4919,6 +4952,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing path segment in serverUrl:
+                  description: This error occurs when `serverURL` in the `restreams` array has incorrect format and is missing a path segment.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: Missing required path.
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
       security:
         - apiKey: []
       x-client-action: update
