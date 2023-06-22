@@ -882,6 +882,34 @@ public class {{classname}} {
             return {{operationId}}WithHttpInfo({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}});
         }
 
+        {{^vendorExtensions.x-client-paginated}}
+        /**
+         * Execute {{operationId}} request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         {{#responses.0}}
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            {{#responses}}
+            <tr><td> {{code}} </td><td> {{message}} </td><td> {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} </td></tr>
+            {{/responses}}
+         </table>
+         {{/responses.0}}
+         {{#isDeprecated}}
+         * @deprecated
+         {{/isDeprecated}}
+         */
+        {{#isDeprecated}}
+        @Deprecated
+        {{/isDeprecated}}
+        public okhttp3.Call executeAsync(final ApiCallback<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}> _callback) throws ApiException {
+            return {{operationId}}Async({{#allParams}}{{paramName}}, {{/allParams}}_callback);
+        }
+        {{/vendorExtensions.x-client-paginated}}
+
+        {{#vendorExtensions.x-client-paginated}}
         /**
          * Execute {{operationId}} request (asynchronously)
          * @param _callback The callback to be executed when the API call finishes
@@ -933,6 +961,7 @@ public class {{classname}} {
                 }};
             return {{operationId}}Async({{#allParams}}{{paramName}}, {{/allParams}}apiCallback);
         }
+        {{/vendorExtensions.x-client-paginated}}
     }
 
     /**
