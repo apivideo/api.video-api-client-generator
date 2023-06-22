@@ -14,6 +14,16 @@
 
     <profiles>
         <profile>
+            <id>documentation</id>
+            <properties>
+                <configFileName>documentation</configFileName>
+                <outputFolder>documentation</outputFolder>
+                <templateFolder>documentation</templateFolder>
+                <generatorName>video.api.client.generator.Documentation</generatorName>
+                <postGenerationScript>./post-generate.sh</postGenerationScript>
+            </properties>
+        </profile>
+        <profile>
             <id>android</id>
             <properties>
                 <configFileName>android</configFileName>
