@@ -1,7 +1,6 @@
 changelog:
-  - 2.5.0 (2023-06-22):
+  - 2.4.0 (2023-06-28):
     - Introducing live streams restream feature
-  - 2.4.0 (2023-06-19):
     - Introducing new analytics endpoints
   - 2.3.2 (2023-03-01):
     - fix import issues
