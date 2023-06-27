@@ -1,3 +1,4 @@
+# Fake test that always passes (for now), because the generator requires a test job in each of its targets
 name: Run unit tests
 on: [push]
 jobs:
