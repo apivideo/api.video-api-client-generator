@@ -4400,6 +4400,7 @@ paths:
               liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
               liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
               liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
+              liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
 
               res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
@@ -4438,7 +4439,14 @@ paths:
                       name="My Live Stream Video",
                       public=True,
                       player_id="pl4f4ferf5erfr5zed4fsdd",
-                  ) 
+                      restreams=[
+                          RestreamsRequestObject(
+                              name="My RTMP server",
+                              server_url="rtmp://my.broadcast.example.com/app",
+                              stream_key="dw-dew8-q6w9-k67w-1ws8",
+                          ),
+                      ],
+                  ) # LiveStreamCreationPayload | 
 
                   try:
                       live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)
@@ -4459,13 +4467,17 @@ paths:
               liveStreamCreationPayload.setName("My Live Stream Video"); // Add a name for your live stream here.
               liveStreamCreationPayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it.
               liveStreamCreationPayload.setPlayerId("pl4f4ferf5erfr5zed4fsdd"); // The unique identifier for the player.
+              liveStreamCreationPayload.setRestreams(Collections.singletonList(new RestreamsRequestObject() // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
+                    .name("My RTMP server")
+                    .serverUrl("rtmp://my.broadcast.example.com/app")
+                    .streamKey("dw-dew8-q6w9-k67w-1ws8")));
 
 
               try {
-                LiveStream liveStream = client.liveStreams().create(liveStreamCreationPayload);
-                System.out.println(liveStream);
+                  LiveStream liveStream = client.liveStreams().create(liveStreamCreationPayload);
+                  System.out.println(liveStream);
               } catch (ApiException e) {
-                e.printStackTrace();
+                  e.printStackTrace();
               }
           - language: csharp
             code: |
@@ -4521,7 +4533,13 @@ paths:
                   name: "My Live Stream Video",
                   record: false,
                   _public: true,
-                  playerId: "pl4f4ferf5erfr5zed4fsdd")
+                  playerId: "pl4f4ferf5erfr5zed4fsdd",
+                  restreams: [RestreamsRequestObject(
+                      name: "My RTMP server",
+                      serverUrl: "rtmp://my.broadcast.example.com/app",
+                      streamKey: "dw-dew8-q6w9-k67w-1ws8"
+                  )]
+              )
 
               LiveStreamsAPI.create(liveStreamCreationPayload: liveStreamCreationPayload) { liveStream, error in
                  if let liveStream = liveStream  {
@@ -5026,9 +5044,13 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
-                  liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
+                  liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}
+                  liveStreamUpdatePayload.SetName("My Live Stream Video") // The name you want to use for your live stream.
+                  liveStreamUpdatePayload.SetRecord(false) // Use this to indicate whether you want the recording on or off. On is true, off is false.
+                  liveStreamUpdatePayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
+                  liveStreamUpdatePayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique ID for the player associated with a live stream that you want to update.
+                  liveStreamUpdatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
 
-                  
                   res, err := client.LiveStreams.Update(liveStreamId, liveStreamUpdatePayload)
 
                   if err != nil {
@@ -5077,6 +5099,13 @@ paths:
                       public=True,
                       record=True,
                       player_id="pl45KFKdlddgk654dspkze",
+                      restreams=[
+                          RestreamsRequestObject(
+                              name="My RTMP server",
+                              server_url="rtmp://my.broadcast.example.com",
+                              stream_key="dw-dew8-q6w9-k67w-1ws8",
+                          ),
+                      ],
                   ) # LiveStreamUpdatePayload | 
 
                   # example passing only required values which don't have defaults set
@@ -5112,6 +5141,10 @@ paths:
                   liveStreamUpdatePayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
                   liveStreamUpdatePayload.setRecord(true); // Use this to indicate whether you want the recording on or off. On is true, off is false.
                   liveStreamUpdatePayload.setPlayerId("pl45KFKdlddgk654dspkze"); // The unique ID for the player associated with a live stream that you want to update.
+                  liveStreamUpdatePayload.setRestreams(Collections.singletonList(new RestreamsRequestObject() // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
+                        .name("My RTMP server")
+                        .serverUrl("rtmp://my.broadcast.example.com/app")
+                        .streamKey("dw-dew8-q6w9-k67w-1ws8")));
 
 
                   try {
@@ -5191,6 +5224,30 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
+
+              ApiVideoClient.apiKey = "YOUR_API_KEY"
+
+              let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+              let liveStreamUpdatePayload = LiveStreamUpdatePayload(
+                  name: "My Live Stream Video",
+                  record: false,
+                  _public: true,
+                  playerId: "pl4f4ferf5erfr5zed4fsdd",
+                  restreams: [RestreamsRequestObject(
+                      name: "My RTMP server",
+                      serverUrl: "rtmp://my.broadcast.example.com/app",
+                      streamKey: "dw-dew8-q6w9-k67w-1ws8"
+                  )]
+              )
+
+              LiveStreamsAPI.update(liveStreamId: liveStreamId, liveStreamUpdatePayload: liveStreamUpdatePayload) { liveStream, error in
+                 if let liveStream = liveStream  {
+                     // Do something with the livestream
+                 }
+                 if let error = error {
+                    // Manage update error here
+                 }
+              }
   '/live-streams/{liveStreamId}/thumbnail':
     post:
       tags:
@@ -13039,7 +13096,7 @@ components:
         serverUrl:
           description: Use this parameter to set the RTMP URL of the restream destination.
           type: string
-          example: rtmp://my.broadcast.example.com
+          example: rtmp://my.broadcast.example.com/app
           nullable: false
         streamKey:
           description: Use this parameter to provide the unique key of the live stream that you want to restream.
@@ -13057,7 +13114,7 @@ components:
         serverUrl:
           description: Returns the RTMP URL of a restream destination.
           type: string
-          example: rtmp://my.broadcast.example.com
+          example: rtmp://my.broadcast.example.com/app
         streamKey:
           description: Returns the unique key of the live stream that is set up for restreaming.
           type: string
