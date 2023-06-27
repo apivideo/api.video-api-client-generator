@@ -9388,6 +9388,18 @@ paths:
                     status: 400
                     detail: This value must refer to an existing video
                     name: filter
+        '403':
+          description: Forbidden - Disabled Analytics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403-error-schema'
+              examples:
+                Analytics is disabled:
+                  value:
+                    type: https://docs.api.video/reference/authorization-disabled-analytics
+                    title: You cannot get analytics from this project.
+                    status: 403
         '404':
           description: Not Found
           content:
@@ -10130,6 +10142,18 @@ paths:
                     status: 400
                     detail: This value must refer to an existing live stream
                     name: filter
+        '403':
+          description: Forbidden - Disabled Analytics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403-error-schema'
+              examples:
+                Analytics is disabled:
+                  value:
+                    type: https://docs.api.video/reference/authorization-disabled-analytics
+                    title: You cannot get analytics from this project.
+                    status: 403
         '404':
           description: Not Found
           content:
@@ -11920,6 +11944,23 @@ components:
         name:
           type: string
         status:
+          type: integer
+    403-error-schema:
+      title: 403 Forbidden
+      type: object
+      properties:
+        type:
+          description: A link to the error documentation.
+          type: string
+        title:
+          description: A description of the error that occurred.
+          type: string
+        name:
+          description: The name of the parameter that caused the error.
+          type: string
+          nullable: true
+        status:
+          description: The HTTP status code.
           type: integer
     video:
       title: Video
