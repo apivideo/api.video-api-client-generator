@@ -19,7 +19,7 @@
                 <configFileName>documentation</configFileName>
                 <outputFolder>documentation</outputFolder>
                 <templateFolder>documentation</templateFolder>
-                <generatorName>video.api.client.generator.Documentation</generatorName>
+                <generatorName>org.openapitools.codegen.DefaultCodegen</generatorName>
                 <postGenerationScript>./post-generate.sh</postGenerationScript>
             </properties>
         </profile>
