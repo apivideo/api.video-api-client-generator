@@ -50,18 +50,19 @@ To see the list of available profiles, see the "profile" column in the table of 
 
 ## Supported languages
 
-| Language | Profile | CI tests | CI package release | Repository |
-| ------- | ------ | ---- | ---- | ---- |
-| Java    |  java      | :white_check_mark:  | :white_check_mark: | [java-api-client](https://github.com/apivideo/api.video-java-client) |
-| Android    |  android      | :white_check_mark:  | :white_check_mark: | [android-api-client](https://github.com/apivideo/api.video-android-client) |
-| Android    |  android-uploader      | :white_check_mark:  | :white_check_mark: | [android-video-uploader](https://github.com/apivideo/api.video-android-uploader) |
-| NodeJs/Typescript        | nodejs        | :white_check_mark:  | :white_check_mark: | [nodejs-api-client](https://github.com/apivideo/api.video-nodejs-client) |
-| Php | php | :white_check_mark:  | - | [php-api-client](https://github.com/apivideo/api.video-php-client) |
-| C# | csharp | :white_check_mark:  | :white_check_mark: | [csharp-api-client](https://github.com/apivideo/api.video-csharp-client) |
-| Go | go | :white_check_mark:  | - |  [go-api-client](https://github.com/apivideo/api.video-go-client) |
-| Python | python | :white_check_mark:  | :white_check_mark: | [python-api-client](https://github.com/apivideo/api.video-python-client) |
-| Swift5 | swift5 | :white_check_mark:  | :white_check_mark: | [ios-api-client](https://github.com/apivideo/api.video-ios-client) |
-| Swift5 | swift5-uploader | :white_check_mark:  | :white_check_mark: | [ios-video-uploader](https://github.com/apivideo/api.video-ios-uploader) |
+| Language          | Profile          | CI tests           | CI package release | Repository                                                                       |
+|-------------------|------------------|--------------------|--------------------|----------------------------------------------------------------------------------|
+| Java              | java             | :white_check_mark: | :white_check_mark: | [java-api-client](https://github.com/apivideo/api.video-java-client)             |
+| Android           | android          | :white_check_mark: | :white_check_mark: | [android-api-client](https://github.com/apivideo/api.video-android-client)       |
+| Android           | android-uploader | :white_check_mark: | :white_check_mark: | [android-video-uploader](https://github.com/apivideo/api.video-android-uploader) |
+| NodeJs/Typescript | nodejs           | :white_check_mark: | :white_check_mark: | [nodejs-api-client](https://github.com/apivideo/api.video-nodejs-client)         |
+| Php               | php              | :white_check_mark: | -                  | [php-api-client](https://github.com/apivideo/api.video-php-client)               |
+| C#                | csharp           | :white_check_mark: | :white_check_mark: | [csharp-api-client](https://github.com/apivideo/api.video-csharp-client)         |
+| Go                | go               | :white_check_mark: | -                  | [go-api-client](https://github.com/apivideo/api.video-go-client)                 |
+| Python            | python           | :white_check_mark: | :white_check_mark: | [python-api-client](https://github.com/apivideo/api.video-python-client)         |
+| Swift5            | swift5           | :white_check_mark: | :white_check_mark: | [ios-api-client](https://github.com/apivideo/api.video-ios-client)               |
+| Swift5            | swift5-uploader  | :white_check_mark: | :white_check_mark: | [ios-video-uploader](https://github.com/apivideo/api.video-ios-uploader)         |
+| Documentation     | documentation    | -                  | -                  | [documentation](https://github.com/apivideo/api.video-documentation)             |
 
 ## Template files
 

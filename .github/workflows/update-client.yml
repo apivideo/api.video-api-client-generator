@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ get_available_profiles ]
     strategy:
+      fail-fast: false
       matrix:
         profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
 
@@ -67,6 +68,7 @@ jobs:
 
       # Make changes to pull request here
       - uses: peter-evans/create-pull-request@v3
+        id: cpr
         with:
           token: ${{ secrets.PAT }}
           path: ${{ env.CLIENT_PATH }}
@@ -83,6 +85,14 @@ jobs:
           assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
   #          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }} #TODO
   #          draft: true
+      - name: Check tests results
+        uses: apivideo/api.video-pull-checks-conclusion-action@v1.0.0
+        if: ${{ steps.cpr.outputs.pull-request-head-sha }}
+        with:
+          token: ${{ secrets.PAT }}
+          repo: ${{ matrix.profile.repository }}
+          owner: ${{ github.repository_owner }}
+          sha: ${{ steps.cpr.outputs.pull-request-head-sha }}
 
   merge_client_pr:
     # this job will only run if the PR has been merged
