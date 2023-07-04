@@ -13,15 +13,15 @@ import {
 import { promisify } from 'util';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
-import ObjectSerializer from '../ObjectSerializer.js';
-import HttpClient, { QueryOptions } from '../HttpClient.js';
-import ProgressiveSession from '../model/ProgressiveSession.js';
+import ObjectSerializer from '../ObjectSerializer';
+import HttpClient, { QueryOptions } from '../HttpClient';
+import ProgressiveSession from '../model/ProgressiveSession';
 {{#imports}}
-import {{classname}} from '../model/{{classname}}.js';
+import {{classname}} from '../model/{{classname}}';
 {{/imports}}
 import { Readable, Stream } from 'stream';
 import { Blob } from 'buffer';
-import { readableToBuffer } from "../HttpClient.js";
+import { readableToBuffer } from "../HttpClient";
 {{#operations}}
 
 /**
@@ -150,19 +150,23 @@ export default class {{classname}} {
             {{/vendorExtensions.x-client-copy-from-response}}
             queryParams.body = formData;
             queryParams.headers['Content-Range'] = `part ${this.currentPart}/${isLast ? this.currentPart : "*"}`;
-            const call = this.httpClient.call(localVarPath, queryParams);
+
+
             if (progressListener) {
-              call.on('uploadProgress', (progress: any) => {
-                progressListener({
-                  chunksCount: 1,
-                  currentChunk: 0,
-                  currentChunkUploadedBytes: progress.transferred,
-                  currentChunkTotalBytes: progress.total || 0,
-                  uploadedBytes: progress.transferred,
-                  totalBytes: progress.total || 0,
+              queryParams.onUploadProgress = (progress) => {
+                  progressListener({
+                      chunksCount: 1,
+                      currentChunk: 0,
+                      currentChunkUploadedBytes: progress.loaded,
+                      currentChunkTotalBytes: progress.total || 0,
+                      uploadedBytes: progress.loaded,
+                      totalBytes: progress.total || 0,
                 });
-              });
+              }
             }
+
+            const call = this.httpClient.call(localVarPath, queryParams);
+
             this.currentPart++;
             return call.then(response => ObjectSerializer.deserialize(
                 ObjectSerializer.parse(response.body, response.headers["content-type"]),
@@ -343,19 +347,23 @@ export default class {{classname}} {
         {{#hasFormParams}}
         queryParams.body = formData;
         {{/hasFormParams}}
-        const call = this.httpClient.call(localVarPath, queryParams);
-        if(progressListener) {
-          call.on('uploadProgress', progress => {
-            progressListener({
-              chunksCount: 1,
-              currentChunk: 0,
-              currentChunkUploadedBytes:  progress.transferred,
-              currentChunkTotalBytes: progress.total || 0,
-              uploadedBytes: progress.transferred,
-              totalBytes: progress.total || 0,
-            })
-          });
+
+
+        if (progressListener) {
+          queryParams.onUploadProgress = (progress) => {
+              progressListener({
+                  chunksCount: 1,
+                  currentChunk: 0,
+                  currentChunkUploadedBytes: progress.loaded,
+                  currentChunkTotalBytes: progress.total || 0,
+                  uploadedBytes: progress.loaded,
+                  totalBytes: progress.total || 0,
+            });
+          }
         }
+
+        const call = this.httpClient.call(localVarPath, queryParams);
+
         return call.then(response => ObjectSerializer.deserialize(
           ObjectSerializer.parse(response.body, response.headers["content-type"]),
           "{{{returnType}}}", "{{returnFormat}}"
@@ -387,20 +395,19 @@ export default class {{classname}} {
         queryParams.headers['Content-Range'] = `part ${part}/${partsCount}`;
         part++;
 
-        const call = this.httpClient.call(localVarPath, queryParams);
-
         if (progressListener) {
-          call.on('uploadProgress', (progress) => {
-            progressListener({
+          queryParams.onUploadProgress = (progress) => {
+              progressListener({
               chunksCount: Math.ceil(length / chunkSize),
               currentChunk: chunkNumber,
-              currentChunkUploadedBytes: progress.transferred,
+              currentChunkUploadedBytes: progress.loaded,
               currentChunkTotalBytes: progress.total || 0,
-              uploadedBytes: Math.min(length, chunkNumber * chunkSize + progress.transferred),
+              uploadedBytes: Math.min(length, chunkNumber * chunkSize + progress.loaded),
               totalBytes: length,
             });
-          });
+          }
         }
+        const call = this.httpClient.call(localVarPath, queryParams);
 
         lastBody = await call.then(response => ObjectSerializer.deserialize(
             ObjectSerializer.parse(response.body, response.headers["content-type"]),

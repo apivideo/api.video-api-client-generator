@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import ApiVideoClient from '../src';
 {{# apiInfo.apis }}
     {{^x-client-hidden}}
@@ -11,7 +10,7 @@ describe('ApiVideoClient', () => {
     {{^x-client-hidden}}
     it('should use the {{classFilename}} class', () => {
         const client = new ApiVideoClient({ apiKey: 'test' });
-        expect(client.{{classVarName}}).instanceOf({{classFilename}});
+        expect(client.{{classVarName}}).toBeInstanceOf({{classFilename}});
     });
     {{/x-client-hidden}}
 {{/ apiInfo.apis }}
@@ -19,9 +18,7 @@ describe('ApiVideoClient', () => {
   it('should validate the application name value', () => {
     expect(
       () => new ApiVideoClient({ applicationName: 'applicationname' })
-    ).to.throw(
-      'application version is mandatory when application name is set.'
-    );
+    ).toThrow('application version is mandatory when application name is set.');
 
     expect(
       () =>
@@ -29,7 +26,7 @@ describe('ApiVideoClient', () => {
           applicationName: 'application name',
           applicationVersion: '1.0.0',
         })
-    ).to.throw(
+    ).toThrow(
       "Invalid application name value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50."
     );
 
@@ -40,7 +37,7 @@ describe('ApiVideoClient', () => {
             '012345678901234567890123456789012345678901234567891',
           applicationVersion: '1.0.0',
         })
-    ).to.throw(
+    ).toThrow(
       "Invalid application name value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50."
     );
 
@@ -50,9 +47,9 @@ describe('ApiVideoClient', () => {
           applicationName: 'my-great-application1',
           applicationVersion: '0.1.1',
         })
-    ).not.to.throw();
+    ).not.toThrow();
 
-    expect(() => new ApiVideoClient({ applicationVersion: '1.0.0' })).to.throw(
+    expect(() => new ApiVideoClient({ applicationVersion: '1.0.0' })).toThrow(
       'application name is mandatory when application version is set.'
     );
 
@@ -62,7 +59,7 @@ describe('ApiVideoClient', () => {
           applicationName: 'application',
           applicationVersion: '1.1234.0',
         })
-    ).to.throw(
+    ).toThrow(
       'Invalid application version value. The version should match the xxx[.yyy][.zzz] pattern.'
     );
 
@@ -72,6 +69,7 @@ describe('ApiVideoClient', () => {
           applicationName: 'application',
           applicationVersion: '1.123.0',
         })
-    ).not.to.throw();
+    ).not.toThrow();
   });
 });
+

@@ -3,7 +3,7 @@
 
 {{#models}}
 {{#model}}
-import {{classname}}{{#hasEnums}}, { {{#vars}}{{#isEnum}}{{classname}}{{enumName}}, {{/isEnum}}{{/vars}} }{{/hasEnums}} from './model/{{{ classFilename }}}.js';
+import {{classname}}{{#hasEnums}}, { {{#vars}}{{#isEnum}}{{classname}}{{enumName}}, {{/isEnum}}{{/vars}} }{{/hasEnums}} from './model/{{{ classFilename }}}';
 {{/model}}
 {{/models}}
 
@@ -215,7 +215,7 @@ export default class ObjectSerializer {
   public static parse(rawData: string, mediaType: string | undefined): any {
     if (mediaType === undefined) {
       // HTTP DELETE response.
-      if (rawData === '') {
+      if (rawData === '' || rawData === '""') {
         return rawData;
       }
 
