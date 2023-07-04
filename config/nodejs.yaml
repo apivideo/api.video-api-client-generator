@@ -1,4 +1,6 @@
 changelog:
+  - 2.5.0 (2023-07-05):
+    - Use Axios instead of Got
   - 2.4.0 (2023-06-28):
     - Introducing new live streams restream feature
     - Introducing new analytics endpoints
