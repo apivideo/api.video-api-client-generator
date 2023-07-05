@@ -205,7 +205,7 @@ paths:
           example: 'metadata[Author]=John Doe&metadata[Format]=Tutorial'
         - name: description
           in: query
-          description: 'If you described a video with a term or sentence, you can add it here to return videos containing this string.'
+          description: 'Retrieve video objects by `description`.'
           required: false
           style: form
           explode: true
@@ -214,7 +214,7 @@ paths:
           example: New Zealand
         - name: liveStreamId
           in: query
-          description: 'If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.'
+          description: 'Retrieve video objects that were recorded from a live stream by `liveStreamId`.'
           required: false
           style: form
           explode: true
@@ -223,21 +223,23 @@ paths:
           example: li400mYKSgQ6xs7taUeSaEKr
         - name: sortBy
           in: query
-          description: 'Allowed: publishedAt, title. You can search by the time videos were published at, or by title.'
+          description: 'Use this parameter to sort videos by the their created time, published time, updated time, or by title.'
           required: false
           style: form
           explode: true
           schema:
             type: string
+            enum: [title, createdAt, publishedAt, updatedAt]
           example: publishedAt
         - name: sortOrder
           in: query
-          description: 'Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.'
+          description: 'Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.'
           required: false
           style: form
           explode: true
           schema:
             type: string
+            enum: [asc, desc]
           example: asc
         - $ref: '#/components/parameters/current-page'
         - $ref: '#/components/parameters/page-size'
