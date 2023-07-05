@@ -38,7 +38,7 @@ class ApiVideoClient {
     this._{{classVarName}} = new {{classFilename}}(this.httpClient);{{/x-client-hidden}}{{/ apiInfo.apis }}
   }
 
-  public async getAccessToken() {
+  public async getAccessToken(): Promise<AccessToken> {
     return this.httpClient.getAccessToken();
   }
 
