@@ -229,11 +229,11 @@ class MainActivity : AppCompatActivity() {
 
 Examples that demonstrate how to use the API is provided in folder `examples/`.
 
-## Upload options
+## Upload methods
 
-To upload a video, you have 3 differents options:
-* WorkManager: preferred option: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
-* UploadService: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
+To upload a video, you have 3 differents methods:
+* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
+* `UploadService`: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
 * Direct call with `ApiClient`: Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
 
 ## Permissions
