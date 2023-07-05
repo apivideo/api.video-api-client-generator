@@ -128,4 +128,17 @@ public class Swift5 extends Swift5ClientCodegen {
         }
         return super.constructExampleCode(codegenParameter, modelMaps, visitedModels);
     }
+
+    @Override
+    public String constructExampleCode(CodegenModel codegenModel, HashMap<String, CodegenModel> modelMaps, Set<String> visitedModels) {
+        String example;
+        example = codegenModel.classname + "(";
+        List<String> propertyExamples = new ArrayList<>();
+        for (CodegenProperty codegenProperty : codegenModel.vars) {
+            propertyExamples.add(codegenProperty.name + ": " + constructExampleCode(codegenProperty, modelMaps, visitedModels));
+        }
+        example += StringUtils.join(propertyExamples, ", ");
+        example += ")";
+        return example;
+    }
 }
