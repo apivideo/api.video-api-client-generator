@@ -73,7 +73,12 @@ export default class HttpClient {
       },
     });
 
-    return axiosRes.data;
+    return {
+      accessToken: axiosRes.data.access_token,
+      refreshToken: axiosRes.data.refresh_token,
+      tokenType: axiosRes.data.token_type,
+      expiresIn: axiosRes.data.expires_in,
+    };
   }
 
   public async call(path: string, options: QueryOptions) {
