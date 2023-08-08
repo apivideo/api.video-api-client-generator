@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="channel_name">api.video</string>
-    <string name="notification_progress_title">Uploading</string>
-    <string name="notification_progress_text">Uploaded %1d of %1d</string>
-    <string name="notification_current_progress_text">%1d %%</string>
-    <string name="notification_error_title">Upload error</string>
-    <string name="notification_upload_started_title">Upload starting…</string>
-    <string name="notification_cancel">Cancel</string>
+    <string name="upload_notification_channel_name">api.video</string>
+    <string name="upload_notification_progress_title">Uploading</string>
+    <string name="upload_notification_progress_text">Uploaded %1d of %1d</string>
+    <string name="upload_notification_current_progress_text">%1d %%</string>
+    <string name="upload_notification_error_title">Upload error</string>
+    <string name="upload_notification_upload_started_title">Upload starting…</string>
+    <string name="upload_notification_cancel">Cancel</string>
 </resources>

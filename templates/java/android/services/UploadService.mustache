@@ -51,10 +51,10 @@ import java.util.concurrent.Future
 open class UploadService(
     private val notificationId: Int = DEFAULT_NOTIFICATION_ID,
     protected val channelId: String = DEFAULT_NOTIFICATION_SERVICE_CHANNEL_ID,
-    @StringRes private val channelNameResourceId: Int = R.string.channel_name,
+    @StringRes private val channelNameResourceId: Int = R.string.upload_notification_channel_name,
     @StringRes private val channelDescriptionResourceId: Int = 0,
-    @DrawableRes protected val notificationIconResourceId: Int = R.drawable.ic_api_video_logo,
-    @ColorRes protected val notificationColorResourceId: Int = R.color.primary_orange
+    @DrawableRes protected val notificationIconResourceId: Int = R.drawable.ic_upload_notification,
+    @ColorRes protected val notificationColorResourceId: Int = R.color.upload_notification_color
 ) : Service() {
     private val uploadFuturesMap = ConcurrentHashMap<String, Future<Video>>()
     private val binder = UploadServiceBinder()
@@ -219,7 +219,7 @@ open class UploadService(
     open fun onUploadErrorNotification(id: String, e: Exception): Notification? {
         return NotificationCompat.Builder(this, channelId)
             .setStyle(this, notificationIconResourceId, notificationColorResourceId)
-            .setContentTitle(getString(R.string.notification_error_title))
+            .setContentTitle(getString(R.string.upload_notification_error_title))
             .setContentText(e.localizedMessage)
             .build()
     }
@@ -237,10 +237,10 @@ open class UploadService(
         return NotificationCompat.Builder(this, channelId)
             .setStyle(this, notificationIconResourceId, notificationColorResourceId)
             .setOngoing(true)
-            .setContentTitle(getString(R.string.notification_progress_title))
+            .setContentTitle(getString(R.string.upload_notification_progress_title))
             .setContentText(
                 getString(
-                    R.string.notification_progress_text,
+                    R.string.upload_notification_progress_text,
                     numOfUploaded,
                     totalNumOfUploads - numOfCancelled
                 )

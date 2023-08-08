@@ -80,7 +80,7 @@ abstract class AbstractUploadWorker(
     open fun onUploadStarted(): Notification {
         return NotificationCompat.Builder(applicationContext, channelId)
             .setStyle(applicationContext, notificationIconResourceId, notificationColorResourceId)
-            .setContentTitle(applicationContext.getString(R.string.notification_upload_started_title))
+            .setContentTitle(applicationContext.getString(R.string.upload_notification_upload_started_title))
             .build()
     }
 
@@ -95,7 +95,7 @@ abstract class AbstractUploadWorker(
     open fun onUploadError(e: Exception): Notification? {
         return NotificationCompat.Builder(applicationContext, channelId)
             .setStyle(applicationContext, notificationIconResourceId, notificationColorResourceId)
-            .setContentTitle(applicationContext.getString(R.string.notification_error_title))
+            .setContentTitle(applicationContext.getString(R.string.upload_notification_error_title))
             .setContentText(e.localizedMessage)
             .build()
     }
@@ -120,17 +120,17 @@ abstract class AbstractUploadWorker(
                 notificationColorResourceId
             )
             .setOngoing(true)
-            .setContentTitle(applicationContext.getString(R.string.notification_progress_title))
+            .setContentTitle(applicationContext.getString(R.string.upload_notification_progress_title))
             .setContentText(
                 applicationContext.getString(
-                    R.string.notification_current_progress_text,
+                    R.string.upload_notification_current_progress_text,
                     progress
                 )
             )
             .setProgress(100, progress, false)
             .addAction(
                 android.R.drawable.ic_delete,
-                applicationContext.getString(R.string.notification_cancel),
+                applicationContext.getString(R.string.upload_notification_cancel),
                 intent
             )
             .build()

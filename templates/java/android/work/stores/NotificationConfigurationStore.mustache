@@ -28,7 +28,7 @@ object NotificationConfigurationStore {
      */
     @JvmStatic
     @StringRes
-    var channelNameResourceId: Int = R.string.channel_name
+    var channelNameResourceId: Int = R.string.upload_notification_channel_name
 
     /**
      * A string resource identifier for the user visible description of the notification channel, or 0 if no description is provided.
@@ -42,12 +42,12 @@ object NotificationConfigurationStore {
      */
     @JvmStatic
     @DrawableRes
-    var notificationIconResourceId: Int = R.drawable.ic_api_video_logo
+    var notificationIconResourceId: Int = R.drawable.ic_upload_notification
 
     /**
      * The color id of the notification.
      */
     @JvmStatic
     @ColorRes
-    var notificationColorResourceId: Int = R.color.primary_orange
+    var notificationColorResourceId: Int = R.color.upload_notification_color
 }

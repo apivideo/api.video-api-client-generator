@@ -9,7 +9,7 @@ import video.api.uploader.api.services.UploadService
 class CustomUploaderService : UploadService(
     notificationId = DEFAULT_NOTIFICATION_ID,
     channelId = DEFAULT_NOTIFICATION_CHANNEL_ID,
-    channelNameResourceId = R.string.channel_name,
+    channelNameResourceId = R.string.upload_notification_channel_name,
 ) {
     companion object {
         const val DEFAULT_NOTIFICATION_CHANNEL_ID =
