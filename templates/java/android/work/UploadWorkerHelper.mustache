@@ -209,76 +209,14 @@ object UploadWorkerHelper {
                     file
                 )
             )
-            .addTag("{{artifactId}}")
-            .addTag(getTagForUpload(videoId, token))
+            .addTag(ARTIFACT_ID)
             .apply {
+                videoId?.let { addTag(getTagForVideoId(it)) }
+                token?.let { addTag(getTagForUploadToken(it)) }
                 tags.forEach { addTag(it) }
             }
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
-    }
-
-    /**
-     * Cancels all works related to a video id that was added with [upload].
-     * Works with upload token are not cancelled.
-     *
-     * @param context The application context
-     * @param videoId The video id
-     */
-    @JvmStatic
-    fun cancel(context: Context, videoId: String) =
-        cancel(WorkManager.getInstance(context), videoId)
-
-    /**
-     * Cancels all works related to a video id that was added with [upload].
-     * Works with upload token are not cancelled.
-     *
-     * @param workManager The WorkManager instance
-     * @param videoId The video id
-     */
-    @JvmStatic
-    fun cancel(workManager: WorkManager, videoId: String) =
-        workManager.cancelAllWorkByTag(getTagForUpload(videoId, null))
-
-    /**
-     * Cancels all works related to an upload token and possibly a video id that was added with [uploadWithUploadToken].
-     * Works without upload token are not cancelled.
-     *
-     * @param context The application context
-     * @param token The upload token
-     * @param videoId The video id.Must be the same as the one used in [uploadWithUploadToken].
-     */
-    @JvmStatic
-    fun cancelWithUploadToken(context: Context, token: String, videoId: String? = null) =
-        cancelWithUploadToken(WorkManager.getInstance(context), token, videoId)
-
-    /**
-     * Cancels all works related to an upload token and possibly a video id that was added with [uploadWithUploadToken].
-     * Works without upload token are not cancelled.
-     *
-     * @param workManager The WorkManager instance
-     * @param token The upload token
-     * @param videoId The video id. Must be the same as the one used in [uploadWithUploadToken].
-     */
-    @JvmStatic
-    fun cancelWithUploadToken(workManager: WorkManager, token: String, videoId: String? = null) =
-        workManager.cancelAllWorkByTag(getTagForUpload(videoId, token))
-
-    private const val PREFIX_VIDEO_ID = "videoId="
-    private const val PREFIX_TOKEN = "token="
-
-    /**
-     * Returns the tag used to identify works related to a video id or an upload token.
-     *
-     * @param videoId The video id
-     * @param token The upload token
-     * @return The tag
-     */
-    fun getTagForUpload(videoId: String?, token: String?): String {
-        require((token != null) || (videoId != null)) {
-            "You must provide either a token or a videoId"
-        }
-        return "($PREFIX_VIDEO_ID$videoId, $PREFIX_TOKEN$token)"
     }
 
     /**
@@ -404,13 +342,96 @@ object UploadWorkerHelper {
                     partId
                 )
             )
-            .addTag("{{artifactId}}")
+            .addTag(ARTIFACT_ID)
             .addTag("progressive")
-            .addTag(getTagForUpload(session.videoId, session.token))
             .apply {
+                session.videoId?.let { addTag(getTagForVideoId(it)) }
+                session.token?.let { addTag(getTagForUploadToken(it)) }
                 tags.forEach { addTag(it) }
             }
             .build()
         return OperationWithRequest(workManager.enqueue(workRequest), workRequest)
     }
+
+    /**
+     * Cancels all upload works.
+     *
+     * @param context The application context
+     */
+    @JvmStatic
+    fun cancelAll(context: Context) =
+        cancelAll(WorkManager.getInstance(context))
+
+    /**
+     * Cancels all upload works.
+     *
+     * @param workManager The WorkManager instance
+     */
+    @JvmStatic
+    fun cancelAll(workManager: WorkManager) =
+        workManager.cancelAllWorkByTag(ARTIFACT_ID)
+
+    /**
+     * Cancels all works related to a video id.
+     *
+     * @param context The application context
+     * @param videoId The video id
+     */
+    @JvmStatic
+    fun cancel(context: Context, videoId: String) =
+        cancel(WorkManager.getInstance(context), videoId)
+
+    /**
+     * Cancels all works related to a video id.
+     *
+     * @param workManager The WorkManager instance
+     * @param videoId The video id
+     */
+    @JvmStatic
+    fun cancel(workManager: WorkManager, videoId: String) =
+        workManager.cancelAllWorkByTag(getTagForVideoId(videoId))
+
+    /**
+     * Cancels all works related to an upload token that was added with [uploadWithUploadToken].
+     *
+     * @param context The application context
+     * @param token The upload token
+     */
+    @JvmStatic
+    fun cancelWithUploadToken(context: Context, token: String) =
+        cancelWithUploadToken(WorkManager.getInstance(context), token)
+
+    /**
+     * Cancels all works related to an upload token that was added with [uploadWithUploadToken].
+     *
+     * @param workManager The WorkManager instance
+     * @param token The upload token
+     */
+    @JvmStatic
+    fun cancelWithUploadToken(workManager: WorkManager, token: String) =
+        workManager.cancelAllWorkByTag(getTagForUploadToken(token))
+
+    /**
+     * Returns the tag used to identify works related to a video id.
+     *
+     * @param videoId The video id
+     * @return The tag
+     */
+    fun getTagForVideoId(videoId: String): String {
+        return "($PREFIX_VIDEO_ID$videoId)"
+    }
+
+    /**
+     * Returns the tag used to identify works related to an upload token.
+     *
+     * @param token The upload token
+     * @return The tag
+     */
+    fun getTagForUploadToken(token: String): String {
+        return "($PREFIX_TOKEN$token)"
+    }
+
+    private const val PREFIX_VIDEO_ID = "videoId="
+    private const val PREFIX_TOKEN = "token="
+    private const val ARTIFACT_ID = "{{artifactId}}"
 }

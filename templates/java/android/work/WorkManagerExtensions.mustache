@@ -85,22 +85,6 @@ fun WorkManager.uploadWithUploadToken(
     )
 
 /**
- * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.upload].
- *
- * @param videoId The video id
- */
-fun WorkManager.cancel(videoId: String) = UploadWorkerHelper.cancel(this, videoId)
-
-/**
- * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.uploadWithUploadToken].
- *
- * @param token The upload token
- * @param videoId The video id. Must be the same as the one used in [WorkManager.uploadWithUploadToken].
- */
-fun WorkManager.cancelWithUploadToken(token: String, videoId: String? = null) =
-    UploadWorkerHelper.cancelWithUploadToken(this, token, videoId)
-
-/**
  * Extension functions for [WorkManager] to enqueue upload works for progressive upload.
  *
  * @param session The progressive upload session
@@ -147,3 +131,23 @@ fun WorkManager.uploadPart(
         tags,
         workerClass
     )
+
+/**
+ * Extension functions for [WorkManager] to cancel all upload works.
+ */
+fun WorkManager.cancelAllUploads() = UploadWorkerHelper.cancelAll(this)
+
+/**
+ * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.upload].
+ *
+ * @param videoId The video id
+ */
+fun WorkManager.cancel(videoId: String) = UploadWorkerHelper.cancel(this, videoId)
+
+/**
+ * Extension functions for [WorkManager] to cancel upload works that was added with [WorkManager.uploadWithUploadToken].
+ *
+ * @param token The upload token
+ */
+fun WorkManager.cancelWithUploadToken(token: String) =
+    UploadWorkerHelper.cancelWithUploadToken(this, token)
