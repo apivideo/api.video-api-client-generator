@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -860,6 +861,11 @@ public class TypeScript extends DefaultCodegen {
             for (CodegenProperty var : cm.vars) {
                 if (Boolean.TRUE.equals(var.isEnum)) {
                     var.datatypeWithEnum = var.datatypeWithEnum.replace(var.enumName, cm.classname + var.enumName);
+                }
+                if("undefined".equals(var.defaultValue)) {
+                    var.defaultValue = null;
+                } else {
+                    var.defaultValue = URLDecoder.decode(var.defaultValue);
                 }
             }
             if (cm.parent != null) {
