@@ -6,7 +6,8 @@ import androidx.work.Data
 import androidx.work.WorkInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.suspendCancellableCoroutine
 import {{invokerPackage}}.JSON
 import {{invokerPackage}}.upload.UploadProgressListener
 import {{invokerPackage}}.work.stores.VideosApiStore
@@ -14,6 +15,8 @@ import {{invokerPackage}}.work.workers.UploadWorker.Companion.TOKEN_KEY
 import {{invokerPackage}}.work.workers.UploadWorker.Companion.VIDEO_ID_KEY
 import java.io.File
 import java.io.IOException
+import kotlin.coroutines.cancellation.CancellationException
+import kotlin.coroutines.resumeWithException
 
 /**
  * Worker that uploads a video to api.video.
@@ -41,6 +44,7 @@ class UploadWorker(
 ) :
     AbstractUploadWorker(context, workerParams), UploadProgressListener {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun doWork(): Result {
         createNotificationChannel()
         setForeground(createForegroundInfo(onUploadStarted()))
@@ -62,19 +66,32 @@ class UploadWorker(
 
         val file = File(filePath)
 
+        /**
+         * Use an executor to make the coroutine cancellable.
+         */
         return try {
-            val video = withContext(limitedCoroutineContext) {
-                if (token == null) {
-                    videosApi.upload(
-                        videoId, file, this@UploadWorker
-                    )
-                } else {
-                    videosApi.uploadWithUploadToken(
-                        token,
-                        file,
-                        videoId,
-                        this@UploadWorker
-                    )
+            val video = suspendCancellableCoroutine { continuation ->
+                val future = uploaderExecutor.submit {
+                    try {
+                        val video = if (token == null) {
+                            videosApi.upload(
+                                videoId, file, this@UploadWorker
+                            )
+                        } else {
+                            videosApi.uploadWithUploadToken(
+                                token,
+                                file,
+                                videoId,
+                                this@UploadWorker
+                            )
+                        }
+                        continuation.resume(video, null)
+                    } catch (e: Exception) {
+                        continuation.resumeWithException(e)
+                    }
+                }
+                continuation.invokeOnCancellation {
+                    future.cancel(true)
                 }
             }
             Result.success(
@@ -83,6 +100,9 @@ class UploadWorker(
                     VIDEO_KEY to JSON().serialize(video)
                 )
             )
+        } catch (e: CancellationException) {
+            Log.i(TAG, "Upload cancelled")
+            Result.failure(workDataOf(ERROR_KEY to e.message))
         } catch (e: Exception) {
             Log.e(TAG, "Upload failed", e)
             createErrorNotification(e)
