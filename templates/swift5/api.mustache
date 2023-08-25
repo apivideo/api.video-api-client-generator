@@ -90,7 +90,7 @@ extension {{projectName}}API {
      - returns: a progressive {{operationId}} session
      */
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class func buildProgressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{{dataType}}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}) -> Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session {
-        Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}})
+        Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{paramName}}{{/vendorExtensions.x-client-copy-from-response}})
     }
    
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} class Progressive{{#titlecase}}{{operationId}}{{/titlecase}}Session: RequestTaskQueue<Video>, ProgressiveUploadSessionProtocol {
