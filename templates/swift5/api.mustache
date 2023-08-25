@@ -29,7 +29,7 @@ extension {{projectName}}API {
     /**
      * enum for parameter {{paramName}}
      */
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum {{enumName}}_{{operationId}}: {{^isContainer}}{{{dataType}}}{{/isContainer}}{{#isContainer}}String{{/isContainer}}, CaseIterable{{#useVapor}}, Content{{/useVapor}} {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} enum {{enumName}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}: {{^isContainer}}{{{dataType}}}{{/isContainer}}{{#isContainer}}String{{/isContainer}}, CaseIterable{{#useVapor}}, Content{{/useVapor}} {
         {{#allowableValues}}
         {{#enumVars}}
         case {{name}} = {{{value}}}
@@ -58,7 +58,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{dataType}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{dataType}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
         {{#vendorExtensions.x-client-chunk-upload}}
         if (try file.isMultiChunk) {
             return try UploadChunkRequestTaskQueue({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}, file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
@@ -185,7 +185,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}} {{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> Promise<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}} {{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> Promise<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         let deferred = Promise<{{{returnType}}}{{^returnType}}Void{{/returnType}}>.pending()
         {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
             switch result {
@@ -216,7 +216,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> Observable<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> Observable<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         return Observable.create { observer -> Disposable in
             let task = {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
                 switch result {
@@ -254,7 +254,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> AnyPublisher<{{{returnType}}}{{^returnType}}Void{{/returnType}}, Error> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) -> AnyPublisher<{{{returnType}}}{{^returnType}}Void{{/returnType}}, Error> {
         var task: RequestTask
         return Future<{{{returnType}}}{{^returnType}}Void{{/returnType}}, Error> { promise in
             task = {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
@@ -292,7 +292,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) async throws{{#returnType}} -> {{{returnType}}}{{/returnType}} {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue) async throws{{#returnType}} -> {{{returnType}}}{{/returnType}} {
         var task: RequestTask
         return try await withTaskCancellationHandler {
             try Task.checkCancellation()
@@ -335,7 +335,7 @@ extension {{projectName}}API {
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
     @discardableResult
-    open class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<{{{returnType}}}{{^returnType}}Void{{/returnType}}, ErrorResponse>) -> Void)) -> RequestTask {
+    open class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ result: Swift.Result<{{{returnType}}}{{^returnType}}Void{{/returnType}}, ErrorResponse>) -> Void)) -> RequestTask {
         return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}).execute(apiResponseQueue) { result in
             switch result {
             {{#returnType}}
@@ -375,7 +375,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}Raw({{#allParams}}{{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}_{{operationId}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}headers: HTTPHeaders = {{projectName}}.customHeaders, beforeSend: (inout ClientRequest) throws -> () = { _ in }) -> EventLoopFuture<ClientResponse> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}Raw({{#allParams}}{{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}headers: HTTPHeaders = {{projectName}}.customHeaders, beforeSend: (inout ClientRequest) throws -> () = { _ in }) -> EventLoopFuture<ClientResponse> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = String(describing: {{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}{{paramName}}{{/isEnum}})
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -393,7 +393,7 @@ extension {{projectName}}API {
             {{/headerParams}}{{/hasHeaderParams}}
             {{#hasQueryParams}}struct QueryParams: Content {
                 {{#queryParams}}
-                var {{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}_{{operationId}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}
+                var {{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}
                 {{/queryParams}}
 
                 enum CodingKeys: String, CodingKey {
@@ -411,7 +411,7 @@ extension {{projectName}}API {
             {{#hasFormParams}}struct FormParams: Content {
                 static let defaultContentType = Vapor.HTTPMediaType.formData
                 {{#formParams}}
-                var {{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}_{{operationId}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}
+                var {{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}
                 {{/formParams}}
             }
             try localVariableRequest.content.encode(FormParams({{#formParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/formParams}}), using: Configuration.contentConfiguration.requireEncoder(for: FormParams.defaultContentType)){{/hasFormParams}}
@@ -450,7 +450,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}_{{operationId}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}headers: HTTPHeaders = {{projectName}}.customHeaders, beforeSend: (inout ClientRequest) throws -> () = { _ in }) -> EventLoopFuture<{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isArray}}[{{enumName}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}]{{/isArray}}{{^isArray}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isArray}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}headers: HTTPHeaders = {{projectName}}.customHeaders, beforeSend: (inout ClientRequest) throws -> () = { _ in }) -> EventLoopFuture<{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}> {
         return {{operationId}}Raw({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}headers: headers, beforeSend: beforeSend).flatMapThrowing { response -> {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}} in
             switch response.status.code {
             {{#responses}}
@@ -495,7 +495,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = "\({{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}APIHelper.mapValueToPathItem({{paramName}}){{/isEnum}})"
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -574,7 +574,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    open class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}FileChunkInputStream{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    open class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}FileChunkInputStream{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = "\({{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}APIHelper.mapValueToPathItem({{paramName}}){{/isEnum}})"
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
