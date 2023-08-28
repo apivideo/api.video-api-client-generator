@@ -1,0 +1,68 @@
+---
+- heading: Get started
+  items:
+    - label: What is VOD?
+      href: /vod/README.md
+    - label: Video objects
+      href: /vod/video-object.md
+    - label: VOD quickstart
+      href: /vod/get-started-in-5-minutes.md
+
+- heading: Templates & demos
+  items:
+  - label: Upload a video
+    href: /vod/upload-your-first-video.md
+  - label: Private videos
+    href: /vod/demo-private-video.md
+  - label: Loom clone
+    href: /vod/demo-loom-clone.md
+  - label: YouTube clone
+    href: /vod/demo-youtube-clone.md
+
+- heading: Libraries & SDKs
+  items:
+  - label: VOD SDKs
+    href: /sdks/vod/README.md
+  - label: No-code solutions
+    href: /sdks/nocode/README.md
+
+- heading: Video ingestion & transcoding
+  items:
+  - label: Regular video upload
+    href: /vod/upload-a-video-regular-upload.md
+  - label: Progressive upload
+    href: /vod/progressive-upload.md
+  - label: Encoding and transcoding
+    href: /vod/encoding-transcoding.md
+
+- heading: Video management
+  items:
+  - subheading: Video management basics
+    collapsed: true
+    items:
+    - label: List Videos
+      href: /vod/list-videos-2.md
+    - label: Show Video Details
+      href: /vod/show-video-details.md
+    - label: Update Video Details
+      href: /vod/update-video-details.md
+    - label: Add A Thumbnail To Your Video
+      href: /vod/add-a-thumbnail-to-your-video.md
+    - label: Delete A Video
+      href: /vod/delete-a-video.md
+    - label: Downloading videos
+      href: /vod/downloading-videos.md
+  - label: Video status & details
+    href: /vod/show-video-upload-status.md
+  - label: Video tagging
+    href: /vod/video-tagging.md
+
+
+- heading: Annotations & branding
+  items:
+  - label: Adding watermarks
+    href: /vod/add-a-permanent-watermark.md
+  - label: Creating and managing chapters
+    href: /vod/creating-and-managing-chapters.md
+  - label: Adding captions
+    href: /vod/add-captions.md

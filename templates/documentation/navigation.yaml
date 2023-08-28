@@ -1,0 +1,28 @@
+- heading: Get started
+  items:
+  - label: Overview
+    href: /README.md
+  - label: Start building
+    href: /get-started/start-building.md
+  - label: Migration guides
+    href: /get-started/migration-guides.md
+    collapsed: true
+    items:
+    - label: api.video import tool
+      external: https://api.video/blog/tutorials/switch-to-api-video-in-minutes-latest-updates-on-our-import-tool/
+    - label: Azure
+      href: /get-started/azure-migration.md
+    - label: AWS
+      href: /get-started/aws-migration.md
+  - label: Authentication
+    href: /get-started/authentication-guide.md
+  - label: Using tokens
+    href: /get-started/using-tokens.md
+    collapsed: true
+    items:
+    - label: Create and manage delegated upload tokens
+      href: /get-started/create-and-manage-tokens-for-delegated-uploads.md
+    - label: Upload a video with a delegated token
+      href: /get-started/upload-a-video-with-a-delegated-token.md
+  - label: SDK Catalog
+    href: /sdks/README.md

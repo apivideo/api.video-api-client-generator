@@ -1,0 +1,191 @@
+.hero {
+  text-align: left;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h1 {
+  font-weight: 200 !important;
+  font-size: 64px !important;
+}
+
+.hero .links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.hero .links > p:first-child a {
+  background: var(--doctave-theme-main);
+  color: #fff !important;
+  border-radius: 4px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.dark .hero .links > p:nth-child(2) a {
+  border: 0px;
+}
+.hero .links > p:nth-child(2) a {
+  border: 1px solid var(--doctave-theme-main);
+  color: var(--doctave-theme-main);
+  background: #fff !important;
+  text-decoration: none;
+  border-radius: 4px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.starter-guides {
+  padding-top: 4rem;
+}
+
+.starter-guides h2 {
+  margin-top: 0px !important;
+  font-size: 14px !important;
+  text-transform: uppercase;
+}
+
+.starter-guides p {
+  margin-top: 0px !important;
+}
+
+.starter-guides .starter-guide-link a {
+  display: block;
+  text-align: center;
+  color: #fff !important;
+  text-decoration: none !important;
+  width: 100%;
+  border-radius: 4px;
+  background: red;
+  padding: 0.7rem;
+  background: rgb(211, 188, 74);
+  background: linear-gradient(
+    108deg,
+    rgb(78, 179, 223) 0%,
+    rgb(140, 117, 201) 100%
+  );
+}
+
+.starter-guides .starter-guide-link a:hover {
+  text-decoration: underline !important;
+  text-decoration-color: #fff;
+}
+
+.help-center {
+  padding-top: 4rem;
+}
+
+.help-center h2 {
+  margin-top: 0px !important;
+  font-size: 14px !important;
+}
+
+.help-center p {
+  margin-top: 0px !important;
+}
+
+.help-center .help-center-link a {
+  display: block;
+  text-align: center;
+  color: #fff !important;
+  text-decoration: none !important;
+  width: 100%;
+  border-radius: 4px;
+  background: red;
+  padding: 0.7rem;
+  background: rgb(211, 188, 74);
+  background: linear-gradient(
+    108deg,
+    rgb(78, 179, 223) 0%,
+    rgb(140, 117, 201) 100%
+  );
+}
+
+.help-center .help-center-link a:hover {
+  text-decoration: underline !important;
+  text-decoration-color: #fff;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-gap: 2rem;
+}
+
+.product-grid-item {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.product-grid-item-header * {
+  margin: 0 !important;
+  color: #fff !important;
+}
+.product-grid-item-header p {
+  font-weight: 200 !important;
+}
+.product-grid-item-header {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 5.5rem;
+  padding-bottom: 2rem;
+}
+
+.product-grid-item-header.Video {
+  background: rgb(211, 74, 191);
+  background: linear-gradient(
+    38deg,
+    rgba(211, 74, 191, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+}
+
+.product-grid-item-header.Live {
+  background: rgb(201, 74, 211);
+  background: linear-gradient(
+    38deg,
+    rgba(201, 74, 211, 1) 0%,
+    rgba(102, 45, 253, 1) 100%
+  );
+}
+
+.product-grid-item-header.Player {
+  background: rgb(201, 74, 211);
+  background: linear-gradient(
+    38deg,
+    rgb(78, 179, 223) 0%,
+    rgb(140, 117, 201) 100%
+  );
+}
+
+.product-grid-item-body {
+  padding: 2rem;
+}
+
+.product-grid-item-body p {
+  font-size: 14px;
+  margin: 0 !important;
+}
+
+.product-grid-item-body a {
+  display: inline-block;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  background: rgb(250, 91, 48, 0.2);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-decoration: none !important;
+}
+
+.product-grid-item-body a:hover {
+  background: rgb(250, 91, 48, 0.3);
+}

@@ -1,0 +1,28 @@
+---
+- heading: "Player SDKs"
+  items:
+    - label: api.video Player SDK
+      href: ././apivideo-player-sdk.md
+    - label: React Player
+      href: ././apivideo-react-player.md
+    - label: React Native Player
+      href: ././apivideo-react-native-player.md
+    - label: Flutter Player
+      href: ././apivideo-flutter-player.md
+    - label: Swift Player
+      href: ././apivideo-swift-player.md
+    - label: Android Player
+      href: ././apivideo-android-player.md
+
+- heading: "Player Analytics SDKs"
+  items:
+    - label: video.js analytics plugin
+      href: ././apivideo-videojs-analytics.md
+    - label: hls.js analytics plugin
+      href: ././apivideo-hlsjs-analytics.md
+    - label: api.video Player analytics
+      href: ././apivideo-player-analytics.md
+    - label: Swift Player analytics
+      href: ././apivideo-swift-player-analytics.md
+    - label: Android Player analytics
+      href: ././apivideo-android-player-analytics.md

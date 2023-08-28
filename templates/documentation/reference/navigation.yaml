@@ -1,0 +1,194 @@
+---
+- heading: API.VIDEO
+  items:
+    - label: Introduction
+      href: ././README.md
+    - label: Postman Collection
+      href: ./postman-collection.md
+    - label: Webhooks
+      href: ./create-and-manage-webhooks.md
+
+- heading: Authentication
+  items:
+    - label: Basic authentication
+      href: ./basic-authentication.md
+    - label: Disposable Bearer Token Authentication (Optional)
+      href: ./disposable-bearer-token-authentication.md
+    - open_api_spec: openapi.yaml
+      only:
+        - Advanced authentication
+        - Upload Tokens
+
+- heading: VOD
+  items:
+    - label: Video best practices
+      href: ./video-best-practices.md
+    - open_api_spec: openapi.yaml
+      only:
+        - Videos
+        - Watermarks
+        - Captions
+        - Chapters
+
+- heading: Live Streams
+  items:
+    - label: Live stream best practices
+      href: ./live-stream-best-practices.md
+    - open_api_spec: openapi.yaml
+      only:
+        - Live Streams
+
+- heading: Player
+  items:
+    - open_api_spec: openapi.yaml
+      only:
+        - Player Themes
+
+- heading: Analytics
+  items:
+    - open_api_spec: openapi.yaml
+      only:
+        - Analytics
+
+- heading: Webhooks
+  items:
+    - open_api_spec: openapi.yaml
+      only:
+        - Webhooks
+
+- heading: Errors
+  items:
+    - label: Authentication Errors
+      href: ./errors.md
+      collapsed: true
+      items:
+        - label: Invalid API key
+          href: ./authentication-invalid-api-key-1.md
+          collapsed: true
+          items:
+            - label: Invalid Access Token
+              href: ./authentication-invalid-access-token-1.md
+              collapsed: true
+              items: 
+                - label: Invalid Upload Token
+                  href: ./authentication-invalid-upload-token-1.md
+            - label: Invalid Refresh Token
+              href: ./authentication-invalid-refresh-token-1.md
+            - label: Invalid Authorization Header Value
+              href: ./authentication-invalid-authorization-header-value-1.md
+            - label: Missing Authorization Header
+              href: ./authentication-missing-authorization-header-1.md
+            - label: Missing upload token
+              href: ./authentication-missing-upload-token-1.md
+            - label: Suspended account
+              href: ./authorization-suspended-account-1.md
+            - label: Invalid Access Token
+              href: ./authentication-invalid-access-token-1.md
+            - label: Invalid Upload Token
+              href: ./authentication-invalid-upload-token-1.md
+            - label: Invalid Refresh Token
+              href: ./authentication-invalid-refresh-token-1.md
+            - label: Invalid Authorization Header Value
+              href: ./authentication-invalid-authorization-header-value-1.md
+            - label: Missing Authorization Header
+              href: ./authentication-missing-authorization-header-1.md
+            - label: Missing upload token
+              href: ./authentication-missing-upload-token-1.md
+            - label: Suspended account
+              href: ./authorization-suspended-account-1.md
+    - label: General Errors
+      href: ./general-errors.md
+      collapsed: true
+      items:
+        - label: Invalid Attribute
+          href: ./invalid-attribute-1.md
+        - label: Invalid Payload
+          href: ./invalid-payload-1.md
+        - label: Method Not Allowed
+          href: ./method-not-allowed-1.md
+        - label: Resource Not Found
+          href: ./resource-not-found-1.md
+        - label: Unrecognized Request Url
+          href: ./unrecognized-request-url-1.md
+        - label: Webhook Limit Reached
+          href: ./webhook-limit-reached-1.md
+    - label: Video Ingestion Errors
+      href: ./video-upload-errors.md
+      collapsed: true
+      items:
+        - label: Uploaded File Empty
+          href: ./uploaded-file-empty-1.md
+        - label: Uploaded File is Invalid
+          href: ./uploaded-file-invalid-file-1.md
+        - label: Uploaded Multiple Files
+          href: ./uploaded-file-multiple-files-1.md
+        - label: No File
+          href: ./uploaded-file-no-file-1.md
+        - label: Uploaded File Too Large
+          href: ./uploaded-file-too-large-1.md
+        - label: Video Source Already Copied
+          href: ./video-source-already-copied-1.md
+        - label: Video Source Already Downloaded
+          href: ./video-source-already-downloaded-1.md
+        - label: Video Source Already Uploaded
+          href: ./video-source-already-uploaded-1.md
+    - label: Progressive Upload Errors - General
+      href: ./progressive-upload-errors-general.md
+      collapsed: true
+      items:
+        - label: Started With Bytes
+          href: ./video-content-range-started-with-bytes-1.md
+        - label: Started With Part
+          href: ./video-content-range-started-with-part-1.md
+        - label: Range Malformed
+          href: ./video-content-range-malformed-1.md
+        - label: Already Initiated
+          href: ./video-content-range-already-initiated-1.md
+    - label: Progressive Upload Errors - Content Range By Bytes
+      href: ./progressive-upload-errors.md
+      collapsed: true
+      items:
+        - label: Different Total Bytes
+          href: ./video-content-range-by-bytes-different-total-bytes-1.md
+        - label: Byte Too High
+          href: ./video-content-range-by-bytes-from-byte-too-high-1.md
+        - label: Range Mismatch
+          href: ./video-content-range-by-bytes-range-mismatch-1.md
+        - label: Range Overlap
+          href: ./video-content-range-by-bytes-range-overlap-1.md
+        - label: Range Too Large
+          href: ./video-content-range-by-bytes-range-too-large-1.md
+        - label: Range Too Small
+          href: ./video-content-range-by-bytes-range-too-small-1.md
+        - label: Byte Too High Allowed
+          href: ./video-content-range-by-bytes-to-byte-too-high-allowed-1.md
+        - label: Too High Total
+          href: ./video-content-range-by-bytes-to-byte-too-high-total-1.md
+        - label: Total Bytes Too High
+          href: ./video-content-range-by-bytes-total-bytes-too-high-1.md
+        - label: Total Bytes Too Low
+          href: ./video-content-range-by-bytes-total-bytes-too-low-1.md
+        - label: Total Bytes Zero
+          href: ./video-content-range-by-bytes-total-bytes-zero-1.md
+    - label: Progressive Upload Errors - Content Range By Part
+      href: ./progressive-upload-errors-content-range-by-part.md
+      collapsed: true
+      items:
+        - label: Different Total Parts
+          href: ./video-content-range-by-part-different-total-parts-1.md
+        - label: Part Already Sent
+          href: ./video-content-range-by-part-part-already-sent-1.md
+        - label: Part Too High Allowed
+          href: ./video-content-range-by-part-part-too-high-allowed-1.md
+        - label: Part Too High Total
+          href: ./video-content-range-by-part-part-too-high-total-1.md
+        - label: Part Zero
+          href: ./video-content-range-by-part-part-zero-1.md
+        - label: Total Parts Too High
+          href: ./video-content-range-by-part-total-parts-too-high-1.md
+        - label: Total Parts Too Low
+          href: ./video-content-range-by-part-total-parts-too-low-2.md
+        - label: Total Parts Zero
+          href: ./video-content-range-by-part-total-parts-zero-1.md
+        - label: Uploaded File Too Small
+          href: ./video-content-range-by-part-uploaded-file-too-small-1.md
