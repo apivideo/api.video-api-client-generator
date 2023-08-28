@@ -1,0 +1,33 @@
+---
+- heading: Get started
+  items:
+  - label: What is live streaming?
+    href: /live-streaming/README.md
+  - label: Live stream quickstart
+    href: /live-streaming/create-a-live-stream.md
+  
+- heading: Templates & demos
+  items:
+  - label: Creating a live stream
+    external: https://api.video/blog/tutorials/live-stream-tutorial/
+  - label: Hosting and watching a live stream
+    external: https://api.video/blog/tutorials/watching-a-livestream/
+
+- heading: Live stream management
+  items:
+  - label: Working with live streams
+    href: /live-streaming/working-with-live-streams.md
+  - label: Listing live streams
+    href: /live-streaming/list-live-streams.md
+  - label: Live stream thumbnails
+    href: /live-streaming/add-or-delete-a-live-stream-thumbnail.md
+  - label: Restreaming
+    href: /live-streaming/restreams.md
+  
+  
+- heading: Libraries & SDKs
+  items:
+  - label: Live streaming SDKs
+    href: /sdks/livestream/README.md
+  - label: No-code solutions
+    href: /sdks/nocode/README.md

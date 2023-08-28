@@ -1,0 +1,22 @@
+---
+title: api.video documentation
+
+colors:
+  main: "#FA5B30"
+  main_dark: "#FA5B30"
+  content_bg_secondary: "#F6F8FA"
+
+favicon:
+  src: _assets/favicon.ico
+
+logo:
+  src: _assets/logo.svg
+  src_dark: _assets/logo-dark.svg
+
+styles:
+  - _assets/style.css
+  - _assets/landing.css
+
+open_api:
+  - spec_file: openapi.yaml
+    uri_prefix: /reference/api

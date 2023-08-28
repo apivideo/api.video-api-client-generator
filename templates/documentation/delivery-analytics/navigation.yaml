@@ -1,0 +1,56 @@
+---
+- heading: Get started
+  items:
+  - label: How does video delivery work? 
+    href: /delivery-analytics/README.md
+  - label: Delivery best practices
+    href: /delivery-analytics/player-best-practices.md
+
+- heading: Features
+  items:
+  - label: Using custom domains for delivery
+    href: /delivery-analytics/using-custom-domains.md
+  - label: Domain referrer restrictions
+    href: /delivery-analytics/domain-referrer.md
+  - label: In-stream ads
+    href: /delivery-analytics/ads.md
+  - label: Private videos
+    href: /delivery-analytics/video-privacy-access-management.md
+    collapsed: true
+    items:
+    - label: Delivery with api.video players
+      href: /delivery-analytics/private-video-delivery-web-browser.md
+    - label: Delivery with hls or external players
+      href: /delivery-analytics/private-video-on-hls-or-external-players.md
+    - label: Delivery with mp4 built in players
+      href: /delivery-analytics/private-video-delivery-with-mp4-built-in-players.md
+    - label: Custom players session retention
+      href: /delivery-analytics/private-videos-with-custom-players-session-retention.md
+    - label: Private video session tokens
+      href: /delivery-analytics/private-video-session-tokens.md
+    - label: Video security best practices
+      href: /delivery-analytics/video-security-best-practices.md
+
+- heading: Players
+  items:
+  - label: Player SDKs
+    href: /sdks/player/README.md#player-sdks
+  - label: api.video Player features
+    href: /delivery-analytics/video-playback-features.md
+  - label: Player customization
+    href: /delivery-analytics/player-customization.md
+  - label: No-code solutions
+    href: /sdks/nocode/README.md
+
+- heading: Analytics
+  items:
+  - label: Analytics SDKs
+    href: /sdks/player/README.md#player-analytics-sdks
+  - label: Player analytics
+    href: /delivery-analytics/analytics.md
+    collapsed: true
+    items:
+    - label: How to - analytics with api.video Player SDK
+      href: /delivery-analytics/how-to-player-sdk-analytics.md
+    - label: Using video metadata for analytics
+      href: /delivery-analytics/using-video-metadata.md

@@ -1,0 +1,20 @@
+---
+
+- heading: "API client SDKs"
+  items:
+    - label: NodeJS
+      href: ././apivideo-nodejs-client.md
+    - label: Python
+      href: ././apivideo-python-client.md
+    - label: PHP
+      href: ././apivideo-php-client.md
+    - label: Go
+      href: ././apivideo-go-client.md
+    - label: C#
+      href: ././apivideo-csharp-client.md
+    - label: Java
+      href: ././apivideo-java-client.md
+    - label: iOS
+      href: ././ios-api-client.md
+    - label: Android
+      href: ././android-api-client.md
