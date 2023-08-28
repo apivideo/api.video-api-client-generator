@@ -4,3 +4,4 @@ apivideo-generator/target
 *.iml
 .DS_Store
 target/
+templates/documentation/openapi.yaml
