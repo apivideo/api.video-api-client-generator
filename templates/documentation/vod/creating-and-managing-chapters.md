@@ -66,6 +66,8 @@ To upload chapters for your video, you'll need a .VTT file containing details ab
 - [Adding chapters to your videos](https://api.video/blog/tutorials/video-chapters)
 - [Video chapters: Using external buttons for controls](https://api.video/blog/tutorials/video-chapters) 
 
+{% capture content %}
+
 ```curl
 curl --request POST \
      --url https://ws.api.video/videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/chapters/en \
@@ -171,6 +173,8 @@ response = chapter_api.upload(video_id, language, file)
 print(response)
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" samples: content %}
 
 
 ## Upload a chapter using the dashboard
@@ -190,6 +194,8 @@ To upload a chapter, do the following:
 ## List chapters
 
 If you just want to list all the chapters that are available to you, you can send a request with the video ID for the video you want this information for. All chapters will be returned in the response.
+
+{% capture samples %}
 
 ```curl
 curl --request GET \
@@ -292,6 +298,8 @@ response = chapter_api.list(video_id)
 print(response)
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" samples: content %}
 
 
 ## List chapters using the dashboard
@@ -310,6 +318,8 @@ To list all chapter files for a video, do the following:
 ## Show a chapter
 
 You can retrieve details about a specific chapters file by sending a request with the video ID for the video you want chapter information for, and the valid BCP 47 tag for the specific chapter file. 
+
+{% capture samples %}
 
 ```curl
 curl --request GET \
@@ -414,6 +424,9 @@ response = chapter_api.get(video_id, language)
 print(response)
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
+
 
 
 ## Show a chapter file using the dashboard
@@ -430,6 +443,9 @@ To show a chapter file using the dashboard, do the following:
 ## Delete a chapter
 
 To delete a chapter, send the unique video ID with the chapters you want to delete. Include the appropriate BCP 47 language tag. You can only have one set of chapters per tag. Deletion is permanent, so be sure it's what you want to do.
+
+{% capture samples %}
+
 
 ```curl
 curl --request DELETE \
@@ -528,6 +544,8 @@ response = chapter_api.delete(video_id, language)
 print(response)
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Delete a chapter using the dashboard
