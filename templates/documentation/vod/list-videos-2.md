@@ -53,7 +53,7 @@ Using Nuget
 Install-Package ApiVideo
 ```
 {% endcapture %}
-{% include "_partials/code-tabs.html" samples: content %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## List all videos
 
@@ -148,7 +148,7 @@ videos = videos_api.list()
 print(videos)
 ```
 {% endcapture %}
-{% include "_partials/code-tabs.html" samples: content %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## List videos using query parameters
 
@@ -262,7 +262,7 @@ videos = videos_api.list(title='your title')
 print(videos)
 ```
 {% endcapture %}
-{% include "_partials/code-tabs.html" samples: content %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## See a list of videos in the dashboard
 
