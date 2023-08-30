@@ -11,8 +11,6 @@ api.video provides different ways to upload your videos. There are two ways to u
 - Regular upload for a video that's 200MiB or more using byte range in the Content-Range header
 
 {% capture content %}
-📘 **NOTE**
-
 Megabyte (MB) and Mebibyte (MiB) are both used to measure units of information on computer storage. 1 MB is 1000Kb (kilobytes), and 1 MiB is 1048.576Kb. api.video uses MiB.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
@@ -27,8 +25,6 @@ Megabyte (MB) and Mebibyte (MiB) are both used to measure units of information o
 This section gives you an overview of your upload options. This guide walks through regular uploads but describes all the available choices here. 
 
 {% capture content %}
-📘 **NOTE**
-
 If you want to learn about delegated uploads, which are useful for creating private videos, or allowing your viewers to upload content themselves, or even just making it easier for you to do uploads, please see the [Create and manage tokens for delegated uploads](/get-started/create-and-manage-tokens-for-delegated-uploads) guide and the [Upload a video with a delegated token](/get-started/upload-a-video-with-a-delegated-token) guide.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
