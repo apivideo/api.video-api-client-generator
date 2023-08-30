@@ -1,0 +1,23 @@
+name: "CI Docs"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-publish:
+    name: Build and publish docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Publish docs
+        shell: bash
+        env:
+          DOCTAVE_UPLOAD_TOKEN: ${{ secrets.DOCTAVE_UPLOAD_TOKEN }}
+        run: |
+          curl -L http://dashboard.doctave.com/doctave-upload.sh | bash -s -- .
