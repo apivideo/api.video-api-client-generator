@@ -8,9 +8,7 @@ Upload A Video With A Delegated Token
 You can upload videos using the traditional two-step process where you create a video container then upload your video into your container. You can also upload a video using a delegated token. In this type of upload, you retrieve a token from the tokens endpoint. You can then directly upload using the token upload endpoint. It's one step, and you don't provide anything except the file. You can update the metadata for the upload later. A benefit of a delegated token is that you can make it, so it doesn't expire. You can always use the token to upload. You can also create delegated tokens for others to use to do uploads. Anyone who has a token can make an upload, so be careful how you set and manage tokens. 
 
 {% capture content %}
-📘 **NOTE**
-
-If you do a progressive upload with a delegated token, then you would have to include the video ID you are uploading to after it comes back from the first request. If the video you're uploading is under 200 MiB, you don't need to worry.
+If you do a progressive upload with a delegated token, you have to include the video ID you are uploading to after it comes back from the first request. If the video you're uploading is under 200 MiB, you don't need to worry.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
