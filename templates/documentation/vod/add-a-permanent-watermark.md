@@ -21,12 +21,10 @@ Overall, watermarks can be an effective way to protect intellectual property, es
 Watermarks are uploaded separately from videos. You will need to upload the watermarks you want to utilize beforehand, after the watermark is uploaded it is attached to a video object, and eventually as soon as the video is uploaded to the object, the watermark is embedded in the video
 
 {% capture content %}
-**📘 Important to know**
-
-- Watermarks are only attachable when creating a new video object
-- Watermarks cannot be deleted or edited after being added to a video
+- You can only add watermarks when creating a new video object.
+- You cannot delete or edit watermarks after you add them to a video.
 {% endcapture %}
-{% include "_partials/callout.html" kind: "info", content: content %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 ![](/_assets/watermark-diagram.jpg)
 
@@ -85,8 +83,6 @@ First step, would be to upload a watermark. It is recommended to use images that
 When the upload is complete, the response from the watermark endpoint will be the watermark id. You can either store it on your end or you can consume it from the list of watermarks.
 
 {% capture content %}
-**📘 Note**
-
 api.video will only store the watermark id and the time and date it was uploaded. If you would like to reference the watermark to a specific image name, you would have to do that on your end.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
