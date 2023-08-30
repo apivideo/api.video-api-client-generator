@@ -40,6 +40,8 @@ The clients offered by api.video include:
 
 To install your selected client, do the following: 
 
+{% capture samples %}
+
 ```go
 go get github.com/apivideo/api.video-go-client
 ```
@@ -61,7 +63,8 @@ Using Nuget
   
 Install-Package ApiVideo
 ```
-
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Retrieve your API key
@@ -76,6 +79,8 @@ You'll need your API key to get started. You can sign up for one here: [Get your
 ## Delegated upload
 
 You must first create a token and get the unique token ID to do a delegated upload. Then, you include it in your request as a query parameter. In the body, you place the path to the file you want to upload. If you are uploading a file that's 200 MiB or larger, to do a progressive upload, you will need to break the file into smaller pieces (no smaller than 5 MiB). Then send a request containing the first piece of your upload. Subsequent pieces must be sent with the video ID included in the body along with the file chunk. Retrieve the video ID from the response that comes back after your first request to upload. 
+
+{% capture samples %}
 
 ```curl
 curl --request POST \
@@ -178,7 +183,8 @@ response = videos_api.upload_with_upload_token(token, file)
 print(response)
 © 2022 GitHub, Inc.
 ```
-
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Conclusion

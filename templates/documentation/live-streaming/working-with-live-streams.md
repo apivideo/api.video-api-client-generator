@@ -24,6 +24,8 @@ The clients offered by api.video include:
 
 To install your selected client, do the following: 
 
+{% capture samples %}
+
 ```go
 go get github.com/apivideo/api.video-go-client
 ```
@@ -46,6 +48,9 @@ Using Nuget
 Install-Package ApiVideo
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
+
 ## Retrieve your API key
 
 You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
@@ -58,6 +63,8 @@ You'll need your API key to get started. You can sign up for one here: [Get your
 ## Show live stream (retrieve details for watching)
 
 You can retrieve details about any live stream by sending a request containing the live stream ID. The response will show you the current state of the live stream and provide all the details you need if you want to broadcast using a particular live stream container. 
+
+{% capture samples %}
 
 ```curl
 curl --request GET \
@@ -153,6 +160,8 @@ live_stream_api = LiveStreamsApi(client)
 response = live_stream_api.get(live_stream_id)
 print(response)
 ```
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## Show live stream (retrieve details for watching) with your dashboard
 
@@ -178,6 +187,8 @@ If you want to update details for your live stream, you need the unique ID for y
 - playerId - You can associate an api.video player with your live stream by providing the player's ID.
 
 The code sample to update is: 
+
+{% capture samples %}
 
 ```curl
 curl --request PATCH \
@@ -275,6 +286,9 @@ response = live_stream_api.update(live_stream_id, live_stream_update_payload)
 print(response)
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
+
 ## Update a live stream using the dashboard
 
 You can update live stream details from your dashboard if you don't want to retrieve details about a stream programmatically. Do the following:
@@ -294,6 +308,8 @@ You can update live stream details from your dashboard if you don't want to retr
 ## Delete a live stream
 
 You can delete a live stream by sending in a DELETE request using the unique ID for the live stream. The code sample looks like this:
+
+{% capture samples %}
 
 ```curl
 curl --request DELETE \
@@ -364,6 +380,9 @@ live_stream_api = LiveStreamsApi(client)
 response = live_stream_api.delete(live_stream)
 print(response)
 ```
+
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## Delete a live stream from your dashboard
 

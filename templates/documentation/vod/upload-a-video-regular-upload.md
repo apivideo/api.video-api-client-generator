@@ -54,6 +54,8 @@ The clients offered by api.video include:
 
 To install your selected client, do the following: 
 
+{% capture samples %}
+
 ```go
 go get github.com/apivideo/api.video-go-client
 ```
@@ -76,11 +78,15 @@ Using Nuget
 Install-Package ApiVideo
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Create a video container and upload a video
 
 When you want to upload a video using the regular way, your video must be under 200 MB. It's a two-step process. First, you create a video container with all your video details and metadata. Then, you retrieve the container's video ID and upload your video into the container using the ID. 
+
+{% capture samples %}
 
 ```curl
 curl --request POST \
@@ -308,11 +314,15 @@ namespace Example
 }
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Create a video container and upload a video over 200 MB with a progressive upload
 
 When you do a progressive upload for a video, it's because the video is too big to send in one request to api.video. To upload the entire video, it must be broken into chunks, and then each chunk is sent. The smallest chunk size allowed is 5 MiB. When you send using one of the clients, you must indicate when you send the last part. If you implement without a client, then when you send the last part, api.video can tell because your header will say Content-Range: part 3/3 (or whatever number of chunks you sent - 4/4, 8/8, etc.) 
+
+{% capture samples %}
 
 ```curl
 curl --request POST \
@@ -329,7 +339,7 @@ curl --request POST \
 }
 '
 
-------Retrieve the access_token from the response, then include in your next request.-----
+# Retrieve the access_token from the response, then include in your next request.
 
 curl --request POST \
      --url https://ws.api.video/videos//source \
@@ -338,8 +348,7 @@ curl --request POST \
      --header 'Content-Range: part%201%2F3' \
      --header 'Content-Type: multipart/form-data'
 
-------You would send each part until the last part is sent. In order to do this with
- a cURL request, you must break your video into chunks ahead of time.------
+# You would send each part until the last part is sent. In order to do this with a cURL request, you must break your video into chunks ahead of time.
 ```
 ```go
 package main
@@ -498,6 +507,8 @@ def upload(file):
 upload('VIDEO_FILE.mp4')
 ```
 
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
 
 
 ## Create a video container and upload a video over 200 MiB with bytes in the content-range header
@@ -508,13 +519,15 @@ Content-Range: bytes 0-5242879
 
 And then continue from there. By default, the api.video clients handle uploads for you using this method. If you want to try it yourself without the client, the sample will look like this in cURL: 
 
+{% capture samples %}
+
 ```curl
 curl -X POST \
   https://sandbox.api.video/auth/api-key \
   -H 'Content-Type: application/json' \
   -d '{"apiKey": "your_api_key"}'
   
-------Retrieve the access_token from the response, then include in your next request.-----
+# Retrieve the access_token from the response, then include in your next request.
 
 curl -X POST https://sandbox.api.video/videos \
   -H 'Content-Type: application/json' \
@@ -525,17 +538,17 @@ curl -X POST https://sandbox.api.video/videos \
     "source":"https://example.com/myVideo.mp4"
   }'
   
-------Split your video into chunks, if you're on a mac you can use this command-----
+# Split your video into chunks, if you're on a mac you can use this command
   
 split -b 100m source.mp4.mp4 file_chunk_
 
-------Split your video into chunks, if you're using Linux you can use this command-----
+# Split your video into chunks, if you're using Linux you can use this command
 
 /path/to/source.mp4` is a 289MB (`281905832 B`) file .
 
 split --bytes=100M source.mp4 file_chunk_
 
---You'll need to send a cURL request for each chunk, with the proper Content-Range header--
+# You'll need to send a cURL request for each chunk, with the proper Content-Range header
 
 curl https://sandbox.api.video/videos/vitq4gOj8GyDT9kyxPQoyNJl/source \
   -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFiYjcxNmNiY2ZiNmY4MDc2OWEzZmQ1MjlhMjZiZWRkY2EwMzhlYzA3NDk5M2ZiMTA0YjhiZGMwOTI5MzgxN2M3NmNkNzI4ZDIzOGMzZmNlIn0.eyJhdWQiOiJsaWJjYXN0IiwianRpIjoiYWJiNzE2Y2JjZmI2ZjgwNzY5YTNmZDUyOWEyNmJlZGRjYTAzOGVjMDc0OTkzZmIxMDRiOGJkYzA5MjkzODE3Yzc2Y2Q3MjhkMjM4YzNmY2UiLCJpYXQiOjE1MjY1NDgzMDEsIm5iZiI6MTUyNjU0ODMwMSwiZXhwIjoxNTI2NTUxOTAxLCJzdWIiOiJ1c01vbml0b3IiLCJzY29wZXMiOlsibW9uaXRvci5saWJjYXN0LmNvbSJdLCJjb250ZXh0Ijp7InVzZXIiOiJ1c01vbml0b3IiLCJwcm9qZWN0IjoicHJNb25pdG9yIiwibWVtYmVyIjoibWVNb25pdG9yIn19.jWHC18iEur69FzD5dm78wAwNzh2cPKTRvKuspyQNQKPvhEbYa2v4XhqVNh0TTw8JeNxBtcePBTMHl4S9nWsw7pW4KD8zbqzUjCZNYlaYDpu8vu_tmWVO2JccglJIjuQEaiTbkUsfLdgtsb_9DJ3frk1-WgAKuzu0HewhcGb80xivdJPqNYA6I1Ig8GOief9LTUNNJoqqZn1A1-UiGRTXDag7_yODuxzpMFaAzbaisfK0gYti-PnjyHGWhpGwRplMKPPJk6rSAp1d9TWWXVgg-bNqUzz4_sr33ICJTx7_qZzfamMqk5PDZbHOwpIj8L2DBfo3isvt6QliWmgFEOuvog' \
@@ -551,11 +564,17 @@ curl https://sandbox.api.video/videos/vitq4gOj8GyDT9kyxPQoyNJl/source \
   -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFiYjcxNmNiY2ZiNmY4MDc2OWEzZmQ1MjlhMjZiZWRkY2EwMzhlYzA3NDk5M2ZiMTA0YjhiZGMwOTI5MzgxN2M3NmNkNzI4ZDIzOGMzZmNlIn0.eyJhdWQiOiJsaWJjYXN0IiwianRpIjoiYWJiNzE2Y2JjZmI2ZjgwNzY5YTNmZDUyOWEyNmJlZGRjYTAzOGVjMDc0OTkzZmIxMDRiOGJkYzA5MjkzODE3Yzc2Y2Q3MjhkMjM4YzNmY2UiLCJpYXQiOjE1MjY1NDgzMDEsIm5iZiI6MTUyNjU0ODMwMSwiZXhwIjoxNTI2NTUxOTAxLCJzdWIiOiJ1c01vbml0b3IiLCJzY29wZXMiOlsibW9uaXRvci5saWJjYXN0LmNvbSJdLCJjb250ZXh0Ijp7InVzZXIiOiJ1c01vbml0b3IiLCJwcm9qZWN0IjoicHJNb25pdG9yIiwibWVtYmVyIjoibWVNb25pdG9yIn19.jWHC18iEur69FzD5dm78wAwNzh2cPKTRvKuspyQNQKPvhEbYa2v4XhqVNh0TTw8JeNxBtcePBTMHl4S9nWsw7pW4KD8zbqzUjCZNYlaYDpu8vu_tmWVO2JccglJIjuQEaiTbkUsfLdgtsb_9DJ3frk1-WgAKuzu0HewhcGb80xivdJPqNYA6I1Ig8GOief9LTUNNJoqqZn1A1-UiGRTXDag7_yODuxzpMFaAzbaisfK0gYti-PnjyHGWhpGwRplMKPPJk6rSAp1d9TWWXVgg-bNqUzz4_sr33ICJTx7_qZzfamMqk5PDZbHOwpIj8L2DBfo3isvt6QliWmgFEOuvog' \
   -H 'Content-Range: bytes 209715200-281905831/281905832' \
   -F file=@/path/to/file_chunk_ac
+
 ```
-```text All Clients
-All api.video clients automatically use the Content-Range: bytes method to upload
-big videos for you. You don't have to set it up yourself if you use a client!
-```
+
+{% endcapture %}
+{% include "_partials/code-tabs.html" content: samples %}
+
+
+{% capture content %}
+All api.video clients automatically use the `Content-Range: bytes` method to upload big videos for you. You don't have to set it up yourself if you use a client!
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
 
 ## Conclusion
 
