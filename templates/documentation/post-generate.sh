@@ -1,4 +1,3 @@
-cp ../../templates/common-resources/CONTRIBUTING.md ./
 cp -R ../../oas_apivideo.yaml openapi.yaml
 cp -R ../../templates/documentation/* ./
 cp -R ../../templates/documentation/.github ./
