@@ -24,10 +24,10 @@ When delivering the embedded video, we will use our in-house player to playback 
 
 
 {% capture content %}
-**❗ iframe on incognito tab/page**
+**iframes in incognito mode**
 
 When playing an embedded private video in a browser that runs in incognito mode you'll have to leverage sessions.
-Please find the guide for retaining a private session [here](/delivery-analytics/private-videos-with-custom-players-session-retention).
+Check out the guide for retaining a private session [here](/delivery-analytics/private-videos-with-custom-players-session-retention).
 {% endcapture %}
 {% include "_partials/callout.html" kind: "error", content: content %}
 
@@ -76,11 +76,3 @@ curl --request GET \
 The same method can be applied to the [Android SDK player](https://github.com/apivideo/api.video-android-player) we offer. Playing the private video is simple as just passing in the video id and private token.
 
 In the [example folder](https://github.com/apivideo/api.video-android-player/tree/main/example) you'll be able to find the implementation using just video id and the private token. 
-
-### Using api.video iOS SDK player to delivery private video
-{% capture content %}
-**🚧 Under construction**
-
-We are working on an example for iOS. Hang in there.
-{% endcapture %}
-{% include "_partials/callout.html" kind: "warning", content: content %}

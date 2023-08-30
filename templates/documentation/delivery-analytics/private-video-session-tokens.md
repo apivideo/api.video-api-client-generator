@@ -17,7 +17,7 @@ Once the session token is acquired, it is reused in all other requests to the di
 ![Imported image](/_assets/Session%20Token.jpg)
 
 {% capture content %}
-**🚧 Time to Live**
+**Time to Live**
 
 The session token TTL is 24 hours. Once the session token has expired, you will have to get a new private token and create a new session.
 {% endcapture %}

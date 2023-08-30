@@ -35,11 +35,13 @@ After play events are collected, there is a short delay while the API processes 
 
 ## Requirements
 
-> 📘 
-> 
-> The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](https://docs.api.video/docs/video-player-sdk) for details about the implementation.
-> 
-> When using third-party players, you need to implement the [Video.js](https://docs.api.video/docs/videojs-analytics-plugin) or [Hls.js](https://docs.api.video/docs/hlsjs-analytics-plugin) analytics plugins, or the analytics modules for [Android](https://github.com/apivideo/api.video-android-player-analytics) or [iOS](https://github.com/apivideo/api.video-ios-player-analytics). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
+{% capture content %}
+The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](/sdks/player/apivideo-player-sdk.md) for details about the implementation.
+
+When using third-party players, you need to implement the [Video.js](/sdks/player/apivideo-videojs-analytics.md) or [Hls.js](/sdks/player/apivideo-hlsjs-analytics.md) analytics plugins, or the analytics modules for [Android](/sdks/player/apivideo-android-player-analytics.md) or [iOS](/sdks/player/apivideo-swift-player-analytics.md). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
+
 
 # Usage
 
@@ -50,9 +52,12 @@ Api.video offers 2 dedicated API endpoints for analytics:
 | [`/analytics/videos/plays`](https://docs.api.video/reference/get_analytics-videos-plays)             | Get play event count for VOD (Video on demand) |
 | [`/analytics/live-streams/plays`](https://docs.api.video/reference/get_analytics-live-streams-plays) | Get play event count for live streams          |
 
-> 📘 Testing
-> 
-> You can test the Analytics endpoints **in api.video's sandbox environment**. Check out [Environments](https://docs.api.video/reference/overview#environments) for more details. The sandbox environment returns data within the last 1-day time period.
+{% capture content %}
+**Testing**
+
+You can test the Analytics endpoints **in api.video's sandbox environment**. Check out [Environments](/reference/README.md#environments) for more details. The sandbox environment returns data within the last 1-day time period.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
 
 ## Request
 
@@ -67,44 +72,17 @@ curl --request GET \
      --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDI4MDUyNzEuOTEyODMsIm5iZiI6MTY0MjgwNTI3MS45MTI4MywiZXhwIjoxNjQyODA4ODcxLjkxMjgzLCJwcm9qZWN0SWQiOiJwclJ6SUpKQTdCTHNxSGpTNDVLVnBCMSJ9.jTiB29R_sg5dqCDBU8wrnz7GRJsCzfVeLVTX-XSctS024B9OmGsuY139s2ua1HzrT63sqkBB1QshrjZbkDLVxSrs0-gt-FaM2bgvCC0lqK1HzEUL4vN2OqPPuM8R2pruj0UdGVaifGqmyfehKcHxuNr0ijGmGIMwSXkabECbXCxm7LraRCgmlobHepuXcUPeUKzKxN5LwPSO1onD684S0FtUUYbVMq9Ik7V8UznbpOjmFaknIZowKKlCkTmgKcyLSq7IaPJd7UuDJVXJDiC49oImEInrjx1xuFbyoBz_wkZlwcgk9GjksTeSz4xzBLcyzVgCwGP2hs8_BtdslXXOrA' \
 ```
 
-> 🚧 Please note
-> 
-> api.video retains play event data for 30 days. If you select a time period that is outside the 30 day retention period, the API returns a `400` error.
+{% capture content %}
+api.video retains play event data for 30 days. If you select a time period that is outside the 30 day retention period, the API returns a `400` error.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
 
-[block:parameters]
-{
-  "data": {
-    "h-0": "Parameter",
-    "h-1": "Type",
-    "h-2": "Required",
-    "h-3": "Details",
-    "0-0": "`from`",
-    "0-1": "`date`",
-    "0-2": "`true`",
-    "0-3": "The start date for the time period of the analytics you would like to request.  \n  \n- The API returns analytics data **including** the day you set in `from`.  \n- A valid date value is only **within the last 30 days**.  \n- The value you provide must follow the `YYYY-MM-DD` format.",
-    "1-0": "`dimension`",
-    "1-1": "`string`",
-    "1-2": "`true`",
-    "1-3": "This parameter enables you to define a single property that you want analytics for. You can select only **one property** in your request. See the [table below for all dimension options](https://docs.api.video/docs/analytics#dimension).",
-    "2-0": "`to`",
-    "2-1": "`date`",
-    "2-2": "`false`",
-    "2-3": "Use this optional query parameter to set the end date for the time period that you want analytics for.  \n  \n- The API returns analytics data **excluding** the day you set in `to`.  \n- If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and **excluding** today.  \n- A valid date value is only **within the last 30 days**.  \n- The value you provide must follow the `YYYY-MM-DD` format.",
-    "3-0": "`filter`",
-    "3-1": "`key-value pair`",
-    "3-2": "`false`",
-    "3-3": "Use this parameter to filter your results to a specific video or live stream in a project that you want analytics for.  \n  \nYou must use the `videoId:` or `liveStreamId:` prefix when specifying an identifier for a video or a live stream.  \n  \nNote that the **Get play events for videos** endpoint only accepts video `ID` as a filter, and the **Get play events for live streams** endpoint only accepts live stream `ID` as a filter."
-  },
-  "cols": 4,
-  "rows": 4,
-  "align": [
-    "left",
-    "left",
-    "left",
-    "left"
-  ]
-}
-[/block]
+| Parameter  | Type  | Required  | Details  |
+|---|---|---|---|
+| `from`  | `date`  | `true`  | The start date for the time period of the analytics you would like to request.<br><br>- The API returns analytics data **including** the day you set in from.<br>- A valid date value is only **within the last 30 days**.<br>- The value you provide must follow the `YYYY-MM-DD` format.  |
+| `dimension`  | `string`  | `true`  | This parameter enables you to define a single property that you want analytics for. You can select only one property in your request. See the [table below for all dimension options](#dimension) |
+| `to`  | `date`  | `false`  | Use this optional query parameter to set the end date for the time period that you want analytics for.<br>  <br>- The API returns analytics data **excluding** the day you set in `to`.<br>- If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and **excluding** today.<br>- A valid date value is only **within the last 30 days**.<br>- The value you provide must follow the `YYYY-MM-DD` format.  |
+| `filter`  | `key-value pair`  | `false`  | Use this parameter to filter your results to a specific video or live stream in a project that you want analytics for.<br><br>You must use the `videoId:` or `liveStreamId:` prefix when specifying an identifier for a video or a live stream.<br><br>Note that the **Get play events for videos** endpoint only accepts video `ID` as a filter, and the **Get play events for live streams** endpoint only accepts live stream `ID` as a filter.  |
 
 ### Dimension
 
@@ -176,7 +154,6 @@ Based on your request the Analytics API returns paginated play event data in an 
 You can find sample responses for some common analytics parameters here:
 
 <details><summary><b>By <code>videoId</code></b></summary>
-<br>
 
 This response gives you a detailed breakdown for the number of play events for each video from the date you specified until today. You can use this data to understand which videos are the most popular.
 
@@ -228,7 +205,6 @@ This example uses the sandbox environment's `{base_URL}`. Check out the [**API e
 
 <details>
 <summary><b>By <code>country</code></b></summary>
-<br>
 
 This response gives you a detailed, paginated breakdown for the number of play events by country in a period of 4 days. You can use this data to understand how play events are spread out geographically, and which country has the most play events.
 
