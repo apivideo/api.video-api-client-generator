@@ -1,5 +1,16 @@
 ---
 title: api.video documentation
+header:
+  links:
+    - external: https://community.api.video/
+      text: Community
+    - external: https://help.api.video/en/
+      text: Help Center
+    - external: https://api.video/changelog/
+      text: Changelog
+  cta:
+    external: https://dashboard.api.video/register
+    text: Sign up for free
 
 colors:
   main: "#FA5B30"
