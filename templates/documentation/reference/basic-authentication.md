@@ -11,7 +11,7 @@ You must use different credentials depending on the [environment](/reference/REA
 
 
 {% capture content %}
-**📘 API Key protection**
+**API Key protection**
 
 To protect your credentials from being revealed on the client-side, invoke the api.video calls from your own server-side applications only.
 
@@ -46,10 +46,10 @@ Sample requests with authentication can be found below:
   ```
 
 {% capture content %}
-**📘 Notes**
+**Notes**
 
 * Replace `api_key` with the key you have already copied from [https://dashboard.api.video](https://dashboard.api.video/)
-* **⚠️ Important: You need to keep the colon after `api_key`**
+* **Important: You need to keep the colon after `api_key`**
 * The above API request is equivalent to  
   ```bash
     curl --header 'Authorization: Basic your\_api\_key\_with\_trailing\_colon\_in\_base64' https://ws.api.video/videos

@@ -22,7 +22,7 @@ Once you've upgraded you can switch between sandbox and production by toggling t
 ![](https://files.readme.io/a3713b2-Screenshot_2023-02-23_at_18.29.00.png "Screenshot 2023-02-23 at 18.29.00.png")
 
 {% capture content %}
-**🚧 The sandbox mode will have these limitations**
+**The sandbox mode has these limitations**
 
 - Limited to 30 seconds videos and live streams.
 - Will include an unremovable watermark
