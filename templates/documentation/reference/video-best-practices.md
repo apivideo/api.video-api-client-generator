@@ -15,7 +15,7 @@ A more visual representation can be found below:
 ![](https://files.readme.io/fee60cd-Create_a_video_flowchart.png "Create a video flowchart.png")
 
 {% capture content %}
-**📘 Important things to know**
+**Important things to know**
 * **All qualities encoding:** The video object will include up to 6 responsive video streams from 240p to 4K
 * **Video size:** There's no file size limitation but the files will be compressed to fit delivery needs (4k max def with x264 + aac at 60fps max )
 * **Highest quality encoding by default:** Mp4 encoded versions are created at the highest quality (max 4K) by default.
@@ -66,7 +66,7 @@ Metadata values can be a key:value where the values are predefined, but Dynamic 
 The double underscore on both sides of the value allows any variable to be added for a given video session. Added the the url you might have:
 
 ```html
-<iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrollling="no"></iframe>
+<iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrolling="no"></iframe>
 ```
 
 This video session will be tagged as watched by Doug - allowing for in-depth analysis on how each viewer interacts with the videos.
