@@ -7,8 +7,6 @@ Add Or Delete A Live Stream Thumbnail
 You can add your image as the thumbnail. There is only one way to add a thumbnail to a live stream, unlike videos. This guide walks through how to add a live stream thumbnail. 
 
 {% capture content %}
-**📘 NOTE**
-
 If you want to add a thumbnail to a video, there are two methods available - you can choose an image to upload, or you can pick a frame from the video to set as the thumbnail. To learn how to do this, please see the [Add a thumbnail to your video](/vod/add-a-thumbnail-to-your-video) guide.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
