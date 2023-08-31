@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Inter;
+  src: url("/_assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf");
+}
+
+@font-face {
+  font-family: JetBrains Mono;
+  src: url("/_assets/fonts/JetBrainsMono[wght].ttf");
+}
+
 .callout {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -151,6 +161,7 @@
   display: none;
 }
 
+
 .hagrid-item {
   color: black !important;
   text-decoration: none !important;
@@ -202,6 +213,10 @@
 .hagrid-item-subtitle a {
   color: black !important;
   text-decoration: none !important;
+}
+
+.dark .hagrid-item-title a, .dark .hagrid-item-subtitle a {
+  color: white !important;
 }
 
 .link-cards {
@@ -311,4 +326,31 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   grid-gap: 2rem;
+}
+
+
+.content-markdown {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+  padding-left: 80px !important;
+  font-family: "Inter" !important;
+}
+
+.section-header hr {
+  border-top: 1px dashed var(--doctave-theme-content-bg-secondary);
+}
+
+.section-header h3 {
+  color: var(--AV_Primary_Blue_06, rgba(65, 79, 110, 0.60)) !important;
+  font-family: JetBrains Mono, sans-serif;
+  text-transform: uppercase;
+  font-size: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+.section-header h2 {
+  font-size: 34px !important;
+  line-height: 34px !important;
+  font-weight: 500 !important;
 }
