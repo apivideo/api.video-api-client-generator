@@ -8,7 +8,7 @@ Private Video Delivery With Mp4 Built In Players
 ================================================
 
 {% capture content %}
-Please make sure to read [Private Videos](/delivery-analytics/video-privacy-access-management.md) in order to make sure you understand the concept of private videos before proceeding.
+api.video recommends that you read [Private Videos](/delivery-analytics/video-privacy-access-management.md) to ensure that you understand the concept of private videos before proceeding.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -95,10 +95,3 @@ mediaPlayer.setDataSource(url);
 mediaPlayer.prepare(); // might take long! (for buffering, etc)
 mediaPlayer.start();
 ```
-
-{% capture content %}
-**🚧 Under construction**
-
-We are working on an example for Android. Hang in there.
-{% endcapture %}
-{% include "_partials/callout.html" kind: "warning", content: content %}

@@ -40,13 +40,16 @@ The Live stream endpoint has an optional field called `restreams` which is an ar
 | `serverUrl` | `string` | The RTMP url of the streaming server.                                                             |
 | `streamKey` | `string` | Stream key provided by the streaming provider.                                                    |
 
-> 📘 
-> 
-> - Currently api.video supports up to 5 restreams
-> - At this time, it's only possible to restream to RTMP
-> - The names of the providers are arbitrary, you can provide any name you like
-> - When updating the restreams object, it's important to make sure that you are passing the previous values if you would like to keep them
-> - Modifying the restreams array while the live stream is already broadcasting will only take only effect after the stream has been restarted
+{% capture content %}
+Please note that:
+
+- Currently api.video supports up to 5 restreams
+- At this time, it's only possible to restream to RTMP
+- The names of the providers are arbitrary, you can provide any name you like
+- When updating the restreams object, it's important to make sure that you are passing the previous values if you would like to keep them
+- Modifying the restreams array while the live stream is already broadcasting will only take only effect after the stream has been restarted
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 ## Supported Platforms
 
@@ -66,9 +69,12 @@ In order to get started with restream, you will need to create a live stream. Ch
 
 ## Usage
 
-> 📘 Limitations
-> 
-> Restreaming in Sandbox mode is limited to 2 minutes. The original live stream is not limited, only the restreams are limited.
+{% capture content %}
+**Limitations**
+
+Restreaming in Sandbox mode is limited to 2 minutes. The original live stream is not limited, only the restreams are limited.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 ### Creating a live stream with restreams
 

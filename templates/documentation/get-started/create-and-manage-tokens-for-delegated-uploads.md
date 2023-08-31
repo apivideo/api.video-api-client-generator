@@ -13,9 +13,7 @@ Create And Manage Tokens For Delegated Uploads
 To complete a delegated upload, you need to create a token. You can create as many tokens as you like. If you don't include a TTL (time-to-live) for a token, then it lasts until you choose to delete it. In this guide, we will walk through how to create a token and then how to list tokens, retrieve token details, and delete a token you no longer need. 
 
 {% capture content %}
-📘 **NOTE**
-
-If you want to learn about regular or progressive uploads, please see the [Upload a video - regular, progressive, and bytes](/vod/upload-a-video-regular-upload) guide.
+If you want to learn about regular or progressive uploads, check out the [Upload a video - regular, progressive, and bytes](/vod/upload-a-video-regular-upload) guide.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

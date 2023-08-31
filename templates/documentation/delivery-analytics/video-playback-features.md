@@ -66,7 +66,10 @@ To hide the Player's title that is displayed on the bottom left corner of the po
 
 To hide the Player's control bar, use `#hide-controls`.
 
-> Caution as you should integrate your own controls if you prevent users from accessing Api Video Player native ones.
+{% capture content %}
+Note that you need to integrate your own player controls if you hide the default api.video Player controls.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 <iframe src="https://embed.api.video/vod/vi54sj9dAakOHJXKrUycCQZp#hide-controls" class="av_player" width="100%" height="300" frameborder="0" scrolling="no" allowfullscreen></iframe>
 

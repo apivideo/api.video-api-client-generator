@@ -9,9 +9,7 @@ With api.video, every call to the API requires authentication. We use Bearer aut
 Bearer authentication is simple to set up and use; however, we encourage you to use one of our clients if possible. api.video clients handle authentication for you, including renewing your token as needed. This guide will show you how to quickly install the client of your choice and provide the code snippet you'll need for authentication. 
 
 {% capture content %}
-**📘 NOTE:**
-
-We will show the corresponding cURL commands for each part of the tutorial when appropriate.
+This guide shows the corresponding cURL commands for each part of the tutorial where appropriate.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

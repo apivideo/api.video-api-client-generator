@@ -170,7 +170,7 @@ catch (ApiException e)
 {% include "_partials/code-tabs.md" samples: samples %}
 
 {% capture content %}
-ℹ️ Replace `your_api_key` by the key you have already copied from dashboard.api.video
+Replace `your_api_key` by the key you have already copied from dashboard.api.video
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -191,7 +191,7 @@ Remember the `videoId`: you will need it to upload your video, in [step b](#b-up
 Also, you will need the `assets.player` to playback your video in [step 3](#3-watch-your-video).
 
 {% capture content %}
-💡 If you are using one of our API clients, you will find the above information in the returned response. `Video` object.
+If you are using one of our API clients, you will find the above information in the returned response's `Video` object.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -494,7 +494,7 @@ catch (ApiException e)
 {% include "_partials/code-tabs.md" samples: samples %}
 
 {% capture content %}
-ℹ️ Replace the link in the example above with your video URL. If you don’t have a video URL handy to test this, you can use [this one](http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4) for example.
+Replace the link in the example above with your video URL. If you don’t have a video URL to test this, you can use [this one](http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4) for example.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

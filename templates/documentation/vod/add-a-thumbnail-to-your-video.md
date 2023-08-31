@@ -12,8 +12,6 @@ For videos or recorded live streams, api.video offers you two ways to add a thum
 This guide walks you through both methods for setting up a thumbnail for videos. 
 
 {% capture content %}
-📘 **NOTE**
-
 If you want to add a thumbnail to a live stream, the only available method is to upload a picture you choose. You can read more about this in the [Add or delete a live stream thumbnail](/live-streaming/add-or-delete-a-live-stream-thumbnail) guide.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}

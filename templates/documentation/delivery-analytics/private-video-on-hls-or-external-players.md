@@ -11,7 +11,7 @@ Private Video On Hls Or External Players
 ========================================
 
 {% capture content %}
-Please make sure to read [Private Videos](/delivery-analytics/video-privacy-access-management.md) in order to make sure you understand the concept of private videos before proceeding.
+api.video recommends that you read [Private Videos](/delivery-analytics/video-privacy-access-management.md) to ensure that you understand the concept of private videos before proceeding.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -24,15 +24,10 @@ for example, if you would like to play the video on HLS, we provide a ready made
 
 `https://vod.api.video/vod/{video id}/token/{private token}/hls/manifest.m3u8`
 
-### Serving private videos to HTML on Safari, Chrome and Firefox:
-[block:callout]
-{
-  "type": "warning",
-  "title": "HLS player on Chrome",
-  "body": "We've seen some issues with HLS player and Chrome, please be advised"
-}
-[/block]
+### Serving private videos to HTML on Safari, Chrome and Firefox
+
 You can use the video tag directly to play the video in Safari, for example:
+
 ```html
 <html>
   <head>
@@ -69,14 +64,15 @@ Example of loading the manifest with hls.js on Safari:
 </script>
 ```
 
-source: https://github.com/video-dev/hls.js/blob/master/docs/API.md#third-step-load-a-manifest
-[block:callout]
-{
-  "type": "info",
-  "title": "Test the manifest with hls.js demo",
-  "body": "You can test out and pass the manifest to this demo player that is provided by hls.js: https://hls-js.netlify.app/demo/"
-}
-[/block]
+Source: [GitHub](https://github.com/video-dev/hls.js/blob/master/docs/API.md#third-step-load-a-manifest)
+
+{% capture content %}
+**Test the manifest with hls.js demo**
+
+You can test and pass the manifest to this demo player that is provided by hls.js: https://hls-js.netlify.app/demo/
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
+
 ### Serving private videos dynamically
 
 In order to build a dynamically served private videos, you can leverage the [/videos](/reference/api/Videos#retrieve-a-video-object) endpoint in order to get the url of the video and private token. For example the following steps are possible:
@@ -123,7 +119,8 @@ curl --request GET \
 
 You can serve the manifest directly into the native iOS player, you can find an example below.
 
-Reference: https://developer.apple.com/documentation/avfoundation/media_playback/creating_a_basic_video_player_ios_and_tvos
+Reference: [Apple Developer docs](https://developer.apple.com/documentation/avfoundation/media_playback/creating_a_basic_video_player_ios_and_tvos)
+
 ```swift
 @IBAction func playVideo(_ sender: UIButton) {
     guard let url = URL(string: "https://vod.api.video/vod/ABC/token/XYZ/hls/manifest.m3u8") else { return }

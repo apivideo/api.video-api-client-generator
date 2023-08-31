@@ -83,7 +83,7 @@ You can test your webhooks with tools like [Pipedream](https://pipedream.com/wor
 ### Retry policy
 
 {% capture content %}
-**📘 Webhook retry policy**
+**Webhook retry policy**
 
 api.video’s webhook service makes 3 notification attempts, with 3 second intervals between each try.
 {% endcapture %}
@@ -554,7 +554,7 @@ print(response)
 {% include "_partials/code-tabs.md" samples: samples %}
 
 {% capture content %}
-⚠️  **Warning**
+**Warning**
 
 Deleting a webhook is a permanent action and deleted webhooks cannot be recovered.
 {% endcapture %}
