@@ -32,3 +32,7 @@
       href: ./live-stream-ended.md
     - label: All Live Events
       href: ./all-live-events.md
+  - label: Wordpress Plugin
+    href: ./wordpress.md
+  - label: Strapi Plugin
+    href: ./strapi.md
