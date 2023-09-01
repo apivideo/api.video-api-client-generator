@@ -1,44 +1,35 @@
-.hero {
+:root {
+  --AV_Primary_Blue_06: #414F6E99
+  --AV_Primary_Blue: #414F6E
+  --AV_BG_Gradient: #46396C
+  --AV_Primary_Blue_Dark: #FF2D47
+}
+
+.hero h1 {
+  
   text-align: left;
-  max-width: 42rem;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .hero h1 {
-  font-weight: 200 !important;
-  font-size: 64px !important;
+  color: var(--AV_Primary_Blue_Dark, #202D47) !important;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.68px;
 }
 
-.hero .links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.hero .links > p:first-child a {
-  background: var(--doctave-theme-main);
-  color: #fff !important;
-  border-radius: 4px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
-}
-
-.dark .hero .links > p:nth-child(2) a {
-  border: 0px;
-}
-.hero .links > p:nth-child(2) a {
-  border: 1px solid var(--doctave-theme-main);
-  color: var(--doctave-theme-main);
-  background: #fff !important;
-  text-decoration: none;
-  border-radius: 4px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
+.hero h1 em {
+  display: block;
+  color: var(--AV_Primary_Blue_06, rgba(65, 79, 110, 0.60));
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.68px;
 }
 
 .starter-guides {
@@ -119,18 +110,31 @@
 }
 
 .product-grid-item {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: 0px 20px 50px 0px rgba(59, 43, 92, 0.10), 0px 34px 24px -20px rgba(65, 79, 110, 0.04);
   border-radius: 4px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-grid-item-header * {
   margin: 0 !important;
   color: #fff !important;
 }
+
 .product-grid-item-header p {
   font-weight: 200 !important;
 }
+
+.product-grid-item-header h3 {
+  color: #FFF;
+  font-size: 30px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
+  letter-spacing: -0.6px !important;
+}
+
 .product-grid-item-header {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -139,45 +143,50 @@
 }
 
 .product-grid-item-header.Video {
-  background: rgb(211, 74, 191);
-  background: linear-gradient(
-    38deg,
-    rgba(211, 74, 191, 1) 0%,
-    rgba(253, 187, 45, 1) 100%
-  );
+  background: linear-gradient(215deg, #FA5B30 -5.18%, #F7B500 179.35%);
 }
 
 .product-grid-item-header.Live {
-  background: rgb(201, 74, 211);
-  background: linear-gradient(
-    38deg,
-    rgba(201, 74, 211, 1) 0%,
-    rgba(102, 45, 253, 1) 100%
-  );
+  background: var(--AV_urp_icon, linear-gradient(76deg, #642180 -24.15%, #AF2A72 93.03%));
 }
 
 .product-grid-item-header.Player {
-  background: rgb(201, 74, 211);
-  background: linear-gradient(
-    38deg,
-    rgb(78, 179, 223) 0%,
-    rgb(140, 117, 201) 100%
-  );
+  background: var(--AV_BG_Gradient, radial-gradient(204.77% 98.38% at 87.15% 25.85%, rgba(78, 178, 221, 0.18) 0%, rgba(42, 124, 159, 0.00) 100%), linear-gradient(0deg, rgba(109, 27, 132, 0.40) -16.17%, rgba(109, 27, 132, 0.00) 84.97%), #46396C);
 }
 
 .product-grid-item-body {
   padding: 2rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.product-grid-item-body p {
+.product-grid-item-body-description p  {
+  flex: 1;
+  opacity: 0.6;
+  color: var(--AV_Primary_Blue, #414F6E);
+  font-family: Inter;
   font-size: 14px;
-  margin: 0 !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 19.6px */
 }
 
-.product-grid-item-body a {
+.product-grid-item-body p a {
+  color: var(--AV_Primary_Orange, #FA5B30);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 14px; /* 100% */
+  letter-spacing: -0.28px;
+  
   display: inline-block;
   border-radius: 4px;
-  margin-top: 0.5rem;
+  
   background: rgb(250, 91, 48, 0.2);
   padding-left: 1rem;
   padding-right: 1rem;
@@ -188,4 +197,97 @@
 
 .product-grid-item-body a:hover {
   background: rgb(250, 91, 48, 0.3);
+}
+
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-gap: 2rem;
+  margin-bottom: 2em;
+}
+
+.quick-links-grid-item {
+  border-radius: 4px;
+  background: #FFF;
+  box-shadow: 0px 20px 50px 0px rgba(59, 43, 92, 0.10), 0px 34px 24px -20px rgba(65, 79, 110, 0.04);
+  padding: 0 24px;
+}
+
+.quick-links-grid-item h4 {
+  color: var(--AV_Primary_Blue_Dark, #202D47) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 18px !important;
+}
+
+.quick-links-grid-item .color-rectancle {
+  width: 24px;
+  height: 4px;
+  flex-shrink: 0;
+  margin: 20px 0;
+}
+
+.quick-links-grid-item.getting-started .color-rectancle {
+  background: var(--AV_urp_icon, linear-gradient(76deg, #642180 -24.15%, #AF2A72 93.03%));
+}
+
+.quick-links-grid-item.sdks .color-rectancle {
+  background: var(--AV_CTA, linear-gradient(92deg, #FA5B30 5.21%, #F7B500 186.04%));
+}
+
+.quick-links-grid-item.understand .color-rectancle {
+  background: linear-gradient(90deg, #414F6E 0%, #2773AA 100%);
+}
+
+.quick-links-grid-item > p {
+  border-top: 1px solid #EFEFEF !important;
+  padding-top: 18px !important;
+}
+
+.quick-links-grid-item > p > a.quick-links-grid-item-line {
+  display: flex !important; 
+  gap: 16px !important;
+  align-items: center !important;
+  
+  text-decoration: none !important;
+  color: var(--AV_Primary_Blue, #414F6E) !important;
+}
+
+.quick-links-grid-item a.quick-links-grid-item-line img {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+.need-help-buttons {
+  display: flex;
+  gap: 56px;
+}
+
+a.need-help-button {
+  flex: 1;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 4px;
+  background: #FFF;
+  box-shadow: 0px 20px 50px 0px rgba(59, 43, 92, 0.10);
+  padding: 0 24px;
+  color: var(--AV_Primary_Blue, #414F6E) !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  line-height: 18px !important; /* 100% */
+  letter-spacing: -0.36px !important;
+}
+
+a.need-help-button img {
+  width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }

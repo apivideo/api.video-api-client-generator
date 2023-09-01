@@ -7,8 +7,7 @@
 
 </div>
 <div class="product-grid-item-body">
-
-{{ vod-description }}
+<div class="product-grid-item-body-description">{{ description }}</div>
 
 [Learn More]({{ link }})
 
