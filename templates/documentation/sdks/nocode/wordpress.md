@@ -1,3 +1,10 @@
+---
+title: "Wordpress"
+slug: "wordpress"
+metadata: 
+  title: "Wordpress • api.video Documentation"
+  description: "The official plugin to facilitate the use of api.video on your WordPress website through uploading, embedding, listing, and managing your videos."
+---
 
 # Wordpress
 
