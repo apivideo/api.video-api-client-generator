@@ -15,7 +15,7 @@ The [video object](https://docs.api.video/reference/videos-1) in reference to ap
 
 Before you [upload a video](https://docs.api.video/reference/post_videos-videoid-source), you need to[ create the video object](https://docs.api.video/reference/post-video) that will contain the video itself (once uploaded). 
 
-![](https://files.readme.io/06e7947-image.png)
+![](/_assets/vod/video-object/06e7947-image.png)
 
 The video object has properties and metadata that you can create and update, below are the attributes that are available for the video object.
 
