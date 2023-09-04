@@ -12,7 +12,7 @@ api.video gives you the ability to broadcast a live stream to multiple platforms
 
 ## How it works
 
-![](https://files.readme.io/edc6e78-restreams-diagram.jpg)
+![](/_assets/live-streaming/restreams/edc6e78-restreams-diagram.jpg)
 
 You can add restreams to an existing live stream or you can create a live stream that already includes the restream list.   
 

@@ -145,7 +145,7 @@ There are two types of tokens for private videos:
 
 At a very high level, to request different assets for the same private video, more than having the private token is required; you also need to retain the session. For that, we have the session token. In the flowchart below, you can see that for each private video, we are using a session token + the private token:
 
-![](https://files.readme.io/52f1d35-Private_videos_post_-_15FEB23.png "Private videos post - 15FEB23.png")
+![](/_assets/vod/demo-private-video/52f1d35-Private_videos_post_-_15FEB23.png "Private videos post - 15FEB23.png")
 
 
 

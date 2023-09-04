@@ -12,7 +12,7 @@ A tutorial for uploading a video with curl can be found [here](https://api.video
 
 A more visual representation can be found below:
 
-![](https://files.readme.io/fee60cd-Create_a_video_flowchart.png "Create a video flowchart.png")
+![](/_assets/reference/video-best-practices/fee60cd-Create_a_video_flowchart.png "Create a video flowchart.png")
 
 {% capture content %}
 **Important things to know**

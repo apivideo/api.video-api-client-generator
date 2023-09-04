@@ -35,16 +35,16 @@ You can add a clickable custom company logo to your videos.
 | Parameter Name   | Description                                          | Type    | Default                  |
 |------------------|------------------------------------------------------|---------|--------------------------|
 | `name`           | The name of the player theme                        | string  |                          |
-| `text`           | RGBA color for timer text. ![](https://files.readme.io/fac4eaf-Screenshot_2023-03-13_at_10.49.30.png) | string  | rgba(255, 255, 255, 1)  |
-| `link`           | RGBA color for all controls. ![](https://files.readme.io/12127f5-Screenshot_2023-03-13_at_10.53.12.png) | string  | rgba(255, 255, 255, 1)  |
-| `linkHover`      | RGBA color for controls when hovering over. ![](https://files.readme.io/e72c530-Screenshot_2023-03-13_at_10.58.17.png) | string  | rgba(255, 255, 255, 1)  |
-| `linkActive`     | RGBA color for the play button when hovered. ![](https://files.readme.io/cb636b9-Screenshot_2023-03-13_at_11.02.36.png) | string  | rgba(255, 255, 255, 1)  |
-| `trackPlayed`    | RGBA color playback bar: played content. ![](https://files.readme.io/bea91e5-Screenshot_2023-03-13_at_11.07.45.png) | string  | rgba(88, 131, 255, .95) |
-| `trackUnplayed`  | RGBA color playback bar: downloaded but unplayed (buffered) content. ![](https://files.readme.io/fabe2f3-Screenshot_2023-03-13_at_11.13.49.png) | string  | rgba(255, 255, 255, .35) |
-| `trackBackground`| RGBA color playback bar: background. ![](https://files.readme.io/255d36f-Screenshot_2023-03-13_at_11.16.25.png) | string  | rgba(255, 255, 255, .2)  |
-| `backgroundTop`  | RGBA color: top 50% of background. ![](https://files.readme.io/5a5e240-Screenshot_2023-03-13_at_11.20.17.png) | string  | rgba(0, 0, 0, .7)       |
-| `backgroundBottom`| RGBA color: bottom 50% of background. ![](https://files.readme.io/554522c-Screenshot_2023-03-13_at_11.23.41.png) | string  | rgba(0, 0, 0, .7)       |
-| `backgroundText` | RGBA color for title text. ![](https://files.readme.io/8ef21b7-Screenshot_2023-03-13_at_11.26.03.png) | string  | rgba(255, 255, 255, 1)  |
+| `text`           | RGBA color for timer text. ![](/_assets/delivery-analytics/player-customization/fac4eaf-Screenshot_2023-03-13_at_10.49.30.png) | string  | rgba(255, 255, 255, 1)  |
+| `link`           | RGBA color for all controls. ![](/_assets/delivery-analytics/player-customization/12127f5-Screenshot_2023-03-13_at_10.53.12.png) | string  | rgba(255, 255, 255, 1)  |
+| `linkHover`      | RGBA color for controls when hovering over. ![](/_assets/delivery-analytics/player-customization/e72c530-Screenshot_2023-03-13_at_10.58.17.png) | string  | rgba(255, 255, 255, 1)  |
+| `linkActive`     | RGBA color for the play button when hovered. ![](/_assets/delivery-analytics/player-customization/cb636b9-Screenshot_2023-03-13_at_11.02.36.png) | string  | rgba(255, 255, 255, 1)  |
+| `trackPlayed`    | RGBA color playback bar: played content. ![](/_assets/delivery-analytics/player-customization/bea91e5-Screenshot_2023-03-13_at_11.07.45.png) | string  | rgba(88, 131, 255, .95) |
+| `trackUnplayed`  | RGBA color playback bar: downloaded but unplayed (buffered) content. ![](/_assets/delivery-analytics/player-customization/fabe2f3-Screenshot_2023-03-13_at_11.13.49.png) | string  | rgba(255, 255, 255, .35) |
+| `trackBackground`| RGBA color playback bar: background. ![](/_assets/delivery-analytics/player-customization/255d36f-Screenshot_2023-03-13_at_11.16.25.png) | string  | rgba(255, 255, 255, .2)  |
+| `backgroundTop`  | RGBA color: top 50% of background. ![](/_assets/delivery-analytics/player-customization/5a5e240-Screenshot_2023-03-13_at_11.20.17.png) | string  | rgba(0, 0, 0, .7)       |
+| `backgroundBottom`| RGBA color: bottom 50% of background. ![](/_assets/delivery-analytics/player-customization/554522c-Screenshot_2023-03-13_at_11.23.41.png) | string  | rgba(0, 0, 0, .7)       |
+| `backgroundText` | RGBA color for title text. ![](/_assets/delivery-analytics/player-customization/8ef21b7-Screenshot_2023-03-13_at_11.26.03.png) | string  | rgba(255, 255, 255, 1)  |
 | `enableControls` | Enabled or disabled player controls.                 | boolean | True                     |
 | `enableApi`      | Enable/disable player SDK access.                   | boolean | True                     |
 | `forceAutoplay`  | Enable/disable player autoplay.                     | boolean | False                    |
