@@ -1,11 +1,45 @@
 ---
 title: "Create and manage chapters"
+slug: "create-manage-chapters"
+meta:
+  description: This page gets users started on how to add chapters to their videos using the api.video Chapters endpoint.
 ---
 
-Creating And Managing Chapters
-==============================
+# Create and manage chapters
 
-Adding chapters can make your video easier to navigate if you have a long video. Viewers can click through to different segments to find the information they need. 
+Adding chapters can make your video easier to navigate if you have a long video. Viewers can click through to different segments to find the information they need.
+
+## Use VTT files to define chapters
+
+Video chapters use the same concept as video [captions](/vod/add-captions.md) and the supported format is VTT. The chapters are listed with the timeframe in the VTT file. For example:
+
+```
+{
+  "codes": [
+    {
+      "code": "WEBVTT  </br>  </br>  01\n00:01.000 --> 00:04.000\n\n02\n00:05.000 --> 00:09.000",
+      "language": "text"
+    }
+  ]
+}
+```
+
+### Supported chaoter file formats
+
+Currently only **VTT** file format is supported.
+
+### WebVTT file formatting
+
+For more information on VTT formatting: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API
+
+You can check the formatting of the VTT with a free online tool here: https://w3c.github.io/webvtt.js/parser.html
+
+{% capture content %}
+**Incorrect VTT file formatting**
+
+The api.video API does not return an error for incorrectly formatted VTT files. The response from the API will be `200`, however, the captions will not be displayed.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "info", content: content %}
 
 ## Associated API reference documentation
 
