@@ -23,7 +23,7 @@ WEBVTT
 00:05.000 --> 00:09.000
 ```
 
-### Supported chaoter file formats
+### Supported chapter file formats
 
 Currently only **VTT** file format is supported.
 
