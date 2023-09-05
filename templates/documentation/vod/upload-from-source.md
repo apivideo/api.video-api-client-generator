@@ -334,7 +334,7 @@ catch (ApiException e)
 
 ## Watch your video
 
-The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in [step 2](#2-upload-a-video):
+The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in the [ API response](#api-response):
 
 `"player": "https://embed.api.video/vod/{videoId}"`
 
