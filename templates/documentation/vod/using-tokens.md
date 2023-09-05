@@ -1,6 +1,14 @@
-api.video provides you with various options of authentication which allows you to leverage the API on a different level of your application, whether it's on the front end or backend. Moreover, you can provide better security for your backend and videos.
+---
+title: "Using upload tokens"
+slug: "using-tokens"
+metadata: 
+  title: "Using upload tokens"
+  description: "This guide explains the various options of API authentication for uploading videos."
+---
 
 # Upload & API Access Tokens
+
+api.video provides you with various options of authentication which allows you to leverage the API on a different level of your application, whether it's on the front end or backend. Moreover, you can provide better security for your backend and videos.
 
 ## Access Token
 
