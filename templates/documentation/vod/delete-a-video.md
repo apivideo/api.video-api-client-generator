@@ -4,59 +4,11 @@ title: "Delete a video"
 Delete A Video
 ==============
 
-Sometimes, you need to delete a video permanently. This guide walks you through how to get rid of a video programmatically and through the dashboard. Please be aware that you cannot retrieve a video you delete, so be sure it's what you want to do.
+This guide walks you through how to permanently remove a video programmatically, and through the dashboard. Please be aware that you cannot retrieve a video you delete, so be sure it's what you want to do.
 
-## Associated API reference documentation
+## API documentation
 
 - [Delete a video](/reference/api/Videos#delete-a-video-object)
-
-## Choose an api.video client
-
-The clients offered by api.video include:
-
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
-
-## Installation
-
-To install your selected client, do the following: 
-   
-{% capture samples %}
-```go
-go get github.com/apivideo/api.video-go-client
-```
-```php
-composer require api-video/php-api-client
-```
-```javascript
-npm install @api.video/nodejs-client --save
-
-...or with yarn: 
-  
-yarn add @api.video/nodejs-client
-```
-```python
-pip install api.video
-```
-```csharp
-Using Nuget
-  
-Install-Package ApiVideo
-```
-{% endcapture %}
-{% include "_partials/code-tabs.md" samples: samples %}
-
-## Retrieve your API key
-
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
-
-1. Log in to the api.video dashboard. 
-2. From the list of choices on the left, make sure you are on **API Keys** 
-3. You will always be able to choose to use your Sandbox API key. If you want to use the Production API key instead, enter your credit card information. 
-4. Grab the key you want, and you're ready to get started! 
 
 ## Delete a video
 

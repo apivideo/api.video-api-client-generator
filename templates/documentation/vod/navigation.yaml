@@ -37,7 +37,8 @@
 
 - heading: Video management
   items:
-  - subheading: Video management basics
+  - label: Video management basics
+    href: /vod/video-management-basics.md
     collapsed: true
     items:
     - label: List Videos
