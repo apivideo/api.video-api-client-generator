@@ -14,17 +14,16 @@ Adding chapters can make your video easier to navigate if you have a long video.
 Video chapters use the same concept as video [captions](/vod/add-captions.md) and the supported format is VTT. The chapters are listed with the timeframe in the VTT file. For example:
 
 ```
-{
-  "codes": [
-    {
-      "code": "WEBVTT  </br>  </br>  01\n00:01.000 --> 00:04.000\n\n02\n00:05.000 --> 00:09.000",
-      "language": "text"
-    }
-  ]
-}
+WEBVTT
+
+01
+00:01.000 --> 00:04.000
+
+02
+00:05.000 --> 00:09.000
 ```
 
-### Supported chaoter file formats
+### Supported chapter file formats
 
 Currently only **VTT** file format is supported.
 
