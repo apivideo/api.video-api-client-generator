@@ -70,7 +70,7 @@ api.video lets you customize a large part of the delivery, whether it's the play
 {% endcapture %}
 
 {% capture sdks-and-plugins %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/github.svg", label: "SDK", link: "/" %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
 {% endcapture %}
@@ -98,8 +98,8 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 
 <div class="support-cards">
-{% include "_partials/support-card.md" label: "Browse help center", icon: "/_assets/icons/js.svg", link: "/" %}
-{% include "_partials/support-card.md" label: "Talk to Customer Care team", icon: "/_assets/icons/js.svg", link: "/" %}
+{% include "_partials/support-card.md" label: "Browse help center", icon: "/_assets/icons/videos-sdks.svg", link: "/" %}
+{% include "_partials/support-card.md" label: "Talk to Customer Care team", icon: "/_assets/icons/vod-quickstart.svg", link: "/" %}
 </div> 
 
 
@@ -113,6 +113,8 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 
 <div class="content-cards">
-{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/js.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
-{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/js.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/solutions-demos.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/annotations.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos. This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/no-code.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/github.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
 </div>

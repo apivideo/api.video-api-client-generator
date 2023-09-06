@@ -1,11 +1,11 @@
 .content-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 2rem;
 }
 
 .content-card {
-  padding: 24px  !important;
+  padding: 24px !important;
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -15,12 +15,13 @@
 }
 
 .content-card p {
-    padding: 0 !important;
-    margin: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .content-card > p > img {
-   padding: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
   background-color: #e9dded;
   width: 40px;
   height: 40px;
@@ -28,25 +29,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px !important;
 }
 
-.support-card-label {
+.content-card p.content-card-label {
   font-size: 18px;
   font-weight: 600;
   text-align: left;
   color: #202d47;
+  margin-bottom: 16px !important;
 }
 
-.content-card-description {
+.content-card p.content-card-description {
+  padding-bottom: 32px !important;
   opacity: 0.6;
   font-size: 14px;
   text-align: left;
   color: #414f6e;
-  margin-bottom: 20px;
+  flex: 1;
 }
 
-.support-card-link {
+.content-card-link {
   font-size: 12px !important;
   font-weight: 700 !important;
   text-align: left;
