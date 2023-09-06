@@ -246,7 +246,6 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("tests/Api/Helper.php", "", "tests/Api/Helper.php"));
         supportingFiles.add(new SupportingFile("tests/Api/LiveStreamsApiTest.php", "", "tests/Api/LiveStreamsApiTest.php"));
         supportingFiles.add(new SupportingFile("tests/Api/PlayerThemesApiTest.php", "", "tests/Api/PlayerThemesApiTest.php"));
-        supportingFiles.add(new SupportingFile("tests/Api/RawStatisticsApiTest.php", "", "tests/Api/RawStatisticsApiTest.php"));
         supportingFiles.add(new SupportingFile("tests/Api/UploadTokensApiTest.php", "", "tests/Api/UploadTokensApiTest.php"));
         supportingFiles.add(new SupportingFile("tests/Api/VideosApiTest.php", "", "tests/Api/VideosApiTest.php"));
         supportingFiles.add(new SupportingFile("tests/Api/WebhooksApiTest.php", "", "tests/Api/WebhooksApiTest.php"));
