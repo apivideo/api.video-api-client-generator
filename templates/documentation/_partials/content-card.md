@@ -7,6 +7,6 @@
 
 <p class="content-card-description">{{description}}</p>
 
-<a class="content-card-link" href="{{link}}">Learn mode</a>
+<a class="content-card-link" href="{{link}}">Learn more</a>
 
 </div>
