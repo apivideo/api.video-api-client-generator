@@ -10,14 +10,22 @@
 
 - heading: Templates & demos
   items:
-  - label: Upload a video
-    href: /vod/upload-your-first-video.md
-  - label: Private videos
-    href: /vod/demo-private-video.md
-  - label: Loom clone
+  - label: Overview
+    href: /vod/demos-template-overview.md
+  - label: Video uploader
+    href: /vod/demos-video-uploader.md
+  - label: Progressive video uploader
+    href: /vod/demos-prog-upload-uploader.md
+  - label: Loom mockup
     href: /vod/demo-loom-clone.md
-  - label: YouTube clone
+  - label: TikTok mockup
+    href: /vod/demos-tiktok-clone.md
+  - label: YouTube mockup
     href: /vod/demo-youtube-clone.md
+  - label: Udemy mockup
+    href: /vod/demos-udemy-clone.md
+  - label: Airbnb mockup
+    href: /vod/demos-airbnb-clone.md
 
 - heading: Libraries & SDKs
   items:

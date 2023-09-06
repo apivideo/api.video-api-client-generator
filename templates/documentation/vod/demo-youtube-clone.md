@@ -14,13 +14,13 @@ Youtube is one of the most, if not "The" most popular user-generated content pro
 
 ## Demo
 
-Before cloning the Github repo, you can try out the demo of the Youtube mockup. Head over to the following page to test it out.
+Before cloning the Github repo, you can try out the demo of the [Youtube mockup](https://api-video-youtube-demo.netlify.app/). Head over to the following [page](https://api-video-youtube-demo.netlify.app/) to test it out.
 
 ## Github repo
 
 Now that's you've got the look and feel, you can clone the repo and start hacking.
 
-You will find the repo here: https://github.com/apivideo/youtube-clone-next
+You will find the repo [here](https://github.com/apivideo/youtube-clone-next)
 
 To clone the repo, just go into your command line and run the following command:
 
@@ -30,4 +30,4 @@ $ git clone https://github.com/apivideo/youtube-clone-next.git
 
 ## Usage
 
-{https://github.com/apivideo/youtube-clone-next.git readme.md placeholder}
+You can find the usage instructions in the [Youtube mockup Github repository](https://github.com/apivideo/youtube-clone-next#readme)
