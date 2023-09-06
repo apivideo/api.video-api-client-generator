@@ -18,5 +18,5 @@ The Templates are structured in a way where you can:
 * [Loom clone](/vod/demo-loom-clone.md)
 * [Youtube mockup](/vod/demo-youtube-clone.md)
 * [Udemy mockup](/vod/demos-udemy-clone.md)
-* Airbnb mockup
-* TikTok mockup
+* [Airbnb mockup](/vod/demos-airbnb-clone.md)
+* [TikTok mockup](/vod/demos-tiktok-clone.md)
