@@ -1,0 +1,112 @@
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-gap: 2rem;
+}
+
+.product-grid-item {
+  box-shadow: 0px 20px 50px 0px rgba(59, 43, 92, 0.1),
+    0px 34px 24px -20px rgba(65, 79, 110, 0.04);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-grid-item-header * {
+  margin: 0 !important;
+  color: #fff !important;
+}
+
+.product-grid-item-header p {
+  font-weight: 200 !important;
+}
+
+.product-grid-item-header h3 {
+  color: #fff;
+  font-size: 30px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
+  letter-spacing: -0.6px !important;
+}
+
+.product-grid-item-header {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 5.5rem;
+  padding-bottom: 2rem;
+}
+
+.product-grid-item-header.Video {
+  background: linear-gradient(215deg, #fa5b30 -5.18%, #f7b500 179.35%);
+}
+
+.product-grid-item-header.Live {
+  background: var(
+    --AV_urp_icon,
+    linear-gradient(76deg, #642180 -24.15%, #af2a72 93.03%)
+  );
+}
+
+.product-grid-item-header.Player {
+  background: var(
+    --AV_BG_Gradient,
+    radial-gradient(
+      204.77% 98.38% at 87.15% 25.85%,
+      rgba(78, 178, 221, 0.18) 0%,
+      rgba(42, 124, 159, 0) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(109, 27, 132, 0.4) -16.17%,
+      rgba(109, 27, 132, 0) 84.97%
+    ),
+    #46396c
+  );
+}
+
+.product-grid-item-body {
+  padding: 2rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.product-grid-item-body-description p {
+  flex: 1;
+  opacity: 0.6;
+  color: var(--AV_Primary_Blue, #414f6e);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 19.6px */
+}
+
+.product-grid-item-body p a {
+  color: var(--AV_Primary_Orange, #fa5b30);
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 14px; /* 100% */
+  letter-spacing: -0.28px;
+
+  display: inline-block;
+  border-radius: 4px;
+
+  background: rgb(250, 91, 48, 0.2);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-decoration: none !important;
+}
+
+.product-grid-item-body a:hover {
+  background: rgb(250, 91, 48, 0.3);
+}

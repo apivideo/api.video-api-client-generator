@@ -22,7 +22,7 @@ Welcome to the developer documentation of api.video! Our platform empowers devel
 
 Check out the products:
 
-<div class="product-grid">
+<div class="product-cards">
 
 {% capture vod-description %}
 
@@ -46,9 +46,9 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 {% endcapture %}
 
-{% include "_partials/product-grid-item.md" product: "Video", subheading: "on demand", description: vod-description, link: "/vod/README.md" %}
-{% include "_partials/product-grid-item.md" product: "Live", subheading: "streaming", description: live-stream-description, link: "/live-streaming/README.md" %}
-{% include "_partials/product-grid-item.md" product: "Player", subheading: "& analytics", description: player-analytics-description, link: "/delivery-analytics/README.md" %}
+{% include "_partials/product-card.md" product: "Video", subheading: "on demand", description: vod-description, link: "/vod/README.md" %}
+{% include "_partials/product-card.md" product: "Live", subheading: "streaming", description: live-stream-description, link: "/live-streaming/README.md" %}
+{% include "_partials/product-card.md" product: "Player", subheading: "& analytics", description: player-analytics-description, link: "/delivery-analytics/README.md" %}
 
 </div>
 
@@ -62,29 +62,29 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 
 
-<div class="quick-links-grid">
+<div class="quick-links">
 {% capture get-started-links %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "Start working with api.video", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "Video quickstart", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "Live streaming quickstart", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "Start working with api.video", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "Video quickstart", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "Live streaming quickstart", link: "/" %}
 {% endcapture %}
 
 {% capture sdks-and-plugins %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/github.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
 {% endcapture %}
 
 {% capture understand-api-video %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
-{% include "_partials/quick-links-grid-item-line.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "SDK", link: "/" %}
 {% endcapture %}
 
 
-{% include "_partials/quick-links-grid-item.md" name: "getting-started", title: "Get Started", content: get-started-links %}
-{% include "_partials/quick-links-grid-item.md" name: "sdks", title: "SDKs and plugins", content: sdks-and-plugins %}
-{% include "_partials/quick-links-grid-item.md" name: "understand", title: "Understand api.video", content: understand-api-video %}
+{% include "_partials/quick-links-container.md" name: "getting-started", title: "Get Started", content: get-started-links %}
+{% include "_partials/quick-links-container.md" name: "sdks", title: "SDKs and plugins", content: sdks-and-plugins %}
+{% include "_partials/quick-links-container.md" name: "understand", title: "Understand api.video", content: understand-api-video %}
 
 </div>
 
@@ -97,7 +97,24 @@ api.video lets you customize a large part of the delivery, whether it's the play
 </div>
 
 
-<div class="need-help-buttons">
-{% include "_partials/need-help-button.md" label: "Browse help center", icon: "/_assets/icons/js.svg", link: "/" %}
-{% include "_partials/need-help-button.md" label: "Talk to Customer Care team", icon: "/_assets/icons/js.svg", link: "/" %}
+<div class="support-cards">
+{% include "_partials/support-card.md" label: "Browse help center", icon: "/_assets/icons/videos-sdks.svg", link: "/" %}
+{% include "_partials/support-card.md" label: "Talk to Customer Care team", icon: "/_assets/icons/vod-quickstart.svg", link: "/" %}
+</div> 
+
+
+<div class="section-header"> 
+  <hr/>
+
+  ### Section header
+  ## Content cards
+</div>
+
+
+
+<div class="content-cards">
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/solutions-demos.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/annotations.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos. This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/no-code.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
+{% include "_partials/content-card.md" label: "Browse help center", icon: "/_assets/icons/github.svg", description: "This is a placeholder for a paragraph that guides users to our solutions & demos", link: "/" %}
 </div>

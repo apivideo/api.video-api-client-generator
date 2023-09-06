@@ -1,4 +1,4 @@
-<div class="quick-links-grid-item {{name}}">
+<div class="quick-links-item {{name}}">
 
 #### {{ title }}
 

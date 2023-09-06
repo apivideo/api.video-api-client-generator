@@ -12,48 +12,9 @@ You will often need to retrieve a list of all your videos or some videos to work
 
 This guide walks through the different options for retrieving videos and covers a method for searching for them using your dashboard. 
 
-## Associated API reference documentation
+## API documentation
 
-- [List all videos](/reference/api/Videos#list-all-video-objects) 
-
-## Choose an api.video client
-
-The clients offered by api.video include:
-
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
-
-## Installation
-
-To install your selected client, do the following: 
-
-{% capture samples %}
-```go
-go get github.com/apivideo/api.video-go-client
-```
-```php
-composer require api-video/php-api-client
-```
-```javascript
-npm install @api.video/nodejs-client --save
-
-...or with yarn: 
-  
-yarn add @api.video/nodejs-client
-```
-```python
-pip install api.video
-```
-```csharp
-Using Nuget
-  
-Install-Package ApiVideo
-```
-{% endcapture %}
-{% include "_partials/code-tabs.html" content: samples %}
+- [List all videos](/reference/api/Videos#list-all-video-objects)
 
 ## List all videos
 

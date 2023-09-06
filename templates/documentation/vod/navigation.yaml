@@ -10,14 +10,22 @@
 
 - heading: Templates & demos
   items:
-  - label: Upload a video
-    href: /vod/upload-your-first-video.md
-  - label: Private videos
-    href: /vod/demo-private-video.md
-  - label: Loom clone
+  - label: Overview
+    href: /vod/demos-template-overview.md
+  - label: Video uploader
+    href: /vod/demos-video-uploader.md
+  - label: Progressive video uploader
+    href: /vod/demos-prog-upload-uploader.md
+  - label: Loom mockup
     href: /vod/demo-loom-clone.md
-  - label: YouTube clone
+  - label: TikTok mockup
+    href: /vod/demos-tiktok-clone.md
+  - label: YouTube mockup
     href: /vod/demo-youtube-clone.md
+  - label: Udemy mockup
+    href: /vod/demos-udemy-clone.md
+  - label: Airbnb mockup
+    href: /vod/demos-airbnb-clone.md
 
 - heading: Libraries & SDKs
   items:
@@ -28,16 +36,27 @@
 
 - heading: Video ingestion & transcoding
   items:
-  - label: Regular video upload
-    href: /vod/upload-a-video-regular-upload.md
-  - label: Progressive upload
-    href: /vod/progressive-upload.md
   - label: Encoding and transcoding
     href: /vod/encoding-transcoding.md
+  - label: Regular video upload
+    href: /vod/upload-a-video-regular-upload.md
+  - label: Progressive video upload
+    href: /vod/progressive-upload.md
+  - label: Upload video from source
+    href: /vod/upload-from-source.md
+  - label: Using upload tokens
+    href: /vod/using-tokens.md
+    collapsed: true
+    items:
+    - label: Create and manage delegated upload tokens
+      href: /vod/create-and-manage-tokens-for-delegated-uploads.md
+    - label: Upload a video with a delegated token
+      href: /vod/upload-a-video-with-a-delegated-token.md
 
 - heading: Video management
   items:
-  - subheading: Video management basics
+  - label: Video management basics
+    href: /vod/video-management-basics.md
     collapsed: true
     items:
     - label: List Videos

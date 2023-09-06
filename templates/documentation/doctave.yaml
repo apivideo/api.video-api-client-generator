@@ -25,8 +25,13 @@ logo:
   src_dark: _assets/logo-dark.svg
 
 styles:
-  - _assets/style.css
-  - _assets/landing.css
+  - _assets/css/style.css
+  - _assets/css/landing.css
+  - _assets/css/components/support-card.css
+  - _assets/css/components/quick-link.css
+  - _assets/css/components/product-card.css
+  - _assets/css/components/hero.css
+  - _assets/css/components/content-card.css
 
 open_api:
   - spec_file: openapi.yaml
