@@ -1,0 +1,133 @@
+---
+title: "Go API client"
+slug: "go-api-client"
+hidden: false
+metadata:
+description: "The official Go client for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+---
+
+Go API Client
+==============
+
+# Getting started
+
+## Installation
+```bash
+go get {{gitHost}}/{{gitUserId}}/{{gitRepoId}}
+```
+
+
+## Code sample
+
+For a more advanced usage you can checkout the rest of the documentation in the [docs directory](https://github.com/apivideo/api.video-go-client/tree/main/docs/)
+
+```golang
+package main
+
+import (
+    "fmt"
+    "os"
+    {{packageName}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}"
+)
+
+func main() {
+    //Connect to production environment
+    client := {{packageName}}.ClientBuilder("YOUR_API_KEY").Build()
+
+    // if you rather like to use the sandbox environment:
+    // client := {{packageName}}.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+
+
+    //List Videos
+    //First create the url options for searching
+    opts := apivideosdk.VideosApiListRequest{}.
+        CurrentPage(1).
+        PageSize(25).
+        SortBy("publishedAt").
+        SortOrder("desc")
+
+    //Then call the List endpoint with the options
+    result, err := client.Videos.List(opts)
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    for _, video := range result.Data {
+        fmt.Printf("%s\n", video.VideoId)
+        fmt.Printf("%s\n", *video.Title)
+    }
+
+
+    //Upload a video
+    //First create a container
+    create, err := client.Videos.Create(apivideosdk.VideoCreationPayload{Title: "My video title"})
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    //Then open the video file
+    videoFile, err := os.Open("path/to/video.mp4")
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+    //Finally upload your video to the container with the videoId
+    uploadedVideo, err := client.Videos.UploadFile(create.VideoId, videoFile)
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
+
+    //And get the assets
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Hls)
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Iframe)
+}
+```
+
+# Documentation
+
+## API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}}
+
+
+#### Retrieve an instance of the {{classname}} API:
+```golang
+client := {{packageName}}.ClientBuilder("API_VIDEO_KEY").Build()
+{{classVarName}}Api := client.{{classname}}
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/api.video-go-client/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+
+## Models
+
+{{#models}}{{#model}} - [{{{classname}}}](https://github.com/apivideo/api.video-go-client/blob/main/{{modelDocPath}}{{{classname}}}.md)
+{{/model}}{{/models}}
+
+
+# Have you gotten use from this API client?
+
+Please take a moment to leave a star on the client ⭐
+
+This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
+
+# Contribution
+
+Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.

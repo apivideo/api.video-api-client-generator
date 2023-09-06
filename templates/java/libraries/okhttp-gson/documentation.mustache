@@ -1,36 +1,13 @@
-[![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/{{gitRepoId}}?style=social)]({{artifactUrl}}) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
-![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
-<h1 align="center">api.video {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}uploader{{/uploader}}{{#client}}API client{{/client}}</h1>
+---
+title: "{{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}uploader{{/uploader}}{{#client}}API client{{/client}}"
+slug: "{{originClient}}{{#client}}-api-client{{/client}}"
+hidden: false
+metadata:
+description: "The official {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}uploader{{/uploader}}{{#client}}API client{{/client}} for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+---
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
-
-# Table of contents
-
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-    - [Maven users](#maven-users)
-    - [Gradle users](#gradle-users)
-    - [Others](#others)
-  - [Code sample](#code-sample)
-  {{#android}}
-  - [Upload options](#upload-options)
-  - [Permissions](#permissions)
-  {{/android}}
-- [Documentation](#documentation)
-  - [API Endpoints](#api-endpoints){{#apiInfo}}{{#apis}}{{^x-client-hidden}}    - [{{classname}}](#{{#lower}}{{classname}}{{/lower}}){{/x-client-hidden}}
-{{/apis}}{{/apiInfo}}  - [Models](#models)
-  - [Authorization](#documentation-for-authorization)
-    - [API key](#api-key)
-    - [Public endpoints](#public-endpoints)
-  - [Recommendation](#recommendation)
-- [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
-- [Contribution](#contribution)
-
-# Project description
-
-api.video's {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{userAgent}} streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.
+{{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}uploader{{/uploader}}{{#client}}API client{{/client}}
+==============
 
 # Getting started
 
@@ -176,8 +153,8 @@ Examples that demonstrate how to use the API is provided in folder `examples/`.
 ## Upload methods
 
 To upload a video, you have 3 differents methods:
-* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
-* `UploadService`: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
+* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications. Directly use, WorkManager extensions. See [example](https://github.com/apivideo/api.video-android-client/tree/main/examples/workmanager) for more details.
+* `UploadService`: Upload with an Android Service. It supports progress notifications. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](https://github.com/apivideo/api.video-android-client/tree/main/examples/service) for more details.
 * Direct call with `ApiClient`: Do not call API from the main thread, otherwise you will get a android.os.NetworkOnMainThreadException. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
 
 ## Permissions
@@ -233,13 +210,13 @@ val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
 ## Documentation for Models
 
-{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}{{classname}}.md)
 {{/model}}{{/models}}
 
 ## Documentation for Authorization

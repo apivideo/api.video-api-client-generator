@@ -1,0 +1,157 @@
+---
+title: "PHP API client"
+slug: "php-api-client"
+hidden: false
+metadata:
+description: "The official PHP client for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+---
+
+PHP API Client
+==============
+
+# Getting started
+
+## Installation
+
+```shell
+composer require api-video/php-api-client
+```
+
+## Initialization
+
+Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
+1. Base URI, which can be either `https://sandbox.api.video` or `https://ws.api.video`
+2. Your API key, available on your account
+3. HTTP client
+4. (Request factory)
+5. (Stream factory)
+
+Note : If the HTTP client also implements RequestFactoryInterface and StreamFactoryInterface, then it is not necessary to pass this object in 4th and 5th argument.
+
+### Symfony HTTP client example
+
+The Symfony HTTP client has the triple advantage of playing the role of **HTTP client**, but also of **request factory** and **stream factory**. It is therefore sufficient to pass it as an argument 3 times.
+
+If the HTTP client isn't yet in your project, you can add it with:
+
+```shell
+composer require symfony/http-client
+composer require nyholm/psr7
+```
+
+## Code sample
+
+### Client initialization
+
+```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+$httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+$client = new \ApiVideo\Client\Client(
+    'https://sandbox.api.video',
+    'YOUR_API_KEY',
+    $httpClient
+);
+?>
+```
+
+### Create a video
+
+```php
+$payload = (new VideoCreationPayload())
+    ->setTitle('Test video creation');
+
+// the `$client` must already be initialized.
+$video = $client->videos()->create($payload);
+```
+
+### Upload a video
+
+```php
+$payload = (new VideoCreationPayload())
+    ->setTitle('Test video creation');
+
+$video = $client->videos()->create($payload);
+
+// the `$client` must already be initialized.
+$client->videos()->upload(
+    $video->getVideoId(),
+    new SplFileObject(__DIR__.'/../earth.mp4')
+);
+```
+
+# Documentation
+
+## API Endpoints
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}}
+
+Method | Description | HTTP request
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}()**](https://github.com/apivideo/api.video-php-client/blob/main/{{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** `{{path}}`
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+## Models
+
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/api.video-php-client/blob/main/{{modelDocPath}}/{{classname}}.md)
+{{/model}}{{/models}}
+
+## Authentication
+
+Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API key:
+
+```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+$httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+$client = new \ApiVideo\Client\Client(
+    'https://sandbox.api.video',
+    null,
+    $httpClient
+);
+?>
+```
+
+
+## Chunks
+
+The video is automatically split into 50 Mb chunks.
+
+To modify the size of the chunks, fill in the last argument `$contentRange` as follows:
+
+- `bytes 0-{size}/0` where `{size}` is the size of the chunk.
+
+For example : `bytes 0-500000/0` for 500 Kb chunks.
+
+The chunks size value must be between 5 Mb and 128mb.
+
+## Tests
+
+In order to run the PhpUnit tests, it is necessary to enter two variables in the command line:
+
+- `BASE_URI` (for example : `https://sandbox.api.video`)
+- `API_KEY`
+
+These identifiers must belong to a real api.video account.
+
+```
+$ BASE_URI="" API_KEY="..." vendor/bin/phpunit
+```
+
+
+## Have you gotten use from this API client?
+
+Please take a moment to leave a star on the client ⭐
+
+This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
+
+# Contribution
+
+Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.
