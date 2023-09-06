@@ -13,10 +13,10 @@ The Templates are structured in a way where you can:
 
 ## VOD Templates list
 
-* Video uploader
+* [Video uploader](/vod/upload-your-first-video.md)
 * Progressive upload
-* Loom clone
-* Youtube mockup
+* [Loom clone](/vod/demo-loom-clone.md)
+* [Youtube mockup](/vod/demo-youtube-clone.md)
 * Udemy mockup
 * Airbnb mockup
 * TikTok mockup

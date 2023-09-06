@@ -10,6 +10,8 @@
 
 - heading: Templates & demos
   items:
+  - label: Overview
+    href: /vod/demos-template-overview.md
   - label: Upload a video
     href: /vod/upload-your-first-video.md
   - label: Private videos
