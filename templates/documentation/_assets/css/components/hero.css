@@ -1,0 +1,22 @@
+.hero h1 {
+  text-align: left;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--AV_Primary_Blue_Dark, #202d47) !important;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.68px;
+}
+
+.hero h1 em {
+  display: block;
+  color: var(--AV_Primary_Blue_06, rgba(65, 79, 110, 0.6));
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.68px;
+}

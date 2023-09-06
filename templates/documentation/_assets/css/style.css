@@ -8,6 +8,7 @@
   src: url("/_assets/fonts/JetBrainsMono[wght].ttf");
 }
 
+
 .callout {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -321,13 +322,6 @@
   text-align: left;
   color: #202d47;
 }
-
-.help-center {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  grid-gap: 2rem;
-}
-
 
 .content-markdown {
   padding-left: 0 !important;
