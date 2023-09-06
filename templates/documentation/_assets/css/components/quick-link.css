@@ -1,0 +1,67 @@
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-gap: 2rem;
+  margin-bottom: 2em;
+}
+
+.quick-links-item {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 20px 50px 0px rgba(59, 43, 92, 0.1),
+    0px 34px 24px -20px rgba(65, 79, 110, 0.04);
+  padding: 0 24px;
+}
+
+.quick-links-item h4 {
+  color: var(--AV_Primary_Blue_Dark, #202d47) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 18px !important;
+}
+
+.quick-links-item .color-rectancle {
+  width: 24px;
+  height: 4px;
+  flex-shrink: 0;
+  margin: 20px 0;
+}
+
+.quick-links-item.getting-started .color-rectancle {
+  background: var(
+    --AV_urp_icon,
+    linear-gradient(76deg, #642180 -24.15%, #af2a72 93.03%)
+  );
+}
+
+.quick-links-item.sdks .color-rectancle {
+  background: var(
+    --AV_CTA,
+    linear-gradient(92deg, #fa5b30 5.21%, #f7b500 186.04%)
+  );
+}
+
+.quick-links-item.understand .color-rectancle {
+  background: linear-gradient(90deg, #414f6e 0%, #2773aa 100%);
+}
+
+.quick-links-item > p {
+  border-top: 1px solid #efefef !important;
+  padding-top: 18px !important;
+}
+
+.quick-links-item > p > a.quick-links-item-line {
+  display: flex !important;
+  gap: 16px !important;
+  align-items: center !important;
+
+  text-decoration: none !important;
+  color: var(--AV_Primary_Blue, #414f6e) !important;
+}
+
+.quick-links-item a.quick-links-item-line img {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
