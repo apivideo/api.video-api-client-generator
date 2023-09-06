@@ -28,12 +28,22 @@
 
 - heading: Video ingestion & transcoding
   items:
-  - label: Regular video upload
-    href: /vod/upload-a-video-regular-upload.md
-  - label: Progressive upload
-    href: /vod/progressive-upload.md
   - label: Encoding and transcoding
     href: /vod/encoding-transcoding.md
+  - label: Regular video upload
+    href: /vod/upload-a-video-regular-upload.md
+  - label: Progressive video upload
+    href: /vod/progressive-upload.md
+  - label: Upload video from source
+    href: /vod/upload-from-source.md
+  - label: Using upload tokens
+    href: /vod/using-tokens.md
+    collapsed: true
+    items:
+    - label: Create and manage delegated upload tokens
+      href: /vod/create-and-manage-tokens-for-delegated-uploads.md
+    - label: Upload a video with a delegated token
+      href: /vod/upload-a-video-with-a-delegated-token.md
 
 - heading: Video management
   items:
