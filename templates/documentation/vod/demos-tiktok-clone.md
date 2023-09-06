@@ -32,4 +32,6 @@ $ git clone https://github.com/apivideo/tiktok_clone
 
 ## Usage
 
-{https://github.com/apivideo/tiktok_clone readme.md placeholder}
+You can find the usage instructions in the [TikTok mockup Github repository](https://github.com/apivideo/tiktok_clone#readme)
+
+

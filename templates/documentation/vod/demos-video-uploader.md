@@ -28,4 +28,4 @@ $ git clone https://github.com/apivideo/upload.a.video
 
 ## Usage
 
-{https://github.com/apivideo/upload.a.video readme.md placeholder}
+You can find the usage instructions in the [Video uploader Github repository](https://github.com/apivideo/upload.a.video#readme)

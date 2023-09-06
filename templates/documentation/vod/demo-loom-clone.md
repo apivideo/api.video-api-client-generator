@@ -35,4 +35,4 @@ $ git clone https://github.com/apivideo/api.video-typescript-media-stream-compos
 
 ## Usage
 
-{https://github.com/apivideo/api.video-typescript-media-stream-composer readme.md placeholder}
+You can find the usage instructions in the [Loom clone Github repository](https://github.com/apivideo/api.video-typescript-media-stream-composer#readme)

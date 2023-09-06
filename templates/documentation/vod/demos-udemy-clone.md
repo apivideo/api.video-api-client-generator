@@ -32,4 +32,4 @@ $ git clone https://github.com/apivideo/udemy-clone-next-typescript
 
 ## Usage
 
-{https://github.com/apivideo/udemy-clone-next-typescript readme.md placeholder}
+You can find the usage instructions in the [Udemy mockup Github repository](https://github.com/apivideo/udemy-clone-next-typescript#readme)

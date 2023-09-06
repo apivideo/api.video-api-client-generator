@@ -30,4 +30,4 @@ $ git clone https://github.com/apivideo/youtube-clone-next.git
 
 ## Usage
 
-{https://github.com/apivideo/youtube-clone-next.git readme.md placeholder}
+You can find the usage instructions in the [Youtube mockup Github repository](https://github.com/apivideo/youtube-clone-next#readme)
