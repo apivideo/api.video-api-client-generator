@@ -335,6 +335,11 @@
   border-top: 1px dashed var(--doctave-theme-content-bg-secondary);
 }
 
+.dark .section-header hr {
+  border-top: 1px dashed white !important;
+  opacity: 0.6 !important;
+}
+
 .section-header h3 {
   color: var(--AV_Primary_Blue_06, rgba(65, 79, 110, 0.60)) !important;
   font-family: JetBrains Mono, sans-serif;
@@ -347,4 +352,12 @@
   font-size: 34px !important;
   line-height: 34px !important;
   font-weight: 500 !important;
+}
+
+p {
+  font-size: 18px;
+}
+
+.dark p {
+  color: rgba(255, 255, 255, 0.70);
 }
