@@ -3,11 +3,7 @@ package video.api.client.generator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.util.Json;
 import org.apache.commons.lang3.StringUtils;
-import org.openapitools.codegen.CodegenModel;
-import org.openapitools.codegen.CodegenOperation;
-import org.openapitools.codegen.CodegenParameter;
-import org.openapitools.codegen.CodegenProperty;
-import org.openapitools.codegen.CodegenResponse;
+import org.openapitools.codegen.*;
 import org.openapitools.codegen.languages.Swift5ClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
 import org.openapitools.codegen.templating.mustache.TitlecaseLambda;
@@ -30,6 +26,7 @@ public class Swift5 extends Swift5ClientCodegen {
 
     public Swift5() {
         super();
+        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     @Override

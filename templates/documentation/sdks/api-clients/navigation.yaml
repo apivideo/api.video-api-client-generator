@@ -15,6 +15,6 @@
     - label: Java
       href: ././apivideo-java-client.md
     - label: iOS
-      href: ././ios-api-client.md
+      href: ././apivideo-swift5-client.md
     - label: Android
-      href: ././android-api-client.md
+      href: ././apivideo-android-client.md

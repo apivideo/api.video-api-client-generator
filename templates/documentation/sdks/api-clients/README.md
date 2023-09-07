@@ -25,8 +25,8 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 {% include "_partials/hagrid-item.md" title: "Java", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/java_1b6f259caf.svg", subtitle: "API client",  link: "././apivideo-java-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "API client",  link: "././ios-api-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "API client",  link: "././apivideo-swift5-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Kotlin", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "API client",  link: "././android-api-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Kotlin", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "API client",  link: "././apivideo-android-client.md" %}
 
 </div>

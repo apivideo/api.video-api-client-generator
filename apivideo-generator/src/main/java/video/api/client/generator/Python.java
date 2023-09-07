@@ -53,6 +53,7 @@ public class Python extends PythonClientCodegen {
     public Python() {
         super();
         modelTestTemplateFiles.clear();
+        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     /**

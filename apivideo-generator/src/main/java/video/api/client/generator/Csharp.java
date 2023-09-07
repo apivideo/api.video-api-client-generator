@@ -8,6 +8,7 @@ import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
 import org.openapitools.codegen.CodegenResponse;
+import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.CSharpClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
 import org.openapitools.codegen.templating.mustache.LowercaseLambda;
@@ -34,6 +35,7 @@ public class Csharp extends CSharpClientCodegen {
         super();
         this.reservedWords.remove("Version");
         packageGuid = "{" + java.util.UUID.nameUUIDFromBytes(this.packageVersion.getBytes()).toString().toUpperCase(Locale.ROOT) + "}";
+        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     @Override
