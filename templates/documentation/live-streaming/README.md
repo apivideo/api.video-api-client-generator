@@ -33,8 +33,8 @@ meta:
 </div>
 
 <div class="content-cards">
-{% include "_partials/content-card.md" label: "Live streaming quickstart", icon: "/_assets/icons/livestream-quickstart.svg", description: "api.video enables you to embed live streaming into your application or project seamlessly. Start building now!", link: "/live-streaming/create-a-live-stream.md" %}
-{% include "_partials/content-card.md" label: "Working with live streams", icon: "/_assets/icons/livestream-management.svg", description: "Learn about the different operations you can use to manage your live streams.", link: "/live-streaming/working-with-live-streams.md" %}
-{% include "_partials/content-card.md" label: "Live streaming SDKs", icon: "/_assets/icons/livestream-sdks.svg", description: "Check out api.video's dedicated libraries and SDKs for live streaming.", link: "/sdks/livestream/README.md" %}
-{% include "_partials/content-card.md" label: "No-code solutions for live streaming", icon: "/_assets/icons/no-code.svg", description: "Build your solution without code using api.video's supported no-code plugins.", link: "/sdks/nocode/README.md" %}
+{% include "_partials/content-card.md" label: "Live streaming quickstart", icon: "/_assets/icons/livestream-quickstart.svg", description: "api.video enables you to embed live streaming into your application or project seamlessly. Start building now!", link: "/live-streaming/create-a-live-stream" %}
+{% include "_partials/content-card.md" label: "Working with live streams", icon: "/_assets/icons/livestream-management.svg", description: "Learn about the different operations you can use to manage your live streams.", link: "/live-streaming/working-with-live-streams" %}
+{% include "_partials/content-card.md" label: "Live streaming SDKs", icon: "/_assets/icons/livestream-sdks.svg", description: "Check out api.video's dedicated libraries and SDKs for live streaming.", link: "/sdks/livestream" %}
+{% include "_partials/content-card.md" label: "No-code solutions for live streaming", icon: "/_assets/icons/no-code.svg", description: "Build your solution without code using api.video's supported no-code plugins.", link: "/sdks/nocode" %}
 </div>

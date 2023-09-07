@@ -62,17 +62,17 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 <div class="quick-links">
 {% capture get-started-links %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/setup-checklist.svg", label: "Start building with api.video", link: "/get-started/start-building.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/vod-quickstart.svg", label: "VOD quickstart", link: "/vod/get-started-in-5-minutes.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-quickstart.svg", label: "Live streaming quickstart", link: "/live-streaming/create-a-live-stream.md" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/setup-checklist.svg", label: "Start building with api.video", link: "/get-started/start-building" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/vod-quickstart.svg", label: "VOD quickstart", link: "/vod/get-started-in-5-minutes" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-quickstart.svg", label: "Live streaming quickstart", link: "/live-streaming/create-a-live-stream" %}
 {% endcapture %}
 
 {% capture libraries-sdks %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/github.svg", label: "API clients", link: "/sdks/api-clients.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/videos-sdks.svg", label: "Video libraries & SDKs", link: "/sdks/vod.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-sdks.svg", label: "Live streaming libraries & SDKs", link: "/sdks/livestream.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/player-sdks.svg", label: "Delivery & analytics SDKs", link: "/sdks/player.md" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/no-code.svg", label: "No-code solutions", link: "/sdks/nocode.md" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/github.svg", label: "API clients", link: "/sdks/api-clients" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/videos-sdks.svg", label: "Video libraries & SDKs", link: "/sdks/vod" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-sdks.svg", label: "Live streaming libraries & SDKs", link: "/sdks/livestream" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/player-sdks.svg", label: "Delivery & analytics SDKs", link: "/sdks/player" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/no-code.svg", label: "No-code solutions", link: "/sdks/nocode" %}
 {% endcapture %}
 
 {% capture understand-api-video %}
