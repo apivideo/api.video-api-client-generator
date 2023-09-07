@@ -3,6 +3,13 @@
   gap: 56px;
 }
 
+.dark .support-cards .support-card {
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  background: #242933;
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1),
+    0px 34px 24px -20px rgba(0, 0, 0, 0.04);
+}
+
 .support-cards .support-card {
   flex: 1;
   display: flex;
@@ -20,6 +27,10 @@
   font-weight: 600 !important;
   line-height: 18px !important; /* 100% */
   letter-spacing: -0.36px !important;
+}
+
+.dark .support-card p.support-card-label {
+    color: rgba(255, 255, 255, 0.50) !important;
 }
 
 .support-card p.support-card-label {

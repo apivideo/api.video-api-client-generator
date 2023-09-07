@@ -32,6 +32,7 @@ styles:
   - _assets/css/components/product-card.css
   - _assets/css/components/hero.css
   - _assets/css/components/content-card.css
+  - _assets/css/components/dark-light-image.css
 
 open_api:
   - spec_file: openapi.yaml
