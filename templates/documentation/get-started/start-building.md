@@ -18,26 +18,15 @@ Within this section, you can find essential insights into building with api.vide
 
 api.video is a cloud-based video hosting and live streaming platform that provides developers and businesses with an easy-to-use API to handle all video-related tasks. The platform offers a range of features to help developers and businesses manage video content, including video hosting, transcoding, player customization, live streaming, and analytics.
 
-### (TODO: quick link cards should list the nav elements of the Get started section)
+<div class="section-header"> 
 
-<div class="link-cards">
-{% capture vod-quickstart-description %}
+<hr/>
 
-Enable your users to upload and store videos, which can be easily delivered and shared across various platforms.
+## Start building with api.video
 
-<br>
+</div>
 
-{% endcapture %}
-
-{% capture live-stream-quickstart-description %}
-
-api.video provides you with the possibility to embed live streaming into your application or project seamlessly.
-
-<br>
-
-{% endcapture %}
-
-{% include "_partials/vod-quickstart-link-card.md" product: "VOD quickstart", description: vod-quickstart-description, link: "/vod/get-started-in-5-minutes.md" %}
-{% include "_partials/live-stream-quickstart-link-card.md" product: "Live stream quickstart", description: live-stream-quickstart-description, link: "/live-streaming/create-a-live-stream.md" %}
-
+<div class="content-cards">
+{% include "_partials/content-card.md" label: "VOD quickstart", icon: "/_assets/icons/vod-quickstart.svg", description: "Get up to speed about the concept of VOD through building a video uploader and a video listing service in this quickstart guide.", link: "/vod/get-started-in-5-minutes" %}
+{% include "_partials/content-card.md" label: "Live streaming quickstart", icon: "/_assets/icons/livestream-quickstart.svg", description: "api.video enables you to embed live streaming into your application or project seamlessly. Start building now!", link: "/live-streaming/create-a-live-stream" %}
 </div>
