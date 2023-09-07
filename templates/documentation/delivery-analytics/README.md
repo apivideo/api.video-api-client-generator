@@ -35,13 +35,13 @@ meta:
 </div>
 
 <div class="content-cards">
-{% include "_partials/content-card.md" label: "Best practices for delivery", icon: "/_assets/icons/js.svg", description: "Learn how to make the most of your delivery.", link: "/delivery-analytics/player-best-practices.md" %}
-{% include "_partials/content-card.md" label: "Analytics", icon: "/_assets/icons/analytics.svg", description: "Start collecting delivery event data about your videos and live streams.", link: "/delivery-analytics/analytics.md" %}
-{% include "_partials/content-card.md" label: "Using custom domains", icon: "/_assets/icons/custom-domains.svg", description: "Maintain your company branding by delivering through custom domains", link: "/delivery-analytics/using-custom-domains.md" %}
-{% include "_partials/content-card.md" label: "Domain referrer restrictions", icon: "/_assets/icons/js.svg", description: "Make sure that your videos and live streams are delivered securely, and only through your domains", link: "/delivery-analytics/domain-referrer.md" %}
-{% include "_partials/content-card.md" label: "In-stream ads", icon: "/_assets/icons/js.svg", description: "Implement in-stream ads to monetize your videos and live streams conveniently.", link: "/delivery-analytics/ads.md" %}
-{% include "_partials/content-card.md" label: "Private videos", icon: "/_assets/icons/js.svg", description: "Learn how you can secure and manage access to your videos.", link: "/delivery-analytics/private-video-get-started.md" %}
-{% include "_partials/content-card.md" label: "Player SDKs", icon: "/_assets/icons/player-sdks.svg", description: "Check out api.video's dedicated video player libraries and SDKs.", link: "/sdks/player/README.md#player-sdks" %}
-{% include "_partials/content-card.md" label: "Analytics SDKs", icon: "/_assets/icons/analytics.svg", description: "Check out api.video's dedicated libraries and SDKs for delivery analytics.", link: "/sdks/player/README.mdr#player-analytics-sdks" %}
+{% include "_partials/content-card.md" label: "Best practices for delivery", icon: "/_assets/icons/js.svg", description: "Learn how to make the most of your delivery.", link: "/delivery-analytics/player-best-practices" %}
+{% include "_partials/content-card.md" label: "Analytics", icon: "/_assets/icons/analytics.svg", description: "Start collecting delivery event data about your videos and live streams.", link: "/delivery-analytics/analytics" %}
+{% include "_partials/content-card.md" label: "Using custom domains", icon: "/_assets/icons/custom-domains.svg", description: "Maintain your company branding by delivering through custom domains", link: "/delivery-analytics/using-custom-domains" %}
+{% include "_partials/content-card.md" label: "Domain referrer restrictions", icon: "/_assets/icons/js.svg", description: "Make sure that your videos and live streams are delivered securely, and only through your domains", link: "/delivery-analytics/domain-referrer" %}
+{% include "_partials/content-card.md" label: "In-stream ads", icon: "/_assets/icons/js.svg", description: "Implement in-stream ads to monetize your videos and live streams conveniently.", link: "/delivery-analytics/ads" %}
+{% include "_partials/content-card.md" label: "Private videos", icon: "/_assets/icons/js.svg", description: "Learn how you can secure and manage access to your videos.", link: "/delivery-analytics/private-video-get-started" %}
+{% include "_partials/content-card.md" label: "Player SDKs", icon: "/_assets/icons/player-sdks.svg", description: "Check out api.video's dedicated video player libraries and SDKs.", link: "/sdks/player#player-sdks" %}
+{% include "_partials/content-card.md" label: "Analytics SDKs", icon: "/_assets/icons/analytics.svg", description: "Check out api.video's dedicated libraries and SDKs for delivery analytics.", link: "/sdks/player#player-analytics-sdks" %}
 </div>
 
