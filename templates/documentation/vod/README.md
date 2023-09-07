@@ -23,31 +23,21 @@ api.video's transcoding and delivery is one of the fastest in the market.</span
   <br />
 </p>
 
+<div class="section-header"> 
 
-
-### (TODO: quick link cards should list the nav elements of the VOD section)
+<hr/>
 
 ## Start working with api.video
 
+</div>
 
-<div class="link-cards">
-{% capture vod-quickstart-description %}
-
-Enable your users to upload and store videos, which can be easily delivered and shared across various platforms.
-
-<br>
-
-{% endcapture %}
-
-{% capture live-stream-quickstart-description %}
-
-api.video provides you with the possibility to embed live streaming into your application or project seamlessly.
-
-<br>
-
-{% endcapture %}
-
-{% include "_partials/vod-quickstart-link-card.md" product: "VOD quickstart", description: vod-quickstart-description, link: "/vod/get-started-in-5-minutes.md" %}
-{% include "_partials/live-stream-quickstart-link-card.md" product: "Live stream quickstart", description: live-stream-quickstart-description, link: "/live-streaming/create-a-live-stream.md" %}
-
+<div class="content-cards">
+{% include "_partials/content-card.md" label: "What is a video object?", icon: "/_assets/icons/video-object.svg", description: "Learn about the basic building block of api.video's VOD solution.", link: "/vod/video-object" %}
+{% include "_partials/content-card.md" label: "VOD quickstart", icon: "/_assets/icons/vod-quickstart.svg", description: "Get up to speed about the concept of VOD through building a video uploader and a video listing service in this quickstart guide.", link: "/vod/get-started-in-5-minutes" %}
+{% include "_partials/content-card.md" label: "Templates & demos", icon: "/_assets/icons/solutions-demos.svg", description: "Try api.video's interactive VOD demos, and build your own app with our free repository templates.", link: "/vod/demos-template-overview" %}
+{% include "_partials/content-card.md" label: "Video upload", icon: "/_assets/icons/video-ingestion.svg", description: "Understand the different way you can manage video ingestion using api.video.", link: "/vod/upload-a-video-regular-upload" %}
+{% include "_partials/content-card.md" label: "Using tokens", icon: "/_assets/icons/tokens.svg", description: "Learn about how api.video offers different authentication methods for video upload using tokens.", link: "/vod/using-tokens" %}
+{% include "_partials/content-card.md" label: "Video management basics", icon: "/_assets/icons/video-object-management.svg", description: "Check out this guide to understand the different operations you can use in api.video's solutions for VOD.", link: "/vod/upload-a-video-regular-upload" %}
+{% include "_partials/content-card.md" label: "VOD SDKs", icon: "/_assets/icons/videos-sdks.svg", description: "Check out api.video's dedicated libraries and SDKs for video on demand.", link: "/sdks/vod" %}
+{% include "_partials/content-card.md" label: "No-code solutions for VOD", icon: "/_assets/icons/no-code.svg", description: "Build your solution without code using api.video's supported no-code plugins.", link: "/sdks/nocode" %}
 </div>

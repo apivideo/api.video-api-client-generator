@@ -1,6 +1,25 @@
-# Introduction
+---
+title: "API reference"
+slug: "reference"
+hide_side_table_of_contents: true
+meta:
+  description: The API reference serves as a practical developers' documentation about api.video's solutions for video on demand, live streaming, and delivery.
+---
 
-This page will describe how to authenticate, setup and securely implement api.video with your product.
+<p style="font-size: 34px; font-weight: 600; text-align: left;">
+  <span style="font-size: 34px; font-weight: 600; text-align: left; ">
+    api.video </span>
+  <span style="font-size: 34px; font-weight: 600; text-align: left; color: #fa5b30; text-decoration: none;">
+    API reference</span>
+</p>
+</p>
+
+<p style="opacity: 0.8; font-size: 18px; text-align: left;">
+  <span style="opacity: 0.8; font-size: 18px; text-align: left;"
+    >This page describes how to authenticate, set up, and securely implement the api.video API solutions with your product.</span
+  >
+  <br />
+</p>
 
 api.video API is built with the [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) standard, the most common standard used today.
 

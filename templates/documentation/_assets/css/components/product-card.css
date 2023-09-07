@@ -49,7 +49,7 @@
   );
 }
 
-.product-grid-item-header.Player {
+.product-grid-item-header.Delivery {
   background: var(
     --AV_BG_Gradient,
     radial-gradient(
