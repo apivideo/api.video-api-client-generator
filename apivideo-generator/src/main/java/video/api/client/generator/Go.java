@@ -31,6 +31,7 @@ public class Go extends GoClientCodegen {
     public Go() {
         apiNameSuffix = "";
         typeMapping.put("DateTime", "string");
+        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     public CodegenProperty fromProperty(String name, Schema p) {

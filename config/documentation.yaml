@@ -1,6 +1,0 @@
-licenseName: MIT
-gitRepoId: api.video-documentation
-
-files:
-  post-generate.sh:
-    destinationFilename: post-generate.sh

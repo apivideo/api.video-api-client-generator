@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
+import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.JavaClientCodegen;
 import org.openapitools.codegen.templating.mustache.IndentedLambda;
 import org.openapitools.codegen.templating.mustache.LowercaseLambda;
@@ -23,6 +24,7 @@ public class Java extends JavaClientCodegen {
     public Java() {
         super();
         this.modelTestTemplateFiles.remove("model_test.mustache");
+        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     @Override

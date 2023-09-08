@@ -85,6 +85,12 @@ jobs:
           assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
   #          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }} #TODO
   #          draft: true
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.profile.name }}-documentation-artifact
+          path: |
+            ${{ env.CLIENT_PATH }}/documentation.md
       - name: Check tests results
         uses: apivideo/api.video-pull-checks-conclusion-action@v1.0.0
         if: ${{ steps.cpr.outputs.pull-request-head-sha }}
@@ -93,6 +99,58 @@ jobs:
           repo: ${{ matrix.profile.repository }}
           owner: ${{ github.repository_owner }}
           sha: ${{ steps.cpr.outputs.pull-request-head-sha }}
+
+  generate_documentation:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    needs: [update_client_pr]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+      # print a debug message
+      - run: |
+          for dir in *-documentation-artifact; do
+            if [ -d "$dir" ]; then
+                prefix=$(echo "$dir" | sed 's/-documentation-artifact//')
+                
+                if [ -f "$dir/documentation.md" ]; then
+                    cp "$dir/documentation.md" "templates/documentation/sdks/api-clients/apivideo-${prefix}-client.md"
+                fi
+            fi
+          done
+        
+          ls -la templates/documentation/sdks/api-clients/
+        
+      - name: Checkout client repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository_owner }}/api.video-documentation
+          token: ${{ secrets.PAT }}
+          path: generated-clients/documentation
+      - name: Copy documentation files
+        run: |
+          cp -R templates/documentation/* generated-clients/documentation
+          cp -R templates/documentation/.github generated-clients/documentation
+          cp -R oas_apivideo.yaml generated-clients/documentation/openapi.yaml
+      - uses: peter-evans/create-pull-request@v3
+        id: cpr
+        with:
+          token: ${{ secrets.PAT }}
+          path: generated-clients/documentation
+          commit-message: ${{ github.event.pull_request.title }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: ${{ github.event.pull_request.head.ref }}
+          title: ${{ github.event.pull_request.title }}
+          body: |
+            > ${{ github.event.pull_request.body }}
+            > Created by @${{ github.actor }} via ${{ github.event.pull_request.html_url }}
+          delete-branch: true
+          labels: ${{ join(github.event.pull_request.labels.*.name) }}
+          assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
+      
 
   merge_client_pr:
     # this job will only run if the PR has been merged
@@ -156,3 +214,11 @@ jobs:
             } else {
               console.log(`There are no PRs from branch ${context.payload.pull_request.head.ref} on ${process.env.CLIENT_REPOSITORY} repository.`);
             }
+
+            for f of *; do
+              case $f in 
+                *-clients)
+                  print $f
+                  ;;
+              esac
+            done

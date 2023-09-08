@@ -18,6 +18,8 @@
     href: /delivery-analytics/video-privacy-access-management.md
     collapsed: true
     items:
+    - label: Get started with private videos
+      href: /delivery-analytics/private-video-get-started.md
     - label: Delivery with api.video players
       href: /delivery-analytics/private-video-delivery-web-browser.md
     - label: Delivery with hls or external players
@@ -52,5 +54,3 @@
     items:
     - label: How to - analytics with api.video Player SDK
       href: /delivery-analytics/how-to-player-sdk-analytics.md
-    - label: Using video metadata for analytics
-      href: /delivery-analytics/using-video-metadata.md

@@ -65,8 +65,8 @@ testPackage: test
 #apiTestFileFolder:
 #modelTestFileFolder:
 #docPackage: doc/
-apiDocFileFolder: doc/api
-modelDocFileFolder: doc/model
+apiDocFileFolder: docs/api
+modelDocFileFolder: docs/model
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
@@ -74,17 +74,17 @@ maxChunkSize: 128 * 1024 * 1024
 ignoredFiles:
   # This shouldn't be needed.
   # These files should be automatically excluded from supporting files since they are configured in files.
-  - doc/api/api_doc.md.mustache
-  - doc/model/model_doc.md.mustache
+  - docs/api/api_doc.md.mustache
+  - docs/model/model_doc.md.mustache
   - src/api/api.ts.mustache
   - src/model/model.ts.mustache
 
 # `templateType` can be any of the following:
 # API Model APIDocs ModelDocs APITests ModelTests SupportingFiles
 files:
-  doc/api/api_doc.md.mustache:
+  docs/api/api_doc.md.mustache:
     templateType: APIDocs
-  doc/model/model_doc.md.mustache:
+  docs/model/model_doc.md.mustache:
     templateType: ModelDocs
   src/api/api.ts.mustache:
     templateType: API

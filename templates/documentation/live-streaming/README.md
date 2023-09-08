@@ -24,31 +24,17 @@ meta:
   <br />
 </p>
 
+<div class="section-header"> 
 
+<hr/>
 
-### (TODO: quick link cards should list the nav elements of the Live stream section)
+## Start streaming with api.video
 
-## Start working with api.video
+</div>
 
-
-<div class="link-cards">
-{% capture vod-quickstart-description %}
-
-Enable your users to upload and store videos, which can be easily delivered and shared across various platforms.
-
-<br>
-
-{% endcapture %}
-
-{% capture live-stream-quickstart-description %}
-
-api.video provides you with the possibility to embed live streaming into your application or project seamlessly.
-
-<br>
-
-{% endcapture %}
-
-{% include "_partials/vod-quickstart-link-card.md" product: "VOD quickstart", description: vod-quickstart-description, link: "/vod/get-started-in-5-minutes.md" %}
-{% include "_partials/live-stream-quickstart-link-card.md" product: "Live stream quickstart", description: live-stream-quickstart-description, link: "/live-streaming/create-a-live-stream.md" %}
-
+<div class="content-cards">
+{% include "_partials/content-card.md" label: "Live streaming quickstart", icon: "/_assets/icons/livestream-quickstart.svg", description: "api.video enables you to embed live streaming into your application or project seamlessly. Start building now!", link: "/live-streaming/create-a-live-stream" %}
+{% include "_partials/content-card.md" label: "Working with live streams", icon: "/_assets/icons/livestream-management.svg", description: "Learn about the different operations you can use to manage your live streams.", link: "/live-streaming/working-with-live-streams" %}
+{% include "_partials/content-card.md" label: "Live streaming SDKs", icon: "/_assets/icons/livestream-sdks.svg", description: "Check out api.video's dedicated libraries and SDKs for live streaming.", link: "/sdks/livestream" %}
+{% include "_partials/content-card.md" label: "No-code solutions for live streaming", icon: "/_assets/icons/no-code.svg", description: "Build your solution without code using api.video's supported no-code plugins.", link: "/sdks/nocode" %}
 </div>

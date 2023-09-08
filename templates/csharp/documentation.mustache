@@ -1,0 +1,190 @@
+---
+title: "C# API client"
+slug: "csharp-api-client"
+hidden: false
+metadata:
+description: "The official C# client for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+---
+
+C# API Client
+==============
+
+# Getting started
+
+## Requirements
+
+### Frameworks supported
+
+{{#netStandard}}
+
+- .NET Core >=1.0
+- .NET Framework >=4.6
+- Mono/Xamarin >=vNext
+- UWP >=10.0
+{{/netStandard}}
+{{^netStandard}}
+{{^supportsUWP}}
+
+- .NET 4.0 or later
+- Windows Phone 7.1 (Mango)
+{{/supportsUWP}}
+{{#supportsUWP}}
+
+- UWP
+{{/supportsUWP}}
+{{/netStandard}}
+
+### Dependencies
+
+{{^netStandard}}
+
+- [RestSharp](https://www.nuget.org/packages/RestSharp) - 105.1.0
+- [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/) - 7.0.0 or later
+- [JsonSubTypes](https://www.nuget.org/packages/JsonSubTypes/) - 1.2.0 or later
+
+We recommend using [NuGet](https://docs.nuget.org/consume/installing-nuget) to obtain the packages:
+
+```
+Install-Package RestSharp
+Install-Package Newtonsoft.Json
+Install-Package JsonSubTypes
+```
+
+NOTE: RestSharp versions greater than 105.1.0 have a bug which causes file uploads to fail. See [RestSharp#742](https://github.com/restsharp/RestSharp/issues/742)
+{{/netStandard}}
+
+## Installation
+
+### Using Nuget
+
+```
+Install-Package {{packageName}}
+```
+
+### Generating the DLL yourself
+
+Generate the DLL using your preferred tool
+
+Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
+
+```csharp
+using {{packageName}}.{{apiPackage}};
+using {{packageName}}.Client;
+using {{packageName}}.{{modelPackage}};
+
+```
+
+## Code sample
+
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System;
+using System.IO;
+using {{packageName}}.{{apiPackage}};
+using {{packageName}}.Client;
+using {{packageName}}.{{modelPackage}};
+
+namespace Example
+{
+    public class {{operationId}}Example
+    {
+        public static void Main()
+        {
+            var apiKey = "YOUR_API_KEY";
+
+            var apiVideoClient = new ApiVideoClient(apiKey);
+            // if you rather like to use the sandbox environment:
+            // var apiVideoClient = new ApiVideoClient(apiKey, ApiVideo.Client.Environment.SANDBOX);
+
+            var videoPayload = new VideoCreationPayload()
+            {
+                title = "Example video title",
+                description = "Example video description",
+                mp4support = true,
+                tags = new List<string>()
+                {
+                    "first","video","test","c#","client"
+                }
+            };
+
+            var myVideoFile = File.OpenRead("my-video.mp4");
+
+            try {
+                var newVideo = apiVideoClient.Videos().create(videoPayload);
+                var video = apiVideoClient.Videos().upload(newVideo.videoid,myVideoFile);
+                Console.WriteLine(video);
+            } catch (ApiException e) {
+                Console.WriteLine(e.ErrorCode);
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+# Documentation
+
+## API Endpoints
+
+All URIs are relative to *{{{basePath}}}*
+
+
+{{#apiInfo}}
+{{#apis}}
+{{^x-client-hidden}}
+
+### {{classname}}
+
+
+#### Retrieve an instance of {{classname}}:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
+{{classname}} {{classVarName}} = client.{{# lambda.titlecase }}{{classVarName}}{{/ lambda.titlecase }}()
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/api.video-csharp-client/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}
+{{/x-client-hidden}}{{/apis}}{{/apiInfo}}
+
+## Models
+
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/api.video-csharp-client/blob/main/{{modelDocPath}}{{classname}}.md)
+{{/model}}{{/models}}
+
+## Authorization
+
+### API key
+
+Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
+The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key when instantiating the ApiVideoClient:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
+```
+
+### Public endpoints
+
+Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API key:
+```java
+ApiVideoClient apiVideoClient = new ApiVideoClient();
+```
+
+## Recommendation
+
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+
+## Have you gotten use from this API client?
+
+Please take a moment to leave a star on the client ⭐
+
+This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
+
+
+# Contribution
+
+Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.
