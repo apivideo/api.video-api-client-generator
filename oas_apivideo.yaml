@@ -56,7 +56,7 @@ paths:
                     status: 400
       x-client-action: authenticate
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -131,7 +131,7 @@ paths:
                     name: ''
       x-client-action: refresh
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -368,7 +368,7 @@ paths:
                           max: 100
       security:
         - apiKey: []
-      x-readme:
+      x-doctave:
         code-samples:
           - language: php
             code: |
@@ -548,7 +548,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -903,7 +903,7 @@ paths:
         - apiKey: []
       x-client-action: upload
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         explorer-enabled: false
         code-samples:
           - language: go
@@ -1138,7 +1138,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -1403,7 +1403,7 @@ paths:
         - apiKey: []
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: node
             code: |
@@ -1497,7 +1497,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: node
             code: |-
@@ -1642,7 +1642,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: uploadThumbnail
-      x-readme:
+      x-doctave:
         explorer-enabled: false
         code-samples:
           - language: go
@@ -1892,7 +1892,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: pickThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -2141,7 +2141,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -2334,7 +2334,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -2576,7 +2576,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -2868,7 +2868,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: getStatus
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -3095,7 +3095,7 @@ paths:
       x-client-paginated: true
       x-optional-object: true
       x-client-action: list
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -3317,7 +3317,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: createToken
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -3521,7 +3521,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: getToken
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -3706,7 +3706,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: deleteToken
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -3935,7 +3935,7 @@ paths:
       security: []
       x-client-action: uploadWithUploadToken
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -4105,7 +4105,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-optional-object: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -4386,7 +4386,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -4593,7 +4593,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -4804,7 +4804,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -5036,7 +5036,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -5330,7 +5330,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: uploadThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -5537,7 +5537,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: deleteThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -5748,7 +5748,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -5966,7 +5966,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -6170,7 +6170,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -6400,7 +6400,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -6638,7 +6638,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -6847,7 +6847,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -7066,7 +7066,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -7271,7 +7271,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -7482,7 +7482,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -7768,7 +7768,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-optional-object: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -7989,7 +7989,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -8286,7 +8286,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -8472,7 +8472,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -8683,7 +8683,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -8963,7 +8963,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: uploadLogo
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -9175,7 +9175,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: deleteLogo
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -9555,7 +9555,7 @@ paths:
       x-client-action: getVideosPlays
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -9876,7 +9876,7 @@ paths:
       x-client-action: listVideoSessions
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -10309,7 +10309,7 @@ paths:
       x-client-action: getLiveStreamsPlays
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -10618,7 +10618,7 @@ paths:
       x-client-action: listLiveStreamSessions
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -10945,7 +10945,7 @@ paths:
       x-client-action: listSessionEvents
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -11186,7 +11186,7 @@ paths:
       x-client-paginated: true
       x-optional-object: true
       x-client-action: list
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -11413,7 +11413,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -11620,7 +11620,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -11807,7 +11807,7 @@ paths:
       security:
         - apiKey: []
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
           - language: go
             code: |
@@ -13807,7 +13807,7 @@ components:
 x-client-base-paths:
   production: 'https://ws.api.video'
   sandbox: 'https://sandbox.api.video'
-x-readme:
+x-doctave:
   explorer-enabled: true
   proxy-enabled: true
   samples-enabled: true
