@@ -4059,7 +4059,6 @@ paths:
                           streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
                         name: Live Stream From the browser
                         public: true
-                        record: true
                         broadcasting: false
                         assets:
                           iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
@@ -4079,7 +4078,6 @@ paths:
                           streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                         name: Live From New York
                         public: true
-                        record: true
                         broadcasting: false
                         assets:
                           iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
@@ -4399,7 +4397,6 @@ paths:
 
               liveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}
               liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your live stream here.
-              liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
               liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
               liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
               liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
@@ -4419,7 +4416,6 @@ paths:
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const liveStreamCreationPayload = {
-                  record: false, // Whether you are recording or not. True for record, false for not record.
                   name: "My Live Stream", // Add a name for your live stream here.
                   _public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. 
                   playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
@@ -4444,7 +4440,6 @@ paths:
 
               with AuthenticatedApiClient("YOUR_API_KEY") as api_client:
                   live_stream_creation_payload = LiveStreamCreationPayload(
-                      record=False,
                       name="My Live Stream Video",
                       public=True,
                       player_id="pl4f4ferf5erfr5zed4fsdd",
@@ -4472,7 +4467,6 @@ paths:
               ApiVideoClient client = new ApiVideoClient("YOUR_API_KEY");
 
               LiveStreamCreationPayload liveStreamCreationPayload = new LiveStreamCreationPayload(); 
-              liveStreamCreationPayload.setRecord(true); // Whether you are recording or not. True for record, false for not record.
               liveStreamCreationPayload.setName("My Live Stream Video"); // Add a name for your live stream here.
               liveStreamCreationPayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it.
               liveStreamCreationPayload.setPlayerId("pl4f4ferf5erfr5zed4fsdd"); // The unique identifier for the player.
@@ -4498,7 +4492,6 @@ paths:
 
               var liveStreamCreationPayload = new LiveStreamCreationPayload()
               {
-                  record = false,
                   name = "My Live Stream Video",
                   _public = true,
                   playerid = "pl4f4ferf5erfr5zed4fsdd",
@@ -4530,7 +4523,6 @@ paths:
               );
 
               $liveStream = $client->liveStreams()->create((new \ApiVideo\Client\Model\LiveStreamCreationPayload())
-                  ->setRecord(false) // Whether you are recording or not. True for record, false for not record.
                   ->setName("My Live Stream Video") // Add a name for your live stream here.
                   ->setPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it. 
                   ->setPlayerId("pl4f4ferf5erfr5zed4fsdd")); // The unique identifier for the player.
@@ -4545,7 +4537,6 @@ paths:
 
               let liveStreamCreationPayload = LiveStreamCreationPayload(
                   name: "My Live Stream Video",
-                  record: false,
                   _public: true,
                   playerId: "pl4f4ferf5erfr5zed4fsdd",
                   restreams: [RestreamsRequestObject(
@@ -4963,7 +4954,7 @@ paths:
       parameters:
         - name: liveStreamId
           in: path
-          description: 'The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.'
+          description: 'The unique ID for the live stream that you want to update information for such as player details.'
           required: true
           style: simple
           explode: false
@@ -5057,10 +5048,9 @@ paths:
                   // if you rather like to use the sandbox environment:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
-                  liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+                  liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details.
                   liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}
                   liveStreamUpdatePayload.SetName("My Live Stream Video") // The name you want to use for your live stream.
-                  liveStreamUpdatePayload.SetRecord(false) // Use this to indicate whether you want the recording on or off. On is true, off is false.
                   liveStreamUpdatePayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
                   liveStreamUpdatePayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique ID for the player associated with a live stream that you want to update.
                   liveStreamUpdatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
@@ -5082,11 +5072,10 @@ paths:
 
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
-              const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+              const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details.
               const liveStreamUpdatePayload = {
                 name: "My Live Stream Video", // The name you want to use for your live stream.
                 _public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. 
-                record: true, // Use this to indicate whether you want the recording on or off. On is true, off is false.
                 playerId: "pl45KFKdlddgk654dspkze", // The unique ID for the player associated with a live stream that you want to update.
                 restreams: [ // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
                   {
@@ -5114,11 +5103,10 @@ paths:
               with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
                   # Create an instance of the API class
                   api_instance = live_streams_api.LiveStreamsApi(api_client)
-                  live_stream_id = "li400mYKSgQ6xs7taUeSaEKr" # str | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+                  live_stream_id = "li400mYKSgQ6xs7taUeSaEKr" # str | The unique ID for the live stream that you want to update information for such as player details.
                   live_stream_update_payload = LiveStreamUpdatePayload(
                       name="My Live Stream Video",
                       public=True,
-                      record=True,
                       player_id="pl45KFKdlddgk654dspkze",
                       restreams=[
                           RestreamsRequestObject(
@@ -5156,11 +5144,10 @@ paths:
 
                   LiveStreamsApi apiInstance = client.liveStreams();
                   
-                  String liveStreamId = "li400mYKSgQ6xs7taUeSaEKr"; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+                  String liveStreamId = "li400mYKSgQ6xs7taUeSaEKr"; // The unique ID for the live stream that you want to update information for such as player details.
                   LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload(); // 
                   liveStreamUpdatePayload.setName("My Live Stream Video"); // The name you want to use for your live stream.
                   liveStreamUpdatePayload.setPublic(); // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-                  liveStreamUpdatePayload.setRecord(true); // Use this to indicate whether you want the recording on or off. On is true, off is false.
                   liveStreamUpdatePayload.setPlayerId("pl45KFKdlddgk654dspkze"); // The unique ID for the player associated with a live stream that you want to update.
                   liveStreamUpdatePayload.setRestreams(Collections.singletonList(new RestreamsRequestObject() // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
                         .name("My RTMP server")
@@ -5199,7 +5186,7 @@ paths:
 
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
-                          var liveStreamId = li400mYKSgQ6xs7taUeSaEKr;  // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+                          var liveStreamId = li400mYKSgQ6xs7taUeSaEKr;  // string | The unique ID for the live stream that you want to update information for such as player details.
                           var liveStreamUpdatePayload = new LiveStreamUpdatePayload(); // LiveStreamUpdatePayload | 
                           var apiLiveStreamsInstance = apiInstance.LiveStreams();
                           try
@@ -5231,12 +5218,11 @@ paths:
                   new \Symfony\Component\HttpClient\Psr18Client()
               ); 
 
-              $liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+              $liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details.
 
               $liveStreamUpdatePayload = (new \ApiVideo\Client\Model\LiveStreamUpdatePayload())
                   ->setName("My Live Stream Video") // The name you want to use for your live stream.)
                   ->setPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it. )
-                  ->setRecord(true) // Use this to indicate whether you want the recording on or off. On is true, off is false.)
                   ->setPlayerId("pl45KFKdlddgk654dspkze") // The unique ID for the player associated with a live stream that you want to update.)
                   ->setRestreams(array(
                     new RestreamsRequestObject(['name' => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app', 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));
@@ -5250,10 +5236,9 @@ paths:
 
               ApiVideoClient.apiKey = "YOUR_API_KEY"
 
-              let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+              let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details.
               let liveStreamUpdatePayload = LiveStreamUpdatePayload(
                   name: "My Live Stream Video",
-                  record: false,
                   _public: true,
                   playerId: "pl4f4ferf5erfr5zed4fsdd",
                   restreams: [RestreamsRequestObject(
@@ -11050,7 +11035,6 @@ components:
           streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         name: Live From New York
         public: true
-        record: true
         broadcasting: false
         assets:
           iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
@@ -11620,10 +11604,6 @@ components:
           type: string
           description: 'The unique, private stream key that you use to begin streaming.'
           example: dw-dew8-q6w9-k67w-1ws8
-        record:
-          type: boolean
-          description: Whether you are recording or not.
-          example: true
         public:
           type: boolean
           description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
@@ -12128,11 +12108,6 @@ components:
           type: string
           description: Add a name for your live stream here.
           example: My Live Stream Video
-        record:
-          type: boolean
-          description: 'Whether you are recording or not. True for record, false for not record.'
-          example: true
-          default: false
         public:
           type: boolean
           description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
@@ -12148,7 +12123,6 @@ components:
             $ref: '#/components/schemas/restreams-request-object'
       example:
         name: Test live
-        record: true
         playerId: pl4f4ferf5erfr5zed4fsdd
         restreams:
            - name: YouTube
@@ -12168,10 +12142,6 @@ components:
         public:
           type: boolean
           description: 'Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).'
-        record:
-          type: boolean
-          description: 'Use this to indicate whether you want the recording on or off. On is true, off is false.'
-          example: true
         playerId:
           type: string
           description: The unique ID for the player associated with a live stream that you want to update.
