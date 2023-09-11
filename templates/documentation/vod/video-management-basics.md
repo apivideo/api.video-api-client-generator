@@ -15,14 +15,14 @@ Before jumping into the different operations, follow these steps to set up your 
 
 The clients offered by api.video include:
 
-- [NodeJS](/sdks/api-clients/apivideo-nodejs-client.md)
-- [Python](/sdks/api-clients/apivideo-python-client.md)
-- [PHP](/sdks/api-clients/apivideo-php-client.md)
-- [Go](/sdks/api-clients/apivideo-go-client.md)
-- [C#](/sdks/api-clients/apivideo-csharp-client.md)
-- [Java](/sdks/api-clients/apivideo-java-client.md)
-- [iOS](/sdks/api-clients/ios-api-client.md)
-- [Android](/sdks/api-clients/android-api-client.md)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 
 ### Install
