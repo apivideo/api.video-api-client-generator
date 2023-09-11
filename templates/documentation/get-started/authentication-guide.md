@@ -1,6 +1,9 @@
 ---
 title: "Authentication and refresh tokens"
+meta:
+  description: This page explains how clients should use access and refresh tokens to authenticate their requests to the api.video APIs.
 ---
+
 Authentication and refresh tokens
 =================================
 
@@ -13,7 +16,7 @@ This guide shows the corresponding cURL commands for each part of the tutorial w
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-## Associated API reference documentation
+## API documentation
 
 - [Authenticate](/reference/api/Advanced-authentication#get-bearer-token)
 - [Refresh token](/reference/api/Advanced-authentication#refresh-bearer-token)
@@ -25,21 +28,33 @@ We offer blog content on this topic:
 - [Authentication steps](https://api.video/blog/tutorials/authentication-tutorial) - A walkthrough for authentication using cURL.
 - [You shall not pass: The benefits of token based authentication](https://api.video/blog/video-trends/you-shall-not-pass-the-benefits-of-token-based-authentication) - A discussion about what tokens are and what kinds of authentication api.video uses.
 
+## Create an account
+
+Before you can start uploading your first video, you need to [create an api.video account](https://dashboard.api.video/register). 
+
+Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
+
+![](/_assets/retrieve-api-key.png)
+
 ## Choose an api.video client
 
 The clients offered by api.video include:
 
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
+- [NodeJS](/sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](/sdks/api-clients/apivideo-python-client.md)
+- [PHP](/sdks/api-clients/apivideo-php-client.md)
+- [Go](/sdks/api-clients/apivideo-go-client.md)
+- [C#](/sdks/api-clients/apivideo-csharp-client.md)
+- [Java](/sdks/api-clients/apivideo-java-client.md)
+- [iOS](/sdks/api-clients/ios-api-client.md)
+- [Android](/sdks/api-clients/android-api-client.md)
 
-## Installation
+## Install
 
 To install your selected client, do the following: 
 
 {% capture samples %}
+
 ```go
 go get github.com/apivideo/api.video-go-client
 ```
@@ -61,19 +76,9 @@ Using Nuget
   
 Install-Package ApiVideo
 ```
+
 {% endcapture %}
-{% include "_partials/code-tabs.md" samples: samples %}
-
-## Retrieve your API key
-
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
-
-1. Log in to the api.video dashboard. 
-2. From the list of choices on the left, make sure you are on **API Keys** 
-3. You will always be able to choose to use your Sandbox API key. If you want to use the Production API key instead, select a plan and enter your credit card information. 
-4. Grab the key you want, and you're ready to get started! 
-
-![](/_assets/retrieve-api-key.png)
+{% include "_partials/code-tabs.html" content: samples %}
 
 ## Authenticate
 
