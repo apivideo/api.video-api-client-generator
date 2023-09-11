@@ -175,3 +175,4 @@ The `yml` config file -- is loaded in the `CodegenConfigurator` class via the `f
 Each entry under the `files` key of the `yml` configuration file is used to build a `TemplateDefinition` object.
 If not specified otherwise the file is treated as a `SupportingFile`.
 
+ 

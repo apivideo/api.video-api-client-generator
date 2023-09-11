@@ -48,10 +48,8 @@
     href: /vod/using-tokens.md
     collapsed: true
     items:
-    - label: Create and manage delegated upload tokens
-      href: /vod/create-and-manage-tokens-for-delegated-uploads.md
-    - label: Upload a video with a delegated token
-      href: /vod/upload-a-video-with-a-delegated-token.md
+    - label: Delegated upload tokens
+      href: /vod/delegated-upload-tokens.md
 
 - heading: Video management
   items:

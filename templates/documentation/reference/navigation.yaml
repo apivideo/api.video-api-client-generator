@@ -64,38 +64,20 @@
       items:
         - label: Invalid API key
           href: ./authentication-invalid-api-key-1.md
-          collapsed: true
-          items:
-            - label: Invalid Access Token
-              href: ./authentication-invalid-access-token-1.md
-              collapsed: true
-              items: 
-                - label: Invalid Upload Token
-                  href: ./authentication-invalid-upload-token-1.md
-            - label: Invalid Refresh Token
-              href: ./authentication-invalid-refresh-token-1.md
-            - label: Invalid Authorization Header Value
-              href: ./authentication-invalid-authorization-header-value-1.md
-            - label: Missing Authorization Header
-              href: ./authentication-missing-authorization-header-1.md
-            - label: Missing upload token
-              href: ./authentication-missing-upload-token-1.md
-            - label: Suspended account
-              href: ./authorization-suspended-account-1.md
-            - label: Invalid Access Token
-              href: ./authentication-invalid-access-token-1.md
-            - label: Invalid Upload Token
-              href: ./authentication-invalid-upload-token-1.md
-            - label: Invalid Refresh Token
-              href: ./authentication-invalid-refresh-token-1.md
-            - label: Invalid Authorization Header Value
-              href: ./authentication-invalid-authorization-header-value-1.md
-            - label: Missing Authorization Header
-              href: ./authentication-missing-authorization-header-1.md
-            - label: Missing upload token
-              href: ./authentication-missing-upload-token-1.md
-            - label: Suspended account
-              href: ./authorization-suspended-account-1.md
+        - label: Invalid Access Token
+          href: ./authentication-invalid-access-token-1.md
+        - label: Invalid Upload Token
+          href: ./authentication-invalid-upload-token-1.md
+        - label: Invalid Refresh Token
+          href: ./authentication-invalid-refresh-token-1.md
+        - label: Invalid Authorization Header Value
+          href: ./authentication-invalid-authorization-header-value-1.md
+        - label: Missing Authorization Header
+          href: ./authentication-missing-authorization-header-1.md
+        - label: Missing upload token
+          href: ./authentication-missing-upload-token-1.md
+        - label: Suspended account
+          href: ./authorization-suspended-account-1.md
     - label: General Errors
       href: ./general-errors.md
       collapsed: true

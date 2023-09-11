@@ -351,4 +351,3 @@ You can do many things to manage existing videos in your [api.video](http://api.
 - [Pick a thumbnail for a video](/reference/api/Videos#set-a-thumbnail) (API)
 - [Retrieve a video](/reference/api/Videos#retrieve-a-video-object) (API)
 - [Retrieve a video status](/reference/api/Videos#retrieve-video-status-and-details) (API)
-- [Retrieve raw statistics about your video](/reference/api/Raw-statistics#list-video-player-sessions) (API)
