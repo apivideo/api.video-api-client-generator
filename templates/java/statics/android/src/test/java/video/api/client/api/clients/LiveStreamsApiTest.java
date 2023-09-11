@@ -125,7 +125,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
             assertThat(res.getItems()).containsExactlyElementsIn(Arrays.asList(new LiveStream()
                     .updatedAt(OffsetDateTime.parse("2020-03-09T13:19:43Z"))
                     .createdAt(OffsetDateTime.parse("2020-01-31T10:17:47Z")).liveStreamId("li400mYKSgQ6xs7taUeSaEKr")
-                    .streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332").name("Live Stream From the browser").record(true)
+                    .streamKey("30087931-229e-42cf-b5f9-e91bcc1f7332").name("Live Stream From the browser")
                     .broadcasting(false)._public(true)
                     .assets(new LiveStreamAssets().iframe(
                             "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
@@ -142,7 +142,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     new LiveStream().updatedAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
                             .createdAt(OffsetDateTime.parse("2020-07-29T10:45:35Z"))
                             .liveStreamId("li4pqNqGUkhKfWcBGpZVLRY5").streamKey("cc1b4df0-d1c5-4064-a8f9-9f0368385135")
-                            .name("Live From New York").record(true).broadcasting(false)._public(true)
+                            .name("Live From New York").broadcasting(false)._public(true)
                             .assets(new LiveStreamAssets().iframe(
                                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
@@ -186,7 +186,6 @@ public class LiveStreamsApiTest extends AbstractApiTest {
             assertThat(res.getLiveStreamId()).isEqualTo("li4pqNqGUkhKfWcBGpZVLRY5");
             assertThat(res.getStreamKey()).isEqualTo("cc1b4df0-d1c5-4064-a8f9-9f0368385135");
             assertThat(res.getName()).isEqualTo("Live From New York");
-            assertThat(res.getRecord()).isEqualTo(true);
             assertThat(res.getBroadcasting()).isEqualTo(false);
             assertThat(res.getAssets()).isEqualTo(new LiveStreamAssets().iframe(
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
@@ -226,7 +225,6 @@ public class LiveStreamsApiTest extends AbstractApiTest {
             assertThat(res.getLiveStreamId()).isEqualTo("li4pqNqGUkhKfWcBGpZVLRY5");
             assertThat(res.getStreamKey()).isEqualTo("cc1b4df0-d1c5-4064-a8f9-9f0368385135");
             assertThat(res.getName()).isEqualTo("Live From New York");
-            assertThat(res.getRecord()).isEqualTo(true);
             assertThat(res.getBroadcasting()).isEqualTo(false);
             assertThat(res.getAssets()).isEqualTo(new LiveStreamAssets().iframe(
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
@@ -278,7 +276,6 @@ public class LiveStreamsApiTest extends AbstractApiTest {
             assertThat(res.getLiveStreamId()).isEqualTo("li4pqNqGUkhKfWcBGpZVLRY5");
             assertThat(res.getStreamKey()).isEqualTo("cc1b4df0-d1c5-4064-a8f9-9f0368385135");
             assertThat(res.getName()).isEqualTo("Live From New York");
-            assertThat(res.getRecord()).isEqualTo(true);
             assertThat(res.getBroadcasting()).isEqualTo(false);
             assertThat(res.getAssets()).isEqualTo(new LiveStreamAssets().iframe(
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
