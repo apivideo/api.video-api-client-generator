@@ -1,72 +1,27 @@
 ---
 title: "Authentication and refresh tokens"
 ---
-Authentication and refresh tokens
-=================================
+# Authenticating with api.video API
 
-With api.video, every call to the API requires authentication. We use Bearer authentication for everything, so on your first request, you send your API key in an authorization header and get back an access token and a refresh token. The access token lasts for one hour. The refresh token lasts until you make a new call to the API to get an access token, or you send in your API key again to get an access token and refresh token. 
+With api.video, every call to the API requires authentication. In order to authenticate against the API, you have two options at your disposal:
 
-Bearer authentication is simple to set up and use; however, we encourage you to use one of our clients if possible. api.video clients handle authentication for you, including renewing your token as needed. This guide will show you how to quickly install the client of your choice and provide the code snippet you'll need for authentication. 
+1. [Basic Authentication](/reference/basic-authentication)
+2. [Bearer token authentication](/reference/disposable-bearer-token-authentication)
+
+Each of these methods has its advantages. You can choose either of the authentication methods that suit your security needs. 
 
 {% capture content %}
-This guide shows the corresponding cURL commands for each part of the tutorial where appropriate.
+When using the [api.video client libraries](/sdks/api-clients), the Disposable Bearer token will be applied by default.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-## Associated API reference documentation
+* Basic authentication is great for quick testing (with Postman for example) and will be quicker to implement if you decide to write your own wrapper for the API.
 
-- [Authenticate](/reference/api/Advanced-authentication#get-bearer-token)
-- [Refresh token](/reference/api/Advanced-authentication#refresh-bearer-token)
+* Disposable bearer token authentication is more secure, and as it is built into the [api.video client libraries](/sdks/api-clients), it would be our recommended method of authentication. While it's a bit more complex to implement if you decide to write your own wrapper for the API.
 
-## Resources
+## Retrieve your api.video API key
 
-We offer blog content on this topic: 
-
-- [Authentication steps](https://api.video/blog/tutorials/authentication-tutorial) - A walkthrough for authentication using cURL.
-- [You shall not pass: The benefits of token based authentication](https://api.video/blog/video-trends/you-shall-not-pass-the-benefits-of-token-based-authentication) - A discussion about what tokens are and what kinds of authentication api.video uses.
-
-## Choose an api.video client
-
-The clients offered by api.video include:
-
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
-
-## Installation
-
-To install your selected client, do the following: 
-
-{% capture samples %}
-```go
-go get github.com/apivideo/api.video-go-client
-```
-```php
-composer require api-video/php-api-client
-```
-```javascript
-npm install @api.video/nodejs-client --save
-
-...or with yarn: 
-  
-yarn add @api.video/nodejs-client
-```
-```python
-pip install api.video
-```
-```csharp
-Using Nuget
-  
-Install-Package ApiVideo
-```
-{% endcapture %}
-{% include "_partials/code-tabs.md" samples: samples %}
-
-## Retrieve your API key
-
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
+You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then follow the below steps:
 
 1. Log in to the api.video dashboard. 
 2. From the list of choices on the left, make sure you are on **API Keys** 
@@ -75,9 +30,77 @@ You'll need your API key to get started. You can sign up for one here: [Get your
 
 ![](/_assets/retrieve-api-key.png)
 
-## Authenticate
+## Basic Authentication
 
-For each client, you will set up a client and provide it with your API key. The client then takes care of everything else for you. It will keep track of your access token and refresh token. When the access token expires after an hour, it will renew when needed.  
+Basic Authentication is a method for an HTTP user agent (e.g., a web browser) to provide a username and password when making a request.
+
+When employing Basic Authentication, users include an encoded string in the Authorization header of each request they make. The string is used by the request’s recipient to verify users’ identity and rights to access a resource.
+
+This method will allow you to use a simple way of authentication. By sending your API key in the Basic Auth header as username.
+
+### Usage
+
+Here's an example of how to make a request with Basic Authentication to api.video:
+
+{% capture samples %}
+```curl
+$ curl -u apikey: https://sandbox.api.video/
+```
+{% endcapture %}
+{% include "_partials/code-tabs.md" samples: samples %}
+
+
+## Bearer Token Authentication
+
+Bearer authentication (also called token authentication) is an HTTP authentication scheme that involves security tokens called bearer tokens. The name “Bearer authentication” can be understood as "give access to the bearer of this token." The bearer token is a cryptic string, usually generated by the server in response to a login request. The client must send the token in the Authorization header when making requests to protected resources.
+
+api.video provides an enhanced security authentication method, which uses a disposable bearer token that has a short time to live and has to be refreshed every 3600 seconds.
+
+![](/_assets/disposable-bearer-token-authentication.png)
+
+Bearer token authentication is simple to set up and use; however, we encourage you to use one of our client libraries if possible. [api.video client libraries](/sdks/api-clients) handle authentication for you, including renewing your token as needed.
+
+### Usage with cURL
+
+With the Bearer Token method, there are [two endpoints](/reference/api/Advanced-authentication) at your disposable in order to generate the access token.
+
+1. You have to make a request to the `/auth/api-key` endpoint in order to get the bearer token
+```curl
+curl -X POST \
+https://sandbox.api.video/auth/api-key \
+-H 'Content-Type: application/json' \
+-d '{"apiKey": "your API key here"}'
+```
+
+2. Once you've got the response from the API, you can use the token in the response in order to authenticate against any other endpoint with the `access token`:
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "access_token": "xxXXX.Yyyyyy",
+  "refresh_token": "yyyYYY.XxxXXXxx"
+}
+```
+
+```curl
+curl --location 'https://sandbox.api.video/videos' \
+--header 'Authorization: xxXXX.Yyyyyy'
+```
+
+3. When the token TTL has expired, you can then use the refresh token you've received from the response earlier in order to get a new token:
+
+```curl
+curl --request POST \
+     --url https://sandbox.api.video/auth/refresh \
+     --header 'accept: application/json' \
+     --header 'content-type: application/json' \
+     --data '{"refreshToken": "jwt_bearer_token"}'
+```
+
+### Usage with client libraries
+
+The simplest way, of course, is using the [api.video client libraries](/sdks/api-clients). You can find an example of how to authenticate below:
 
 {% capture samples %}
 ```go
@@ -178,15 +201,6 @@ namespace Example
     }
 }
 ```
-```curl
-curl -X POST \
-https://sandbox.api.video/auth/api-key \
--H 'Content-Type: application/json' \
--d '{"apiKey": "your API key here"}'
-```
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-## Conclusion
-
-Authentication is required for every call to api.video. It's made easy with clients, so we recommend choosing a client to work with.
