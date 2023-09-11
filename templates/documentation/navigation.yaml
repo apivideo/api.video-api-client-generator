@@ -4,6 +4,8 @@
     href: /README.md
   - label: Start building
     href: /get-started/start-building.md
+  - label: Authentication
+    href: /get-started/authentication-guide.md
   - label: Migration guides
     href: /get-started/migration-guides.md
     collapsed: true
@@ -14,13 +16,5 @@
       href: /get-started/azure-migration.md
     - label: AWS
       href: /get-started/aws-migration.md
-  - label: Using tokens
-    href: /get-started/using-tokens.md
-    collapsed: true
-    items:
-    - label: Authentication and refresh tokens
-      href: /get-started/authentication-guide.md
-    - label: Delegated upload tokens
-      href: /get-started/delegated-upload-tokens.md
   - label: SDK Catalog
     href: /sdks/README.md

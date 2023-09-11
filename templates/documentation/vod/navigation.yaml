@@ -45,11 +45,7 @@
   - label: Upload video from source
     href: /vod/upload-from-source.md
   - label: Using upload tokens
-    href: /vod/using-tokens.md
-    collapsed: true
-    items:
-    - label: Delegated upload tokens
-      href: /vod/delegated-upload-tokens.md
+    href: /vod/delegated-upload-tokens.md
 
 - heading: Video management
   items:
