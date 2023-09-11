@@ -45,14 +45,14 @@ Once you are logged in to the Dashboard, select the environment of your choice (
 
 The clients offered by api.video include:
 
-- [NodeJS](/sdks/api-clients/apivideo-nodejs-client.md)
-- [Python](/sdks/api-clients/apivideo-python-client.md)
-- [PHP](/sdks/api-clients/apivideo-php-client.md)
-- [Go](/sdks/api-clients/apivideo-go-client.md)
-- [C#](/sdks/api-clients/apivideo-csharp-client.md)
-- [Java](/sdks/api-clients/apivideo-java-client.md)
-- [iOS](/sdks/api-clients/ios-api-client.md)
-- [Android](/sdks/api-clients/android-api-client.md)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 ## Installation
 

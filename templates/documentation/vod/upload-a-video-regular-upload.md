@@ -23,7 +23,7 @@ Megabyte (MB) and Mebibyte (MiB) are both used to measure units of information o
 This section gives you an overview of your upload options. This guide walks through regular uploads but describes all the available choices here. 
 
 {% capture content %}
-If you want to learn about delegated uploads, which are useful for creating private videos, or allowing your viewers to upload content themselves, or even just making it easier for you to do uploads, please see the [Create and manage tokens for delegated uploads](/vod/create-and-manage-tokens-for-delegated-uploads) guide and the [Upload a video with a delegated token](/vod/upload-a-video-with-a-delegated-token) guide.
+If you want to learn about delegated uploads, which are useful for creating private videos, or allowing your viewers to upload content themselves, or even just making it easier for you to do uploads, check out the [Delegated upload tokens](/vod/delegated-upload-tokens) guide.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -44,14 +44,14 @@ Once you are logged in to the Dashboard, select the environment of your choice (
 
 The clients offered by api.video include:
 
-- [NodeJS](/sdks/api-clients/apivideo-nodejs-client.md)
-- [Python](/sdks/api-clients/apivideo-python-client.md)
-- [PHP](/sdks/api-clients/apivideo-php-client.md)
-- [Go](/sdks/api-clients/apivideo-go-client.md)
-- [C#](/sdks/api-clients/apivideo-csharp-client.md)
-- [Java](/sdks/api-clients/apivideo-java-client.md)
-- [iOS](/sdks/api-clients/ios-api-client.md)
-- [Android](/sdks/api-clients/android-api-client.md)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 ## Install
 
