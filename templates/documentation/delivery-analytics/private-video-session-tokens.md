@@ -13,8 +13,9 @@ In order to preserve the session and give the ability to make requests to multip
 
 The session starts with the /session endpoint where we get the session token from which then cached in the browser cache and used to make the requests to multiple assets later.
 
-Once the session token is acquired, it is reused in all other requests to the different assets. 
-![Imported image](/_assets/Session%20Token.jpg)
+Once the session token is acquired, it is reused in all other requests to the different assets.
+
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/session-token-dark.png", light: "/_assets/delivery-analytics/private-videos/session-token-light.png" %}
 
 {% capture content %}
 **Time to Live**
