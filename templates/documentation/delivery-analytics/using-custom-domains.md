@@ -12,7 +12,7 @@ Using Custom Domains
 
 api.video enables you to deliver video content and provide live streams using your own custom domains. You can decide what custom URL or subdomain you use in your implementation, for example `live.mycustomdomain.com`.
 
-![Imported image](/_assets/custom-domains.png)
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/custom-domains/custom-domains-dark.png", light: "/_assets/delivery-analytics/custom-domains/custom-domains-light.png" %}
 
 You can maintain your company branding by utilizing custom domains in any of these use cases, and more:
 
