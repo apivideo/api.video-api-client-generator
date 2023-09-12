@@ -37,3 +37,197 @@ styles:
 open_api:
   - spec_file: openapi.yaml
     uri_prefix: /reference/api
+
+redirects:
+  - from: /docs
+    to: /
+  - from: /docs/ads
+    to: /delivery-analytics/ads
+  - from: /docs/analytics
+    to: /delivery-analytics/analytics
+  - from: /docs/android-api-client
+    to: /sdks/api-clients/apivideo-android-client
+  - from: /docs/android-sdk
+    to: /sdks/api-clients/android-api-client
+  - from: /docs/android-video-uploader
+    to: /sdks/vod/apivideo-android-uploader
+  - from: /docs/api-clients
+    to: /sdks/api-clients
+  - from: /docs/apivideo-android-kotlin-livestream-module
+    to: /sdks/livestream/apivideo-kotlin-livestream-module
+  - from: /docs/apivideo-api-reference
+    to: /reference
+  - from: /docs/attributeinvalid
+    to: /reference/invalid-attribute-1
+  - from: /docs/authentication-guide
+    to: /get-started/authentication-guide
+  - from: /docs/bubbleio-plugin
+    to: /sdks/nocode/bubbleio-plugin
+  - from: /docs/bubbleio-uploader
+    to: /sdks/nocode/bubbleio-uploader
+  - from: /docs/contentful
+    to: /sdks/nocode/contentful
+  - from: /docs/create-a-live-stream
+    to: /live-streaming/create-a-live-stream
+  - from: /docs/create-and-manage-tokens-for-delegated-uploads
+    to: /vod/create-and-manage-tokens-for-delegated-uploads
+  - from: /docs/csharp-api-client
+    to: /sdks/api-clients/apivideo-csharp-client
+  - from: /docs/domain-referrer
+    to: /delivery-analytics/domain-referrer
+  - from: /docs/flutter-uploader
+    to: /sdks/vod/apivideo-flutter-uploader
+  - from: /docs/get-started-in-5-minutes
+    to: /vod/get-started-in-5-minutes
+  - from: /docs/go-api-client
+    to: /sdks/api-clients/apivideo-go-client
+  - from: /docs/guides
+    to: /get-started/start-building
+  - from: /docs/hlsjs-analytics-plugin
+    to: /sdks/player/apivideo-hlsjs-analytics
+  - from: /docs/ios-api-client
+    to: /sdks/api-clients/apivideo-swift5-client
+  - from: /docs/ios-sdk
+    to: /sdks/api-clients/apivideo-swift5-client
+  - from: /docs/ios-swift-livestream-library
+    to: /sdks/livestream/swift-livestream-library
+  - from: /docs/ios-video-uploader
+    to: /sdks/vod/apivideo-ios-uploader
+  - from: /docs/java-api-client
+    to: /sdks/api-clients/apivideo-java-client
+  - from: /docs/nodejs-api-client
+    to: /sdks/api-clients/apivideo-nodejs-client
+  - from: /docs/nodejs-sdk
+    to: /sdks/api-clients/apivideo-nodejs-client
+  - from: /docs/php-api-client
+    to: /sdks/api-clients/apivideo-php-client
+  - from: /docs/private-videos
+    to: /delivery-analytics/video-privacy-access-management
+  - from: /docs/python-api-client
+    to: /sdks/api-clients/apivideo-python-client
+  - from: /docs/react-native-livestream-component
+    to: /sdks/livestream/react-native-livestream-component
+  - from: /docs/react-native-player-component
+    to: /sdks/player/apivideo-react-native-player
+  - from: /docs/react-native-uploader
+    to: /sdks/vod/apivideo-react-native-uploader
+  - from: /docs/restream
+    to: /live-streaming/restreams
+  - from: /docs/upload-a-video-regular-upload
+    to: /vod/upload-a-video-regular-upload
+  - from: /docs/upload-your-first-video
+    to: /vod/get-started-in-5-minutes
+  - from: /docs/upload-your-first-video
+    to: /vod/upload-a-video-regular-upload
+  - from: /docs/using-custom-domains
+    to: /delivery-analytics/using-custom-domains
+  - from: /docs/video-access-management-getting-started-with-private-videos
+    to: /delivery-analytics/video-privacy-access-management
+  - from: /docs/video-playback-features
+    to: /delivery-analytics/video-playback-features
+  - from: /docs/video-player-sdk
+    to: /sdks/player/apivideo-player-sdk
+  - from: /docs/video-uploader
+    to: /sdks/vod/apivideo-typescript-uploader
+  - from: /docs/videojs-analytics-plugin
+    to: /sdks/player/apivideo-videojs-analytics
+  - from: /docs/zapier
+    to: /sdks/nocode/zapier
+  - from: /reference/analytics
+    to: /reference/api/Analytics
+  - from: /reference/apivideo-api-reference
+    to: /reference
+  - from: /reference/authentication
+    to: /reference/basic-authentication
+  - from: /reference/basic-authentication
+    to: /reference/basic-authentication
+  - from: /reference/captions
+    to: /vod/add-captions
+  - from: /reference/chapters
+    to: /vod/creating-and-managing-chapters
+  - from: /reference/delete_upload-tokens-uploadtoken
+    to: /reference/api/Upload-Tokens#delete-an-upload-token
+  - from: /reference/delete-video
+    to: /reference/api/Videos#delete-a-video-object
+  - from: /reference/delete-webhook
+    to: /reference/api/Webhooks#delete-a-webhook
+  - from: /reference/get_analytics-live-streams-plays
+    to: /reference/api/Analytics#get-play-events-for-live-stream
+  - from: /reference/get_analytics-videos-plays
+    to: /reference/api/Analytics
+  - from: /reference/get_analytics-videos-plays
+    to: /reference/api/Analytics#get-play-events-for-video
+  - from: /reference/get_live-streams
+    to: /reference/api/Live-Streams#list-all-live-streams
+  - from: /reference/get_live-streams-livestreamid
+    to: /reference/api/Live-Streams#retrieve-live-stream
+  - from: /reference/get_players
+    to: /reference/api/Player-Themes#list-all-player-themes
+  - from: /reference/get_upload-tokens
+    to: /get-started/using-tokens
+  - from: /reference/get_videos-videoid-captions-language
+    to: /reference/api/Captions#retrieve-a-caption
+  - from: /reference/get-video
+    to: /reference/api/Videos#retrieve-a-video-object
+  - from: /reference/get-video-status
+    to: /reference/api/Videos#retrieve-video-status-and-details
+  - from: /reference/get-webhook
+    to: /reference/api/Webhooks#retrieve-webhook-details
+  - from: /reference/list-videos
+    to: /reference/api/Videos#list-all-video-objects
+  - from: /reference/list-webhooks
+    to: /reference/api/Webhooks#list-all-webhooks
+  - from: /reference/live
+    to: /reference/api/Live-Streams
+  - from: /reference/live-stream-best-practices
+    to: /reference/live-stream-best-practices
+  - from: /reference/overview
+    to: /reference
+  - from: /reference/patch_live-streams-livestreamid
+    to: /reference/api/Live-Streams#update-a-live-stream
+  - from: /reference/patch_players-playerid
+    to: /reference/api/Player-Themes#update-a-player
+  - from: /reference/patch-video
+    to: /reference/api/Videos#update-a-video-object
+  - from: /reference/player-themes
+    to: /delivery-analytics/player-customization
+  - from: /reference/post_auth-api-key
+    to: /reference/api/Advanced-authentication#get-bearer-token
+  - from: /reference/post_live-streams
+    to: /reference/api/Live-Streams#create-live-stream
+  - from: /reference/post_live-streams-livestreamid-thumbnail
+    to: /reference/api/Live-Streams#upload-a-thumbnail
+  - from: /reference/post_players
+    to: /reference/api/Player-Themes#create-a-player
+  - from: /reference/post_players-playerid-logo
+    to: /reference/api/Player-Themes#upload-a-logo
+  - from: /reference/post_upload
+    to: /reference/api/Videos#upload-with-an-delegated-upload-token
+  - from: /reference/post_upload-tokens
+    to: /reference/api/Upload-Tokens#generate-an-upload-token
+  - from: /reference/post_videos-videoid-captions-language
+    to: /reference/api/Captions#upload-a-caption
+  - from: /reference/post_videos-videoid-chapters-language
+    to: /reference/api/Chapters#upload-a-chapter
+  - from: /reference/post_videos-videoid-source
+    to: /reference/api/Videos#upload-a-video
+  - from: /reference/post_videos-videoid-thumbnail
+    to: /reference/api/Videos#upload-a-thumbnail
+  - from: /reference/post_watermark
+    to: /reference/api/Watermarks#upload-a-watermark
+  - from: /reference/post-video
+    to: /reference/api/Videos#create-a-video-object
+  - from: /reference/post-webhooks
+    to: /reference/api/Webhooks#create-webhook
+  - from: /reference/upload-tokens
+    to: /vod/using-tokens
+  - from: /reference/videos-1
+    to: /reference/video-best-practices
+  - from: /reference/videos-delegated-upload
+    to: /vod/upload-a-video-with-a-delegated-token
+  - from: /reference/watermarks
+    to: /vod/add-a-permanent-watermark
+  - from: /reference/webhooks
+    to: /reference/create-and-manage-webhooks
+  - from: /webhooks
+    to: /reference/create-and-manage-webhooks
