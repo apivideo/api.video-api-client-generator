@@ -54,8 +54,6 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 <hr/>
 
-### Section header
-  
 ## Quick links
 
 </div>
@@ -94,12 +92,9 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 <hr/>
 
-### Section header
-
 ## Need help?
 
 </div>
-
 
 <div class="support-cards">
 {% include "_partials/support-card.md" label: "Browse Help Center", icon: "/_assets/icons/js.svg", link: "https://help.api.video/en/" %}
