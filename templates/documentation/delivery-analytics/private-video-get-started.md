@@ -38,7 +38,7 @@ After you learn how private video works and what it’s good for, we can now tal
 
 To reiterate the private video concept, here’s a visual representation of how the whole thing works:
 
-![](/_assets/private-videos.png)
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/private-videos-dark.png", light: "/_assets/delivery-analytics/private-videos/private-videos-light.png" %}
 
 Knowing that now we can finally start building stuff! 
 
@@ -145,9 +145,7 @@ There are two types of tokens for private videos:
 
 At a very high level, to request different assets for the same private video, more than having the private token is required; you also need to retain the session. For that, we have the session token. In the flowchart below, you can see that for each private video, we are using a session token + the private token:
 
-![](/_assets/vod/demo-private-video/52f1d35-Private_videos_post_-_15FEB23.png "Private videos post - 15FEB23.png")
-
-
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/single-session-token-dark.png", light: "/_assets/delivery-analytics/private-videos/single-session-token-light.png" %}
 
 So let’s get a bit technical here. To start the session, you will need to request the `/session` endpoint, get the session token, add it to the first asset you request, and then add it to every following asset you request. In the example above, we will request the `/session` endpoint, then add the session token to the query string of the private video thumbnail → request an embedded video asset with the session token in the query string → request a private video asset in mp4 format with the session token, and so on, you got the idea 😄
 
