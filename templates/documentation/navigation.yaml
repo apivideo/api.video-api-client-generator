@@ -10,11 +10,11 @@
     href: /get-started/migration-guides.md
     collapsed: true
     items:
+    - label: Azure Media Services
+      href: /get-started/azure-migration.md
+    - label: Amazon S3
+      href: /get-started/aws-migration.md
     - label: api.video import tool
       external: https://api.video/blog/tutorials/switch-to-api-video-in-minutes-latest-updates-on-our-import-tool/
-    - label: Azure
-      href: /get-started/azure-migration.md
-    - label: AWS
-      href: /get-started/aws-migration.md
   - label: SDK Catalog
     href: /sdks/README.md
