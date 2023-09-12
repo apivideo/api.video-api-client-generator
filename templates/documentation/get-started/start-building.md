@@ -14,7 +14,7 @@ Within this section, you can find essential insights into building with api.vide
 
 ## What is api.video?
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/getting-started-diagram-dark.png", light: "/_assets/getting-started-diagram-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/get-started/what-is-api-video-dark.png", light: "/_assets/get-started/what-is-api-video-light.png" %}
 
 api.video is a cloud-based video hosting and live streaming platform that provides developers and businesses with an easy-to-use API to handle all video-related tasks. The platform offers a range of features to help developers and businesses manage video content, including video hosting, transcoding, player customization, live streaming, and analytics.
 
