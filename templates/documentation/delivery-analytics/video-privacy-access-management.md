@@ -18,7 +18,7 @@ A **private token** is a string of unique numbers and letters. For example: `009
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-![](/_assets/private-videos.png)
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/private-videos-dark.png", light: "/_assets/delivery-analytics/private-videos/private-videos-light.png" %}
 
 ### How to create private videos?
 
@@ -42,6 +42,6 @@ You can see that for each url the token will be included in different places. Fo
 
 You can [retrieve a video](/reference/api/Videos#retrieve-a-video-object) via the API, which will generate the private token while you retrieve it. Each time you make a new request to retrieve a video it will generate a new private token. Hence, if the same user would like to play the video multiple times, on different pages you'll need to make a request to the `https://ws.api.video/videos/{videoId}` endpoint mentioned above in order to get a new private token.
 
-![](/_assets/private-video-reusability.jpg)
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/private-video-reusability-dark.png", light: "/_assets/delivery-analytics/private-videos/private-video-reusability-light.png" %}
 
 Once you've retrieved the video you can either use api.video player or an external player to play it back for the user. Hence the user can play it back for as long as the session lives, which is 24 hours in this case. When the session has ended, you will have to generate a new private token.
