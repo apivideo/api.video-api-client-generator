@@ -5,7 +5,8 @@
     href: /delivery-analytics/README.md
   - label: Delivery best practices
     href: /delivery-analytics/player-best-practices.md
-
+  - label: Delivery & Analytics quickstart
+    href: /delivery-analytics/delivery-analytics-quickstart.md
 - heading: Features
   items:
   - label: Using custom domains for delivery
