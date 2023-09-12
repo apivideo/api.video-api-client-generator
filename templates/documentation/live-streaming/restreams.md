@@ -87,7 +87,6 @@ curl --request POST \
      --header 'authorization: Basic bW9CRTdQbmMxRWFmSWNUTXpRMkdmd2VJQ3NvUDQ1WVl3NW5IS0Z1d3RHcjo=' \
      --header 'content-type: application/json' \
      --data '{
-"record":false,
 "name": "TEST-LIVE-STREAM",
 "restreams": [
       {
@@ -129,7 +128,6 @@ curl --request GET \
     "streamKey": "77b8b72d-25eb-469a-be9d-aa9c8deae361",
     "name": "TEST",
     "public": true,
-    "record": false,
     "broadcasting": false,
     "assets": {
         "iframe": "<iframe src=\"https://embed.staging.api.video/live/li6N18RfQG0lvsZ5tYBdIdny\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"true\"></iframe>",
