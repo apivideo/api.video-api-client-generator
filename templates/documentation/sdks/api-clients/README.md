@@ -11,6 +11,8 @@ API client libraries
 
 Seamlessly integrate video on demand or live streaming into your current tech stack.
 
+### Server-side
+
 <div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "NodeJS", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/node_031ab5d518.svg", subtitle: "API client",  link: "././apivideo-nodejs-client.md" %}
@@ -24,6 +26,12 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 {% include "_partials/hagrid-item.md" title: "C#", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/c_sharp_55a8990e3a.svg", subtitle: "API client",  link: "././apivideo-csharp-client.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Java", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/java_1b6f259caf.svg", subtitle: "API client",  link: "././apivideo-java-client.md" %}
+
+</div>
+
+### Mobile 
+
+<div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "API client",  link: "././apivideo-swift5-client.md" %}
 
