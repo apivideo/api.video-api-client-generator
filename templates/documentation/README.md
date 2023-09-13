@@ -62,7 +62,8 @@ api.video lets you customize a large part of the delivery, whether it's the play
 {% capture get-started-links %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/setup-checklist.svg", label: "Start building with api.video", link: "/get-started/start-building" %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/vod-quickstart.svg", label: "VOD quickstart", link: "/vod/get-started-in-5-minutes" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-quickstart.svg", label: "Live streaming quickstart", link: "/live-streaming/create-a-live-stream" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/livestream-quickstart.svg", label: "Live streaming quickstart", link: "/live-streaming/create-a-live-stream" %}icon: "/_assets/icons/vod-quickstart.svg", label: "VOD quickstart", link: "/vod/get-started-in-5-minutes" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/player-customization.svg", label: "Delivery & analytics quickstart", link: "/delivery-analytics/delivery-analytics-quickstart" %}
 {% endcapture %}
 
 {% capture libraries-sdks %}
