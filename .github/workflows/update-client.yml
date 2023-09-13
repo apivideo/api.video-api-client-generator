@@ -160,7 +160,10 @@ jobs:
     needs: [ get_available_profiles ]
     strategy:
       matrix:
-        profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+        profile: 
+          - ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+          - name: documentation
+            repository: api.video-documentation
     env:
       CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile.repository }}
 
@@ -192,7 +195,10 @@ jobs:
     needs: [ get_available_profiles ]
     strategy:
       matrix:
-        profile: ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+        profile: 
+          - ${{ fromJson(needs.get_available_profiles.outputs.profiles) }}
+          - name: documentation
+            repository: api.video-documentation
     env:
       CLIENT_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.profile.repository }}
 
