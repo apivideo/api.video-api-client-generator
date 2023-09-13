@@ -4,8 +4,6 @@
     href: /README.md
   - label: Start building
     href: /get-started/start-building.md
-  - label: Authentication
-    href: /get-started/authentication-guide.md
   - label: Migration guides
     href: /get-started/migration-guides.md
     collapsed: true

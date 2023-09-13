@@ -3,6 +3,8 @@
   items:
     - label: Introduction
       href: ././README.md
+    - label: Authentication
+      href: ./authentication-guide.md
     - label: Postman Collection
       href: ./postman-collection.md
     - label: Webhooks
