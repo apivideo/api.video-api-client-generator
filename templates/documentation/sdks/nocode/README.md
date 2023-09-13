@@ -9,7 +9,7 @@ meta:
 No-code solutions
 ==================
 
-Seamlessly integrate video on demand or live streaming into your application with no code!
+Sometimes you need a quick solution without getting into coding. api.video provides you with a variety of plugins and solutions that will enable you to use api.video's various features without the need to write a single line of code.
 
 <div class="hagrid">
 
