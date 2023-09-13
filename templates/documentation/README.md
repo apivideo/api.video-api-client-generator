@@ -99,4 +99,4 @@ api.video lets you customize a large part of the delivery, whether it's the play
 <div class="support-cards">
 {% include "_partials/support-card.md" label: "Browse Help Center", icon: "/_assets/icons/js.svg", link: "https://help.api.video/en/" %}
 {% include "_partials/support-card.md" label: "Ask the Community", icon: "/_assets/icons/js.svg", link: "https://community.api.video/" %}
-</div>
+</div> 
