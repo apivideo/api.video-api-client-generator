@@ -1,5 +1,5 @@
 ---
-title: "Loom clone"
+title: "Loom mockup"
 ---
 
 # Loom clone

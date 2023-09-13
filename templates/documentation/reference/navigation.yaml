@@ -3,18 +3,18 @@
   items:
     - label: Introduction
       href: ././README.md
-    - label: Authentication
-      href: ./authentication-guide.md
-    - label: Postman Collection
+    - label: Postman collection
       href: ./postman-collection.md
     - label: Webhooks
       href: ./create-and-manage-webhooks.md
 
 - heading: Authentication
   items:
+    - label: Overview
+      href: ./authentication-guide.md
     - label: Basic authentication
       href: ./basic-authentication.md
-    - label: Disposable Bearer Token Authentication (Optional)
+    - label: Bearer token authentication
       href: ./disposable-bearer-token-authentication.md
     - open_api_spec: openapi.yaml
       only:

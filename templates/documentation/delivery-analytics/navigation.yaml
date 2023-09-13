@@ -3,8 +3,6 @@
   items:
   - label: How does video delivery work? 
     href: /delivery-analytics/README.md
-  - label: Delivery best practices
-    href: /delivery-analytics/player-best-practices.md
   - label: Delivery & Analytics quickstart
     href: /delivery-analytics/delivery-analytics-quickstart.md
 - heading: Features
@@ -31,8 +29,6 @@
       href: /delivery-analytics/private-videos-with-custom-players-session-retention.md
     - label: Private video session tokens
       href: /delivery-analytics/private-video-session-tokens.md
-    - label: Video security best practices
-      href: /delivery-analytics/video-security-best-practices.md
 
 - heading: Players
   items:
@@ -47,11 +43,7 @@
 
 - heading: Analytics
   items:
+  - label: Analytics & data
+    href: /delivery-analytics/analytics.md
   - label: Analytics SDKs
     href: /sdks/player/README.md#player-analytics-sdks
-  - label: Player analytics
-    href: /delivery-analytics/analytics.md
-    collapsed: true
-    items:
-    - label: How to - analytics with api.video Player SDK
-      href: /delivery-analytics/how-to-player-sdk-analytics.md
