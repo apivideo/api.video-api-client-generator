@@ -7,8 +7,13 @@
 .dark .content-card {
   border: 0.5px solid rgba(255, 255, 255, 0.2);
   background: var(--card-bg-color-dark);
+  transition: background-color 0.3s;
   box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1),
     0px 34px 24px -20px rgba(0, 0, 0, 0.04);
+}
+
+.dark .content-card:hover {
+  background: rgba(47, 47, 61, 0.2) !important;
 }
 
 .content-card {
