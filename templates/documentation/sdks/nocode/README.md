@@ -17,7 +17,7 @@ Seamlessly integrate video on demand or live streaming into your application wit
 
 {% include "_partials/hagrid-item.md" title: "Contentful", image: "/_assets/icons/contentful.png", subtitle: "No-code plugin",  link: "././contentful.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Zapier", image: "/_assets/icons/zapier.png", subtitle: "No-code plugin",  link: "././zapier.md" %}
+{% include "_partials/hagrid-item.md" title: "Zapier", image: "/_assets/icons/zapier_black.png", subtitle: "No-code plugin",  link: "././zapier.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Wordpress", image: "/_assets/icons/wordpress.png", subtitle: "No-code plugin",  link: "././wordpress.md" %}
 
