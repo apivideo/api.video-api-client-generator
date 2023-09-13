@@ -35,7 +35,7 @@ meta:
 </div>
 
 <div class="content-cards">
-{% include "_partials/content-card.md" label: "Best practices for delivery", icon: "/_assets/icons/js.svg", description: "Learn how to make the most of your delivery.", link: "/delivery-analytics/player-best-practices" %}
+{% include "_partials/content-card.md" label: "Delivery & analytics quickstart", icon: "/_assets/icons/player-customization.svg", description: "Learn how to make the most of your content delivery through branding, customization, and gathering analytics.", link: "/delivery-analytics/delivery-analytics-quickstart" %}
 {% include "_partials/content-card.md" label: "Analytics", icon: "/_assets/icons/analytics.svg", description: "Start collecting delivery event data about your videos and live streams.", link: "/delivery-analytics/analytics" %}
 {% include "_partials/content-card.md" label: "Using custom domains", icon: "/_assets/icons/custom-domains.svg", description: "Maintain your company branding by delivering through custom domains", link: "/delivery-analytics/using-custom-domains" %}
 {% include "_partials/content-card.md" label: "Domain referrer restrictions", icon: "/_assets/icons/js.svg", description: "Make sure that your videos and live streams are delivered securely, and only through your domains", link: "/delivery-analytics/domain-referrer" %}

@@ -8,6 +8,8 @@ header:
       text: Help Center
     - external: https://api.video/changelog/
       text: Changelog
+    - external: https://status.api.video/
+      text: API status
   cta:
     external: https://dashboard.api.video/register
     text: Sign up for free
