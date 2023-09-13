@@ -15,11 +15,14 @@ Creating a live stream is simple with api.video. After you create it, you have a
 
 The clients offered by api.video include:
 
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 ## Installation
 
@@ -121,7 +124,6 @@ const ApiVideoClient = require('@api.video/nodejs-client');
 
         const liveStreamCreationPayload = {
 			name: "My Live Stream Video", // Add a name for your live stream here.
-			record: true, // Whether you are recording or not. True for record, false for not record.
 			_public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
 			playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
 		}; 
@@ -152,7 +154,6 @@ client.connect()
 live_stream_api = LiveStreamsApi(client)
 
 live_stream_creation_payload = {
-    "record": False,
     "name": "My live stream"
 }
 
@@ -168,7 +169,6 @@ curl --request POST \
      --header 'Content-Type: application/json' \
      --data '
 {
-     "record": false,
      "name": "My Live Stream",
      "public": true,
      "playerId": "pt240hxAaDBLCYxUIPh0Fb2"

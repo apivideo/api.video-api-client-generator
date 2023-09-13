@@ -183,7 +183,6 @@ If you want to update details for your live stream, you need the unique ID for y
 
 - name - A string representing the name of your live stream.
 - public - A boolean representing whether your video is public or not (true for public, false for private).
-- record - A boolean representing whether you want recording on or off (true for recording, false for not recording).
 - playerId - You can associate an api.video player with your live stream by providing the player's ID.
 
 The code sample to update is: 
@@ -200,7 +199,6 @@ curl --request PATCH \
 {
      "name": "My Live Stream Video",
      "public": true,
-     "record": true,
      "playerId": "pl45KFKdlddgk654dspkze"
 }
 '
@@ -220,7 +218,7 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+    liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details.
     liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
 
     
@@ -240,11 +238,10 @@ const ApiVideoClient = require('@api.video/nodejs-client');
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
 
-        const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+        const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details.
         const liveStreamUpdatePayload = {
 			name: "My Live Stream Video", // The name you want to use for your live stream.
 			_public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-			record: true, // Use this to indicate whether you want the recording on or off. On is true, off is false.
 			playerId: "pl45KFKdlddgk654dspkze", // The unique ID for the player associated with a live stream that you want to update.
 		}; 
 
@@ -257,7 +254,7 @@ const ApiVideoClient = require('@api.video/nodejs-client');
 })();
 ```
 ```python
-## Update information about your live stream. For example you can change whether you record it, or have it presented publicly. 
+## Update information about your live stream. For example you can change whether you have it presented publicly. 
 import apivideo
 from apivideo.apis import LiveStreamsApi
 from apivideo.exceptions import ApiAuthException
@@ -277,7 +274,6 @@ live_stream_api = LiveStreamsApi(client)
 ## Add the details you want to update to a dictionary
 live_stream_update_payload = {
     "public": True,
-    "record": True,
     "name": "Bob III"    
 }
 
@@ -303,7 +299,7 @@ You can update live stream details from your dashboard if you don't want to retr
 
    ![](/_assets/show-livestream.png)
 
-5. You can change the title of your live stream, enable recording, upload a thumbnail, and associate a player ID on this screen. When you're done, click **Save**.
+5. You can change the title of your live stream, upload a thumbnail, and associate a player ID on this screen. When you're done, click **Save**.
 
 ## Delete a live stream
 
