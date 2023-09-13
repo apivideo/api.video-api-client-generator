@@ -19,7 +19,7 @@ In this type of upload, you retrieve a token from the tokens endpoint. You can t
 * If you do not include a TTL (time-to-live) value for a token, it lasts until you delete it. 
 
 {% capture content %}
-If you want to learn about regular or progressive uploads, check out the [Upload a video - regular, progressive, and bytes](/vod/upload-a-video-regular-upload) guide.
+If you want to learn about regular or progressive uploads, check out the [regular](/vod/upload-a-video-regular-upload) and [progressive](/vod/progressive-upload) video upload guides.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

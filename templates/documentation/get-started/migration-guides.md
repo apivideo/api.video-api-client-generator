@@ -3,7 +3,7 @@ title: "Migration guides"
 slug: "migration-guides"
 hide_side_table_of_contents: true
 meta:
-  description: This page gets users started on how to migrate to api.video from other platforms.
+  description: This page gets users started on how to migrate to api.video from other platforms using the Import tool.
 ---
 
 Migration guides

@@ -15,7 +15,7 @@ In order to use the API, you have to put your api.video private API key in the d
 
 To do this, go to the "Plugins" tab on the left, select "Api.video" and paste the value of your api key into the "Api key" field:
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-12%20à%2016.02.18.png)
+![](/_assets/bubbleio_2.png)
 
 ## Action API calls
 
@@ -31,12 +31,12 @@ Let's imagine you'd like to delete a specific video when a user clicks on a butt
 - first, create a new button element, go in its properties, and click on "Start/edit workflow":
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-13%20à%2017.55.39.png)
+![](/_assets/bubbleio_9.png)
 
 - in the workflow page, click on "Click here to add an action" and select "authenticate - delete a video" in the "Plugins" tab:
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-13%20à%2017.56.19.png)
+![](/_assets/bubbleio_10.png)
 
 - the properties popup of the action appears, enter the video id you want to delete in the "(path) videoId" field, and you're all done. 
 
@@ -63,27 +63,27 @@ For example, you can create an upload token for each user of your application. T
 In the workflow action that sign the users up, click on the "Change another field" button:
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2009.34.13.png)
+![](/_assets/bubbleio_11.png)
 
 Then, select "create a new field", and create a field called "uploadtoken", with the type "text":
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2009.37.19.png)
+![](/_assets/bubbleio_12.png)
 
 Click on the link to associate a value to the field and select "Get data from an external API":
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2009.38.45.png)
+![](/_assets/bubbleio_13.png)
 
 Then, select "authenticate - generate upload token" in the API provider field and clear the "TTL" field to have a token that will never expire:
 
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2009.41.24.png)
+![](/_assets/bubbleio_14.png)
 
 Finally, close the "authenticate - generate upload token" popup and select "'s token" to use the "token" attribute from the API response:
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2009.42.58.png)
+![](/_assets/bubbleio_15.png)
 
 By doing this, you assign a unique upload token to each user that you can use in the uploader element. This can be considered a good practice because if one of your users abuses the token (if he uploads more than you would like), you'll be able to delete this token from api.video without any impact on your other users.
 
@@ -94,7 +94,7 @@ This API call will return the status of a given video. For more details about vi
 In response to this call, one value is beneficial: the "playable" value. It indicates whether your video is ready to be played or not yet. For example, you can display a video player only when the video is ready to be played:
 
 
-![Imported%20image](/_assets/Capture%20d’écran%202021-10-14%20à%2010.26.31.png)
+![](/_assets/bubbleio_16.png)
 
 ### List all videos
 

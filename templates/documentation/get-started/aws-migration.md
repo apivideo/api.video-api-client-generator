@@ -1,12 +1,11 @@
 ---
-title: "AWS migration guide"
+title: "Amazon S3 migration guide"
 slug: "aws-migration"
-
 meta:
-description: This page gets users started on how to migrate from AWS to api.video.
+  description: This page gets users started on how to migrate from Amazon S3 to api.video.
 ---
 
-# AWS migration guide
+# Amazon S3 migration guide
 
 Planning to migrate api.video from Amazon S3? We got you covered!
 

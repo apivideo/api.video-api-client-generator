@@ -6,19 +6,24 @@ Working with live streams
 
 When working with live streams, you will want to retrieve details about them, update them or sometimes delete them. This guide walks you through how to manage your live streams.
 
-## Associated API reference documentation
+## API documentation
 
+- [Retrieve a live stream](/reference/api/Live-Streams#retrieve-live-stream)
+- [Update a live stream](/reference/api/Live-Streams#update-a-live-stream)
 - [Delete a live stream](/reference/api/Live-Streams#delete-a-list-stream)
 
 ## Choose an api.video client
 
 The clients offered by api.video include:
 
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 ## Installation
 
@@ -51,14 +56,11 @@ Install-Package ApiVideo
 {% endcapture %}
 {% include "_partials/code-tabs.html" content: samples %}
 
-## Retrieve your API key
+## Create an account
 
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
+Before you can start streaming, you need to [create an api.video account](https://dashboard.api.video/register). 
 
-1. Log in to the api.video dashboard. 
-2. From the list of choices on the left, make sure you are on **API Keys** 
-3. You will always be able to choose to use your Sandbox API key. If you want to use the Production API key instead, enter your credit card information. 
-4. Grab the key you want, and you're ready to get started! 
+Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
 
 ## Show live stream (retrieve details for watching)
 

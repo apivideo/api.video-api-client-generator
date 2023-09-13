@@ -1,12 +1,18 @@
-<div class=callout>
+---
+title: "Restreaming"
+---
 
+Restreaming
+=================
+
+{% capture content %}
 **Beta Feature**
 
 Please note that Restreaming is currently a beta feature. The api.video engineering team is continuously working on improving the feature, thus issues may occur.
 
 If you are experiencing an issue, please do not hesitate to contact our support team.
-
-</div>
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 api.video gives you the ability to broadcast a live stream to multiple platforms simultaneously. You'll be able to stream to Youtube, Facebook, Twitch, and any other platform that supports [RTMP](https://api.video/blog/video-trends/what-is-rtmp-and-why-do-we-use-it-for-live-streaming/) from one source.
 
@@ -65,7 +71,7 @@ Providers that use RTMPS, SRT or any other protocol (like Kick or Telegram) are 
 
 ## Getting Started
 
-In order to get started with restream, you will need to create a live stream. Check out the guide on [how to create a live stream in 5 minutes](https://docs.api.video/docs/create-a-live-stream) with api.video. You can either add the restreams directly with the live stream creation or you can [edit the live stream with the PATCH method](https://docs.api.video/reference/patch_live-streams-livestreamid) later and add the restream.
+In order to get started with restream, you will need to create a live stream. Check out the guide on [how to create a live stream in 5 minutes](/live-streaming/create-a-live-stream) with api.video. You can either add the restreams directly with the live stream creation or you can [edit the live stream with the PATCH method](/reference/api/Live-Streams#update-a-live-stream) later and add the restream.
 
 ## Usage
 
@@ -78,7 +84,7 @@ Restreaming in Sandbox mode is limited to 2 minutes. The original live stream is
 
 ### Creating a live stream with restreams
 
-It's possible to include the providers you want to restream to in the creation payload of the live stream endpoint. You can do that by making a [POST request to the live stream endpoint ](https://docs.api.video/reference/post_live-streams) or using one of api.video's modules.
+It's possible to include the providers you want to restream to in the creation payload of the live stream endpoint. You can do that by making a [POST request to the live stream endpoint](/reference/api/Live-Streams#create-live-stream) or using one of api.video's modules.
 
 ```curl
 curl --request POST \

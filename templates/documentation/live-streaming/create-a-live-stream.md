@@ -53,14 +53,11 @@ Install-Package ApiVideo
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-## Retrieve your API key
+## Create an account
 
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register). Then do the following: 
+Before you can start streaming, you need to [create an api.video account](https://dashboard.api.video/register). 
 
-1. Log in to the api.video dashboard. 
-2. From the list of choices on the left, make sure you are on **API Keys** 
-3. You will always be able to choose to use your Sandbox API key. If you want to use the Production API key instead, enter your credit card information. 
-4. Grab the key you want, and you're ready to get started! 
+Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
 
 ## Create a live stream container
 
@@ -181,7 +178,7 @@ curl --request POST \
 
 You'll want to grab your live stream's streamKey from the response. It's required for use with OBS. To get started: 
 
-1. Install OBS if need be. You can grab the software here: [OBS Studio](https://obsproject.com/)
+1. Install OBS. You can grab the software here: [OBS Studio](https://obsproject.com/)
 
 2. Establish a source. In the sources section, choose a video feed to share. You could choose to share your screen or to share your camera (on a Mac: Video Capture Device, and then in the "Device" dropdown, select the camera). You should now see the video source in the main OBS window. 
 

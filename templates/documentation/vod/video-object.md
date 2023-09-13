@@ -11,9 +11,9 @@ metadata:
 What is a video object?
 ==========================
 
-The [video object](https://docs.api.video/reference/videos-1) in reference to api.video is a container of sort (not to be confused with [video container](https://headendinfo.com/video-container/)) for the video that you upload.
+The video object in reference to api.video is a container of sort (not to be confused with [video container](https://headendinfo.com/video-container/)) for the video that you upload.
 
-Before you [upload a video](https://docs.api.video/reference/post_videos-videoid-source), you need to[ create the video object](https://docs.api.video/reference/post-video) that will contain the video itself (once uploaded). 
+Before you [upload a video](/reference/api/Videos#upload-a-video), you need to [create the video object](/reference/api/Videos#create-a-video-object) that will contain the video itself after you upload it. 
 
 {% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-object/create-a-video-dark.png", light: "/_assets/vod/video-object/create-a-video-light.png" %}
 
@@ -37,7 +37,7 @@ You can either add a video already on the web, by entering the URL of the video,
 
 ## Public: Video Access Management
 
-On creation, the video can either be public or private. If the video is set to public `true`, the url of the video can be accessed by anyone that has the url, however, you can secure the video and make it private, but setting the public parameter to `false` , this will convert the video to private and the access to the video url will be limited. You can get started with Video Access Management [here](https://docs.api.video/docs/video-access-management-getting-started-with-private-videos) or go straight to the [Private Videos section](https://docs.api.video/docs/private-videos) to learn more.
+On creation, the video can either be public or private. If the video is set to public `true`, the url of the video can be accessed by anyone that has the url, however, you can secure the video and make it private. Set the public parameter to `false` to convert the video to private and limit access to the video url. You can get started with Video Access Management [here](/delivery-analytics/video-privacy-access-management).
 
 ## Panoramic: Upload 360-degree Videos
 
@@ -49,7 +49,7 @@ The parameter will allow your users to have a download button on the player.
 
 ## PlayerId: Add Video Player Theme
 
-As you can create different [player themes](https://docs.api.video/reference/player-themes), you can pass in the player theme that will be used with this specific video.
+As you can create different [player themes](/reference/api/Player-Themes), you can pass in the player theme that will be used with this specific video.
 
 ## Tags
 
@@ -84,4 +84,4 @@ Allows you to trim the video by passing in the segment that you would like to tr
 
 ## Watermark
 
-Allows you to add a watermark to the video from your pre-uploaded [watermarks](https://docs.api.video/reference/post_watermark). Note, that the watermark can only be added on the video object creation, you will not be able to update a video object watermark.
+Allows you to add a watermark to the video from your pre-uploaded [watermarks](/reference/api/Watermarks). Note, that the watermark can only be added on the video object creation, you will not be able to update a video object watermark.

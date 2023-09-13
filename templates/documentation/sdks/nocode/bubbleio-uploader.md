@@ -15,7 +15,7 @@ It comes as a customizable button that opens a file selector when clicked. Once 
 To add an uploader element on a page, click on the "api.video uploader" item of the Input form elements list.
 
 
-![Imported image](/_assets/Capture%20d’écran%202021-10-11%20à%2012.11.54.png)
+![](/_assets/bubbleio_8.png)
 
 Then, draw the uploader on your page using your mouse, like you do we any other Visual component. You can change the style of the element as you usually do. Once done, double-click on the player to open the window for editing its properties. 
 
@@ -25,7 +25,7 @@ There are several ways to proceed with the upload token:
 
 - Generate a token once and use it for all uploads. To generate a token, you'll have to call the api.video API as described in this article: [Delegated uploads: Make video uploads with a token you create
 ](https://api.video/blog/tutorials/delegated-uploads)
-- Let Bubble make the call to the token generation API thanks to the API calls predefined in the plugin. This particular topic is covered here: [Bubble.io API calls](doc:bubbleio-api-calls). You can generate a new token: 
+- Let Bubble make the call to the token generation API thanks to the API calls predefined in the plugin. This particular topic is covered here: [Bubble.io API calls](/sdks/nocode/bubbleio-api-calls). You can generate a new token: 
     - When a new user sign-in in your application and save the token in this user's database entry
     - When an upload is going to be made (in this case, the token may be created with a short lifetime).
 

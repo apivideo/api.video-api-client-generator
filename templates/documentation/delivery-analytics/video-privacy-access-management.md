@@ -1,11 +1,9 @@
 ---
-title: "How do private videos work?"
+title: "What are private videos?"
 ---
 
-How do private videos work?
+What are private videos?
 ===========================
-
-### What are private videos?
 
 When uploading user videos it's important to value the user's privacy, while we also recognize that there are some use cases in which you would like to use a different player other than the one we offer from api.video.
 

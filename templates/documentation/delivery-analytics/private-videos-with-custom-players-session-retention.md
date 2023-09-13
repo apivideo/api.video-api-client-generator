@@ -14,9 +14,9 @@ There are quite a few cases where you would want to include other assets in the 
 
 In these cases, you will have to make multiple requests to api.video assets. As it's a secured session we are using a Session Token in order to retrain the session and make sure it's continuous.
 
-### What is a [Session Token](/delivery-analytics/private-video-session-tokens)
+### What is a Session Token?
 
-In short a [Session Token](/delivery-analytics/private-video-session-tokens) is our way of retaining the session for every request you make to each asset. You can find the detailed article about session tokens [here](/delivery-analytics/private-video-session-tokens).
+In short a Session Token is api.video's way of retaining the session for every request you make to each asset. You can find the detailed article about session tokens [here](/delivery-analytics/private-video-session-tokens).
 
 {% capture content %}
 **Example for incorrect usage of private videos**

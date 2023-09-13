@@ -14,4 +14,4 @@ With the Create video action - you can create a video on demand file at api.vide
 
 For example:  When a new video is uploaded into Amazon S3, you can create a new video, and upload the video (using the publicly available URL) to insert the video into api.video.
 
-![Imported image](/_assets/Screenshot%202021-10-25%20at%2013.40.41.png)
+![](/_assets/Zapier_4.png)

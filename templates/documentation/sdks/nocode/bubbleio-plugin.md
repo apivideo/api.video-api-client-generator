@@ -27,12 +27,12 @@ To benefit from all this, the first step is to install the plugin in your applic
 To install the api.video plugin, when you are on the editing interface of your application, you must go to the "Plugins" tab and click on "Add plugins," as described in the following screenshot. 
 
 
-![Imported image](/_assets/Capture%20d’écran%202021-10-05%20à%2015.01.59.png%20copie%20-%20copie.jpg)
+![](/_assets/bubbleio_1.jpg)
 
 
 After that, search for the term "api.video" in the window that has just appeared. You should have only one result. Click on the "Install" button.
 
 
-![Imported image](/_assets/Capture%20d’écran%202021-10-05%20à%2015.02.18.png)
+![](/_assets/bubbleio_3.png)
 
 Now you are ready to use the plugin!

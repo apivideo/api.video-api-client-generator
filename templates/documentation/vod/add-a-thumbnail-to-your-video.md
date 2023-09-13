@@ -23,7 +23,7 @@ If you want to add a thumbnail to a live stream, the only available method is to
 
 ## Upload a thumbnail
 
-You have the option to choose a photo that's in .jpg, .png, or .webp format. It must be 8MB or smaller. To send your file, add the path to where it's stored and open it in binary. Then you can upload it with the client of your choice or see how it works with cURL. 
+You have the option to choose a photo that's in `.jpg`, `.png`, or `.webp` format. It must be 8MB or smaller. To send your file, add the path to where it's stored and open it in binary. Then you can upload it with the client of your choice or see how it works with cURL. 
 
 {% capture samples %}
 ```curl

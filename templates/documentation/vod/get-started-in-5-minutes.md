@@ -16,11 +16,11 @@ You can either follow the video that you see below or you can follow the text gu
 
 If you haven't done so already, you will need to signup with api.video to get the API key and access to the sandbox account.
 
-Navigate to <https://dashboard.api.video/register> and register with your Google account, Github, email or any of the options available for signup.
+Navigate to the [Dashboard](https://dashboard.api.video/register) and register with your Google account, Github, email, or any otheroptions that you prefer.
 
 ## Get the API key from the dashboard
 
-All you need now is to get your API key from the dashboard. Navigate to: <https://dashboard.api.video/apikeys> and grab your API key from there.
+All you need now is to get your API key from the dashboard. Navigate to the [API keys page](https://dashboard.api.video/apikeys) and grab your API key from there.
 
 {% capture content %}
 **API Key Security**
@@ -290,7 +290,7 @@ func main() {
 
 The client library takes your api key, which you can [find here](https://dashboard.api.video/apikeys). Let's pass it the api key and initialize the client. 
 
-Learn more about [Basic Authentication](/reference/basic-authentication) or authentication with [disposable access token ](/reference/disposable-bearer-token-authentication). 
+Learn more about [Basic Authentication](/reference/basic-authentication) and [Bearer Token Authentication](/reference/disposable-bearer-token-authentication). 
 
 {% capture samples %}
 ```javascript
@@ -492,7 +492,7 @@ res.json(uploadVideoRes.videoId);
 {% include "_partials/code-tabs.md" samples: samples %}
 
 
-In this step we are leveraging the upload a video endpoint, this endpoint allows you not only to [upload a video](/reference/api/Videos#upload-a-video), but also get the video from a [url source](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-api-using-a-public-url-python), or if do a [progressive video upload.](/vod/upload-a-video-regular-upload).
+In this step we are leveraging the upload a video endpoint, this endpoint enables you not only to [upload a video](/reference/api/Videos#upload-a-video), but also to upload a video from a [url source](/vod/upload-from-source), or do a [progressive video upload](/vod/progressive-upload).
 
 ### [Upload status](/reference/api/Videos#retrieve-video-status-and-details)
 

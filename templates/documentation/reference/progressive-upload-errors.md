@@ -1,9 +1,6 @@
 ---
 title: "Progressive Upload Errors - Content Range By Bytes"
 slug: "progressive-upload-errors"
-hidden: false
-createdAt: "2023-03-13T11:34:40.562Z"
-updatedAt: "2023-05-11T06:45:25.883Z"
 ---
 
 Progressive Upload Errors - Content Range By Bytes

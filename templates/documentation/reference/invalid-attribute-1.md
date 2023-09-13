@@ -23,8 +23,12 @@ If you are using one of our API clients, check the rules for how to format param
 
 You can cut down on mistakes by using one of our clients. We offer clients for our API in these languages:
 
-* [Go](https://github.com/apivideo/api.video-go-client)
-* [Python](https://github.com/apivideo/api.video-python-client)
-* [C#](https://github.com/apivideo/api.video-csharp-client)
-* [PHP](https://github.com/apivideo/api.video-php-client)
-* [Node.js](https://github.com/apivideo/api.video-nodejs-client)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
+

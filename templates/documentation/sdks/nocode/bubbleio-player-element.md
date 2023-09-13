@@ -11,12 +11,12 @@ Bubble.io Player Element
 ## Basic usage
 
 To add a video player to a page of your site, click on the "api.video player" item of the Visual elements list.
-![Imported image](/_assets/Capture%20d’écran%202021-10-05%20à%2015.49.25.png)
+![](/_assets/bubbleio_4.png)
 Then, draw the player on your page using your mouse, like you do we any other Visual component. Once done, double-click on the player to open the window for editing its properties. 
 
 You should see something like that:
 
-![Imported image](/_assets/Capture%20d’écran%202021-10-05%20à%2015.54.35.png)
+![](/_assets/bubbleio_5.png)
 As you can see, there is a list of specific attributes that you can use to customize your player:
 
 
@@ -32,7 +32,7 @@ As you can see, there is a list of specific attributes that you can use to custo
 |          loop | no (default: false)   | boolean | once the video is finished, it automatically starts again                                                     |
 
 Once you've entered a videoId, you can click on "preview" to see your player in action. 
-![Imported image](/_assets/Capture%20d’écran%202021-10-05%20à%2016.02.57.png)
+![](/_assets/bubbleio_6.png)
 
 ## Events
 
@@ -55,7 +55,7 @@ Here is the list of all events triggered by the player:
 
 To perform an action when an event occurs, go to the workflow tab, create a new workflow, and as a trigger condition, select "Elements -> A api.video player ..." : 
 
-![Imported image](/_assets/Capture%20d’écran%202021-10-06%20à%2015.08.15.png)
+![](/_assets/bubbleio_7.png)
 
 ## Exposed state
 

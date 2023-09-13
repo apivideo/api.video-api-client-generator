@@ -249,8 +249,7 @@ The response to your API request will return the following, along with other par
 }
 ```
 
-Remember the `videoId`: you will need it to upload your video, in the [next step](#b-upload-the-file-into-the-video-object).  
-Also, save the value of `assets.player` for [video playback](#watch-your-video).
+Remember the `videoId`: you will need it to upload your video, in the [next step](#upload-your-file-into-the-video-object). Also, save the value of `assets.player` for [video playback](#watch-and-share-your-video).
 
 {% capture content %}
 If you are using one of our API clients, you will find the above information in the returned response's `Video` object.
@@ -399,6 +398,14 @@ catch (ApiException e)
 	}
 }
 ```
+
+## Watch and share your video
+
+The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in the [ API response](#api-response):
+
+`"player": "https://embed.api.video/vod/{videoId}"`
+
+To watch your video, just paste the link into your favorite browser. Use the same link to share your video.
 
 ## Conclusion
 

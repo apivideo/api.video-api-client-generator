@@ -25,11 +25,11 @@ A more visual representation can be found below:
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-## Progressive video upload & uploading large videos ⏫
+## Progressive video upload & uploading large videos
 
 Some videos you might upload could be very large in size. We made sure that this is addressed and that there's a convenient way to upload large videos while breaking them into chunks. Please be sure to read the guide on how to make [progressive video upload](/vod/upload-a-video-regular-upload).
 
-## Video Access Management 🔒
+## Video Access Management
 
 The video object will be created as public by default. If you want to make the video private, you just need to create a private video object or update it later. You can read all about Private Videos [here](/delivery-analytics/video-privacy-access-management.md)
 
@@ -42,7 +42,7 @@ $ curl https://ws.api.video/videos \
 -d '{"title" : "My video", "description" : "so many details", "mp4Support" : true }'` 
 ```
 
-## Create a video from a URL 🔗
+## Create a video from a URL
 
 You can also create a video directly from a video hosted on a third-party server by giving its URI in `source` parameter:
 
@@ -55,7 +55,7 @@ $ curl https://ws.api.video/videos \
 
 In this case, the service will respond `202 Accepted` and ingest the video asynchronously.
 
-## Track users with Dynamic Metadata 🔎
+## Track users with Dynamic Metadata
 
 Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter _any_ value for a defined key. To defined a dynamic metadata pair use:
 
