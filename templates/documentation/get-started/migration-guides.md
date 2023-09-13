@@ -11,5 +11,10 @@ Migration guides
 
 Moving to a different provider takes time, effort, and development resources. api.video can help you migrate your existing content cost-efficiently, in only a few clicks. Read more about using our [Import tool](https://api.video/blog/tutorials/switch-to-api-video-in-minutes-latest-updates-on-our-import-tool/), or check out the migration guides if you plan to move from these providers:
 
-- [Azure Media Services](./azure-migration.md)
-- [Amazon S3](./aws-migration.md)
+<div class="hagrid">
+
+{% include "_partials/hagrid-item.md" title: "Azure", image: "/_assets/get-started/migration-guide/Microsoft_Azure.svg", subtitle: "Media Services",  link: "./azure-migration.md" %}
+
+{% include "_partials/hagrid-item.md" title: "Amazon", image: "/_assets/get-started/migration-guide/Amazon-S3-Logo.svg", subtitle: "S3",  link: "./aws-migration.md" %}
+
+</div>
