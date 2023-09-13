@@ -8,15 +8,23 @@ meta:
 Delivery & analytics SDK catalog
 ==================
 
-## Players
+## Player SDKs
 
 Enable video playback from your app.
+
+### Web
 
 <div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "api.video Player SDK", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/javascript_052f5287c4.svg", subtitle: "Player",  link: "././apivideo-player-sdk.md" %}
 
 {% include "_partials/hagrid-item.md" title: "React.js", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Player",  link: "././apivideo-react-player.md" %}
+
+</div>
+
+### Mobile
+
+<div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Player",  link: "././apivideo-react-native-player.md" %}
 
@@ -30,7 +38,9 @@ Enable video playback from your app.
 
 ## Player analytics SDKs
 
-Collect data insights for your videos and live streams.
+Collect data and insights from custom players.
+
+### Web
 
 <div class="hagrid">
 
@@ -39,6 +49,12 @@ Collect data insights for your videos and live streams.
 {% include "_partials/hagrid-item.md" title: "hls.js", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/javascript_052f5287c4.svg", subtitle: "Analytics plugin",  link: "././apivideo-hlsjs-analytics.md" %}
 
 {% include "_partials/hagrid-item.md" title: "api.video Player analytics", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/javascript_052f5287c4.svg", subtitle: "Analytics plugin",  link: "././apivideo-player-analytics.md" %}
+
+</div>
+
+### Mobile
+
+<div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "Analytics plugin",  link: "././apivideo-swift-player-analytics.md" %}
 

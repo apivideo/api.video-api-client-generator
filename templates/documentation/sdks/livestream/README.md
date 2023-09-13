@@ -9,6 +9,9 @@ meta:
 Live streaming SDK catalog
 ==================
 
+With api.video you can use live streaming mobile SDKs to create a streaming client for your users.
+
+### Mobile
 <div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Live streaming",  link: "././react-native-livestream-component.md" %}

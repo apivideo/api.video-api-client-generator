@@ -13,9 +13,21 @@ VOD SDK catalog
 
 Enable users to upload videos from your application.
 
+### Web
+
 <div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Uploader",  link: "././apivideo-typescript-uploader.md" %}
+
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
+
+</div>
+
+## Mobile
+
+<div class="hagrid">
+
+{% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Uploader",  link: "././apivideo-react-native-uploader.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
 
@@ -23,20 +35,23 @@ Enable users to upload videos from your application.
 
 {% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Uploader",  link: "././apivideo-android-uploader.md" %}
 
-{% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Uploader",  link: "././apivideo-react-native-uploader.md" %}
-
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
-
 </div>
 
-## Upstream SDKs
+
+## Upstream web SDKs
 
 Enable your users to simultaneously create and upload video & audio using these SDKs.
 
+### Web
+<div class="hagrid">
+
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media stream composer",  link: "././apivideo-typescript-media-stream-composer.md" %}
+
+</div>
+
+### Mobile
 <div class="hagrid">
 
 {% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Upstream",  link: "././apivideo-android-upstream.md" %}
-
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media stream composer",  link: "././apivideo-typescript-media-stream-composer.md" %}
 
 </div>
