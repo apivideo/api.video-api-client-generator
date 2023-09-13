@@ -5,9 +5,10 @@
 }
 
 .dark .content-card {
-    border: 0.5px solid rgba(255, 255, 255, 0.20);
-background: #242933;
-box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.10), 0px 34px 24px -20px rgba(0, 0, 0, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  background: var(--card-bg-color-dark);
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1),
+    0px 34px 24px -20px rgba(0, 0, 0, 0.04);
 }
 
 .content-card {
@@ -39,8 +40,8 @@ box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.10), 0px 34px 24px -20px rgba(0, 0
 }
 
 .dark .content-card p.content-card-label {
-    color: white;
-    opacity: 0.7;
+  color: white;
+  opacity: 0.7;
 }
 
 .content-card p.content-card-label {
@@ -52,8 +53,8 @@ box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.10), 0px 34px 24px -20px rgba(0, 0
 }
 
 .dark .content-card p.content-card-description {
-    color: white !important;
-    opacity: 0.5 !important;
+  color: white !important;
+  opacity: 0.5 !important;
 }
 
 .content-card p.content-card-description {
@@ -75,6 +76,6 @@ box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.10), 0px 34px 24px -20px rgba(0, 0
   text-decoration: none !important;
 }
 
-.dark .content-card-link { 
-    color: rgba(255, 255, 255, 0.70) !important;
+.dark .content-card-link {
+  color: rgba(255, 255, 255, 0.7) !important;
 }
