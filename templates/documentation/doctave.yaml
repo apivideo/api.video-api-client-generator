@@ -220,7 +220,7 @@ redirects:
   - from: /reference/upload-tokens  
     to: /vod/delegated-upload-tokens
   - from: /reference/videos-1
-    to: /reference/video-best-practices
+    to: /reference/api/Videos
   - from: /reference/videos-delegated-upload
     to: /reference/api/Videos
   - from: /reference/watermarks

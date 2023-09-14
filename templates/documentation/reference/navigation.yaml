@@ -23,8 +23,6 @@
 
 - heading: VOD
   items:
-    - label: Video best practices
-      href: ./video-best-practices.md
     - open_api_spec: openapi.yaml
       only:
         - Videos
@@ -34,8 +32,6 @@
 
 - heading: Live Streams
   items:
-    - label: Live stream best practices
-      href: ./live-stream-best-practices.md
     - open_api_spec: openapi.yaml
       only:
         - Live Streams
