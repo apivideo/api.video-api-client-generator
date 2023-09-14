@@ -139,8 +139,6 @@ redirects:
     to: /reference
   - from: /reference/authentication
     to: /reference/basic-authentication
-  - from: /reference/basic-authentication
-    to: /reference/basic-authentication
   - from: /reference/captions
     to: /vod/add-captions
   - from: /reference/chapters
@@ -179,8 +177,6 @@ redirects:
     to: /reference/api/Webhooks#list-all-webhooks
   - from: /reference/live
     to: /reference/api/Live-Streams
-  - from: /reference/live-stream-best-practices
-    to: /reference/live-stream-best-practices
   - from: /reference/overview
     to: /reference
   - from: /reference/patch_live-streams-livestreamid
