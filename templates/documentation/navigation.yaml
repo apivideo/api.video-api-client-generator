@@ -13,6 +13,6 @@
     - label: Amazon S3
       href: /get-started/aws-migration.md
     - label: api.video import tool
-      external: https://api.video/blog/tutorials/switch-to-api-video-in-minutes-latest-updates-on-our-import-tool/
+      external: https://import.api.video/
   - label: SDK Catalog
     href: /sdks/README.md
