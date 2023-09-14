@@ -387,7 +387,7 @@ func InitApiVideoClient() (*apivideosdk.Client) {
 
 ### [Creating the video object](/reference/api/Videos#create-a-video-object) & [uploading the file](/reference/api/Videos#upload-a-video)
 
-In this step, we will need to create a handler for the incoming POST request from the front end. Let's change the endpoint to `/upload` and add the logic of video object creation. You can find the visual flowchart of video object creation and upload [here](/reference/video-best-practices#how-to-create--upload-a-video) if you want to understand it a bit better.
+In this step, we will need to create a handler for the incoming POST request from the front end. Let's change the endpoint to `/upload` and add the logic of video object creation. You can find the visual flowchart of video object creation and upload [here](/vod/video-best-practices#how-to-create--upload-a-video) if you want to understand it a bit better.
 
 In this instance we are referring to the Videos endpoint. First we create a video object. You can find more about the endpoint [here](/reference/api/Videos#create-a-video-object) 
 

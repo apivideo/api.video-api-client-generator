@@ -5,6 +5,8 @@
     href: /live-streaming/README.md
   - label: Live stream quickstart
     href: /live-streaming/create-a-live-stream.md
+  - label: Live stream best practices
+    href: ./live-stream-best-practices.md
   
 - heading: Templates & demos
   items:
