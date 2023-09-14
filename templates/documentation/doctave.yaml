@@ -50,7 +50,7 @@ redirects:
   - from: /docs/android-api-client
     to: /sdks/api-clients/apivideo-android-client
   - from: /docs/android-sdk
-    to: /sdks/api-clients/android-api-client
+    to: /sdks/api-clients/apivideo-android-client
   - from: /docs/android-video-uploader
     to: /sdks/vod/apivideo-android-uploader
   - from: /docs/api-clients
@@ -62,7 +62,7 @@ redirects:
   - from: /docs/attributeinvalid
     to: /reference/invalid-attribute-1
   - from: /docs/authentication-guide
-    to: /get-started/authentication-guide
+    to: /reference/authentication-guide
   - from: /docs/bubbleio-plugin
     to: /sdks/nocode/bubbleio-plugin
   - from: /docs/bubbleio-uploader
@@ -72,7 +72,7 @@ redirects:
   - from: /docs/create-a-live-stream
     to: /live-streaming/create-a-live-stream
   - from: /docs/create-and-manage-tokens-for-delegated-uploads
-    to: /vod/create-and-manage-tokens-for-delegated-uploads
+    to: /vod/delegated-upload-tokens
   - from: /docs/csharp-api-client
     to: /sdks/api-clients/apivideo-csharp-client
   - from: /docs/domain-referrer
@@ -164,7 +164,7 @@ redirects:
   - from: /reference/get_players
     to: /reference/api/Player-Themes
   - from: /reference/get_upload-tokens
-    to: /get-started/using-tokens
+    to: /reference/api/Upload-Tokens
   - from: /reference/get_videos-videoid-captions-language
     to: /reference/api/Captions
   - from: /reference/get-video
@@ -217,12 +217,12 @@ redirects:
     to: /reference/api/Videos
   - from: /reference/post-webhooks
     to: /reference/api/Webhooks
-  - from: /reference/upload-tokens
-    to: /vod/using-tokens
+  - from: /reference/upload-tokens  
+    to: /vod/delegated-upload-tokens
   - from: /reference/videos-1
     to: /reference/video-best-practices
   - from: /reference/videos-delegated-upload
-    to: /vod/upload-a-video-with-a-delegated-token
+    to: /reference/api/Videos
   - from: /reference/watermarks
     to: /vod/add-a-permanent-watermark
   - from: /reference/webhooks

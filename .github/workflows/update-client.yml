@@ -110,6 +110,17 @@ jobs:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v3
       # print a debug message
+      - name: Checkout client repository
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository_owner }}/api.video-documentation
+          token: ${{ secrets.PAT }}
+          path: generated-clients/documentation
+      - name: Remove files to allow files deletion from git
+        run: |
+          cd generated-clients/documentation
+          shopt -s extglob
+          rm -Rf !(.git|examples|.|..)
       - run: |
           for dir in *-documentation-artifact; do
             if [ -d "$dir" ]; then
@@ -122,13 +133,6 @@ jobs:
           done
         
           ls -la templates/documentation/sdks/api-clients/
-        
-      - name: Checkout client repository
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ github.repository_owner }}/api.video-documentation
-          token: ${{ secrets.PAT }}
-          path: generated-clients/documentation
       - name: Copy documentation files
         run: |
           cp -R templates/documentation/* generated-clients/documentation
