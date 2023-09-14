@@ -1,17 +1,14 @@
 ---
 title: "Private video delivery with HLS built-in players"
 slug: "private-video-on-hls-or-external-players"
-hidden: false
 metadata: 
   description: "Private videos are a way to giving access to videos only to certain users and making sure that privacy concerns are covered. This section will provide a detailed explanation on how you can deliver private videos with HLS built-in players."
-createdAt: "2023-01-26T20:23:11.701Z"
-updatedAt: "2023-05-05T17:34:00.956Z"
 ---
 Private Video On Hls Or External Players
 ========================================
 
 {% capture content %}
-api.video recommends that you read [Private Videos](/delivery-analytics/video-privacy-access-management.md) to ensure that you understand the concept of private videos before proceeding.
+api.video recommends that you read [Private Videos](/delivery-analytics/video-privacy-access-management) to ensure that you understand the concept of private videos before proceeding.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

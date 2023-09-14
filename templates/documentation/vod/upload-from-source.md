@@ -332,22 +332,22 @@ catch (ApiException e)
 }
 ```
 
-## Watch your video
+## Watch and share your video
 
 The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in the [ API response](#api-response):
 
 `"player": "https://embed.api.video/vod/{videoId}"`
 
-To watch your video, just paste the link into your favorite browser.
+To watch your video, just paste the link into your favorite browser. Use the same link to share your video.
 
 ## Manage your video
 
 You can do many things to manage existing videos in your [api.video](http://api.video) environment:
 
-- [Update a video](/reference/api/Videos#update-a-video-object) (API)
-- [List all videos](/reference/api/Videos#list-all-video-objects) (API)
-- [Delete a video](/reference/api/Videos#delete-a-video-object) (API)
-- [Upload a thumbnail to a video](/reference/api/Videos#upload-a-thumbnail) (API)
-- [Pick a thumbnail for a video](/reference/api/Videos#set-a-thumbnail) (API)
-- [Retrieve a video](/reference/api/Videos#retrieve-a-video-object) (API)
-- [Retrieve a video status](/reference/api/Videos#retrieve-video-status-and-details) (API)
+- [Update a video](/reference/api/Videos#update-a-video-object)
+- [List all videos](/reference/api/Videos#list-all-video-objects)
+- [Delete a video](/reference/api/Videos#delete-a-video-object)
+- [Upload a thumbnail to a video](/reference/api/Videos#upload-a-thumbnail)
+- [Pick a thumbnail for a video](/reference/api/Videos#set-a-thumbnail)
+- [Retrieve a video](/reference/api/Videos#retrieve-a-video-object)
+- [Retrieve a video status](/reference/api/Videos#retrieve-video-status-and-details)

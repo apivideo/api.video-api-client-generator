@@ -13,9 +13,9 @@ In-stream ads are a very convenient way of monetization of videos and streams. [
 
 Including ads in your videos and stream is easy. There are multiple ways you can do that:
 
-- [HTML5 URL fragments](/delivery-analytics/video-playback-features.md)
-- [Javascript Player SDK](/sdks/player/apivideo-player-sdk.md)
-- [React Player SDK](https://github.com/apivideo/api.video-react-player)
+- [api.video Player features](/delivery-analytics/video-playback-features.md)
+- [api.video Player SDK](/sdks/player/apivideo-player-sdk)
+- [React Player SDK](/sdks/player/apivideo-react-player)
 
 ### What are VAST, VPAID, and VMAP url tags?
 

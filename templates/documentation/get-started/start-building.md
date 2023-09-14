@@ -9,8 +9,7 @@ meta:
 Start building with api.video
 =============
 
-These pages serve as your foundational guide to integrating api.video's solutions seamlessly into your applications.
-Within this section, you can find essential insights into building with api.video, an overview of api.video's key concepts and features, quickstart guides to speed up your development process, and information on how to securely authenticate your interactions with the API.
+This documentation serves as your foundational guide to integrating api.video's solutions seamlessly into your applications. You can find essential insights into building with api.video, an overview of api.video's key concepts and features, quickstart guides to speed up your development process, and information on how to securely authenticate your interactions with the API.
 
 ## What is api.video?
 

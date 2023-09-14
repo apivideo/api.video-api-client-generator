@@ -21,7 +21,7 @@ The api.video integration features both triggers and actions, which we will outl
 ## Triggers
 
 A Zapier Trigger is an event that kicks off an automation process. There are 5 Triggers in the api.video integration:
-![Imported Image](/_assets/Screenshot%202021-10-22%20at%2014.25.03.png)
+![](/_assets/Zapier_1.png)
 
 ### Non instant:
 

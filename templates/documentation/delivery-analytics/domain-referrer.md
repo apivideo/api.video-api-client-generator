@@ -54,11 +54,9 @@ The following information is needed to get you started:
 
 Our team will configure the feature on the backend and let you know as soon as it is ready.
 
-### Requesting Access
+### Request Access
 
-Click on this button to request access from our support team, or get in touch directly at [hello@api.video](mailto:hello@api.video).
-
-<a href="#" class="custom-api-video-button">Request access to Domain Referrer</a>
+Visit the [Dashboard](https://dashboard.api.video/domains) to get started with setting your allowed domains, or get in touch directly at [hello@api.video](mailto:hello@api.video).
 
 ## Implementation
 

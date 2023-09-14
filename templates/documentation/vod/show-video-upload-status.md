@@ -258,7 +258,7 @@ print(response)
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-## Associated API reference documentation
+## API documentation
 
 - [Show video status](/reference/api/Videos##retrieve-video-status-and-details)
 - [Webhooks](/reference/api/Webhooks)

@@ -11,10 +11,10 @@ The live stream started endpoint is an instant Zapier trigger. It is powered by 
 
 The live stream started webhook will fire when the `live-stream.broadcast.started` webhook alert is sent. This means that one of the live streams in your api.video account has begun broadcasting (the `broadcasting` switches from false to true.)
 
-When you choose this trigger, you'll authenticate your api.video account with your api key (which you can find on the [dashboard](https://my.api.video)). When you test the Zap - Zapier uses sample data provided by api.video (no webhook has been created yet)
+When you choose this trigger, you'll authenticate your api.video account with your api key (which you can find on the [dashboard](https://dashboard.api.video/)). When you test the Zap - Zapier uses sample data provided by api.video (no webhook has been created yet)
 
 
-![Imported%20image](/_assets/Screenshot%202021-10-22%20at%2021.30.46.png)
+![](/_assets/Zapier_6.png)
 
 Now you can create an action to occur. Here are a few ideas that might be useful:
 

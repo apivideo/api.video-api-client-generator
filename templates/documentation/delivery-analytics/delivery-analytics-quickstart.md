@@ -1,11 +1,11 @@
 ---
 title: "Delivery and Analytics with api.video"
-excerpt: "Setup the api.video player and start working with video analytics in 5 minutes"
+excerpt: "Set up the api.video player and start working with video analytics in 5 minutes"
 ---
 
 # Getting started with delivery and analytics
 
-api.video provides you with powerful tools that allow you to deliver content to your users with great customization and branding while making sure that you get all of the data you need to analyze the viewer's behavior.
+api.video provides you with powerful tools that enable you to deliver content to your users with great customization and branding while making sure that you get all of the data you need to analyze the viewer's behavior.
 
 There are two parts to this tutorial, where we will jump into the player capabilities and then look at how to analyze the data we've received from the viewers.
 
@@ -35,7 +35,7 @@ Let's add the api.video client library to our code.
 
 The client library takes your API key, which you can [find here](https://dashboard.api.video/apikeys). Let's pass it the API key and initialize the client. 
 
-If wish to learn more about api.video authentication and how it works, jump over to this [page](/get-started/authentication-guide).
+If wish to learn more about api.video authentication and how it works, jump over to this [page](/reference/authentication-guide).
 
 {% capture content %}
 Make sure to install the [modules / libraries](/sdks/api-clients) on your environment beforehand.
@@ -505,7 +505,7 @@ Now we've applied our theme to this specific video, and we can implement the api
 
 ### Implementing the player
 
-After we branded our player, we can now implement the player on the frontend. In this example, we'll use the React player for simplicity, however, you can use any of the available [player SDK](https://api-video.doctave.dev/sdks/player).
+After we branded our player, we can now implement the player on the frontend. In this example, we'll use the React player, however, you can use any of the available [player SDKs](/sdks/player).
 
 Let's first [install React](https://react.dev/learn/installation) and add the React Player SDK from api.video
 
@@ -539,14 +539,14 @@ After we have a cool branded player, it would be great to get some data on your 
 
 {% capture content %}
 
-Please note, that we will only collect analytics from videos that were played through the api.video player. If you are using a custom player, you can leverage the [analytics SDKs](/sdks/player/apivideo-videojs-analytics) to pass on the analytics to api.video.
+Please note, that we will only collect analytics from videos that were played through the api.video player. If you are using a custom player, you can leverage the [analytics SDKs](/sdks/player#player-analytics-sdks) to pass on the analytics to api.video.
 
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
 In this example, we will check what countries your video was watched the most. 
 
-### Preperation
+### Preparation
 
 {% capture content %}
 In this example, we will be using the [api.video client libraries](/sdks/api-clients), however, is you prefer to use cURL or make the requests yourself, you are welcome to follow along with the [API reference documentation](/reference/api/Player-Themes).
@@ -554,7 +554,7 @@ In this example, we will be using the [api.video client libraries](/sdks/api-cli
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-### Adding the api.video client library & initializing
+### Add & initialize the api.video client library
 
 {% capture content %}
 If you've followed through the whole tutorial, you can skip this step
@@ -571,7 +571,7 @@ Make sure to install the modules / libraries on your environment beforehand.
 
 The client library takes your API key, which you can [find here](https://dashboard.api.video/apikeys). Let's pass it the API key and initialize the client. 
 
-You can learn more about authentication [here](/get-started/authentication-guide).
+You can learn more about authentication [here](/reference/authentication-guide).
 
 {% capture samples %}
 ```javascript
@@ -626,7 +626,7 @@ $playerThemeCreationPayload = (new \ApiVideo\Client\Model\PlayerThemeCreationPay
 
 As we planned, in this example, we want to analyze the viewers' geo-location. For that task, we will utilize the api.video client library and make use of the analytics endpoint to get the count of plays for a specific video.
 
-If you are interested in a more in-depth overview, head over to the [Analytics page](/delivery-analytics/analytics) to get more information.
+If you are interested in a more in-depth overview, head over to the [Analytics & data page](/delivery-analytics/analytics) to get more information.
 
 Notice that we are passing few parameters:
 * Video Id: This represents the video you want to analyze, you can get the video you've used before in this example.

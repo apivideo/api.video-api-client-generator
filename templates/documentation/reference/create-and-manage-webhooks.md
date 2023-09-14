@@ -1,11 +1,8 @@
 ---
 title: "Webhooks"
 slug: "create-and-manage-webhooks"
-hidden: false
 metadata:
   description: "api.video provides you the possibility to get a `POST` request to your server that contains a JSON payload with event data. Webhooks can push notifications directly to your server, saving you the need to poll api.video for changes. This guide goes over how to create and manage your webhooks."
-createdAt: "2022-01-22T07:01:19.493Z"
-updatedAt: "2023-05-31T08:01:24.966Z"
 ---
 
 # Create And Manage Webhooks
@@ -93,11 +90,14 @@ api.video’s webhook service makes 3 notification attempts, with 3 second inter
 
 The clients offered by api.video include:
 
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 To install your selected client, do the following:
 
@@ -126,9 +126,11 @@ Install-Package ApiVideo
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-### Retrieve your API key
+## Create an account
 
-You'll need your API key to get started. You can sign up for one here: [Get your api.video API key!](https://dashboard.api.video/register).
+Before you can start creating webhooks, you need to [create an api.video account](https://dashboard.api.video/register). 
+
+Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
 
 ### Create a webhook
 

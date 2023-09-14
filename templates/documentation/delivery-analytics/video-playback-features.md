@@ -1,13 +1,13 @@
 ---
-title: "HTML5 Player URL Fragments"
+title: "api.video Player features"
 slug: "video-playback-features"
 hidden: false
 metadata: 
-  title: "HTML5 Player URL Fragments • api.video Documentation"
-  description: "URL fragments let you complete the api.video embed source URL with query parameters introduced by a hash (#). The HTML5 Player URL Fragments page shows you how to use them with your project."
+  title: "api.video Player features • api.video Documentation"
+  description: "URL fragments let you complete the api.video embed source URL with query parameters introduced by a hash (#). The api.video Player features page shows you how to use them with your project."
 ---
 
-HTML5 Player URL Fragments
+api.video Player features
 ==========================
 
 ## Introduction

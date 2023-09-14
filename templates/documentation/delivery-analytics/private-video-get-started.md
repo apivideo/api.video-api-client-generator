@@ -7,7 +7,7 @@ Get started with private videos
 
 This article explains how to secure and limit access to videos. 
 
-## Secure & manage access to your videos 🔒
+## Secure & manage access to your videos
 
 Maybe you are asking yourself: “ok, but how does _video privacy_ help me?”. There are quite a few use cases for private videos, and we’ve discussed the hassle of securing the videos yourself. 
 
@@ -18,21 +18,21 @@ Maybe you are asking yourself: “ok, but how does _video privacy_ help me?”. 
 - Private video messaging
 - Disposable one-time videos
 
-And pretty much any video where you want to limit or restrict access! 🔒
+And pretty much any video where you want to limit or restrict access!
 
-## What are private videos? ❓
+## What are private videos?
 
 A private video is a video object secured by a private token and can be consumed only once. After the private token is consumed, the video is only available once you have another private token assigned to it. So, even if your user has the video URL, sharing it with anyone else is useless. 
 
 We tried to make it as simple as possible to secure your videos:
 
-- Create a video container with a `public: false` flag, which will make the video (surprise 🥳) private!
+- Create a video container with a `public: false` flag, which will make the video private!
 - Private videos will generate a new private token each time a request is made for that video id.
 - Each private token is usable only once.
 
-If you like to get into nitty gritty details, feel free to check out our docs about [Private Videos](/delivery-analytics/video-privacy-access-management.md).
+If you like to get into nitty gritty details, feel free to check out all the other pages about [Private Videos](/delivery-analytics/video-privacy-access-management.md).
 
-## How to deliver private videos to your audience 📥
+## How to deliver private videos to your audience
 
 After you learn how private video works and what it’s good for, we can now talk about the delivery part, which is the most important part. 
 
@@ -71,9 +71,9 @@ Now that the video is private, we can deliver it to users. Here’s a quick snip
 
 
 
-We played the video once with a browser. Now, open another browser tab in incognito mode and play the same video. You can see that it’s gone! no more video! don’t worry; even though the video still exists, the token changes once you consume it. If you refresh the video details page, you’ll notice that the private token has changed. If you paste the URL with the new private token in the `src` you will be able to play the video again in a new tab, but already with a different private token. Cool right? 🙂
+We played the video once with a browser. Now, open another browser tab in incognito mode and play the same video. You can see that it’s gone! no more video! don’t worry; even though the video still exists, the token changes once you consume it. If you refresh the video details page, you’ll notice that the private token has changed. If you paste the URL with the new private token in the `src` you will be able to play the video again in a new tab, but already with a different private token. Cool right?
 
-## Let’s get programmable 🖥️
+## Let’s get programmable
 
 The concept works the same for API requests. You can request the API and fetch the video by id; if it’s a private video the response will give you the URLs with the private tokens (the `XYZ` in the URLs stands for the private token):
 
@@ -115,9 +115,9 @@ curl --request GET \
 
 
 
-## Assets? what assets? 🏠
+## Assets? What assets?
 
-Notice that JSON above has a field called `assets`. We’ll refer to assets later, but it’s important to know what they are. Assets include the URLs for the video thumbnail, iframe with the [api.video](http://api.video) player for embedding directly into the HTML, and several other video formats like `mp4` and `hls`. Now you know! 💡
+Notice that JSON above has a field called `assets`. We’ll refer to assets later, but it’s important to know what they are. Assets include the URLs for the video thumbnail, iframe with the [api.video](http://api.video) player for embedding directly into the HTML, and several other video formats like `mp4` and `hls`. Now you know!
 
 ## How to create a sample app with private videos
 
@@ -134,7 +134,7 @@ On the backend, we will have to do some magic. While with public videos it’s p
 
 Notice the `avh` parameter in the query string? The `avh` parameter is where you will pass the session token... oh wait, what's a session token?!
 
-## Session token & session management 💼
+## Session token & session management
 
 Session Tokens are designed to retain the same session for a user. Let’s take an example - a user opened a tab with the private video and would like to refresh the tab, or the video didn’t work with our player for whatever reason. Hence, you redirect the user to an mp4 version of that video (different asset). For these cases, we’ve created the session tokens.
 
@@ -147,7 +147,7 @@ At a very high level, to request different assets for the same private video, mo
 
 {% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/single-session-token-dark.png", light: "/_assets/delivery-analytics/private-videos/single-session-token-light.png" %}
 
-So let’s get a bit technical here. To start the session, you will need to request the `/session` endpoint, get the session token, add it to the first asset you request, and then add it to every following asset you request. In the example above, we will request the `/session` endpoint, then add the session token to the query string of the private video thumbnail → request an embedded video asset with the session token in the query string → request a private video asset in mp4 format with the session token, and so on, you got the idea 😄
+So let’s get a bit technical here. To start the session, you will need to request the `/session` endpoint, get the session token, add it to the first asset you request, and then add it to every following asset you request. In the example above, we will request the `/session` endpoint, then add the session token to the query string of the private video thumbnail → request an embedded video asset with the session token in the query string → request a private video asset in mp4 format with the session token, and so on, you get the idea.
 
 In other words:
 
@@ -182,7 +182,7 @@ Let’s do a step-by-step review of what we are doing here.
 1. We are creating a server that will serve HTML on port 3000 with Node.js
 2. To make it easy on ourselves, we create a wrapper that will make an HTTP request to [api.video](http://api.video) with api key already embedded in HTTP header. That’s the `apiVideoReq` function.
 3. We will get a raw response from the apiVideoReq, so need to create a parser that will parse the JSON response if the request is successful (200). That’s going to be the `getJsonResponse` 
-4. Then we need to create a function that will get the list of our videos. That’s pretty simple with the wrapper function we have, so let’s reuse the `apiVideoReq` and make a request to `[https://ws.api.video/videos](https://ws.api.video/videos)` endpoint. You can find more info about the `/videos` endpoint here: </reference/api/Videos#list-all-video-objects>. The response we'll get is an array of objects of the following format:
+4. Then we need to create a function that will get the list of our videos. That’s pretty simple with the wrapper function we have, so let’s reuse the `apiVideoReq` and make a request to the [`videos`](https://ws.api.video/videos) endpoint. You can find more info about the `/videos` endpoint [here](/reference/api/Videos#list-all-video-objects). The response we'll get is an array of objects of the following format:
 
 ```json
 {
@@ -250,11 +250,11 @@ Notice that the second object has a property `public` which is set to `false` , 
 {% endraw %}
 6. And lastly, generate the HTML `<head>` and `<body>` while encapsulating the `<a href><img></a>` we’ve already created, and…. DONE!
 
-Now you have clickable thumbnails of your private videos which you can secure behind user credentials for example 🙂
+Now you have clickable thumbnails of your private videos which you can secure behind user credentials for example.
 
 Let’s summarize what we’ve learned here:
 
 - We’ve understood how private videos work and the purpose of private videos with real-life use cases.
 - We’ve also built a small app to leverage private videos to create clickable thumbnails with minimal code.
 
-If you have any questions or feedback about this article, do not hesitate to contact our support. You can also find the docs for private videos [here](/delivery-analytics/video-privacy-access-management.md).
+If you have any questions or feedback about this article, do not hesitate to contact our support.

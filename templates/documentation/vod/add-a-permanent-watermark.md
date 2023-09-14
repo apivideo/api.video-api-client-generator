@@ -38,17 +38,24 @@ You can upload watermarks either in `jpeg` or `png` format, however it is highly
 | `png`  | Yes (Recommended) |
 | `jpeg` | Yes               |
 
+## Create an account
 
+Before you can start uploading your first video, you need to [create an api.video account](https://dashboard.api.video/register). 
+
+Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
 
 ## Installation & Usage
 
 The clients offered by api.video include:
 
-- [Go](https://github.com/apivideo/api.video-go-client)
-- [PHP](https://github.com/apivideo/api.video-php-client)
-- [JavaScript ](https://github.com/apivideo/api.video-nodejs-client)
-- [Python](https://github.com/apivideo/api.video-python-client)
-- [C#](https://github.com/apivideo/api.video-csharp-client)
+- [NodeJS](../sdks/api-clients/apivideo-nodejs-client.md)
+- [Python](../sdks/api-clients/apivideo-python-client.md)
+- [PHP](../sdks/api-clients/apivideo-php-client.md)
+- [Go](../sdks/api-clients/apivideo-go-client.md)
+- [C#](../sdks/api-clients/apivideo-csharp-client.md)
+- [Java](../sdks/api-clients/apivideo-java-client.md)
+- [iOS](../sdks/api-clients/apivideo-swift5-client.md)
+- [Android](../sdks/api-clients/apivideo-android-client.md)
 
 To install your selected client, do the following: 
 
@@ -423,6 +430,6 @@ print(response)
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-## Associated API reference documentation
+## API documentation
 
 - [Watermarks](/reference/api/Watermarks)

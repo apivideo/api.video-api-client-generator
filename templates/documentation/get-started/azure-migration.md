@@ -1,8 +1,8 @@
 ---
-title: "Azure migration guide"
+title: "Azure Media Services migration guide"
 slug: "azure-migration"
 meta:
-  description: This page gets users started on how to migrate from Azure to api.video.
+  description: This page gets users started on how to migrate from Azure Media Services to api.video.
 ---
 
 # Azure Media Services migration guide

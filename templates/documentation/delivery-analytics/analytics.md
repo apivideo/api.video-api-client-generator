@@ -1,11 +1,11 @@
 ---
-title: "Analytics"
+title: "Analytics & data"
 slug: "analytics"
 metadata: 
   description: "Learn how you can get data insights for your videos and live streams using api.video's Analytics solution."
 ---
 
-Analytics
+Analytics & data
 =============
 
 api.video enables you to collect play event data about your videos and live streams.
@@ -36,9 +36,9 @@ After play events are collected, there is a short delay while the API processes 
 ## Requirements
 
 {% capture content %}
-The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](/sdks/player/apivideo-player-sdk.md) for details about the implementation.
+The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](/sdks/player/apivideo-player-sdk) for details about the implementation.
 
-When using third-party players, you need to implement the [Video.js](/sdks/player/apivideo-videojs-analytics.md) or [Hls.js](/sdks/player/apivideo-hlsjs-analytics.md) analytics plugins, or the analytics modules for [Android](/sdks/player/apivideo-android-player-analytics.md) or [iOS](/sdks/player/apivideo-swift-player-analytics.md). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
+When using third-party players, you need to implement the [Video.js](/sdks/player/apivideo-videojs-analytics) or [Hls.js](/sdks/player/apivideo-hlsjs-analytics) analytics plugins, or the analytics modules for [Android](/sdks/player/apivideo-android-player-analytics) or [iOS](/sdks/player/apivideo-swift-player-analytics). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
@@ -146,7 +146,7 @@ Based on your request the Analytics API returns paginated play event data in an 
 | Property | Type               | Details                                                                                                                                                                     |
 | :------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`   | `array of objects` | The array of objects that contains the actual data response from the API                                                                                                    |
-| `value`  | `string`           | The value of the dimension that you've selected in the request. You can find the possible [dimensions in the table above](https://docs.api.video/docs/analytics#dimension). |
+| `value`  | `string`           | The value of the dimension that you've selected in the request. You can find the possible [dimensions in the table above](#dimension). |
 | `plays`  | `int`              | The number of play events that was returned for the dimension in question                                                                                                   |
 
 ### Examples
@@ -159,7 +159,7 @@ This response gives you a detailed breakdown for the number of play events for e
 
 The query string used in this example is `https://sandbox.api.video/analytics/videos/plays?`**`from=2023-06-01`**`&`**`dimension=videoId`**
 
-This example uses the sandbox environment's `{base_URL}`. Check out the [**API environments**](https://docs.api.video/reference/overview#environments) for more details.
+This example uses the sandbox environment's `{base_URL}`. Check out the [**API environments**](/reference/README.md#environments) for more details.
 
 ```json
 {
@@ -210,7 +210,7 @@ This response gives you a detailed, paginated breakdown for the number of play e
 
 The query string used in this example is `https://sandbox.api.video/analytics/videos/plays?`**`from=2023-06-01`**`&`**`to=2023-06-04`**`&`**`dimension=country`**`&`**`pageSize=2`**
 
-This example uses the sandbox environment's `{base_URL}`. Check out the [API environments](https://docs.api.video/reference/overview#environments) for more details.
+This example uses the sandbox environment's `{base_URL}`. Check out the [API environments](/reference/README.md#environments) for more details.
 
 ```json
 {
@@ -258,6 +258,8 @@ This example uses the sandbox environment's `{base_URL}`. Check out the [API env
 
 </details>
 
+<br>
+
 # Best practices
 
 To ensure that your Analytics implementation runs smoothly, make sure that you:
@@ -269,6 +271,6 @@ To ensure that your Analytics implementation runs smoothly, make sure that you:
 
 # What's next
 
-Check out the **[API reference](https://docs.api.video/reference/analytics-1)** for sample responses and errors, and more details about using the Analytics endpoint.
+Check out the **[API reference](/reference/api/Analytics)** for sample responses and errors, and more details about using the Analytics endpoint.
 
 If you have any questions, check out the **[Help Center](https://help.api.video/en/articles/7983849-analytics)** article about Analytics.
