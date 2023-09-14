@@ -75,10 +75,10 @@ api.video lets you customize a large part of the delivery, whether it's the play
 {% endcapture %}
 
 {% capture understand-api-video %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/setup-checklist.svg", label: "Help Center and FAQs", link: "https://help.api.video/en/" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "API reference", link: "/reference" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "Blog", link: "https://api.video/blog/" %}
-{% include "_partials/quick-link.md" icon: "/_assets/icons/js.svg", label: "Changelog", link: "https://api.video/changelog/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/helpcenter.png", label: "Help Center and FAQs", link: "https://help.api.video/en/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/api_reference.png", label: "API reference", link: "/reference" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/blog.png", label: "Blog", link: "https://api.video/blog/" %}
+{% include "_partials/quick-link.md" icon: "/_assets/icons/changelog.png", label: "Changelog", link: "https://api.video/changelog/" %}
 {% endcapture %}
 
 
@@ -98,6 +98,6 @@ api.video lets you customize a large part of the delivery, whether it's the play
 </div>
 
 <div class="support-cards">
-{% include "_partials/support-card.md" label: "Browse Help Center", icon: "/_assets/icons/js.svg", link: "https://help.api.video/en/" %}
-{% include "_partials/support-card.md" label: "Ask the Community", icon: "/_assets/icons/js.svg", link: "https://community.api.video/" %}
+{% include "_partials/support-card.md" label: "Browse Help Center", icon: "/_assets/icons/helpcenter.png", link: "https://help.api.video/en/" %}
+{% include "_partials/support-card.md" label: "Ask the Community", icon: "/_assets/icons/community.png", link: "https://community.api.video/" %}
 </div> 

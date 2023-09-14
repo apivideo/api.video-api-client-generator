@@ -13,14 +13,14 @@ Sometimes you need a quick solution without getting into coding. api.video provi
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "Bubble.io", image: "/_assets/icons/bubbleio.png", subtitle: "No-code plugin",  link: "././bubbleio-plugin.md" %}
+{% include "_partials/hagrid-item.md" title: "Bubble.io", image: "/_assets/icons/bubbleio_new.png", subtitle: "No-code plugin",  link: "././bubbleio-plugin.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Contentful", image: "/_assets/icons/contentful.png", subtitle: "No-code plugin",  link: "././contentful.md" %}
+{% include "_partials/hagrid-item.md" title: "Contentful", image: "/_assets/icons/contentful_new.png", subtitle: "No-code plugin",  link: "././contentful.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Zapier", image: "/_assets/icons/zapier_black.png", subtitle: "No-code plugin",  link: "././zapier.md" %}
+{% include "_partials/hagrid-item.md" title: "Zapier", image: "/_assets/icons/zapier_new.png", subtitle: "No-code plugin",  link: "././zapier.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Wordpress", image: "/_assets/icons/wordpress.png", subtitle: "No-code plugin",  link: "././wordpress.md" %}
+{% include "_partials/hagrid-item.md" title: "Wordpress", image: "/_assets/icons/wordpress_new.png", subtitle: "No-code plugin",  link: "././wordpress.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Strapi", image: "/_assets/icons/strapi.png", subtitle: "No-code plugin",  link: "././strapi.md" %}
+{% include "_partials/hagrid-item.md" title: "Strapi", image: "/_assets/icons/strapi_new.png", subtitle: "No-code plugin",  link: "././strapi.md" %}
 
 </div>
