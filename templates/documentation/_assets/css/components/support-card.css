@@ -1,6 +1,14 @@
 .support-cards {
-  display: flex;
-  gap: 56px;
+    display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 767px) {
+  .support-cards {
+    flex-direction: row;
+    gap: 56px;
+  }
 }
 
 .dark .support-cards .support-card {
@@ -30,7 +38,7 @@
 }
 
 .dark .support-card p.support-card-label {
-    color: rgba(255, 255, 255, 0.50) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .support-card p.support-card-label {

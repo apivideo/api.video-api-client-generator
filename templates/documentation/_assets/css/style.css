@@ -344,9 +344,14 @@
 .content-markdown {
   padding-left: 0 !important;
   padding-right: 0 !important;
-  max-width: 100% !important;
-  padding-left: 80px !important;
+  max-width: 100% !important;  
   font-family: "Inter" !important;
+}
+
+@media (min-width: 768px) {
+  .content-markdown {
+    padding-left: 80px !important;
+  }
 }
 
 .section-header hr {
