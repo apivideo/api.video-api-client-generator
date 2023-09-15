@@ -258,7 +258,7 @@ redirects:
   - from: /docs/creating-and-managing-captions
     to: /vod/add-captions
   - from: /docs/creating-and-managing-chapters
-    to: /creating-and-managing-chapters
+    to: /vod/creating-and-managing-chapters
   - from: /docs/dashboard-tour
     to: /
   - from: /docs/delete-a-video
