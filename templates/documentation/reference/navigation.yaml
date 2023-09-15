@@ -82,6 +82,8 @@
       items:
         - label: Invalid Attribute
           href: ./invalid-attribute-1.md
+        - label: Invalid Query Parameter
+          href: ./invalid-query-parameter.md
         - label: Invalid Payload
           href: ./invalid-payload-1.md
         - label: Method Not Allowed
