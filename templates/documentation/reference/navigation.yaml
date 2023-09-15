@@ -61,116 +61,116 @@
       collapsed: true
       items:
         - label: Invalid API key
-          href: ./authentication-invalid-api-key-1.md
+          href: ./authentication-invalid-api-key.md
         - label: Invalid Access Token
-          href: ./authentication-invalid-access-token-1.md
+          href: ./authentication-invalid-access-token.md
         - label: Invalid Upload Token
-          href: ./authentication-invalid-upload-token-1.md
+          href: ./authentication-invalid-upload-token.md
         - label: Invalid Refresh Token
-          href: ./authentication-invalid-refresh-token-1.md
+          href: ./authentication-invalid-refresh-token.md
         - label: Invalid Authorization Header Value
-          href: ./authentication-invalid-authorization-header-value-1.md
+          href: ./authentication-invalid-authorization-header-value.md
         - label: Missing Authorization Header
-          href: ./authentication-missing-authorization-header-1.md
+          href: ./authentication-missing-authorization-header.md
         - label: Missing upload token
-          href: ./authentication-missing-upload-token-1.md
+          href: ./authentication-missing-upload-token.md
         - label: Suspended account
-          href: ./authorization-suspended-account-1.md
+          href: ./authorization-suspended-account.md
     - label: General Errors
       href: ./general-errors.md
       collapsed: true
       items:
         - label: Invalid Attribute
-          href: ./invalid-attribute-1.md
+          href: ./invalid-attribute.md
         - label: Invalid Query Parameter
           href: ./invalid-query-parameter.md
         - label: Invalid Payload
-          href: ./invalid-payload-1.md
+          href: ./invalid-payload.md
         - label: Method Not Allowed
-          href: ./method-not-allowed-1.md
+          href: ./method-not-allowed.md
         - label: Resource Not Found
-          href: ./resource-not-found-1.md
+          href: ./resource-not-found.md
         - label: Unrecognized Request Url
-          href: ./unrecognized-request-url-1.md
+          href: ./unrecognized-request-url.md
         - label: Webhook Limit Reached
-          href: ./webhook-limit-reached-1.md
+          href: ./webhook-limit-reached.md
     - label: Video Ingestion Errors
       href: ./video-upload-errors.md
       collapsed: true
       items:
         - label: Uploaded File Empty
-          href: ./uploaded-file-empty-1.md
+          href: ./uploaded-file-empty.md
         - label: Uploaded File is Invalid
-          href: ./uploaded-file-invalid-file-1.md
+          href: ./uploaded-file-invalid-file.md
         - label: Uploaded Multiple Files
-          href: ./uploaded-file-multiple-files-1.md
+          href: ./uploaded-file-multiple-files.md
         - label: No File
-          href: ./uploaded-file-no-file-1.md
+          href: ./uploaded-file-no-file.md
         - label: Uploaded File Too Large
-          href: ./uploaded-file-too-large-1.md
+          href: ./uploaded-file-too-large.md
         - label: Video Source Already Copied
-          href: ./video-source-already-copied-1.md
+          href: ./video-source-already-copied.md
         - label: Video Source Already Downloaded
-          href: ./video-source-already-downloaded-1.md
+          href: ./video-source-already-downloaded.md
         - label: Video Source Already Uploaded
-          href: ./video-source-already-uploaded-1.md
+          href: ./video-source-already-uploaded.md
     - label: Progressive Upload Errors - General
       href: ./progressive-upload-errors-general.md
       collapsed: true
       items:
         - label: Started With Bytes
-          href: ./video-content-range-started-with-bytes-1.md
+          href: ./video-content-range-started-with-bytes.md
         - label: Started With Part
-          href: ./video-content-range-started-with-part-1.md
+          href: ./video-content-range-started-with-part.md
         - label: Range Malformed
-          href: ./video-content-range-malformed-1.md
+          href: ./video-content-range-malformed.md
         - label: Already Initiated
-          href: ./video-content-range-already-initiated-1.md
+          href: ./video-content-range-already-initiated.md
     - label: Progressive Upload Errors - Content Range By Bytes
       href: ./progressive-upload-errors.md
       collapsed: true
       items:
         - label: Different Total Bytes
-          href: ./video-content-range-by-bytes-different-total-bytes-1.md
+          href: ./video-content-range-by-bytes-different-total-bytes.md
         - label: Byte Too High
-          href: ./video-content-range-by-bytes-from-byte-too-high-1.md
+          href: ./video-content-range-by-bytes-from-byte-too-high.md
         - label: Range Mismatch
-          href: ./video-content-range-by-bytes-range-mismatch-1.md
+          href: ./video-content-range-by-bytes-range-mismatch.md
         - label: Range Overlap
-          href: ./video-content-range-by-bytes-range-overlap-1.md
+          href: ./video-content-range-by-bytes-range-overlap.md
         - label: Range Too Large
-          href: ./video-content-range-by-bytes-range-too-large-1.md
+          href: ./video-content-range-by-bytes-range-too-large.md
         - label: Range Too Small
-          href: ./video-content-range-by-bytes-range-too-small-1.md
+          href: ./video-content-range-by-bytes-range-too-small.md
         - label: Byte Too High Allowed
-          href: ./video-content-range-by-bytes-to-byte-too-high-allowed-1.md
+          href: ./video-content-range-by-bytes-to-byte-too-high-allowed.md
         - label: Too High Total
-          href: ./video-content-range-by-bytes-to-byte-too-high-total-1.md
+          href: ./video-content-range-by-bytes-to-byte-too-high-total.md
         - label: Total Bytes Too High
-          href: ./video-content-range-by-bytes-total-bytes-too-high-1.md
+          href: ./video-content-range-by-bytes-total-bytes-too-high.md
         - label: Total Bytes Too Low
-          href: ./video-content-range-by-bytes-total-bytes-too-low-1.md
+          href: ./video-content-range-by-bytes-total-bytes-too-low.md
         - label: Total Bytes Zero
-          href: ./video-content-range-by-bytes-total-bytes-zero-1.md
+          href: ./video-content-range-by-bytes-total-bytes-zero.md
     - label: Progressive Upload Errors - Content Range By Part
       href: ./progressive-upload-errors-content-range-by-part.md
       collapsed: true
       items:
         - label: Different Total Parts
-          href: ./video-content-range-by-part-different-total-parts-1.md
+          href: ./video-content-range-by-part-different-total-parts.md
         - label: Part Already Sent
-          href: ./video-content-range-by-part-part-already-sent-1.md
+          href: ./video-content-range-by-part-part-already-sent.md
         - label: Part Too High Allowed
-          href: ./video-content-range-by-part-part-too-high-allowed-1.md
+          href: ./video-content-range-by-part-part-too-high-allowed.md
         - label: Part Too High Total
-          href: ./video-content-range-by-part-part-too-high-total-1.md
+          href: ./video-content-range-by-part-part-too-high-total.md
         - label: Part Zero
-          href: ./video-content-range-by-part-part-zero-1.md
+          href: ./video-content-range-by-part-part-zero.md
         - label: Total Parts Too High
-          href: ./video-content-range-by-part-total-parts-too-high-1.md
+          href: ./video-content-range-by-part-total-parts-too-high.md
         - label: Total Parts Too Low
-          href: ./video-content-range-by-part-total-parts-too-low-2.md
+          href: ./video-content-range-by-part-total-parts-too-low.md
         - label: Total Parts Zero
-          href: ./video-content-range-by-part-total-parts-zero-1.md
+          href: ./video-content-range-by-part-total-parts-zero.md
         - label: Uploaded File Too Small
-          href: ./video-content-range-by-part-uploaded-file-too-small-1.md
+          href: ./video-content-range-by-part-uploaded-file-too-small.md

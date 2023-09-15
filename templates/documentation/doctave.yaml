@@ -60,7 +60,7 @@ redirects:
   - from: /docs/apivideo-api-reference
     to: /reference
   - from: /docs/attributeinvalid
-    to: /reference/invalid-attribute-1
+    to: /reference/invalid-attribute
   - from: /docs/authentication-guide
     to: /reference/authentication-guide
   - from: /docs/bubbleio-plugin
