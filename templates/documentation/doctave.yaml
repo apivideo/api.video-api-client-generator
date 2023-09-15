@@ -227,3 +227,131 @@ redirects:
     to: /reference/create-and-manage-webhooks
   - from: /webhooks
     to: /reference/create-and-manage-webhooks
+  - from: /reference/video-best-practices
+    to: /vod/video-best-practices
+  - from: /reference/live-stream-best-practices
+    to: /live-streaming/live-stream-best-practices
+  - from: /cdn-cgi/l/email-protection
+    to: /
+  - from: /changelog/changelog
+    to: /
+  - from: /changelog/october-12-2021-new-contentful-integration
+    to: /
+  - from: /docs/access-private-videos-with-external-player
+    to: /delivery-analytics/private-video-on-hls-or-external-players
+  - from: /docs/add-a-permanent-watermark
+    to: /vod/add-a-permanent-watermark
+  - from: /docs/add-a-thumbnail-to-your-video
+    to: /vod/add-a-thumbnail-to-your-video
+  - from: /docs/add-or-delete-a-live-stream-thumbnail
+    to: /live-streaming/add-or-delete-a-live-stream-thumbnail#delete-a-live-stream-thumbnail
+  - from: /docs/all-live-events
+    to: /sdks/nocode/all-live-events
+  - from: /docs/bubbleio-api-calls
+    to: /sdks/nocode/bubbleio-api-calls
+  - from: /docs/bubbleio-player-element
+    to: /sdks/nocode/bubbleio-player-element
+  - from: /docs/create-and-manage-webhooks
+    to: /reference/create-and-manage-webhooks
+  - from: /docs/create-video
+    to: /sdks/nocode/create-video
+  - from: /docs/creating-and-managing-captions
+    to: /vod/add-captions
+  - from: /docs/creating-and-managing-chapters
+    to: /creating-and-managing-chapters
+  - from: /docs/dashboard-tour
+    to: /
+  - from: /docs/delete-a-video
+    to: /vod/delete-a-video
+  - from: /docs/delete-update-or-retrieve-details-for-watching-a-live-stream
+    to: /live-streaming/working-with-live-streams
+  - from: /docs/demos-and-tutorials
+    to: /vod/demos-template-overview
+  - from: /docs/list-live-streams
+    to: /live-streaming/list-live-streams
+  - from: /docs/list-videos-2
+    to: /vod/list-videos-2
+  - from: /docs/live-stream-created
+    to: /sdks/nocode/live-stream-created
+  - from: /docs/live-stream-ended
+    to: /sdks/nocode/live-stream-ended
+  - from: /docs/live-stream-started
+    to: /sdks/nocode/live-stream-started
+  - from: /docs/media-recorder
+    to: /sdks/vod/apivideo-typescript-media-recorder
+  - from: /docs/private-video-delivery-web-browser
+    to: /delivery-analytics/private-video-delivery-web-browser
+  - from: /docs/private-video-delivery-with-mp4-built-in-players
+    to: /delivery-analytics/private-video-delivery-with-mp4-built-in-players
+  - from: /docs/private-video-on-hls-or-external-players
+    to: /delivery-analytics/private-video-on-hls-or-external-players
+  - from: /docs/private-video-session-tokens
+    to: /delivery-analytics/private-video-session-tokens
+  - from: /docs/private-videos-with-custom-players-session-retention
+    to: /delivery-analytics/private-videos-with-custom-players-session-retention
+  - from: /docs/show-video-details
+    to: /vod/show-video-details
+  - from: /docs/show-video-upload-status
+    to: /vod/show-video-upload-status
+  - from: /docs/update-video-details
+    to: /vod/update-video-details
+  - from: /docs/upload-a-video-with-a-delegated-token
+    to: /vod/delegated-upload-tokens
+  - from: /docs/useful-tools
+    to: /
+  - from: /docs/video-created
+    to: /sdks/nocode/video-created
+  - from: /docs/video-encoding-completed
+    to: /sdks/nocode/video-encoding-completed
+  - from: /docs/video-upload-guides
+    to: /vod/upload-a-video-regular-upload
+  - from: /docs/what-is-api-video
+    to: /
+  - from: /recipes
+    to: /
+  - from: /recipes/consume-private-videos-with-videojs
+    to: /
+  - from: /reference/analytics-1
+    to: /reference/api/Analytics
+  - from: /reference/delete_live-streams-livestreamid
+    to: /reference/api/Live-Streams#delete-a-live-stream
+  - from: /reference/delete_live-streams-livestreamid-thumbnail
+    to: /reference/api/Live-Streams#delete-a-thumbnail
+  - from: /reference/delete_players-playerid
+    to: /reference/api/Player-Themes#delete-a-player
+  - from: /reference/delete_players-playerid-logo
+    to: /reference/api/Player-Themes#delete-logo
+  - from: /reference/delete_videos-videoid-captions-language
+    to: /reference/api/Captions#delete-a-caption
+  - from: /reference/delete_videos-videoid-chapters-language
+    to: /reference/api/Chapters#delete-a-chapter
+  - from: /reference/delete_watermark
+    to: /reference/api/Watermarks#delete-a-watermark
+  - from: /reference/demos-and-tutorials
+    to: /vod/demos-template-overview
+  - from: /reference/get_players-playerid
+    to: /reference/api/Player-Themes#retrieve-a-player
+  - from: /reference/get_upload-tokens-uploadtoken
+    to: /reference/api/Upload-Tokens#retrieve-upload-token
+  - from: /reference/get_videos-videoid-captions
+    to: /reference/api/Captions#retrieve-a-caption
+  - from: /reference/get_videos-videoid-chapters
+    to: /reference/api/Chapters#list-video-chapters
+  - from: /reference/get_videos-videoid-chapters-language
+    to: /reference/api/Chapters#retrieve-a-chapter
+  - from: /reference/hlsjs-analytics-plugin
+    to: /sdks/player/apivideo-hlsjs-analytics
+  - from: /reference/list-watermarks
+    to: /reference/api/Watermarks#list-all-watermarks
+  - from: /reference/live-streams
+    to: /reference/api/Live-Streams
+  - from: /reference/patch_videos-videoid-captions-language
+    to: /reference/api/Captions#update-a-caption
+  - from: /reference/patch_videos-videoid-thumbnail
+    to: /reference/api/Videos#set-a-thumbnail
+  - from: /reference/post_auth-refresh
+    to: /reference/api/Advanced-authentication#refresh-bearer-token
+  - from: /reference/request-invalid-query-parameter
+    to: /reference/invalid-query-parameter
+  - from: /reference/useful-tools
+    to: /
