@@ -25,9 +25,39 @@ A more visual representation can be found below:
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
+## Recommendations
+
+{% capture content %}
+For optimal ingestion, the video should use:
+
+- Resolution ≤ 4k
+- Video codec: **h264**
+    - ≤ 1080p max bitrate: 16Mbps
+    - \> 1080p  ≤ 4k max bitrate: 50Mbps
+- Standard Dynamic Range: **yuv420p**
+- Framerate ≤ **60fps**
+- Audio Codec: **aac**
+{% endcapture %}
+{% include "_partials/callout.html" kind: "success", content: content %}
+
+
+## Limitations
+
+{% capture content %}
+* When using [progressive upload](/vod/progressive-upload):
+   * a video uploaded in a single chunk **must be between 0 and 200MiB**
+   * a video uploaded in several chunks must use at most **10 000 chunks each between 5MiB and 200MiB except the last chunk which must be between 0 and 200MiB**
+* a video **must be uploaded/downloaded/copied in at most 7 days (168 hours)**
+* an **uploaded/downloaded/copied video** must be:
+    - **at most 10GiB**
+    - **of at most 24h**
+* **ProRes RAW** video codec is currently not supported.
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
+
 ## Progressive video upload & uploading large videos
 
-Some videos you might upload could be very large in size. We made sure that this is addressed and that there's a convenient way to upload large videos while breaking them into chunks. Please be sure to read the guide on how to make [progressive video upload](/vod/upload-a-video-regular-upload).
+Some videos you might upload could be very large in size. We made sure that this is addressed and that there's a convenient way to upload large videos while breaking them into chunks. Please be sure to read the guide on how to make [progressive video upload](/vod/progressive-upload).
 
 ## Video Access Management
 
