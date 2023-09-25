@@ -41,3 +41,15 @@ Keyframe Interval: 2 second
 | 1080p    | (60 fps)  | 60 fps 4500-9000 Kbps      | 44,1 kHz          | 128 Kbps      |
 | 2160(4K) | (30 fps)  | 25-30 fps 13000-34000 Kbps | 44,1 kHz          | 192 Kbps      |
 | 2160(4K) | (60 fps)  | 60 fps 20000-51000 Kbps    | 44,1 kHz          | 192 Kbps      |
+
+## Limitations
+
+{% capture content %}
+* When using the sandbox environment, live streaming is limited to 24 hours.
+* The **video codec must be H.264**
+* The **audio codec must be AAC or MP3**
+* DVR is exactly 6 hours
+* During a disconnection on ingest side, re-connection must occur within 10 seconds
+* When creating a new live event using the same `streamID` without keeping the DVR of a previous live, you must wait at least 5 minutes before re-using it
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
