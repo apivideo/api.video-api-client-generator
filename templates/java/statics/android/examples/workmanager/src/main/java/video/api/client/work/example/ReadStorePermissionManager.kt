@@ -4,6 +4,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class ReadStorePermissionManager(
     private val activity: ComponentActivity,
@@ -18,20 +20,16 @@ class ReadStorePermissionManager(
     }
 
     private val hasPermission: Boolean
-        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.checkSelfPermission(requiredPermission) == PackageManager.PERMISSION_GRANTED
-        } else {
-            true
-        }
+        get() = ContextCompat.checkSelfPermission(
+            activity,
+            requiredPermission
+        ) == PackageManager.PERMISSION_GRANTED
 
     fun requestPermission() {
         if (hasPermission) {
             onGranted()
         } else {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                throw IllegalStateException("Permission should be granted")
-            }
-            if (activity.shouldShowRequestPermissionRationale(requiredPermission)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, requiredPermission)) {
                 onShowPermissionRationale(requiredPermission) {
                     requestPermission.launch(requiredPermission)
                 }
