@@ -16,13 +16,21 @@ class ReadStorePermissionManager(
     } else {
         android.Manifest.permission.READ_EXTERNAL_STORAGE
     }
+
     private val hasPermission: Boolean
-        get() = activity.checkSelfPermission(requiredPermission) == PackageManager.PERMISSION_GRANTED
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.checkSelfPermission(requiredPermission) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
 
     fun requestPermission() {
         if (hasPermission) {
             onGranted()
         } else {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                throw IllegalStateException("Permission should be granted")
+            }
             if (activity.shouldShowRequestPermissionRationale(requiredPermission)) {
                 onShowPermissionRationale(requiredPermission) {
                     requestPermission.launch(requiredPermission)

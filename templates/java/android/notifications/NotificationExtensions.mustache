@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 
 fun NotificationCompat.Builder.setStyle(
     context: Context,
@@ -11,5 +12,5 @@ fun NotificationCompat.Builder.setStyle(
     @ColorRes notificationColorResourceId: Int
 ): NotificationCompat.Builder = apply {
     setSmallIcon(notificationIconResourceId)
-    color = context.getColor(notificationColorResourceId)
+    color = ContextCompat.getColor(context, notificationColorResourceId)
 }
