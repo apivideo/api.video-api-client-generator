@@ -334,4 +334,4 @@ All api.video clients automatically use the `Content-Range: bytes` method to upl
 
 ## Resources
 
-Check out api.video's blog content and tutorials about [video uploads](https://api.video/blog/endpoints/video-upload/), [private videos](https://api.video/blog/endpoints/private-videos/), and delegated uploads](https://api.video/blog/endpoints/delegated-upload/)!
+Check out api.video's blog content and tutorials about [video uploads](https://api.video/blog/endpoints/video-upload/), [private videos](https://api.video/blog/endpoints/private-videos/), and [delegated uploads](https://api.video/blog/endpoints/delegated-upload/)!
