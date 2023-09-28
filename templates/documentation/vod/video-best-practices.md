@@ -103,14 +103,12 @@ This video session will be tagged as watched by Doug - allowing for in-depth ana
 
 ## Resources
 
-* [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
+Check out api.video's blog content and tutorials about:
+
+* [Creating](https://api.video/blog/endpoints/video-create/) and [uploading](https://api.video/blog/endpoints/video-upload/) videos
   
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
   
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
   
-* [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
-  
-* [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
-  
-* Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+* [Private videos](https://api.video/blog/endpoints/private-videos/)
