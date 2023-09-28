@@ -334,26 +334,4 @@ All api.video clients automatically use the `Content-Range: bytes` method to upl
 
 ## Resources
 
-Check out api.video's blog content on video upload:
-
-- [Video upload with cURL](https://api.video/blog/tutorials/video-upload-tutorial) - **cURL** 
-
-- [Video upload (large videos) with cURL](https://api.video/blog/tutorials/video-upload-tutorial-large-videos) **cURL** 
-
-- [Upload many files at once with HTML and JavaScript](https://api.video/blog/tutorials/upload-many-files-at-once-with-html-and-javascript) - **JavaScript** Upload many files at once using an HTML form and JavaScript without the api.video client. 
-
-- [Upload a video with Laravel](https://api.video/blog/tutorials/upload-a-video-with-laravel) - **PHP** Create a form that uploads a video to api.video using Laravel. 
-
-- [Upload a video with the api.video PHP client](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-php-client) - **PHP** A tutorial about how to upload a video with the PHP API client, this will work for large or small files and uses the Content-Range header method. 
-
-- [Progressively upload large video files without compromising speed](https://api.video/blog/tutorials/progressively-upload-large-video-files-without-compromising-on-speed) - **Python** A tutorial that walks you through using progressive uploads without using an API client. 
-
-- [Upload a big video file using Python](https://api.video/blog/tutorials/upload-a-big-video-file-using-python) - **Python** Learn how to break a large video file into chunks and upload each chunk using Python.
-
-- [Upload a video from your computer with the api.video API](https://api.video/blog/tutorials/upload-a-video-from-your-computer-with-the-api-video-api-python) - **Python** Upload a video from your computer using Python. 
-
-- [Upload a video to api.video using a public URL](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-api-using-a-public-url-python) - **Python** Learn how to upload a video from a public mp4 link. 
-
-- [Upload a video with the api.video Python Client](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-python-client) - **Python** Upload a video of any size using api.video's Python client.
-
-- [Use Flask with Dropzone.js to upload videos under 200 MiB (no client)](https://api.video/blog/tutorials/use-flask-with-dropzone-js-to-upload-videos-under-128mb-no-client) - **Python** Learn how to do an upload for files under 200 MiB without using an api.video client.
+Check out api.video's blog content and tutorials about [video uploads](https://api.video/blog/endpoints/video-upload/), [private videos](https://api.video/blog/endpoints/private-videos/), and delegated uploads](https://api.video/blog/endpoints/delegated-upload/)!
