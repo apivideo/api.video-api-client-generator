@@ -74,7 +74,7 @@ api.video lets you customize a large part of the delivery, whether it's the play
 {% include "_partials/quick-link.md" icon: "/_assets/icons/no-code.svg", label: "No-code solutions", link: "/sdks/nocode" %}
 {% endcapture %}
 
-{% capture understand-api-video %}
+{% capture resources %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/helpcenter.png", label: "Help Center and FAQs", link: "https://help.api.video/en/" %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/api_reference.png", label: "API reference", link: "/reference" %}
 {% include "_partials/quick-link.md" icon: "/_assets/icons/blog.png", label: "Blog", link: "https://api.video/blog/" %}
@@ -84,7 +84,7 @@ api.video lets you customize a large part of the delivery, whether it's the play
 
 {% include "_partials/quick-links-container.md" name: "getting-started", title: "Get Started", content: get-started-links %}
 {% include "_partials/quick-links-container.md" name: "sdks", title: "Libraries & SDKs", content: libraries-sdks %}
-{% include "_partials/quick-links-container.md" name: "understand", title: "Understand api.video", content: understand-api-video %}
+{% include "_partials/quick-links-container.md" name: "resources", title: "Resources", content: resources %}
 
 </div>
 
