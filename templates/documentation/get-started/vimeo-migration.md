@@ -1,18 +1,26 @@
 ---
-title: "Amazon S3 migration guide"
-slug: "aws-migration"
+title: "Vimeo migration guide"
+slug: "vimeo-migration"
 meta:
-  description: This page gets users started on how to migrate from Amazon S3 to api.video.
+  description: This page gets users started on how to migrate from Vimeo to api.video.
 ---
 
-# Amazon S3 migration guide
+# Vimeo migration guide
 
-Planning to migrate api.video from Amazon S3? We got you covered!
+Planning to migrate api.video from Vimeo? We got you covered!
 
 There are two methods at your disposal that you can use to migrate all of your video content from S3 to api.video.
 
 - Migrate with api.video Import tool
 - Migrate using your own script
+
+{% capture content %}
+
+Migrating from Vimeo requires that you have at least a Pro subscription or higher with Vimeo. This limitation is set by Vimeo, and is a requirement for video file access.
+
+{% endcapture %}
+
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
 ## What's the cost? 
 
@@ -22,76 +30,63 @@ api.video gives you the ability to **migrate for free** and avoid paying anythin
 
 ## api.video Import Tool
 
-With api.video, you can use our in-house import tool to migrate all of your videos in a short time from the popular hosting and video provider.
+With api.video, you can use our in-house import tool to migrate all of your videos in a short time from your previous hosting and video provider.
 
-The simple tool will require you to input several parameters from the provider you are leaving and from api.video.
+This simple tool only requires a Vimeo access token, and that you authenticate yourself with your api.video account.
 
-Check out the [Import Tool](https://import.api.video/) now.
+Check out the [Import Tool](https://import.api.video/) to get started.
 
-### How to get the AWS Access Key and Account Secret
+### Retrieve your Vimeo access token
 
-To access AWS, you will need to sign up for an AWS account.
+To access your content on Vimeo, api.video needs an access token. This access token is used to retrieve the list of your videos, and to access the video source files.
 
-Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. If you don't have access keys, you can create them by using the [IAM console](https://console.aws.amazon.com/iam/).
+You can generate Vimeo access tokens is in two quick steps:
 
-We recommend that you use IAM access keys instead of AWS root account access keys. IAM lets you securely control access to AWS services and resources in your AWS account.
+* create a Vimeo application
+* create an access token for this application
 
-{% capture content %}
+#### 1. Create a Vimeo application
 
-To create access keys, you must have permission to perform the required IAM actions. For more information, see Granting IAM User Permission to Manage Password Policy and Credentials in the IAM User Guide.
+To create an application, go to your [Vimeo applications](https://developer.vimeo.com/apps), and click on **Create an app**.
 
-{% endcapture %}
+![](/_assets/get-started/migration-guide/vimeo-migration-1.png)
 
-{% include "_partials/callout.html" kind: "info", content: content %}
+#### 2. Create an access token
 
-**To get your access key ID and secret access key:**
-- Open the [IAM console](https://console.aws.amazon.com/iam/).
-- On the navigation menu, choose Users.
-- Choose your IAM user name (not the check box).
-- Open the Security credentials tab, and then choose Create access key.
-- To see the new access key, choose Show. Your credentials resemble the following:
+Once your app is ready, Vimeo redirects you to the application settings page. You can generate access tokens on this page.
 
-```
+In the **Authentication** section:
 
-Access key ID: AKIAIOSFODNN7EXAMPLE
+* select *Authenticated (you)*
+* check the *Private* and *Video Files* check boxes, and then click on Generate.
 
-Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+![](/_assets/get-started/migration-guide/vimeo-migration-2.png)
 
-```
+The access token that you generate appears on the page. You can use the Token value in the api.video [Import Tool](https://import.api.video/) to authenticate your Vimeo account for the import process:
 
-- To download the key pair, choose Download .csv file. Store the .csv file with keys in a secure location.
-
-{% capture content %}
-
-Keep the keys confidential to protect your AWS account, and never email them. Do not share them outside your organization, even if an inquiry appears to come from AWS or Amazon.com. No one who legitimately represents Amazon will ever ask you for your secret key.
-
-{% endcapture %}
-
-{% include "_partials/callout.html" kind: "warning", content: content %}
-
-You can retrieve the secret access key only when you initially create the key pair. Like a password, **you can't retrieve it later.** If you lose it, you must create a new key pair.
+![](/_assets/get-started/migration-guide/vimeo-migration-3.png)
 
 ### Importing the videos
 
-Once you have all the credentials, you can proceed with the migration.
+Once you have all the credentials, you can start the migration.
 
 1. Navigate to the api.video [Import Tool](https://import.api.video/).
 
-2. Select Amazon S3 from the list.
+2. Select **Vimeo** from the list.
 
-3. Autherize with api.video with your account. This process will link your api.video workspace to the Import tool.
+3. Log into your api.video account. This process links your api.video workspace to the Import tool.
 
-4. Select the project that you would like to import the video.
+4. If you have multiple api.video projects in your workspace, select the project where you want to migrate your content to.
 
-5. Next, click on Sign in to Amazon S3 and fill in the AWS Access Key and AWS Secret Key you got from Amazon S3.
+5. Next, click on Sign in to Vimeo and paste in the Vimeo access token that you generated.
 
-6. Select the S3 bucket you would like to import.
+6. Next, the tool retrieves the available videos from Vimeo. Select the videos you would like to import.
 
 7. Now you can proceed with the import.
 
 The process will show you the status of each video and the encoding status.
 
-## Importing with a script
+## Importing with a script (WIP!)
 
 Another way to import your videos is to use your own script and leverage one of the api.video client libraries with the provider's client libraries or API (if there are any).
 
