@@ -8,11 +8,13 @@
     href: /get-started/migration-guides.md
     collapsed: true
     items:
+    - label: api.video import tool
+      external: https://import.api.video/
     - label: Azure Media Services
       href: /get-started/azure-migration.md
     - label: Amazon S3
       href: /get-started/aws-migration.md
-    - label: api.video import tool
-      external: https://import.api.video/
+    - label: Vimeo
+      href: /get-started/vimeo-migration.md
   - label: SDK Catalog
     href: /sdks/README.md
