@@ -48,8 +48,8 @@ Once your app is ready, Vimeo redirects you to the application settings page. Yo
 
 In the **Authentication** section:
 
-* select *Authenticated (you)*
-* check the *Private* and *Video Files* check boxes, and then click on Generate.
+* select **Authenticated (you)**
+* check the **Private** and **Video Files** check boxes, and then click on Generate.
 
 ![](/_assets/get-started/migration-guide/vimeo-migration-2.png)
 
@@ -73,6 +73,6 @@ Once you have all the credentials, you can start the migration.
 
 6. Next, the tool retrieves the available videos from Vimeo. Select the videos you would like to import.
 
-7. Select the videos you want to migrate, and can start the import process.
+7. Select the videos you want to migrate, and start the import process.
 
 The process displays the upload status and encoding status for each video.
