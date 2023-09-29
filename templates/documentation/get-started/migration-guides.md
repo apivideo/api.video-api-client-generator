@@ -17,4 +17,6 @@ Moving to a different provider takes time, effort, and development resources. ap
 
 {% include "_partials/hagrid-item.md" title: "Amazon", image: "/_assets/get-started/migration-guide/Amazon-S3-Logo.svg", subtitle: "S3",  link: "./aws-migration.md" %}
 
+{% include "_partials/hagrid-item.md" title: "Vimeo", image: "/_assets/get-started/migration-guide/vimeo.png", subtitle: "", link: "./vimeo-migration.md" %}
+
 </div>
