@@ -15,7 +15,7 @@ The session starts with the /session endpoint where we get the session token fro
 
 Once the session token is acquired, it is reused in all other requests to the different assets.
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/session-token-dark.png", light: "/_assets/delivery-analytics/private-videos/session-token-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/delivery-analytics/private-videos/session-token-dark.svg", light: "/_assets/delivery-analytics/private-videos/session-token-light.svg" %}
 
 {% capture content %}
 **Time to Live**

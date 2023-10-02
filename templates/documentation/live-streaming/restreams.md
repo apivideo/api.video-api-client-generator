@@ -18,7 +18,7 @@ api.video gives you the ability to broadcast a live stream to multiple platforms
 
 ## How it works
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/live-streaming/restreams/restreams-dark.png", light: "/_assets/live-streaming/restreams/restreams-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/live-streaming/restreams/restreams-dark.svg", light: "/_assets/live-streaming/restreams/restreams-light.svg" %}
 
 You can add restreams to an existing live stream or you can create a live stream that already includes the restream list.   
 

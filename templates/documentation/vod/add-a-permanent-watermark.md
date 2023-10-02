@@ -27,7 +27,7 @@ Watermarks are uploaded separately from videos. You will need to upload the wate
 {% include "_partials/callout.html" kind: "warning", content: content %}
 
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/add-watermarks/watermark-dark.png", light: "/_assets/vod/add-watermarks/watermark-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/add-watermarks/watermark-dark.svg", light: "/_assets/vod/add-watermarks/watermark-light.svg" %}
 
 ## Supported Image formats
 

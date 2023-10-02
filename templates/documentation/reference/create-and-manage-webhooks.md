@@ -22,7 +22,7 @@ api.video provides you the possibility to get a `POST` request to your server th
 
 Here’s how the `video.encoding` webhook’s flow looks like:
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/reference/webhooks/webhooks-dark.png", light: "/_assets/reference/webhooks/webhooks-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/reference/webhooks/webhooks-dark.svg", light: "/_assets/reference/webhooks/webhooks-light.svg" %}
 
 ## Event properties
 
