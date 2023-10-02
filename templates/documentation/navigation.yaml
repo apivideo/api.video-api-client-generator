@@ -16,5 +16,7 @@
       href: /get-started/aws-migration.md
     - label: Vimeo
       href: /get-started/vimeo-migration.md
+    - label: Wistia
+      href: /get-started/wistia-migration.md
   - label: SDK Catalog
     href: /sdks/README.md
