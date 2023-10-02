@@ -19,4 +19,6 @@ Moving to a different provider takes time, effort, and development resources. ap
 
 {% include "_partials/hagrid-item.md" title: "Vimeo", image: "/_assets/get-started/migration-guide/vimeo.png", subtitle: "", link: "./vimeo-migration.md" %}
 
+{% include "_partials/hagrid-item.md" title: "Wistia", image: "/_assets/get-started/migration-guide/wistia.png", subtitle: "", link: "./wistia-migration.md" %}
+
 </div>
