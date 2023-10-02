@@ -56,7 +56,7 @@ Bearer authentication (also called token authentication) is an HTTP authenticati
 
 api.video provides an enhanced security authentication method, which uses a disposable bearer token that has a short time to live and has to be refreshed every 3600 seconds.
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/get-started/authentication/disposable-bearer-token-dark.png", light: "/_assets/get-started/authentication/disposable-bearer-token-light.png" %} 
+{% include "_partials/dark-light-image.md" dark: "/_assets/reference/authentication/disposable-bearer-token-dark.svg", light: "/_assets/reference/authentication/disposable-bearer-token-light.svg" %} 
 
 Bearer token authentication is simple to set up and use; however, we encourage you to use one of our client libraries if possible. [api.video client libraries](/sdks/api-clients) handle authentication for you, including renewing your token as needed.
 

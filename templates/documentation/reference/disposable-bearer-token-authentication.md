@@ -11,7 +11,7 @@ We provide an enhanced security authentication method, which uses a disposable b
 
 ## How it works?
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/reference/disposable-bearer-auth/disposable-bearer-token-dark.png", light: "/_assets/reference/disposable-bearer-auth/disposable-bearer-token-light.png" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/reference/disposable-bearer-auth/disposable-bearer-token-dark.svg", light: "/_assets/reference/disposable-bearer-auth/disposable-bearer-token-light.svg" %}
 
 _Fig. 1_
 
