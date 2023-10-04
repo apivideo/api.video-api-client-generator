@@ -11,8 +11,8 @@ You must authenticate every time you use the api.video API. Depending on what pa
 
 ### Tutorials
 
-- [Authentication steps](https://api.video/blog/tutorials/authentication-tutorial) \- Walk through how to authenticate and retrieve an access token.
-- [When your token expires, hit refresh and protect your API key](https://api.video/blog/tutorials/when-your-token-expires-hit-refresh-and-protect-your-api-key) \- Use refresh tokens to retrieve a new access token when yours expires.
+- [Authentication steps](https://api.video/blog/tutorials/authentication-tutorial/) \- Walk through how to authenticate and retrieve an access token.
+- [When your token expires, hit refresh and protect your API key](https://api.video/blog/tutorials/when-your-token-expires-hit-refresh-and-protect-your-api-key/) \- Use refresh tokens to retrieve a new access token when yours expires.
 
 ### Tools
 

@@ -52,5 +52,5 @@ You can check the formatting of the VTT with a free online tool here: <https://w
 
 ## Tutorials & Resources
 
-- [How to programmatically add captions to your video](https://api.video/blog/tutorials/how-to-add-captions-to-your-videos)
+- [How to programmatically add captions to your video](https://api.video/blog/tutorials/how-to-add-captions-to-your-videos/)
 - [Free online VTT creator](https://www.vtt-creator.com/)

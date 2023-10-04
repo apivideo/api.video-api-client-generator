@@ -281,7 +281,7 @@ The progressive upload object is instanciated using an `options` object. Options
 
 #### Using a delegated upload token (recommended):
 
-Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads).
+Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads/).
 
 
 |                   Option name | Mandatory | Type   | Description             |

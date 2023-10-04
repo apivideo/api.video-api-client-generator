@@ -205,7 +205,7 @@ With `responsive={true}`, the player height will be automatically set to match t
 
 ### Private videos
 
-To play a [private video](https://api.video/blog/tutorials/tutorial-private-videos), add the video view token in the video attribute:
+To play a [private video](https://api.video/blog/tutorials/tutorial-private-videos/), add the video view token in the video attribute:
 
 {% raw %}
 

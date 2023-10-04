@@ -32,8 +32,8 @@ If you want to learn about regular or progressive uploads, check out the [regula
 
 We offer blog content on this topic: 
 
-- [Delegated uploads](https://api.video/blog/tutorials/delegated-uploads) - **cURL** Walk through how to do a delegated upload using cURL. 
-- [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python) - **Python** Learn how to do a delegated upload using Python. 
+- [Delegated uploads](https://api.video/blog/tutorials/delegated-uploads/) - **cURL** Walk through how to do a delegated upload using cURL. 
+- [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python/) - **Python** Learn how to do a delegated upload using Python. 
 
 ## Create an account
 
