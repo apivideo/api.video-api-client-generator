@@ -48,8 +48,8 @@
     href: /vod/upload-from-source.md
   - label: Using upload tokens
     href: /vod/delegated-upload-tokens.md
-  - label: Video cold storage & backup
-    href: /vod/azure-cold-storage-backup.md
+  - label: Video backup & cold storage
+    href: /vod/backup-and-cold-storage.md
     collapsed: true
     items:
     - label: Video backup to Azure
