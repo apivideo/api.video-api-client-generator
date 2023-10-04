@@ -1,6 +1,7 @@
 ---
 title: "Backup your videos to Azure"
 slug: "azure-cold-storage-backup"
+meta:
   description: Backup videos uploaded to api.video to Azure Storage account with a simple script. 
 ---
 # Video backup to Azure
