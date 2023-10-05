@@ -187,7 +187,7 @@ const ApiVideoClient = require('@api.video/nodejs-client');
 				const videos = apiVideoClient.videos;
         const title = 'My Video.mp4'; // The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
         const tags = '["captions", "dialogue"]'; // A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-        const metadata = 'metadata[Author]=John Doe&metadata[Format]=Tutorial'; // Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+        const metadata = 'metadata[Author]=John Doe&metadata[Format]=Tutorial'; // Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
         const description = 'New Zealand'; // If you described a video with a term or sentence, you can add it here to return videos containing this string.
         const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
         const sortBy = 'publishedAt'; // Allowed: publishedAt, title. You can search by the time videos were published at, or by title.

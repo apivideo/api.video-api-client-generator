@@ -24,7 +24,7 @@ There is one element property that you have to define to use the uploader: the "
 There are several ways to proceed with the upload token:
 
 - Generate a token once and use it for all uploads. To generate a token, you'll have to call the api.video API as described in this article: [Delegated uploads: Make video uploads with a token you create
-](https://api.video/blog/tutorials/delegated-uploads)
+](https://api.video/blog/tutorials/delegated-uploads/)
 - Let Bubble make the call to the token generation API thanks to the API calls predefined in the plugin. This particular topic is covered here: [Bubble.io API calls](/sdks/nocode/bubbleio-api-calls). You can generate a new token: 
     - When a new user sign-in in your application and save the token in this user's database entry
     - When an upload is going to be made (in this case, the token may be created with a short lifetime).

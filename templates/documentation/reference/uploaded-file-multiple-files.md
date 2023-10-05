@@ -18,8 +18,8 @@ You can't attach multiple videos to the same upload request. One video or chunk 
 
 ### Tutorials
 
-* [Private video upload with a public token](https://api.video/blog/tutorials/private-video-upload-with-a-public-token)
-* [Video upload](https://api.video/blog/tutorials/video-upload-tutorial)
+* [Private video upload with a public token](https://api.video/blog/product-updates/video-access-management-how-to-create-deliver-and-manage-private-videos-and-what//)
+* [Video upload](https://api.video/blog/tutorials/video-upload-tutorial/)
 
 ### Tools
 

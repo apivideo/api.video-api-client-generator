@@ -49,8 +49,8 @@ Api.video offers 2 dedicated API endpoints for analytics:
 
 | Endpoint                                                                                             | Use case                                       |
 | :--------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
-| [`/analytics/videos/plays`](https://docs.api.video/reference/get_analytics-videos-plays)             | Get play event count for VOD (Video on demand) |
-| [`/analytics/live-streams/plays`](https://docs.api.video/reference/get_analytics-live-streams-plays) | Get play event count for live streams          |
+| [`/analytics/videos/plays`](https://docs.api.video/reference/api/Analytics#get-play-events-for-video)             | Get play event count for VOD (Video on demand) |
+| [`/analytics/live-streams/plays`](https://docs.api.video/reference/api/Analytics#get-play-events-for-live-stream) | Get play event count for live streams          |
 
 {% capture content %}
 **Testing**

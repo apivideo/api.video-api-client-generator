@@ -2,7 +2,7 @@
 title: "Swift live stream library"
 slug: "swift-live-stream-library"
 metadata: 
-  description: "The official Swift live stream library for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official Swift live stream library for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 Swift Live stream Library

@@ -13,8 +13,8 @@ You create upload tokens with the [delegated upload](/reference/api/Upload-Token
 
 ### Tutorials
 
-* [Delegated uploads](https://api.video/blog/tutorials/delegated-uploads)
-* [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python)
+* [Delegated uploads](https://api.video/blog/tutorials/delegated-uploads/)
+* [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python/)
 * [Integrate delegated upload to ingest videos from your users](/reference/api/Videos#upload-with-an-delegated-upload-token)
 
 ### Tools

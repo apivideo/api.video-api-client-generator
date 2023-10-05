@@ -12,7 +12,7 @@ updatedAt: "2023-05-24T10:34:39.667Z"
 Upload Your First Video
 =======================
 
-## 1. Create an **[api.video](http://api.video) account**
+## 1. Create an **[api.video](https://api.video/) account**
 
 Before you can start uploading your first video, you need to [create an account](https://dashboard.api.video/register). 
 
@@ -513,7 +513,7 @@ API response
 
 ## 3. Watch your video
 
-The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in [step 2](#2-upload-a-video):
+The easiest way to play your video is to use the [api.video](https://api.video/) player URL that you received in [step 2](#2-upload-a-video):
 
 `"player": "https://embed.api.video/vod/{videoId}"`
 
@@ -521,7 +521,7 @@ To watch your video, just paste the link into your favorite browser.
 
 ## 4. Manage your video
 
-You can do many things to manage existing videos in your [api.video](http://api.video) environment, among which:
+You can do many things to manage existing videos in your [api.video](https://api.video/) environment, among which:
 
 - [Update a video](/reference/api/Videos#update-a-video-object) (API)
 - [List all videos](/reference/api/Videos#list-all-video-objects) (API)

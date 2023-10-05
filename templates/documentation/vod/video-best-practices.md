@@ -8,7 +8,7 @@ The concept of creating and uploading a video is pretty simple:
 1.  **Create a video object:** Think about it as a box or shell for the video. Once you've created a video object, it's an empty shell, however, it has an id and assets.
 2.  **Upload a video:** Now you can upload your video into that object.
 
-A tutorial for uploading a video with curl can be found [here](https://api.video/blog/tutorials/video-upload-tutorial)
+A tutorial for uploading a video with curl can be found [here](https://api.video/blog/tutorials/video-upload-tutorial/)
 
 A more visual representation can be found below:
 
@@ -107,8 +107,8 @@ Check out api.video's blog content and tutorials about:
 
 * [Creating](https://api.video/blog/endpoints/video-create/) and [uploading](https://api.video/blog/endpoints/video-upload/) videos
   
-* [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+* [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos/)
   
-* [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
+* [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices/)
   
-* [Private videos](https://api.video/blog/endpoints/private-videos/)
+* [Private videos](https://api.video/blog/product-updates/video-access-management-how-to-create-deliver-and-manage-private-videos-and-what/)
