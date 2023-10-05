@@ -120,7 +120,7 @@ The analytics module constructor takes a `PlayerAnalyticsOptions` parameter that
 |         Option name | Mandatory | Type                                  | Description                                                                                                  |
 | ------------------: | --------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 |            mediaUrl | **yes**   | string                                | url of the media (eg. `https://cdn.api.video/vod/vi5oDagRVJBSKHxSiPux5rYD/hls/manifest.m3u8`)                |
-|        userMetadata | no        | ```{ [name: string]: string }[]```    | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata) (see **Full example** below) |
+|        userMetadata | no        | ```{ [name: string]: string }[]```    | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) (see **Full example** below) |
 |            sequence | no        | ```{start: number; end?: number;} ``` | if only a sequence of the video is going to be played                                                        |
 | onSessionIdReceived | no        | ```(sessionId: string) => void```     | callback to be called once the session id is reveiced                                                        |
  

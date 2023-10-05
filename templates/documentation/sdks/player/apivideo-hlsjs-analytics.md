@@ -83,7 +83,7 @@ Available options (`HlsJsApiVideoAnalyticsOptions`):
 
 |  Option name | Mandatory | Type                                  | Description                                                                                                  |
 | -----------: | --------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| userMetadata | no        | ```{ [name: string]: string }[]```    | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata) (see **Full example** below) |
+| userMetadata | no        | ```{ [name: string]: string }[]```    | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) (see **Full example** below) |
 |     sequence | no        | ```{start: number; end?: number;} ``` | if only a sequence of the video is going to be played                                                        |
 
 ## Instanciation example

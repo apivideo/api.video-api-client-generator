@@ -111,4 +111,4 @@ Check out api.video's blog content and tutorials about:
   
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices/)
   
-* [Private videos](https://api.video/blog/endpoints/private-videos/)
+* [Private videos](https://api.video/blog/product-updates/video-access-management-how-to-create-deliver-and-manage-private-videos-and-what/)

@@ -85,7 +85,7 @@ The analytics module constructor takes a `Options` parameter that contains the f
 |               yes** | String    | url of the media (eg. `https://vod.api.video/vod/vi5oDagRVJBSKHxSiPux5rYD/hls/manifest.m3u8`) |                                                                                 |
 |           videoInfo | **        |                                                                                               |                                                                                 |
 |               yes** | VideoInfo | information containing analytics collector url, video type (vod or live) and video id         |                                                                                 |
-|            metadata | no        | ```Map<String, String>```                                                                     | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata) |
+|            metadata | no        | ```Map<String, String>```                                                                     | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) |
 | onSessionIdReceived | no        | ```((sessionId: String) -> Unit)?```                                                          | callback called once the session id has been received                           |
 |              onPing | no        | ```((message: PlaybackPingMessage) -> Unit)?```                                               | callback called before sending the ping message                                 |
 
