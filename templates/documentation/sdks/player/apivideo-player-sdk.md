@@ -3,13 +3,13 @@ title: "api.video Player SDK"
 slug: "apivideo-player-sdk"
 hidden: false
 metadata: 
-  description: "The official api.video Player SDK for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video Player SDK for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 api.video Player SDK
 ==============
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 
 # Table of contents
@@ -146,12 +146,12 @@ The PlayerSdk constructor takes 2 parameters:
 |    Option name | Mandatory             | Type    | Description                                                                                                  |
 | -------------: | --------------------- | ------- | ------------------------------------------------------------------------------------------------------------ |
 |             id | **yes**               | string  | the id of the video (videoId or liveStreamId)                                                                |
-|          token | yes for private video | string  | the [private video](https://api.video/blog/tutorials/tutorial-private-videos) url token                      |
-| privateSession | no                    | string  | the [private video](https://api.video/blog/tutorials/tutorial-private-videos) session id if needed           |
+|          token | yes for private video | string  | the [private video](https://api.video/blog/tutorials/tutorial-private-videos/) url token                      |
+| privateSession | no                    | string  | the [private video](https://api.video/blog/tutorials/tutorial-private-videos/) session id if needed           |
 |           live | no (default: false)   | boolean | indicate that the video is a live one                                                                        |
 |       autoplay | no (default: false)   | boolean | start playing the video as soon as it is loaded                                                              |
 |          muted | no (default: false)   | boolean | the video is muted                                                                                           |
-|       metadata | no (default: empty)   | object  | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata) (see **Full example** below) |
+|       metadata | no (default: empty)   | object  | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) (see **Full example** below) |
 |   hideControls | no (default: false)   | boolean | the controls are hidden (except unmute button if the video starts muted)                                     |
 |     chromeless | no (default: false)   | boolean | chromeless mode: all controls are hidden                                                                     |
 |      hideTitle | no (default: false)   | boolean | the video title is hidden                                                                                    |

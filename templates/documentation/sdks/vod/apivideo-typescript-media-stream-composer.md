@@ -3,13 +3,13 @@ title: "api.video TypeScript Media Composer"
 slug: "typescript-media-composer"
 hidden: false
 metadata: 
-  description: "The official api.video TypeScript Media Composer for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video TypeScript Media Composer for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 api.video TypeScript Media Composer
 ==============
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 
 # Table of contents
@@ -381,7 +381,7 @@ Options to provide depend on the way you want to authenticate to the api.video A
 
 ##### Using a delegated upload token (recommended):
 
-Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads).
+Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads/).
 
 
 |                   Option name | Mandatory | Type   | Description             |

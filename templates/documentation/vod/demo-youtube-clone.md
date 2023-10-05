@@ -9,7 +9,7 @@ Youtube is one of the most, if not "The" most popular user-generated content pro
 ## Features
 
 - Search for a video by name
-- List videos that have already been uploaded to your [api.video](http://api.video) account
+- List videos that have already been uploaded to your [api.video](https://api.video/) account
 - Video view with mockup like and subscribe buttons
 
 ## Demo

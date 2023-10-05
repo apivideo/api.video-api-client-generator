@@ -6,19 +6,19 @@ meta:
 ---
 # Video backup to Azure
 
-At [api.video](http://api.video) we understand that sometimes, you want to make sure that your videos are safe and secure. Although api.video has a backup and disaster recovery plan, it’s up to you to decide if you want an extra backup resource or if you would like to use api.video just to transcode your videos but eventually store them on a different resource.
+At [api.video](https://api.video/) we understand that sometimes, you want to make sure that your videos are safe and secure. Although api.video has a backup and disaster recovery plan, it’s up to you to decide if you want an extra backup resource or if you would like to use api.video just to transcode your videos but eventually store them on a different resource.
 
-That’s why, we’ve created this guide so you can store the videos you’ve already transcoded with [api.video](http://api.video) on a file storage resource.
+That’s why, we’ve created this guide so you can store the videos you’ve already transcoded with [api.video](https://api.video/) on a file storage resource.
 
 ## How it’s done?
 
-This guide will explain how you can store your transcoded videos on Azure Storage Account. In short, all you need to do is run a small script that will copy the videos from [api.video](http://api.video) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
+This guide will explain how you can store your transcoded videos on Azure Storage Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
 
 ## Preparation
 
 **What we will need to run the script?**
 
-1. **[api.video](http://api.video) API key**, you can find the information on how to retrieve the <a href="https://docs.api.video/reference/authentication-guide#retrieve-your-apivideo-api-key" target="_blank">API key in the Retrieve your api.video API key guide</a>
+1. **[api.video](https://api.video/) API key**, you can find the information on how to retrieve the <a href="https://docs.api.video/reference/authentication-guide#retrieve-your-apivideo-api-key" target="_blank">API key in the Retrieve your api.video API key guide</a>
 2. <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal" target="_blank">Azure Account Key</a>, or use any other credential system that Azure provides
 3. Azure storage account name
 4. api.video <a href="https://github.com/apivideo/azure-cold-storage" target="_blank">Cold Storage script</a>,
@@ -59,7 +59,7 @@ $ npm install
 
 After the dependencies are installed, we will need to enter the credentials we have copied in the preparation phase.
 
-Edit the `.env` file and replace the following with the keys you've received from Azure and [api.video](http://api.video/). 
+Edit the `.env` file and replace the following with the keys you've received from Azure and [api.video](https://api.video/). 
 
 ```bash
 APIVIDEO_API_KEY = "apivideo_api_key"

@@ -3,13 +3,13 @@ title: "api.video Swift Player"
 slug: "apivideo-swift-player"
 hidden: false
 metadata: 
-  description: "The official api.video Swift Player component for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video Swift Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 api.video Swift Player
 ==============
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
@@ -28,7 +28,7 @@ your app.
 
 # Project description
 
-Easily integrate a video player for videos from [api.video](https://api.video) in your iOS
+Easily integrate a video player for videos from [api.video](https://api.video/) in your iOS
 application.
 
 ![](https://github.com/apivideo/api.video-swift-player/blob/main/Assets/player-preview.png)
@@ -64,20 +64,17 @@ Run `pod install`
 ## Retrieve your video Id
 
 At this point, you must have uploaded a least one video to your account. If you haven't
-see [how to upload a video](https://docs.api.video/docs/upload-a-video-regular-upload). You'll need
+see [how to upload a video](https://docs.api.video/vod/upload-a-video-regular-upload/). You'll need
 a video Id to use this component and play a video from api.video. To get yours, follow these steps:
 
 1. [Log into your account](https://dashboard.api.video/login) or create
    one [here](https://dashboard.api.video/register).
 2. Copy your API key (sandbox or production if you are subscribed to one of
    our [plan](https://api.video/pricing)).
-3. Go to [the official api.video documentation](https://docs.api.video/docs).
-4. Log into your account in the top right corner. If it's already done, be sure it's the account you
-   want to use.
-5. Go to API Reference -> Videos -> [List all videos](https://docs.api.video/reference/list-videos)
-6. On the right, be sure the "Authentication" section contains the API key you want to use.
-7. Generate your upload token by clicking the "Try It!" button in the right section
-8. Copy the "videoId" value of one of elements of the response in the right section.
+3. Go to [the official api.video documentation](https://docs.api.video/).
+4. Go to API Reference -> Videos -> [List all videos](https://docs.api.video/reference/api/Videos#list-all-video-objects)
+5. Create a `get` request to the `/videos` endpoint based on the reference, using a tool like Postman.
+6. Copy the "videoId" value of one of elements of the API response.
 
 Alternatively, you can find your video Id in the video details of
 your [dashboard](https://dashboard.api.video).
@@ -210,7 +207,7 @@ On the first run, you will have to set your video Id:
 # Documentation
 
 * [Player documentation](https://apivideo.github.io/api.video-swift-player/documentation/apivideoplayer/)
-* [api.video documentation](https://docs.api.video)
+* [api.video documentation](https://docs.api.video/)
 
 # Dependencies
 

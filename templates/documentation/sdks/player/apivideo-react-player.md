@@ -3,14 +3,14 @@ title: "api.video React Player component"
 slug: "apivideo-react-player"
 hidden: false
 metadata: 
-  description: "The official api.video React Player component for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video React Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 api.video React Player component
 ==============
 
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 # Table of contents
 
@@ -76,7 +76,7 @@ The following properties are used to configure the player. The value of each of 
 | style               | no        | React.CSSProperties                                                                              | CSS style to apply to the player container                                                                                      | {}        |
 | autoplay            | no        | boolean                                                                                          | Define if the video should start playing as soon as it is loaded                                                                | false     |
 | muted               | no        | boolean                                                                                          | The video is muted                                                                                                              | false     |
-| metadata            | no        | { [key: string]: string }                                                                        | Object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata) (see **example** below)                         | {}        |
+| metadata            | no        | { [key: string]: string }                                                                        | Object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) (see **example** below)                         | {}        |
 | hidePoster          | no        | boolean                                                                                          | Weither if the poster image displayed before the first play of the video should be hidden                                       | false     |
 | chromeless          | no        | boolean                                                                                          | Chromeless mode: all controls are hidden                                                                                        | false     |
 | loop                | no        | boolean                                                                                          | Once the video is finished it automatically starts again                                                                        | false     |
@@ -205,7 +205,7 @@ With `responsive={true}`, the player height will be automatically set to match t
 
 ### Private videos
 
-To play a [private video](https://api.video/blog/tutorials/tutorial-private-videos), add the video view token in the video attribute:
+To play a [private video](https://api.video/blog/tutorials/tutorial-private-videos/), add the video view token in the video attribute:
 
 {% raw %}
 

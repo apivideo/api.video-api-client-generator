@@ -16,11 +16,11 @@ You'll need to figure out what you're doing wrong with your header set up. One e
 
 ### Tutorials
 
-* [Video upload (large videos)](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-* [Upload a big video file using Python](https://api.video/blog/tutorials/upload-a-big-video-file-using-python)
-* [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python)
-* [Uploading large files with JavaScript: File.slice() to the rescue!](https://api.video/blog/tutorials/uploading-large-files-with-javascript)
-* [Tutorial to upload large video file](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+* [Video upload (large videos)](https://api.video/blog/tutorials/video-upload-tutorial-large-videos/)
+* [Upload a big video file using Python](https://api.video/blog/tutorials/upload-a-big-video-file-using-python/)
+* [Delegated uploads for videos large and small](https://api.video/blog/tutorials/delegated-uploads-for-videos-large-and-small-python/)
+* [Uploading large files with JavaScript: File.slice() to the rescue!](https://api.video/blog/tutorials/uploading-large-files-with-javascript/)
+* [Tutorial to upload large video file](https://api.video/blog/tutorials/video-upload-tutorial-large-videos/)
 
 ### Tools
 

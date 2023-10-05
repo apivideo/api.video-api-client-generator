@@ -96,8 +96,8 @@ Install-Package ApiVideo
 
 To upload chapters for your video, you'll need a .VTT file containing details about where you want breaks to occur in your video. Here are two tutorials that go over how to add chapters to your content: 
 
-- [Adding chapters to your videos](https://api.video/blog/tutorials/video-chapters)
-- [Video chapters: Using external buttons for controls](https://api.video/blog/tutorials/video-chapters) 
+- [Adding chapters to your videos](https://api.video/blog/tutorials/video-chapters/)
+- [Video chapters: Using external buttons for controls](https://api.video/blog/tutorials/video-chapters/) 
 
 {% capture content %}
 

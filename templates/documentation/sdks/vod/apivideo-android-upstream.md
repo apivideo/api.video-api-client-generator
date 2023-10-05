@@ -3,13 +3,13 @@ title: "api.video Android Upstream"
 slug: "android-upstream"
 hidden: false
 metadata: 
-  description: "The official api.video Android Upstream package for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video Android Upstream package for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
 api.video Android Upstream: camera + progressive upload
 ==============
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
@@ -30,7 +30,7 @@ your app.
 # Project description
 
 This library is an easy way to capture your video and microphone and upload it
-to [api.video](https://api.video) at the same time.
+to [api.video](https://api.video/) at the same time.
 
 # Getting started
 
@@ -109,7 +109,7 @@ class MyFragment : Fragment() {
 
 4. [Create or get your video id](https://github.com/apivideo/api.video-android-client#videosapi)
    or [create or get an upload token](https://github.com/apivideo/api.video-android-client#uploadtokensapi)
-   from [api.video](https://api.video)
+   from [api.video](https://api.video/)
    Alternatively, you can create or get an upload token in
    the [dashboard](https://dashboard.api.video/upload-tokens).
 
@@ -139,7 +139,7 @@ to [API documentation](https://apivideo.github.io/api.video-android-upstream/).
 # Documentation
 
 * [API documentation](https://apivideo.github.io/api.video-android-upstream/)
-* [api.video documentation](https://docs.api.video)
+* [api.video documentation](https://docs.api.video/)
 
 # Sample application
 

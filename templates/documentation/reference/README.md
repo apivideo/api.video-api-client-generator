@@ -101,7 +101,7 @@ If for example you have created 900 videos, after calling `GET https://ws.api.vi
     ]
 ```
 
-In order to retrieve the next 25 videos, you will need to make another request with the page number, and you can pull it from the object `links` with the `rel: "next"` value. A call to GET [https://ws.api.video/videos?currentPage=2&pageSize=25z](https://ws.api.video/videos?currentPage=2&pageSize=25z) will give you the next 25 videos.
+In order to retrieve the next 25 videos, you will need to make another request with the page number, and you can pull it from the object `links` with the `rel: "next"` value. A call to `GET https://ws.api.video/videos?currentPage=2&pageSize=25z` will give you the next 25 videos.
 
 ## API Clients
 

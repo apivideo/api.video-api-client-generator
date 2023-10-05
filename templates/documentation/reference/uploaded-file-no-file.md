@@ -18,13 +18,13 @@ Make sure you correctly add your file to your upload. This can be an issue if yo
 
 ### Tutorials
 
-* [Upload a big video file using Python](https://api.video/blog/tutorials/upload-a-big-video-file-using-python)
-* [Upload a video from your computer with the api.video API (Python)](https://api.video/blog/tutorials/upload-a-video-from-your-computer-with-the-api-video-api-python)
-* [Upload a video to api.video using a public URL](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-api-using-a-public-url-python)
-* [Delegated uploads: Make video uploads with a token you create](https://api.video/blog/tutorials/delegated-uploads)
-* [Video upload with cURL](https://api.video/blog/tutorials/video-upload-tutorial)
-* [Video upload (large videos) with cURL](https://api.video/blog/tutorials/video-upload-tutorial)
-* [Video upload (large videos) with cURL](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+* [Upload a big video file using Python](https://api.video/blog/tutorials/upload-a-big-video-file-using-python/)
+* [Upload a video from your computer with the api.video API (Python)](https://api.video/blog/tutorials/upload-a-video-from-your-computer-with-the-api-video-api-python/)
+* [Upload a video to api.video using a public URL](https://api.video/blog/tutorials/upload-a-video-with-the-api-video-api-using-a-public-url-python/)
+* [Delegated uploads: Make video uploads with a token you create](https://api.video/blog/tutorials/delegated-uploads/)
+* [Video upload with cURL](https://api.video/blog/tutorials/video-upload-tutorial/)
+* [Video upload (large videos) with cURL](https://api.video/blog/tutorials/video-upload-tutorial/)
+* [Video upload (large videos) with cURL](https://api.video/blog/tutorials/video-upload-tutorial-large-videos/)
 
 ### Tools
 
