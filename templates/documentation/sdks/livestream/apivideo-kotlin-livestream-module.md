@@ -2,12 +2,12 @@
 title: "Kotlin live stream"
 slug: "apivideo-kotlin-livestream-module"
 metadata: 
-  description: "The official Kotlin live stream client for api.video. [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official Kotlin live stream client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 api.video Kotlin Live stream module
 =========================================
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
@@ -122,7 +122,7 @@ You can check device supported configurations by using the helper: `Helper`
 ## Documentation
 
 * [API documentation](https://apivideo.github.io/api.video-android-live-stream/)
-* [api.video documentation](https://docs.api.video)
+* [api.video documentation](https://docs.api.video/)
 
 ## Dependencies
 

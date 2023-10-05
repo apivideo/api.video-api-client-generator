@@ -44,7 +44,7 @@ Knowing that now we can finally start building stuff!
 
 It’s that simple! (if you want the advanced stuff, scroll down to “Time to roll up our sleeves!”)
 
-Let’s try to deliver one video in HTML with our own (amazing!) [api.video](http://api.video) player. 
+Let’s try to deliver one video in HTML with our own (amazing!) [api.video](https://api.video/) player. 
 
 Suppose you already have a cool video uploaded. Go to the dashboard and get make the video private (if it’s not already private)
 
@@ -117,7 +117,7 @@ curl --request GET \
 
 ## Assets? What assets?
 
-Notice that JSON above has a field called `assets`. We’ll refer to assets later, but it’s important to know what they are. Assets include the URLs for the video thumbnail, iframe with the [api.video](http://api.video) player for embedding directly into the HTML, and several other video formats like `mp4` and `hls`. Now you know!
+Notice that JSON above has a field called `assets`. We’ll refer to assets later, but it’s important to know what they are. Assets include the URLs for the video thumbnail, iframe with the [api.video](https://api.video/) player for embedding directly into the HTML, and several other video formats like `mp4` and `hls`. Now you know!
 
 ## How to create a sample app with private videos
 
@@ -180,9 +180,9 @@ Check out a sample runnable code of the above app in Node.js using [Replit](http
 Let’s do a step-by-step review of what we are doing here.
 
 1. We are creating a server that will serve HTML on port 3000 with Node.js
-2. To make it easy on ourselves, we create a wrapper that will make an HTTP request to [api.video](http://api.video) with api key already embedded in HTTP header. That’s the `apiVideoReq` function.
+2. To make it easy on ourselves, we create a wrapper that will make an HTTP request to [api.video](https://api.video/) with api key already embedded in HTTP header. That’s the `apiVideoReq` function.
 3. We will get a raw response from the apiVideoReq, so need to create a parser that will parse the JSON response if the request is successful (200). That’s going to be the `getJsonResponse` 
-4. Then we need to create a function that will get the list of our videos. That’s pretty simple with the wrapper function we have, so let’s reuse the `apiVideoReq` and make a request to the [`videos`](https://ws.api.video/videos) endpoint. You can find more info about the `/videos` endpoint [here](/reference/api/Videos#list-all-video-objects). The response we'll get is an array of objects of the following format:
+4. Then we need to create a function that will get the list of our videos. That’s pretty simple with the wrapper function we have, so let’s reuse the `apiVideoReq` and make a request to the [`videos`](/reference/api/Videos) endpoint. You can find more info about the `/videos` endpoint [here](/reference/api/Videos#list-all-video-objects). The response we'll get is an array of objects of the following format:
 
 ```json
 {

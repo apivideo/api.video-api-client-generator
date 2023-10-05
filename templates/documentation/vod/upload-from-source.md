@@ -334,7 +334,7 @@ catch (ApiException e)
 
 ## Watch and share your video
 
-The easiest way to play your video is to use the [api.video](http://api.video) player URL that you received in the [ API response](#api-response):
+The easiest way to play your video is to use the [api.video](https://api.video/) player URL that you received in the [ API response](#api-response):
 
 `"player": "https://embed.api.video/vod/{videoId}"`
 
@@ -342,7 +342,7 @@ To watch your video, just paste the link into your favorite browser. Use the sam
 
 ## Manage your video
 
-You can do many things to manage existing videos in your [api.video](http://api.video) environment:
+You can do many things to manage existing videos in your [api.video](https://api.video/) environment:
 
 - [Update a video](/reference/api/Videos#update-a-video-object)
 - [List all videos](/reference/api/Videos#list-all-video-objects)

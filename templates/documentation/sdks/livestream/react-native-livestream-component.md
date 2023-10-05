@@ -7,7 +7,7 @@ excerpt: "Live stream library for React Native from api.video"
 React Native Livestream Component
 =================================
 
-[api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 ## Project description
 
