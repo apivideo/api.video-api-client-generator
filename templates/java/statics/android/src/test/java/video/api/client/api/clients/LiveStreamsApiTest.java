@@ -131,7 +131,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                             "<iframe src=\"https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                             .player(URI.create("https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"))
                             .hls(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8"))
-                            .thumbnail(URI.create("https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg")))
+                            .thumbnail(URI.create("https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg")))
                     .restreams(Arrays.asList(
                             new RestreamsResponseObject().name("YouTube")
                                     .serverUrl("rtmp://youtube.broadcast.example.com")
@@ -148,7 +148,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
                                     .hls(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8"))
                                     .thumbnail(URI.create(
-                                            "https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")))
+                                            "https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")))
                             .restreams(Arrays.asList(
                                     new RestreamsResponseObject().name("YouTube")
                                             .serverUrl("rtmp://youtube.broadcast.example.com")
@@ -191,7 +191,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
                     .hls(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8"))
-                    .thumbnail(URI.create("https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
+                    .thumbnail(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
         }
     }
 
@@ -230,7 +230,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
                     .hls(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8"))
-                    .thumbnail(URI.create("https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
+                    .thumbnail(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
         }
 
         @Test
@@ -281,7 +281,7 @@ public class LiveStreamsApiTest extends AbstractApiTest {
                     "<iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>")
                     .player(URI.create("https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"))
                     .hls(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8"))
-                    .thumbnail(URI.create("https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
+                    .thumbnail(URI.create("https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg")));
         }
 
         @Test

@@ -4064,7 +4064,7 @@ paths:
                           iframe: '<iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
                           player: 'https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr'
                           hls: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8'
-                          thumbnail: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
+                          thumbnail: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
                       - liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
                         createdAt: '2020-07-29T10:45:35.000Z'
                         updatedAt: '2020-07-29T10:45:35.000Z'
@@ -4083,7 +4083,7 @@ paths:
                           iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
                           player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
                           hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
-                          thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
+                          thumbnail: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
                     pagination:
                       currentPage: 1
                       currentPageItems: 19
@@ -11044,7 +11044,7 @@ components:
           iframe: '<iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>'
           player: 'https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5'
           hls: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8'
-          thumbnail: 'https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
+          thumbnail: 'https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg'
   schemas:
     link:
       type: object
@@ -12614,7 +12614,7 @@ components:
           type: string
           description: A link to the thumbnail for your video.
           format: uri
-          example: 'https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
+          example: 'https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg'
     live-stream-session-session:
       title: LiveStreamSessionSession
       type: object
