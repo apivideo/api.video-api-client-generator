@@ -355,3 +355,9 @@ redirects:
     to: /reference/invalid-query-parameter
   - from: /reference/useful-tools
     to: /
+  - from: /reference/get_analytics-videos-videoid
+    to: /delivery-analytics/analytics
+  - from: /reference/get_analytics-sessions-sessionid-events
+    to: /delivery-analytics/analytics
+  - from: /reference/get_analytics-live-streams-livestreamid
+    to: /delivery-analytics/analytics
