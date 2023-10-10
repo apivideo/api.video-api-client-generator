@@ -14,7 +14,7 @@ The live stream started webhook will fire when the `live-stream.broadcast.starte
 When you choose this trigger, you'll authenticate your api.video account with your api key (which you can find on the [dashboard](https://dashboard.api.video/)). When you test the Zap - Zapier uses sample data provided by api.video (no webhook has been created yet)
 
 
-![](/_assets/Zapier_6.png)
+![Setting up a Live Stream Started trigger using the api.video Zapier plugin](/_assets/Zapier_6.png)
 
 Now you can create an action to occur. Here are a few ideas that might be useful:
 
