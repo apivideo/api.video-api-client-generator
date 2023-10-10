@@ -4,7 +4,7 @@ slug: "google-cold-storage-backup"
 meta:
   description: Backup videos uploaded to api.video to Google Storage account with a simple script. 
 ---
-# Video backup to Azure
+# Video backup to Google Storage account
 
 At [api.video](https://api.video/) we understand that sometimes, you want to make sure that your videos are safe and secure. Although api.video has a backup and disaster recovery plan, it’s up to you to decide if you want an extra backup resource or if you would like to use api.video just to transcode your videos but eventually store them on a different resource.
 
@@ -12,7 +12,7 @@ That’s why, we’ve created this guide so you can store the videos you’ve al
 
 ## How it’s done?
 
-This guide will explain how you can store your transcoded videos on Amazon S3 Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
+This guide will explain how you can store your transcoded videos on Google Storage account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Google Storage account. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
 
 ## Preparation
 
@@ -84,7 +84,7 @@ $ npm install
 
 After the dependencies are installed, we will need to enter the credentials we have copied in the preparation phase.
 
-Edit the `.env` file and replace the following with the keys you've received from Azure and [api.video](https://api.video/). 
+Edit the `.env` file and replace the following with the keys you've received from Google and [api.video](https://api.video/). 
 
 ```bash
 # possible providers: google, aws, azure
