@@ -205,7 +205,7 @@ $playerTheme = $client->playerThemes()->create($playerThemeCreationPayload);
 
 The following code will give us this effect:
 
-![](/_assets/delivery-analytics/delivery-quickstart/delivery-quickstart-player-purple.png)
+![Showing customized player UI](/_assets/delivery-analytics/delivery-quickstart/delivery-quickstart-player-purple.png)
 
 The response that you should expect will contain the `playerId` that we will use in the next step. 
 
@@ -372,7 +372,7 @@ func main() {
 
 After you've added the image, it will look similar to this:
 
-![](/_assets/delivery-analytics/delivery-quickstart/player-logo.png)
+![Showing a custom logo in the api.video player](/_assets/delivery-analytics/delivery-quickstart/player-logo.png)
 
 
 ### Assign the theme to a video

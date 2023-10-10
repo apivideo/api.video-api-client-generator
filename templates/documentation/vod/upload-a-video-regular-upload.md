@@ -87,7 +87,7 @@ Install-Package ApiVideo
 
 ## Upload a video file
 
-![](/_assets/upload-a-file.png)
+![Uploading a video via the API or from your computer](/_assets/upload-a-file.png)
 
 ### Create the video object
 

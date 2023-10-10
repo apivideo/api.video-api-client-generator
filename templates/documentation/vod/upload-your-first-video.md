@@ -24,7 +24,7 @@ You can choose to upload a video [from your computer](#upload-a-file-from-your-c
 
 ### Upload a file from your computer
 
-![](/_assets/upload-a-file.png)
+![Uploading a video via the API or from your computer](/_assets/upload-a-file.png)
 
 #### a. Create the video object
 

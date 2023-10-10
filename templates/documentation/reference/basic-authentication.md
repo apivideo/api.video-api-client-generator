@@ -27,7 +27,7 @@ There are separate API keys for Sandbox and Production [environment](/reference/
 
 In production, you can also manage multiple API keys from your dashboard, for different applications.
 
-![](/_assets/production-api-key.png)
+![Managing the API keys on the dashboard](/_assets/production-api-key.png)
 
 ### Basic Auth Request 🔒
 

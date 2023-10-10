@@ -28,7 +28,7 @@ You'll need your API key to get started. You can sign up for one here: [Get your
 3. You will always be able to choose to use your Sandbox API key. If you want to use the Production API key instead, select a plan and enter your credit card information. 
 4. Grab the key you want, and you're ready to get started! 
 
-![](/_assets/retrieve-api-key.png)
+![Managing the API keys in the Dashboard](/_assets/retrieve-api-key.png)
 
 ## Basic Authentication
 

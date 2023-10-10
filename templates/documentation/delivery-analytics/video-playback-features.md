@@ -84,7 +84,7 @@ Video will play to end and automatically restart. This example will autoplay and
 
 If your video has captions, you can make them appear by default by adding the #show-subtitles url parameter to the player url:
 
-![](/_assets/show-captions.png)
+![Showing video captions in the api.video player](/_assets/show-captions.png)
 
 ### 8. Download
 

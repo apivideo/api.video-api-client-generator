@@ -41,7 +41,7 @@ Before you can start uploading your first video, you need to [create an api.vide
 
 Once you are logged in to the Dashboard, select the environment of your choice (sandbox or production) and copy your API key.
 
-![](/_assets/retrieve-api-key.png)
+![Managing the API keys in the Dashboard](/_assets/retrieve-api-key.png)
 
 ## Choose an api.video client
 
