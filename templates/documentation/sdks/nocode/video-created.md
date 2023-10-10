@@ -10,7 +10,7 @@ The _Video Created_ Zapier trigger will fire whenever a new video is created at 
 
 Once you choose this trigger, and authorize your api.video account with your api key (which you can find on the [dashboard](https://my.api.video)), you can further filter the created videos for specific titles or tags that are being created.
 
-![](/_assets/Zapier_2.png)
+![Setting up a Video Created trigger using the api.video Zapier plugin](/_assets/Zapier_2.png)
 
 Example uses:
 

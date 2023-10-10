@@ -253,7 +253,7 @@ print(response)
 
 api.video also makes it possible for you to add a thumbnail from the dashboard. Both choices discussed in this guide are available here too - Timestamp and Upload image. 
 
-![](/_assets/add-thumbnail.png)
+![Adding a timestamp or uploading an image as a thumbnail](/_assets/add-thumbnail.png)
 
 To get to the area to add a thumbnail in the dashboard: 
 

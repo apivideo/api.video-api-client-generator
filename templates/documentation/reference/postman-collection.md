@@ -11,11 +11,11 @@ The official Postman collection for api.video (coming soon!)
 1. Click the button above
 2. Add your [API key](https://dashboard.api.video/apikeys) to the Variables
 
-   ![](/_assets/postman-1.png)
+   ![Adding api.video API keys as Postman variables](/_assets/postman-1.png)
 
 3. Add the API Key variable to Authorization
 
-   ![](/_assets/postman-2.png)
+   ![Adding the API key as a variable for Postman authorization](/_assets/postman-2.png)
 
 ## Switching environments
 

@@ -38,7 +38,7 @@ There are two environments that you can utilize right now. Before you upgrade yo
 
 Once you've upgraded you can switch between sandbox and production by toggling the button on the [overview page](https://dashboard.api.video/overview) on the api.video dashboard.
 
-![](/_assets/reference/a3713b2-Screenshot_2023-02-23_at_18.29.00.png "Screenshot 2023-02-23 at 18.29.00.png")
+![Switching to the sandbox environment in the Dashboard](/_assets/reference/a3713b2-Screenshot_2023-02-23_at_18.29.00.png "Screenshot 2023-02-23 at 18.29.00.png")
 
 {% capture content %}
 **The sandbox mode has these limitations**

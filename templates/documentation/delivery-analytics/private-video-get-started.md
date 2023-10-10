@@ -53,7 +53,7 @@ Suppose you already have a cool video uploaded. Go to the dashboard and get make
 
 Now that the video is private, we can deliver it to users. Here’s a quick snippet in HTML that you can use to play your video in the browser. Just copy the code snippet and replace the URL with your private video URL. You can find the video URLs in the Assets section of the Video Details:
 
-![](/_assets/link-to-video.png)
+![Showing the link assets in the Video details screen on the Dashboard](/_assets/link-to-video.png)
 
 
 
@@ -130,7 +130,7 @@ Let’s assume that we want to build an app that will display all the private vi
 
 On the backend, we will have to do some magic. While with public videos it’s pretty simple as just returning the videos, for private videos we will need to get the session first. Let’s look at the HTML code:
 
-![](/_assets/avh-parameter.png)
+![Grabbing the avh parameter for a private video](/_assets/avh-parameter.png)
 
 Notice the `avh` parameter in the query string? The `avh` parameter is where you will pass the session token... oh wait, what's a session token?!
 

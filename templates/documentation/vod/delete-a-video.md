@@ -132,7 +132,7 @@ You can delete a video using your dashboard by doing the following:
 
 3. On the Video screen, use the filtering and scrolling features to locate the video you want to delete. Place a checkmark next to one or more videos you want to delete.
 
-   ![](/_assets/delete-video.png)
+   ![Showing the list of videos in the Dashboard](/_assets/delete-video.png)
 
 4. In the center of the screen at the bottom, you'll see a trash can icon. Click the **trash can**. A popup appears asking if you're sure you want to delete the video(s) you selected.
 

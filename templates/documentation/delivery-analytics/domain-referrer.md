@@ -26,11 +26,11 @@ Leveraging the [referer header](https://developer.mozilla.org/en-US/docs/Web/HTT
 
 For example, you've requested to allow list: `https://some.domain.com` and the video is hosted in that domain:
 
-![](/_assets/domain-referrer-fig-1.png)
+![Showing website domain referrer via inspector tool](/_assets/domain-referrer-fig-1.png)
 
 What happens if the same video is embedded in a different website? In this case, the video will return a `403` error, as the referrer header is different from what was allowed:
 
-![](/_assets/domain-referrer-fig-2.png)
+![Showing website domain referrer via inspector tool](/_assets/domain-referrer-fig-2.png)
 
 ## Domain referrer restriction with videos on native mobile players
 

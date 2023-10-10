@@ -170,4 +170,4 @@ If you don't want to send an API request with code, you can update video details
 
 3. From the upper right of the pop-up, click **See details**. You'll land on the details screen for your video, and the video ID appears at the top, above the video. 
 
-   ![](/_assets/update-video-details.png)
+   ![Showing the video details screen in the Dashboard](/_assets/update-video-details.png)

@@ -34,15 +34,15 @@ To enable the Video Import Tool access to the videos in your Azure Blob Storage 
 
 1. Navigate to your storage account and click on "Shared Access Signature":
 
-![](/_assets/get-started/azure-migration/azure-4.png)
+![Generating a Shared Access Signature](/_assets/get-started/azure-migration/azure-4.png)
 
 2. Enable the required parameters:
 
-![](/_assets/get-started/azure-migration/azure-storage-doc-11.png)
+![Enabling required parameters](/_assets/get-started/azure-migration/azure-storage-doc-11.png)
 
 3. Ensure that you generate the Shared Access Signature. Once you have the links, copy the Blob Service SAS URL.
 
-![](/_assets/get-started/azure-migration/azure-6.png)
+![Copying the Blob service SAS URL](/_assets/get-started/azure-migration/azure-6.png)
 
 4. Finally, paste the URL into the "SAS URL" field of the Import Tool.
 
@@ -134,7 +134,7 @@ let mediaServicesClient: AzureMediaServices;
     
     let remoteSasUrl: string = process.env.REMOTESTORAGEACCOUNTSAS as string;
 ```
-![](/_assets/get-started/azure-migration/azure-1.png)
+![Selecting the api.video media service on Azure](/_assets/get-started/azure-migration/azure-1.png)
 {% capture content %}
 Note that in the previous step, you will also need to update the .env file and grab the parameters from Azure. In order to do that, navigate to your Azure Media Service, and select the directory that you would like to migrate.
 {% endcapture %}
@@ -143,25 +143,25 @@ Note that in the previous step, you will also need to update the .env file and g
 
 5. Select API keys and copy over the parameters presented in the `.ENV` pane (you can select either User Authentication or Service principal authentication)
 
-![](/_assets/get-started/azure-migration/azure-2.png)
+![Selecting API Access for media services](/_assets/get-started/azure-migration/azure-2.png)
 
-![](/_assets/get-started/azure-migration/azure-3.png)
+![Selecting the .ENV credentials pane](/_assets/get-started/azure-migration/azure-3.png)
 
 6. To get access to the storage, navigate to the Azure Storage Account → Shared access signature:
 
-![](/_assets/get-started/azure-migration/azure-4.png)
+![Generating Shared Access Signature](/_assets/get-started/azure-migration/azure-4.png)
 
 7. Allow the following:
 
-![](/_assets/get-started/azure-migration/azure-5.png)
+![Enabling required parameters](/_assets/get-started/azure-migration/azure-5.png)
 
-![](/_assets/get-started/azure-migration/azure-6.png)
+![Copying the Blob service SAS URL](/_assets/get-started/azure-migration/azure-6.png)
 
 Make sure that you generate the Shared access signature and once you have the links, copy the Blob service SAS URL link to the `.env` file. The parameter you are looking for is `REMOTESTORAGEACCOUNTSAS`
 
 8. Add the api.video API key to the .env file by navigating to the [api.video dashboard](https://dashboard.api.video/overview) and copy the API key value
 
-![](/_assets/get-started/azure-migration/azure-7.png)
+![Copying the api.video API key](/_assets/get-started/azure-migration/azure-7.png)
 
 9. Now, `run npm install` in the terminal in order to install all of the node modules
 10. Run `npm run build`

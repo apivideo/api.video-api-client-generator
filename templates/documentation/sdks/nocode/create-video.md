@@ -14,4 +14,4 @@ With the Create video action - you can create a video on demand file at api.vide
 
 For example:  When a new video is uploaded into Amazon S3, you can create a new video, and upload the video (using the publicly available URL) to insert the video into api.video.
 
-![](/_assets/Zapier_4.png)
+![Setting up a Create Video trigger using the api.video Zapier plugin](/_assets/Zapier_4.png)

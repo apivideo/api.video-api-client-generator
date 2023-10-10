@@ -15,7 +15,7 @@ It comes as a customizable button that opens a file selector when clicked. Once 
 To add an uploader element on a page, click on the "api.video uploader" item of the Input form elements list.
 
 
-![](/_assets/bubbleio_8.png)
+![Adding the api.video uploader element](/_assets/bubbleio_8.png)
 
 Then, draw the uploader on your page using your mouse, like you do we any other Visual component. You can change the style of the element as you usually do. Once done, double-click on the player to open the window for editing its properties. 
 

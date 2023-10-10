@@ -15,7 +15,7 @@ For example, a video uploaded at 480p will have 240p, 360p, and 480p webhook ale
 
 When you choose this trigger, you'll authenticate your api.video account with your api key (which you can find on the [dashboard](https://my.api.video)). The next request is which encoding size you'd like the Zap to trigger on:
 
-![](/_assets/Zapier_3.png)
+![Setting up a Video Encoding Completed trigger using the api.video Zapier plugin](/_assets/Zapier_3.png)
 
 In the screenshot above, the zap will fire whenever a 1080p video is encoded at api.video. (This does mean that if a 720p video is uploaded, the Zap will not fire). So choose the size of the video based on what size you'd prefer the Zap to fire on - based on the types of videos uploaded by your users.
 

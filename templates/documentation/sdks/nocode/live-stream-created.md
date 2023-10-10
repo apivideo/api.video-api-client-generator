@@ -13,4 +13,4 @@ Once you choose this trigger, you'll authorize your api.video account with your 
 
 The test will look for a live stream in your account, so before you test the trigger, make sure your account has a live stream:
 
-![](/_assets/Zapier_5.png)
+![Testing the Live Stream Created trigger](/_assets/Zapier_5.png)
