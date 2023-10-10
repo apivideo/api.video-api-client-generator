@@ -12,7 +12,7 @@ That’s why, we’ve created this guide so you can store the videos you’ve al
 
 ## How it’s done?
 
-This guide will explain how you can store your transcoded videos on Amazon S3 Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
+This guide will explain how you can store your transcoded videos on Amazon S3 Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Amazon S3. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
 
 ## Preparation
 
@@ -57,7 +57,7 @@ $ npm install
 
 After the dependencies are installed, we will need to enter the credentials we have copied in the preparation phase.
 
-Edit the `.env` file and replace the following with the keys you've received from Azure and [api.video](https://api.video/). 
+Edit the `.env` file and replace the following with the keys you've received from AWS and [api.video](https://api.video/). 
 
 ```bash
 # possible providers: google, aws, azure
