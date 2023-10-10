@@ -82,7 +82,7 @@ You can change the default port of 3000 to something of your liking by editing t
 
 When you navigate to `http://localhost:3000` with your browser, you should get this screen:
 
-![](/_assets/select-file-to-upload.png)
+![Loading the Next.js video uploader frontend](/_assets/select-file-to-upload.png)
 
 If you edit `src/pages/index.tsx` you'll find the whole logic of the frontend. The thing you are looking for is the `serverUrl`. This is where you can point the requests to your server, you'll be able to configure the port or the whole url to your server url (by default it's pointing to `http://localhost:5500`)
 

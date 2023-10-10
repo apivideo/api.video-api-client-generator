@@ -15,7 +15,7 @@ Log into your Contentful account and add the [api.video app](https://www.content
 
 Input your api.video API key first. You'll also notice that a list of your JSON objects is listed. The api.video app should be connected to JSON object types in Contentful. If you don't see any objects listed, that's ok. We'll add a JSON object in the next step.
 
-![](/_assets/apivideoapp.jpg)
+![Managing your api.video app in Contentful](/_assets/apivideoapp.jpg)
 
 ## Adding api.video to content models
 
@@ -63,7 +63,7 @@ In the top menu, choose content, and then pick the model you wish to use (in the
 
 The title is 'My Awesome video,' and I'm skipping the YouTube section - it's no longer required! With the api.video app, you can choose a video already uploaded to api.video ("select an existing video") or upload a new video (descriptively named "upload a new video").
 
-![](/_assets/addingavideo.png)
+![Adding a video component](/_assets/addingavideo.png)
 
 Now publish the content, and you've added the video for playback!
 
