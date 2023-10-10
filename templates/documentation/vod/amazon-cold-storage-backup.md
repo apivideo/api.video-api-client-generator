@@ -1,8 +1,8 @@
 ---
-title: "Backup your videos to Azure"
-slug: "azure-cold-storage-backup"
+title: "Backup your videos to Amazon S3"
+slug: "amazon-cold-storage-backup"
 meta:
-  description: Backup videos uploaded to api.video to Azure Storage account with a simple script. 
+  description: Backup videos uploaded to api.video to Amazon Storage account with a simple script. 
 ---
 # Video backup to Azure
 
@@ -12,24 +12,22 @@ That’s why, we’ve created this guide so you can store the videos you’ve al
 
 ## How it’s done?
 
-This guide will explain how you can store your transcoded videos on Azure Storage Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
+This guide will explain how you can store your transcoded videos on Amazon S3 Account. In short, all you need to do is run a small script that will copy the videos from [api.video](https://api.video/) to Azure. The videos will be kept on api.video as well, however, if you wish to delete them you can do so by leveraging the `DELETE /videos` endpoint, more information can be found [here](https://docs.api.video/vod/delete-a-video).  
 
 ## Preparation
 
 **What we will need to run the script?**
 
 1. **[api.video](https://api.video/) API key**, you can find the information on how to retrieve the <a href="https://docs.api.video/reference/authentication-guide#retrieve-your-apivideo-api-key" target="_blank">API key in the Retrieve your api.video API key guide</a>
-2. <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal" target="_blank">Azure Account Key</a>, or use any other credential system that Azure provides
-3. Azure storage account name
+2. <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html#getting-started-nodejs-credentials" target="_blank">Amazon S3 credentials</a>
+3. Copy the Amazon S3 region from the console
 4. api.video <a href="https://github.com/apivideo/backup-cold-storage" target="_blank">Cold Storage script</a>,
 5. **Node.js** and **npm**, you can find the installation instructions <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target="_blank">here</a>
 6. **Typescript**, you can find the installation instructions <a href="https://www.npmjs.com/package/typescript" target="_blank">here</a>
 
-### Getting the Azure Storage Account name
+### Getting the Amazon S3 credentials
 
-- Navigate to your Azure portal
-- Click on Storage Account    
-- You’ll find the Storage Account in the list
+You can find the guide of getting the Amazon S3 Access Key id and Secret Key [here](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html#getting-started-nodejs-credentials)
 
 ## Getting Started
 
@@ -43,10 +41,10 @@ After you’ve got all the keys and installed node.js, npm and typescript, you c
 $ git clone https://github.com/apivideo/backup-cold-storage
 ```
 
-2. Once the script is cloned, you can navigate the script directory
+1. Once the script is cloned, you can navigate the script directory
 
 ```bash
-$ cd backup-cold-storage
+$ cd back-cold-storage
 ```
 
 ### Setting up the script
@@ -63,17 +61,18 @@ Edit the `.env` file and replace the following with the keys you've received fro
 
 ```bash
 # possible providers: google, aws, azure
-PROVIDER = "azure"
+PROVIDER = "aws"
 
 # api.video API key
 APIVIDEO_API_KEY = "api_video_api_key"
 
 # the name of the bucket on Google Amazon S3 or the container on Azure Storage
-SPACE_NAME = "azure_container_name"
+SPACE_NAME = "your_bucket_name"
 
-# Azure credentials
-AZURE_ACCOUNT_KEY = "azure_account_key"
-AZURE_STORAGE_ACCOUNT_NAME = "azure_storage_account_name"
+# Amazon S3 credentials
+AWS_ACCESS_KEY_ID = "amazon_access_key_id"
+AWS_SECRET_ACCESS_KEY = "amazon_secret_key"
+AWS_REGION = "s3_bucket_region"
 ```
 
 Don’t forget to save the file. 

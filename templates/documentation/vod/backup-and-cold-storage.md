@@ -24,6 +24,8 @@ Below, you will find the scripts that are available for your disposale in order 
 
 <div class="hagrid">
 
+{% include "_partials/hagrid-item.md" title: "Amazon", image: "/_assets/get-started/migration-guide/Amazon-S3-Logo.svg", subtitle: "S3",  link: "./amazon-cold-storage-backup.md" %}
+{% include "_partials/hagrid-item.md" title: "Google", image: "/_assets/get-started/migration-guide/Google-Storage-Logo.svg", subtitle: "Storage account",  link: "./google-cold-storage-backup.md" %}
 {% include "_partials/hagrid-item.md" title: "Azure", image: "/_assets/get-started/migration-guide/Microsoft_Azure.svg", subtitle: "Storage account",  link: "./azure-cold-storage-backup.md" %}
 
 </div>
