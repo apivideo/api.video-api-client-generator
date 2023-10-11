@@ -2,11 +2,11 @@
 title: "Upload video from source"
 ---
 
-## Upload video from source
+# Upload video from source
 
 api.video enables you to upload a video container file [via a URL](#upload-a-file-from-url), or [clone one of your existing videos](#clone-an-existing-video). 
 
-### Upload a file from a URL
+## Upload a file from a URL
 
 Uploading a video from a video URL enables you go through the whole video upload process in only 1 step. Paste a URL that points to your video container (for example, the `.mp4` file of your video) into the `source` field in your request:
 
@@ -164,7 +164,7 @@ Replace the link in the example above with your video container (for example, th
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-### Clone an existing video
+## Clone an existing video
 
 You can clone a video that already exists in your api.video project. Just paste your video's `videoId` into the `source` field in your request:
 
@@ -317,7 +317,7 @@ catch (ApiException e)
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
 
-### API response
+## API response
 
 ```json
 202 - Accepted video object creation from source URL or source Video ID (for cloning)
@@ -334,7 +334,7 @@ catch (ApiException e)
 
 ## Watch and share your video
 
-The easiest way to play your video is to use the [api.video](https://api.video/) player URL that you received in the [ API response](#api-response):
+The easiest way to play your video is to use the [api.video](https://api.video/) player URL that you received in the [API response](#api-response):
 
 `"player": "https://embed.api.video/vod/{videoId}"`
 
