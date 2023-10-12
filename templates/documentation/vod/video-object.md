@@ -14,7 +14,7 @@ The video object in reference to api.video is a container of sort (not to be con
 
 Before you [upload a video](/reference/api/Videos#upload-a-video), you need to [create the video object](/reference/api/Videos#create-a-video-object) that will contain the video itself after you upload it. 
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-object/create-a-video-dark.svg", light: "/_assets/vod/video-object/create-a-video-light.svg" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-object/create-a-video-dark.svg", light: "/_assets/vod/video-object/create-a-video-light.svg", alt: "A diagram that shows the steps of creating a video object, and uploading a video"  %}
 
 The video object has properties and metadata that you can create and update, below are the attributes that are available for the video object.
 
