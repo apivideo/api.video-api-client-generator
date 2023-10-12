@@ -6,32 +6,17 @@ metadata:
   description: "The official api.video React Native Player for api.video. [api.video](https://api./) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video React Native Player
-==============
-
+# api.video React Native Player
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-  - [Limitations](#limitations)
-  - [Code sample](#code-sample)
-- [Documentation](#documentation)
-  - [Props & Methods](#props--methods)
-  - [Using methods](#using-methods)
-- [FAQ](#faq)
-
-# Project description
+## Project description
 
 React Native video player to play vod and lives from api.video 
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
 ```sh
 npm install @api.video/react-native-player
@@ -46,13 +31,13 @@ Install the native dependencies with Cocoapods
 cd ios && pod install
 ```
 
-## Limitations
+### Limitations
 
 For the moment, this player component is based on the api.video's javascript player (displayed in a [react-native-webview](https://github.com/react-native-webview/react-native-webview)), and therefore it suffers from the same limitation as every players displayed in browsers. 
 
 We plan to base the player component on natives video players in a further release to avoid this kind of limitation. Stay tuned!
 
-## Code sample
+### Code sample
 
 ```jsx
 import React from 'react';
@@ -64,9 +49,9 @@ const App = () =>
 export default App;
 ```
 
-# Documentation
+## Documentation
 
-## Props & Methods
+### Props & Methods
 
 ```ts
 // props:
@@ -122,7 +107,7 @@ setPlaybackRate(rate: number): void;
 setVolume(volume: number): void;
 ```
 
-## Using methods
+### Using methods
 
 {% raw %}
 
@@ -152,7 +137,7 @@ export default class App extends Component {
 
 {% endraw %}
 
-# FAQ
+## FAQ
 If you have any questions, ask us here:  https://community.api.video .
 Or use [Issues].
 

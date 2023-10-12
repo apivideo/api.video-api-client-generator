@@ -6,38 +6,24 @@ metadata:
   description: "The official api.video Swift Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Swift Player
-==============
+# api.video Swift Player
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-    - [Installation](#installation)
-        - [Swift Package Manager](#swift-package-manager)
-        - [Cocoapods](#cocoapods)
-    - [Retrieve your video Id](#retrieve-your-video-id)
-- [Sample application](#sample-application)
-- [Documentation](#documentation)
-- [Dependencies](#dependencies)
-
-# Project description
+## Project description
 
 Easily integrate a video player for videos from [api.video](https://api.video/) in your iOS
 application.
 
 ![](https://github.com/apivideo/api.video-swift-player/blob/main/Assets/player-preview.png)
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Swift Package Manager
+#### Swift Package Manager
 
 In the Project Navigator select your own project. Then select the project in the Project section and click on the
 Package Dependencies tab. Click on the "+" button at the bottom. Paste the below url on the search bar on the top right.
@@ -55,13 +41,13 @@ Or add this in your Package.swift
     ],
 ```
 
-### Cocoapods
+#### Cocoapods
 
 Add `pod 'ApiVideoPlayer', '1.1.3'` in your `Podfile`
 
 Run `pod install`
 
-## Retrieve your video Id
+### Retrieve your video Id
 
 At this point, you must have uploaded a least one video to your account. If you haven't
 see [how to upload a video](https://docs.api.video/vod/upload-a-video-regular-upload/). You'll need
@@ -80,7 +66,7 @@ Alternatively, you can find your video Id in the video details of
 your [dashboard](https://dashboard.api.video).
 
 
-## Code sample
+### Code sample
 
 1. Imports the library
 
@@ -181,7 +167,7 @@ override func viewDidAppear(_ animated: Bool) {
 }
 ```
 
-### Remote control
+#### Remote control
 
 If you want to enable the remote control do the following: 
 ```swift
@@ -194,7 +180,7 @@ When you have to remove it set `enableRemoteControl` to false
 
 By default the remote control is hidden.
 
-# Sample application
+## Sample application
 
 A demo application demonstrates how to use player.
 See [`/example`](https://github.com/apivideo/api.video-swift-player/tree/main/Examples)
@@ -204,12 +190,12 @@ On the first run, you will have to set your video Id:
 
 1. Replace "YOUR_VIDEO_ID" by your video Id
 
-# Documentation
+## Documentation
 
 * [Player documentation](https://apivideo.github.io/api.video-swift-player/documentation/apivideoplayer/)
 * [api.video documentation](https://docs.api.video/)
 
-# Dependencies
+## Dependencies
 
 We are using external library
 
@@ -217,7 +203,7 @@ We are using external library
 |---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | [ApiVideoPlayerAnalytics](https://github.com/apivideo/api.video-ios-player-analytics) | [README.md](https://github.com/apivideo/api.video-ios-player-analytics#readme) |
 
-# FAQ
+## FAQ
 
 If you have any questions, ask us here: [https://community.api.video](https://community.api.video) or
 use [Issues](https://github.com/apivideo/api.video-swift-player/issues).

@@ -2,22 +2,19 @@
 title: "Invalid Query Parameter"
 slug: "invalid-query-parameter"
 metadata: 
-  title: "Invalid Attribute"
+  title: "Invalid Query Parameter"
   description: "You sent in a query parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value."
 ---
 
-Invalid Query Parameter
-=================
+# Invalid Query Parameter
 
 You sent in a query parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value.
 
-# Solution
+## Solution
 
 If you're not using one of our API clients, check our documentation for the endpoint you're using and make sure the parameters are set up correctly in your request.
 
-If you are using one of our API clients, check the rules for how to format parameters within your client. They are not always identical to how they would be sent if you weren't using an API client.  
-
-# Learning resources
+If you are using one of our API clients, check the rules for how to format parameters within your client. They are not always identical to how they would be sent if you weren't using an API client.
 
 ## Tools
 

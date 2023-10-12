@@ -6,36 +6,13 @@ metadata:
   description: "The official api.video Android Player analytics plugin for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Android Player analytics plugin
-==============
+# api.video Android Player analytics plugin
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-    - [Installation](#installation)
-        - [Gradle](#gradle)
-    - [Permissions](#permissions)
-- [Sample application](#sample-application)
-- [Documentation](#documentation)
-    - [Options](#options)
-    - [ApiVideoPlayerAnalytics API](#apivideoplayeranalytics-api)
-        - [`play(): Future<void>`](#playeventtime-float--currenttime-futurevoid)
-        - [`resume(): Future<void>`](#resumeeventtime-float--currenttime-futurevoid)
-        - [`ready(): Future<void>`](#readyeventtime-float--currenttime-futurevoid)
-        - [`end(): Future<void>`](#endeventtime-float--currenttime-futurevoid)
-        - [`seek(from: Float, to: Float): Future<void>`](#seekfrom-float-to-float-futurevoid)
-        - [`pause(): Future<void>`](#pauseeventtime-float--currenttime-futurevoid)
-        - [`destroy(): Future<void>`](#destroyeventtime-float--currenttime-futurevoid)
-        - [`currentTime`](#currenttime)
-    - [API documentation](#api-documentation)
-
-# Project description
+## Project description
 
 Android library to manually call the api.video analytics collector.
 
@@ -44,11 +21,11 @@ monitoring module.
 
 This module also supports ExoPlayer analytics.
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Gradle
+#### Gradle
 
 In your module `build.gradle`, add the following code in `dependencies`:
 
@@ -58,7 +35,7 @@ dependencies {
 }
 ```
 
-## Permissions
+### Permissions
 
 In your `AndroidManifest.xml`, add the following code in `<manifest>`:
 
@@ -67,15 +44,15 @@ In your `AndroidManifest.xml`, add the following code in `<manifest>`:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-# Sample application
+## Sample application
 
 A demo application demonstrates how to use player analytics library.
 See [`/example`](https://github.com/apivideo/api.video-android-player-analytics/tree/main/example)
 folder.
 
-# Documentation
+## Documentation
 
-## Options
+### Options
 
 The analytics module constructor takes a `Options` parameter that contains the following options:
 
@@ -94,49 +71,27 @@ Options instantiation is made with either mediaUrl or videoInfo.
 Once the module is instantiated, the following methods have to be called to monitor the playback
 events.
 
-## ApiVideoPlayerAnalytics API
+### ApiVideoPlayerAnalytics API
 
-#### Event time or current time
+- Event time or current time
 
 If you know the event timestamp, you can use it as the `eventTime` parameter. If you don't know the
 event timestamp, you can set the `currentTime` parameter with a scheduler.
 
-#### `play(eventTime: Float = currentTime): Future<void>`
+#### Methods
 
-> method to call when the video starts playing for the first time (in the case of a resume after
-> paused, use `resume()`)
+| Method | Description |
+|----------|----------|
+| `play(eventTime: Float = currentTime): Future<void>` | method to call when the video starts playing for the first time (in the case of a resume after paused, use `resume()`) |
+| `resume(eventTime: Float = currentTime): Future<void>` | method to call when the video playback is resumed after a pause |
+| `ready(eventTime: Float = currentTime): Future<void>` | method to call once the player is ready to play the media |
+| `end(eventTime: Float = currentTime): Future<void>` | method to call when the video is ended |
+| `seek(from: Float, to: Float): Future<void>` | method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should contain the seek start & end times in seconds |
+| `pause(eventTime: Float = currentTime): Future<void>` | method to call when the video is paused |
+| `destroy(eventTime: Float = currentTime): Future<void>` | method to call when the video player is disposed (eg. when the use closes the navigation tab) |
+| `currentTime` | field to call each time the playback time changes (it should be called often, the accuracy of the collected data depends on it) if you don't know event time. |
 
-#### `resume(eventTime: Float = currentTime): Future<void>`
-
-> method to call when the video playback is resumed after a pause
-
-#### `ready(eventTime: Float = currentTime): Future<void>`
-
-> method to call once the player is ready to play the media
-
-#### `end(eventTime: Float = currentTime): Future<void>`
-
-> method to call when the video is ended
-
-#### `seek(from: Float, to: Float): Future<void>`
-
-> method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should
-> contains the seek start & end times in seconds
-
-#### `pause(eventTime: Float = currentTime): Future<void>`
-
-> method to call when the video is paused
-
-#### `destroy(eventTime: Float = currentTime): Future<void>`
-
-> method to call when the video player is disposed (eg. when the use closes the navigation tab)
-
-#### `currentTime`
-
-> field to call each time the playback time changes (it should be called often, the accuracy of the
-> collected data depends on it) if you don't know event time.
-
-## API documentation
+### API documentation
 
 A complete [API documentation](https://apivideo.github.io/api.video-android-player-analytics/) is
 available.

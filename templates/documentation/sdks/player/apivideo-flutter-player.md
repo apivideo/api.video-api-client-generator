@@ -6,42 +6,20 @@ metadata:
   description: "The official api.video Flutter Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Flutter Player
-==============
+# api.video Flutter Player
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Web usage](#web-usage)
-- [Documentation](#documentation)
-  - [Instantiation](#instantiation)
-    - [1. The ApiVideoPlayerController](#1-the-apivideoplayercontroller)
-    - [2. The ApiVideoPlayer](#2-the-apivideoplayer)
-  - [Methods](#methods)
-  - [Properties](#properties)
-  - [Events listener](#events-listener)
-    - [Add a new event listener: Method 1](#add-a-new-event-listener-method-1)
-    - [Add a new event listener: Method 2](#add-a-new-event-listener-method-2)
-    - [Remove an event listener](#remove-an-event-listener)
-- [Dependencies](#dependencies)
-- [Sample application](#sample-application)
-- [FAQ](#faq)
-
-# Project description
+## Project description
 
 Easily integrate a video player for videos from api.video in your Flutter application for iOS,
 Android and Web.
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
 Run the following command at the root of your project.
 
@@ -49,7 +27,7 @@ Run the following command at the root of your project.
 flutter pub add apivideo_player
 ```
 
-### Web usage
+#### Web usage
 
 If you want to use your application as a web app, you need to add the [api.video player SDK](https://github.com/apivideo/api.video-player-sdk) script in `web/index.html` from the root of your project.
 
@@ -68,11 +46,11 @@ If you want to use your application as a web app, you need to add the [api.video
 </html>
 ```
 
-# Documentation
+## Documentation
 
-## Instantiation
+### Instantiation
 
-### 1. The ApiVideoPlayerController
+#### 1. The ApiVideoPlayerController
 
 To use a video player, you must instantiate a new controller.
 
@@ -100,7 +78,7 @@ await controller.initialize();
 
 See the sample application below for more details.
 
-### 2. The ApiVideoPlayer
+#### 2. The ApiVideoPlayer
 
 A Widget that displays the video and its controls.
 
@@ -126,7 +104,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-## Methods
+### Methods
 
 Once the [ApiVideoPlayerController](https://github.com/apivideo/api.video-flutter-player/blob/main/lib/src/apivideo_player_controller.dart) has been instantiated, you can control the player it has been assigned to with its methods:
 
@@ -154,7 +132,7 @@ await controller.initialize();
 controller.play(); // Play the video
 ```
 
-## Properties
+### Properties
 
 Once the [ApiVideoPlayerController](https://github.com/apivideo/api.video-flutter-player/blob/main/lib/src/apivideo_player_controller.dart) has been instantiated, you can access the video player's properties:
 
@@ -183,9 +161,9 @@ await controller.initialize();
 final bool isMuted = await controller.isMuted;
 ```
 
-## Events listener
+### Events listener
 
-### Add a new event listener: Method 1
+#### Add a new event listener: Method 1
 
 When you instantiate a new [ApiVideoPlayerController](https://github.com/apivideo/api.video-flutter-player/blob/main/lib/src/apivideo_player_controller.dart), you can bind callbacks to some events:
 
@@ -197,7 +175,7 @@ final ApiVideoPlayerController controller = ApiVideoPlayerController(
   );
 ```
 
-### Add a new event listener: Method 2
+#### Add a new event listener: Method 2
 
 Once the [ApiVideoPlayerController](https://github.com/apivideo/api.video-flutter-player/blob/main/lib/src/apivideo_player_controller.dart) has been instantiated, you can bind callbacks to some events:
 
@@ -224,7 +202,7 @@ controller.addEventsListener(eventsListener);
 | onEnd   | VoidCallback     | A callback called when the video has ended             |
 | onError | Function(Object) | A callback called when an error occured                |
 
-### Remove an event listener
+#### Remove an event listener
 
 To remove an event listener, you need to call the controller's `removeEventsListener` method.
 
@@ -243,7 +221,7 @@ final ApiVideoPlayerEventsListener eventsListener =
 controller.removeEventsListener(eventsListener);
 ```
 
-# Dependencies
+## Dependencies
 
 We are using external library
 
@@ -251,7 +229,7 @@ We are using external library
 |--------------------------------------------------|---------------------------------------------------------|
 | [Exoplayer](https://github.com/google/ExoPlayer) | [README.md](https://github.com/google/ExoPlayer#readme) |
 
-# Sample application
+## Sample application
 
 ```dart
 import 'package:apivideo_player/apivideo_player.dart';
@@ -334,7 +312,7 @@ class _MyAppState extends State<MyApp> {
 
 ```
 
-# FAQ
+## FAQ
 
 If you have any questions, ask us in the [community](https://community.api.video). Or
 use [issues](https://github.com/apivideo/api.video-flutter-player/issues).

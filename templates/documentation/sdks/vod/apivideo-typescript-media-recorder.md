@@ -6,46 +6,20 @@ metadata:
   description: "The official api.video TypeScript Media Recorder for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video TypeScript Media Recorder
-==============
+# api.video TypeScript Media Recorder
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-
-# Table of contents
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Installation method #1: requirejs](#installation-method-1-requirejs)
-    - [Installation method #2: typescript](#installation-method-2-typescript)
-    - [Simple include in a javascript project](#simple-include-in-a-javascript-project)
-- [Documentation](#documentation)
-  - [Instanciation](#instanciation)
-    - [Options](#options)
-      - [Using a delegated upload token (recommended):](#using-a-delegated-upload-token-recommended)
-      - [Using an access token (discouraged):](#using-an-access-token-discouraged)
-      - [Common options](#common-options)
-    - [Example](#example)
-  - [Methods](#methods)
-    - [`start(options?: { timeslice?: number })`](#startoptions--timeslice-number-)
-      - [Options](#options-1)
-    - [`stop(): Promise<VideoUploadResponse>`](#stop-promisevideouploadresponse)
-    - [`addEventListener(event: string, listener: Function)`](#addeventlistenerevent-string-listener-function)
-    - [`getMediaRecorderState(): RecordingState`](#getmediarecorderstate-recordingstate)
-- [Full example](#full-example)
-
-# Project description
-
+## Project description
 
 Typescript library to easily upload data from a [MediaStream](https://developer.mozilla.org/fr/docs/Web/API/MediaStream) to api.video.
 It can be used to upload a video to api.video from the user's webcam with ease, as well as from a screen recording.
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Installation method #1: requirejs
+#### Installation method #1: requirejs
 
 If you use requirejs you can add the library as a dependency to your project with 
 
@@ -64,7 +38,7 @@ var recorder = new ApiVideoMediaRecorder(mediaStream, {
 }); 
 ```
 
-### Installation method #2: typescript
+#### Installation method #2: typescript
 
 If you use Typescript you can add the library as a dependency to your project with 
 
@@ -84,7 +58,7 @@ const recorder = new ApiVideoMediaRecorder(mediaStream, {file: files[0],
 ```
 
 
-### Simple include in a javascript project
+#### Simple include in a javascript project
 
 Include the library in your HTML file like so:
 
@@ -108,13 +82,13 @@ Then, once the `window.onload` event has been trigered, create your player using
 </script>
 ```
 
-# Documentation
+## Documentation
 
-## Instanciation
+### Instantiation
 
-### Options 
+#### Options 
 
-The media recorder object is instanciated using a [MediaStream](https://developer.mozilla.org/fr/docs/Web/API/MediaStream) and an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
+The media recorder object is instantiated using a [MediaStream](https://developer.mozilla.org/fr/docs/Web/API/MediaStream) and an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
 
 #### Using a delegated upload token (recommended):
 
@@ -173,7 +147,7 @@ The start() method starts the upload of the content retrieved from the MediaStre
 **Example**
 
 ```javascript
-    // ... mediaRecorder instanciation
+    // ... mediaRecorder instantiation
 
     mediaRecorder.start();
     // or, with a 2 seconds timeslice:
@@ -194,7 +168,7 @@ Define an event listener for the media recorder. The following events are availa
 **Example**
 
 ```javascript
-    // ... mediaRecorder instanciation
+    // ... mediaRecorder instantiation
 
     mediaRecorder.addEventListener("error", (event) => {
        console.log(event.data);
@@ -208,13 +182,13 @@ Return the state of the underlaying [MediaRecorder](https://developer.mozilla.or
 **Example**
 
 ```javascript
-    // ... mediaRecorder instanciation
+    // ... mediaRecorder instantiation
 
     mediaRecorder.stop()
         .then(video => console.log(video));
 ```
 
-# Full example
+## Full example
 
 
 ```html

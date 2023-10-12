@@ -6,30 +6,11 @@ metadata:
   description: "The official api.video iOS video uploader for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video iOS video uploader
-==============
+# api.video iOS video uploader
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Carthage](#carthage)
-    - [CocoaPods](#cocoaPods)
-  - [Code sample](#code-sample)
-- [Documentation](#documentation)
-  - [API Endpoints](#api-endpoints)
-    - [VideosAPI](#VideosAPI)
-  - [Models](#models)
-  - [Authorization](#documentation-for-authorization)
-    - [API key](#api-key)
-    - [Public endpoints](#public-endpoints)
-- [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client)
-- [Contribution](#contribution)
-
-# Project description
+## Project description
 
 api.video's iOS  uploads videos to api.video using delegated upload token or API Key.
 
@@ -37,11 +18,11 @@ It allows you to upload videos in two ways:
 - standard upload: to send a whole video file in one go
 - progressive upload: to send a video file by chunks, without needing to know the final size of the video file
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Carthage
+#### Carthage
 
 Specify it in your `Cartfile`:
 
@@ -51,13 +32,13 @@ github "apivideo/api.video-ios-uploader" ~> 1.2.1
 
 Run `carthage update`
 
-### CocoaPods
+#### CocoaPods
 
 Add `pod 'ApiVideoUploader', '1.2.1'` in your `Podfile`
 
 Run `pod install`
 
-## Code sample
+### Code sample
 
 Please follow the [installation](#installation) instruction and execute the following Swift code:
 ```swift
@@ -80,9 +61,9 @@ import ApiVideoUploader
 
 ```
 
-# Documentation
+## Documentation
 
-## API Endpoints
+### API Endpoints
 
 All URIs are relative to *https://ws.api.video*
 
@@ -104,7 +85,7 @@ Method | HTTP request | Description
 
 
 
-## Models
+### Models
 
  - [AccessToken](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/AccessToken.md)
  - [AdditionalBadRequestErrors](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/AdditionalBadRequestErrors.md)
@@ -140,6 +121,6 @@ Please take a moment to leave a star on the client ⭐
 
 This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
 
-# Contribution
+## Contribution
 
 Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.

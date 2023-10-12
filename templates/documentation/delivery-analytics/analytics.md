@@ -5,8 +5,7 @@ metadata:
   description: "Learn how you can get data insights for your videos and live streams using api.video's Analytics solution."
 ---
 
-Analytics & data
-=============
+# Analytics & data
 
 api.video enables you to collect play event data about your videos and live streams.
 
@@ -20,7 +19,7 @@ Use this data to understand your audience, or integrate the data directly into y
 
 Visit the **[Analytics](https://dashboard.api.video/analytics)** page on the Dashboard to get started and see your data visualized!
 
-# How it works
+## How it works
 
 api.video's solution uses playback data to analyze and segment your viewers. 
 
@@ -33,7 +32,7 @@ api.video's solution uses playback data to analyze and segment your viewers.
 
 After play events are collected, there is a short delay while the API processes the data. api.video recommends that you retrieve Analytics periodically, for example once every minute. This enables you to keep track of live stream engagement or manage user-generated content without delay. 
 
-## Requirements
+### Requirements
 
 {% capture content %}
 The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](/sdks/player/apivideo-player-sdk) for details about the implementation.
@@ -43,7 +42,7 @@ When using third-party players, you need to implement the [Video.js](/sdks/playe
 {% include "_partials/callout.html" kind: "info", content: content %}
 
 
-# Usage
+## Usage
 
 Api.video offers 2 dedicated API endpoints for analytics:
 
@@ -59,7 +58,7 @@ You can test the Analytics endpoints **in api.video's sandbox environment**. Che
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 
-## Request
+### Request
 
 The endpoints accept `GET` requests. You must provide 2 **required** query parameters in your requests: `from` and `dimension`. You can also provide 2 **optional** query parameters: `to`, and `filter`.
 
@@ -84,7 +83,7 @@ api.video retains play event data for 30 days. If you select a time period that 
 | `to`  | `date`  | `false`  | Use this optional query parameter to set the end date for the time period that you want analytics for.<br>  <br>- The API returns analytics data **excluding** the day you set in `to`.<br>- If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and **excluding** today.<br>- A valid date value is only **within the last 30 days**.<br>- The value you provide must follow the `YYYY-MM-DD` format.  |
 | `filter`  | `key-value pair`  | `false`  | Use this parameter to filter your results to a specific video or live stream in a project that you want analytics for.<br><br>You must use the `videoId:` or `liveStreamId:` prefix when specifying an identifier for a video or a live stream.<br><br>Note that the **Get play events for videos** endpoint only accepts video `ID` as a filter, and the **Get play events for live streams** endpoint only accepts live stream `ID` as a filter.  |
 
-### Dimension
+#### Dimension
 
 This parameter enables you to define a single property that you want analytics for. You can select only **one property** in your request.
 
@@ -98,14 +97,14 @@ This parameter enables you to define a single property that you want analytics f
 | `operatingSystem` | the operating system used during the play event. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.                                               |
 | `browser`         | the browser used during the play event. Response values include `chrome`, `firefox`, `edge`, `opera`.                                                                   |
 
-## Response
+### Response
 
 Based on your request the Analytics API returns paginated play event data in an array of objects. Each object contains these analytics fields:
 
 - `value`: shows a value for the property you have specified for `dimension` in your request. For example, if you requested `dimension=browser`, each `value` field in the response returns a type of browser that was used during the play events.
 - `plays`: shows the number of play events for one specific `value`.
 
-### Structure
+#### Structure
 
 ```json
 {
@@ -149,7 +148,7 @@ Based on your request the Analytics API returns paginated play event data in an 
 | `value`  | `string`           | The value of the dimension that you've selected in the request. You can find the possible [dimensions in the table above](#dimension). |
 | `plays`  | `int`              | The number of play events that was returned for the dimension in question                                                                                                   |
 
-### Examples
+#### Examples
 
 You can find sample responses for some common analytics parameters here:
 
@@ -260,7 +259,7 @@ This example uses the sandbox environment's `{base_URL}`. Check out the [API env
 
 <br>
 
-# Best practices
+## Best practices
 
 To ensure that your Analytics implementation runs smoothly, make sure that you:
 
@@ -269,7 +268,7 @@ To ensure that your Analytics implementation runs smoothly, make sure that you:
 - only select **one** property for `dimension` in your request.
 - use the `videoId:` or `liveStreamId:` prefix appropriately when using the `filter` parameter.
 
-# What's next
+## What's next
 
 Check out the **[API reference](/reference/api/Analytics)** for sample responses and errors, and more details about using the Analytics endpoint.
 

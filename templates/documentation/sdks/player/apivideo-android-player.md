@@ -6,37 +6,22 @@ metadata:
   description: "The official api.video Android Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Android Player
-==============
+# api.video Android Player
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in
 your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-    - [Installation](#installation)
-        - [Gradle](#gradle)
-    - [Permissions](#permissions)
-    - [Permissions](#permissions)
-    - [Retrieve your video Id](#retrieve-your-video-id)
-- [Sample application](#sample-application)
-- [Documentation](#documentation)
-- [Dependencies](#dependencies)
-
-# Project description
+## Project description
 
 Easily integrate a video player for videos from [api.video](https://api.video/) in your Android
 application.
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Gradle
+#### Gradle
 
 In your module `build.gradle`, add the following code in `dependencies`:
 
@@ -46,7 +31,7 @@ dependencies {
 }
 ```
 
-## Permissions
+### Permissions
 
 In your `AndroidManifest.xml`, add the following code in `<manifest>`:
 
@@ -55,7 +40,7 @@ In your `AndroidManifest.xml`, add the following code in `<manifest>`:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-## Retrieve your video Id
+### Retrieve your video Id
 
 At this point, you must have uploaded a least one video to your account. If you haven't
 see [how to upload a video](https://docs.api.video/vod/upload-a-video-regular-upload/). You'll need
@@ -73,7 +58,7 @@ a video Id to use this component and play a video from api.video. To get yours, 
 Alternatively, you can find your video Id in the video details of
 your [dashboard](https://dashboard.api.video).
 
-## Code sample
+### Code sample
 
 1. Add a `ApiVideoExoPlayerView` to your Activity/Fragment layout:
 
@@ -121,7 +106,7 @@ val player = ApiVideoPlayerController(
 If you requires a fullscreen video. You will have to implement the `ApiVideoPlayerController.ViewListener` interface.
 Check out for the implementation in the [Sample application](#sample-application).
 
-# Sample application
+## Sample application
 
 A demo application demonstrates how to use player.
 See [`/example`](https://github.com/apivideo/api.video-android-player/tree/main/example)
@@ -131,12 +116,12 @@ On the first run, you will have to set your video Id:
 1. Click on the FloatingActionButton -> Settings
 2. Replace "YOUR_VIDEO_ID" by your video Id
 
-# Documentation
+## Documentation
 
 * [API documentation](https://apivideo.github.io/api.video-android-player/)
 * [api.video documentation](https://docs.api.video/)
 
-# Dependencies
+## Dependencies
 
 We are using external library
 
@@ -144,7 +129,7 @@ We are using external library
 |--------------------------------------------------|---------------------------------------------------------|
 | [Exoplayer](https://github.com/google/ExoPlayer) | [README.md](https://github.com/google/ExoPlayer#readme) |
 
-# FAQ
+## FAQ
 
 If you have any questions, ask us here: [https://community.api.video](https://community.api.video).
 Or use [Issues].
