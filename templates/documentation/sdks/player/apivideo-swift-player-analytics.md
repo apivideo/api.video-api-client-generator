@@ -6,43 +6,19 @@ metadata:
   description: "The official api.video Swift Player analytics plugin for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Swift Player analytics plugin
-==============
+# api.video Swift Player analytics plugin
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Swift Package Manager](#swift-package-manager)
-    - [Cocoapods](#cocoapods)
-- [Sample application](#sample-application)
-- [Documentation](#documentation)
-  - [Options](#options)
-  - [PlayerAnalytics API](#playeranalytics-api)
-      - [`play(completion: @escaping (Result<Void, Error>) -> Void)`](#playcompletion-escaping-resultvoid-error---void)
-      - [`resume(completion: @escaping (Result<Void, Error>) -> Void)`](#resumecompletion-escaping-resultvoid-error---void)
-      - [`ready(completion: @escaping (Result<Void, Error>) -> Void)`](#readycompletion-escaping-resultvoid-error---void)
-      - [`end(completion: @escaping (Result<Void, Error>) -> Void)`](#endcompletion-escaping-resultvoid-error---void)
-      - [`seek(from:Float, to: Float, completion : @escaping (Result<Void, Error>) -> Void)`](#seekfromfloat-to-float-completion--escaping-resultvoid-error---void)
-      - [`pause(completion: @escaping (Result<Void, Error>) -> Void)`](#pausecompletion-escaping-resultvoid-error---void)
-      - [`destroy(completion: @escaping (Result<Void, VideoError>) -> Void)`](#destroycompletion-escaping-resultvoid-videoerror---void)
-      - [`currentTime`](#currenttime)
-    
-
-
-# Project description
+## Project description
 iOS library to manually call the api.video analytics collector.
 
 This is useful if you are using a video player for which we do not yet provide a ready-to-use monitoring module.
 
-# Getting started
+## Getting started
 
-## Installation
-### Swift Package Manager
+### Installation
+#### Swift Package Manager
 In the Project Navigator select your own project. Then select the project in the Project section and click on the Package Dependencies tab. Click on the "+" button at the bottom. Paste the below url on the search bar on the top right. Finaly click on "Add package" button.
 ```
  https://github.com/apivideo/api.video-ios-player-analytics
@@ -53,18 +29,18 @@ Or add this in your Package.swift
         .package(url: "https://github.com/apivideo/api.video-ios-player-analytics.git", from: "1.1.0"),
     ],
 ```
-### Cocoapods
+#### Cocoapods
 Add `pod 'ApiVideoPlayerAnalytics', '1.1.0'` in your `Podfile`
 
 Run `pod install`
 
-# Sample application
+## Sample application
 
 A demo application demonstrates how to use player analytics library. See [`/Example`](https://github.com/apivideo/api.video-ios-player-analytics/tree/main/Example) folder.
 
-# Documentation
+## Documentation
 
-## Options
+### Options
 
 The analytics module constructor takes a `Options` parameter that contains the following options:
 
@@ -80,28 +56,15 @@ Options instantiation is made with either mediaUrl or videoInfo.
 
 Once the module is instantiated, the following methods have to be called to monitor the playback events.
 
-## PlayerAnalytics API
+### PlayerAnalytics API
 
-#### `play(completion: @escaping (Result<Void, Error>) -> Void)`
-> method to call when the video starts playing for the first time (in the case of a resume after paused, use `resume()`)
-
-#### `resume(completion: @escaping (Result<Void, Error>) -> Void)`
-> method to call when the video playback is resumed after a pause
-
-#### `ready(completion: @escaping (Result<Void, Error>) -> Void)`
-> method to call once the player is ready to play the media
-
-#### `end(completion: @escaping (Result<Void, Error>) -> Void)`
-> method to call when the video is ended
-
-#### `seek(from:Float, to: Float, completion : @escaping (Result<Void, Error>) -> Void)`
-> method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should contains the seek start & end times in seconds
-
-#### `pause(completion: @escaping (Result<Void, Error>) -> Void)`
-> method to call when the video is paused
-
-#### `destroy(completion: @escaping (Result<Void, VideoError>) -> Void)`
-> method to call when the video player is disposed (eg. when the use closes the navigation tab)
-
-#### `currentTime`
-> field to call each time the playback time changes (it should be called often, the accuracy of the collected data depends on it)
+| Method | Description |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `play(completion: @escaping (Result<Void, Error>) -> Void)`    | Method to call when the video starts playing for the first time (in the case of a resume after paused, use `resume()`)               |
+| `resume(completion: @escaping (Result<Void, Error>) -> Void)`  | Method to call when the video playback is resumed after a pause                                      |
+| `ready(completion: @escaping (Result<Void, Error>) -> Void)`   | Method to call once the player is ready to play the media                                            |
+| `end(completion: @escaping (Result<Void, Error>) -> Void)`     | Method to call when the video is ended                                                               |
+| `seek(from: Float, to: Float, completion : @escaping (Result<Void, Error>) -> Void)` | Method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should contain the seek start & end times in seconds |
+| `pause(completion: @escaping (Result<Void, Error>) -> Void)`   | Method to call when the video is paused                                                              |
+| `destroy(completion: @escaping (Result<Void, VideoError>) -> Void)` | Method to call when the video player is disposed (e.g., when the user closes the navigation tab) |
+| `currentTime`                                                 | Field to call each time the playback time changes (it should be called often, the accuracy of the collected data depends on it)       |

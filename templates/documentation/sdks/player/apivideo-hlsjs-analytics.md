@@ -6,29 +6,17 @@ metadata:
   description: "The official api.video hls.js analytics plugin for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video hls.js analytics plugin
-==============
+# api.video hls.js analytics plugin
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Setup](#setup)
-  - [Code sample](#code-sample)
-- [Documentation](#documentation)
-  - [Module instanciation](#module-instanciation)
-  - [Instanciation example](#instanciation-example)
-
-# Project description
+## Project description
 
 hls.js module to call the api.video analytics collector. 
 
-# Getting started
+## Getting started
 
-## Setup
+### Setup
 
 Include `https://unpkg.com/@api.video/hlsjs-player-analytics` in your web page.
 
@@ -36,7 +24,7 @@ Include `https://unpkg.com/@api.video/hlsjs-player-analytics` in your web page.
 <script src="https://unpkg.com/@api.video/hlsjs-player-analytics"></script>
 ```
 
-## Code sample
+### Code sample
 
 
 Include the module in your HTML file like so:
@@ -65,11 +53,11 @@ Include the module in your HTML file like so:
 </html>
 ```
 
-# Documentation
+## Documentation
 
-## Module instanciation
+### Module instantiation
 
-Then, before having instanciated `Hls`, instanciate a `HlsJsApiVideoAnalytics` object. 
+Then, before having instantiated `Hls`, instantiate a `HlsJsApiVideoAnalytics` object. 
 
 The `HlsJsApiVideoAnalytics` constructor take the following parameters:
 
@@ -86,7 +74,7 @@ Available options (`HlsJsApiVideoAnalyticsOptions`):
 | userMetadata | no        | ```{ [name: string]: string }[]```    | object containing [metadata](https://api.video/blog/tutorials/dynamic-metadata/) (see **Full example** below) |
 |     sequence | no        | ```{start: number; end?: number;} ``` | if only a sequence of the video is going to be played                                                        |
 
-## Instanciation example
+### Instantiation example
 
 ```javascript
 var hls = new Hls();

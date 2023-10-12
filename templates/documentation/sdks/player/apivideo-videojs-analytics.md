@@ -6,31 +6,19 @@ metadata:
   description: "The official api.video video.js analytics plugin for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video video.js analytics plugin
-==============
+# api.video video.js analytics plugin
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Method #1: requirejs](#method-1-requirejs)
-    - [Method #2: typescript](#method-2-typescript)
-    - [Method #3: simple include in a javascript project](#method-3-simple-include-in-a-javascript-project)
-
-# Project description
+## Project description
 
 video.js plugin to call the api.video analytics collector. 
 
-# Getting started
+## Getting started
 
-## Installation 
+### Installation 
 
-### Method #1: requirejs
+#### Method #1: requirejs
 
 If you use requirejs you can add the plugin as a dependency to your project with 
 
@@ -49,7 +37,7 @@ const player = videojs('my-video');
 player.apiVideoAnalytics();
 ```
 
-### Method #2: typescript
+#### Method #2: typescript
 
 If you use Typescript you can add the plugin as a dependency to your project with 
 
@@ -70,7 +58,7 @@ player.apiVideoAnalytics();
 
 ```
 
-### Method #3: simple include in a javascript project
+#### Method #3: simple include in a javascript project
 
 Include the plugin in your HTML file like so:
 

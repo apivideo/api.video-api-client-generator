@@ -5,8 +5,7 @@ metadata:
   description: This guide explains how to create, list, retrieve, and delete delegated upload tokens, and how to upload videos with them.
 ---
 
-Using delegated upload tokens
-==============================================
+# Using delegated upload tokens
 
 You can upload videos using the traditional two-step process where you create a video container then upload your video into your container. You can also upload a video using a **delegated upload token**. This guide explains how to create, list, retrieve, and delete delegated upload tokens, and how to upload videos with them.
 
@@ -313,9 +312,9 @@ print(response)
 {% endcapture %}
 {% include "_partials/code-tabs.html" content: samples %}
 
-# Token operations
+## Token operations
 
-## List all tokens you created
+### List all tokens you created
 
 If a token is compromised, or you want to see how many tokens you have, you will need to retrieve a list of them programmatically. Here is the code sample for that:
 
@@ -426,7 +425,7 @@ print(response)
 {% include "_partials/code-tabs.html" content: samples %}
 
 
-## Show details about a specific token
+### Show details about a specific token
 
 Retrieve information about a specific token. To do this, you send a request containing the token ID for the token you need details about.
 
@@ -533,7 +532,7 @@ print(response)
 {% include "_partials/code-tabs.html" content: samples %}
 
 
-## Delete a token
+### Delete a token
 
 If you create a token that's compromised, you may want to remove it. Or, you might want to clean up how many tokens you have in general. All you need to do to delete a token is send a request containing the token ID for the token you want to remove.
 

@@ -6,34 +6,11 @@ metadata:
   description: "The official api.video Player analytics plugin for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video Player analytics plugin
-==============
+# api.video Player analytics plugin
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Method #1: requirejs](#method-1-requirejs)
-    - [Method #2: typescript](#method-2-typescript)
-    - [Method #3: imple include in a javascript project](#method-3-imple-include-in-a-javascript-project)
-- [Documentation](#documentation)
-  - [Instanciation options](#instanciation-options)
-  - [Module methods](#module-methods)
-      - [`play(): Promise<void>`](#play-promisevoid)
-      - [`resume(): Promise<void>`](#resume-promisevoid)
-      - [`ready(): Promise<void>`](#ready-promisevoid)
-      - [`end(): Promise<void>`](#end-promisevoid)
-      - [`seek(from: number, to: number): Promise<void>`](#seekfrom-number-to-number-promisevoid)
-      - [`pause(): Promise<void>`](#pause-promisevoid)
-      - [`destroy(): Promise<void>`](#destroy-promisevoid)
-      - [`updateTime(time: number): Promise<void>`](#updatetimetime-number-promisevoid)
-
-
-# Project description
+## Project description
 
 Javascript module to manually call the api.video analytics collector. 
 
@@ -49,11 +26,11 @@ If you use one of the following video player, you should rather use the associat
 
 This module is compatible with React Native.
 
-# Getting started
+## Getting started
 
-## Installation 
+### Installation 
 
-### Method #1: requirejs
+#### Method #1: requirejs
 
 If you use requirejs you can add the module as a dependency to your project with 
 
@@ -72,7 +49,7 @@ const playerAnalytics = new PlayerAnalytics({
 });
 ```
 
-### Method #2: typescript
+#### Method #2: typescript
 
 If you use Typescript you can add the SDK as a dependency to your project with 
 
@@ -90,7 +67,7 @@ const playerAnalytics = new PlayerAnalytics({
 });
 ```
 
-### Method #3: imple include in a javascript project
+#### Method #3: imple include in a javascript project
 
 Include the SDK in your HTML file like so:
 
@@ -110,9 +87,9 @@ Then, once the `window.onload` event has been trigered, instanciate the module w
 </script>
 ```
 
-# Documentation
+## Documentation
 
-## Instanciation options
+### Instantiation options
 
 The analytics module constructor takes a `PlayerAnalyticsOptions` parameter that contains the following options:
 
@@ -127,28 +104,15 @@ The analytics module constructor takes a `PlayerAnalyticsOptions` parameter that
 
 Once the module is instanciated, the following methods have to be called to monitor the playback events.
 
-## Module methods
+### Module methods
 
-#### `play(): Promise<void>` 
-> method to call when the video starts playing for the first time (in the case of a resume after paused, use `resume()`)
-
-#### `resume(): Promise<void>`
-> method to call when the video playback is resumed after a pause
-
-#### `ready(): Promise<void>`
-> method to call once the player is ready to play the media
-
-#### `end(): Promise<void>`
-> method to call when the video is ended
-
-#### `seek(from: number, to: number): Promise<void>`
-> method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should contains the seek start & end times in seconds
-
-#### `pause(): Promise<void>`
-> method to call when the video is paused
-
-#### `destroy(): Promise<void>`
-> method to call when the video player is disposed (eg. when the use closes the navigation tab)
-
-#### `updateTime(time: number): Promise<void>`
-> method to call each time the playback time changes (it should be called often, the accuracy of the collected data depends on it)
+| Method | Description |
+|----------|----------|
+| `play(): Promise<void>` | method to call when the video starts playing for the first time (in the case of a resume after paused, use `resume()`) |
+| `resume(): Promise<void>` | method to call when the video playback is resumed after a pause |
+| `ready(): Promise<void>` | method to call once the player is ready to play the media |
+| `end(): Promise<void>` | method to call when the video is ended |
+| `seek(from: number, to: number): Promise<void>` | method to call when a seek event occurs, the `from` and `to` parameters are mandatory and should contain the seek start & end times in seconds |
+| `pause(): Promise<void>` | method to call when the video is paused |
+| `destroy(): Promise<void>` | method to call when the video player is disposed (eg. when the use closes the navigation tab) |
+| `updateTime(time: number): Promise<void>` | method to call each time the playback time changes (it should be called often, the accuracy of the collected data depends on it) |

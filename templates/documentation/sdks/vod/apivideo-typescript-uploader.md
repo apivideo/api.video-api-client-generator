@@ -6,46 +6,11 @@ metadata:
   description: "The official api.video TypeScript video uploader for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video TypeScript video uploader
-==============
+# api.video TypeScript video uploader
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-    - [Installation method #1: requirejs](#installation-method-1-requirejs)
-    - [Installation method #2: typescript](#installation-method-2-typescript)
-    - [Simple include in a javascript project](#simple-include-in-a-javascript-project)
-- [Documentation - Standard upload](#documentation---standard-upload)
-  - [Instanciation](#instanciation)
-    - [Options](#options)
-      - [Using a delegated upload token (recommended):](#using-a-delegated-upload-token-recommended)
-      - [Using an access token (discouraged):](#using-an-access-token-discouraged)
-      - [Using an API key (**strongly** discouraged):](#using-an-api-key-strongly-discouraged)
-      - [Common options](#common-options)
-    - [Example](#example)
-  - [Methods](#methods)
-    - [`upload()`](#upload)
-    - [`onProgress()`](#onprogress)
-    - [`onPlayable()`](#onplayable)
-- [Documentation - Progressive upload](#documentation---progressive-upload)
-  - [Instanciation](#instanciation-1)
-    - [Options](#options-1)
-      - [Using a delegated upload token (recommended):](#using-a-delegated-upload-token-recommended-1)
-      - [Using an access token (discouraged):](#using-an-access-token-discouraged-1)
-      - [Common options](#common-options-1)
-    - [Example](#example-1)
-  - [Methods](#methods-1)
-    - [`uploadPart(file: Blob)`](#uploadpartfile-blob)
-    - [`uploadLastPart(file: Blob)`](#uploadlastpartfile-blob)
-    - [`onProgress()`](#onprogress-1)
-    - [`onPlayable()`](#onplayable-1)
-
-# Project description
+## Project description
 
 Typescript library to upload videos to api.video using delegated upload token (or usual access token) from the front-end. 
 
@@ -53,11 +18,11 @@ It allows you to upload videos in two ways:
 - standard upload: to send a whole video file in one go
 - progressive upload: to send a video file by chunks, without needing to know the final size of the video file
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
-### Installation method #1: requirejs
+#### Installation method #1: requirejs
 
 If you use requirejs you can add the library as a dependency to your project with 
 
@@ -83,7 +48,7 @@ var uploader = new ProgressiveUploader({
 }); 
 ```
 
-### Installation method #2: typescript
+#### Installation method #2: typescript
 
 If you use Typescript you can add the library as a dependency to your project with 
 
@@ -110,7 +75,7 @@ const uploader = new ProgressiveUploader({
 ```
 
 
-### Simple include in a javascript project
+#### Simple include in a javascript project
 
 Include the library in your HTML file like so:
 
@@ -137,15 +102,15 @@ Then, once the `window.onload` event has been trigered, create your player using
 </script>
 ```
 
-# Documentation - Standard upload
+## Documentation - Standard upload
 
-## Instanciation
+### Instantiation
 
-### Options 
+#### Options 
 
-The upload library is instanciated using an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
+The upload library is instantiated using an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
 
-#### Using a delegated upload token (recommended):
+##### Using a delegated upload token (recommended):
 
 Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads/).
 
@@ -156,7 +121,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 |                       videoId | no        | string | id of an existing video |
 | _common options (see bellow)_ |           |        |                         |
 
-#### Using an access token (discouraged):
+##### Using an access token (discouraged):
 
 **Warning**: be aware that exposing your access token client-side can lead to huge security issues. Use this method only if you know what you're doing :).
 
@@ -169,7 +134,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 | _common options (see bellow)_ |           |        |                                                                                                                                                 |
 
 
-#### Using an API key (**strongly** discouraged):
+##### Using an API key (**strongly** discouraged):
 
 **Warning**: be aware that exposing your API key client-side can lead to huge security issues. Use this method only if you know what you're doing :).
 
@@ -181,7 +146,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 | _common options (see bellow)_ |           |        |                         |
 
 
-#### Common options
+##### Common options
 
 
 |   Option name    | Mandatory | Type                                                            | Description                                                                                                                              |
@@ -195,7 +160,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 | maxVideoDuration | no        | number                                                          | maximum duration allowed for the file (in seconds)                                                                                       |
 
 
-### Example
+#### Example
 
 ```javascript
     const uploader = new VideoUploader({
@@ -206,9 +171,9 @@ Using delegated upload tokens for authentication is best options when uploading 
     });
 ```
 
-## Methods
+### Methods
 
-### `upload()`
+#### `upload()`
 
 The upload() method starts the upload. It takes no parameter. It returns a Promise that resolves once the file is uploaded. If an API call fails more than the specified number of retries, then the promise is rejected.
 On success, the promise embeds the `video` object returned by the API.
@@ -217,14 +182,14 @@ On fail, the promise embeds the status code & error message returned by the API.
 **Example**
 
 ```javascript
-    // ... uploader instanciation
+    // ... uploader instantiation
 
     uploader.upload()
         .then((video) => console.log(video))
         .catch((error) => console.log(error.status, error.message));
 ```
 
-### `onProgress()`
+#### `onProgress()`
 
 The onProgress() method let you defined an upload progress listener. It takes a callback function with one parameter: the onProgress events.
 An onProgress event contains the following attributes:
@@ -238,7 +203,7 @@ An onProgress event contains the following attributes:
 **Example**
 
 ```javascript
-    // ... uploader instanciation
+    // ... uploader instantiation
     
     uploader.onProgress((event) => {
         console.log(`total number of bytes uploaded for this upload: ${event.uploadedBytes}.`);
@@ -251,7 +216,7 @@ An onProgress event contains the following attributes:
 ```
 
 
-### `onPlayable()`
+#### `onPlayable()`
 
 The onPlayable() method let you defined a listener that will be called when the video is playable. It takes a callback function with one parameter: the `video` object returned by the API.
 
@@ -261,7 +226,7 @@ The onPlayable() method let you defined a listener that will be called when the 
     <div id="player-container"></div>
 
     <script>
-        // ... uploader instanciation
+        // ... uploader instantiation
     
         uploader.onPlayable((video) => {
             // the video is playable, we can display the player
@@ -270,16 +235,16 @@ The onPlayable() method let you defined a listener that will be called when the 
     </script>
 ```
 
-# Documentation - Progressive upload
+## Documentation - Progressive upload
 
 
-## Instanciation
+### Instantiation
 
-### Options 
+#### Options 
 
-The progressive upload object is instanciated using an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
+The progressive upload object is instantiated using an `options` object. Options to provide depend on the way you want to authenticate to the API: either using a delegated upload token (recommanded), or using a usual access token. 
 
-#### Using a delegated upload token (recommended):
+##### Using a delegated upload token (recommended):
 
 Using delegated upload tokens for authentication is best options when uploading from the client side. To know more about delegated upload token, read the dedicated article on api.video's blog: [Delegated Uploads](https://api.video/blog/tutorials/delegated-uploads/).
 
@@ -290,7 +255,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 |                       videoId | no        | string | id of an existing video |
 | _common options (see bellow)_ |           |        |                         |
 
-#### Using an access token (discouraged):
+##### Using an access token (discouraged):
 
 **Warning**: be aware that exposing your access token client-side can lead to huge security issues. Use this method only if you know what you're doing :).
 
@@ -302,7 +267,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 | _common options (see bellow)_ |           |        |                         |
 
 
-#### Common options
+##### Common options
 
 
 |       Option name           | Mandatory | Type                                                            | Description                                                                                                                                            |
@@ -314,7 +279,7 @@ Using delegated upload tokens for authentication is best options when uploading 
 | mergeSmallPartsBeforeUpload | no        | boolean                                                         | if false, parts smaller than 5MB will not be merged before upload, resulting in an error (default: true)                                               |
 
 
-### Example
+#### Example
 
 ```javascript
     const uploader = new ProgressiveUploader({
@@ -323,9 +288,9 @@ Using delegated upload tokens for authentication is best options when uploading 
     });
 ```
 
-## Methods
+### Methods
 
-### `uploadPart(file: Blob)`
+#### `uploadPart(file: Blob)`
 
 The upload() method starts the upload. It takes no parameter. It returns a Promise that resolves once the file is uploaded. If an API call fails more than the specified number of retries, then the promise is rejected.
 On success, the promise embeds the `video` object returned by the API.
@@ -334,13 +299,13 @@ On fail, the promise embeds the status code & error message returned by the API.
 **Example**
 
 ```javascript
-    // ... uploader instanciation
+    // ... uploader instantiation
 
     uploader.uploadPart(blob)
         .catch((error) => console.log(error.status, error.message));
 ```
 
-### `uploadLastPart(file: Blob)`
+#### `uploadLastPart(file: Blob)`
 
 The upload() method starts the upload. It takes no parameter. It returns a Promise that resolves once the file is uploaded. If an API call fails more than the specified number of retries, then the promise is rejected.
 On success, the promise embeds the `video` object returned by the API.
@@ -349,14 +314,14 @@ On fail, the promise embeds the status code & error message returned by the API.
 **Example**
 
 ```javascript
-    // ... uploader instanciation
+    // ... uploader instantiation
 
     uploader.uploadLastPart(blob)
         .then((video) => console.log(video))
         .catch((error) => console.log(error.status, error.message));
 ```
 
-### `onProgress()`
+#### `onProgress()`
 
 The onProgress() method let you defined an upload progress listener. It takes a callback function with one parameter: the onProgress events.
 An onProgress event contains the following attributes:
@@ -366,7 +331,7 @@ An onProgress event contains the following attributes:
 **Example**
 
 ```javascript
-    // ... uploader instanciation
+    // ... uploader instantiation
     
     uploader.onProgress((event) => {
         console.log(`total number of bytes uploaded for this upload: ${event.uploadedBytes}.`);
@@ -374,7 +339,7 @@ An onProgress event contains the following attributes:
     });
 ```
 
-### `onPlayable()`
+#### `onPlayable()`
 
 The onPlayable() method let you defined a listener that will be called when the video is playable. It takes a callback function with one parameter: the `video` object returned by the API.
 
@@ -384,7 +349,7 @@ The onPlayable() method let you defined a listener that will be called when the 
     <div id="player-container"></div>
 
     <script>
-        // ... uploader instanciation
+        // ... uploader instantiation
     
         uploader.onPlayable((video) => {
             // the video is playable, we can display the player

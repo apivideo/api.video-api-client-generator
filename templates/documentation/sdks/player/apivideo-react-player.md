@@ -6,47 +6,21 @@ metadata:
   description: "The official api.video React Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-api.video React Player component
-==============
-
+# api.video React Player component
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
-
-- [Table of contents](#table-of-contents)
-- [Project description](#project-description)
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-  - [Basic usage](#basic-usage)
-- [Documentation](#documentation)
-  - [Properties](#properties)
-    - [Settings](#settings)
-      - [Controls](#controls)
-      - [Player theme](#player-theme)
-      - [Ads](#ads)
-      - [Responsiveness](#responsiveness)
-    - [Callbacks](#callbacks)
-  - [Methods](#methods)
-  - [Use cases](#use-cases)
-    - [Private videos](#private-videos)
-    - [Defining metadata](#defining-metadata)
-    - [Define your own controls](#define-your-own-controls)
-
-# Project description
-
-
-# Getting started
+## Getting started
 
 A React component for playing api.video videos.
 
-## Installation
+### Installation
 
 ```sh
 $ npm install --save @api.video/react-player
 ```
 
-## Basic usage
+### Basic usage
 
 You can then use the component in your app: 
 
@@ -62,11 +36,11 @@ import ApiVideoPlayer from '@api.video/react-player'
 
 {% endraw %}
 
-# Documentation
+## Documentation
 
-## Properties
+### Properties
 
-### Settings
+#### Settings
 
 The following properties are used to configure the player. The value of each of these properties can be changed at any time during the playback.
 
@@ -90,6 +64,7 @@ The following properties are used to configure the player. The value of each of 
 | videoStyleObjectFit | no        | "contain" \| "cover" \| "fill" \| "none" \| "scale-down"                                         | The `object-fit` CSS value of the video tag                                                                                     | undefined |
 | videoStyleTransform | no        | string                                                                                           | The `transform` CSS value of the video tag (examples: "rotateY(180deg)")                                                        | undefined |
 | ads | no | {adTagUrl: string} | see below [ads](#ads) |
+
 #### Controls
 
 The `controls` property let you decide wich controls should be displayed on the player. Here is the list of all available controls:  `play`, `seekBackward`, `seekForward`, `playbackRate`, `volume`, `fullscreen`, `subtitles`, `chapters`, `pictureInPicture`, `progressBar`, `chromecast`, `download`, `more`.
