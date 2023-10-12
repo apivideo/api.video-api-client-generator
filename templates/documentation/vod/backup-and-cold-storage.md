@@ -16,7 +16,7 @@ With this in mind, we've created ways for you to backup your already transcoded 
 In this section, you'll be able to find guides on how to backup the videos hosted on api.video to your Azure Storage account, Amazon S3 and other storage providers.
 
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/backup-and-cold-storage/backup-and-cold-storage-dark.svg", light: "/_assets/vod/backup-and-cold-storage/backup-and-cold-storage-light.svg" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/backup-and-cold-storage/backup-and-cold-storage-dark.svg", light: "/_assets/vod/backup-and-cold-storage/backup-and-cold-storage-light.svg", alt: "A diagram that shows the process of backing up videos on different hosting solutions" %}
 
 Below, you will find the scripts that are available for your disposale in order to backup your videos from api.video.
 

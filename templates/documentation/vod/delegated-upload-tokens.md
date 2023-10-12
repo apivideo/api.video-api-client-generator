@@ -9,7 +9,7 @@ metadata:
 
 You can upload videos using the traditional two-step process where you create a video container then upload your video into your container. You can also upload a video using a **delegated upload token**. This guide explains how to create, list, retrieve, and delete delegated upload tokens, and how to upload videos with them.
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/upload-tokens/upload-token-dark.svg", light: "/_assets/vod/upload-tokens/upload-token-light.svg" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/upload-tokens/upload-token-dark.svg", light: "/_assets/vod/upload-tokens/upload-token-light.svg", alt: "A diagram that shows how delegated tokens can be used on the backend and the frontend of your app" %}
 
 In this type of upload, you retrieve a token from the tokens endpoint. You can then directly upload using the token upload endpoint. It's one step, and you don't provide anything except the file. You can update the metadata for the upload later. A benefit of a delegated token is that you define the TTL (time-to-live) value, so it expires only when you need it to. You can always use the token to upload. You can also create delegated tokens for others to use to do uploads.
 

@@ -12,7 +12,7 @@ A tutorial for uploading a video with curl can be found [here](https://api.video
 
 A more visual representation can be found below:
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-best-practices/create-a-video-dark.svg", light: "/_assets/vod/video-best-practices/create-a-video-light.svg" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-best-practices/create-a-video-dark.svg", light: "/_assets/vod/video-best-practices/create-a-video-light.svg", alt: "A diagram that shows the steps of creating a video object, and uploading a video" %}
 
 {% capture content %}
 **Important things to know**
