@@ -458,8 +458,8 @@ paths:
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#list
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#list
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
@@ -777,8 +777,8 @@ paths:
               }
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#create
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#create
   '/videos/{videoId}/source':
     post:
       tags:
@@ -1095,8 +1095,8 @@ paths:
               }
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#upload
   /watermarks:
     post:
       tags:
@@ -1317,8 +1317,8 @@ paths:
               }
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#upload
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WatermarksAPI.md#upload
     get:
       tags:
         - Watermarks
@@ -1459,8 +1459,8 @@ paths:
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#list
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WatermarksAPI.md#list
   '/watermarks/{watermarkId}':
     delete:
       tags:
@@ -1544,8 +1544,8 @@ paths:
               # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#delete
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WatermarksAPI.md#delete
   '/videos/{videoId}/thumbnail':
     post:
       tags:
@@ -1810,8 +1810,8 @@ paths:
               $client->videos()->uploadThumbnail($videoId, $thumbnail); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadThumbnail
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#uploadThumbnail
     patch:
       tags:
         - Videos
@@ -2068,8 +2068,8 @@ paths:
                   ->setTimecode("00:01:00.000")); // Frame in video to be used as a placeholder before the video plays. 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#pickThumbnail
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#pickThumbnail
   '/videos/{videoId}':
     get:
       tags:
@@ -2295,8 +2295,8 @@ paths:
               $videoStatus = $client->videos()->getStatus($videoId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#get
     delete:
       tags:
         - Videos
@@ -2472,8 +2472,8 @@ paths:
               $client->videos()->delete($videoId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#delete
     patch:
       tags:
         - Videos
@@ -2785,8 +2785,8 @@ paths:
                       new \ApiVideo\Client\Model\Metadata(["key" => "aa2", 'value' => "bb2"])))); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#update
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#update
   '/videos/{videoId}/status':
     get:
       tags:
@@ -3022,8 +3022,8 @@ paths:
               $videoStatus = $client->videos()->getStatus($videoId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#getStatus
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#getStatus
   /upload-tokens:
     get:
       tags:
@@ -3280,8 +3280,8 @@ paths:
               $uploadTokens = $client->uploadTokens()->list(); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/UploadTokensAPI.md#list
     post:
       tags:
         - Upload Tokens
@@ -3480,8 +3480,8 @@ paths:
               $client->uploadTokens()->deleteToken($uploadToken); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#createToken
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/UploadTokensAPI.md#createToken
   '/upload-tokens/{uploadToken}':
     get:
       tags:
@@ -3676,8 +3676,8 @@ paths:
               $uploadToken = $client->uploadTokens()->getToken($uploadTokenId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#getToken
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/UploadTokensAPI.md#getToken
     delete:
       tags:
         - Upload Tokens
@@ -3854,8 +3854,8 @@ paths:
               $uploadToken = $client->uploadTokens()->getToken($uploadTokenId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#deleteToken
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/UploadTokensAPI.md#deleteToken
   /upload:
     post:
       tags:
@@ -3984,8 +3984,8 @@ paths:
                   ->setTimecode("00:01:00.000")); // Frame in video to be used as a placeholder before the video plays. 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
   /live-streams:
     get:
       tags:
@@ -4310,8 +4310,8 @@ paths:
               )); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#list
     post:
       tags:
         - Live Streams
@@ -4530,8 +4530,8 @@ paths:
                       new RestreamsRequestObject(['name' => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app', 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#create
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#create
 
               ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -4771,8 +4771,8 @@ paths:
               $liveStream = $client->liveStreams()->get($liveStreamId);
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#get
     delete:
       tags:
         - Live Streams
@@ -4943,8 +4943,8 @@ paths:
               $liveStream = $client->liveStreams()->deleteThumbnail($liveStreamId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#delete
     patch:
       tags:
         - Live Streams
@@ -5231,8 +5231,8 @@ paths:
               $liveStream = $client->liveStreams()->update($liveStreamId, $liveStreamUpdatePayload); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#update
 
               ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -5481,8 +5481,8 @@ paths:
               $livestream = $client->liveStreams()->uploadThumbnail($liveStreamId, $file); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#uploadThumbnail
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#uploadThumbnail
     delete:
       tags:
         - Live Streams
@@ -5678,8 +5678,8 @@ paths:
               $liveStream = $client->liveStreams()->get(liveStreamId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#deleteThumbnail
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#deleteThumbnail
   '/videos/{videoId}/captions/{language}':
     get:
       tags:
@@ -5889,8 +5889,8 @@ paths:
               $client->captions()->get($videoId, $language); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/CaptionsAPI.md#get
     post:
       tags:
         - Captions
@@ -6116,8 +6116,8 @@ paths:
               $caption = $client->captions()->upload($videoId, $language, $file); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#upload
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/CaptionsAPI.md#upload
     delete:
       tags:
         - Captions
@@ -6305,8 +6305,8 @@ paths:
               $client->captions()->delete($videoId, $language); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/CaptionsAPI.md#delete
     patch:
       tags:
         - Captions
@@ -6559,8 +6559,8 @@ paths:
               $caption = $client->captions()->update($videoId, $language, $captionsUpdatePayload); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#update
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/CaptionsAPI.md#update
   '/videos/{videoId}/captions':
     get:
       tags:
@@ -6782,8 +6782,8 @@ paths:
               )); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/CaptionsAPI.md#list
   '/videos/{videoId}/chapters/{language}':
     get:
       tags:
@@ -6988,8 +6988,8 @@ paths:
               $client->chapters()->delete($videoId, $language); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/ChaptersAPI.md#get
     post:
       tags:
         - Chapters
@@ -7217,8 +7217,8 @@ paths:
               $chapter = $client->chapters()->upload($videoId, $language, $file); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#upload
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/ChaptersAPI.md#upload
     delete:
       tags:
         - Chapters
@@ -7405,8 +7405,8 @@ paths:
               $client->chapters()->delete($videoId, $language); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/ChaptersAPI.md#delete
   '/videos/{videoId}/chapters':
     get:
       tags:
@@ -7626,8 +7626,8 @@ paths:
               )); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/ChaptersAPI.md#list
   /players:
     get:
       tags:
@@ -7929,8 +7929,8 @@ paths:
               )); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#list
     post:
       tags:
         - Player Themes
@@ -8184,8 +8184,8 @@ paths:
               $playerTheme = $client->playerThemes()->create($playerThemeCreationPayload); 
           - language: swift
             code: |+
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#create
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#create
 
               ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -8420,8 +8420,8 @@ paths:
               $playerTheme = $client->playerThemes()->get($playerId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#get
     delete:
       tags:
         - Player Themes
@@ -8598,8 +8598,8 @@ paths:
               $client->playerThemes()->delete($playerId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#delete
     patch:
       tags:
         - Player Themes
@@ -8887,8 +8887,8 @@ paths:
               $playerTheme = $client->playerThemes()->update($playerId, $playerThemeUpdatePayload); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#update
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#update
   '/players/{playerId}/logo':
     post:
       tags:
@@ -9127,8 +9127,8 @@ paths:
               $playerTheme = $client->playerThemes()->uploadLogo($playerId, $file, $link); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#uploadLogo
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#uploadLogo
     delete:
       tags:
         - Player Themes
@@ -9305,8 +9305,8 @@ paths:
               $client->playerThemes()->deleteLogo($playerId); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
   '/analytics/videos/plays':
     get:
       tags:
@@ -10425,8 +10425,8 @@ paths:
               const webhooks = await client.webhooks.list({ events, currentPage, pageSize }); 
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#list
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WebhooksAPI.md#list
     post:
       tags:
         - Webhooks
@@ -10648,8 +10648,8 @@ paths:
               $webhook = $client->webhooks()->create($webhooksCreationPayload); 
           - language: swift
             code: |+
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#create
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WebhooksAPI.md#create
 
               ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -10841,8 +10841,8 @@ paths:
               $webhook = $client->webhooks()->get($webhookId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#get
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WebhooksAPI.md#get
     delete:
       tags:
         - Webhooks
@@ -11020,8 +11020,8 @@ paths:
               $client->webhooks()->delete($webhookId);  
           - language: swift
             code: |
-              // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-              // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#delete
+              // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+              // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/WebhooksAPI.md#delete
 components:
   examples:
     live-stream-response-example:

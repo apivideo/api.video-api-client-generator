@@ -65,7 +65,7 @@ apiPackage: video.api.client.api.clients
 modelPackage: video.api.client.api.models
 groupId: video.api
 gitRepoId: api.video-android-client
-artifactDescription: api.video Android API client
+artifactDescription: The official Android api.video client
 artifactUrl: https://github.com/apivideo/api.video-android-client
 scmConnection: scm:git:git://github.com/apivideo/api.video-android-client.git
 scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-android-client.git

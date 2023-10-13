@@ -40,14 +40,14 @@ library: alamofire
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
-originClient: ios
+originClient: swift
 client: "true"
-gitRepoId: api.video-ios-client
+gitRepoId: api.video-swift-client
 additionalProperties:
   projectName: ApiVideoClient
   podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
-  podSummary: "The official iOS client library for api.video"
-  podRepo: https://github.com/apivideo/api.video-ios-client
+  podSummary: "The official Swift api.video client for iOS, macOS and tvOS"
+  podRepo: https://github.com/apivideo/api.video-swift-client
   podHomepage: https://docs.api.video
   podSocialMediaUrl: https://twitter.com/api_video
   podLicense: "{ :type => 'MIT' }"

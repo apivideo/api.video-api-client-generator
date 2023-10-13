@@ -55,7 +55,7 @@ apiPackage: video.api.uploader
 modelPackage: video.api.uploader.api.models
 groupId: video.api
 gitRepoId: api.video-android-uploader
-artifactDescription: api.video Android API video uploader
+artifactDescription: The official Android api.video uploader
 artifactUrl: https://github.com/apivideo/api.video-android-uploader
 scmConnection: scm:git:git://github.com/apivideo/api.video-android-uploader.git
 scmDeveloperConnection: scm:git:ssh://github.com:apivideo/api.video-android-uploader.git
