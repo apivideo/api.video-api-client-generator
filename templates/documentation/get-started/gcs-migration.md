@@ -47,7 +47,7 @@ You can grant this access in two quick steps:
 
 Once you have navigated to the bucket that you want to migrate, you need to add the Import Tool as a principal and assign Storage Object Viewer role:
 
-![Showing the Grant access dialog box Google Cloud Storage](/_assets/get-started/migration-guide/gcs-migration-3.png)
+![Showing the Grant access dialog box Google Cloud Storage](/_assets/get-started/migration-guide/gcs-migration-4.png)
 
 * In the "Grant access" dialog box, enter `storage-service-account@video-import-tool.iam.gserviceaccount.com` in the "New principals" input field. 
 * In the "Role" dropdown menu, select "Storage Object Viewer".
