@@ -14,6 +14,8 @@
       href: /get-started/azure-migration.md
     - label: Amazon S3
       href: /get-started/aws-migration.md
+    - label: Google Cloud Storage
+      href: /get-started/gcs-migration.md
     - label: Vimeo
       href: /get-started/vimeo-migration.md
     - label: Wistia
