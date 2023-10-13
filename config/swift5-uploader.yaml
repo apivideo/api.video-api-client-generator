@@ -35,14 +35,14 @@ library: alamofire
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
-originClient: ios-uploader
+originClient: swift-uploader
 uploader: "true"
-gitRepoId: api.video-ios-uploader
+gitRepoId: api.video-swift-uploader
 additionalProperties:
   projectName: ApiVideoUploader
   podAuthors: "{ 'Ecosystem Team' => 'ecosystem@api.video' }"
-  podSummary: "The official iOS video uploader for api.video "
-  podRepo: https://github.com/apivideo/api.video-ios-uploader
+  podSummary: "The official Swift api.video uploader for iOS, macOS and tvOS"
+  podRepo: https://github.com/apivideo/api.video-swift-uploader
   podHomepage: https://docs.api.video
   podSocialMediaUrl: https://twitter.com/api_video
   podLicense: "{ :type => 'MIT' }"
