@@ -10,6 +10,8 @@
   
 - heading: Templates & demos
   items:
+  - label: Live streaming from your browser
+    href: /live-streaming/live-stream-demo.md
   - label: Creating a live stream
     external: https://api.video/blog/tutorials/live-stream-tutorial/
   - label: Hosting and watching a live stream
