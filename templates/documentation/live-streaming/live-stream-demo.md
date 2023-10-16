@@ -30,7 +30,7 @@ Check out the demo's repository GitHub [here](https://github.com/apivideo/browse
 To clone the repo, run this command in your git command line:
 
 ```
-$ git clone https://github.com/apivideo/api.video-typescript-media-stream-composer
+$ git clone https://github.com/apivideo/browserLiveStream
 ```
 
 ## Usage
