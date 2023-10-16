@@ -14,7 +14,7 @@ your app.
 
 ## Project description
 
-Easily integrate a video player for videos from [api.video](https://api.video/) in your iOS
+Easily integrate a video player for videos from [api.video](https://api.video/) in your Swift
 application.
 
 ![](https://github.com/apivideo/api.video-swift-player/blob/main/Assets/player-preview.png)
@@ -201,7 +201,7 @@ We are using external library
 
 | Plugin                                                                                | README                                                                         |
 |---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [ApiVideoPlayerAnalytics](https://github.com/apivideo/api.video-ios-player-analytics) | [README.md](https://github.com/apivideo/api.video-ios-player-analytics#readme) |
+| [ApiVideoPlayerAnalytics](https://github.com/apivideo/api.video-swift-player-analytics) | [README.md](https://github.com/apivideo/api.video-swift-player-analytics#readme) |
 
 ## FAQ
 

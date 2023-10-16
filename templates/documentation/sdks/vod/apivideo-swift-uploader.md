@@ -1,18 +1,18 @@
 ---
-title: "api.video iOS video uploader"
-slug: "ios-uploader"
+title: "api.video Swift video uploader"
+slug: "swift-uploader"
 hidden: false
 metadata: 
-  description: "The official api.video iOS video uploader for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+  description: "The official api.video Swift video uploader for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
 ---
 
-# api.video iOS video uploader
+# api.video Swift video uploader
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 ## Project description
 
-api.video's iOS  uploads videos to api.video using delegated upload token or API Key.
+api.video's Swift uploader uploads videos using delegated upload token or API Key.
 
 It allows you to upload videos in two ways:
 - standard upload: to send a whole video file in one go
@@ -27,7 +27,7 @@ It allows you to upload videos in two ways:
 Specify it in your `Cartfile`:
 
 ```
-github "apivideo/api.video-ios-uploader" ~> 1.2.1
+github "apivideo/api.video-swift-uploader" ~> 1.2.1
 ```
 
 Run `carthage update`
@@ -80,25 +80,25 @@ VideosAPI
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**upload**](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideosAPI.md#upload) | **POST** /videos/{videoId}/source | Upload a video
-[**uploadWithUploadToken**](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideosAPI.md#uploadWithUploadToken) | **POST** /upload | Upload with an delegated upload token
+[**upload**](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideosAPI.md#upload) | **POST** /videos/{videoId}/source | Upload a video
+[**uploadWithUploadToken**](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideosAPI.md#uploadWithUploadToken) | **POST** /upload | Upload with an delegated upload token
 
 
 
 ### Models
 
- - [AccessToken](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/AccessToken.md)
- - [AdditionalBadRequestErrors](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/AdditionalBadRequestErrors.md)
- - [AuthenticatePayload](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/AuthenticatePayload.md)
- - [BadRequest](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/BadRequest.md)
- - [Metadata](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/Metadata.md)
- - [NotFound](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/NotFound.md)
- - [RefreshTokenPayload](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/RefreshTokenPayload.md)
- - [Video](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/Video.md)
- - [VideoAssets](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideoAssets.md)
- - [VideoSource](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideoSource.md)
- - [VideoSourceLiveStream](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideoSourceLiveStream.md)
- - [VideoSourceLiveStreamLink](https://github.com/apivideo/api.video-ios-uploader/blob/main/docs/VideoSourceLiveStreamLink.md)
+ - [AccessToken](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/AccessToken.md)
+ - [AdditionalBadRequestErrors](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/AdditionalBadRequestErrors.md)
+ - [AuthenticatePayload](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/AuthenticatePayload.md)
+ - [BadRequest](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/BadRequest.md)
+ - [Metadata](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/Metadata.md)
+ - [NotFound](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/NotFound.md)
+ - [RefreshTokenPayload](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/RefreshTokenPayload.md)
+ - [Video](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/Video.md)
+ - [VideoAssets](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideoAssets.md)
+ - [VideoSource](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideoSource.md)
+ - [VideoSourceLiveStream](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideoSourceLiveStream.md)
+ - [VideoSourceLiveStreamLink](https://github.com/apivideo/api.video-swift-uploader/blob/main/docs/VideoSourceLiveStreamLink.md)
 
 
 ## Documentation for Authorization

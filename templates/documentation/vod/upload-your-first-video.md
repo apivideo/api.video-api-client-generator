@@ -128,8 +128,8 @@ if video != nil {
 }
 ```
 ```swift
-// First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-// Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#create
+// First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+// Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#create
 
 ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -291,8 +291,8 @@ if err != nil {
 }
 ```
 ```swift
-// First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-// Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
+// First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+// Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#upload
 
 ApiVideoClient.apiKey = "YOUR_API_KEY"
 
@@ -450,8 +450,8 @@ if video != nil {
 }
 ```
 ```swift
-// First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-// Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#create
+// First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
+// Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#create
 
 ApiVideoClient.apiKey = "YOUR_API_KEY"
 

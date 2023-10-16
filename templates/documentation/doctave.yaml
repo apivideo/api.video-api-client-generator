@@ -94,7 +94,7 @@ redirects:
   - from: /docs/ios-swift-livestream-library
     to: /sdks/livestream/swift-livestream-library
   - from: /docs/ios-video-uploader
-    to: /sdks/vod/apivideo-ios-uploader
+    to: /sdks/vod/apivideo-swift-uploader
   - from: /docs/java-api-client
     to: /sdks/api-clients/apivideo-java-client
   - from: /docs/nodejs-api-client

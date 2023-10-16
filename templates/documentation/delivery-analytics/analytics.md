@@ -37,7 +37,7 @@ After play events are collected, there is a short delay while the API processes 
 {% capture content %}
 The Analytics feature is available using api.video's video player. Check out the [Video Player SDK](/sdks/player/apivideo-player-sdk) for details about the implementation.
 
-When using third-party players, you need to implement the [Video.js](/sdks/player/apivideo-videojs-analytics) or [Hls.js](/sdks/player/apivideo-hlsjs-analytics) analytics plugins, or the analytics modules for [Android](/sdks/player/apivideo-android-player-analytics) or [iOS](/sdks/player/apivideo-swift-player-analytics). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
+When using third-party players, you need to implement the [Video.js](/sdks/player/apivideo-videojs-analytics) or [Hls.js](/sdks/player/apivideo-hlsjs-analytics) analytics plugins, or the analytics modules for [Android](/sdks/player/apivideo-android-player-analytics) or [Swift](/sdks/player/apivideo-swift-player-analytics). These enable you to collect and report play event data to api.video, so you can retrieve analytics from the API.
 {% endcapture %}
 {% include "_partials/callout.html" kind: "info", content: content %}
 

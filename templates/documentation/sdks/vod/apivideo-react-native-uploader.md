@@ -62,7 +62,7 @@ api.video-reactnative-uploader is using external native library for upload
 
 | Plugin                 | README                   |
 | ---------------------- | ------------------------ |
-| iOS-video-uploader     | [iOS-video-uploader]     |
+| swift-video-uploader     | [swift-video-uploader]     |
 | android-video-uploader | [android-video-uploader] |
 
 ## FAQ
@@ -71,6 +71,6 @@ If you have any questions, ask [our community](https://community.api.video).
 Or use [Issues].
 
 [//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax"
-[videouploaderios]: https://github.com/apivideo/ios-video-uploader
+[videouploaderswift]: https://github.com/apivideo/swift-video-uploader
 [android-video-uploader]: https://github.com/apivideo/android-video-uploader
 [issues]: https://github.com/apivideo/api.video-reactnative-uploader/issues
