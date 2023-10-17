@@ -31,7 +31,7 @@ Enable users to upload videos from your application.
 
 {% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
 
-{% include "_partials/hagrid-item.md" title: "iOS", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/ios_77940d0f03.svg", subtitle: "Uploader",  link: "././apivideo-ios-uploader.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "Uploader",  link: "././apivideo-swift-uploader.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Uploader",  link: "././apivideo-android-uploader.md" %}
 

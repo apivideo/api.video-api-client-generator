@@ -6,8 +6,8 @@
       href: ././apivideo-typescript-uploader.md
     - label: Flutter
       href: ././apivideo-flutter-uploader.md
-    - label: iOS
-      href: ././apivideo-ios-uploader.md
+    - label: Swift
+      href: ././apivideo-swift-uploader.md
     - label: Android
       href: ././apivideo-android-uploader.md
     - label: React Native

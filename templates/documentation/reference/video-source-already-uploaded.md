@@ -27,4 +27,3 @@ You can cut down on mistakes by using one of our clients. We offer clients for o
 - [Java](../sdks/api-clients/apivideo-java-client.md)
 - [iOS](../sdks/api-clients/apivideo-swift5-client.md)
 - [Android](../sdks/api-clients/apivideo-android-client.md)
-
