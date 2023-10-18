@@ -11,7 +11,7 @@ In some cases, you just need to upload a smaller piece of a video, but you would
 
 [api.video](http://api.video) allows you to clip a video to upload only specific parts of the video. You will be able to specify the start and end time of the clip before you upload the source video to api.video.
 
-{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-clip/video-clipping-dark.svg", light: "/_assets/vod/video-clip/video-clipping-light.svg", alt: "A diagram that shows the process of creating and applying a watermark to a video object" %}
+{% include "_partials/dark-light-image.md" dark: "/_assets/vod/video-clip/video-clipping-dark.svg", light: "/_assets/vod/video-clip/video-clipping-light.svg", alt: "A diagram that shows the process of clipping a video" %}
 
 
 ## How does video clipping work?
