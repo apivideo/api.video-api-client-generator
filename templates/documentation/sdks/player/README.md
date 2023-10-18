@@ -18,6 +18,8 @@ Enable video playback from your app.
 
 {% include "_partials/hagrid-item.md" title: "api.video Player SDK", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/javascript_052f5287c4.svg", subtitle: "Player",  link: "././apivideo-player-sdk.md" %}
 
+{% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Player",  link: "././apivideo-flutter-player.md" %}
+
 {% include "_partials/hagrid-item.md" title: "React.js", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Player",  link: "././apivideo-react-player.md" %}
 
 </div>

@@ -3,7 +3,7 @@ title: API client libraries
 slug: api-client-libraries
 hide_side_table_of_contents: true
 meta: 
-    description: api.video client libraries for NodeJS, Python, PHP, Go, C#, Java, iOS Swift, and Android Kotlin.
+    description: api.video client libraries for NodeJS, Python, PHP, Go, C#, Java, iOS Swift, and Android.
 ---
 
 API client libraries
@@ -35,6 +35,6 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 {% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "API client",  link: "././apivideo-swift5-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Kotlin", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "API client",  link: "././apivideo-android-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "API client",  link: "././apivideo-android-client.md" %}
 
 </div>
