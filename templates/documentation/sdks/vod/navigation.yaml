@@ -12,12 +12,12 @@
       href: ././apivideo-android-uploader.md
     - label: React Native
       href: ././apivideo-react-native-uploader.md
-    - label: TypeScript Media Recorder
-      href: ././apivideo-typescript-media-recorder.md
 
-- heading: "Updstream SDKs"
+- heading: "Upstream SDKs"
   items:
     - label: Android Upstream
       href: ././apivideo-android-upstream.md
+    - label: TypeScript Media Recorder
+      href: ././apivideo-typescript-media-recorder.md
     - label: TypeScript Media Composer
       href: ././apivideo-typescript-media-stream-composer.md

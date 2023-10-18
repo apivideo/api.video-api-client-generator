@@ -19,7 +19,7 @@ Enable users to upload videos from your application.
 
 {% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Uploader",  link: "././apivideo-typescript-uploader.md" %}
 
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
+{% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
 
 </div>
 
@@ -44,6 +44,8 @@ Enable your users to simultaneously create and upload video & audio using these 
 
 ### Web
 <div class="hagrid">
+
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
 
 {% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media stream composer",  link: "././apivideo-typescript-media-stream-composer.md" %}
 
