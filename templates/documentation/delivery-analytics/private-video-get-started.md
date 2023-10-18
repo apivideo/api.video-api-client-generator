@@ -1,9 +1,10 @@
 ---
 title: "Get started with private videos"
+slug: private-video-get-started
+metadata: 
+  description: The quickest and simplest way to take control and manage the access to videos you've published with api.video
 ---
-
-Get started with private videos
-===========================================================
+# Get started with private videos
 
 This article explains how to secure and limit access to videos. 
 
