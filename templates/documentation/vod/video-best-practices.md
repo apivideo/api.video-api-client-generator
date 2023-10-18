@@ -49,7 +49,7 @@ For optimal ingestion, the video should use:
    * a video uploaded in several chunks must use at most **10 000 chunks each between 5MiB and 200MiB except the last chunk which must be between 0 and 200MiB**
 * a video **must be uploaded/downloaded/copied in at most 7 days (168 hours)**
 * an **uploaded/downloaded/copied video** must be:
-    - **at most 10GiB**
+    - **at most 20 GiB**
     - **of at most 24h**
 * **ProRes RAW** video codec is currently not supported.
 {% endcapture %}
