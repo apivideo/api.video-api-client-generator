@@ -17,7 +17,7 @@ A more visual representation can be found below:
 {% capture content %}
 **Important things to know**
 * **All qualities encoding:** The video object will include up to 6 responsive video streams from 240p to 4K
-* **Video size:** There's no file size limitation but the files will be compressed to fit delivery needs (4k max def with x264 + aac at 60fps max )
+* **Video size:** The video file size is limited to 20 GiB. The files will be compressed to fit delivery needs (4k max def with H.264 at 60fps max + AAC)
 * **Highest quality encoding by default:** Mp4 encoded versions are created at the highest quality (max 4K) by default.
 * **360° videos support:** Panoramic videos are videos recorded in 360°. You can toggle this after your 360° video upload.
 * **Video Access Management:** When creating a video object, it can be either private or public. The feature allows you to change it later by updating the video object.
