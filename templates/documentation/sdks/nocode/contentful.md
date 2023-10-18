@@ -6,65 +6,62 @@ metadata:
   title: "Contentful • Plugins • api.video Documentation"
   description: "The official plugin to facilitate the upload, hosting and sharing of your videos in your Contentful applications."
 ---
-Contentful
-==========
+# Contentful
 
-Using [api.video with Contentful](https://www.contentful.com/marketplace/app/api-video/) is easy!
+Contentful Empower creative teams to visually craft captivating content experiences - without writing a single line of code, and now you can easily add and deliver videos from your Contentful page with few simple steps using api.video.
 
-Log into your Contentful account and add the [api.video app](https://www.contentful.com/marketplace/app/api-video/) by clicking "Apps" and then "Manage apps" in the main navigation bar.
+## Getting started with Contentful
 
-Input your api.video API key first. You'll also notice that a list of your JSON objects is listed. The api.video app should be connected to JSON object types in Contentful. If you don't see any objects listed, that's ok. We'll add a JSON object in the next step.
+If you need help with getting started with Contentful, you can follow the [Contentful getting started guide](https://www.contentful.com/help/contentful-101/).
 
-![Managing your api.video app in Contentful](/_assets/apivideoapp.jpg)
+## api.video Contentful plugin features
 
-## Adding api.video to content models
+* Upload videos–up to 4k–directly in the Contentful UI; they’ll be quickly encoded and ready for streaming in seconds.
+* Search and select previously uploaded videos from your api.video library.
+* Update video titles, descriptions, caption & chapter files, and even tags and metadata in the Contentful UI.
+* Embed videos with our responsive & fully customizable HTML5 player.
 
-In this section, we'll add api.video to 2 different content models:
+## Installing the api.video plugin
 
-1. A new JSON object
-2. Add it to the Component:Video Object
+Log into your Contentful account and add the [api.video app](https://www.contentful.com/marketplace/app/api-video/) by clicking Apps -> Marketplace
 
+![](/_assets/nocode/contentful/contentful-marketplace.png)
 
-### A new JSON object
+Select the Featured tab and search for the api.video plugin in the search bar
 
-In the top menu, select "Content Model," and a new page will open with all the models/components in your app. Choose the "Add content type" button on the top right to begin creating a new type:
+![](/_assets/nocode/contentful/contentful-search.png)
 
-1. The video field
-First, you will name your model, and then the UI will walk you through adding fields. Click the blue button to add a field and add a JSON Object. You'll be asked to name the field - choose a name that reminds you that it is an api.video object that is being added.
+Once you've found the api.video plugin, click on the icon. You will get a new page where you see the ability to install the plugin, click on Install and authorize the access for api.video
 
-Click the "Create and Configure" button, and under "Appearance," choose api.video.
+![](/_assets/nocode/contentful/contentful-auth.png)
 
-2. Name field:
- Create a new field, text, Short text, and when you configure the item, click the "Entry title" button. (If you do not add this step, every object you add will be named "Untitled," which is less than ideal.)
+Enter your [api.video API key](https://docs.api.video/reference/authentication-guide#retrieve-your-apivideo-api-key) an click Install
 
-### Modifying the Component:video model
+![](/_assets/nocode/contentful/contentful-apikey.png)
 
-Contentful has a built-in video model to which you can add the api.video app. Let's walk through the steps to do that.
+Congratulations! you have installed the api.video plugin successfully!
 
-In the "Content Model" section, click on the "Component:Video" model. This will give you a page that shows all the fields in the model. It has 2 fields, the title, and a YouTube Video Id by default. We'll modify this so that you can still use a YouTube video Id, but you can also add an api.video object.
+## Usage
 
-#### Add the api.video object
+After a successful installation, we can to the fun part of adding videos to our content. All you have to do is create a JSON object with the api.video video appearance type.
 
-Click the "add field" button on the right. Add a JSON object, and name the field "apivideo" or another term that helps you remember where the videos will be stored. Click the "Create and Configure" button, and then under Appearance, add the api.video app.
+### Adding api.video to the Content Model
 
+1. Create or edit an existing Content Model
+2. Add a new field with a JSON object type
+![](/_assets/nocode/contentful/contentful-select-object.png)
+3. Give the new JSON object a name and api key 
+![](/_assets/nocode/contentful/contentful-field-name.png)
+4. Click on Add and Configure
+5. On the configuration page, scroll down to Appearance and select api.video and save the settings
+![](/_assets/nocode/contentful/contentful-appearance.png)
+6. Now that you have a video JSON object, you can create or edit an entry in the Content and add a video.
 
-#### Edit the YouTube object
+### Adding videos to your content
 
-The Component:Video model is designed to only work with YouTube, and one of the settings is that the YouTube video Id is required. We're making this model more flexible (YouTube AND api.video), so we need to remove this requirement. Click the settings button, and under "Validation," you'll uncheck the "Required field" checkbox.
-
-## Adding api.video videos to Contentful
-
-The process is very similar - no matter which type of object you created in the last step.
-
-### Using the Content section
-
-In the top menu, choose content, and then pick the model you wish to use (in the screenshots, I've used the Component:Video model.)
-
-
-The title is 'My Awesome video,' and I'm skipping the YouTube section - it's no longer required! With the api.video app, you can choose a video already uploaded to api.video ("select an existing video") or upload a new video (descriptively named "upload a new video").
-
-![Adding a video component](/_assets/addingavideo.png)
-
-Now publish the content, and you've added the video for playback!
-
-You can also add the content model to a page you are building and follow the same steps to add an api.video to your site.
+1. In the Content menu, click on add an entry or edit an previous entry (to which you've added the JSON object)
+2. Select the Content type that you want to use (the one you've added the JSON object to)
+3. Now you will see that you can either upload a video or select from existing videos that you've uploaded to api.video
+![](/_assets/nocode/contentful/contentful-new-entry.png)
+4. Once you've selected the video you want to add, you will see the video appearing in the content editor
+![](/_assets/nocode/contentful/contentful-selected-video.png)
