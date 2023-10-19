@@ -1,11 +1,10 @@
 ---
-title: "Private video delivery with api.video players"
+title: Private video playback and delivery
 metadata: 
-  description: "Private videos are a way to giving access to videos only to certain users and making sure that privacy concerns are covered. This section will provide a detailed explanation on how you can deliver private videos with api.video's player."
+  description: Manage and control the access of users to the videos that you publish.
 ---
 
-Private video delivery with api.video players
-=============================================
+# Private video delivery with api.video players
 
 The recommended way and easiest way to deliver private videos is with our in-house player. This method will allow you to delivery the private videos without additional coding efforts and without handling any extra parameters.
 

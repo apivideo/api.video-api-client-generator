@@ -1,8 +1,8 @@
 ---
-title: "Domain Referrer Restriction"
-excerpt: "Secure your videos and live streams by restricting from where the content is being consumed"
+title: Video Domain Restriction
+metadata: 
+  description: Secure your videos and live streams by restricting from where the content is being consumed
 ---
-
 # Domain Referrer
 
 Domain referrer restrictions are a great way to make sure that your videos or live streams are secure and being consumed specifically through your domain or subdomains.

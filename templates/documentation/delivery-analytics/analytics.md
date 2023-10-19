@@ -1,8 +1,7 @@
 ---
-title: "Analytics & data"
-slug: "analytics"
+title: Analytics & data
 metadata: 
-  description: "Learn how you can get data insights for your videos and live streams using api.video's Analytics solution."
+  description: Learn how you can get data insights for your videos and live streams using api.video's Analytics solution.
 ---
 
 # Analytics & data

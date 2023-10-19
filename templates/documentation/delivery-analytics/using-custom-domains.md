@@ -1,12 +1,11 @@
 ---
-title: "Using custom domains"
-slug: "using-custom-domains"
+title: Using custom domains
+slug: using-custom-domains
 hidden: false
 metadata: 
-  description: "api.video enables you to deliver video content and provide live streams using your own custom domains. This guide explains how you can utilize the feature."
+  description: api.video enables you to deliver video content and provide live streams using your own custom domains. This guide explains how you can utilize the feature.
 ---
-Using Custom Domains
-====================
+# Using Custom Domains
 
 api.video enables you to deliver video content and provide live streams using your own custom domains. You can decide what custom URL or subdomain you use in your implementation, for example `live.mycustomdomain.com`.
 

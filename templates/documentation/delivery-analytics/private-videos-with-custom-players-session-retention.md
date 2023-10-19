@@ -1,11 +1,11 @@
 ---
-title: "Private videos with custom players & session retention"
+title: Private video session retention on custom players
 metadata: 
-  description: "Private videos are a way to giving access to videos only to certain users and making sure that privacy concerns are covered. This section will provide a detailed explanation on how you can deliver private videos with custom players, and how session retention works."
+  description: Retain a private video session on custom player with api.video.
 ---
 
-Private Videos With Custom Players Session Retention
-====================================================
+# Private Videos With Custom Players Session Retention
+
 
 There are quite a few cases where you would want to include other assets in the session where you play your video. In example:
 * Displaying a clickable thumbnail that redirects to your video

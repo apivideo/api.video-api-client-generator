@@ -1,7 +1,7 @@
 ---
-title: "Private video delivery with MP4 built-in players"
+title: Private mp4 video playback and delivery
 metadata: 
-  description: "Private videos are a way to giving access to videos only to certain users and making sure that privacy concerns are covered. This section will provide a detailed explanation on how you can deliver private videos with MP4 built-in players."
+  description: Manage and control the access to mp4 videos that you publish with api.video.
 ---
 
 Private Video Delivery With Mp4 Built In Players

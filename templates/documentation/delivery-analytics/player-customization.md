@@ -1,12 +1,10 @@
 ---
-title: "Player customization"
-slug: "player-customization"
+title: api.video Player customization
 metadata: 
-  description: This guide explains the customization options for the api.video player. You can define your brand's color scheme, include your company logo with their player, and define the available player controls for your users. 
+  description: Take control of your brand and player behavior by implementing the api.video player customization features.
 ---
 
-Player customization
-==========================
+# Player customization
 
 api.video enables you to customize the api.video player and match your brand's color scheme, as well as include your company logo with the player. 
 

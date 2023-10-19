@@ -1,11 +1,10 @@
 ---
-title: "Private Video Session Tokens"
+title: Private Video Session Tokens
 metadata: 
-  description: "Private videos are a way to giving access to videos only to certain users and making sure that privacy concerns are covered. This section will provide a detailed explanation on how private video session tokens work."
+  description: Control the access of users to secured and private videos while retraining the browser session.
 ---
 
-Private Video Session Tokens
-============================
+# Private Video Session Tokens
 
 In order to preserve the session and give the ability to make requests to multiple endpoints while opening the private videos. The session preservation is done via session token. When you are building your own player or you would like to consume multiple assets in the same session, like the thumbnail, you will have to use the session token to retain the session.
 
