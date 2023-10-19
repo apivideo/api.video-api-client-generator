@@ -61,10 +61,10 @@ Follow these best practices to secure your API keys:
 
 ## Limitation
 
-Video upload (VOD) is limited in size and minutes. We support video upload for:
+Video upload (VOD) is limited in size and minutes. We support upload for videos that are:
 
-- Videos <10GB in size.
-- Video that are <1440 minutes in length.
+- at most 20 GiB in size.
+- at most 1440 minutes in length.
 
 ## Pagination
 
