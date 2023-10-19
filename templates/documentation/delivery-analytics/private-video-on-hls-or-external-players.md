@@ -1,6 +1,5 @@
 ---
 title: Private video delivery with HLS built-in players
-slug: private-video-on-hls-or-external-players
 metadata: 
   description: Manage and control the access to mp4 videos that you publish with api.video.
 ---

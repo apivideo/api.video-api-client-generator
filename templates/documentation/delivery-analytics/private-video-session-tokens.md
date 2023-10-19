@@ -1,8 +1,7 @@
 ---
 title: Private Video Session Tokens
-slug: private-video-session-tokens
 metadata: 
-  description: Control the access of users to secured and private videos while retraining the a browser session.
+  description: Control the access of users to secured and private videos while retraining the browser session.
 ---
 
 # Private Video Session Tokens

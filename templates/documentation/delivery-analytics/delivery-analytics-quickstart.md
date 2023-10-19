@@ -1,6 +1,5 @@
 ---
 title: Delivery and Analytics with api.video
-slug: delivery-analytics-quickstart
 metadata: 
   description: Set up the api.video player and start working with video analytics in 5 minutes
 ---

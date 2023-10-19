@@ -1,6 +1,5 @@
 ---
 title: "Get started with private videos"
-slug: private-video-get-started
 metadata: 
   description: The quickest and simplest way to take control and manage the access to videos you've published with api.video
 ---

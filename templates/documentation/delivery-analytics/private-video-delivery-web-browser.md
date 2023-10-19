@@ -1,6 +1,5 @@
 ---
 title: Private video playback and delivery
-slug: private-video-delivery-web-browser
 metadata: 
   description: Manage and control the access of users to the videos that you publish.
 ---

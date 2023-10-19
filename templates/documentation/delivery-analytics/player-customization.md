@@ -1,6 +1,5 @@
 ---
 title: api.video Player customization
-slug: player-customization
 metadata: 
   description: Take control of your brand and player behavior by implementing the api.video player customization features.
 ---

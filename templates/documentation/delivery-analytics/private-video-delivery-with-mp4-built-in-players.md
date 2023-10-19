@@ -1,6 +1,5 @@
 ---
 title: Private mp4 video playback and delivery
-slug: private-video-delivery-with-mp4-built-in-players
 metadata: 
   description: Manage and control the access to mp4 videos that you publish with api.video.
 ---

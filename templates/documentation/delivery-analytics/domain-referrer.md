@@ -1,6 +1,5 @@
 ---
 title: Video Domain Restriction
-slug: domain-referrer
 metadata: 
   description: Secure your videos and live streams by restricting from where the content is being consumed
 ---
