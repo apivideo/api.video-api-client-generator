@@ -4,6 +4,8 @@
     href: /README.md
   - label: Start building
     href: /get-started/start-building.md
+  - label: Selecting the hosting region
+    href: /get-started/infra.md
   - label: Migration guides
     href: /get-started/migration-guides.md
     collapsed: true
