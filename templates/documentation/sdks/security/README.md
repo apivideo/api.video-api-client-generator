@@ -1,3 +1,9 @@
+---
+title: Security best practices
+meta:
+    description: Best practices on SDK and API security that will help secure your application and protect your users.
+---
+
 # Security Best Practices
 
 Ensuring app security is paramount for developers for several compelling reasons:
@@ -18,9 +24,7 @@ In summary, securing an app is not merely a technical necessity; it's a strategi
 
 ## Securing your application
 
-We highly recommend to avoid storing the API keys in your frontend application as long as it is possible. The best way to make sure that your API keys are secure is separating the front-end and the backend, while making sure that all the API keys and sensitive app information is stored on the backend.
-
-* Make sure that the code that makes request to the API, including the API keys are stored on the backend. While the frontend is making requests to your backend securely. 
+We highly recommend to avoid storing the API keys in your frontend & mobile application as long as it is possible. The best way to make sure that your API keys are secure is separating the frontend & mobile application with the backend, while making sure that all the API keys and sensitive app information is stored on the backend.
 
 * All the api.video client libraries are using the [Advanced Authentication](https://docs.api.video/reference/disposable-bearer-token-authentication) method. If you are writing your own API client wrapper, be sure to leverage the Advanced Authentication instead of the Basic Authentication concept.
 
@@ -38,13 +42,18 @@ Delete unneeded API keys to minimize exposure to attacks.
 * Limit one API key pair's usage to a specific system of your platform backend. This limits the scope of each key. If an API key is compromised, you can delete or regenerate the impacted key without needing to update your other API keys.
 
 
-## Securing the API keys on the application
+## Securing the API keys on the application [Not recommended]
 
-If you are forced to store the API keys directly in your application for technical reasons, make sure that you follow the below recommendations.
+{% capture content %}
+api.video highly recommend to avoid storing the API keys on the application side at all cost. Even if you take steps to obfuscate your API keys on the application, your application is still prone to security threats
+{% endcapture %}
+{% include "_partials/callout.html" kind: "warning", content: content %}
 
-Consider obfuscating the API key within your front-end application. Obfuscation transforms the key into a form that isn't immediately readable. However, it's crucial to understand that obfuscation is not foolproof. It merely makes the task of key retrieval more challenging, but not impossible. Determined malicious actors with advanced skills can still de-obfuscate the key. Think of obfuscation as an added layer of security, not a standalone solution.
+Obfuscation transforms the key into a form that isn't immediately readable. However, it's crucial to understand that obfuscation is not foolproof. It merely makes the task of key retrieval more challenging, but not impossible. Determined malicious actors with advanced skills can still de-obfuscate the key. Think of obfuscation as an added layer of security, not a standalone solution.
 
-There are multiple guides around the web on how to secure your frontend application. You can find more recommendations on securing sensitive data on various frameworks and languages below:
+## General information on securing your mobile application
+
+There are multiple guides around the web on how to secure your frontend application. You can find more recommendations on securing your application on various frameworks and languages below:
 
 * [React Native - Storing sensitive data](https://reactnative.dev/docs/security#storing-sensitive-info)
 
