@@ -1,8 +1,10 @@
 ---
-title: "Update video details"
+title: Update video details
+meta:
+  description: This guide explains the two methods you can use to update videos - programmatically and through the dashboard.
 ---
-Update Video Details
-====================
+
+# Update Video Details
 
 You can update details for a video after you've uploaded it. The only things you can't change are the video ID, the content of the video, and the watermark. This guide walks through two ways you can make an update - programmatically and through the dashboard.
 

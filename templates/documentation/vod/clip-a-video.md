@@ -1,6 +1,5 @@
 ---
-title: "clip and trim videos with api.video"
-slug: "clip-a-video"
+title: clip and trim videos with api.video
 meta:
   description: Clip and trim a video while uploading to api.video
 ---

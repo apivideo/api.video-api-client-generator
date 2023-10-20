@@ -1,9 +1,7 @@
 ---
-title: "Encoding and transcoding"
-slug: "encoding-transcoding"
-metadata: 
-  title: "Encoding and transcoding • api.video Documentation"
-  description: "This guide explains what video encoding and transcoding means and how api.video enables you to provide your users high quality videos via encoding and transcoding."
+title: Encoding and transcoding
+metadata:
+  description: This guide explains what video encoding and transcoding means and how api.video enables you to provide your users high quality videos via encoding and transcoding.
 ---
 
 ## Encoding

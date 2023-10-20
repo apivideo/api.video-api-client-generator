@@ -1,5 +1,7 @@
 ---
-title: "Loom mockup"
+title: Loom mockup
+meta:
+    description: This guide explains how to create a Loom-like application with api.video.
 ---
 
 # Loom clone

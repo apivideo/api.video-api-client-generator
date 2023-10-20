@@ -1,12 +1,9 @@
 ---
-title: "Video tagging"
-slug: "video-tagging"
+title: Video tagging
 metadata: 
-  title: "Video tagging • api.video Documentation"
-  description: "TBA"
+  description: TBA
 ---
 
-Video tagging
-==========
+# Video tagging
 
 TBA

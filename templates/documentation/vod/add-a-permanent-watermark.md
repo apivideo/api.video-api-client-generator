@@ -1,9 +1,10 @@
 ---
-title: "Watermarks"
+title: Watermarks
+meta:
+    description: Learn how to apply permanent watermarks programmatically to videos uploaded to api.video.
 ---
 
-Add A Permanent Watermark
-=========================
+# Add A Permanent Watermark
 
 api.video gives you the ability to add permanent watermarks to your videos.
 

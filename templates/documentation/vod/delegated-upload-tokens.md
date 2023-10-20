@@ -1,6 +1,5 @@
 ---
-title: "Delegated upload tokens"
-slug: "delegated-upload-tokens"
+title: Delegated upload tokens
 metadata: 
   description: This guide explains how to create, list, retrieve, and delete delegated upload tokens, and how to upload videos with them.
 ---

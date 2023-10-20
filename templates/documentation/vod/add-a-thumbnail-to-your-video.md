@@ -1,8 +1,10 @@
 ---
-title: "Add a thumbnail to your video"
+title: Add a thumbnail to your video
+meta:
+    description: Learn how to add thumbnails programmatically or via the Dashboard to videos uploaded to api.video.
 ---
-Add A Thumbnail To Your Video
-=============================
+
+# Add A Thumbnail To Your Video
 
 For videos or recorded live streams, api.video offers you two ways to add a thumbnail:
 

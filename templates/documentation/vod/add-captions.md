@@ -1,6 +1,5 @@
 ---
-title: "Adding captions"
-slug: "add-captions"
+title: Adding captions
 meta:
   description: This page gets users started on how to add captions to their videos using the api.video Captions endpoint.
 ---

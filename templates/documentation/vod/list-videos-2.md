@@ -1,9 +1,10 @@
 ---
-title: "List videos"
+title: List videos
+meta:
+  description: This guide walks through the different options for retrieving videos and covers a method for searching for them using your dashboard.
 ---
 
-List Videos
-===========
+# List Videos
 
 You will often need to retrieve a list of all your videos or some videos to work with them. You might need to do this on the fly to see what you have, or you might want to pull the list into a database you can then pull from to create different kinds of displays. There are two ways to retrieve your videos: 
 

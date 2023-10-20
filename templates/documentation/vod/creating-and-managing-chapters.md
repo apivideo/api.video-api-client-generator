@@ -1,6 +1,5 @@
 ---
-title: "Create and manage chapters"
-slug: "create-manage-chapters"
+title: Create and manage chapters
 meta:
   description: This page gets users started on how to add chapters to their videos using the api.video Chapters endpoint.
 ---

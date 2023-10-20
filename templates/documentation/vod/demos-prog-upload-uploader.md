@@ -1,5 +1,7 @@
 ---
-title: "Progressive video uploader"
+title: Progressive video uploader
+meta:
+    description: This guide explains how to create an application than can handle video recording and upload in real-time with api.video.
 ---
 
 # Progressive video uploader

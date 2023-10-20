@@ -1,12 +1,8 @@
 ---
-title: "What is a video object?"
-slug: video-object
-hidden: false
+title: What is a video object?
 metadata:
-  title: "What is a video object?"
-  description: "Short guide to explain what api.video objects are."
+  description: Short guide to explain what api.video objects are.
 ---
-
 
 # What is a video object?
 

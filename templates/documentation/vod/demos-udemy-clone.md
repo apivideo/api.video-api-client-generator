@@ -1,5 +1,7 @@
 ---
-title: "Udemy clone"
+title: Udemy clone
+meta:
+    description: This guide explains how to create a Udemy-like application with api.video.
 ---
 
 # Udemy mockup
