@@ -23,6 +23,8 @@ tabs:
     subtabs:
     - label: Overview
       path: /sdks/
+    - label: Security best practices
+      path: /sdks/security/
     - label: API clients
       path: /sdks/api-clients/
       icon:

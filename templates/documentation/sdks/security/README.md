@@ -1,4 +1,10 @@
-# Security Best Practices
+---
+title: Security best practices
+meta:
+    description: This page offers tips and best practices on SDK and API security that can help secure your application and protect your users.
+---
+
+# Security best practices
 
 Ensuring app security is paramount for developers for several compelling reasons:
 
