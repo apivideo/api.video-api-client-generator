@@ -5,7 +5,7 @@ meta:
   description: Learn about selecting the optimal hosting location for your videos.
 ---
 
-# api.video Infrastructure
+# Selecting the hosting region
 
 api.video is unwavering in its dedication to providing top-tier performance worldwide. Our mission is to ensure that your video content ingestion and delivery transcends geographical boundaries, guaranteeing an exceptional experience for your audience worldwide.
 
