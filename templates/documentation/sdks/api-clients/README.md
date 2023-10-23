@@ -19,7 +19,7 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 {% include "_partials/hagrid-item.md" title: "Python", image: "/_assets/icons/sdk_icons/Python.svg", subtitle: "API client",  link: "././apivideo-python-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "PHP", image: "/_assets/icons/sdk_icons/php.svg", subtitle: "API client",  link: "././apivideo-php-client.md" %}
+{% include "_partials/hagrid-item.md" title: "PHP", image: "/_assets/icons/sdk_icons/Php.svg", subtitle: "API client",  link: "././apivideo-php-client.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Go", image: "/_assets/icons/sdk_icons/Go.svg", subtitle: "API client",  link: "././apivideo-go-client.md" %}
 
