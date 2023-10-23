@@ -1,5 +1,10 @@
-Video best practices
-====================
+---
+title: Video best practices
+meta:
+  description: This guide provides best practices, limitations, and recommendations on how to work with video on demand via api.video.
+---
+
+# Video best practices
 
 ## How to create & upload a video
 

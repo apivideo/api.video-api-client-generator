@@ -1,8 +1,10 @@
 ---
-title: "Regular video upload"
+title: Regular video upload
+meta:
+  description: This guide walks through how to upload videos under 200MiB in size programmatically with api.video.
 ---
-Regular video upload
-=============================
+
+# Regular video upload
 
 api.video provides different ways to upload your videos. There are two ways to upload with tokens, and then there are two ways to upload depending on whether your video is over 200MiB or under. This guide walks through how to do regular video upload for a video under 200MiB in size.
 

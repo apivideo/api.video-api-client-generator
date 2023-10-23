@@ -1,6 +1,5 @@
 ---
-title: "Download & disable download with api.video"
-slug: "downlad-video"
+title: Download & disable download with api.video
 meta:
   description: With api.video you can control whether your users can download videos.
 ---

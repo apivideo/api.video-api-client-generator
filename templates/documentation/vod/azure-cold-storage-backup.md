@@ -1,9 +1,9 @@
 ---
-title: "Backup your videos to Azure"
-slug: "azure-cold-storage-backup"
+title: Backup your videos to Azure
 meta:
   description: Backup videos uploaded to api.video to Azure Storage account with a simple script. 
 ---
+
 # Video backup to Azure Storage account
 
 At [api.video](https://api.video/) we understand that sometimes, you want to make sure that your videos are safe and secure. Although api.video has a backup and disaster recovery plan, it’s up to you to decide if you want an extra backup resource or if you would like to use api.video just to transcode your videos but eventually store them on a different resource.

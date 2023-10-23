@@ -1,5 +1,7 @@
 ---
-title: "Upload video from source"
+title: Upload video from source
+meta:
+  description: This guide walks through how to clone one of your existing videos, and upload videos via a URL with api.video.
 ---
 
 # Upload video from source

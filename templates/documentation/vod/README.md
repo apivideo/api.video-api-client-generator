@@ -1,6 +1,5 @@
 ---
-title: "VOD overview"
-slug: "vod-overview"
+title: VOD overview
 hide_side_table_of_contents: true
 meta:
   description: This page serves as a foundational guide to integrating api.video's solutions for video on demand (VOD).

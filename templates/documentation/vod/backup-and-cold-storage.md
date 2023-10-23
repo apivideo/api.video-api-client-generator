@@ -1,6 +1,5 @@
 ---
-title: "api.video backup and cold storage"
-slug: "backup-and-cold-storage"
+title: api.video backup and cold storage
 meta:
   description: Backup your uploaded videos to your preferred provider.
 ---

@@ -1,8 +1,10 @@
 ---
-title: "Progressive video upload"
+title: Progressive video upload
+meta:
+  description: This guide walks through how progressive video upload works with api.video.
 ---
-Progressive video upload
-=============================
+
+# Progressive video upload
 
 api.video provides different ways to upload your videos. There are two ways to upload with tokens, and then there are two ways to upload depending on whether your video is over 200MB or under. This guide walks through how to do progressive video upload. Options covered in this guide include:
 

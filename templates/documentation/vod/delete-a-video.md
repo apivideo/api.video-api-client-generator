@@ -1,8 +1,10 @@
 ---
-title: "Delete a video"
+title: Delete a video
+meta:
+    description: This guide walks you through how to permanently remove a video programmatically, and through the dashboard.
 ---
-Delete A Video
-==============
+
+# Delete A Video
 
 This guide walks you through how to permanently remove a video programmatically, and through the dashboard. Please be aware that you cannot retrieve a video you delete, so be sure it's what you want to do.
 

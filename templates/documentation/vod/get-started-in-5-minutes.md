@@ -1,8 +1,10 @@
 ---
-title: "Get Started with VOD in 5 Minutes"
+title: Get Started with VOD in 5 Minutes
+meta:
+  description: This quickstart guide explains the concept of building a video uploader and a video listing on the same page in just a few steps.
 ---
-Get Started In 5 Minutes
-========================
+
+# Get Started In 5 Minutes
 
 In order to get the concept of building on top of api.video, we've created a get started guide that will show you the concept of building a video uploader and a video listing on the same page. 
 

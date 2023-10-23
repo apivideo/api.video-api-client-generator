@@ -1,9 +1,10 @@
 ---
-title: "Show video details"
+title: Show video details
+meta:
+  description: This guide explains how retrieve video details programmatically and through the api.video dashboard.
 ---
 
-Show Video Details
-==================
+# Show Video Details
 
 You can retrieve details for a specific video if you have the video ID. In this guide, we'll walk through the code to retrieve it and how to retrieve it from the dashboard.
 

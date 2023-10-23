@@ -1,3 +1,9 @@
+---
+title: Demos & templates
+meta:
+    description: This page lists demo applications and templates that you can use to develop your own video solution using api.video.
+---
+
 # Demos & Templates
 
 The amount of use cases you can build with [api.video](https://api.video/) is endless, however, sometimes, you need a little help in building your next amazing startup! That’s why we’ve created Templates to help you kickstart your application, without doing all the heavy lifting.
@@ -13,7 +19,7 @@ The Templates are structured in a way where you can:
 
 ## VOD Templates list
 
-* [Video uploader](/vod/upload-your-first-video.md)
+* [Video uploader](/vod/demos-video-uploader.md)
 * [Progressive video uploader](/vod/demos-prog-upload-uploader.md)
 * [Loom clone](/vod/demo-loom-clone.md)
 * [Youtube mockup](/vod/demo-youtube-clone.md)
