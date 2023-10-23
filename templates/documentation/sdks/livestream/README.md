@@ -18,8 +18,8 @@ With api.video you can use live streaming mobile SDKs to create a streaming clie
 
 {% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Live streaming",  link: "././apivideo-flutter-livestream.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "Live streaming",  link: "././swift-livestream-library.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "Live streaming",  link: "././swift-livestream-library.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Live streaming",  link: "././apivideo-kotlin-livestream-module.md" %}
+{% include "_partials/hagrid-item.md" title: "Android", image: "/_assets/icons/sdk_icons/Android.svg", subtitle: "Live streaming",  link: "././apivideo-kotlin-livestream-module.md" %}
 
 </div>

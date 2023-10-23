@@ -32,9 +32,9 @@ Enable video playback from your app.
 
 {% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Player",  link: "././apivideo-flutter-player.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "Player",  link: "././apivideo-swift-player.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "Player",  link: "././apivideo-swift-player.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Player",  link: "././apivideo-android-player.md" %}
+{% include "_partials/hagrid-item.md" title: "Android", image: "/_assets/icons/sdk_icons/Android.svg", subtitle: "Player",  link: "././apivideo-android-player.md" %}
 
 </div>
 
@@ -58,8 +58,8 @@ Collect data and insights from custom players.
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "Analytics plugin",  link: "././apivideo-swift-player-analytics.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "Analytics plugin",  link: "././apivideo-swift-player-analytics.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "Analytics plugin",  link: "././apivideo-android-player-analytics.md" %}
+{% include "_partials/hagrid-item.md" title: "Android", image: "/_assets/icons/sdk_icons/Android.svg", subtitle: "Analytics plugin",  link: "././apivideo-android-player-analytics.md" %}
 
 </div>

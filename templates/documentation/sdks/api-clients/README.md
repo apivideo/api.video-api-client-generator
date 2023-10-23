@@ -15,17 +15,17 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "NodeJS", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/node_031ab5d518.svg", subtitle: "API client",  link: "././apivideo-nodejs-client.md" %}
+{% include "_partials/hagrid-item.md" title: "NodeJS", image: "/_assets/icons/sdk_icons/NodeJs.svg", subtitle: "API client",  link: "././apivideo-nodejs-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Python", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/python_96b8a9b719.svg", subtitle: "API client",  link: "././apivideo-python-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Python", image: "/_assets/icons/sdk_icons/Python.svg", subtitle: "API client",  link: "././apivideo-python-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "PHP", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/php_459780cd53.svg", subtitle: "API client",  link: "././apivideo-php-client.md" %}
+{% include "_partials/hagrid-item.md" title: "PHP", image: "/_assets/icons/sdk_icons/php.svg", subtitle: "API client",  link: "././apivideo-php-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Go", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/go_3b0d7ddcbc.svg", subtitle: "API client",  link: "././apivideo-go-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Go", image: "/_assets/icons/sdk_icons/Go.svg", subtitle: "API client",  link: "././apivideo-go-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "C#", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/c_sharp_55a8990e3a.svg", subtitle: "API client",  link: "././apivideo-csharp-client.md" %}
+{% include "_partials/hagrid-item.md" title: "C#", image: "/_assets/icons/sdk_icons/Csharp.svg", subtitle: "API client",  link: "././apivideo-csharp-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Java", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/java_1b6f259caf.svg", subtitle: "API client",  link: "././apivideo-java-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Java", image: "/_assets/icons/sdk_icons/Java.svg", subtitle: "API client",  link: "././apivideo-java-client.md" %}
 
 </div>
 
@@ -33,8 +33,8 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "Swift", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/swift_b6e888925d.svg", subtitle: "API client",  link: "././apivideo-swift5-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "API client",  link: "././apivideo-swift5-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Android", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/android_4356dd4e0c.svg", subtitle: "API client",  link: "././apivideo-android-client.md" %}
+{% include "_partials/hagrid-item.md" title: "Android", image: "/_assets/icons/sdk_icons/Android.svg", subtitle: "API client",  link: "././apivideo-android-client.md" %}
 
 </div>
