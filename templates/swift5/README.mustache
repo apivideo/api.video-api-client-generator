@@ -63,48 +63,17 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```swift
 import {{projectName}}
 
-{{#client}}
-    {{projectName}}.apiKey = "YOUR_API_KEY"
-    // if you rather like to use the sandbox environment:
-    // {{projectName}}.basePath = Environment.sandbox.rawValue
+// If you rather like to use the sandbox environment:
+// {{projectName}}.basePath = Environment.sandbox.rawValue
 
-    let url = URL(string: "My video.mov")
-
-    VideosAPI.create(videoCreationPayload: VideoCreationPayload(title: "my video")) { video, error in
+try VideosAPI.uploadWithUploadToken(token: "MY_VIDEO_TOKEN", file: url) { video, error in
     if let video = video {
-        do {
-            try VideosAPI.upload(videoId: video.videoId,
-                             file: url) { video, error in
-                if let video = video {
-                    // Manage upload success here
-                }
-                if let error = error {
-                    // Manage upload error here
-                }
-            }
-        } catch {
-            // Manage error on file here
-        }
+        // Manage upload with upload token success here
     }
     if let error = error {
-       // Manage create error here
+        // Manage upload with upload token error here
     }
-}{{/client}}{{#uploader}}
-    // If you rather like to use the sandbox environment:
-    // {{projectName}}.basePath = Environment.sandbox.rawValue
-    // If you rather like to upload with your "YOUR_API_KEY" (upload)
-    // {{projectName}}.apiKey = "YOUR_API_KEY"
-
-    try VideosAPI.uploadWithUploadToken(token: "MY_VIDEO_TOKEN", file: url) { video, error in
-        if let video = video {
-            // Manage upload with upload token success here
-        }
-        if let error = error {
-            // Manage upload with upload token error here
-        }
-    }
-{{/uploader}}
-
+}
 ```
 
 # Documentation
@@ -143,14 +112,14 @@ Method | HTTP request | Description
 ### API key
 
 Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
-The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key:
-```swift
-{{projectName}}.apiKey = YOUR_API_KEY
-```
+
+You must NOT store your API key in your application code to prevent your API key from being exposed in your source code.
+Only the [Public endpoints](#public-endpoints) can be called without authentication.
+In the case, you want to call an endpoint that requires authentication, you will have to use a backend server. See [Security best practices](https://docs.api.video/sdks/security) for more details.
 
 ### Public endpoints
 
-Some endpoints don't require authentication. These one can be called without setting `{{projectName}}.apiKey`:
+Some endpoints don't require authentication. These one can be called without setting `{{projectName}}.apiKey`.
 
 ## Have you gotten use from this API client?
 
