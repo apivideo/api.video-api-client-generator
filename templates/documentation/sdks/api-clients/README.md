@@ -23,7 +23,7 @@ Seamlessly integrate video on demand or live streaming into your current tech st
 
 {% include "_partials/hagrid-item.md" title: "Go", image: "/_assets/icons/sdk_icons/Go.svg", subtitle: "API client",  link: "././apivideo-go-client.md" %}
 
-{% include "_partials/hagrid-item.md" title: "C#", image: "/_assets/icons/sdk_icons/C.svg", subtitle: "API client",  link: "././apivideo-csharp-client.md" %}
+{% include "_partials/hagrid-item.md" title: "C#", image: "/_assets/icons/sdk_icons/Csharp.svg", subtitle: "API client",  link: "././apivideo-csharp-client.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Java", image: "/_assets/icons/sdk_icons/Java.svg", subtitle: "API client",  link: "././apivideo-java-client.md" %}
 
