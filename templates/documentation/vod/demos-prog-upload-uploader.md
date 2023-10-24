@@ -22,5 +22,5 @@ Before cloning the Github repo, you can try out the demo of the [Progressive vid
 
 ## Tutorial
 
-You can find the Tutorial on how to build such a usecase in our [docuementation](/vod/progressive-upload.md) and [blog tutorial](https://api.video/blog/tutorials/progressively-upload-large-video-files-without-compromising-on-speed/).
+You can find the Tutorial on how to build such a usecase in our [documentation](/vod/progressive-upload.md) and [blog tutorial](https://api.video/blog/tutorials/progressively-upload-large-video-files-without-compromising-on-speed/).
 
