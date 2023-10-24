@@ -18,6 +18,18 @@ The video object has properties and metadata that you can create and update, bel
 
 The video object is a powerful feature that you can utilize in order to achieve many use cases by leveraging the parameter that is offered with the object.
 
+### Video ID
+
+The video ID is a unique identifier for the video object that you create. Use it to identify a specific video object through the API. For example, you need the video ID when you [upload a video](https://docs.api.video/reference/api/Videos#upload-a-video), [retrieve a video object](https://docs.api.video/reference/api/Videos#retrieve-a-video-object), or [update a video object](https://docs.api.video/reference/api/Videos#update-a-video-object). For a full list of API operations, check out the [`/videos` endpoint](https://docs.api.video/reference/api/Videos) in the API reference.
+
+You can retrieve the video ID for a video object via these methods:
+
+* when creating a video object, the API returns the `videoId` in the response payload
+* when listing all video objects associated with your current workspace, the API returns the `videoId` for each video object in the response payload
+
+You can also retrieve video IDs through the Dashboard - visit the [Videos page](https://dashboard.api.video/videos) to see each video in your workspace and the video IDs associated with them.
+
+
 ### Title
 
 The title of the video. The title will display on the embedded player when the controls are present in the video. You can set the title on creation or update it later.
