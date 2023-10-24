@@ -17,9 +17,9 @@ Enable users to upload videos from your application.
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Uploader",  link: "././apivideo-typescript-uploader.md" %}
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "/_assets/icons/sdk_icons/typescript.svg", subtitle: "Uploader",  link: "././apivideo-typescript-uploader.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
+{% include "_partials/hagrid-item.md" title: "Flutter", image: "/_assets/icons/sdk_icons/flutter.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
 
 </div>
 
@@ -27,9 +27,9 @@ Enable users to upload videos from your application.
 
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Uploader",  link: "././apivideo-react-native-uploader.md" %}
+{% include "_partials/hagrid-item.md" title: "React Native", image: "/_assets/icons/sdk_icons/react_native.svg", subtitle: "Uploader",  link: "././apivideo-react-native-uploader.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
+{% include "_partials/hagrid-item.md" title: "Flutter", image: "/_assets/icons/sdk_icons/flutter.svg", subtitle: "Uploader",  link: "././apivideo-flutter-uploader.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "Uploader",  link: "././apivideo-swift-uploader.md" %}
 
@@ -45,9 +45,9 @@ Enable your users to simultaneously create and upload video & audio using these 
 ### Web
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "/_assets/icons/sdk_icons/typescript.svg", subtitle: "Media recorder",  link: "././apivideo-typescript-media-recorder.md" %}
 
-{% include "_partials/hagrid-item.md" title: "TypeScript", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/typescript_613d95b010.svg", subtitle: "Media stream composer",  link: "././apivideo-typescript-media-stream-composer.md" %}
+{% include "_partials/hagrid-item.md" title: "TypeScript", image: "/_assets/icons/sdk_icons/typescript.svg", subtitle: "Media stream composer",  link: "././apivideo-typescript-media-stream-composer.md" %}
 
 </div>
 

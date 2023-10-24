@@ -14,9 +14,9 @@ With api.video you can use live streaming mobile SDKs to create a streaming clie
 ### Mobile
 <div class="hagrid">
 
-{% include "_partials/hagrid-item.md" title: "React Native", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/react_0062aa9c7c.svg", subtitle: "Live streaming",  link: "././react-native-livestream-component.md" %}
+{% include "_partials/hagrid-item.md" title: "React Native", image: "/_assets/icons/sdk_icons/react_native.svg", subtitle: "Live streaming",  link: "././react-native-livestream-component.md" %}
 
-{% include "_partials/hagrid-item.md" title: "Flutter", image: "https://s3.eu-central-1.amazonaws.com/api.video-strapi/flutter_0d0a3cf5e8.svg", subtitle: "Live streaming",  link: "././apivideo-flutter-livestream.md" %}
+{% include "_partials/hagrid-item.md" title: "Flutter", image: "/_assets/icons/sdk_icons/flutter.svg", subtitle: "Live streaming",  link: "././apivideo-flutter-livestream.md" %}
 
 {% include "_partials/hagrid-item.md" title: "Swift", image: "/_assets/icons/sdk_icons/Swift.svg", subtitle: "Live streaming",  link: "././swift-livestream-library.md" %}
 
