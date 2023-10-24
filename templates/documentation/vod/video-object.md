@@ -25,7 +25,7 @@ The video ID is a unique identifier for the video object that you create. Use it
 You can retrieve the video ID for a video object via these methods:
 
 * when creating a video object, the API returns the `videoId` in the response payload
-* when listing all video objects associated with your current workspace, the API sends the `videoId` for each video object in the response payload
+* when listing all video objects associated with your current workspace, the API returns the `videoId` for each video object in the response payload
 
 You can also retrieve video IDs through the Dashboard - visit the [Videos page](https://dashboard.api.video/videos) to see each video in your workspace and the video IDs associated with them.
 
