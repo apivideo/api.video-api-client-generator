@@ -1,6 +1,6 @@
 ---
 title: Strapi
-metadata:
+meta:
   description: With the api.video Strapi plugin you can upload and embed your videos into your Strapi website effortlessly.
 ---
 

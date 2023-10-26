@@ -1,6 +1,6 @@
 ---
 title: Encoding and transcoding
-metadata:
+meta:
   description: This guide explains what video encoding and transcoding means and how api.video enables you to provide your users high quality videos via encoding and transcoding.
 ---
 

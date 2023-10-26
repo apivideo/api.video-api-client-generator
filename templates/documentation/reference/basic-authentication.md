@@ -1,5 +1,10 @@
-Basic authentication
-====================
+---
+title: Basic authentication
+meta: 
+    description: This guide explains the basic authentication method for api.video's API.
+---
+
+# Basic authentication
 
 ## Introduction
 

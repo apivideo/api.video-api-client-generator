@@ -1,8 +1,7 @@
 ---
-title: "Webhooks"
-slug: "create-and-manage-webhooks"
-metadata:
-  description: "api.video provides you the possibility to get a `POST` request to your server that contains a JSON payload with event data. Webhooks can push notifications directly to your server, saving you the need to poll api.video for changes. This guide goes over how to create and manage your webhooks."
+title: Webhooks
+meta:
+  description: api.video provides you the possibility to get a `POST` request to your server that contains a JSON payload with event data. Webhooks can push notifications directly to your server, saving you the need to poll api.video for changes. This guide goes over how to create and manage your webhooks.
 ---
 
 # Create And Manage Webhooks

@@ -1,9 +1,9 @@
 ---
-title: "Total Parts Zero"
-slug: "video-content-range-by-part-total-parts-zero-1"
+title: Total Parts Zero
+meta: 
+    description: This guide explains the cause for the Total Parts Zero error.
 ---
 
-Total Parts Zero
-================
+# Total Parts Zero
 
 The "total_parts" value in the "Content-Range" header must be greater than 0.

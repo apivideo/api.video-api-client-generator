@@ -1,5 +1,10 @@
-Missing Authorization Header
-============================
+---
+title: Missing Authorization Header
+meta: 
+    description: This guide explains the cause and the possible solutions for the Missing Authorization Header error.
+---
+
+# Missing Authorization Header
 
 You did not send the "Authorization" header at all.
 

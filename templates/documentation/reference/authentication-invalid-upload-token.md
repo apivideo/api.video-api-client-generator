@@ -1,5 +1,10 @@
-Invalid Upload Token
-====================
+---
+title: Invalid Upload Token
+meta: 
+    description: This guide explains the cause and the possible solutions for the Invalid Upload Token error.
+---
+
+# Invalid Upload Token
 
 The upload token you use does not exist at all or has expired.
 

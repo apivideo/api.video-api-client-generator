@@ -1,6 +1,6 @@
 ---
 title: Bubble.io plugin
-metadata:
+meta:
   description: The api.video plugin for Bubble.io facilitate the use of api.video services in your Bubble applications.
 ---
 

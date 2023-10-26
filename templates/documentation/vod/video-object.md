@@ -1,7 +1,7 @@
 ---
 title: What is a video object?
-metadata:
-  description: Short guide to explain what api.video objects are.
+metad:
+  description: Short guide to explain what api.video video objects are.
 ---
 
 # What is a video object?

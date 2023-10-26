@@ -1,10 +1,10 @@
 ---
-title: "Uploaded Multiple Files"
-slug: "uploaded-file-multiple-files-1"
+title: Uploaded File Multiple Files
+meta: 
+    description: This guide explains the cause and the possible solutions for the Uploaded File Multiple Files error.
 ---
 
-Uploaded File Multiple Files
-============================
+# Uploaded File Multiple Files
 
 You tried to upload multiple files at once.
 
