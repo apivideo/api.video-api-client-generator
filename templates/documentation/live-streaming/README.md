@@ -1,6 +1,5 @@
 ---
-title: "Live stream overview"
-slug: "live-stream-overview"
+title: Live stream overview
 hide_side_table_of_contents: true
 meta:
   description: This page serves as a foundational guide to integrating api.video's solutions for live streaming.

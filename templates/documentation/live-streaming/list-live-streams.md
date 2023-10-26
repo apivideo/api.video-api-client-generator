@@ -1,8 +1,10 @@
 ---
-title: "List live streams"
+title: List Live Streams
+meta: 
+    description: This guide explains how you can list live streams via API at at api.video.
 ---
-List Live Streams
-=================
+
+# List Live Streams
 
 Sometimes you will want a complete list of all your live stream containers. Sometimes you will want a list to choose a specific live stream container. This guide walks you through how to retrieve this information.
 

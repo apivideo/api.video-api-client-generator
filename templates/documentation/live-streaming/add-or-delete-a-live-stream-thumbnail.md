@@ -1,8 +1,10 @@
 ---
-title: "Add or delete a live stream thumbnail"
+title: Add Or Delete A Live Stream Thumbnail
+meta: 
+    description: This guide explains how you can add or remove thumbnails to a live stream at api.video.
 ---
-Add Or Delete A Live Stream Thumbnail
-=====================================
+
+# Add Or Delete A Live Stream Thumbnail
 
 You can add your image as the thumbnail. There is only one way to add a thumbnail to a live stream, unlike videos. This guide walks through how to add a live stream thumbnail. 
 
