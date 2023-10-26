@@ -56,7 +56,7 @@ redirects:
   - from: /docs/api-clients
     to: /sdks/api-clients
   - from: /docs/apivideo-android-kotlin-livestream-module
-    to: /sdks/livestream/apivideo-kotlin-livestream-module
+    to: /sdks/livestream/apivideo-android-livestream-module
   - from: /docs/apivideo-api-reference
     to: /reference
   - from: /docs/attributeinvalid

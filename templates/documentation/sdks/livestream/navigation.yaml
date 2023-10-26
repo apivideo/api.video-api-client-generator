@@ -8,5 +8,5 @@
       href: ././apivideo-flutter-livestream.md
     - label: Swift
       href: ././swift-livestream-library.md
-    - label: Kotlin
-      href: ././apivideo-kotlin-livestream-module.md
+    - label: Android
+      href: ././apivideo-android-livestream-module.md

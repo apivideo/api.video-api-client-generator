@@ -1,7 +1,7 @@
 ---
 title: "Webhook Limit Reached"
 slug: "webhook-limit-reached-1"
-metadata: 
+meta: 
   description: "The amount of webhook subscriptions has been reached."
 ---
 

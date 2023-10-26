@@ -1,7 +1,7 @@
 ---
 title: "Resource Not Found"
 slug: "resource-not-found-1"
-metadata: 
+meta: 
   title: "Resource Not Found"
   description: "You've requested a resource (video, live stream, etc.) that doesn't exist at all or that doesn't belong to your project."
 ---

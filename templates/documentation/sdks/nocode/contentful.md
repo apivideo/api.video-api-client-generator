@@ -1,9 +1,9 @@
 ---
-title: "Contentful"
-metadata: 
-  title: "Contentful • Plugins • api.video Documentation"
-  description: "The official plugin to facilitate the upload, hosting, and sharing of your videos in your Contentful applications."
+title: Contentful
+meta: 
+  description: The official plugin to facilitate the upload, hosting, and sharing of your videos in your Contentful applications.
 ---
+
 # Contentful
 
 Contentful empowers creative teams to visually craft captivating content experiences - without writing a single line of code, and now you can easily add and deliver videos from your Contentful page with few simple steps using api.video.

@@ -1,11 +1,10 @@
 ---
-title: "Create video"
-slug: "create-video"
-excerpt: "Zapier lets you connect APIs and applications together without coding. The create video action let you create a video on demand file at api.video."
+title: Create video
+meta:
+    description: Zapier lets you connect APIs and applications together without coding. With the Create video action you can create a video on demand file at api.video.
 ---
 
-Create Video
-============
+# Create Video
 
 The *Create video* Zapier step is an action.  Zapier's actions occur after a trigger has been fired. 
 

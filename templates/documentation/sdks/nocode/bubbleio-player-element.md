@@ -1,12 +1,10 @@
 ---
-title: "Bubble.io player element"
-slug: "bubbleio-player-element"
-excerpt: "Bubble is a no-code tool that lets you build SaaS platforms, marketplaces and CRMs without code. You use the player element to set up video players on your site."
-metadata: 
-  description: "Bubble is a no-code tool that lets you build SaaS platforms, marketplaces and CRMs without code. You use the player element to set up video players on your site."
+title: Bubble.io player element
+meta: 
+  description: Bubble is a no-code tool that lets you build SaaS platforms, marketplaces and CRMs without code. You use the player element to set up video players on your site.
 ---
-Bubble.io Player Element
-========================
+
+# Bubble.io Player Element
 
 ## Basic usage
 

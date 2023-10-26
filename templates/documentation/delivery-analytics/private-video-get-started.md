@@ -1,6 +1,6 @@
 ---
 title: "Get started with private videos"
-metadata: 
+meta: 
   description: The quickest and simplest way to take control and manage the access to videos you've published with api.video
 ---
 # Get started with private videos

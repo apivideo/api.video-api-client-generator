@@ -2,7 +2,7 @@
 title: Using custom domains
 slug: using-custom-domains
 hidden: false
-metadata: 
+meta: 
   description: api.video enables you to deliver video content and provide live streams using your own custom domains. This guide explains how you can utilize the feature.
 ---
 # Using Custom Domains

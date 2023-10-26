@@ -1,7 +1,7 @@
 ---
 title: "Invalid Query Parameter"
 slug: "invalid-query-parameter"
-metadata: 
+meta: 
   title: "Invalid Query Parameter"
   description: "You sent in a query parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value."
 ---

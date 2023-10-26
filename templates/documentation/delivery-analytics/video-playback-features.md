@@ -2,7 +2,7 @@
 title: "api.video Player features"
 slug: "video-playback-features"
 hidden: false
-metadata: 
+meta: 
   title: "api.video Player features • api.video Documentation"
   description: "URL fragments let you complete the api.video embed source URL with query parameters introduced by a hash (#). The api.video Player features page shows you how to use them with your project."
 ---

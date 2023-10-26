@@ -1,9 +1,7 @@
 ---
-title: "Flutter RTMP live stream client"
-slug: "flutter-rtmp-livestream-client"
-hidden: false
-metadata: 
-  description: "The official Flutter RTMP live stream client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+title: Flutter RTMP live stream client
+meta: 
+  description: The official Flutter RTMP live stream client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 ---
 
 # Flutter RTMP Live stream Client

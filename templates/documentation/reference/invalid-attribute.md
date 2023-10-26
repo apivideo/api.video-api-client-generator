@@ -1,7 +1,7 @@
 ---
 title: "Invalid Attribute"
 slug: "invalid-attribute-1"
-metadata: 
+meta: 
   title: "Invalid Attribute"
   description: "You sent in a parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value."
 ---

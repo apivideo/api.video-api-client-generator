@@ -1,10 +1,7 @@
 ---
-title: "Zapier"
-slug: "zapier"
-excerpt: "Connect api.video with your favorite apps thanks to Zapier"
+title: Zapier
 metadata:
-  title: "Zapier <> api.video • Plugins • api.video Documentation"
-  description: "Thanks to Zapier, connect api.video with your favorite apps to trigger events when a video or a live stream is uploaded or edited"
+  description: Thanks to Zapier, connect api.video with your favorite apps to trigger events when a video or a live stream is uploaded or edited.
 ---
 
 # Zapier

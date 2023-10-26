@@ -2,7 +2,7 @@
 title: "General Errors"
 slug: "general-errors"
 excerpt: "The errors you might get while authenticating against the API"
-metadata: 
+meta: 
   title: "General Erros"
   description: "The list of possible errors that are generated from the API"
 ---

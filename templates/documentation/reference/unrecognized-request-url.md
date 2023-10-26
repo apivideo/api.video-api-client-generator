@@ -1,7 +1,7 @@
 ---
 title: "Unrecognized Request URL"
 slug: "unrecognized-request-url-1"
-metadata: 
+meta: 
   description: "A request was made to an invalid URL. For example, you've requested an endpoint `/foobar`"
 ---
 

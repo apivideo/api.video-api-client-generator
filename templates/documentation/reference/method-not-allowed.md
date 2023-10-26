@@ -1,7 +1,7 @@
 ---
 title: "Method Not Allowed"
 slug: "method-not-allowed-1"
-metadata: 
+meta: 
   title: "Method not allowed"
   description: "The request made to the endpoint didn't contain a supported HTTP method. For example, a request was made to the `/webhooks` endpoint with the `DELETE` method, which is not supported for the endpoint in question."
 ---

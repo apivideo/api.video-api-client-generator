@@ -1,6 +1,6 @@
 ---
 title: Private video session retention on custom players
-metadata: 
+meta: 
   description: Retain a private video session on custom player with api.video.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Private video delivery with HLS built-in players
-metadata: 
+meta: 
   description: Manage and control the access to mp4 videos that you publish with api.video.
 ---
 

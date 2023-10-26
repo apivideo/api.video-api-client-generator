@@ -1,6 +1,6 @@
 ---
 title: Private mp4 video playback and delivery
-metadata: 
+meta: 
   description: Manage and control the access to mp4 videos that you publish with api.video.
 ---
 

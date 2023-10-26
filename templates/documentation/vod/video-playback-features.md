@@ -1,6 +1,6 @@
 ---
 title: HTML5 Player URL Fragments
-metadata: 
+meta: 
   description: URL fragments let you complete the api.video embed source URL with query parameters introduced by a hash (#). The HTML5 Player URL Fragments page shows you how to use them with your project.
 ---
 
