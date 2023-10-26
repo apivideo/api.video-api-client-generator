@@ -1,9 +1,10 @@
 ---
-title: "Get started with live stream in 5 minutes"
+title: Get started with live stream in 5 minutes
+meta: 
+    description: This guide will cover how to set up your live stream with api.video and then use OBS to broadcast.
 ---
 
-Get started with live stream in 5 minutes
-=========================================
+# Get started with live stream in 5 minutes
 
 Creating a live stream is simple with api.video. After you create it, you have a variety of options for connecting live video and beginning broadcasting. This guide will cover how to set up your live stream with api.video and then use OBS to broadcast. 
 

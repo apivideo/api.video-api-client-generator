@@ -1,9 +1,7 @@
 ---
-title: "api.video Swift Player"
-slug: "apivideo-swift-player"
-hidden: false
-metadata: 
-  description: "The official api.video Swift Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+title: api.video Swift Player
+meta: 
+  description: The official api.video Swift Player component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 ---
 
 # api.video Swift Player

@@ -1,10 +1,10 @@
 ---
-title: "Bubble.io uploader element"
-slug: "bubbleio-uploader"
-excerpt: "Bubble is a no-code tool that lets you build SaaS platforms, marketplaces and CRMs without code. You use the uploader element to upload videos from your web application to api.video."
+title: Bubble.io uploader element
+metadata:
+  description: Bubble is a no-code tool that lets you build SaaS platforms, marketplaces and CRMs without code. You use the uploader element to upload videos from your web application to api.video.
 ---
-Bubble.io Uploader
-==================
+
+# Bubble.io Uploader
 
 The purpose of the uploader element is to offer users of your web application the ability to upload videos to api.video. 
 

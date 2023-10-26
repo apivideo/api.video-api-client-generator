@@ -1,10 +1,10 @@
 ---
-title: "Progressive Upload Errors - General"
-slug: "progressive-upload-errors-general"
+title: Progressive Upload Errors - General
+meta: 
+    description: This guide explains the cause and the possible solutions for the General Progressive Upload error.
 ---
 
-Progressive Upload Errors General
-=================================
+# Progressive Upload Errors General
 
 ## Error map
 

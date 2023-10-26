@@ -1,10 +1,10 @@
 ---
-title: "Range Overlap"
-slug: "video-content-range-by-bytes-range-overlap-1"
+title: Video Content Range By Bytes Range Overlap
+meta: 
+    description: This guide explains the cause and possible solutions for the Video Content Range By Bytes Range Overlap error.
 ---
 
-Video Content Range By Bytes Range Overlap
-==========================================
+# Video Content Range By Bytes Range Overlap
 
 You send a chunk that you've already sent, for example 2 requests in a row with Content-Range: "bytes 1000-2000/10000". Check the "detail" key for more information.
 

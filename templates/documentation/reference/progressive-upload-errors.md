@@ -1,10 +1,10 @@
 ---
-title: "Progressive Upload Errors - Content Range By Bytes"
-slug: "progressive-upload-errors"
+title: Progressive Upload Errors - Content Range By Bytes
+meta: 
+    description: This guide explains the cause and the possible solutions for the Content Range By Bytes error.
 ---
 
-Progressive Upload Errors - Content Range By Bytes
-==================================================
+# Progressive Upload Errors - Content Range By Bytes
 
 ## Error map
 

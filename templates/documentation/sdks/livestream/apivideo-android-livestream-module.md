@@ -1,11 +1,10 @@
 ---
-title: "Kotlin live stream"
-slug: "apivideo-kotlin-livestream-module"
-metadata: 
-  description: "The official Kotlin live stream client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app."
+title: Android live stream module
+meta: 
+  description: The official Android live stream module for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 ---
-api.video Kotlin Live stream module
-=========================================
+
+# api.video Android Live stream module
 
 [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast
 video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in

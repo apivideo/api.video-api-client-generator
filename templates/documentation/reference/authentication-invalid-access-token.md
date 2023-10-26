@@ -1,3 +1,9 @@
+---
+title: Invalid Access Token
+meta: 
+    description: This guide explains the cause and the possible solutions for the Invalid Access Token error.
+---
+
 # Invalid Access Token
 
 The access token sent in `"Authorization: Bearer <ACCESS_TOKEN>"` does not exist at all or has expired.

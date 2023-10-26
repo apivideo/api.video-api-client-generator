@@ -1,13 +1,10 @@
 ---
-title: "Method Not Allowed"
-slug: "method-not-allowed-1"
-metadata: 
-  title: "Method not allowed"
-  description: "The request made to the endpoint didn't contain a supported HTTP method. For example, a request was made to the `/webhooks` endpoint with the `DELETE` method, which is not supported for the endpoint in question."
+title: Method Not Allowed
+meta: 
+    description: This guide explains the cause and the possible solutions for the Method Not Allowed error.
 ---
 
-Method Not Allowed
-==================
+# Method Not Allowed
 
 The request made to the endpoint didn't contain a supported HTTP method. For example, a request was made to the `/webhooks` endpoint with the `DELETE` method, which is not supported for the endpoint in question.
 

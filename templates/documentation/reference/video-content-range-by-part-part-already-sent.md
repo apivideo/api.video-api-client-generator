@@ -1,9 +1,9 @@
 ---
-title: "Part Already Sent"
-slug: "video-content-range-by-part-part-already-sent-1"
+title: Part Already Sent
+meta: 
+    description: This guide explains the cause for the Part Already Sent error.
 ---
 
-Part Already Sent
-=================
+# Part Already Sent
 
 The "part" value in the "Content-Range" header collides with a previous one you already sent for this video.

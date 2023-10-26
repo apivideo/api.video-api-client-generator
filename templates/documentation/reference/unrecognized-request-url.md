@@ -1,12 +1,10 @@
 ---
-title: "Unrecognized Request URL"
-slug: "unrecognized-request-url-1"
-metadata: 
-  description: "A request was made to an invalid URL. For example, you've requested an endpoint `/foobar`"
+title: Unrecognized Request Url
+meta: 
+    description: This guide explains the cause and the possible solutions for the Unrecognized Request Url error.
 ---
 
-Unrecognized Request Url
-========================
+# Unrecognized Request Url
 
 A request was made to an invalid URL. For example, you've requested an endpoint `/foobar`
 

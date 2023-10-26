@@ -1,8 +1,10 @@
 ---
-title: "Working with live streams"
+title: Working with live streams
+meta: 
+    description: This guide walks you through how to manage your live streams.
 ---
-Working with live streams
-============================================================
+
+# Working with live streams
 
 When working with live streams, you will want to retrieve details about them, update them or sometimes delete them. This guide walks you through how to manage your live streams.
 

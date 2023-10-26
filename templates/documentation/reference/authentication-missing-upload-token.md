@@ -1,5 +1,10 @@
-Missing upload token
-====================
+---
+title: Missing upload token
+meta: 
+    description: This guide explains the cause and the possible solutions for the Missing upload token error.
+---
+
+# Missing upload token
 
 You did not send the upload token at all.
 

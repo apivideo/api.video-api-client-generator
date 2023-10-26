@@ -1,10 +1,10 @@
 ---
-title: "Progressive Upload Errors - Content Range By Part"
-slug: "progressive-upload-errors-content-range-by-part"
+title: Progressive Upload Errors - Content Range By Part
+meta: 
+    description: This guide explains the cause and the possible solutions for the Content Range By Part error.
 ---
 
-Progressive Upload Errors Content Range By Part
-===============================================
+# Progressive Upload Errors Content Range By Part
 
 ## Error map
 

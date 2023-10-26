@@ -1,13 +1,10 @@
 ---
-title: "General Errors"
-slug: "general-errors"
-excerpt: "The errors you might get while authenticating against the API"
-metadata: 
-  title: "General Erros"
-  description: "The list of possible errors that are generated from the API"
+title: General Errors
+meta:
+  description: The list of possible errors that are generated from the API.
 ---
-General Errors
-==============
+
+# General Errors
 
 ## Error map
 

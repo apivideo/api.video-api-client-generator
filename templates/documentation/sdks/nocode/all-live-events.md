@@ -1,11 +1,10 @@
 ---
-title: "All live events"
-slug: "all-live-events"
-excerpt: "Zapier lets you connect APIs and applications together without coding. The all live events Zapier trigger is a combination of 3 alerts - live stream created, live stream ended, and video source recorded."
+title: All live events
+meta:
+    description: Zapier lets you connect APIs and applications together without coding. The all live events Zapier trigger is a combination of 3 alerts - live stream created, live stream ended, and video source recorded.
 ---
 
-All Live Events
-===============
+# All Live Events
 
 The All live events endpoint is an instant Zapier trigger. It is powered by api.video's [webhooks](/reference/api/Webhooks#list-all-webhooks). Each api.video account has 10 webhooks available, and they will push the data to Zapier immediately - leading to the "instant trigger" nomenclature.
 

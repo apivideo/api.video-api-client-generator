@@ -1,12 +1,10 @@
 ---
-title: "Webhook Limit Reached"
-slug: "webhook-limit-reached-1"
-metadata: 
-  description: "The amount of webhook subscriptions has been reached."
+title: Webhook Limit Reached
+meta: 
+    description: This guide explains the cause and possible solutions for the Webhook Limit Reached error.
 ---
 
-Webhook Limit Reached
-=====================
+# Webhook Limit Reached
 
 ## Problem
 

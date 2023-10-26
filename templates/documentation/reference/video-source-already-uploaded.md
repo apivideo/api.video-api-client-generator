@@ -1,10 +1,10 @@
 ---
-title: "Video Source Already Uploaded"
-slug: "video-source-already-uploaded-1"
+title: Video Source Already Uploaded
+meta: 
+    description: This guide explains the cause and possible solutions for the Video Source Already Uploaded error.
 ---
 
-Video Source Already Uploaded
-=============================
+# Video Source Already Uploaded
 
 You already initiated a content range upload or you already uploaded a full video or you created the video with the download from "source" feature and you try to do one of those things again.
 

@@ -1,10 +1,10 @@
 ---
-title: "Range Malformed"
-slug: "video-content-range-malformed-1"
+title: Video Content Range Malformed
+meta: 
+    description: This guide explains the cause and possible solutions for the Video Content Range Malformed error.
 ---
 
-Video Content Range Malformed
-=============================
+# Video Content Range Malformed
 
 The value of the "Content-Range" header is malformed, the expected format is "bytes <from_byte>-<to_byte>/<total_bytes>" or "part <part>/<total_parts>".
 

@@ -1,6 +1,9 @@
 ---
-title: "Authentication and refresh tokens"
+title: Authentication and refresh tokens
+meta: 
+    description: This guide explains the different authentication methods at api.video.
 ---
+
 # Authenticating with api.video API
 
 With api.video, every call to the API requires authentication. In order to authenticate against the API, you have two options at your disposal:

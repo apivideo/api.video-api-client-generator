@@ -1,14 +1,10 @@
 ---
-title: "Bubble.io plugin"
-slug: "bubbleio-plugin"
-excerpt: "The official plugin to facilitate the use of api.video in your Bubble applications."
-metadata: 
-  title: "Bubble.io plugin • Plugins • api.video Documentation"
-  description: "The api.video plugin for Bubble.io facilitate the use of api.video services in your Bubble applications."
+title: Bubble.io plugin
+meta:
+  description: The api.video plugin for Bubble.io facilitate the use of api.video services in your Bubble applications.
 ---
 
-Bubble.io Plugin
-================
+# Bubble.io Plugin
 
 The api.video plugin for Bubble.io aims to facilitate using api.video services in your Bubble applications. 
 

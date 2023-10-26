@@ -1,11 +1,10 @@
 ---
-title: "Bubble.io API calls"
-slug: "bubbleio-api-calls"
-excerpt: "You can use the api.video Bubble plugin as a bridge between your Bubble application and the api.video API."
+title: Bubble.io API calls
+meta: 
+    description: You can use the api.video Bubble plugin as a bridge between your Bubble application and the api.video API.
 ---
 
-Bubbleio API Calls
-==================
+# Bubble.io API Calls
 
 The api.video Bubble plugin contains some API calls definition that will act as a bridge between your Bubble application and the api.video API. Not all the api.video endpoints are used this way but the most important are there. 
 

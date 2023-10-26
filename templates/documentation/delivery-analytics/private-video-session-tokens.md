@@ -1,6 +1,6 @@
 ---
 title: Private Video Session Tokens
-metadata: 
+meta: 
   description: Control the access of users to secured and private videos while retraining the browser session.
 ---
 

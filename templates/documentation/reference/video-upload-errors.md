@@ -1,11 +1,10 @@
 ---
-title: "Video Ingestion Errors"
-slug: "video-upload-errors"
-excerpt: "The errors you might get while authenticating against the API"
+title: Video Upload Errors
+meta: 
+    description: This guide lists all the possible Video Upload Errors that you may encounter when using api.vide.
 ---
 
-Video Upload Errors
-===================
+# Video Upload Errors
 
 ## Error map
 

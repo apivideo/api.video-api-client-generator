@@ -1,12 +1,10 @@
 ---
-title: "Resource Not Found"
-slug: "resource-not-found-1"
-metadata: 
-  title: "Resource Not Found"
-  description: "You've requested a resource (video, live stream, etc.) that doesn't exist at all or that doesn't belong to your project."
+title: Resource Not Found
+meta: 
+    description: This guide explains the cause and the possible solutions for the Resource Not Found error.
 ---
-Resource Not Found
-==================
+
+# Resource Not Found
 
 You've requested a resource (video, live stream, etc.) that doesn't exist at all or that doesn't belong to your project.
 

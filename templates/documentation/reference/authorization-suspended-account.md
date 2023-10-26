@@ -1,5 +1,10 @@
-Suspended account
-=================
+---
+title: Suspended account
+meta: 
+    description: This guide explains the cause and the possible solutions for the Suspended account error.
+---
+
+# Suspended account
 
 You sent an authenticated request but your account is suspended.
 

@@ -1,13 +1,10 @@
 ---
-title: "Invalid Payload"
-slug: "invalid-payload-1"
-metadata: 
-  title: "Invalid Payload"
-  description: "The payload you sent is missing OR it cannot be json decoded."
+title: Invalid Payload
+meta: 
+    description: This guide explains the cause and the possible solutions for the Invalid Payload error.
 ---
 
-Invalid Payload
-===============
+# Invalid Payload
 
 The payload you sent is missing OR it cannot be json decoded.
 

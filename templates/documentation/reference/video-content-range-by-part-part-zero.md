@@ -1,9 +1,9 @@
 ---
-title: "Part Zero"
-slug: "video-content-range-by-part-part-zero-1"
+title: Part Zero
+meta: 
+    description: This guide explains the cause for the Part Zero error.
 ---
 
-Part Zero
-=========
+# Part Zero
 
 The "part" value in the "Content-Range" header must be greater than 0.

@@ -1,11 +1,10 @@
 ---
-title: "Live stream started"
-slug: "live-stream-started"
-excerpt: "Zapier lets you connect APIs and applications together without coding. The live stream started Zapier trigger fires when a new live stream is started at api.video."
+title: Live stream started
+meta:
+    description: Zapier lets you connect APIs and applications together without coding. The live stream started webhook will fire when the live-stream.broadcast.started webhook alert is sent.
 ---
 
-Live Stream Started
-===================
+# Live Stream Started
 
 The live stream started endpoint is an instant Zapier trigger. It is powered by api.video's [webhooks](/reference/api/Webhooks#list-all-webhooks). Each api.video account has 10 webhooks available, and they will push the data to Zapier immediately - leading to the "instant trigger" nomenclature.
 

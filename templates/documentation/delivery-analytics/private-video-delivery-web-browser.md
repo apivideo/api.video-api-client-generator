@@ -1,6 +1,6 @@
 ---
 title: Private video playback and delivery
-metadata: 
+meta: 
   description: Manage and control the access of users to the videos that you publish.
 ---
 

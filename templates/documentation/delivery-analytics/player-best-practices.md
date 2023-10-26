@@ -1,7 +1,7 @@
 ---
 title: "Best practices"
 slug: "player-best-practices"
-metadata: 
+meta: 
   title: "Player best practices • api.video Documentation"
   description: "TBA"
 ---

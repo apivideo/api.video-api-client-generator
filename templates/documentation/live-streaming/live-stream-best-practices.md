@@ -1,3 +1,9 @@
+---
+title: List Live Streams
+meta: 
+    description: This guide explains how you can make the most of your live stream implementation using best practices at api.video.
+---
+
 # Live stream best practices
 
 ## Starting a live stream

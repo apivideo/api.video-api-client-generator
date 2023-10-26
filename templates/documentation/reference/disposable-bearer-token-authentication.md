@@ -1,11 +1,10 @@
 ---
-title: "Bearer Token Authentication"
-metadata: 
+title: Bearer Token Authentication
+meta: 
   description: Learn about api.video's enhanced security authentication method, which uses a disposable bearer token that has a short time to live and has to be refreshed every 3600 seconds.
 ---
 
-Bearer Token Authentication
-=================================================
+# Bearer Token Authentication
 
 We provide an enhanced security authentication method, which uses a disposable bearer token that has a short time to live and has to be refreshed every 3600 seconds.
 

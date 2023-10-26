@@ -1,11 +1,10 @@
 ---
-title: "Video encoding completed"
-slug: "video-encoding-completed"
-excerpt: "Zapier lets you connect APIs and applications together without coding. The video encoding completed Zapier trigger fires when a video finishes encoding for each quality of video created."
+title: Video encoding completed
+meta:
+    description: Zapier lets you connect APIs and applications together without coding. The video encoding completed webhook will fire when the video.encoding.quality.completed webhook alert is sent.
 ---
 
-Video Encoding Completed
-========================
+# Video Encoding Completed
 
 The video encoding completed endpoint is an instant Zapier trigger. It is powered by api.video's [webhooks](/reference/api/Webhooks#list-all-webhooks). Each api.video account has 10 webhooks available, and they will push the data to Zapier immediately - leading to the "instant trigger" nomenclature.
 

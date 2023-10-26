@@ -1,9 +1,10 @@
 ---
-title: "No File"
-slug: "uploaded-file-no-file-1"
+title: Uploaded File No File
+meta: 
+    description: This guide explains the cause and the possible solutions for the Uploaded File No File error.
 ---
-Uploaded File No File
-=====================
+
+# Uploaded File No File
 
 You are trying to send a file to our servers but you forgot to fill it in the body of the request.
 

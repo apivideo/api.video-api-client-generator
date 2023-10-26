@@ -1,6 +1,5 @@
 ---
 title: API client libraries
-slug: api-client-libraries
 hide_side_table_of_contents: true
 meta: 
     description: api.video client libraries for NodeJS, Python, PHP, Go, C#, Java, iOS Swift, and Android.

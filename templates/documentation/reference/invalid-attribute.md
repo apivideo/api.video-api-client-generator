@@ -1,13 +1,10 @@
 ---
-title: "Invalid Attribute"
-slug: "invalid-attribute-1"
-metadata: 
-  title: "Invalid Attribute"
-  description: "You sent in a parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value."
+title: Invalid Attribute
+meta: 
+    description: This guide explains the cause and the possible solutions for the Invalid Attribute error.
 ---
 
-Invalid Attribute
-=================
+# Invalid Attribute
 
 You sent in a parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value.
 

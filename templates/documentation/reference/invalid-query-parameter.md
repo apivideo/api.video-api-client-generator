@@ -1,9 +1,7 @@
 ---
-title: "Invalid Query Parameter"
-slug: "invalid-query-parameter"
-metadata: 
-  title: "Invalid Query Parameter"
-  description: "You sent in a query parameter that doesn't exist, isn't correct for the endpoint you're using, or has a bad value."
+title: Invalid Query Parameter
+meta: 
+    description: This guide explains the cause and the possible solutions for the Invalid Query Parameter error.
 ---
 
 # Invalid Query Parameter

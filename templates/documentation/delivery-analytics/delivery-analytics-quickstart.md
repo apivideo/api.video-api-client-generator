@@ -1,6 +1,6 @@
 ---
 title: Delivery and Analytics with api.video
-metadata: 
+meta: 
   description: Set up the api.video player and start working with video analytics in 5 minutes
 ---
 

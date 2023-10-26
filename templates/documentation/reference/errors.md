@@ -1,3 +1,9 @@
+---
+title: Authentication Errors
+meta: 
+    description: This guide lists the different authentication errors you may encounter when using api.video.
+---
+
 # Authentication Errors
 
 The errors you might get while authenticating against the API

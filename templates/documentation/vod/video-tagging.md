@@ -1,6 +1,6 @@
 ---
 title: Video tagging
-metadata: 
+meta: 
   description: TBA
 ---
 

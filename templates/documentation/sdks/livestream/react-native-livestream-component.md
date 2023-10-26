@@ -1,7 +1,7 @@
 ---
-title: "React Native live stream"
-slug: "react-native-livestream-component"
-excerpt: "Live stream library for React Native from api.video"
+title: React Native live stream component
+meta: 
+  description: The official React Native live stream component for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 ---
 
 React Native Livestream Component

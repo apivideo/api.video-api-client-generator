@@ -1,6 +1,5 @@
 ---
-title: "API reference"
-slug: "reference"
+title: API reference
 hide_side_table_of_contents: true
 meta:
   description: The API reference serves as a practical developers' documentation about api.video's solutions for video on demand, live streaming, and delivery.
