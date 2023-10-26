@@ -1,9 +1,10 @@
 ---
-title: "What are private videos?"
+title: What are private videos?
+meta:
+    description: This guide explains how you can limit acces to videos for your users through api.video's Private video feature.
 ---
 
-What are private videos?
-===========================
+# What are private videos?
 
 When uploading user videos it's important to value the user's privacy, while we also recognize that there are some use cases in which you would like to use a different player other than the one we offer from api.video.
 
