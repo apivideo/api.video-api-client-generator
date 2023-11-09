@@ -5,21 +5,14 @@ meta:
   description: This page serves as a foundational guide to integrating api.video's solutions for video on demand (VOD).
 ---
 
-<p style="font-size: 34px; font-weight: 600; text-align: left;">
-  <span style="font-size: 34px; font-weight: 600; text-align: left; ">
-    What is </span>
-  <span style="font-size: 34px; font-weight: 600; text-align: left; color: #fa5b30; text-decoration: none;">
-    VOD</span>
-  <span style="font-size: 34px; font-weight: 600; text-align: left; ">?</span>
-</p>
+<p style="font-size: 34px; font-weight: 600; text-align: left">
+  <span style="font-size: 34px; font-weight: 600; text-align: left">
+    What is </span><span style="font-size: 34px; font-weight: 600; text-align: left; color: #fa5b30; text-decoration: none">VOD</span><span style="font-size: 34px; font-weight: 600; text-align: left">?</span>
 </p>
 
-<p style="opacity: 0.8; font-size: 18px; text-align: left;">
-  <span style="opacity: 0.8; font-size: 18px; text-align: left;"
-    >api.video's hosting service enables you to upload and store video files, which can then be easily embedded and shared across various devices and platforms. The platform automatically transcodes videos into multiple formats, resolutions, and bitrates, ensuring that the video content can be played on any device with any internet connection.
-api.video's transcoding and delivery is one of the fastest in the market.</span
-  >
-  <br />
+<p style="opacity: 0.8; font-size: 18px; text-align: left">
+  <span style="opacity: 0.8; font-size: 18px; text-align: left">api.video's hosting service enables you to upload and store video files, which can then be easily embedded and shared across various devices and platforms. The platform automatically transcodes videos into multiple formats, resolutions, and bitrates, ensuring that the video content can be played on any device with any internet connection. api.video's transcoding and delivery is one of the fastest on the market.</span>
+  <br/>
 </p>
 
 <div class="section-header"> 
