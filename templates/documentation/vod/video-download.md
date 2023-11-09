@@ -93,7 +93,7 @@ with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
       print("Exception when calling VideosApi->create: %s\n" % e)
 ```
 ```go
-/ First install the go client with "go get github.com/apivideo/api.video-go-client"
+// First install the go client with "go get github.com/apivideo/api.video-go-client"
 // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#create
 
 package main
@@ -216,7 +216,7 @@ It’s also possible to disable the download ability for the users, after the vi
 
 {% capture samples %}
 ```javascript
-/ First install the "@api.video/nodejs-client" npm package
+// First install the "@api.video/nodejs-client" npm package
 // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#update
 
 const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
@@ -229,39 +229,22 @@ const videoUpdatePayload = {
 }; 
 const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);
 ```
+```php
+<?php
+// First install the api client: "composer require api-video/php-api-client"
+// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#update
 
-```go
-// First install the go client with "go get github.com/apivideo/api.video-go-client"
-// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#update
+require __DIR__ . '/vendor/autoload.php';
 
-package main
+$client = new \ApiVideo\Client\Client(
+    'https://ws.api.video',
+    'YOUR_API_KEY',
+    new \Symfony\Component\HttpClient\Psr18Client()
+);
 
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
+$videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want to update.
 
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
-    videoUpdatePayload := *apivideosdk.VideoUpdatePayload{} // VideoUpdatePayload | 
-		videoUpdatePayload.SetMp4Support(false)
-    
-    res, err := client.Videos.Update(videoId, videoUpdatePayload)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\
-", err)
-    }
-    // response from `Update`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\
-", res)
-}
+$client->videos()->update($videoId, (new \ApiVideo\Client\Model\VideoUpdatePayload())->setMp4Support(false) // Whether the player supports the mp4 format.
 ```
 ```python
 # First install the api client with "pip install api.video"
@@ -328,22 +311,38 @@ public class Example {
   }
 }
 ```
-```php
-<?php
-// First install the api client: "composer require api-video/php-api-client"
-// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#update
+```go
+// First install the go client with "go get github.com/apivideo/api.video-go-client"
+// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#update
 
-require __DIR__ . '/vendor/autoload.php';
+package main
 
-$client = new \ApiVideo\Client\Client(
-    'https://ws.api.video',
-    'YOUR_API_KEY',
-    new \Symfony\Component\HttpClient\Psr18Client()
-);
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
 
-$videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want to update.
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
+    videoUpdatePayload := *apivideosdk.VideoUpdatePayload{} // VideoUpdatePayload | 
+		videoUpdatePayload.SetMp4Support(false)
+    
+    res, err := client.Videos.Update(videoId, videoUpdatePayload)
 
-$client->videos()->update($videoId, (new \ApiVideo\Client\Model\VideoUpdatePayload())->setMp4Support(false) // Whether the player supports the mp4 format.
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\
+", err)
+    }
+    // response from `Update`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\
+", res)
+}
 ```
 {% endcapture %}
 {% include "_partials/code-tabs.md" samples: samples %}
