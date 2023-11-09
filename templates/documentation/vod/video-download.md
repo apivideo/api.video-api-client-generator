@@ -93,7 +93,7 @@ with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
       print("Exception when calling VideosApi->create: %s\n" % e)
 ```
 ```go
-/ First install the go client with "go get github.com/apivideo/api.video-go-client"
+// First install the go client with "go get github.com/apivideo/api.video-go-client"
 // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#create
 
 package main
