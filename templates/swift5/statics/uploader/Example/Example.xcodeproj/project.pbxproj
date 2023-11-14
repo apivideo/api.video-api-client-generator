@@ -7,27 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212CE7122B03CABA001F70DD /* InAppSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 212CE7112B03CABA001F70DD /* InAppSettingsKit */; };
+		212CE7502B03CB21001F70DD /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 212CE7392B03CB20001F70DD /* Contents.json */; };
+		212CE76A2B03CB5B001F70DD /* AsyncApiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7662B03CB5A001F70DD /* AsyncApiUtils.swift */; };
+		212CE76B2B03CB5B001F70DD /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7672B03CB5A001F70DD /* AlertUtils.swift */; };
+		212CE76C2B03CB5B001F70DD /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7682B03CB5A001F70DD /* SettingsManager.swift */; };
+		212CE76D2B03CB5B001F70DD /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7692B03CB5A001F70DD /* UIColorExtensions.swift */; };
+		212CE7732B03CB6F001F70DD /* ClientAppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE76F2B03CB6E001F70DD /* ClientAppError.swift */; };
+		212CE7742B03CB6F001F70DD /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7702B03CB6E001F70DD /* TaskManager.swift */; };
+		212CE7752B03CB6F001F70DD /* CancellableApiTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7712B03CB6E001F70DD /* CancellableApiTask.swift */; };
+		212CE7762B03CB6F001F70DD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 212CE7722B03CB6E001F70DD /* Settings.bundle */; };
+		212CE7782B03CBCA001F70DD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212CE7772B03CBCA001F70DD /* MainViewController.swift */; };
 		2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD49274B9E74007B9FC9 /* AppDelegate.swift */; };
 		2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */; };
-		2136DD4E274B9E74007B9FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4D274B9E74007B9FC9 /* ViewController.swift */; };
 		2136DD51274B9E74007B9FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD4F274B9E74007B9FC9 /* Main.storyboard */; };
 		2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD52274B9E77007B9FC9 /* Assets.xcassets */; };
 		2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */; };
 		21A2E574275E5D4A00ED880F /* ApiVideoUploader in Frameworks */ = {isa = PBXBuildFile; productRef = 21A2E573275E5D4A00ED880F /* ApiVideoUploader */; };
-		C70E513C27A9719900B31115 /* UploaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E513B27A9719900B31115 /* UploaderManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		212CE7392B03CB20001F70DD /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = Assets.xcassets/Contents.json; sourceTree = "<group>"; };
+		212CE7662B03CB5A001F70DD /* AsyncApiUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncApiUtils.swift; sourceTree = "<group>"; };
+		212CE7672B03CB5A001F70DD /* AlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
+		212CE7682B03CB5A001F70DD /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		212CE7692B03CB5A001F70DD /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		212CE76F2B03CB6E001F70DD /* ClientAppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientAppError.swift; sourceTree = "<group>"; };
+		212CE7702B03CB6E001F70DD /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		212CE7712B03CB6E001F70DD /* CancellableApiTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancellableApiTask.swift; sourceTree = "<group>"; };
+		212CE7722B03CB6E001F70DD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		212CE7772B03CBCA001F70DD /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2136DD46274B9E74007B9FC9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2136DD49274B9E74007B9FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2136DD4D274B9E74007B9FC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2136DD50274B9E74007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2136DD52274B9E77007B9FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2136DD55274B9E77007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2136DD57274B9E77007B9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21A2E572275E5D3300ED880F /* swift5-uploader */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "swift5-uploader"; path = ..; sourceTree = "<group>"; };
-		C70E513B27A9719900B31115 /* UploaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,12 +53,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A2E574275E5D4A00ED880F /* ApiVideoUploader in Frameworks */,
+				212CE7122B03CABA001F70DD /* InAppSettingsKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		212CE7652B03CB5A001F70DD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				212CE7662B03CB5A001F70DD /* AsyncApiUtils.swift */,
+				212CE7672B03CB5A001F70DD /* AlertUtils.swift */,
+				212CE7682B03CB5A001F70DD /* SettingsManager.swift */,
+				212CE7692B03CB5A001F70DD /* UIColorExtensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		212CE76E2B03CB6E001F70DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				212CE76F2B03CB6E001F70DD /* ClientAppError.swift */,
+				212CE7702B03CB6E001F70DD /* TaskManager.swift */,
+				212CE7712B03CB6E001F70DD /* CancellableApiTask.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2136DD3D274B9E74007B9FC9 = {
 			isa = PBXGroup;
 			children = (
@@ -63,14 +102,17 @@
 		2136DD48274B9E74007B9FC9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				212CE7772B03CBCA001F70DD /* MainViewController.swift */,
+				212CE76E2B03CB6E001F70DD /* Models */,
+				212CE7722B03CB6E001F70DD /* Settings.bundle */,
+				212CE7652B03CB5A001F70DD /* Utils */,
+				212CE7392B03CB20001F70DD /* Contents.json */,
 				2136DD49274B9E74007B9FC9 /* AppDelegate.swift */,
 				2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */,
-				2136DD4D274B9E74007B9FC9 /* ViewController.swift */,
 				2136DD4F274B9E74007B9FC9 /* Main.storyboard */,
 				2136DD52274B9E77007B9FC9 /* Assets.xcassets */,
 				2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */,
 				2136DD57274B9E77007B9FC9 /* Info.plist */,
-				C70E513B27A9719900B31115 /* UploaderManager.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -108,6 +150,7 @@
 			name = Example;
 			packageProductDependencies = (
 				21A2E573275E5D4A00ED880F /* ApiVideoUploader */,
+				212CE7112B03CABA001F70DD /* InAppSettingsKit */,
 			);
 			productName = Example;
 			productReference = 2136DD46274B9E74007B9FC9 /* Example.app */;
@@ -137,6 +180,9 @@
 				Base,
 			);
 			mainGroup = 2136DD3D274B9E74007B9FC9;
+			packageReferences = (
+				212CE7102B03CABA001F70DD /* XCRemoteSwiftPackageReference "InAppSettingsKit" */,
+			);
 			productRefGroup = 2136DD47274B9E74007B9FC9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -153,7 +199,9 @@
 			files = (
 				2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */,
 				2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */,
+				212CE7762B03CB6F001F70DD /* Settings.bundle in Resources */,
 				2136DD51274B9E74007B9FC9 /* Main.storyboard in Resources */,
+				212CE7502B03CB21001F70DD /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,10 +212,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2136DD4E274B9E74007B9FC9 /* ViewController.swift in Sources */,
+				212CE76B2B03CB5B001F70DD /* AlertUtils.swift in Sources */,
+				212CE76C2B03CB5B001F70DD /* SettingsManager.swift in Sources */,
+				212CE7742B03CB6F001F70DD /* TaskManager.swift in Sources */,
 				2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */,
+				212CE76D2B03CB5B001F70DD /* UIColorExtensions.swift in Sources */,
+				212CE76A2B03CB5B001F70DD /* AsyncApiUtils.swift in Sources */,
+				212CE7732B03CB6F001F70DD /* ClientAppError.swift in Sources */,
+				212CE7752B03CB6F001F70DD /* CancellableApiTask.swift in Sources */,
 				2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */,
-				C70E513C27A9719900B31115 /* UploaderManager.swift in Sources */,
+				212CE7782B03CBCA001F70DD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +370,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VY3VXRC7P4;
+				DEVELOPMENT_TEAM = GBC36KP98K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -344,7 +398,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VY3VXRC7P4;
+				DEVELOPMENT_TEAM = GBC36KP98K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -388,7 +442,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		212CE7102B03CABA001F70DD /* XCRemoteSwiftPackageReference "InAppSettingsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/futuretap/InAppSettingsKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		212CE7112B03CABA001F70DD /* InAppSettingsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 212CE7102B03CABA001F70DD /* XCRemoteSwiftPackageReference "InAppSettingsKit" */;
+			productName = InAppSettingsKit;
+		};
 		21A2E573275E5D4A00ED880F /* ApiVideoUploader */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ApiVideoUploader;
