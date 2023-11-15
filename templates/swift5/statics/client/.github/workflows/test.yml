@@ -4,7 +4,7 @@ jobs:
   test:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set API key
         run: |
           sed -i -e "s/INTEGRATION_TESTS_API_KEY/${INTEGRATION_TESTS_API_KEY}/" ./Tests/ApiVideoClient/Integration/Parameters.swift

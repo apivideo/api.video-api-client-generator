@@ -7,33 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210D99FE2B0230FF00D568B1 /* InAppSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 210D99FD2B0230FF00D568B1 /* InAppSettingsKit */; };
+		210D9A002B02314000D568B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 210D99FF2B02314000D568B1 /* Settings.bundle */; };
+		210D9A022B02437200D568B1 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210D9A012B02437200D568B1 /* SettingsManager.swift */; };
+		211834CE29CDBAB2002F2CCD /* AsyncApiUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211834CD29CDBAB2002F2CCD /* AsyncApiUtils.swift */; };
+		211834DB29CDEFF8002F2CCD /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 211834D829CDEFF8002F2CCD /* Contents.json */; };
+		211834E129CDF08F002F2CCD /* ClientAppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211834DE29CDF08F002F2CCD /* ClientAppError.swift */; };
+		211834E229CDF08F002F2CCD /* CancellableApiTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211834DF29CDF08F002F2CCD /* CancellableApiTask.swift */; };
+		211834E829CDF0A8002F2CCD /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211834E629CDF0A8002F2CCD /* AlertUtils.swift */; };
 		2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD49274B9E74007B9FC9 /* AppDelegate.swift */; };
 		2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */; };
-		2136DD4E274B9E74007B9FC9 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */; };
 		2136DD51274B9E74007B9FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD4F274B9E74007B9FC9 /* Main.storyboard */; };
 		2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD52274B9E77007B9FC9 /* Assets.xcassets */; };
 		2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */; };
+		21F366322B02695B00416B65 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F366312B02695B00416B65 /* UIColorExtensions.swift */; };
+		21F366342B027A6B00416B65 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F366332B027A6B00416B65 /* TaskManager.swift */; };
 		C76439BC27A2F69F007FB307 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76439BB27A2F69F007FB307 /* XCTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C7BC280227A16604007406AB /* ApiVideoClient in Frameworks */ = {isa = PBXBuildFile; productRef = C7BC280127A16604007406AB /* ApiVideoClient */; };
-		C7BC280427A17CD2007406AB /* UploaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280327A17CD2007406AB /* UploaderViewController.swift */; };
-		C7BC280727A17FEB007406AB /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */; };
-		C7BC280A27A18CC3007406AB /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280927A18CC3007406AB /* ClientManager.swift */; };
+		C7BC280427A17CD2007406AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC280327A17CD2007406AB /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		210D99FF2B02314000D568B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		210D9A012B02437200D568B1 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		211834CD29CDBAB2002F2CCD /* AsyncApiUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncApiUtils.swift; sourceTree = "<group>"; };
+		211834D829CDEFF8002F2CCD /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Contents.json; path = Assets.xcassets/Contents.json; sourceTree = "<group>"; };
+		211834DE29CDF08F002F2CCD /* ClientAppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientAppError.swift; sourceTree = "<group>"; };
+		211834DF29CDF08F002F2CCD /* CancellableApiTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancellableApiTask.swift; sourceTree = "<group>"; };
+		211834E629CDF0A8002F2CCD /* AlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		2136DD46274B9E74007B9FC9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2136DD49274B9E74007B9FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		2136DD50274B9E74007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2136DD52274B9E77007B9FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2136DD55274B9E77007B9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2136DD57274B9E77007B9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2136DD5F274B9EED007B9FC9 /* swift5 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = swift5; path = ..; sourceTree = "<group>"; };
+		21F366312B02695B00416B65 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		21F366332B027A6B00416B65 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		C76439BB27A2F69F007FB307 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		C7BC280327A17CD2007406AB /* UploaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderViewController.swift; sourceTree = "<group>"; };
-		C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
-		C7BC280927A18CC3007406AB /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		C7BC280327A17CD2007406AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76439BC27A2F69F007FB307 /* XCTest.framework in Frameworks */,
+				210D99FE2B0230FF00D568B1 /* InAppSettingsKit in Frameworks */,
 				C7BC280227A16604007406AB /* ApiVideoClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +63,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		211834DD29CDF08F002F2CCD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21F366332B027A6B00416B65 /* TaskManager.swift */,
+				211834DE29CDF08F002F2CCD /* ClientAppError.swift */,
+				211834DF29CDF08F002F2CCD /* CancellableApiTask.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		211834E429CDF0A8002F2CCD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				211834CD29CDBAB2002F2CCD /* AsyncApiUtils.swift */,
+				210D9A012B02437200D568B1 /* SettingsManager.swift */,
+				211834E629CDF0A8002F2CCD /* AlertUtils.swift */,
+				21F366312B02695B00416B65 /* UIColorExtensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		2136DD3D274B9E74007B9FC9 = {
 			isa = PBXGroup;
 			children = (
@@ -70,15 +105,17 @@
 		2136DD48274B9E74007B9FC9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				C7BC280827A18111007406AB /* Controller */,
-				C7BC280527A17FD4007406AB /* Cell */,
+				C7BC280327A17CD2007406AB /* MainViewController.swift */,
+				210D99FF2B02314000D568B1 /* Settings.bundle */,
+				211834E429CDF0A8002F2CCD /* Utils */,
+				211834DD29CDF08F002F2CCD /* Models */,
+				211834D829CDEFF8002F2CCD /* Contents.json */,
 				2136DD49274B9E74007B9FC9 /* AppDelegate.swift */,
 				2136DD4B274B9E74007B9FC9 /* SceneDelegate.swift */,
 				2136DD4F274B9E74007B9FC9 /* Main.storyboard */,
 				2136DD52274B9E77007B9FC9 /* Assets.xcassets */,
 				2136DD54274B9E77007B9FC9 /* LaunchScreen.storyboard */,
 				2136DD57274B9E77007B9FC9 /* Info.plist */,
-				C7BC280927A18CC3007406AB /* ClientManager.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -99,23 +136,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C7BC280527A17FD4007406AB /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				C7BC280627A17FEB007406AB /* VideoTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		C7BC280827A18111007406AB /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2136DD4D274B9E74007B9FC9 /* VideosViewController.swift */,
-				C7BC280327A17CD2007406AB /* UploaderViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,6 +154,7 @@
 			name = Example;
 			packageProductDependencies = (
 				C7BC280127A16604007406AB /* ApiVideoClient */,
+				210D99FD2B0230FF00D568B1 /* InAppSettingsKit */,
 			);
 			productName = Example;
 			productReference = 2136DD46274B9E74007B9FC9 /* Example.app */;
@@ -163,6 +184,9 @@
 				Base,
 			);
 			mainGroup = 2136DD3D274B9E74007B9FC9;
+			packageReferences = (
+				210D99FC2B0230FF00D568B1 /* XCRemoteSwiftPackageReference "InAppSettingsKit" */,
+			);
 			productRefGroup = 2136DD47274B9E74007B9FC9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -179,7 +203,9 @@
 			files = (
 				2136DD56274B9E77007B9FC9 /* LaunchScreen.storyboard in Resources */,
 				2136DD53274B9E77007B9FC9 /* Assets.xcassets in Resources */,
+				210D9A002B02314000D568B1 /* Settings.bundle in Resources */,
 				2136DD51274B9E74007B9FC9 /* Main.storyboard in Resources */,
+				211834DB29CDEFF8002F2CCD /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,12 +216,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2136DD4E274B9E74007B9FC9 /* VideosViewController.swift in Sources */,
+				211834E129CDF08F002F2CCD /* ClientAppError.swift in Sources */,
+				211834CE29CDBAB2002F2CCD /* AsyncApiUtils.swift in Sources */,
 				2136DD4A274B9E74007B9FC9 /* AppDelegate.swift in Sources */,
-				C7BC280A27A18CC3007406AB /* ClientManager.swift in Sources */,
-				C7BC280427A17CD2007406AB /* UploaderViewController.swift in Sources */,
+				C7BC280427A17CD2007406AB /* MainViewController.swift in Sources */,
+				21F366342B027A6B00416B65 /* TaskManager.swift in Sources */,
+				211834E829CDF0A8002F2CCD /* AlertUtils.swift in Sources */,
+				210D9A022B02437200D568B1 /* SettingsManager.swift in Sources */,
 				2136DD4C274B9E74007B9FC9 /* SceneDelegate.swift in Sources */,
-				C7BC280727A17FEB007406AB /* VideoTableViewCell.swift in Sources */,
+				211834E229CDF08F002F2CCD /* CancellableApiTask.swift in Sources */,
+				21F366322B02695B00416B65 /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +374,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VY3VXRC7P4;
+				DEVELOPMENT_TEAM = GBC36KP98K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ApiVideoClient;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -372,9 +403,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VY3VXRC7P4;
+				DEVELOPMENT_TEAM = GBC36KP98K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ApiVideoClient;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -416,7 +448,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		210D99FC2B0230FF00D568B1 /* XCRemoteSwiftPackageReference "InAppSettingsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/futuretap/InAppSettingsKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.4.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		210D99FD2B0230FF00D568B1 /* InAppSettingsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210D99FC2B0230FF00D568B1 /* XCRemoteSwiftPackageReference "InAppSettingsKit" */;
+			productName = InAppSettingsKit;
+		};
 		C7BC280127A16604007406AB /* ApiVideoClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ApiVideoClient;
