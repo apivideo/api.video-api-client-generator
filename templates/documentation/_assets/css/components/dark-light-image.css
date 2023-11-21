@@ -1,8 +1,0 @@
-
-html.dark .dark-light-image .light {
-  display: none;
-}
-
-html:not(.dark) .dark-light-image .dark {
-  display: none;
-}

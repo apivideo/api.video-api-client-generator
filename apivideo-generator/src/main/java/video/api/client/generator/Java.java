@@ -24,7 +24,6 @@ public class Java extends JavaClientCodegen {
     public Java() {
         super();
         this.modelTestTemplateFiles.remove("model_test.mustache");
-        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     @Override

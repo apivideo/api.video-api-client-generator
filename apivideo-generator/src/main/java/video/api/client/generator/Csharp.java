@@ -35,7 +35,6 @@ public class Csharp extends CSharpClientCodegen {
         super();
         this.reservedWords.remove("Version");
         packageGuid = "{" + java.util.UUID.nameUUIDFromBytes(this.packageVersion.getBytes()).toString().toUpperCase(Locale.ROOT) + "}";
-        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
     }
 
     @Override

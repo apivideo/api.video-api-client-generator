@@ -1,1 +1,0 @@
-[<div class="hagrid-item"><div class="hagrid-item-left">![]({{image}})</div><div class="hagrid-item-right"><div class="hagrid-item-title">{{ title }}</div><div class="hagrid-item-subtitle">{{ subtitle }}</div></div></div>]({{ link }})

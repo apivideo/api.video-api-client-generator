@@ -1,10 +1,11 @@
+<!--<documentation_excluded>-->
 [![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/{{gitRepoId}}?style=social)]({{artifactUrl}}) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 <h1 align="center">api.video Swift {{#client}}client{{/client}}{{#uploader}}uploader{{/uploader}}</h1>
 
 [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
+## Table of contents
 
 - [Project description](#project-description)
 - [Getting started](#getting-started)
@@ -20,19 +21,31 @@
     - [Public endpoints](#public-endpoints)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client)
 - [Contribution](#contribution)
+<!--</documentation_excluded>-->
+<!--<documentation_only>
+---
+title: Swift {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}}
+meta: 
+  description: The official Swift {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}} for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+---
 
-# Project description
-{{#client}}api.video's Swift {{userAgent}} for iOS, macOS and tvOS streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.{{/client}}
-{{#uploader}}api.video's Swift {{userAgent}} for iOS, macOS and tvOS uploads videos to api.video using delegated upload token or API Key.
+# api.video Swift {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}}
+
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+</documentation_only>-->
+
+## Project description
+{{#client}}api.video's Swift {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}} for iOS, macOS and tvOS streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.{{/client}}
+{{#uploader}}api.video's Swift {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}} for iOS, macOS and tvOS uploads videos to api.video using delegated upload token or API Key.
 
 It allows you to upload videos in two ways:
 - standard upload: to send a whole video file in one go
 - progressive upload: to send a video file by chunks, without needing to know the final size of the video file
 {{/uploader}}
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
 {{#useVapor}}
 Add the following entry in your Package.swift:
@@ -41,7 +54,7 @@ Add the following entry in your Package.swift:
 
 {{/useVapor}}
 {{^useVapor}}
-### Carthage
+#### Carthage
 
 Specify it in your `Cartfile`:
 
@@ -51,7 +64,7 @@ github "apivideo/{{gitRepoId}}" ~> {{podVersion}}
 
 Run `carthage update`
 
-### CocoaPods
+#### CocoaPods
 
 Add `pod '{{projectName}}', '{{podVersion}}'` in your `Podfile`
 
@@ -76,9 +89,9 @@ try VideosAPI.uploadWithUploadToken(token: "MY_VIDEO_TOKEN", file: url) { video,
 }
 ```
 
-# Documentation
+## Documentation
 
-## API Endpoints
+### API Endpoints
 
 All URIs are relative to *{{basePath}}*
 
@@ -86,30 +99,30 @@ All URIs are relative to *{{basePath}}*
 {{#apis}}
 {{^x-client-hidden}}
 
-### {{classname}}
+#### {{classname}}
 
-#### Retrieve an instance of {{classname}}:
+##### Retrieve an instance of {{classname}}:
 
 ```swift
 {{classname}}
 ```
 
-#### Endpoints
+##### Endpoints
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
-## Models
+### Models
 
-{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}{{classname}}.md)
 {{/model}}{{/models}}
 
-## Documentation for Authorization
+### Documentation for Authorization
 
-### API key
+#### API key
 
 Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
 
@@ -117,16 +130,16 @@ You must NOT store your API key in your application code to prevent your API key
 Only the [Public endpoints](#public-endpoints) can be called without authentication.
 In the case, you want to call an endpoint that requires authentication, you will have to use a backend server. See [Security best practices](https://docs.api.video/sdks/security) for more details.
 
-### Public endpoints
+#### Public endpoints
 
 Some endpoints don't require authentication. These one can be called without setting `{{projectName}}.apiKey`.
 
-## Have you gotten use from this API client?
+### Have you gotten use from this API client?
 
 Please take a moment to leave a star on the client ⭐
 
 This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
 
-# Contribution
+## Contribution
 
 Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.
