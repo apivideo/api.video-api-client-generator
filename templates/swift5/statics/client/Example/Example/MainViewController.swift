@@ -123,7 +123,9 @@ class MainViewController: UIViewController {
             do {
                 return try await self.upload(fileUrl: videoUrl, progress: { progress in
                     print("Progress: \(progress.fractionCompleted)")
-                    self.progressView.progress = Float(progress.fractionCompleted)
+                    DispatchQueue.main.async {
+                        self.progressView.progress = Float(progress.fractionCompleted)
+                    }
                 })
             } catch {
                 print("Upload error: \(error)")
