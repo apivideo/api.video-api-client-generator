@@ -24,11 +24,6 @@ public class Swift5 extends Swift5ClientCodegen {
     public static final String VENDOR_X_CLIENT_HIDDEN = "x-client-hidden";
     public static final List<String> PARAMETERS_TO_HIDE_IN_CLIENT_DOC = Arrays.asList("currentPage", "pageSize");
 
-    public Swift5() {
-        super();
-        supportingFiles.add(new SupportingFile("documentation.mustache", "", "documentation.md").doNotOverwrite());
-    }
-
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
         Common.replaceDescriptionsAndSamples(objs, "swift5");

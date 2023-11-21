@@ -85,12 +85,6 @@ jobs:
           assignees: ${{ join(github.event.pull_request.assignees.*.login) }}
   #          reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login) }} #TODO
   #          draft: true
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.profile.name }}-documentation-artifact
-          path: |
-            ${{ env.CLIENT_PATH }}/documentation.md
       - name: Check tests results
         uses: apivideo/api.video-pull-checks-conclusion-action@v1.0.0
         if: ${{ steps.cpr.outputs.pull-request-head-sha }}
@@ -107,36 +101,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v3
-      # print a debug message
       - name: Checkout client repository
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository_owner }}/api.video-documentation
           token: ${{ secrets.PAT }}
           path: generated-clients/documentation
-      - name: Remove files to allow files deletion from git
+      - name: Copy oas_apivideo.yaml
         run: |
-          cd generated-clients/documentation
-          shopt -s extglob
-          rm -Rf !(.git|examples|.|..)
-      - run: |
-          for dir in *-documentation-artifact; do
-            if [ -d "$dir" ]; then
-                prefix=$(echo "$dir" | sed 's/-documentation-artifact//')
-                
-                if [ -f "$dir/documentation.md" ]; then
-                    cp "$dir/documentation.md" "templates/documentation/sdks/api-clients/apivideo-${prefix}-client.md"
-                fi
-            fi
-          done
-        
-          ls -la templates/documentation/sdks/api-clients/
-      - name: Copy documentation files
-        run: |
-          cp -R templates/documentation/* generated-clients/documentation
-          cp -R templates/documentation/.github generated-clients/documentation
           cp -R oas_apivideo.yaml generated-clients/documentation/openapi.yaml
       - uses: peter-evans/create-pull-request@v3
         id: cpr

@@ -1,3 +1,4 @@
+<!--<documentation_excluded>-->
 [![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/{{gitRepoId}}?style=social)](https://github.com/apivideo/{{gitRepoId}}) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 <h1 align="center">api.video PHP client</h1>
@@ -5,7 +6,7 @@
 [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
 
-# Table of contents
+## Table of contents
 
 - [Project description](#project-description)
 - [Getting started](#getting-started)
@@ -25,20 +26,32 @@
   - [Tests](#tests)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
 - [Contribution](#contribution)
+<!--</documentation_excluded>-->
+<!--<documentation_only>
+---
+title: PHP API client
+meta: 
+  description: The official PHP API client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+---
 
-# Project description
+# api.video PHP API client
+
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+</documentation_only>-->
+
+## Project description
 
 api.video's PHP API client streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.
 
-# Getting started
+## Getting started
 
-## Installation
+### Installation
 
 ```shell
 composer require api-video/php-api-client
 ```
 
-## Initialization
+### Initialization
 
 Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
 1. Base URI, which can be either `https://sandbox.api.video` or `https://ws.api.video`
@@ -49,7 +62,7 @@ Due to PHP PSR support, you must initialize the client with 3 to 5 arguments:
 
 Note : If the HTTP client also implements RequestFactoryInterface and StreamFactoryInterface, then it is not necessary to pass this object in 4th and 5th argument.
 
-### Symfony HTTP client example
+#### Symfony HTTP client example
 
 The Symfony HTTP client has the triple advantage of playing the role of **HTTP client**, but also of **request factory** and **stream factory**. It is therefore sufficient to pass it as an argument 3 times.
 
@@ -60,9 +73,9 @@ composer require symfony/http-client
 composer require nyholm/psr7
 ```
 
-## Code sample
+### Code sample
 
-### Client initialization
+#### Client initialization
 
 ```php
 <?php
@@ -77,7 +90,7 @@ $client = new \ApiVideo\Client\Client(
 ?>
 ```
 
-### Create a video
+#### Create a video
 
 ```php
 $payload = (new VideoCreationPayload())
@@ -87,7 +100,7 @@ $payload = (new VideoCreationPayload())
 $video = $client->videos()->create($payload);
 ```
 
-### Upload a video
+#### Upload a video
 
 ```php
 $payload = (new VideoCreationPayload())
@@ -102,28 +115,28 @@ $client->videos()->upload(
 );
 ```
 
-# Documentation
+## Documentation
 
-## API Endpoints
+### API Endpoints
 
 {{#apiInfo}}
 {{#apis}}
 {{^x-client-hidden}}
 
-### {{classname}}
+#### {{classname}}
 
 Method | Description | HTTP request
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}()**]({{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** `{{path}}`
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{vendorExtensions.x-client-action}}()**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}/{{classname}}.md#{{vendorExtensions.x-client-action}}) | {{#summary}}{{summary}}{{/summary}} | **{{httpMethod}}** `{{path}}`
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
-## Models
+### Models
 
-{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}/{{classname}}.md)
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}/{{classname}}.md)
 {{/model}}{{/models}}
 
-## Authentication
+### Authentication
 
 Some endpoints don't require authentication. These one can be called with a Client instantiated with a `null` API key:
 
@@ -141,7 +154,7 @@ $client = new \ApiVideo\Client\Client(
 ```
 
 
-## Chunks
+### Chunks
 
 The video is automatically split into 50 Mb chunks.
 
@@ -153,7 +166,7 @@ For example : `bytes 0-500000/0` for 500 Kb chunks.
 
 The chunks size value must be between 5 Mb and 128mb.
 
-## Tests
+### Tests
 
 In order to run the PhpUnit tests, it is necessary to enter two variables in the command line:
 
@@ -173,6 +186,6 @@ Please take a moment to leave a star on the client ⭐
 
 This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
 
-# Contribution
+## Contribution
 
 Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.

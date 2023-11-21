@@ -1,10 +1,11 @@
+<!--<documentation_excluded>-->
 [![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/{{gitRepoId}}?style=social)]({{artifactUrl}}) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 <h1 align="center">api.video {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}uploader{{/uploader}}{{#client}}API client{{/client}}</h1>
 
 [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
+## Table of contents
 
 - [Project description](#project-description)
 - [Getting started](#getting-started)
@@ -27,22 +28,34 @@
   - [Recommendation](#recommendation)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
 - [Contribution](#contribution)
+<!--</documentation_excluded>-->
+<!--<documentation_only>
+---
+title: {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}}
+meta: 
+  description: The official {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}} for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+---
 
-# Project description
+# api.video {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}}
 
-api.video's {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{userAgent}} streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+</documentation_only>-->
 
-# Getting started
+## Project description
 
-## Requirements
+api.video's {{#android}}Android{{/android}}{{^android}}Java{{/android}} {{#uploader}}video uploader{{/uploader}}{{^uploader}}API client{{/uploader}} streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.
+
+## Getting started
+
+### Requirements
 
 Building the API client library requires:
 1. Java {{#supportJava6}}1.6{{/supportJava6}}{{^supportJava6}}{{#java8}}1.8{{/java8}}{{^java8}}1.7{{/java8}}{{/supportJava6}}+
 2. Maven/Gradle
 
-## Installation
+### Installation
 
-### Maven users
+#### Maven users
 
 Add this dependency to your project's POM:
 
@@ -55,7 +68,7 @@ Add this dependency to your project's POM:
 </dependency>
 ```
 
-### Gradle users
+#### Gradle users
 
 Add this dependency to your project's build file:
 
@@ -63,7 +76,7 @@ Add this dependency to your project's build file:
 implementation "{{{groupId}}}:{{{artifactId}}}:{{{artifactVersion}}}"
 ```
 
-### Others
+#### Others
 
 At first generate the JAR by executing:
 
@@ -76,7 +89,7 @@ Then manually install the following JARs:
 * `target/{{{artifactId}}}-{{{artifactVersion}}}.jar`
 * `target/lib/*.jar`
 
-## Code sample
+### Code sample
 
 Please follow the [installation](#installation) instruction and execute the following {{#android}}Kotlin{{/android}}{{^android}}Java{{/android}} code:
 
@@ -133,8 +146,8 @@ Examples that demonstrate how to use the API is provided in folder `examples/`.
 ## Upload methods
 
 To upload a video, you have 3 differents methods:
-* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications, upload in background, queue, reupload after lost connections. Directly use, WorkManager extensions. See [example](examples/workmanager) for more details.
-* `UploadService`: Upload with an Android Service. It supports progress notifications, upload in background, queue. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](examples/service) for more details.
+* `WorkManager`: preferred method: Upload with Android WorkManager API. It supports progress notifications, upload in background, queue, reupload after lost connections. Directly use, WorkManager extensions. See [example](https://github.com/apivideo/{{gitRepoId}}/blob/main/examples/workmanager) for more details.
+* `UploadService`: Upload with an Android Service. It supports progress notifications, upload in background, queue. You have to extend the `UploadService` and register it in your `AndroidManifest.xml`. See [example](https://github.com/apivideo/{{gitRepoId}}/blob/main/examples/service) for more details.
 * Direct call with `ApiClient`: Do not call API from the main thread, otherwise you will get an `android.os.NetworkOnMainThreadException`. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this.
 
 ## Permissions
@@ -150,9 +163,9 @@ You have to add the following permissions in your `AndroidManifest.xml`:
 Your application also has to dynamically request the `android.permission.READ_EXTERNAL_STORAGE` permission to upload videos.
 {{/android}}
 
-# Documentation
+## Documentation
 
-## API Endpoints
+### API Endpoints
 
 All URIs are relative to *{{basePath}}*
 
@@ -190,18 +203,18 @@ val videosApi = VideosApi("YOUR_API_KEY", Environment.PRODUCTION)
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
-## Documentation for Models
+### Documentation for Models
 
-{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}{{classname}}.md)
 {{/model}}{{/models}}
 
-## Documentation for Authorization
+### Documentation for Authorization
 
-### API key
+#### API key
 
 Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
 {{^android}}
@@ -221,7 +234,7 @@ In the case, you want to call an endpoint that requires authentication, you will
 {{#android}}
 {{/android}}
 
-### Public endpoints
+#### Public endpoints
 
 Some endpoints don't require authentication. These one can be called with a client instantiated without API key:
 {{^android}}
@@ -242,19 +255,19 @@ val videosApi = VideosApi()
 {{/uploader}}
 {{/android}}
 
-## Recommendation
+### Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 {{#android}}
 For direct call with `ApiClient`: Do not call API from the main thread, otherwise you will get a `android.os.NetworkOnMainThreadException`. Dispatch API calls with Thread, Executors or Kotlin coroutine to avoid this. Alternatively, APIs come with an asynchronous counterpart (`createAsync` for `create`) except for the upload endpoint.
 {{/android}}
 
-## Have you gotten use from this API client?
+### Have you gotten use from this API client?
 
 Please take a moment to leave a star on the client ⭐
 
 This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
 
-# Contribution
+## Contribution
 
 Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.

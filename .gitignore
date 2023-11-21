@@ -4,12 +4,3 @@ apivideo-generator/target
 *.iml
 .DS_Store
 target/
-templates/documentation/openapi.yaml
-templates/documentation/sdks/api-clients/apivideo-nodejs-client.md
-templates/documentation/sdks/api-clients/apivideo-python-client.md
-templates/documentation/sdks/api-clients/apivideo-php-client.md
-templates/documentation/sdks/api-clients/apivideo-go-client.md
-templates/documentation/sdks/api-clients/apivideo-csharp-client.md
-templates/documentation/sdks/api-clients/apivideo-java-client.md
-templates/documentation/sdks/api-clients/apivideo-swift5-client.md
-templates/documentation/sdks/api-clients/apivideo-android-client.md

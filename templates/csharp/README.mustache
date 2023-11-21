@@ -1,10 +1,11 @@
+<!--<documentation_excluded>-->
 [![badge](https://img.shields.io/twitter/follow/api_video?style=social)](https://twitter.com/intent/follow?screen_name=api_video) &nbsp; [![badge](https://img.shields.io/github/stars/apivideo/{{gitRepoId}}?style=social)](https://github.com/apivideo/{{gitRepoId}}) &nbsp; [![badge](https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.api.video)](https://community.api.video)
 ![](https://github.com/apivideo/.github/blob/main/assets/apivideo_banner.png)
 <h1 align="center">api.video C# client</h1>
 
 [api.video](https://api.video) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
 
-# Table of contents
+## Table of contents
 
 - [Project description](#project-description)
 - [Getting started](#getting-started)
@@ -24,16 +25,28 @@
   - [Recommendation](#recommendation)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
 - [Contribution](#contribution)
+<!--</documentation_excluded>-->
+<!--<documentation_only>
+---
+title: C# API client
+meta: 
+  description: The official C# API client for api.video. [api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+---
 
-# Project description
+# api.video C# API client
+
+[api.video](https://api.video/) is the video infrastructure for product builders. Lightning fast video APIs for integrating, scaling, and managing on-demand & low latency live streaming features in your app.
+</documentation_only>-->
+
+## Project description
 
 api.video's C# API client streamlines the coding process. Chunking files is handled for you, as is pagination and refreshing your tokens.
 
-# Getting started
+## Getting started
 
-## Requirements
+### Requirements
 
-### Frameworks supported
+#### Frameworks supported
 
 {{#netStandard}}
 
@@ -54,7 +67,7 @@ api.video's C# API client streamlines the coding process. Chunking files is hand
 {{/supportsUWP}}
 {{/netStandard}}
 
-### Dependencies
+#### Dependencies
 
 {{^netStandard}}
 
@@ -73,15 +86,15 @@ Install-Package JsonSubTypes
 NOTE: RestSharp versions greater than 105.1.0 have a bug which causes file uploads to fail. See [RestSharp#742](https://github.com/restsharp/RestSharp/issues/742)
 {{/netStandard}}
 
-## Installation
+### Installation
 
-### Using Nuget
+#### Using Nuget
 
 ```
 Install-Package {{packageName}}
 ```
 
-### Generating the DLL yourself
+#### Generating the DLL yourself
 
 Generate the DLL using your preferred tool
 
@@ -94,7 +107,7 @@ using {{packageName}}.{{modelPackage}};
 
 ```
 
-## Code sample
+### Code sample
 
 ```csharp
 using System.Collections.Generic;
@@ -144,9 +157,9 @@ namespace Example
 }
 ```
 
-# Documentation
+## Documentation
 
-## API Endpoints
+### API Endpoints
 
 All URIs are relative to *{{{basePath}}}*
 
@@ -155,31 +168,31 @@ All URIs are relative to *{{{basePath}}}*
 {{#apis}}
 {{^x-client-hidden}}
 
-### {{classname}}
+#### {{classname}}
 
 
-#### Retrieve an instance of {{classname}}:
+##### Retrieve an instance of {{classname}}:
 ```java
 ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
 {{classname}} {{classVarName}} = client.{{# lambda.titlecase }}{{classVarName}}{{/ lambda.titlecase }}()
 ```
 
-#### Endpoints
+##### Endpoints
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
-## Models
+### Models
 
-{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}{{classname}}.md)
 {{/model}}{{/models}}
 
-## Authorization
+### Authorization
 
-### API key
+#### API key
 
 Most endpoints required to be authenticated using the API key mechanism described in our [documentation](https://docs.api.video/reference#authentication).
 The access token generation mechanism is automatically handled by the client. All you have to do is provide an API key when instantiating the ApiVideoClient:
@@ -187,24 +200,24 @@ The access token generation mechanism is automatically handled by the client. Al
 ApiVideoClient apiVideoClient = new ApiVideoClient("YOUR_API_KEY");
 ```
 
-### Public endpoints
+#### Public endpoints
 
 Some endpoints don't require authentication. These one can be called with an ApiVideoClient instantiated without API key:
 ```java
 ApiVideoClient apiVideoClient = new ApiVideoClient();
 ```
 
-## Recommendation
+### Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
-## Have you gotten use from this API client?
+### Have you gotten use from this API client?
 
 Please take a moment to leave a star on the client ⭐
 
 This helps other users to find the clients and also helps us understand which clients are most popular. Thank you!
 
 
-# Contribution
+## Contribution
 
 Since this API client is generated from an OpenAPI description, we cannot accept pull requests made directly to the repository. If you want to contribute, you can open a pull request on the repository of our [client generator](https://github.com/apivideo/api-client-generator). Otherwise, you can also simply open an issue detailing your need on this repository.

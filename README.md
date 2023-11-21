@@ -7,6 +7,7 @@
 
 # Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Project description](#project-description)
 - [Getting started](#getting-started)
   - [Requirements](#requirements)
@@ -20,7 +21,6 @@
     - [Configuration](#configuration)
       - [CLI](#cli)
       - [File](#file)
-- [Contribution](#contribution)
 
 # Project description
 
@@ -62,7 +62,7 @@ To see the list of available profiles, see the "profile" column in the table of 
 | Python            | python           | :white_check_mark: | :white_check_mark: | [python-api-client](https://github.com/apivideo/api.video-python-client)         |
 | Swift5            | swift5           | :white_check_mark: | :white_check_mark: | [ios-api-client](https://github.com/apivideo/api.video-ios-client)               |
 | Swift5            | swift5-uploader  | :white_check_mark: | :white_check_mark: | [ios-video-uploader](https://github.com/apivideo/api.video-ios-uploader)         |
-| Documentation     | documentation    | -                  | -                  | [documentation](https://github.com/apivideo/api.video-documentation)             |
+
 
 ## Template files
 
