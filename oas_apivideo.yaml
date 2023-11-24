@@ -5731,7 +5731,11 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
         - name: language
           in: path
-          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation'
+          description: |-
+            A valid language identifier using (IETF language tags)[https://datatracker.ietf.org/doc/rfc5646]. You can use primary subtags like `en` (English), extended subtags like `fr-ca` (French, Canada), or region subtags like `zh-yue-hk` (Cantonese, as used in Hong Kong SAR).
+
+            - This parameter accepts lowercase letters with dashes for separators, for example `fr-ca`.
+            - When the value in your request does not match any covered language, the API returns an error.
           required: true
           style: simple
           explode: false
@@ -5937,7 +5941,11 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
         - name: language
           in: path
-          description: A valid BCP 47 language representation.
+          description: |-
+            A valid language identifier using (IETF language tags)[https://datatracker.ietf.org/doc/rfc5646]. You can use primary subtags like `en` (English), extended subtags like `fr-ca` (French, Canada), or region subtags like `zh-yue-hk` (Cantonese, as used in Hong Kong SAR).
+
+            - This parameter accepts lowercase letters with dashes for separators, for example `fr-ca`.
+            - When the value in your request does not match any covered language, the API returns an error.
           required: true
           style: simple
           explode: false
@@ -6164,7 +6172,11 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklgc
         - name: language
           in: path
-          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
+          description: |-
+            A valid language identifier using (IETF language tags)[https://datatracker.ietf.org/doc/rfc5646]. You can use primary subtags like `en` (English), extended subtags like `fr-ca` (French, Canada), or region subtags like `zh-yue-hk` (Cantonese, as used in Hong Kong SAR).
+
+            - This parameter accepts lowercase letters with dashes for separators, for example `fr-ca`.
+            - When the value in your request does not match any covered language, the API returns an error.
           required: true
           style: simple
           explode: false
@@ -6355,7 +6367,11 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
         - name: language
           in: path
-          description: 'A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.'
+          description: |-
+            A valid language identifier using (IETF language tags)[https://datatracker.ietf.org/doc/rfc5646]. You can use primary subtags like `en` (English), extended subtags like `fr-ca` (French, Canada), or region subtags like `zh-yue-hk` (Cantonese, as used in Hong Kong SAR).
+
+            - This parameter accepts lowercase letters with dashes for separators, for example `fr-ca`.
+            - When the value in your request does not match any covered language, the API returns an error.
           required: true
           style: simple
           explode: false
