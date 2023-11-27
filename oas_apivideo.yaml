@@ -5788,7 +5788,7 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
-                  language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  language := "en" // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   
                   res, err := client.Captions.Get(videoId, language)
@@ -5809,7 +5809,7 @@ paths:
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want captions for.
-              const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+              const language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
               const caption = await client.captions.get(videoId, language);
           - language: python
@@ -5828,7 +5828,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = captions_api.CaptionsApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Prklg" # str | The unique identifier for the video you want captions for.
-                  language = "en" # str | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  language = "en" # str | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   # example passing only required values which don't have defaults set
                   try:
@@ -5857,7 +5857,7 @@ paths:
                   CaptionsApi apiInstance = client.captions();
                   
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Prklg"; // The unique identifier for the video you want captions for.
-                  String language = "en"; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  String language = "en"; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   try {
                     Caption result = apiInstance.get(videoId, language);
@@ -5891,7 +5891,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Prklg;  // string | The unique identifier for the video you want captions for.
-                          var language = en;  // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                          var language = en;  // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                           var apiCaptionsInstance = apiInstance.Captions();
                           try
                           {
@@ -5917,7 +5917,7 @@ paths:
               require __DIR__ . '/vendor/autoload.php';
 
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want captions for.
-              $language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+              $language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
               $client->captions()->get($videoId, $language); 
           - language: swift
@@ -6011,7 +6011,7 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to add a caption to.
-                  language := "en" // string | A valid BCP 47 language representation.
+                  language := "en" // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                   file := os.NewFile(1234, "some_file") // *os.File | The video text track (VTT) you want to upload.
 
                   
@@ -6036,7 +6036,7 @@ paths:
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to add a caption to.
-              const language = 'en'; // A valid BCP 47 language representation.
+              const language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
               const file = './en.vtt'; // The video text track (VTT) you want to upload.
 
               const caption = await client.captions.upload(videoId, language, file); 
@@ -6057,7 +6057,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = captions_api.CaptionsApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Prklg" # str | The unique identifier for the video you want to add a caption to.
-                  language = "en" # str | A valid BCP 47 language representation.
+                  language = "en" # str | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                   file = open('/path/to/file', 'rb') # file_type | The video text track (VTT) you want to upload.
 
                   # example passing only required values which don't have defaults set
@@ -6087,7 +6087,7 @@ paths:
                   CaptionsApi apiInstance = client.captions();
                   
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Prklg"; // The unique identifier for the video you want captions for.
-                  String language = "en"; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  String language = "en"; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   try {
                     Caption result = apiInstance.get(videoId, language);
@@ -6121,7 +6121,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Prklg;  // string | The unique identifier for the video you want to add a caption to.
-                          var language = en;  // string | A valid BCP 47 language representation.
+                          var language = en;  // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                           var file = BINARY_DATA_HERE;  // System.IO.Stream | The video text track (VTT) you want to upload.
                           var apiCaptionsInstance = apiInstance.Captions();
                           try
@@ -6148,7 +6148,7 @@ paths:
               require __DIR__ . '/vendor/autoload.php';
 
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to add a caption to.
-              $language = 'en'; // A valid BCP 47 language representation.
+              $language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
               $file = new SplFileObject(__DIR__ . '/en.vtt'); // The video text track (VTT) you want to upload.
 
               $caption = $client->captions()->upload($videoId, $language, $file); 
@@ -6220,7 +6220,7 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   videoId := "vi4k0jvEUuaTdRAEjQ4Prklgc" // string | The unique identifier for the video you want to delete a caption from.
-                  language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  language := "en" // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   
                   err := client.Captions.Delete(videoId, language)
@@ -6238,7 +6238,7 @@ paths:
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklgc'; // The unique identifier for the video you want to delete a caption from.
-              const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+              const language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
               await client.captions.delete(videoId, language);
                
@@ -6257,7 +6257,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = captions_api.CaptionsApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Prklgc" # str | The unique identifier for the video you want to delete a caption from.
-                  language = "en" # str | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  language = "en" # str | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   # example passing only required values which don't have defaults set
                   try:
@@ -6285,7 +6285,7 @@ paths:
                   CaptionsApi apiInstance = client.captions();
                   
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Prklgc"; // The unique identifier for the video you want to delete a caption from.
-                  String language = "en"; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  String language = "en"; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   try {
                     apiInstance.delete(videoId, language);
@@ -6318,7 +6318,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Prklgc;  // string | The unique identifier for the video you want to delete a caption from.
-                          var language = en;  // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                          var language = en;  // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                           var apiCaptionsInstance = apiInstance.Captions();
                           try
                           {
@@ -6343,7 +6343,7 @@ paths:
               require __DIR__ . '/vendor/autoload.php';
 
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Prklgc'; // The unique identifier for the video you want to delete a caption from.
-              $language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+              $language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
               $client->captions()->delete($videoId, $language); 
           - language: swift
@@ -6455,7 +6455,7 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to have automatic captions for.
-                  language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  language := "en" // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                   captionsUpdatePayload := *apivideosdk.NewCaptionsUpdatePayload() // CaptionsUpdatePayload | 
 
                   
@@ -6477,7 +6477,7 @@ paths:
               const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
               const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to have automatic captions for.
-              const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+              const language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
               const captionsUpdatePayload = {
                 _default: true,
               }; 
@@ -6502,7 +6502,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = captions_api.CaptionsApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Prklg" # str | The unique identifier for the video you want to have automatic captions for.
-                  language = "en" # str | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  language = "en" # str | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                   captions_update_payload = CaptionsUpdatePayload(
                       default=True,
                   ) # CaptionsUpdatePayload | 
@@ -6535,7 +6535,7 @@ paths:
                   CaptionsApi apiInstance = client.captions();
                   
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Prklg"; // The unique identifier for the video you want to have automatic captions for.
-                  String language = "en"; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                  String language = "en"; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                   CaptionsUpdatePayload captionsUpdatePayload = new CaptionsUpdatePayload(); // 
                   captionsUpdatePayload.setDefault(); // 
 
@@ -6572,7 +6572,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Prklg;  // string | The unique identifier for the video you want to have automatic captions for.
-                          var language = en;  // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+                          var language = en;  // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                           var captionsUpdatePayload = new CaptionsUpdatePayload(); // CaptionsUpdatePayload | 
                           var apiCaptionsInstance = apiInstance.Captions();
                           try
@@ -6599,7 +6599,7 @@ paths:
               require __DIR__ . '/vendor/autoload.php';
 
               $videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for the video you want to have automatic captions for.
-              $language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+              $language = 'en'; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
               $captionsUpdatePayload = (new \ApiVideo\Client\Model\CaptionsUpdatePayload())
                   ->setDefault(true);
@@ -6693,7 +6693,7 @@ paths:
                   // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
                       
                   videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
-                  language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  language := "en" // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   
                   res, err := client.Captions.Get(videoId, language)
@@ -6734,7 +6734,7 @@ paths:
                   # Create an instance of the API class
                   api_instance = captions_api.CaptionsApi(api_client)
                   video_id = "vi4k0jvEUuaTdRAEjQ4Prklg" # str | The unique identifier for the video you want captions for.
-                  language = "en" # str | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  language = "en" # str | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   # example passing only required values which don't have defaults set
                   try:
@@ -6763,7 +6763,7 @@ paths:
                   CaptionsApi apiInstance = client.captions();
                   
                   String videoId = "vi4k0jvEUuaTdRAEjQ4Prklg"; // The unique identifier for the video you want captions for.
-                  String language = "en"; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                  String language = "en"; // A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
 
                   try {
                     Caption result = apiInstance.get(videoId, language);
@@ -6797,7 +6797,7 @@ paths:
                           var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                           var videoId = vi4k0jvEUuaTdRAEjQ4Prklg;  // string | The unique identifier for the video you want captions for.
-                          var language = en;  // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+                          var language = en;  // string | A valid language identifier using IETF language tags. You can use primary subtags like `en` (English), extended subtags like `fr-CA` (French, Canada), or region subtags like `zh-Hans-CN` (Simplified Chinese used in the PRC).
                           var apiCaptionsInstance = apiInstance.Captions();
                           try
                           {
