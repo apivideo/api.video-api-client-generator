@@ -11590,10 +11590,20 @@ components:
       properties:
         uri:
           type: string
+          description: 'The unique resource identifier of the uploaded caption.'
+          example: '/videos/vi1111DinStg3oBbN79GklWS/captions/sr-Cyrl'
         src:
           type: string
+          description: 'A direct URL to the uploaded caption file.'
+          example: 'https://cdn.api.video/vod/vi1111DinStg3oBbN79GklWS/captions/sr-Cyrl.vtt'
         srclang:
           type: string
+          description: 'Indicates the language of the uploaded caption file using IETF language tags.'
+          example: 'sr-Cyrl'
+        languageName:
+          type: string
+          description: 'Returns the native name of the caption language in UTF-8 encoding.'
+          example: 'српски (ћирилица)'
         default:
           type: boolean
           description: 'Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles.'
