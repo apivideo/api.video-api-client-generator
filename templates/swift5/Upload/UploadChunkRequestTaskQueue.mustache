@@ -1,6 +1,4 @@
 import Foundation
-import Alamofire
-
 
 public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
     private let requestBuilders: [RequestBuilder<Video>]
@@ -10,7 +8,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
     private let completion: (_ data: Video?, _ error: Error?) -> Void
 
     private var videoId: String?
-    private let _uploadProgress: Progress
+    private let _progress: Progress
 
     private var hasSentError = false
 
@@ -20,7 +18,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
                   onProgressReady: ((Progress) -> Void)? = nil,
                   apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
                   completion: @escaping (_ data: Video?, _ error: Error?) -> Void) {
-        _uploadProgress = Progress(totalUnitCount: fileSize)
+        _progress = Progress(totalUnitCount: fileSize)
         self.requestBuilders = requestBuilders
         self.onProgressReady = onProgressReady
         self.apiResponseQueue = apiResponseQueue
@@ -76,14 +74,15 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
         requestBuilder.onProgressReady = progressReadyHook
     }
 
-    override public var uploadProgress: Progress {
-        _uploadProgress.completedUnitCount = min(super.uploadProgress.completedUnitCount, _uploadProgress.totalUnitCount)
-        return _uploadProgress
+    {{#useURLSession}}@available(iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0, *)
+    {{/useURLSession}}override public var progress: Progress {
+        _progress.completedUnitCount = min(super.progress.completedUnitCount, _progress.totalUnitCount)
+        return _progress
     }
 
     private func progressReadyHook(progress: Progress) -> Void {
         if let onProgressReady = onProgressReady {
-            onProgressReady(uploadProgress)
+            onProgressReady(progress)
         }
     }
 
@@ -98,9 +97,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
             if (videoId == nil) {
                 videoId = data?.videoId
             }
-            if (requestBuilders.allSatisfy {
-                $0.requestTask.state == .finished
-            }) {
+            if (isFinished) {
                 completion(data, nil)
             }
         }

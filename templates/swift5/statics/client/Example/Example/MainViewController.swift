@@ -157,7 +157,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         progressView.isHidden = false
 
         // Set client configuration
-        ApiVideoClient.apiKey = SettingsManager.apiKey
+        ApiVideoClient.setApiKey(SettingsManager.apiKey)
         ApiVideoClient.basePath = SettingsManager.environment.rawValue
 
         // Upload

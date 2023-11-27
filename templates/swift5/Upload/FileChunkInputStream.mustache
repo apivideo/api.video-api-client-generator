@@ -1,6 +1,3 @@
-//  FileChunkInputStream.swift
-//
-
 import Foundation
 
 public class FileChunkInputStream: InputStream {

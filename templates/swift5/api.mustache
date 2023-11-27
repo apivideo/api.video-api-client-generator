@@ -543,7 +543,7 @@ extension {{projectName}}API {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}>.Type = {{projectName}}.requestBuilderFactory.{{#returnType}}getBuilder(){{/returnType}}{{^returnType}}getNonDecodableBuilder(){{/returnType}}
+        let localVariableRequestBuilder: RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}>.Type = {{projectName}}.requestBuilderFactory.{{#vendorExtensions.x-client-chunk-upload}}getBackgroundBuilder(){{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}{{#returnType}}getBuilder(){{/returnType}}{{^returnType}}getNonDecodableBuilder(){{/returnType}}{{/vendorExtensions.x-client-chunk-upload}}
 
         return localVariableRequestBuilder.init(method: "{{httpMethod}}", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters{{#vendorExtensions.x-client-chunk-upload}}, onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}})
     }
@@ -620,7 +620,7 @@ extension {{projectName}}API {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}>.Type = {{projectName}}.requestBuilderFactory.{{#returnType}}getBuilder(){{/returnType}}{{^returnType}}getNonDecodableBuilder(){{/returnType}}
+        let localVariableRequestBuilder: RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}>.Type = {{projectName}}.requestBuilderFactory.{{#backgroundSupport}}{{#vendorExtensions.x-client-chunk-upload}}getBackgroundBuilder(){{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}{{#returnType}}getBuilder(){{/returnType}}{{^returnType}}getNonDecodableBuilder(){{/returnType}}{{/vendorExtensions.x-client-chunk-upload}}{{/backgroundSupport}}{{^backgroundSupport}}{{#returnType}}getBuilder(){{/returnType}}{{^returnType}}getNonDecodableBuilder(){{/returnType}}{{/backgroundSupport}}
 
         return localVariableRequestBuilder.init(method: "{{httpMethod}}", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, onProgressReady: onProgressReady)
     }
