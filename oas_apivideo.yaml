@@ -5736,7 +5736,7 @@ paths:
 
             - This parameter **only accepts dashes for separators**, for example `fr-CA`. If you use a different separator in your request, the API returns an error.
             - When the value in your request does not match any covered language, the API returns an error.
-            - This endpoint uses (Symfony)[https://symfony.com/] to reference the list of supported language tags. You can find the list of supported tags (here)[https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php].
+            - This endpoint uses [Symfony](https://symfony.com) to reference the list of supported language tags. You can find the list of supported tags [here](https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php).
           required: true
           style: simple
           explode: false
@@ -5947,7 +5947,7 @@ paths:
 
             - This parameter **only accepts dashes for separators**, for example `fr-CA`. If you use a different separator in your request, the API returns an error.
             - When the value in your request does not match any covered language, the API returns an error.
-            - This endpoint uses (Symfony)[https://symfony.com/] to reference the list of supported language tags. You can find the list of supported tags (here)[https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php].
+            - This endpoint uses [Symfony](https://symfony.com) to reference the list of supported language tags. You can find the list of supported tags [here](https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php).
           required: true
           style: simple
           explode: false
@@ -6179,7 +6179,7 @@ paths:
 
             - This parameter **only accepts dashes for separators**, for example `fr-CA`. If you use a different separator in your request, the API returns an error.
             - When the value in your request does not match any covered language, the API returns an error.
-            - This endpoint uses (Symfony)[https://symfony.com/] to reference the list of supported language tags. You can find the list of supported tags (here)[https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php].
+            - This endpoint uses [Symfony](https://symfony.com) to reference the list of supported language tags. You can find the list of supported tags [here](https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php).
           required: true
           style: simple
           explode: false
@@ -6375,7 +6375,7 @@ paths:
 
             - This parameter **only accepts dashes for separators**, for example `fr-CA`. If you use a different separator in your request, the API returns an error.
             - When the value in your request does not match any covered language, the API returns an error.
-            - This endpoint uses (Symfony)[https://symfony.com/] to reference the list of supported language tags. You can find the list of supported tags (here)[https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php].
+            - This endpoint uses [Symfony](https://symfony.com) to reference the list of supported language tags. You can find the list of supported tags [here](https://github.com/symfony/symfony/blob/6.3/src/Symfony/Component/Intl/Resources/data/locales/meta.php).
           required: true
           style: simple
           explode: false
