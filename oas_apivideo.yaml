@@ -5756,7 +5756,32 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
                     src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
+                    languageName: English
                     default: false
+        '400':
+          description: Bad request error
+          content:
+            application/json:
+              schema:
+                title: Bad request error
+                $ref: '#/components/schemas/bad-request'
+              examples:
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided contains characters other than letters and dashes.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
         '404':
           description: Not Found
           content:
@@ -5973,13 +5998,32 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
                     src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
+                    languageName: English
                     default: false
         '400':
-          description: Bad Request
+          description: Bad request error
           content:
             application/json:
               schema:
+                title: Bad request error
                 $ref: '#/components/schemas/bad-request'
+              examples:
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided contains characters other than letters and dashes.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
         '404':
           description: Not Found
           content:
@@ -6189,6 +6233,30 @@ paths:
       responses:
         '204':
           description: No Content
+        '400':
+          description: Bad request error
+          content:
+            application/json:
+              schema:
+                title: Bad request error
+                $ref: '#/components/schemas/bad-request'
+              examples:
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided contains characters other than letters and dashes.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
         '404':
           description: Not Found
           content:
@@ -6401,22 +6469,32 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
                     src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                     srclang: en
+                    languageName: English
                     default: true
         '400':
-          description: Bad Request
+          description: Bad request error
           content:
             application/json:
               schema:
+                title: Bad request error
                 $ref: '#/components/schemas/bad-request'
               examples:
-                response:
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided contains characters other than letters and dashes.
                   value:
-                    type: string (required)
-                    title: string (required)
-                    name: string (required)
-                    status: integer (required)
-                    problems:
-                      - null
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
         '404':
           description: Not Found
           content:
@@ -6642,10 +6720,12 @@ paths:
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
                         src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt'
                         srclang: en
+                        languageName: English
                         default: false
                       - uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/fr
                         src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/fr.vtt'
                         srclang: fr
+                        languageName: Française
                         default: false
                     pagination:
                       currentPage: 1
