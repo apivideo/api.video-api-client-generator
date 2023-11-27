@@ -28,8 +28,9 @@ public class {{projectName}} {
     internal static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory(){{/useAlamofire}}{{#useURLSession}}
     internal static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory(){{/useURLSession}}
     public static var apiResponseQueue: DispatchQueue = .main
-    {{/useVapor}}
-    public static var timeout: TimeInterval = 60
+    {{/useVapor}}{{#backgroundSupport}}
+    public static var backgroundIdentifier: String = "video.api.upload.background"
+    {{/backgroundSupport}}public static var timeout: TimeInterval = 60
     internal static var customHeaders:[String: String] {
         var headers = defaultHeaders
         if let apiKey = apiKey {
@@ -150,5 +151,6 @@ public class {{projectName}} {
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} protocol RequestBuilderFactory {
     func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type
-    func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type
-}{{/useVapor}}
+    func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type{{#backgroundSupport}}
+    func getBackgroundBuilder<T: Decodable>() -> RequestBuilder<T>.Type
+{{/backgroundSupport}}}{{/useVapor}}

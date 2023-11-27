@@ -22,7 +22,12 @@ class URLSessionRequestBuilderFactory: RequestBuilderFactory {
 
     func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type {
         return URLSessionDecodableRequestBuilder<T>.self
+    }{{#backgroundSupport}}
+
+    func getBackgroundBuilder<T: Decodable>() -> RequestBuilder<T>.Type {
+        return URLSessionDecodableBackgroundUploadRequestBuilder<T>.self
     }
+    {{/backgroundSupport}}
 }
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} typealias {{projectName}}ChallengeHandler = ((URLSession, URLSessionTask, URLAuthenticationChallenge) -> (URLSession.AuthChallengeDisposition, URLCredential?))
@@ -376,7 +381,60 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
             }
         }
     }
+}{{#backgroundSupport}}
+
+private class BackgroundUploadTaskURLSession<T>: NSObject, URLSessionProtocol, URLSessionDelegate, URLSessionDataDelegate {
+    private let file: URL
+    private lazy var urlSession: URLSession = {
+        URLSession(configuration: .background(withIdentifier: ApiVideoClient.backgroundIdentifier), delegate: self, delegateQueue: nil)
+    }()
+    private var completion: ((Data?, URLResponse?, Error?) -> Void)? = nil
+    
+    init(_ file: URL) {
+        self.file = file
+    }
+    
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        completion = completionHandler
+        return urlSession.uploadTask(with: request, fromFile: file)
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didBecomeInvalidWithError error: Error?) {
+        guard let error = error else {
+            return
+        }
+        completion?(nil, task.response, error)
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        completion?(data, dataTask.response, nil)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        sessionDelegate.urlSession(session, task: task, didReceive: challenge, completionHandler: completionHandler)
+    }
 }
+
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class URLSessionDecodableBackgroundUploadRequestBuilder<T: Decodable>: URLSessionDecodableRequestBuilder<T> {
+    private var completion: ((Result<Response<T>, ErrorResponse>) -> Void)? = nil
+    
+    override open func createURLSession() -> URLSessionProtocol {
+        guard let parameters = parameters else { fatalError("No parameters found") }
+        
+        // Find file URL
+        var file: URL? = nil
+        for (_, value) in parameters {
+            if let fileURL = value as? URL {
+                file = fileURL
+                break
+            }
+        }
+        guard let fileURL = file else {
+            fatalError("No file URL found")
+        }
+        return BackgroundUploadTaskURLSession<T>(fileURL)
+    }
+}{{/backgroundSupport}}
 
 private class SessionDelegate: NSObject, URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
