@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="upload_notification_channel_name">api.video</string>
+    <string name="upload_notification_channel_name">Video uploader</string>
     <string name="upload_notification_progress_title">Uploading</string>
     <string name="upload_notification_progress_text">Uploaded %1d of %1d</string>
     <string name="upload_notification_current_progress_text">%1d %%</string>
