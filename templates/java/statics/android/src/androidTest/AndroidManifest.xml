@@ -1,9 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="video.api.client.api">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
         <service android:name="video.api.integration.services.UploadServiceWithoutNotifications" />
+
+        <!-- When targeting API >= 34 -->
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge" />
     </application>
 </manifest>

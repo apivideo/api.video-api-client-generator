@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
-
     defaultConfig {
         applicationId "video.api.uploader.service.example"
+
         minSdk 21
-        targetSdk 33
+        targetSdk 34
+        compileSdk 34
+
         versionCode 1
         versionName "1.0"
 

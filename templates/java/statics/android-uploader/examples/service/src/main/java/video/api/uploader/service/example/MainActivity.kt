@@ -105,20 +105,6 @@ class MainActivity : AppCompatActivity(), UploadServiceListener {
         UploadService.unbindService(this, serviceConnection)
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                launchFilePickerIntent()
-            } else {
-                this.showDialog(
-                    getString(R.string.permission),
-                    getString(R.string.permission_required)
-                )
-            }
-        }
-
     private var filesPickerResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
