@@ -4045,7 +4045,7 @@ paths:
           description: |
             Enables you to sort live stream results. Allowed attributes: `name`, `createdAt`, `updatedAt`.
             `name` - the name of the live stream.
-            `createdAt` - the time a live stream was created using.
+            `createdAt` - the time a live stream was created.
             `updatedAt` - the time a live stream was last updated.
             
             When using `createdAt` or `updatedAt`, the API sorts the results based on the ISO-8601 time format.
