@@ -1,17 +1,6 @@
 {{>licenseInfo}}
 
-import path from 'path';
-import {
-  existsSync,
-  statSync,
-  createReadStream,
-  openSync,
-  read,
-  closeSync,
-  ReadStream,
-} from 'fs';
 import { promisify } from 'util';
-import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from '../ObjectSerializer';
 import HttpClient, { QueryOptions } from '../HttpClient';
@@ -19,9 +8,8 @@ import ProgressiveSession from '../model/ProgressiveSession';
 {{#imports}}
 import {{classname}} from '../model/{{classname}}';
 {{/imports}}
+import { createBufferFromPartialData, getFileSize } from '../utils';
 import { Readable, Stream } from 'stream';
-import { Blob } from 'buffer';
-import { readableToBuffer } from "../HttpClient";
 {{#operations}}
 
 /**
@@ -53,15 +41,15 @@ export default class {{classname}} {
           this.httpClient = httpClient;
         }
 
-        uploadPart(file: string, progressListener?: (event: UploadProgressEvent) => void) {
+        uploadPart(file: Buffer | Blob | ArrayBuffer, progressListener?: (event: UploadProgressEvent) => void) {
           return this.upload(file, false, progressListener);
         };
 
-        uploadLastPart(file: string, progressListener?: (event: UploadProgressEvent) => void) {
+        uploadLastPart(file: Buffer | Blob | ArrayBuffer, progressListener?: (event: UploadProgressEvent) => void) {
            return this.upload(file, true, progressListener);
         };
 
-        upload(file: string, isLast: boolean, progressListener?: (event: UploadProgressEvent) => void) {
+        upload(file: Buffer | Blob | ArrayBuffer, isLast: boolean, progressListener?: (event: UploadProgressEvent) => void) {
             const queryParams: QueryOptions = {};
             queryParams.headers = {};
 
@@ -76,11 +64,7 @@ export default class {{classname}} {
             {{#platforms}}
             {{#node}}
 
-            if (!existsSync({{paramName}})) {
-              throw new Error(`${ {{paramName}} } must be a readable source file`);
-            }
-
-            const length = statSync({{paramName}}).size;
+            const length = getFileSize({{paramName}});
             if (length <= 0) {
               throw new Error(`${ {{paramName}} } is empty`);
             }
@@ -141,8 +125,8 @@ export default class {{classname}} {
             const formData = new FormData();
 
 
-            const filename = path.basename(file);
-            formData.append(filename, createReadStream(file), filename);
+            const filename = "file";
+            formData.append(filename, createBufferFromPartialData(file), filename);
             {{#vendorExtensions.x-client-copy-from-response}}
             if(this.{{paramName}}) {
                 formData.append("{{paramName}}", this.{{paramName}});
@@ -208,7 +192,7 @@ export default class {{classname}} {
    * @param {{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}Buffer | Blob | ArrayBuffer{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
   {{/vendorExtensions.x-group-parameters}}
     const queryParams: QueryOptions = {};
     queryParams.headers = {};
@@ -223,25 +207,15 @@ export default class {{classname}} {
     {{#platforms}}
     {{#node}}
     {{#vendorExtensions.x-client-chunk-upload}}
-    if (!existsSync({{paramName}})) {
-      throw new Error(`${ {{paramName}} } must be a readable source file`);
-    }
-
-    const length = statSync({{paramName}}).size;
+    const length = getFileSize({{paramName}});
     if (length <= 0) {
       throw new Error(`${ {{paramName}} } is empty`);
     }
     {{/vendorExtensions.x-client-chunk-upload}}
     {{^vendorExtensions.x-client-chunk-upload}}
-    let {{paramName}}Name = 'file';
-    let {{paramName}}Buffer = {{paramName}};
-    if (typeof {{paramName}} === 'string') {
-        {{paramName}}Name = path.basename({{paramName}});
-        {{paramName}}Buffer = createReadStream({{paramName}});
-    }
-    if ({{paramName}} instanceof Readable) {
-        {{paramName}}Buffer = await readableToBuffer({{paramName}});
-    }
+    const {{paramName}}Name = 'file';
+    let {{paramName}}Buffer = createBufferFromPartialData({{paramName}});
+    
 
     {{/vendorExtensions.x-client-chunk-upload}}
     {{/node}}
@@ -333,10 +307,10 @@ export default class {{classname}} {
       if (chunkSize > length) {
         {{#platforms}}
         {{#node}}
-          const filename = path.basename({{paramName}});
+          const filename = "file";
           formData.append(
             filename,
-            createReadStream({{paramName}}),
+            createBufferFromPartialData({{paramName}}),
             filename
           );
         {{/node}}
@@ -386,9 +360,9 @@ export default class {{classname}} {
           uploadChunkSize = length - offset;
         }
 
-        const filename = path.basename({{paramName}});
+        const filename = "file";
         const chunkFormData = new FormData();
-        stream = createReadStream(file, { start: offset, end: uploadChunkSize + offset - 1});
+        stream = createBufferFromPartialData(file, { start: offset, end: uploadChunkSize + offset});
         chunkFormData.append(filename, stream, filename);
 
         queryParams.body = chunkFormData;
@@ -413,8 +387,6 @@ export default class {{classname}} {
             ObjectSerializer.parse(response.body, response.headers["content-type"]),
             "{{{returnType}}}", "{{returnFormat}}"
           ) as {{{returnType}}});
-
-        stream.close();
       }
 
       return Promise.resolve(lastBody as {{{returnType}}});
