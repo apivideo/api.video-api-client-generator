@@ -2,6 +2,7 @@
 
 namespace ApiVideo\Client;
 
+use ApiVideo\Client\Exception\AuthenticationFailedException;
 use ApiVideo\Client\Exception\ExpiredAuthTokenException;
 use ApiVideo\Client\Exception\HttpException;
 use ApiVideo\Client\Resource\Video\Video;
@@ -85,7 +86,7 @@ class BaseClient
      * @param Request $commandRequest
      *
      * @return array|null
-     * @throws ClientExceptionInterface
+     * @throws ClientExceptionInterface|AuthenticationFailedException
      */
     public function request(Request $commandRequest, bool $skipAuthRequest = false): ?array
     {

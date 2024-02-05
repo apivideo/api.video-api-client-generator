@@ -230,6 +230,7 @@ public class Php extends AbstractPhpCodegen {
         supportingFiles.add(new SupportingFile("src/Exception/ExceptionInterface.php", toSrcPath(invokerPackage, srcBasePath), "Exception/ExceptionInterface.php"));
         supportingFiles.add(new SupportingFile("src/Exception/HttpException.php", toSrcPath(invokerPackage, srcBasePath), "Exception/HttpException.php"));
         supportingFiles.add(new SupportingFile("src/Exception/ExpiredAuthTokenException.php", toSrcPath(invokerPackage, srcBasePath), "Exception/ExpiredAuthTokenException.php"));
+        supportingFiles.add(new SupportingFile("src/Exception/AuthenticationFailedException.php", toSrcPath(invokerPackage, srcBasePath), "Exception/AuthenticationFailedException.php"));
 
         // Api
         supportingFiles.add(new SupportingFile("src/Api/ApiInterface.php", toSrcPath(invokerPackage, srcBasePath), "Api/ApiInterface.php"));
