@@ -160,3 +160,5 @@ files:
   android/work/DataExtensions.mustache:
     folder: src/main/java/video/api/uploader/api/work
     destinationFilename: DataExtensions.kt
+  consumer-rules.mustache:
+    destinationFilename: consumer-rules.pro

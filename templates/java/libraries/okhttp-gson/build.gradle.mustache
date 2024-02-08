@@ -45,6 +45,8 @@ if(hasProperty('target') && target == 'android') {
 
             multiDexEnabled true
 
+            consumerProguardFiles 'consumer-rules.pro'
+
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
             testInstrumentationRunnerArgument("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
             testInstrumentationRunnerArgument("environmentVariables", "INTEGRATION_TESTS_API_KEY=${System.getenv("INTEGRATION_TESTS_API_KEY")}")
