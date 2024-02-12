@@ -39,7 +39,17 @@ def getRepositoryPassword() {
     return hasProperty('OSSRH_PASSWORD') ? OSSRH_PASSWORD : System.getenv("OSSRH_PASSWORD")
 }
 
-afterEvaluate { project ->
+android {
+    publishing {
+        multipleVariants {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
+}
+
+afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
