@@ -12859,12 +12859,18 @@ components:
       properties:
         status:
           type: string
-          description: There are three possible ingest statuses. missing - you are missing information required to ingest the video. uploading - the video is in the process of being uploaded. uploaded - the video is ready for use.
+          description:  |
+            There are four possible statuses depending on how you provide a video file:
+            - `uploading` - the API is gathering the video source file from an upload.
+            - `uploaded` - the video file is fully uploaded.
+            - `ingesting` - the API is gathering the video source file from either a URL, or from cloning.
+            - `ingested` - the video file is fully stored.
           example: uploaded
           enum:
-            - missing
             - uploading
             - uploaded
+            - ingesting
+            - ingested
         filesize:
           type: integer
           description: The size of your file in bytes.
