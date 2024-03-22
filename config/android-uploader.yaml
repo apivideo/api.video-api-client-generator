@@ -1,4 +1,6 @@
 changelog:
+  - 1.3.5 (2024-03-21):
+    - Add missing proguard rules for gson and jackson
   - 1.3.4 (2024-01-08):
     - Upgrade dependencies, gradle and Kotlin
   - 1.3.3 (2023-12-14):

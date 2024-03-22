@@ -1,4 +1,6 @@
 changelog:
+  - 1.5.6 (2024-03-21):
+    - Add missing proguard rules for gson and jackson
   - 1.5.5 (2024-02-19):
     - Update VideoStatusIngest enum
   - 1.5.4 (2024-01-08):
