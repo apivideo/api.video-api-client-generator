@@ -31,7 +31,7 @@ changelog:
     - Fix large upload request time out
     - Fix callback on wrong token
 
-library: alamofire
+library: urlsession
 generateAliasAsModel: true
 removeMigrationProjectNameClass: true
 swiftPackagePath: "Sources"
@@ -46,17 +46,12 @@ additionalProperties:
   podHomepage: https://docs.api.video
   podSocialMediaUrl: https://twitter.com/api_video
   podLicense: "{ :type => 'MIT' }"
+backgroundSupport: true
 defaultChunkSize: 50 * 1024 * 1024
 minChunkSize: 5 * 1024 * 1024
 maxChunkSize: 128 * 1024 * 1024
 
 files:
-  Auth/ApiVideoCredential.mustache:
-    folder: Sources/Auth
-    destinationFilename: ApiVideoCredential.swift
-  Auth/ApiVideoAuthenticator.mustache:
-    folder: Sources/Auth
-    destinationFilename: ApiVideoAuthenticator.swift
   Environment.mustache:
     folder: Sources/Models
     destinationFilename: Environment.swift

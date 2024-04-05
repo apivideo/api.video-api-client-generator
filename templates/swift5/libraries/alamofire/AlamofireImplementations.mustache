@@ -94,19 +94,7 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
     override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
         let managerId = UUID().uuidString
         // Create a new manager for each request to customize its request header
-        var manager: Alamofire.Session
-
-        if URLString.hasSuffix("/auth/api-key") {
-            manager = createAlamofireSession()
-        } else if let apiKey = {{projectName}}.apiKey {
-            // Create the interceptor
-            let authenticator = ApiVideoAuthenticator(apiKey: apiKey)
-            let interceptor = AuthenticationInterceptor(authenticator: authenticator, credential: {{projectName}}.credential)
-
-            manager = createAlamofireSession(interceptor: interceptor)
-        } else {
-            manager = createAlamofireSession()
-        }
+        let manager = createAlamofireSession()
         managerStore[managerId] = manager
 
         let xMethod = Alamofire.HTTPMethod(rawValue: method)
@@ -142,6 +130,8 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
                             mpForm.append(string.data(using: String.Encoding.utf8)!, withName: k)
                         case let number as NSNumber:
                             mpForm.append(number.stringValue.data(using: String.Encoding.utf8)!, withName: k)
+                        case let data as Data:
+                            mpForm.append(data, withName: k)
                         default:
                             fatalError("Unprocessable value \(v) with key \(k)")
                         }
@@ -179,6 +169,10 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
     }
 
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
+        if let credential = self.credential {
+            request.authenticate(with: credential)
+        }
+
         let cleanupRequest = {
             managerStore[managerId] = nil
         }
@@ -267,6 +261,10 @@ private var managerStore = SynchronizedDictionary<String, Alamofire.Session>()
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class AlamofireDecodableRequestBuilder<T: Decodable>: AlamofireRequestBuilder<T> {
 
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
+        if let credential = self.credential {
+            request.authenticate(with: credential)
+        }
+
         let cleanupRequest = {
             managerStore[managerId] = nil
         }

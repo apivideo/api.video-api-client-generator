@@ -1,6 +1,3 @@
-//  ProgressiveUploadSessionProtocol.swift
-//
-
 import Foundation
 
 public protocol ProgressiveUploadSessionProtocol {

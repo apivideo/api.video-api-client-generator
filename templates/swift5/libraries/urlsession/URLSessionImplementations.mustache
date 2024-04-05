@@ -9,6 +9,12 @@ import Foundation
 import MobileCoreServices
 #endif
 
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} protocol URLSessionProtocol {
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+}
+
+extension URLSession: URLSessionProtocol {}
+
 class URLSessionRequestBuilderFactory: RequestBuilderFactory {
     func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type {
         return URLSessionRequestBuilder<T>.self
@@ -16,7 +22,12 @@ class URLSessionRequestBuilderFactory: RequestBuilderFactory {
 
     func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type {
         return URLSessionDecodableRequestBuilder<T>.self
+    }{{#backgroundSupport}}
+
+    func getBackgroundBuilder<T: Decodable>() -> RequestBuilder<T>.Type {
+        return URLSessionDecodableBackgroundUploadRequestBuilder<T>.self
     }
+    {{/backgroundSupport}}
 }
 
 {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} typealias {{projectName}}ChallengeHandler = ((URLSession, URLSessionTask, URLAuthenticationChallenge) -> (URLSession.AuthChallengeDisposition, URLCredential?))
@@ -41,6 +52,11 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var taskDidReceiveChallenge: {{projectName}}ChallengeHandler?
 
     /**
+     To observe upload or download progress
+     */
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var progressObservation: NSKeyValueObservation?
+
+    /**
      May be assigned if you want to do any of those things:
      - control the task completion
      - intercept and handle errors like authorization
@@ -49,15 +65,15 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     @available(*, deprecated, message: "Please override execute() method to intercept and handle errors like authorization or retry the request. Check the Wiki for more info. https://github.com/OpenAPITools/openapi-generator/wiki/FAQ#how-do-i-implement-bearer-token-authentication-with-urlsession-on-the-swift-api-client")
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} var taskCompletionShouldRetry: ((Data?, URLResponse?, Error?, @escaping (Bool) -> Void) -> Void)?
 
-    required {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:]) {
-        super.init(method: method, URLString: URLString, parameters: parameters, headers: headers)
+    required {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:], onProgressReady: ((Progress) -> Void)? = nil) {
+        super.init(method: method, URLString: URLString, parameters: parameters, headers: headers, onProgressReady: onProgressReady)
     }
 
     /**
      May be overridden by a subclass if you want to control the URLSession
      configuration.
      */
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func createURLSession() -> URLSession {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func createURLSession() -> URLSessionProtocol {
         return defaultURLSession
     }
 
@@ -76,14 +92,14 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
      May be overridden by a subclass if you want to control the URLRequest
      configuration (e.g. to override the cache policy).
      */
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func createURLRequest(urlSession: URLSession, method: HTTPMethod, encoding: ParameterEncoding, headers: [String: String]) throws -> URLRequest {
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func createURLRequest(urlSession: URLSessionProtocol, method: HTTPMethod, encoding: ParameterEncoding, headers: [String: String]) throws -> URLRequest {
 
         guard let url = URL(string: URLString) else {
             throw DownloadException.requestMissingURL
         }
 
         var originalRequest = URLRequest(url: url)
-
+        originalRequest.timeoutInterval = {{projectName}}.timeout
         originalRequest.httpMethod = method.rawValue
 
         headers.forEach { key, value in
@@ -100,7 +116,7 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
     }
 
     @discardableResult
-    override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> URLSessionTask? {
+    override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} func execute(_ apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
         let urlSession = createURLSession()
 
         guard let xMethod = HTTPMethod(rawValue: method) else {
@@ -163,7 +179,11 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
             }
 
             if #available(iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0, *) {
-                onProgressReady?(dataTask.progress)
+                if let onProgressReady = onProgressReady {
+                    progressObservation = dataTask.progress.observe(\.fractionCompleted) { progress, _ in
+                        onProgressReady(progress)
+                    }
+                }
             }
 
             taskIdentifier = dataTask.taskIdentifier
@@ -172,14 +192,14 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
 
             dataTask.resume()
 
-            return dataTask
+            requestTask.set(task: dataTask)
         } catch {
             apiResponseQueue.async {
                 completion(.failure(ErrorResponse.error(415, nil, nil, error)))
             }
-
-            return nil
         }
+
+        return requestTask
     }
 
     fileprivate func processRequestResponse(urlRequest: URLRequest, data: Data?, response: URLResponse?, error: Error?, completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
@@ -361,7 +381,60 @@ private var credentialStore = SynchronizedDictionary<Int, URLCredential>()
             }
         }
     }
+}{{#backgroundSupport}}
+
+private class BackgroundUploadTaskURLSession<T>: NSObject, URLSessionProtocol, URLSessionDelegate, URLSessionDataDelegate {
+    private let file: URL
+    private lazy var urlSession: URLSession = {
+        URLSession(configuration: .background(withIdentifier: ApiVideoClient.backgroundIdentifier), delegate: self, delegateQueue: nil)
+    }()
+    private var completion: ((Data?, URLResponse?, Error?) -> Void)? = nil
+    
+    init(_ file: URL) {
+        self.file = file
+    }
+    
+    func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        completion = completionHandler
+        return urlSession.uploadTask(with: request, fromFile: file)
+    }
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, didBecomeInvalidWithError error: Error?) {
+        guard let error = error else {
+            return
+        }
+        completion?(nil, task.response, error)
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        completion?(data, dataTask.response, nil)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        sessionDelegate.urlSession(session, task: task, didReceive: challenge, completionHandler: completionHandler)
+    }
 }
+
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class URLSessionDecodableBackgroundUploadRequestBuilder<T: Decodable>: URLSessionDecodableRequestBuilder<T> {
+    private var completion: ((Result<Response<T>, ErrorResponse>) -> Void)? = nil
+    
+    override open func createURLSession() -> URLSessionProtocol {
+        guard let parameters = parameters else { fatalError("No parameters found") }
+        
+        // Find file URL
+        var file: URL? = nil
+        for (_, value) in parameters {
+            if let fileURL = value as? URL {
+                file = fileURL
+                break
+            }
+        }
+        guard let fileURL = file else {
+            fatalError("No file URL found")
+        }
+        return BackgroundUploadTaskURLSession<T>(fileURL)
+    }
+}{{/backgroundSupport}}
 
 private class SessionDelegate: NSObject, URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
@@ -446,6 +519,17 @@ private class FormDataEncoding: ParameterEncoding {
 
         for (key, value) in parameters {
             switch value {
+            case let fileChunkInputStream as FileChunkInputStream:
+
+                urlRequest = configureInputStreamRequest(
+                    urlRequest: urlRequest,
+                    boundary: boundary,
+                    name: key,
+                    fileName: fileChunkInputStream.file.lastPathComponent,
+                    inputStream: fileChunkInputStream,
+                    length: UInt64(fileChunkInputStream.capacity)
+                )
+
             case let fileURL as URL:
 
                 urlRequest = try configureFileUploadRequest(
@@ -477,6 +561,15 @@ private class FormDataEncoding: ParameterEncoding {
                     )
                 }
 
+           case let data as Data:
+
+                urlRequest = configureDataUploadRequest(
+                    urlRequest: urlRequest,
+                    boundary: boundary,
+                    name: key,
+                    data: data
+                )
+
             default:
                 fatalError("Unprocessable value \(value) with key \(key)")
             }
@@ -485,6 +578,39 @@ private class FormDataEncoding: ParameterEncoding {
         var body = urlRequest.httpBody.orEmpty
 
         body.append("\r\n--\(boundary)--\r\n")
+
+        urlRequest.httpBody = body
+
+        return urlRequest
+    }
+
+    private func configureInputStreamRequest(urlRequest: URLRequest, boundary: String, name: String, fileName: String, inputStream: InputStream, length: UInt64) -> URLRequest {
+
+        var urlRequest = urlRequest
+
+        var body = urlRequest.httpBody.orEmpty
+
+        let data = encodeInputStream(for: inputStream, withLength: length)
+
+        let mimetype = "video/quicktime"
+
+        // If we already added something then we need an additional newline.
+        if body.count > 0 {
+            body.append("\r\n")
+        }
+
+        // Value boundary.
+        body.append("--\(boundary)\r\n")
+
+        // Value headers.
+        body.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(fileName)\"\r\n")
+        body.append("Content-Type: \(mimetype)\r\n")
+
+        // Separate headers and body.
+        body.append("\r\n")
+
+        // The value data.
+        body.append(data)
 
         urlRequest.httpBody = body
 
@@ -564,6 +690,35 @@ private class FormDataEncoding: ParameterEncoding {
             }
         }
         return "application/octet-stream"
+    }
+
+    private func encodeInputStream(for inputStream: InputStream, withLength length: UInt64) -> Data {
+        inputStream.open()
+        defer { inputStream.close() }
+
+        let streamBufferSize = 1024
+        var encoded = Data()
+
+        while inputStream.hasBytesAvailable {
+            var buffer = [UInt8](repeating: 0, count: streamBufferSize)
+            let bytesRead = inputStream.read(&buffer, maxLength: streamBufferSize)
+
+            if let error = inputStream.streamError {
+                fatalError("Reading input stream failed with error \(error)")
+            }
+
+            if bytesRead > 0 {
+                encoded.append(buffer, count: bytesRead)
+            } else {
+                break
+            }
+        }
+
+        guard UInt64(encoded.count) == length else {
+            fatalError("Unexpected input stream length. Expected: \(length) Got: \(UInt64(encoded.count))")
+        }
+
+        return encoded
     }
 
 }
