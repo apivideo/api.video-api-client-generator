@@ -366,6 +366,18 @@ paths:
                         range:
                           min: 10
                           max: 100
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-doctave:
@@ -545,6 +557,18 @@ paths:
                       - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: metadata
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: create
@@ -899,6 +923,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: upload
@@ -1150,6 +1186,18 @@ paths:
                     type: 'https://docs.api.video/docs/fileextension'
                     title: 'Only [jpeg, jpg, JPG, JPEG, png, PNG] extensions are supported.'
                     name: file
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: upload
@@ -1414,6 +1462,18 @@ paths:
                         range:
                           min: 10
                           max: 100
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-group-parameters: true
@@ -1509,6 +1569,18 @@ paths:
                     title: The requested resource was not found.
                     name: watermarkId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -1654,6 +1726,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: uploadThumbnail
@@ -1904,6 +1988,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: pickThumbnail
@@ -2153,6 +2249,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -2346,6 +2454,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -2588,6 +2708,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: update
@@ -2880,6 +3012,18 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: getStatus
@@ -3104,6 +3248,18 @@ paths:
                           uri: /upload-tokens?currentPage=1&pageSize=25
                         - rel: last
                           uri: /upload-tokens?currentPage=1&pageSize=25
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-group-parameters: true
@@ -3329,6 +3485,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: createToken
@@ -3533,6 +3701,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: getToken
@@ -3718,6 +3898,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: deleteToken
@@ -3947,6 +4139,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security: []
       x-client-action: uploadWithUploadToken
       x-client-chunk-upload: true
@@ -4132,6 +4336,18 @@ paths:
                           uri: /live-streams?currentPage=1&pageSize=25
                         - rel: last
                           uri: /live-streams?currentPage=1&pageSize=25
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: list
@@ -4416,6 +4632,18 @@ paths:
                     status: 400
                     detail: This value should not be null.
                     name: restreams[0][name]
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: create
@@ -4616,6 +4844,18 @@ paths:
               examples:
                 live-stream-response-example:
                   $ref: '#/components/examples/live-stream-response-example'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -4827,6 +5067,18 @@ paths:
       responses:
         '204':
           description: No Content
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -5059,6 +5311,18 @@ paths:
                     status: 400
                     detail: This value should not be null.
                     name: restreams[0][name]
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: update
@@ -5347,6 +5611,18 @@ paths:
                     title: The requested resource was not found.
                     name: liveStreamId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: uploadThumbnail
@@ -5554,6 +5830,18 @@ paths:
                     title: The requested resource was not found.
                     name: liveStreamId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: deleteThumbnail
@@ -5795,6 +6083,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -6037,6 +6337,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: upload
@@ -6270,6 +6582,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -6515,6 +6839,18 @@ paths:
                     title: sunt do fugiat tempor
                     name: irure mollit aute
                     status: 85925135
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: update
@@ -6753,6 +7089,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: list
@@ -6964,6 +7312,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -7183,6 +7543,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: upload
@@ -7388,6 +7760,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -7597,6 +7981,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: list
@@ -7882,6 +8278,18 @@ paths:
                         range:
                           min: 10
                           max: 100
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: list
@@ -8106,6 +8514,18 @@ paths:
                     forceAutoplay: false
                     hideTitle: false
                     forceLoop: false
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: create
@@ -8403,6 +8823,18 @@ paths:
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -8589,6 +9021,18 @@ paths:
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -8800,6 +9244,18 @@ paths:
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: update
@@ -9084,6 +9540,18 @@ paths:
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: uploadLogo
@@ -9296,6 +9764,18 @@ paths:
                     title: The requested resource was not found.
                     name: playerId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: deleteLogo
@@ -9674,6 +10154,18 @@ paths:
                     title:
                     name:
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
       - apiKey: []
       x-client-action: getVideosPlays
@@ -10117,6 +10609,18 @@ paths:
                     title:
                     name:
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
       - apiKey: []
       x-client-action: getLiveStreamsPlays
@@ -10387,6 +10891,18 @@ paths:
                           uri: 'https://ws.api.video/webhooks?currentPage=1'
                         - rel: last
                           uri: 'https://ws.api.video/webhooks?currentPage=1'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-group-parameters: true
@@ -10617,6 +11133,18 @@ paths:
                       - type: 'https://docs.api.video/docs/attributeinvalid'
                         title: This attribute must be an array.
                         name: events
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: create
@@ -10824,6 +11352,18 @@ paths:
                     events:
                       - video.encoding.quality.completed
                     url: 'http://clientnotificationserver.com/notif?myquery=query'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: get
@@ -11011,6 +11551,18 @@ paths:
                     title: The requested resource was not found.
                     name: webhookId
                     status: 404
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
       security:
         - apiKey: []
       x-client-action: delete
@@ -11310,6 +11862,19 @@ components:
         name:
           type: string
         status:
+          type: integer
+    too-many-requests:
+      title: TooManyRequests
+      type: object
+      properties:
+        type:
+          description: A link to the error documentation.
+          type: string
+        title:
+          description: A description of the error that occurred.
+          type: string
+        status:
+          description: The HTTP status code.
           type: integer
     403-error-schema:
       title: 403 Forbidden
