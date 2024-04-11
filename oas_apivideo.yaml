@@ -245,6 +245,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-RetryAfter:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
