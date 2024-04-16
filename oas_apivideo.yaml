@@ -254,7 +254,7 @@ paths:
               schema:
                 type: integer
               description: The number of available requests left for the current time window.
-            X-RateLimit-RetryAfter:
+            X-RateLimit-Retry-After:
               schema:
                 type: integer
               description: The number of seconds left until the current rate limit window resets.
@@ -356,6 +356,19 @@ paths:
                         - rel: last
                           uri: 'https://ws.api.video/videos?currentPage=1'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -380,6 +393,19 @@ paths:
                           min: 10
                           max: 100
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -505,6 +531,19 @@ paths:
               $ref: '#/components/schemas/video-creation-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
@@ -539,12 +578,38 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '202':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Accepted
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/video'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -571,6 +636,19 @@ paths:
                         title: This attribute must be an array.
                         name: metadata
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -863,6 +941,19 @@ paths:
               $ref: '#/components/schemas/video-upload-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
@@ -898,6 +989,19 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -924,6 +1028,19 @@ paths:
                         title: There is more than one uploaded file in the request.
                         name: file
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -937,6 +1054,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -1176,6 +1306,19 @@ paths:
               $ref: '#/components/schemas/watermark-upload-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -1187,6 +1330,19 @@ paths:
                     watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
                     createdAt: '2020-03-03T12:52:03.085Z'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -1200,6 +1356,19 @@ paths:
                     title: 'Only [jpeg, jpg, JPG, JPEG, png, PNG] extensions are supported.'
                     name: file
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -1425,6 +1594,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -1452,6 +1634,19 @@ paths:
                         - rel: last
                           uri: 'https://ws.api.video/watermarks?currentPage=1'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -1476,6 +1671,19 @@ paths:
                           min: 10
                           max: 100
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -1568,8 +1776,34 @@ paths:
           example: watermark_1BWr2L5MTQwxGkuxKjzh6i
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -1583,6 +1817,19 @@ paths:
                     name: watermarkId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -1679,6 +1926,19 @@ paths:
               $ref: '#/components/schemas/video-thumbnail-upload-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -1714,6 +1974,19 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -1727,6 +2000,19 @@ paths:
                     title: 'Only [jpeg, jpg, JPG, JPEG] extensions are supported.'
                     name: file
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -1740,6 +2026,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -1955,6 +2254,19 @@ paths:
               $ref: '#/components/schemas/video-thumbnail-pick-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -1989,6 +2301,19 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -2002,6 +2327,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -2214,6 +2552,19 @@ paths:
             type: string
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -2250,6 +2601,19 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -2263,6 +2627,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -2453,8 +2830,34 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -2468,6 +2871,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -2651,6 +3067,19 @@ paths:
               $ref: '#/components/schemas/video-update-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -2686,6 +3115,19 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -2709,6 +3151,19 @@ paths:
                         title: This attribute must be an array.
                         name: metadata
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -2722,6 +3177,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -2968,6 +3436,19 @@ paths:
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -3013,6 +3494,19 @@ paths:
                         audioCodec: aac
                         aspectRatio: 16/9
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -3026,6 +3520,19 @@ paths:
                     name: videoId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -3232,6 +3739,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -3262,6 +3782,19 @@ paths:
                         - rel: last
                           uri: /upload-tokens?currentPage=1&pageSize=25
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -3480,6 +4013,19 @@ paths:
               $ref: '#/components/schemas/token-creation-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -3493,12 +4039,38 @@ paths:
                     createdAt: '2020-12-02T10:13:19.000Z'
                     expiresAt: '2020-12-02T11:13:19.000Z'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -3697,6 +4269,19 @@ paths:
           example: to1tcmSFHeYY5KzyhOqVKMKb
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -3709,12 +4294,38 @@ paths:
                     ttl: 0
                     createdAt: '2020-12-02T10:13:19.000Z'
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -3904,14 +4515,53 @@ paths:
           example: to1tcmSFHeYY5KzyhOqVKMKb
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -4114,6 +4764,19 @@ paths:
               $ref: '#/components/schemas/token-upload-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
@@ -4147,12 +4810,38 @@ paths:
                       thumbnail: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg'
                       mp4: 'https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -4289,6 +4978,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -4350,6 +5052,19 @@ paths:
                         - rel: last
                           uri: /live-streams?currentPage=1&pageSize=25
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -4590,6 +5305,19 @@ paths:
               $ref: '#/components/schemas/live-stream-creation-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -4599,6 +5327,19 @@ paths:
                 live-stream-response-example:
                   $ref: '#/components/examples/live-stream-response-example'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -4646,6 +5387,19 @@ paths:
                     detail: This value should not be null.
                     name: restreams[0][name]
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -4849,6 +5603,19 @@ paths:
           example: li400mYKSgQ6xs7taUeSaEKr
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -4858,6 +5625,19 @@ paths:
                 live-stream-response-example:
                   $ref: '#/components/examples/live-stream-response-example'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -5079,8 +5859,34 @@ paths:
           example: li400mYKSgQ6xs7taUeSaEKr
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -5269,6 +6075,19 @@ paths:
               $ref: '#/components/schemas/live-stream-update-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -5278,6 +6097,19 @@ paths:
                 live-stream-response-example:
                   $ref: '#/components/examples/live-stream-response-example'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -5325,6 +6157,19 @@ paths:
                     detail: This value should not be null.
                     name: restreams[0][name]
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -5593,12 +6438,38 @@ paths:
               $ref: '#/components/schemas/live-stream-thumbnail-upload-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/live-stream'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -5612,6 +6483,19 @@ paths:
                     title: 'Only [jpeg, jpg, JPG, JPEG] extensions are supported.'
                     name: file
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -5625,6 +6509,19 @@ paths:
                     name: liveStreamId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -5825,12 +6722,38 @@ paths:
           example: li400mYKSgQ6xs7taUeSaEKr
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/live-stream'
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -5844,6 +6767,19 @@ paths:
                     name: liveStreamId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -6053,6 +6989,19 @@ paths:
           example: en
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -6067,6 +7016,19 @@ paths:
                     languageName: English
                     default: false
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -6091,12 +7053,38 @@ paths:
                     detail: The "language" attribute is not valid.
                     name: language
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -6307,6 +7295,19 @@ paths:
               $ref: '#/components/schemas/captions-upload-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -6321,6 +7322,19 @@ paths:
                     languageName: English
                     default: false
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -6345,12 +7359,38 @@ paths:
                     detail: The "language" attribute is not valid.
                     name: language
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -6564,8 +7604,34 @@ paths:
           example: en
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -6590,12 +7656,38 @@ paths:
                     detail: The "language" attribute is not valid.
                     name: language
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -6802,6 +7894,19 @@ paths:
               $ref: '#/components/schemas/captions-update-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -6816,6 +7921,19 @@ paths:
                     languageName: English
                     default: true
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -6840,6 +7958,19 @@ paths:
                     detail: The "language" attribute is not valid.
                     name: language
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -6853,6 +7984,19 @@ paths:
                     name: irure mollit aute
                     status: 85925135
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -7064,6 +8208,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -7097,12 +8254,38 @@ paths:
                         - rel: last
                           uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions?currentPage=1&pageSize=25
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -7308,6 +8491,19 @@ paths:
           example: en
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -7320,12 +8516,38 @@ paths:
                     src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
                     language: fr
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -7533,6 +8755,19 @@ paths:
               $ref: '#/components/schemas/chapters-update-payload'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -7545,18 +8780,57 @@ paths:
                     src: 'https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt'
                     language: fr
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/bad-request'
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -7766,14 +9040,53 @@ paths:
           example: en
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -7960,6 +9273,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -7989,12 +9315,38 @@ paths:
                         - rel: last
                           uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters?currentPage=1&pageSize=25
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/not-found'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -8209,6 +9561,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -8268,6 +9633,19 @@ paths:
                         - rel: last
                           uri: 'https://ws.api.video/players?currentPage=1'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -8292,6 +9670,19 @@ paths:
                           min: 10
                           max: 100
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -8501,6 +9892,19 @@ paths:
         required: true
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
@@ -8528,6 +9932,19 @@ paths:
                     hideTitle: false
                     forceLoop: false
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -8797,6 +10214,19 @@ paths:
           example: pl45d5vFFGrfdsdsd156dGhh
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -8824,6 +10254,19 @@ paths:
                     hideTitle: false
                     forceLoop: false
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -8837,6 +10280,19 @@ paths:
                     name: playerId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -9020,8 +10476,34 @@ paths:
           example: pl45d5vFFGrfdsdsd156dGhh
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -9035,6 +10517,19 @@ paths:
                     name: playerId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -9218,6 +10713,19 @@ paths:
         required: true
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -9245,6 +10753,19 @@ paths:
                     hideTitle: false
                     forceLoop: false
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -9258,6 +10779,19 @@ paths:
                     name: playerId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -9522,12 +11056,38 @@ paths:
               $ref: '#/components/schemas/player-theme-upload-logo-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/player-theme'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -9541,6 +11101,19 @@ paths:
                     title: 'Only [''jpg'', ''JPG'', ''jpeg'', ''JPEG'', ''png'', ''PNG''] extensions are supported.'
                     name: file
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -9554,6 +11127,19 @@ paths:
                     name: playerId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -9763,8 +11349,34 @@ paths:
           example: pl14Db6oMJRH6SRVoOwORacK
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -9778,6 +11390,19 @@ paths:
                     name: playerId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -10009,6 +11634,19 @@ paths:
       - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -10087,6 +11725,19 @@ paths:
                       - rel: last
                         uri: "/analytics/videos/plays?dimension=videoId&filter=videoId:vi3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -10143,6 +11794,19 @@ paths:
                     detail: This value must refer to an existing video
                     name: filter
         '403':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Forbidden - Disabled Analytics
           content:
             application/json:
@@ -10155,6 +11819,19 @@ paths:
                     title: You cannot get analytics from this project.
                     status: 403
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -10168,6 +11845,19 @@ paths:
                     name:
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -10466,6 +12156,19 @@ paths:
       - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -10542,6 +12245,19 @@ paths:
                       - rel: last
                         uri: "/analytics/live-streams/plays?dimension=videoId&filter=liveStreamId:li3VooPMbQLWdPF26qfmNVX6&currentPage=1&pageSize=25"
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad request error
           content:
             application/json:
@@ -10598,6 +12314,19 @@ paths:
                     detail: This value must refer to an existing live stream
                     name: filter
         '403':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Forbidden - Disabled Analytics
           content:
             application/json:
@@ -10610,6 +12339,19 @@ paths:
                     title: You cannot get analytics from this project.
                     status: 403
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -10623,6 +12365,19 @@ paths:
                     name:
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -10872,6 +12627,19 @@ paths:
         - $ref: '#/components/parameters/page-size'
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -10905,6 +12673,19 @@ paths:
                         - rel: last
                           uri: 'https://ws.api.video/webhooks?currentPage=1'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -11110,6 +12891,19 @@ paths:
               $ref: '#/components/schemas/webhooks-creation-payload'
       responses:
         '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Created
           content:
             application/json:
@@ -11124,6 +12918,19 @@ paths:
                       - video.encoding.quality.completed
                     url: 'http://clientnotificationserver.com/notif?myquery=query'
         '400':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Bad Request
           content:
             application/json:
@@ -11147,6 +12954,19 @@ paths:
                         title: This attribute must be an array.
                         name: events
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -11352,6 +13172,19 @@ paths:
             type: string
       responses:
         '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Success
           content:
             application/json:
@@ -11366,6 +13199,19 @@ paths:
                       - video.encoding.quality.completed
                     url: 'http://clientnotificationserver.com/notif?myquery=query'
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
@@ -11550,8 +13396,34 @@ paths:
             type: string
       responses:
         '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: No Content
         '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Not Found
           content:
             application/json:
@@ -11565,6 +13437,19 @@ paths:
                     name: webhookId
                     status: 404
         '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
           description: Too Many Requests
           content:
             application/json:
