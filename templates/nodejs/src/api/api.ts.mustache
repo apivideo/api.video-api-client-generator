@@ -14,7 +14,7 @@ import { promisify } from 'util';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
 import ObjectSerializer from '../ObjectSerializer';
-import HttpClient, { QueryOptions } from '../HttpClient';
+import HttpClient, { QueryOptions, ApiResponseHeaders } from '../HttpClient';
 import ProgressiveSession from '../model/ProgressiveSession';
 {{#imports}}
 import {{classname}} from '../model/{{classname}}';
@@ -54,14 +54,22 @@ export default class {{classname}} {
         }
 
         uploadPart(file: string, progressListener?: (event: UploadProgressEvent) => void) {
+          return this.upload(file, false, progressListener).then((res) => res.body);
+        };
+
+        uploadPartWithResponseHeaders(file: string, progressListener?: (event: UploadProgressEvent) => void) {
           return this.upload(file, false, progressListener);
         };
 
         uploadLastPart(file: string, progressListener?: (event: UploadProgressEvent) => void) {
-           return this.upload(file, true, progressListener);
+           return this.upload(file, true, progressListener).then((res) => res.body);
         };
 
-        upload(file: string, isLast: boolean, progressListener?: (event: UploadProgressEvent) => void) {
+        uploadLastPartWithResponseHeaders(file: string, progressListener?: (event: UploadProgressEvent) => void) {
+           return this.upload(file, true, progressListener);
+        };        
+
+        async upload(file: string, isLast: boolean, progressListener?: (event: UploadProgressEvent) => void) {
             const queryParams: QueryOptions = {};
             queryParams.headers = {};
 
@@ -165,23 +173,30 @@ export default class {{classname}} {
               }
             }
 
-            const call = this.httpClient.call(localVarPath, queryParams);
+            const response = await this.httpClient.call(localVarPath, queryParams);
 
             this.currentPart++;
-            return call.then(response => ObjectSerializer.deserialize(
+            const responseBody = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(response.body, response.headers["content-type"]),
                 "{{{returnType}}}", "{{returnFormat}}"
-            ) as Type){{#vendorExtensions.x-client-copy-from-response}}.then((res) => {
-                this.{{paramName}} = (res as any).{{paramName}};
-                return res;
-            }){{/vendorExtensions.x-client-copy-from-response}};
+            ) as Type;
+            
+            {{#vendorExtensions.x-client-copy-from-response}}
+            this.{{paramName}} = (responseBody as any).{{paramName}};
+            {{/vendorExtensions.x-client-copy-from-response}}
+            
+            return {
+              body: responseBody,
+              headers: response.headers
+            }
         }
     }
 
     return new {{#titlecase}}{{nickname}}{{/titlecase}}ProgressiveSession<{{{returnType}}}>(this.httpClient);
   }
   {{/vendorExtensions.x-client-chunk-upload}}
-  {{#vendorExtensions.x-group-parameters}}
+
+{{#vendorExtensions.x-group-parameters}}
   /**
    {{#notes}}
    * {{&notes}}
@@ -194,7 +209,9 @@ export default class {{classname}} {
    * @param { {{dataType}} } searchParams.{{paramName}} {{description}}
    {{/allParams}}
    */
-  public async {{nickname}}({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+  public async {{nickname}}(args: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+    return this.{{nickname}}WithResponseHeaders(args).then((res) => res.body);
+  }
   {{/vendorExtensions.x-group-parameters}}
   {{^vendorExtensions.x-group-parameters}}
   /**
@@ -209,6 +226,39 @@ export default class {{classname}} {
    {{/allParams}}
    */
   public async {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}}{{{returnType}}}{{/returnType}} {{^returnType}}void{{/returnType}}> {
+    return this.{{nickname}}WithResponseHeaders({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener{{/vendorExtensions.x-client-chunk-upload}}).then((res) => res.body);;
+  }
+  {{/vendorExtensions.x-group-parameters}}
+
+
+  {{#vendorExtensions.x-group-parameters}}
+  /**
+   {{#notes}}
+   * {{&notes}}
+   {{/notes}}
+   {{#summary}}
+   * {{&summary}}
+   {{/summary}}
+   * @param {Object} searchParams
+   {{#allParams}}
+   * @param { {{dataType}} } searchParams.{{paramName}} {{description}}
+   {{/allParams}}
+   */
+  public async {{nickname}}WithResponseHeaders({ {{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}} }: { {{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}} }{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}): Promise<{{#returnType}} {headers: ApiResponseHeaders, body:{{{returnType}}} } {{/returnType}} {{^returnType}}void{{/returnType}}> {
+  {{/vendorExtensions.x-group-parameters}}
+  {{^vendorExtensions.x-group-parameters}}
+  /**
+   {{#notes}}
+   * {{&notes}}
+   {{/notes}}
+   {{#summary}}
+   * {{&summary}}
+   {{/summary}}
+   {{#allParams}}
+   * @param {{paramName}} {{description}}
+   {{/allParams}}
+   */
+  public async {{nickname}}WithResponseHeaders({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isFile}}{{#vendorExtensions.x-client-chunk-upload}}string{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}string | Readable | Buffer{{/vendorExtensions.x-client-chunk-upload}}{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{#vendorExtensions.x-optional-object}} = {}{{/vendorExtensions.x-optional-object}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, progressListener?: (event: UploadProgressEvent) => void{{/vendorExtensions.x-client-chunk-upload}}): Promise<{{#returnType}} {headers: ApiResponseHeaders, body:{{{returnType}}} } {{/returnType}} {{^returnType}}void{{/returnType}}> {
   {{/vendorExtensions.x-group-parameters}}
     const queryParams: QueryOptions = {};
     queryParams.headers = {};
@@ -364,13 +414,18 @@ export default class {{classname}} {
 
         const call = this.httpClient.call(localVarPath, queryParams);
 
-        return call.then(response => ObjectSerializer.deserialize(
-          ObjectSerializer.parse(response.body, response.headers["content-type"]),
-          "{{{returnType}}}", "{{returnFormat}}"
-          ) as {{{returnType}}});
+        return call.then(response => {
+          return {
+            headers: response.headers, 
+            body: ObjectSerializer.deserialize(
+              ObjectSerializer.parse(response.body, response.headers["content-type"]),
+              "{{{returnType}}}", "{{returnFormat}}"
+              ) as {{{returnType}}}
+          }
+      });
       }
       let uploadChunkSize = chunkSize;
-      let lastBody;
+      let lastResponse;
       let stream;
       let chunkNumber = 0;
 
@@ -409,15 +464,20 @@ export default class {{classname}} {
         }
         const call = this.httpClient.call(localVarPath, queryParams);
 
-        lastBody = await call.then(response => ObjectSerializer.deserialize(
-            ObjectSerializer.parse(response.body, response.headers["content-type"]),
-            "{{{returnType}}}", "{{returnFormat}}"
-          ) as {{{returnType}}});
+        lastResponse = await call.then(response => {
+          return { 
+            headers: response.headers,
+            body: ObjectSerializer.deserialize(
+              ObjectSerializer.parse(response.body, response.headers["content-type"]),
+              "{{{returnType}}}", "{{returnFormat}}"
+            ) as {{{returnType}}} 
+          }
+      });
 
         stream.close();
       }
 
-      return Promise.resolve(lastBody as {{{returnType}}});
+      return Promise.resolve(lastResponse!);
       {{/vendorExtensions.x-client-chunk-upload}}
       {{^vendorExtensions.x-client-chunk-upload}}
       {{#platforms}}
@@ -438,10 +498,15 @@ export default class {{classname}} {
     queryParams.body = formData;
     {{/hasFormParams}}
     return this.httpClient.call(localVarPath, queryParams)
-      .then(response => ObjectSerializer.deserialize(
+      .then(response => {
+        return {
+          headers: response.headers,
+          body: ObjectSerializer.deserialize(
         ObjectSerializer.parse(response.body, response.headers["content-type"]),
         "{{{returnType}}}", "{{returnFormat}}"
-      ) as {{{returnType}}});
+      ) as {{{returnType}}}
+        }
+  });
     {{/vendorExtensions.x-client-chunk-upload}}
   }
   {{/operation}}
