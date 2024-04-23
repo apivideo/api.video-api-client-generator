@@ -37,3 +37,14 @@ fun Data.toFile(): File {
  * @return The progress
  */
 fun Data.toProgress(): Int = this.getInt(AbstractUploadWorker.PROGRESS_KEY, 0)
+
+/**
+ * Extension functions for [Data] to deserialize the response headers.
+ *
+ * @return A map of headers
+ */
+fun Data.toHeaders() = JSON().deserialize(
+    this.getString(
+        AbstractUploadWorker.HEADERS_KEY
+    ), Map::class.java
+) as Map<String, List<String>>

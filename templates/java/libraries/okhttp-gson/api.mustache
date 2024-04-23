@@ -607,6 +607,11 @@ public class {{classname}} {
         }
 
         @Override
+        public ApiResponse<Video> uploadPartWithHttpInfo(File part, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            return uploadPartWithHttpInfo(part, this.partId++, isLastPart, uploadProgressListener);
+        }
+
+        @Override
         public ApiResponse<Video> uploadPartWithHttpInfo(File part, Integer partId, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
             ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfoInternal({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}partId, isLastPart, uploadProgressListener);
             {{#vendorExtensions.x-client-copy-from-response}}

@@ -70,22 +70,22 @@ class UploadWorker(
          * Use an executor to make the coroutine cancellable.
          */
         return try {
-            val video = suspendCancellableCoroutine { continuation ->
+            val response = suspendCancellableCoroutine { continuation ->
                 val future = uploaderExecutor.submit {
                     try {
-                        val video = if (token == null) {
-                            videosApi.upload(
+                        val response = if (token == null) {
+                            videosApi.uploadWithHttpInfo(
                                 videoId, file, this@UploadWorker
                             )
                         } else {
-                            videosApi.uploadWithUploadToken(
+                            videosApi.uploadWithUploadTokenWithHttpInfo(
                                 token,
                                 file,
                                 videoId,
                                 this@UploadWorker
                             )
                         }
-                        continuation.resume(video, null)
+                        continuation.resume(response, null)
                     } catch (e: Exception) {
                         continuation.resumeWithException(e)
                     }
@@ -97,7 +97,8 @@ class UploadWorker(
             Result.success(
                 workDataOf(
                     FILE_PATH_KEY to filePath,
-                    VIDEO_KEY to JSON().serialize(video)
+                    VIDEO_KEY to JSON().serialize(response.data),
+                    HEADERS_KEY to JSON().serialize(response.headers)
                 )
             )
         } catch (e: CancellationException) {
