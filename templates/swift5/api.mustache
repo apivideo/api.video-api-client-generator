@@ -59,25 +59,42 @@ extension {{projectName}}API {
     {{/isDeprecated}}
     @discardableResult
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{dataType}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: {{{returnType}}}{{^returnType}}Void{{/returnType}}?, _ error: Error?) -> Void)){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
+        return {{#vendorExtensions.x-client-chunk-upload}}try {{/vendorExtensions.x-client-chunk-upload}}{{operationId}}({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}, apiResponseQueue: apiResponseQueue) { result in
+            switch result {
+            {{#returnType}}
+            case let .success(response):
+                completion(response.body, nil)
+            {{/returnType}}
+            {{^returnType}}
+            case .success:
+                completion((), nil)
+            {{/returnType}}
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     {{#summary}}
+     {{{.}}}
+     {{/summary}}{{#allParams}}
+     - parameter {{paramName}}: ({{#isFormParam}}form{{/isFormParam}}{{#isQueryParam}}query{{/isQueryParam}}{{#isPathParam}}path{{/isPathParam}}{{#isHeaderParam}}header{{/isHeaderParam}}{{#isBodyParam}}body{{/isBodyParam}}) {{description}} {{^required}}(optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}
+     - parameter onProgressReady: progress handler to receive request progress.{{/vendorExtensions.x-client-chunk-upload}}
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the result of the request (incl. headers).
+     */
+    {{#isDeprecated}}
+    @available(*, deprecated, message: "This operation is deprecated.")
+    {{/isDeprecated}}
+    @discardableResult
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#hasParams}}, {{/hasParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{dataType}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}onProgressReady: ((Progress) -> Void)? = nil, {{/vendorExtensions.x-client-chunk-upload}}apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping (_ result: Swift.Result<Response<{{{returnType}}}{{^returnType}}Void{{/returnType}}>, ErrorResponse>) -> Void){{#vendorExtensions.x-client-chunk-upload}} throws{{/vendorExtensions.x-client-chunk-upload}} -> RequestTask {
         {{#vendorExtensions.x-client-chunk-upload}}
         if (try file.isMultiChunk) {
             return try UploadChunkRequestTaskQueue({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}{{/isFile}}{{/allParams}}, file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady, apiResponseQueue: apiResponseQueue, completion: completion)
         } else {
         {{/vendorExtensions.x-client-chunk-upload}}
-            return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}).execute(apiResponseQueue) { result in
-                switch result {
-                {{#returnType}}
-                case let .success(response):
-                    completion(response.body, nil)
-                {{/returnType}}
-                {{^returnType}}
-                case .success:
-                    completion((), nil)
-                {{/returnType}}
-                case let .failure(error):
-                    completion(nil, error)
-                }
-            }
+            return {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}}, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}onProgressReady: onProgressReady{{/vendorExtensions.x-client-chunk-upload}}).execute(apiResponseQueue, completion)
         {{#vendorExtensions.x-client-chunk-upload}}
         }
         {{/vendorExtensions.x-client-chunk-upload}}
@@ -134,18 +151,32 @@ extension {{projectName}}API {
         }
 
         public func uploadPart(file: URL, partId: Int, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue, completion: @escaping ((_ data: Video?, _ error: Error?) -> Void)) -> RequestTask {
+            let requestTask = uploadPart(file: file, partId: partId, isLastPart: isLastPart, onProgressReady: onProgressReady, completion: { result in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            })
+            return requestTask
+        }
+
+        public func uploadPart(file: URL, partId: Int, isLastPart: Bool, onProgressReady: ((Progress) -> Void)? = nil, apiResponseQueue: DispatchQueue  = {{projectName}}.apiResponseQueue, completion: @escaping (_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void) -> RequestTask {
             var numOfChunks: Int? = nil
             if (isLastPart) {
                 numOfChunks = partId
             }
             let requestBuilder = {{operationId}}WithRequestBuilder({{#allParams}}{{^isFile}}{{paramName}}: {{paramName}}, {{/isFile}}{{/allParams}}file: file, {{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}chunkId: partId, numOfChunks: numOfChunks, onProgressReady: onProgressReady)
-            execute(requestBuilder, apiResponseQueue: apiResponseQueue) { data, error in{{#vendorExtensions.x-client-copy-from-response}}
-                if let data = data {
+            execute(requestBuilder, apiResponseQueue: apiResponseQueue) { result in{{#vendorExtensions.x-client-copy-from-response}}
+                switch result {
+                case let .success(response):
                     if self.videoId == nil {
-                        self.videoId = data.videoId
+                        self.videoId = response.body.videoId
                     }
+                case .failure(_): break
                 }{{/vendorExtensions.x-client-copy-from-response}}
-                completion(data, error)
+               completion(result)
             }
             return requestBuilder.requestTask
         }
@@ -495,7 +526,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    internal class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}, {{paramName}}: {{{dataType}}}? = nil{{/vendorExtensions.x-client-copy-from-response}}{{#vendorExtensions.x-client-chunk-upload}}, chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil{{/vendorExtensions.x-client-chunk-upload}}) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = "\({{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}APIHelper.mapValueToPathItem({{paramName}}){{/isEnum}})"
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -574,7 +605,7 @@ extension {{projectName}}API {
     {{#isDeprecated}}
     @available(*, deprecated, message: "This operation is deprecated.")
     {{/isDeprecated}}
-    open class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}FileChunkInputStream{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
+    internal class func {{operationId}}WithRequestBuilder({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{datatypeWithEnum}}{{#lambda.titlecase}}{{operationId}}{{/lambda.titlecase}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{#isFile}}FileChunkInputStream{{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}}{{/isEnum}}{{^required}}? = nil{{/required}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}: {{{dataType}}}? = nil, {{/vendorExtensions.x-client-copy-from-response}}chunkId: Int? = nil, numOfChunks: Int? = nil, onProgressReady: ((Progress) -> Void)? = nil) -> RequestBuilder<{{{returnType}}}{{^returnType}}Void{{/returnType}}> {
         {{^pathParams}}let{{/pathParams}}{{#pathParams}}{{#-first}}var{{/-first}}{{/pathParams}} localVariablePath = "{{{path}}}"{{#pathParams}}
         let {{paramName}}PreEscape = "\({{#isEnum}}{{paramName}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}.rawValue{{/isContainer}}{{/isEnum}}{{^isEnum}}APIHelper.mapValueToPathItem({{paramName}}){{/isEnum}})"
         let {{paramName}}PostEscape = {{paramName}}PreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
