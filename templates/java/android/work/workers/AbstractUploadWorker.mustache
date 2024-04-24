@@ -157,6 +157,7 @@ abstract class AbstractUploadWorker(
     companion object {
         const val PROGRESS_KEY = "progress"
         const val VIDEO_KEY = "video"
+        const val HEADERS_KEY = "headers"
         const val ERROR_KEY = "error"
         const val FILE_PATH_KEY = "filePath"
 

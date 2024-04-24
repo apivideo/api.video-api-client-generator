@@ -529,7 +529,7 @@ public class {{classname}} {
         {{/vendorExtensions.x-client-chunk-upload}}
     }
     {{#vendorExtensions.x-client-chunk-upload}}
-     public{{#vendorExtensions.x-group-parameters}}private{{/vendorExtensions.x-group-parameters}} ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfo({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}Integer part, boolean isLast, UploadPartProgressListener uploadProgressListener) throws ApiException {
+    private ApiResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}Void{{/returnType}}> {{operationId}}PartWithHttpInfoInternal({{#allParams}}{{#useBeanValidation}}{{>beanValidationQueryParams}}{{/useBeanValidation}}{{{dataType}}} {{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{dataType}} {{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}Integer part, boolean isLast, UploadPartProgressListener uploadProgressListener) throws ApiException {
         long fileSize = file.length();
         okhttp3.Call localVarCall = {{operationId}}ChunkValidateBeforeCall({{#allParams}}{{paramName}}, {{/allParams}}{{#vendorExtensions.x-client-copy-from-response}}{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}0, fileSize, fileSize, isLast ? part : null, part, null,
                 uploadProgressListener, null, true);
@@ -602,12 +602,23 @@ public class {{classname}} {
 
         @Override
         public Video uploadPart(File part, Integer partId, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
-            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfo({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}partId, isLastPart, uploadProgressListener);
+            ApiResponse<Video> localVarResp = uploadPartWithHttpInfo(part, partId, isLastPart, uploadProgressListener);
+            return localVarResp.getData();
+        }
+
+        @Override
+        public ApiResponse<Video> uploadPartWithHttpInfo(File part, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            return uploadPartWithHttpInfo(part, this.partId++, isLastPart, uploadProgressListener);
+        }
+
+        @Override
+        public ApiResponse<Video> uploadPartWithHttpInfo(File part, Integer partId, boolean isLastPart, UploadPartProgressListener uploadProgressListener) throws ApiException {
+            ApiResponse<Video> localVarResp = {{operationId}}PartWithHttpInfoInternal({{#allParams}}{{^isFile}}this.{{paramName}}, {{/isFile}}{{/allParams}}part, {{#vendorExtensions.x-client-copy-from-response}}this.{{paramName}}, {{/vendorExtensions.x-client-copy-from-response}}partId, isLastPart, uploadProgressListener);
             {{#vendorExtensions.x-client-copy-from-response}}
             if(this.{{paramName}} == null) {
                 this.{{paramName}} = localVarResp.getData().{{vendorExtensions.getter}}();
             } {{/vendorExtensions.x-client-copy-from-response}}
-            return localVarResp.getData();
+            return localVarResp;
         }
     }
 

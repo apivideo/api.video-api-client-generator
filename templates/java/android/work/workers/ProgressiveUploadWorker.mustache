@@ -68,17 +68,17 @@ class ProgressiveUploadWorker(
          * Use an executor to make the coroutine cancellable.
          */
         return try {
-            val video = suspendCancellableCoroutine { continuation ->
+            val response = suspendCancellableCoroutine { continuation ->
                 val future = uploaderExecutor.submit {
                     try {
-                        val video = if (partId != DEFAULT_PART_ID) {
+                        val response = if (partId != DEFAULT_PART_ID) {
                             ProgressiveUploadSessionStore.get(sessionIndex)!!
-                                .uploadPart(file, partId, isLastPart, this@ProgressiveUploadWorker)
+                                .uploadPartWithHttpInfo(file, partId, isLastPart, this@ProgressiveUploadWorker)
                         } else {
                             ProgressiveUploadSessionStore.get(sessionIndex)!!
-                                .uploadPart(file, isLastPart, this@ProgressiveUploadWorker)
+                                .uploadPartWithHttpInfo(file, isLastPart, this@ProgressiveUploadWorker)
                         }
-                        continuation.resume(video, null)
+                        continuation.resume(response, null)
                     } catch (e: Exception) {
                         continuation.resumeWithException(e)
                     }
@@ -90,7 +90,8 @@ class ProgressiveUploadWorker(
             Result.success(
                 workDataOf(
                     FILE_PATH_KEY to filePath,
-                    VIDEO_KEY to JSON().serialize(video)
+                    VIDEO_KEY to JSON().serialize(response.data),
+                    HEADERS_KEY to JSON().serialize(response.headers)
                 )
             )
         } catch (e: CancellationException) {
