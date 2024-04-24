@@ -113,9 +113,11 @@ Method | Description | HTTP request
 
 ### Rate Limiting
 
-api.video implements [rate limiting](https://docs.api.video/reference#limitation) to ensure fair usage and stability of the service. The rate limit values can be retrieved from the response headers of any API request. 
+api.video implements rate limiting to ensure fair usage and stability of the service. The API provides the rate limit values in the response headers for any API requests you make. The /auth endpoint is the only route without rate limitation.
 
 In this Node.js client, you can access these headers by using the `*WithResponseHeaders()` versions of the methods. These methods return both the response body and the headers, allowing you to check the `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Retry-After` headers to understand your current rate limit status.
+
+Read more about these response headers in the [API reference](https://docs.api.video/reference#limitation).
 
 Here is an example of how to use these methods:
 
