@@ -50,7 +50,7 @@ public class RequestTaskQueue<T>: RequestTask {
 
     internal func execute(_ requestBuilder: RequestBuilder<T>,
                           apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
-                          completion: @escaping (_ data: T?, _ error: Error?) -> Void) -> Void {
+                          completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> Void {
         requestBuilders.append(requestBuilder)
         return operationQueue.addOperation(RequestOperation(requestBuilder: requestBuilder, apiResponseQueue: apiResponseQueue, willExecuteRequestBuilder: willExecuteRequestBuilder, completion: completion))
     }
@@ -67,11 +67,11 @@ public class RequestTaskQueue<T>: RequestTask {
 final class RequestOperation<T>: Operation {
     private let requestBuilder: RequestBuilder<T>
     private let apiResponseQueue: DispatchQueue
-    private let completion: (_ data: T?, _ error: Error?) -> Void
+    private let completion: (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void
     private let willExecuteRequestBuilder: (_: RequestBuilder<T>) -> Void
     private let group = DispatchGroup()
 
-    init(requestBuilder: RequestBuilder<T>, apiResponseQueue: DispatchQueue, willExecuteRequestBuilder: @escaping (_: RequestBuilder<T>) -> Void, completion: @escaping (_ data: T?, _ error: Error?) -> Void) {
+    init(requestBuilder: RequestBuilder<T>, apiResponseQueue: DispatchQueue, willExecuteRequestBuilder: @escaping (_: RequestBuilder<T>) -> Void, completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) {
         self.requestBuilder = requestBuilder
         self.apiResponseQueue = apiResponseQueue
         self.willExecuteRequestBuilder = willExecuteRequestBuilder
@@ -87,12 +87,7 @@ final class RequestOperation<T>: Operation {
 
         self.willExecuteRequestBuilder(requestBuilder)
         requestBuilder.execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                self.completion(response.body, nil)
-            case let .failure(error):
-                self.completion(nil, error)
-            }
+            self.completion(result)
             self.group.leave()
         }
         // Make task synchronous

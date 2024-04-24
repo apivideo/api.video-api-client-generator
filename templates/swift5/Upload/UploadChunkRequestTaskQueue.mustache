@@ -7,7 +7,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
 
     private let onProgressReady: ((Progress) -> Void)?
     private let apiResponseQueue: DispatchQueue
-    private let completion: (_ data: Video?, _ error: Error?) -> Void
+    private let completion: (_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void
 
     private var videoId: String?
     private let _uploadProgress: Progress
@@ -19,7 +19,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
                   queueLabel: String,
                   onProgressReady: ((Progress) -> Void)? = nil,
                   apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
-                  completion: @escaping (_ data: Video?, _ error: Error?) -> Void) {
+                  completion: @escaping (_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void) {
         _uploadProgress = Progress(totalUnitCount: fileSize)
         self.requestBuilders = requestBuilders
         self.onProgressReady = onProgressReady
@@ -38,7 +38,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
                               file: URL,
                               onProgressReady: ((Progress) -> Void)? = nil,
                               apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
-                              completion: @escaping (_ data: Video?, _ error: Error?) -> Void) throws {
+                              completion: @escaping (_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void) throws {
         let chunkInputStreams = try FileChunkInputStreamsBuilder(file: file).build()
         let numOfChunks = chunkInputStreams.count
 
@@ -56,7 +56,7 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
                               videoId: String? = nil,
                               onProgressReady: ((Progress) -> Void)? = nil,
                               apiResponseQueue: DispatchQueue = {{projectName}}.apiResponseQueue,
-                              completion: @escaping (_ data: Video?, _ error: Error?) -> Void) throws {
+                              completion: @escaping (_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void) throws {
         let chunkInputStreams = try FileChunkInputStreamsBuilder(file: file).build()
         let numOfChunks = chunkInputStreams.count
 
@@ -87,21 +87,22 @@ public class UploadChunkRequestTaskQueue: RequestTaskQueue<Video> {
         }
     }
 
-    private func completionHook(_ data: Video?, _ error: Error?) -> Void {
-        if let error = error {
-            if !hasSentError {
-                hasSentError = true
-                cancel()
-                completion(nil, error)
-            }
-        } else {
+    private func completionHook(_ result: Swift.Result<Response<Video>, ErrorResponse>) -> Void {
+        switch result {
+        case let .success(response):
             if (videoId == nil) {
-                videoId = data?.videoId
+                videoId = response.body.videoId
             }
             if (requestBuilders.allSatisfy {
                 $0.requestTask.state == .finished
             }) {
-                completion(data, nil)
+                completion(result)
+            }
+        case .failure(_):
+            if !hasSentError {
+                hasSentError = true
+                cancel()
+                completion(result)
             }
         }
     }

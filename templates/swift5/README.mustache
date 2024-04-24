@@ -79,7 +79,7 @@ import {{projectName}}
 // If you rather like to use the sandbox environment:
 // {{projectName}}.basePath = Environment.sandbox.rawValue
 
-try VideosAPI.uploadWithUploadToken(token: "MY_VIDEO_TOKEN", file: url) { video, error in
+try VideosAPI.uploadWithUploadToken(token: "MY_UPLOAD_TOKEN", file: url) { video, error in
     if let video = video {
         // Manage upload with upload token success here
     }
@@ -120,7 +120,27 @@ Method | HTTP request | Description
 {{#models}}{{#model}} - [{{classname}}](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{modelDocPath}}{{classname}}.md)
 {{/model}}{{/models}}
 
-### Documentation for Authorization
+### Rate limiting
+
+api.video implements rate limiting to ensure fair usage and stability of the service. The API provides the rate limit values in the response headers for any API requests you make. The /auth endpoint is the only route without rate limitation.
+
+In this client, you can access these headers by using the methods with the `completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void)` parameters. These methods return both the response body and the headers, allowing you to check the `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Retry-After` headers to understand your current rate limit status.
+Read more about these response headers in the [API reference](https://docs.api.video/reference#limitation).
+
+```swift
+try VideosAPI.uploadWithUploadToken(token: "MY_UPLOAD_TOKEN", file: url) { result in
+    switch result {
+    case .success(let response):
+        print("X-RateLimit-Limit:  \(String(describing: response.header["X-RateLimit-Limit"]))")
+        print("X-RateLimit-Remaining:  \(String(describing: response.header["X-RateLimit-Remaining"]))")
+        print("X-RateLimit-Retry-After:  \(String(describing: response.header["X-RateLimit-Retry-After"]))")
+    case .failure(_):
+        break
+    }
+}
+```
+
+### Authorization
 
 #### API key
 
