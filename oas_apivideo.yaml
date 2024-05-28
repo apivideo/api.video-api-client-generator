@@ -11565,8 +11565,10 @@ paths:
       tags:
       - Analytics
       summary: Get play events for video
-      description: Retrieve filtered analytics about the number of plays for your
-        videos in a project.
+      description: |
+        Retrieve filtered analytics about the number of plays for your videos in a project.
+
+        This endpoint will be deprecated with the release of Analytics v2.0.
       operationId: GET_analytics-videos-plays
       parameters:
       - name: from
@@ -11871,6 +11873,7 @@ paths:
                     status: 429
       security:
       - apiKey: []
+      deprecated: true
       x-client-action: getVideosPlays
       x-group-parameters: true
       x-client-paginated: true
@@ -12087,8 +12090,10 @@ paths:
       tags:
       - Analytics
       summary: Get play events for live stream
-      description: Retrieve filtered analytics about the number of plays for your
-        live streams in a project.
+      description: |
+        Retrieve filtered analytics about the number of plays for your live streams in a project.
+
+        This endpoint will be deprecated with the release of Analytics v2.0.
       operationId: GET_analytics-live-streams-plays
       parameters:
       - name: from
@@ -12391,6 +12396,7 @@ paths:
                     status: 429
       security:
       - apiKey: []
+      deprecated: true
       x-client-action: getLiveStreamsPlays
       x-group-parameters: true
       x-client-paginated: true
