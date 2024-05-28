@@ -174,11 +174,11 @@ public class WebhooksApiTest extends AbstractApiTest {
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400)).satisfies(e -> {
                         ApiException apiException = (ApiException) e;
                         assertThat(apiException.getProblems()).containsExactlyInAnyOrder(
-                                new ApiException.ApiProblem("https://docs.api.video/docs/attributerequired",
+                                new ApiException.ApiProblem("https://docs.api.video/reference/attribute-required",
                                         "This attribute is required.", "events"),
-                                new ApiException.ApiProblem("https://docs.api.video/docs/attributerequired",
+                                new ApiException.ApiProblem("https://docs.api.video/reference/attribute-required",
                                         "This attribute is required.", "url"),
-                                new ApiException.ApiProblem("https://docs.api.video/docs/attributeinvalid",
+                                new ApiException.ApiProblem("https://docs.api.video/reference/invalid-attribute",
                                         "This attribute must be an array.", "events"));
                     }).hasMessage("This attribute is required.");
         }

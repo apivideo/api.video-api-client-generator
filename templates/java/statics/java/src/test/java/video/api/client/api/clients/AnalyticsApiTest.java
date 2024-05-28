@@ -11,22 +11,22 @@
 
 package video.api.client.api.clients;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import video.api.client.api.ApiException;
+import video.api.client.api.models.*;
 
-import com.google.common.truth.Truth;
+import java.time.OffsetDateTime;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import video.api.client.api.ApiException;
-import video.api.client.api.models.AnalyticsData;
-import video.api.client.api.models.Page;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * API tests for AnalyticsApi
@@ -34,188 +34,250 @@ import video.api.client.api.models.Page;
 @DisplayName("AnalyticsApi")
 public class AnalyticsApiTest extends AbstractApiTest {
 
-    private final AnalyticsApi api = new AnalyticsApi(apiClientMock.getHttpClient());
+    private final AnalyticsApi api = apiClientMock.analytics();
 
     @Nested
-    @DisplayName("getLiveStreamsPlays")
-    class getLiveStreamsPlays {
-        private static final String PAYLOADS_PATH = "/payloads/analytics/getLiveStreamsPlays/";
+    @DisplayName("getAggregatedMetrics")
+    class getAggregatedMetrics {
+        private static final String PAYLOADS_PATH = "/payloads/analytics/getAggregatedMetrics/";
 
         @Test
         @DisplayName("required parameters")
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), null).execute())
-                    .isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'dimension' when calling getLiveStreamsPlays");
-            assertThatThrownBy(() -> api.getLiveStreamsPlays(null, "liveStreamId").execute())
-                    .isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'from' when calling getLiveStreamsPlays");
-
-            assertThatNoException()
-                    .isThrownBy(() -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "liveStreamId").execute());
+            assertThatNoException().isThrownBy(() -> api.getAggregatedMetrics("play", "count").execute());
+            // String metric, String aggregation, OffsetDateTime from, OffsetDateTime to, String filterBy, Integer
+            // currentPage, Integer pageSize
         }
 
         @Test
-        @DisplayName("200 response by liveStreamId")
-        public void responseWithStatusByLiveStreamId200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
+        @DisplayName("200 response")
+        public void responseWithStatus200Test() throws ApiException {
+            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "liveStreamId").execute();
+            AnalyticsAggregatedMetricsResponse res = api.getAggregatedMetrics("play", "count").execute();
 
-            AnalyticsData expected1 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaI");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaB");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("li3q7HxhApxRF1c8F8r6VeaD");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
-        }
-
-        @Test
-        @DisplayName("200 response by country")
-        public void responseWithStatusByCountry200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
-
-            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "country").execute();
-
-            AnalyticsData expected1 = new AnalyticsData().value("france");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("united states");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("spain");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
-        }
-
-        @Test
-        @DisplayName("200 response by emittedAt")
-        public void responseWithStatusByEmittedAt200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
-
-            Page<AnalyticsData> res = api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "emittedAt").execute();
-
-            AnalyticsData expected1 = new AnalyticsData().value("2023-06-10T10:00:00.000Z");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("2023-06-10T11:00:00.000Z");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("2023-06-10T12:00:00.000Z");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            /*
+             * sample response: { "context" : { "metric" : "impression", "aggregation" : "count", "timeframe" : { "from"
+             * : "2024-05-28T11:15:07+00:00", "to" : "2024-05-29T11:15:07+00:00" } }, "data" : 346.5 }
+             */
         }
 
         @Test
         @DisplayName("400 response")
-        public void responseWithStatus400ForUnknownDimensionTest() throws ApiException {
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-2.json"));
+        public void responseWithStatus400Test() throws ApiException {
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
-            ApiException e = assertThrows(ApiException.class,
-                    () -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "unknownDimension").execute());
-            Truth.assertThat(e.getCode()).isEqualTo(400);
-            Truth.assertThat(e).hasMessageThat().contains("A query parameter is invalid.");
+            assertThatThrownBy(() -> api.getAggregatedMetrics("play", "count").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
+                    .hasMessage("An attribute is invalid.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/request-invalid-query-parameter", "title" :
+             * "A query parameter is invalid.", "status" : 400, "detail" : "This field was not expected.", "name" :
+             * "from:2024-05-20T09:15:05+02:00" }
+             */
         }
 
         @Test
         @DisplayName("404 response")
         public void responseWithStatus404Test() throws ApiException {
-            answerOnAnyRequest(404, "");
+            answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            ApiException e = assertThrows(ApiException.class,
-                    () -> api.getLiveStreamsPlays(LocalDate.parse("2023-04-01"), "country").execute());
-            Truth.assertThat(e.getCode()).isEqualTo(404);
-            Truth.assertThat(e).hasMessageThat().contains("");
+            assertThatThrownBy(() -> api.getAggregatedMetrics("play", "count").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
+                    .hasMessage("Unrecognized request URL.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/unrecognized-request-url", "title" :
+             * "Unrecognized request URL.", "status" : 404 }
+             */
+        }
+
+        @Test
+        @DisplayName("429 response")
+        public void responseWithStatus429Test() throws ApiException {
+            answerOnAnyRequest(429, readResourceFile(PAYLOADS_PATH + "responses/429.json"));
+
+            assertThatThrownBy(() -> api.getAggregatedMetrics("play", "count").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(429))
+                    .hasMessage("Too many requests.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/too-many-requests", "title" :
+             * "Too many requests.", "status" : 429 }
+             */
         }
     }
 
     @Nested
-    @DisplayName("getVideosPlays")
-    class getVideosPlays {
-        private static final String PAYLOADS_PATH = "/payloads/analytics/getVideosPlays/";
+    @DisplayName("getMetricsBreakdown")
+    class getMetricsBreakdown {
+        private static final String PAYLOADS_PATH = "/payloads/analytics/getMetricsBreakdown/";
 
         @Test
         @DisplayName("required parameters")
         public void requiredParametersTest() {
             answerOnAnyRequest(201, "{}");
 
-            assertThatThrownBy(() -> api.getVideosPlays(LocalDate.parse("2023-04-01"), null).execute())
-                    .isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'dimension' when calling getVideosPlays");
-            assertThatThrownBy(() -> api.getVideosPlays(null, "videoId").execute()).isInstanceOf(ApiException.class)
-                    .hasMessage("Missing the required parameter 'from' when calling getVideosPlays");
-
-            assertThatNoException()
-                    .isThrownBy(() -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "videoId").execute());
+            assertThatNoException().isThrownBy(() -> api.getMetricsBreakdown("play", "media-id").execute());
+            // String metric, String breakdown, OffsetDateTime from, OffsetDateTime to, String filterBy, Integer
+            // currentPage, Integer pageSize
         }
 
         @Test
-        @DisplayName("200 response by videoId")
-        public void responseWithStatusByVideoId200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-0.json"));
+        @DisplayName("200 response")
+        public void responseWithStatus200Test() throws ApiException {
+            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
 
-            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "videoId").execute();
+            Page<AnalyticsMetricsBreakdownResponseData> res = api.getMetricsBreakdown("play", "media-id").execute();
 
-            AnalyticsData expected1 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaI");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaF");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("vi3q7HxhApxRF1c8F8r6VeaH");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
-        }
-
-        @Test
-        @DisplayName("200 response by country")
-        public void responseWithStatusByCountry200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-1.json"));
-
-            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "country").execute();
-
-            AnalyticsData expected1 = new AnalyticsData().value("france");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("united states");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("spain");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
-        }
-
-        @Test
-        @DisplayName("200 response by emittedAt")
-        public void responseWithStatusByEmittedAt200Test() throws ApiException {
-            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200-2.json"));
-
-            Page<AnalyticsData> res = api.getVideosPlays(LocalDate.parse("2023-04-01"), "emittedAt").execute();
-
-            AnalyticsData expected1 = new AnalyticsData().value("2023-06-10T10:00:00.000Z");
-            expected1.setPlays(100);
-            AnalyticsData expected2 = new AnalyticsData().value("2023-06-10T11:00:00.000Z");
-            expected2.setPlays(10);
-            AnalyticsData expected3 = new AnalyticsData().value("2023-06-10T12:00:00.000Z");
-            expected3.setPlays(1);
-            assertThat(res.getItems()).containsExactlyInAnyOrder(expected1, expected2, expected3);
+            /*
+             * sample response: { "context" : { "metric" : "play", "breakdown" : "country", "timeframe" : { "from" :
+             * "2024-04-28T07:15:05+00:00", "to" : "2024-05-29T11:25:37+00:00" } }, "data" : [ { "metricValue" : 7,
+             * "dimensionValue" : "FR" } ], "pagination" : { "currentPage" : 1, "currentPageItems" : 1, "pageSize" : 25,
+             * "pagesTotal" : 1, "itemsTotal" : 1, "links" : [ { "rel" : "self", "uri" :
+             * "/data/buckets/play/country?from=2024-04-28T09%3A15%3A05%2B02%3A00&amp;currentPage=1&amp;pageSize=25" },
+             * { "rel" : "first", "uri" :
+             * "/data/buckets/play/country?from=2024-04-28T09%3A15%3A05%2B02%3A00&amp;currentPage=1&amp;pageSize=25" },
+             * { "rel" : "last", "uri" :
+             * "/data/buckets/play/country?from=2024-04-28T09%3A15%3A05%2B02%3A00&amp;currentPage=1&amp;pageSize=25" } ]
+             * } }
+             */
         }
 
         @Test
         @DisplayName("400 response")
-        public void responseWithStatus400ForUnknownDimensionTest() throws ApiException {
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-2.json"));
+        public void responseWithStatus400Test() throws ApiException {
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
-            ApiException e = assertThrows(ApiException.class,
-                    () -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "unknownDimension").execute());
-            Truth.assertThat(e.getCode()).isEqualTo(400);
-            Truth.assertThat(e).hasMessageThat().contains("A query parameter is invalid.");
+            assertThatThrownBy(() -> api.getMetricsBreakdown("play", "media-id").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
+                    .hasMessage("An attribute is invalid.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/request-invalid-query-parameter", "title" :
+             * "A query parameter is invalid.", "status" : 400, "detail" : "This field was not expected.", "name" :
+             * "from:2024-05-20T09:15:05+02:00" }
+             */
         }
 
         @Test
         @DisplayName("404 response")
         public void responseWithStatus404Test() throws ApiException {
-            answerOnAnyRequest(404, "");
+            answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            ApiException e = assertThrows(ApiException.class,
-                    () -> api.getVideosPlays(LocalDate.parse("2023-04-01"), "country").execute());
-            Truth.assertThat(e.getCode()).isEqualTo(404);
-            Truth.assertThat(e).hasMessageThat().contains("");
+            assertThatThrownBy(() -> api.getMetricsBreakdown("play", "media-id").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
+                    .hasMessage("Unrecognized request URL.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/unrecognized-request-url", "title" :
+             * "Unrecognized request URL.", "status" : 404 }
+             */
+        }
+
+        @Test
+        @DisplayName("429 response")
+        public void responseWithStatus429Test() throws ApiException {
+            answerOnAnyRequest(429, readResourceFile(PAYLOADS_PATH + "responses/429.json"));
+
+            assertThatThrownBy(() -> api.getMetricsBreakdown("play", "media-id").execute())
+                    .isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(429))
+                    .hasMessage("Too many requests.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/too-many-requests", "title" :
+             * "Too many requests.", "status" : 429 }
+             */
+        }
+    }
+
+    @Nested
+    @DisplayName("getMetricsOverTime")
+    class getMetricsOverTime {
+        private static final String PAYLOADS_PATH = "/payloads/analytics/getMetricsOverTime/";
+
+        @Test
+        @DisplayName("required parameters")
+        public void requiredParametersTest() {
+            answerOnAnyRequest(201, "{}");
+
+            assertThatNoException().isThrownBy(() -> api.getMetricsOverTime("play").execute());
+            // String metric, OffsetDateTime from, OffsetDateTime to, OffsetDateTime interval, String filterBy, Integer
+            // currentPage, Integer pageSize
+        }
+
+        @Test
+        @DisplayName("200 response")
+        public void responseWithStatus200Test() throws ApiException {
+            answerOnAnyRequest(200, readResourceFile(PAYLOADS_PATH + "responses/200.json"));
+
+            Page<AnalyticsMetricsOverTimeResponseData> res = api.getMetricsOverTime("play").execute();
+
+            /*
+             * sample response: { "context" : { "metric" : "play", "interval" : "hour", "timeframe" : { "from" :
+             * "2024-05-28T11:08:39+00:00", "to" : "2024-05-29T11:08:39+00:00" } }, "data" : [ { "emittedAt" :
+             * "2024-05-29T07:00:00+00:00", "metricValue" : 2 }, { "emittedAt" : "2024-05-29T08:00:00+00:00",
+             * "metricValue" : 1 }, { "emittedAt" : "2024-05-29T09:00:00+00:00", "metricValue" : 1 } ], "pagination" : {
+             * "currentPage" : 1, "currentPageItems" : 3, "pageSize" : 25, "pagesTotal" : 1, "itemsTotal" : 3, "links" :
+             * [ { "rel" : "self", "uri" : "/data/timeseries/play?currentPage=1&amp;pageSize=25" }, { "rel" : "first",
+             * "uri" : "/data/timeseries/play?currentPage=1&amp;pageSize=25" }, { "rel" : "last", "uri" :
+             * "/data/timeseries/play?currentPage=1&amp;pageSize=25" } ] } }
+             */
+        }
+
+        @Test
+        @DisplayName("400 response")
+        public void responseWithStatus400Test() throws ApiException {
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
+
+            assertThatThrownBy(() -> api.getMetricsOverTime("play").execute()).isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(400))
+                    .hasMessage("An attribute is invalid.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/request-invalid-query-parameter", "title" :
+             * "A query parameter is invalid.", "status" : 400, "detail" : "This field was not expected.", "name" :
+             * "from:2024-05-20T09:15:05+02:00" }
+             */
+        }
+
+        @Test
+        @DisplayName("404 response")
+        public void responseWithStatus404Test() throws ApiException {
+            answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
+
+            assertThatThrownBy(() -> api.getMetricsOverTime("play").execute()).isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
+                    .hasMessage("Unrecognized request URL.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/unrecognized-request-url", "title" :
+             * "Unrecognized request URL.", "status" : 404 }
+             */
+        }
+
+        @Test
+        @DisplayName("429 response")
+        public void responseWithStatus429Test() throws ApiException {
+            answerOnAnyRequest(429, readResourceFile(PAYLOADS_PATH + "responses/429.json"));
+
+            assertThatThrownBy(() -> api.getMetricsOverTime("play").execute()).isInstanceOf(ApiException.class)
+                    .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(429))
+                    .hasMessage("Too many requests.");
+
+            /*
+             * sample response: { "type" : "https://docs.api.video/reference/too-many-requests", "title" :
+             * "Too many requests.", "status" : 429 }
+             */
         }
     }
 

@@ -3,6 +3,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
 import io.swagger.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
@@ -35,6 +36,13 @@ public class Csharp extends CSharpClientCodegen {
         super();
         this.reservedWords.remove("Version");
         packageGuid = "{" + java.util.UUID.nameUUIDFromBytes(this.packageVersion.getBytes()).toString().toUpperCase(Locale.ROOT) + "}";
+    }
+
+
+    @Override
+    public void preprocessOpenAPI(OpenAPI openAPI) {
+        super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
     }
 
     @Override
@@ -187,7 +195,7 @@ public class Csharp extends CSharpClientCodegen {
             System.out.println(model);
             model.allVars.stream().filter(v -> v.name.equals("Data")).findFirst().ifPresent(codegenProperty -> {
                 Map<String, String> paginationProperties = new HashMap<>();
-                paginationProperties.put("type", codegenProperty.complexType);
+                paginationProperties.put("type", codegenProperty.dataType.substring(codegenProperty.dataType.indexOf("<") + 1, codegenProperty.dataType.indexOf(">")));
                 paginationProperties.put("getter", codegenProperty.getter);
                 operation.vendorExtensions.put("x-pagination", paginationProperties);
             });

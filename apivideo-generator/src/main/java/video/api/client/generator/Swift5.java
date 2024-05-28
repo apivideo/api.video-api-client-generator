@@ -2,6 +2,7 @@ package video.api.client.generator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.languages.Swift5ClientCodegen;
@@ -24,6 +25,11 @@ public class Swift5 extends Swift5ClientCodegen {
     public static final String VENDOR_X_CLIENT_HIDDEN = "x-client-hidden";
     public static final List<String> PARAMETERS_TO_HIDE_IN_CLIENT_DOC = Arrays.asList("currentPage", "pageSize");
 
+    @Override
+    public void preprocessOpenAPI(OpenAPI openAPI) {
+        super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
+    }
     @Override
     public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
         Common.replaceDescriptionsAndSamples(objs, "swift5");

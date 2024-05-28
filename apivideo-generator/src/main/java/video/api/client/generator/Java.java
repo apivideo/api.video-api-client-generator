@@ -1,5 +1,6 @@
 package video.api.client.generator;
 
+import io.swagger.v3.oas.models.OpenAPI;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
@@ -140,7 +141,11 @@ public class Java extends JavaClientCodegen {
         supportingFiles.removeIf(e -> skippedFiles.contains(e.getTemplateFile()));
     }
 
-
+    @Override
+    public void preprocessOpenAPI(OpenAPI openAPI) {
+        super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
+    }
 
     private void handlePagination(List<Object> allModels, CodegenOperation operation) {
         Optional<Map> map = allModels.stream().filter(m -> ((CodegenModel) ((Map) m).get("model")).classname.equals(operation.returnType)).map(a -> (Map) a).findFirst();
@@ -149,7 +154,11 @@ public class Java extends JavaClientCodegen {
             System.out.println(model);
             model.allVars.stream().filter(v -> v.name.equals("data")).findFirst().ifPresent(codegenProperty -> {
                 Map<String, String> paginationProperties = new HashMap<>();
-                paginationProperties.put("type", codegenProperty.complexType);
+                if(codegenProperty.dataType.contains("<") && codegenProperty.dataType.contains(">")) {
+                    paginationProperties.put("type", codegenProperty.dataType.substring(codegenProperty.dataType.indexOf("<") + 1, codegenProperty.dataType.indexOf(">")));
+                } else {
+                    paginationProperties.put("type", codegenProperty.dataType);
+                }
                 paginationProperties.put("getter", codegenProperty.getter);
                 operation.vendorExtensions.put("x-pagination", paginationProperties);
             });
