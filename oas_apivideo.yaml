@@ -11663,6 +11663,8 @@ paths:
         schema:
           type: string
         example: filterBy[continent]=EU&filterBy[country]=FR&filterBy[browser]=Safari&filterBy[browser]=Firefox
+      - $ref: '#/components/parameters/current-page'
+      - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           headers:
@@ -11785,6 +11787,7 @@ paths:
       x-client-action: getAggregatedMetrics
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
       x-doctave:
         code-samples:
   '/data/buckets/{metric}/{breakdown}':
@@ -11891,6 +11894,8 @@ paths:
         schema:
           type: string
         example: filterBy[continent]=EU&filterBy[country]=FR&filterBy[browser]=Safari&filterBy[browser]=Firefox
+      - $ref: '#/components/parameters/current-page'
+      - $ref: '#/components/parameters/page-size'
       responses:
         '200':
           headers:
@@ -12028,6 +12033,7 @@ paths:
       x-client-action: getMetricsBreakdown
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
       x-doctave:
         code-samples:
   '/data/timeseries/{metric}':
@@ -12121,6 +12127,26 @@ paths:
         schema:
           type: string
         example: filterBy[continent]=EU&filterBy[country]=FR&filterBy[browser]=Safari&filterBy[browser]=Firefox
+      - name: currentPage
+        in: query
+        description: 'Choose the number of search results to return per page. Minimum value: 1'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 1
+        example: 2
+      - name: pageSize
+        in: query
+        description: 'Results per page. Allowed values 1-100, default is 25.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 25
+        example: 30
       responses:
         '200':
           headers:
@@ -15593,7 +15619,7 @@ components:
           description: The name of the parameter that caused the error.
           type: string
     analytics-aggregated-metrics-response:
-      title: Analytics v2.0 response for aggregated metrics
+      title: AggregatedMetrics
       type: object
       properties:
         context:
@@ -15635,12 +15661,17 @@ components:
                   format: date-time
                   example: '2024-05-29T11:15:07+00:00'
         data:
-          type: number
-          format: float
-          example: '356.2'
+          items:
+            type: number
+            format: float
+            example: '356.2'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/pagination'
       required:
-      - context
-      - data
+        - context
+        - data
+        - pagination
     analytics-metrics-breakdown-response:
       title: Analytics v2.0 response for metrics breakdown by dimension
       type: object

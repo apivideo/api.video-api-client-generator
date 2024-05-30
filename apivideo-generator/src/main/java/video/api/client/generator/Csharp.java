@@ -187,7 +187,7 @@ public class Csharp extends CSharpClientCodegen {
             System.out.println(model);
             model.allVars.stream().filter(v -> v.name.equals("Data")).findFirst().ifPresent(codegenProperty -> {
                 Map<String, String> paginationProperties = new HashMap<>();
-                paginationProperties.put("type", codegenProperty.complexType);
+                paginationProperties.put("type", codegenProperty.dataType.substring(codegenProperty.dataType.indexOf("<") + 1, codegenProperty.dataType.indexOf(">")));
                 paginationProperties.put("getter", codegenProperty.getter);
                 operation.vendorExtensions.put("x-pagination", paginationProperties);
             });
