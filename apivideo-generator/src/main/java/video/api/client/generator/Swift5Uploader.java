@@ -22,6 +22,7 @@ public class Swift5Uploader extends Swift5 {
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
         super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
 
         Set<String> pathsToRemove = new HashSet<>();
 

@@ -11561,6 +11561,7 @@ paths:
               // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
   '/data/metrics/{metric}/{aggregation}':
+    x-ignored: true
     get:
       tags:
       - Analytics v2.0 beta
@@ -11791,6 +11792,7 @@ paths:
       x-doctave:
         code-samples:
   '/data/buckets/{metric}/{breakdown}':
+    x-ignored: true
     get:
       tags:
       - Analytics v2.0 beta
@@ -12037,6 +12039,7 @@ paths:
       x-doctave:
         code-samples:
   '/data/timeseries/{metric}':
+    x-ignored: true
     get:
       tags:
       - Analytics v2.0 beta
@@ -15619,10 +15622,12 @@ components:
           description: The name of the parameter that caused the error.
           type: string
     analytics-aggregated-metrics-response:
+      x-ignored: true
       title: AggregatedMetrics
       type: object
       properties:
         context:
+          x-ignored: true
           type: object
           properties:
             metric:
@@ -15647,6 +15652,7 @@ components:
                 - sum
               example: count
             timeframe:
+              x-ignored: true
               description: Returns the starting and ending date-times of the period you want analytics for.
               type: object
               properties:
@@ -15673,10 +15679,12 @@ components:
         - data
         - pagination
     analytics-metrics-breakdown-response:
+      x-ignored: true
       title: Analytics v2.0 response for metrics breakdown by dimension
       type: object
       properties:
         context:
+          x-ignored: true
           type: object
           properties:
             metric:
@@ -15702,6 +15710,7 @@ components:
                 - browser
               example: country
             timeframe:
+              x-ignored: true
               description: Returns the starting and ending date-times of the period you want analytics for.
               type: object
               properties:
@@ -15716,9 +15725,11 @@ components:
                   format: date-time
                   example: '2024-05-29T11:15:07+00:00'
         data:
+          x-ignored: true
           description: Returns an array of dimensions and their respective metrics.
           type: array
-          items:            
+          items:
+            x-ignored: true
             type: object
             properties:
               dimensionValue:
@@ -15735,10 +15746,12 @@ components:
       - data
       - pagination
     analytics-metrics-over-time-response:
+      x-ignored: true
       title: Analytics v2.0 response for metrics over time
       type: object
       properties:
         context:
+          x-ignored: true
           type: object
           properties:
             metric:
@@ -15759,6 +15772,7 @@ components:
                 - day
               example: day
             timeframe:
+              x-ignored: true
               description: Returns the starting and ending date-times of the period you want analytics for.
               type: object
               properties:
@@ -15773,9 +15787,11 @@ components:
                   format: date-time
                   example: '2024-05-29T11:15:07+00:00'
         data:
+          x-ignored: true
           description: Returns an array of metrics and the timestamps .
           type: array
-          items:            
+          items:
+            x-ignored: true
             type: object
             properties:
               emittedAt:

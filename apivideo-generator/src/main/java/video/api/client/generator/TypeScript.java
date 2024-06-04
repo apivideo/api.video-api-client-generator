@@ -475,6 +475,8 @@ public class TypeScript extends DefaultCodegen {
 
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
+        Common.preprocessOpenAPI(openAPI);
+
         if (additionalProperties.containsKey(NPM_NAME)) {
             // If no npmVersion is provided in additional properties, version from API specification is used.
             // If none of them is provided then fallbacks to default version

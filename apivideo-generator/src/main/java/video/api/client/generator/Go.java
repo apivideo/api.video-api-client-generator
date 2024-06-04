@@ -3,6 +3,7 @@ package video.api.client.generator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import io.swagger.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.*;
@@ -38,6 +39,13 @@ public class Go extends GoClientCodegen {
             return new CodegenProperty();
         }
         return super.fromProperty(name, p);
+    }
+
+
+    @Override
+    public void preprocessOpenAPI(OpenAPI openAPI) {
+        super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
     }
 
     @Override
