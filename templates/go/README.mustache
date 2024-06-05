@@ -135,7 +135,7 @@ client := {{packageName}}.ClientBuilder("API_VIDEO_KEY").Build()
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**](https://github.com/apivideo/{{gitRepoId}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 

@@ -114,7 +114,7 @@ All URIs are relative to *{{basePath}}*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{packageUrl}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{#operations}}{{#operation}}{{#isDeprecated}}**(deprecated)** {{/isDeprecated}}[**{{operationId}}**]({{packageUrl}}/blob/main/{{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** `{{path}}` | {{#summary}}{{summary}}{{/summary}}
 {{/operation}}{{/operations}}
 {{/x-client-hidden}}{{/apis}}{{/apiInfo}}
 
