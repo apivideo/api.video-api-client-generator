@@ -25,6 +25,7 @@ public class JavaUploader extends Java {
 
     }
 
+
     /**
      * Filter the OpenAPI description file entries in order to keep only stuff related to video upload & authentication
      * @param openAPI
@@ -32,6 +33,7 @@ public class JavaUploader extends Java {
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
         super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
 
         Set<String> pathsToRemove = new HashSet<>();
 

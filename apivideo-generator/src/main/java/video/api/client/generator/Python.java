@@ -85,6 +85,7 @@ public class Python extends PythonClientCodegen {
     }
 
     public void preprocessOpenAPI(OpenAPI openAPI) {
+        Common.preprocessOpenAPI(openAPI);
         Map<String, PathItem> pathItems = openAPI.getPaths();
         io.swagger.v3.oas.models.Paths newPaths = new io.swagger.v3.oas.models.Paths();
 
