@@ -1,12 +1,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio {{^netStandard}}2012{{/netStandard}}{{#netStandard}}14{{/netStandard}}
-VisualStudioVersion = {{^netStandard}}12.0.0.0{{/netStandard}}{{#netStandard}}14.0.25420.1{{/netStandard}}
-MinimumVisualStudioVersion = {{^netStandard}}10.0.0.1{{/netStandard}}{{#netStandard}}10.0.40219.1{{/netStandard}}
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "{{packageName}}", "src\{{packageName}}.csproj", "{{packageGuid}}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "{{packageName}}", "src\{{packageName}}.csproj", "{{packageGuid}}"
 EndProject
-{{^excludeTests}}Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "{{testPackageName}}", "tests\ApiVideoTests.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiVideoTests", "tests\ApiVideoTests.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47CD76E4-3F74-3BC2-A1BA-AF194D07E1FA} = {47CD76E4-3F74-3BC2-A1BA-AF194D07E1FA}
+	EndProjectSection
 EndProject
-{{/excludeTests}}Global
+Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

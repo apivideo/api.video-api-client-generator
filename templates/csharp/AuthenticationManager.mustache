@@ -36,7 +36,7 @@ namespace {{packageName}}.Client
         /// </summary>
         /// <param name="request">The request to update</param>
         /// <returns>The request updated</returns>
-        public IRestRequest Intercept(IRestRequest request){
+        public RestRequest Intercept(RestRequest request){
 
             if(request.Resource.Equals("/auth/api-key")) {
                 return request;
