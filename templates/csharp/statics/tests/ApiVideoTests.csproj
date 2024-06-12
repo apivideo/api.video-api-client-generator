@@ -1,28 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   
   <ItemGroup>
     <Reference Include="ApiVideo">
-      <HintPath>..\src\bin\Debug\ApiVideo.dll</HintPath>
-    </Reference>
-    <Reference Include="JsonSubTypes">
-      <HintPath>..\src\bin\Debug\JsonSubTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\src\bin\Debug\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\src\bin\Debug\RestSharp.dll</HintPath>
+       <HintPath>..\src\bin\Debug\net5.0\ApiVideo.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="RestSharp" Version="111.2.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />

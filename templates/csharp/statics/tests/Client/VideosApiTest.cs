@@ -6,6 +6,9 @@ using ApiVideo.Model;
 using System.Collections.Generic;
 using System.IO;
 using Moq;
+using RestSharp;
+using System.Net;
+using System.Threading;
 
 namespace VideoApiTests.Client
 {

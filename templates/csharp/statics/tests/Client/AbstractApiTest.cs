@@ -3,13 +3,16 @@ using RestSharp;
 using System.Net;
 using System.IO;
 using ApiVideo.Client;
+using ApiVideo.Api;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace VideoApiTests.Client
 {
     public abstract class AbstractApiTest
     {
-        private static RestClient restClient = Mock.Of<RestClient>();
-        protected static ApiVideoClient apiClientMock = new ApiVideoClient(restClient);
+        protected static Mock<IRestClient> restClient = new Mock<IRestClient>();
+        protected static ApiVideoClient apiClientMock = new ApiVideoClient(restClient.Object);
 
         protected string readResourceFile(string path)
         {
@@ -17,14 +20,21 @@ namespace VideoApiTests.Client
         }
         protected void answerOnAnyRequest(int statusCode, string body)
         {
-            var r = new RestResponse()
+            var responseHeaders = new List<HeaderParameter>
+            {
+                new HeaderParameter("Content-Type", "application/json")
+            };
+
+            var response1 = new RestResponse
             {
                 StatusCode = (HttpStatusCode)statusCode,
                 Content = body,
-                ResponseStatus = ResponseStatus.Completed
+                ResponseStatus = ResponseStatus.Completed,
+                Headers = responseHeaders
             };
-            Mock.Get(restClient).Setup(m => m.Execute(It.IsAny<IRestRequest>())).Returns(r);
+
+            restClient.Setup(m => m.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
+                          .ReturnsAsync(response1);
         }
     }
-
 }
