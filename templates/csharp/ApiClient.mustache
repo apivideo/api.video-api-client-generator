@@ -352,7 +352,7 @@ namespace {{packageName}}.Client
         /// <param name="contentType">Content type.</param>
         /// <param name="cancellationToken">Cancellation Token.</param>
         /// <returns>The Task instance.</returns>
-        public async System.Threading.Tasks.Task<Object> CallApiAsync(
+        public async System.Threading.Tasks.Task<RestResponse> CallApiAsync(
             string path, {{^netStandard}}RestSharp.{{/netStandard}}Method method, List<KeyValuePair<string, string>> queryParams, Object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
@@ -363,7 +363,7 @@ namespace {{packageName}}.Client
                 pathParams, contentType);
             request = InterceptRequest(request);
             var response = await RestClient.Execute{{^netStandard}}Async{{/netStandard}}(request, cancellationToken);
-            return (Object)response;
+            return (RestResponse)response;
         }{{/supportsAsync}}
 
         /// <summary>
