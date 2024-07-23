@@ -6952,6 +6952,98 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/LiveStreamsAPI.md#deleteThumbnail
+  '/live-streams/{liveStreamId}/complete':
+    put:
+      tags:
+        - Live Streams
+      summary: Complete a live stream
+      description: |
+        Request the completion of a live stream that is currently running. This operation is asynchronous and the live stream will stop after a few seconds. 
+        
+        The API adds the `EXT-X-ENDLIST` tag to the live stream's HLS manifest. This stops the live stream on the player and also stops the recording of the live stream. The API keeps the incoming connection from the streamer open for at most 1 minute, which can be used to terminate the stream.
+      operationId: PUT_live-streams-liveStreamId-complete
+      parameters:
+        - name: liveStreamId
+          in: path
+          description: The unique ID for the live stream you want to complete.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+      responses:
+        '202':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Accepted
+        '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not-found'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/resource-not-found'
+                    title: The requested resource was not found.
+                    name: liveStreamId
+                    status: 404
+        '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                Too many requests:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
+      security:
+        - apiKey: []
+      x-client-action: complete
+      x-doctave:
+        code-samples:
   '/videos/{videoId}/captions/{language}':
     get:
       tags:
