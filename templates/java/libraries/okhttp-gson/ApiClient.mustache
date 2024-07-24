@@ -54,6 +54,7 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 {{/java8}}
 {{/threetenbp}}
 import java.util.*;
@@ -461,9 +462,20 @@ public class ApiClient {
         if (param == null) {
             return "";
         } else if (param instanceof Date {{#joda}}|| param instanceof DateTime || param instanceof LocalDate{{/joda}}{{#jsr310}}|| param instanceof OffsetDateTime || param instanceof LocalDate{{/jsr310}}) {
-            //Serialize to json string and remove the " enclosing characters
-            String jsonStr = json.serialize(param);
-            return jsonStr.substring(1, jsonStr.length() - 1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+
+            String formattedDate;
+            if (param instanceof Date) {
+                OffsetDateTime odt = ((Date) param).toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime();
+                formattedDate = odt.format(formatter);
+            } else if (param instanceof OffsetDateTime) {
+                formattedDate = ((OffsetDateTime) param).format(formatter);
+            } else  {
+                OffsetDateTime odt = ((LocalDate) param).atStartOfDay(ZoneId.systemDefault()).toOffsetDateTime();
+                formattedDate = odt.format(formatter);
+            }
+
+            return formattedDate;
         } else if (param instanceof Collection) {
             StringBuilder b = new StringBuilder();
             for (Object o : (Collection) param) {

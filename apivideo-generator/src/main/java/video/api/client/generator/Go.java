@@ -90,6 +90,10 @@ public class Go extends GoClientCodegen {
                 }
 
                 operation.queryParams.forEach(queryParam -> {
+                    if(queryParam.dataFormat != null && queryParam.dataFormat.equalsIgnoreCase("date-time")) {
+                        operation.allParams.stream().filter(p -> p.baseName.equals(queryParam.baseName)).forEach(p -> p.dataType = "time.Time");
+                        queryParam.dataType = "time.Time";
+                    }
                     if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
                 });
 

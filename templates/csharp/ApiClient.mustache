@@ -401,9 +401,9 @@ namespace {{packageName}}.Client
         public string ParameterToString(object obj)
         {
             if (obj is DateTime dateTime)
-                return dateTime.ToString();
+                return dateTime.ToString("yyyy-MM-ddTHH:mm:ssKT");
             else if (obj is DateTimeOffset dateTimeOffset)
-                return dateTimeOffset.ToString();
+                return dateTimeOffset.ToString("yyyy-MM-ddTHH:mm:ssKT");
             else if (obj is bool isTrue)
                 return isTrue ? "true" : "false";
             else if (obj is IList list)
