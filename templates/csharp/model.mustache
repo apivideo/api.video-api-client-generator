@@ -13,7 +13,7 @@ namespace {{packageName}}.Model {
   /// {{description}}
   /// </summary>
   [DataContract]
-  public class {{classname}}{{#parent}} : {{{parent}}}{{/parent}} {
+  public class {{classname}}{{#parent}} : {{{parent}}}{{/parent}}{{#vendorExtensions.x-implements}}{{#-first}}: {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{#-last}} {{/-last}}{{/vendorExtensions.x-implements}}  {
     {{#vars}}
 {{^vendorExtensions.x-optional-nullable}}    /// <summary>
     /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{{description}}}{{/description}}

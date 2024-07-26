@@ -58,6 +58,28 @@
         }
     }{{/additionalPropertiesType}}{{/generateModelAdditionalProperties}}
 
+{{#vendorExtensions.x-is-deep-object}}
+      public func encodeToQueryParams() -> [URLQueryItem] {
+        var queryItems = [URLQueryItem]()
+
+      {{#allVars}}
+      {{^isArray}}
+        if let {{{name}}} = {{{name}}} {
+            queryItems.append(URLQueryItem(name: "{{{ vendorExtensions.x-model-name }}}[{{{name}}}]", value: {{{name}}}{{#isEnum}}.rawValue{{/isEnum}}))
+        }
+      {{/isArray}}
+      {{#isArray}}
+        if let {{{name}}} = {{{name}}}, !{{{name}}}.isEmpty {
+            for (index, val) in {{{name}}}.enumerated() {
+                queryItems.append(URLQueryItem(name: "{{{ vendorExtensions.x-model-name }}}[{{{name}}}][\(index)]", value: val{{#isEnum}}.rawValue{{/isEnum}}))
+            }
+        }
+      {{/isArray}}
+      {{/allVars}}
+
+        return queryItems
+    }
+{{/vendorExtensions.x-is-deep-object}}
     // Encodable protocol methods
 
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func encode(to encoder: Encoder) throws {

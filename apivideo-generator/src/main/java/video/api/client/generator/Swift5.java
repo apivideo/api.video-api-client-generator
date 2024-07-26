@@ -59,7 +59,16 @@ public class Swift5 extends Swift5ClientCodegen {
                 }
 
                 applyToAllParams(operation, (params) -> params.forEach(pp -> {
-                    if("deepObject".equals(pp.style)) pp.collectionFormat = "deepObject";
+                    if(pp.vendorExtensions != null && pp.vendorExtensions.containsKey("x-is-deep-object")) {
+                        if(!pp.getHasVars()) {
+                            pp.vendorExtensions.remove("x-is-deep-object");
+                        } else {
+                            if("deepObject".equals(pp.style)) {
+                                pp.collectionFormat = "deepObject";
+                            }
+                        }
+                    }
+
                 }));
                 applyToAllParams(operation, (params) -> params.removeIf(pp -> getVendorExtensionBooleanValue(pp, VENDOR_X_CLIENT_IGNORE)) );
 
@@ -80,6 +89,7 @@ public class Swift5 extends Swift5ClientCodegen {
             consumer.accept(operation.formParams);
             consumer.accept(operation.cookieParams);
             consumer.accept(operation.allParams);
+            consumer.accept(operation.queryParams);
         }
     }
 
@@ -100,7 +110,6 @@ public class Swift5 extends Swift5ClientCodegen {
 
     }
 
-
     @Override
     public Map<String, Object> postProcessModels(Map<String, Object> objs) {
         Map<String, Object> stringObjectMap = super.postProcessModels(objs);
@@ -108,6 +117,12 @@ public class Swift5 extends Swift5ClientCodegen {
         List<Map<String, Object>> models = (List)objs.get("models");
         models.forEach(map -> {
             CodegenModel model = ((CodegenModel)map.get("model"));
+            if(model.vendorExtensions != null && model.vendorExtensions.containsKey("x-is-deep-object")) {
+                model.allVars.forEach(var -> {
+                    String nameWithoutEndDigits = model.name.replaceAll("_\\d+$", "");
+                    var.vendorExtensions.put("x-model-name", nameWithoutEndDigits);
+                });
+            }
             model.vars.forEach(var -> {
                 if(var.vendorExtensions.containsKey("x-optional-nullable") && var.dataType.equals("String")) {
                     var.dataType = "NullableString";

@@ -173,13 +173,17 @@ public class Csharp extends CSharpClientCodegen {
     @Override
     public Map<String, Object> postProcessModels(Map<String, Object> objs) {
         Map<String, Object> res = super.postProcessModels(objs);
-        List<Map> models = (List<Map>) res.get("models");
+        ArrayList<HashMap<String, CodegenModel>> models = (ArrayList<HashMap<String, CodegenModel>>) res.get("models");
 
-        models.forEach(model -> {
-            ((CodegenModel)model.get("model")).vars.forEach(var -> {
+        models.forEach(map -> {
+            CodegenModel model = map.get("model");
+            if(model.isMap) {
+                model.vendorExtensions.put("x-implements", Collections.singletonList("DeepObject"));
+            }
+            model.vars.forEach(var -> {
                 if(var.name.equals("_AccessToken")) var.name = "AccessToken";
                 if (var.defaultValue != null) {
-                    ((CodegenModel)model.get("model")).vendorExtensions.put("x-has-defaults", true);
+                    model.vendorExtensions.put("x-has-defaults", true);
                 }
             });
         });

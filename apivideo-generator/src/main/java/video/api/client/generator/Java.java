@@ -168,6 +168,14 @@ public class Java extends JavaClientCodegen {
     @Override
     public Map<String, Object> postProcessModels(Map<String, Object> objs) {
         Map<String, Object> stringObjectMap = super.postProcessModels(objs);
+        ArrayList<HashMap<String, CodegenModel>> models = (ArrayList<HashMap<String, CodegenModel>>) stringObjectMap.get("models");
+        models.stream().forEach((map) -> {
+            CodegenModel model = map.get("model");
+            if(model.isMap) {
+                ((List<String>)model.vendorExtensions.get("x-implements") ).add("DeepObject");
+            }
+        });
+
         ((ArrayList) stringObjectMap.get("imports")).removeIf((v) -> ((Map) v).values().contains("org.openapitools.jackson.nullable.JsonNullable"));
         return stringObjectMap;
     }

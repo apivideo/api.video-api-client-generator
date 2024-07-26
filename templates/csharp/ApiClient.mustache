@@ -19,6 +19,7 @@ using RestSharp.Portable.HttpClient;
 {{^netStandard}}
 using RestSharp;
 {{/netStandard}}
+using ApiVideo.Model;
 
 namespace {{packageName}}.Client
 {
@@ -679,6 +680,25 @@ namespace {{packageName}}.Client
                 {
                     parameters.Add(new KeyValuePair<string, string>(name + "[" + entry.Key + "]", ParameterToString(entry.Value)));
                 }
+            }
+            else if (value is DeepObject) {
+                var dict2 = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(value, Newtonsoft.Json.Formatting.Indented));
+                foreach (var entry in dict2)
+                {
+                    if (entry.Value != null)
+                    {
+                        if (entry.Value is IList)
+                        {
+                            var valueCollection = entry.Value as IEnumerable;
+                            foreach (object item in valueCollection)
+                            {
+                                parameters.Add(new KeyValuePair<string, string>(name + "[" + entry.Key + "][]", ParameterToString(item)));
+                            }
+                        } else {
+                          parameters.Add(new KeyValuePair<string, string>(name + "[" + entry.Key + "]", ParameterToString(entry.Value)));
+                        }
+                    }
+                 }
             }
             else
             {

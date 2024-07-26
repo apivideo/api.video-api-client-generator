@@ -11857,6 +11857,68 @@ paths:
       x-group-parameters: true
       x-doctave:
         code-samples:
+          - language: java
+            code: |
+              FilterBy2 filterBy = new FilterBy2();
+        
+              filterBy.setBrowser(Collections.singletonList("Chrome"));
+              filterBy.setContinent(Arrays.asList(FilterBy2.ContinentEnum.NA, FilterBy2.ContinentEnum.EU));
+              filterBy.setMediaType(FilterBy2.MediaTypeEnum.VIDEO);
+              filterBy.setTag("test");
+
+
+              AnalyticsAggregatedMetricsResponse res = apiClient.analytics().getAggregatedMetrics("play", "total").filterBy(filterBy).execute();
+              System.out.println(res.getData());
+          - language: node
+            code: |
+              const res = await client.analytics.getAggregatedMetrics({
+                aggregation: 'total',
+                metric: 'play',
+                filterBy: {
+                  browser: ['chrome', 'firefox'],
+                  continent: ['EU', 'AF'],
+                  tag: 'test',
+                },
+              });
+              console.log(res.data);
+          - language: csharp
+            code: |
+              FilterBy2 filterBy = new FilterBy2
+              {
+                  continent = new List<string> { "EU", "US" },
+                  devicetype = new List<string> { "phone" },
+                  tag = "test"
+              };
+              AnalyticsAggregatedMetricsResponse res = apiClient.Analytics()
+                  .getAggregatedMetrics("play", "total").From(new DateTime(2024, 7, 1)).FilterBy(filterBy).execute();
+          - language: go
+            code: |
+              res, err := cl.Analytics.GetAggregatedMetrics("play", "day", AnalyticsApiGetAggregatedMetricsRequest{
+                filterBy: &FilterBy2{
+                  Continent: &[]string{"EU", "AA"},
+                  DeviceType: &[]string{"computer", "phone"},
+                  Tag: PtrString("tag"),
+                },
+              })
+          - language: python
+            code: |
+              res = self.api.get_aggregated_metrics(metric='play', aggregation='count', filter_by=FilterBy2(
+                      device_type=["computer", "phone"],
+                      tag="test",
+                  ),
+              )
+          - language: swift
+            code: |
+              AnalyticsAPI.getAggregatedMetrics(
+                      metric: .play,
+                      aggregation: .total,
+                      filterBy: FilterBy2(
+                          continent: [.an, .eu],
+                          tag: "test"
+                      )
+                  ) { analytics, error in
+                      // ...
+                  }
   '/data/buckets/{metric}/{breakdown}':
     get:
       tags:
@@ -11899,9 +11961,9 @@ paths:
           - `media-type`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`. 
           - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`. 
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
-          - `device-type`: Returns analytics based on the type of device used by the viewers. Possible response values are: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
-          - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.
-          - `browser`: Returns analytics based on the browser used by the viewers. Response values include `chrome`, `firefox`, `edge`, `opera`.
+          - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
+          - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`.
+          - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
         style: simple
         explode: false
         required: true
@@ -12084,6 +12146,69 @@ paths:
       x-client-paginated: true
       x-doctave:
         code-samples:
+          - language: java
+            code: |
+              FilterBy2 filterBy = new FilterBy2();
+
+              filterBy.setBrowser(Collections.singletonList("Chrome"));
+              filterBy.setContinent(Arrays.asList(FilterBy2.ContinentEnum.NA, FilterBy2.ContinentEnum.EU));
+              filterBy.setMediaType(FilterBy2.MediaTypeEnum.VIDEO);
+              filterBy.setTag("test");
+
+              Page<AnalyticsMetricsBreakdownResponseData> res = apiClient.analytics().getMetricsBreakdown("play", "media-id").filterBy(filterBy).pageSize(30).execute();
+              for (AnalyticsMetricsBreakdownResponseData item : res.getItems()) {
+                  System.out.println(item.getDimensionValue() + ": " + item.getMetricValue());
+              }
+          - language: node
+            code: |
+              const res = await client.analytics.getMetricsBreakdown({
+                breakdown: 'continent',
+                metric: 'play',
+                filterBy: {
+                  browser: ['chrome', 'firefox'],
+                  continent: ['EU', 'AF'],
+                  tag: 'test',
+                },
+              });
+              console.log(res.data);
+          - language: csharp
+            code: |
+              FilterBy2 filterBy = new FilterBy2
+              {
+                  continent = new List<string> { "EU", "US" },
+                  devicetype = new List<string> { "phone" },
+                  tag = "test"
+              };
+              Page<AnalyticsMetricsBreakdownResponseData> page = apiClient.Analytics()
+                  .getMetricsBreakdown("play", "continent").From(new DateTime(2024, 7, 1)).FilterBy(filterBy).execute();
+          - language: go
+            code: |
+              res, err := cl.Analytics.GetMetricsBreakdown("play", "continent", AnalyticsApiGetMetricsBreakdownRequest{
+                filterBy: &FilterBy2{
+                  Continent: &[]string{"EU", "AA"},
+                  DeviceType: &[]string{"computer", "phone"},
+                  Tag: 	PtrString("tag"),
+                },
+              })
+          - language: python
+            code: |
+              res = self.api.get_metrics_breakdown(metric='play', breakdown='continent', filter_by=FilterBy2(
+                      device_type=["computer", "phone"],
+                      tag="test",
+                  ),
+              )
+          - language: swift
+            code: |
+              AnalyticsAPI.getMetricsBreakdown(
+                  metric: .play,
+                  breakdown: .browser,
+                  filterBy: FilterBy2(
+                      continent: [.an, .eu],
+                      tag: "test"
+                  )
+              ) { analytics, error in
+                  // ...
+              }
   '/data/timeseries/{metric}':
     get:
       tags:
@@ -12300,6 +12425,69 @@ paths:
       x-client-paginated: true
       x-doctave:
         code-samples:
+              - language: java
+                code: |
+                  FilterBy2 filterBy = new FilterBy2();
+
+                  filterBy.setBrowser(Collections.singletonList("Chrome"));
+                  filterBy.setContinent(Arrays.asList(FilterBy2.ContinentEnum.NA, FilterBy2.ContinentEnum.EU));
+                  filterBy.setMediaType(FilterBy2.MediaTypeEnum.VIDEO);
+                  filterBy.setTag("test");
+
+                  Page<AnalyticsMetricsOverTimeResponseData> res = apiClient.analytics().getMetricsOverTime("play").filterBy(filterBy).pageSize(30).execute();
+                  for (AnalyticsMetricsOverTimeResponseData item : res.getItems()) {
+                      System.out.println(item.getEmittedAt() + ": " + item.getMetricValue());
+                  }
+              - language: node
+                code: |
+                  const res = await client.analytics.getMetricsOverTime({
+                    metric: 'play',
+                    filterBy: {
+                      mediaType: 'video',
+                      browser: ['chrome', 'firefox'],
+                      continent: ['EU', 'AF'],
+                      tag: "test",
+                    },
+                  });
+
+                  console.log(res);
+              - language: csharp
+                code: |
+                  FilterBy2 filterBy = new FilterBy2
+                  {
+                      continent = new List<string> { "EU", "US" },
+                      devicetype = new List<string> { "phone" },
+                      tag = "test"
+                  };
+                  Page<AnalyticsMetricsOverTimeResponseData> res = apiClient.Analytics()
+                      .getMetricsOverTime("play").From(new DateTime(2024, 7, 1)).FilterBy(filterBy).execute();
+              - language: go
+                code: |
+                  res, err := cl.Analytics.GetMetricsOverTime("play", AnalyticsApiGetMetricsOverTimeRequest{
+                    filterBy: &FilterBy2{
+                      Continent: &[]string{"EU", "AA"},
+                      DeviceType: &[]string{"computer", "phone"},
+                      Tag: 	PtrString("tag"),
+                    },
+                  })
+              - language: python
+                code: |
+                  res = self.api.get_metrics_over_time(metric='play', filter_by=FilterBy2(
+                          device_type=["computer", "phone"],
+                          tag="test",
+                      ),
+                  )
+              - language: swift
+                code: |
+                  AnalyticsAPI.getMetricsOverTime(
+                          metric: .play,
+                          filterBy: FilterBy2(
+                              continent: [.an, .eu],
+                              tag: "test"
+                          )
+                      ) { analytics, error in
+                          // ...
+                      }
   /webhooks:
     get:
       tags:
@@ -14629,7 +14817,6 @@ components:
       required:
         - context
         - data
-        - pagination
     analytics-metrics-breakdown-response:
       title: Analytics response for metrics breakdown by dimension
       type: object
@@ -14733,7 +14920,7 @@ components:
         data:
           description: Returns an array of metrics and the timestamps .
           type: array
-          items:
+          items:            
             type: object
             properties:
               emittedAt:
@@ -15053,7 +15240,7 @@ components:
           Use this parameter to filter the API's response based on different data dimensions. You can serialize filters in your query to receive more detailed breakdowns of your analytics.
 
           - If you do not set a value for `filterBy`, the API returns the full dataset for your project.
-          - The API only accepts the `mediaId` and `mediaType` filters when you call `/data/metrics/play/total`.
+          - The API only accepts the `mediaId` and `mediaType` filters when you call `/data/metrics/play/total` or `/data/buckets/play-total/media-id`.
           
           These are the available breakdown dimensions:
           
@@ -15061,47 +15248,61 @@ components:
           - `mediaType`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`. 
           - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). You must use the ISO-3166 alpha2 format, for example `EU`. Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`. 
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). You must use the ISO-3166 alpha2 format, for example `FR`.
-          - `deviceType`: Returns analytics based on the type of device used by the viewers. Possible response values are: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
-          - `operatingSystem`: Returns analytics based on the operating system used by the viewers. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.
-          - `browser`: Returns analytics based on the browser used by the viewers. Response values include `chrome`, `firefox`, `edge`, `opera`.
+          - `deviceType`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
+          - `operatingSystem`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`.
+          - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
           - `tag`: Returns analytics for videos using this tag. This filter only accepts a single value and is case sensitive. Read more about tagging your videos [here](https://docs.api.video/vod/tags-metadata).
       in: query
       required: false
-      example: {"mediaType":"video","continent":"EU","country":"FR"}
+      example: filterBy[country]=FR&filterBy[operatingSystem]=windows&filterBy[browser][]=firefox&filterBy[browser][]=chrome&filterBy[tag]=Cool videos
       style: deepObject
+      x-is-deep-object: true
       explode: true
       schema:
+        x-is-deep-object: true
         type: object
         properties:
           mediaId:
-            type: string
+            type: array
+            items:
+              type: string
             description: Returns analytics based on the unique identifiers of a video or a live stream.
-            example: vi4blUQJFrYWbaG44NChkH27
+            example: ['vi4blUQJFrYWbaG44NChkH27']
           mediaType:
             type: string
             enum: [video, live-stream]
             example: video
           continent:
-            type: string
+            type: array
+            items:
+              type: string
+              enum: [AS, AF, NA, SA, AN, EU, AZ]
             description: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). You must use the ISO-3166 alpha2 format, for example `EU`.
-            enum: [AS, AF, NA, SA, AN, EU, AZ]
-            example: EU
+            example: ['EU']
           country:
             description: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). You must use the ISO-3166 alpha2 format, for example `FR`.
-            type: string
-            example: FR
+            type: array
+            items:
+              type: string
+            example: ['FR']
           deviceType:
-            type: string
-            description: 'Returns analytics based on the type of device used by the viewers. Possible response values are: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.'
-            example: computer
+            type: array
+            items:
+              type: string
+            description: 'Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.'
+            example: ['computer']
           operatingSystem:
-            type: string
-            description: Returns analytics based on the operating system used by the viewers. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.
-            example: windows
+            type: array
+            items:
+              type: string
+            description: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`.
+            example: ['windows']
           browser:
-            description: Returns analytics based on the browser used by the viewers. Response values include `chrome`, `firefox`, `edge`, `opera`.
-            type: string
-            example: firefox
+            description: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+            type: array
+            items:
+              type: string
+            example: ['firefox']
           tag:
             type: string
             description: Returns analytics for videos using this tag. This filter only accepts a single value and is case sensitive. Read more about tagging your videos [here](https://docs.api.video/vod/tags-metadata).

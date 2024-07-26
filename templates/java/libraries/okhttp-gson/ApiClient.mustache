@@ -3,6 +3,7 @@
 package {{invokerPackage}};
 
 import {{invokerPackage}}.auth.ApiVideoAuthInterceptor;
+import {{invokerPackage}}.models.DeepObject;
 {{#dynamicOperations}}
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
@@ -28,6 +29,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.ZoneId;
 {{/threetenbp}}
 {{#hasOAuthMethods}}
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest.TokenRequestBuilder;
@@ -54,7 +56,6 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.ZoneId;
 {{/java8}}
 {{/threetenbp}}
 import java.util.*;
@@ -465,10 +466,10 @@ public class ApiClient {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
 
             String formattedDate;
-            if (param instanceof Date) {
+            {{^threetenbp}}{{#java8}}if (param instanceof Date) {
                 OffsetDateTime odt = ((Date) param).toInstant().atZone(ZoneId.systemDefault()).toOffsetDateTime();
                 formattedDate = odt.format(formatter);
-            } else if (param instanceof OffsetDateTime) {
+            } else {{/java8}}{{/threetenbp}}if (param instanceof OffsetDateTime) {
                 formattedDate = ((OffsetDateTime) param).format(formatter);
             } else  {
                 OffsetDateTime odt = ((LocalDate) param).atStartOfDay(ZoneId.systemDefault()).toOffsetDateTime();
@@ -511,6 +512,25 @@ public class ApiClient {
             Map map = (Map) value;
             map.forEach((k, v) -> {
                 if(k != null) params.add(new Pair(name + "[" + k + "]", v == null ? null : v.toString()));
+            });
+            return params;
+        }
+
+
+        if (value instanceof DeepObject) {
+            Map<String, Object> map = json.deserialize(json.serialize(value), Map.class);
+            map.forEach((k, v) -> {
+                if (k != null) {
+                    if(v instanceof List) {
+                        List list = (List) v;
+                        for (int i = 0; i < list.size(); i++) {
+                            Object item = list.get(i);
+                            params.add(new Pair(name + "[" + k + "][" + i + "]", item == null ? null : item.toString()));
+                        }
+                        } else {
+                            params.add(new Pair(name + "[" + k + "]", v == null ? null : v.toString()));
+                        }
+                    }
             });
             return params;
         }

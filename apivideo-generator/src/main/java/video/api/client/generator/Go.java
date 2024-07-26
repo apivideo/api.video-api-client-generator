@@ -94,7 +94,7 @@ public class Go extends GoClientCodegen {
                         operation.allParams.stream().filter(p -> p.baseName.equals(queryParam.baseName)).forEach(p -> p.dataType = "time.Time");
                         queryParam.dataType = "time.Time";
                     }
-                    if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
+                    //if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
                 });
 
                 // overwrite operationId & nickname values of the operation with the x-client-action

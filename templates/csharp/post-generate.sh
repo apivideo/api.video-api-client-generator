@@ -6,6 +6,7 @@ cp ../../templates/common-resources/LICENSE ./
 mv src/ApiVideo ApiVideo
 rm -Rf src
 mv ApiVideo src
+cp -R ../../templates/csharp/statics/src/Model/DeepObject.cs ./src/Model/
 rm .travis.yml
 rm build.bat
 rm build.sh
