@@ -477,11 +477,7 @@ func (s *{{{classname}}}Service) {{nickname}}WithContext(ctx context.Context{{#r
 	{{/isCollectionFormatMulti}}
 	{{^isCollectionFormatMulti}}
     {{#vendorExtensions.x-is-deep-object}}
-        if r.{{paramName}} != nil && len(*r.{{paramName}}) > 0 {
-            for k, v := range *r.{{paramName}} {
-				localVarQueryParams.Add(fmt.Sprintf("{{baseName}}[%s]", k), v)
-            }
-        }
+    addDeepQueryParams(r.{{paramName}}, "{{paramName}}", localVarQueryParams)
     {{/vendorExtensions.x-is-deep-object}}
     {{^vendorExtensions.x-is-deep-object}}
 		localVarQueryParams.Add("{{baseName}}", parameterToString(*r.{{paramName}}, "{{#collectionFormat}}{{collectionFormat}}{{/collectionFormat}}"))

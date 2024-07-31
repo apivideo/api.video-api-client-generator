@@ -527,7 +527,11 @@ class ApiClient(object):
             if k in collection_formats:
                 collection_format = collection_formats[k]
                 if collection_format == 'deepObject':
-                    new_params.extend((k+'['+value+']', v[value]) for value in v)
+                    for value in v:
+                        if isinstance(v[value], list):
+                            new_params.extend((k + '[' + value + '][]', item) for item in v[value])
+                        else:
+                            new_params.append((k+'['+value+']', v[value]))
                 elif collection_format == 'multi':
                     new_params.extend((k, value) for value in v)
                 else:

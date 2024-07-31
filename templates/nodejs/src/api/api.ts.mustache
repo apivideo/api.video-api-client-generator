@@ -314,7 +314,18 @@ export default class {{classname}} {
       if (typeof {{paramName}} !== 'object') {
           throw new Error(`${ {{paramName}} } is not an object`);
       }
-      Object.keys({{paramName}}).forEach((k) => urlSearchParams.append("{{baseName}}["+k+"]", ObjectSerializer.serialize({{paramName}}[k], "string", "")));
+      Object.keys({{paramName}}).forEach((k) => {
+          if(({{paramName}} as any)[k] instanceof Object) {
+              Object.keys(({{paramName}} as any)[k]).forEach((key) => {
+                    urlSearchParams.append(
+                        `{{baseName}}[${k}][${key}]`,
+                        ObjectSerializer.serialize(({{baseName}} as any)[k][key], 'string', '')
+                    );
+              });
+          } else {
+            urlSearchParams.append("{{baseName}}["+k+"]", ObjectSerializer.serialize(({{paramName}} as any)[k], "string", ""))
+          }
+      });
       {{/ vendorExtensions.x-is-deep-object }}
       {{^ vendorExtensions.x-is-deep-object }}
       {{#isArray}}

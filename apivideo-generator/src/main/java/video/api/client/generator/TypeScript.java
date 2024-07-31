@@ -475,6 +475,8 @@ public class TypeScript extends DefaultCodegen {
 
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
+        Common.preprocessOpenAPI(openAPI);
+
         if (additionalProperties.containsKey(NPM_NAME)) {
             // If no npmVersion is provided in additional properties, version from API specification is used.
             // If none of them is provided then fallbacks to default version
@@ -635,7 +637,20 @@ public class TypeScript extends DefaultCodegen {
         } else if (ModelUtils.isMapSchema(p)) {
             inner = (Schema) p.getAdditionalProperties();
             return "{ [key: string]: " + this.getParameterDataType(parameter, inner) + "; }";
-        } else if (ModelUtils.isStringSchema(p)) {
+        } else if (p != null &&
+                parameter.getName() != null &&
+                parameter.getIn().equalsIgnoreCase("query") &&
+                parameter.getExplode() &&
+                parameter.getExtensions() != null &&
+                parameter.get$ref() != null &&
+                parameter.getExtensions().containsKey("x-is-deep-object")) {
+            String refName = parameter.get$ref().substring(parameter.get$ref().lastIndexOf("/") + 1);
+            refName = refName.replace("_", "");
+            refName = refName.substring(0, 1).toUpperCase() + refName.substring(1);
+
+            return refName;
+        }
+        else if (ModelUtils.isStringSchema(p)) {
             // Handle string enums
             if (p.getEnum() != null) {
                 return enumValuesToEnumTypeUnion(p.getEnum(), "string");

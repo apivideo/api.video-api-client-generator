@@ -555,11 +555,15 @@ extension {{projectName}}API {
             {{/hasFormParams}}
 {{/bodyParam}}{{#hasQueryParams}}
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([{{^queryParams}}:{{/queryParams}}
-            {{#queryParams}}
-            {{> _param}},
-            {{/queryParams}}
-        ]){{/hasQueryParams}}{{^hasQueryParams}}
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([{{^queryParams}}:{{/queryParams}}{{#queryParams}}{{^vendorExtensions.x-is-deep-object}}
+            {{> _param}},{{/vendorExtensions.x-is-deep-object}}{{/queryParams}}
+        ])
+        {{#queryParams}}
+{{#vendorExtensions.x-is-deep-object}}        localVariableUrlComponents?.queryItems?.append(contentsOf: {{paramName}}?.encodeToQueryParams() ?? [])
+
+        {{/vendorExtensions.x-is-deep-object}}
+        {{/queryParams}}
+        {{/hasQueryParams}}{{^hasQueryParams}}
         let localVariableUrlComponents = URLComponents(string: localVariableURLString){{/hasQueryParams}}
 
         {{#vendorExtensions.x-client-chunk-upload}}var{{/vendorExtensions.x-client-chunk-upload}}{{^vendorExtensions.x-client-chunk-upload}}let{{/vendorExtensions.x-client-chunk-upload}} localVariableNillableHeaders: [String: Any?] = [{{^headerParams}}{{^hasFormParams}}
@@ -637,7 +641,14 @@ extension {{projectName}}API {
             {{#queryParams}}
             {{> _param}},
             {{/queryParams}}
-        ]){{/hasQueryParams}}{{^hasQueryParams}}
+        ])
+        {{#queryParams}}
+
+            {{#vendorExtensions.x-is-deep-object}}
+                    localVariableUrlComponents?.queryItems?.append(contentsOf: filterBy?.encodeToQueryParams() ?? [])
+            {{/vendorExtensions.x-is-deep-object}}
+        {{/queryParams}}
+    {{/hasQueryParams}}{{^hasQueryParams}}
         let localVariableUrlComponents = URLComponents(string: localVariableURLString){{/hasQueryParams}}
 
         var localVariableNillableHeaders: [String: Any?] = [{{^headerParams}}{{^hasFormParams}}

@@ -18,6 +18,13 @@ import java.util.stream.Collectors;
 
 public class Common {
 
+    public static void preprocessOpenAPI(OpenAPI openAPI) {
+        // remove paths that have the x-ignored flag
+        openAPI.getPaths().keySet().removeIf(path -> openAPI.getPaths().get(path).getExtensions() != null && openAPI.getPaths().get(path).getExtensions().containsKey("x-ignored"));
+        // remove models that have the x-ignored flag
+        openAPI.getComponents().getSchemas().keySet().removeIf(schema -> openAPI.getComponents().getSchemas().get(schema).getExtensions() != null && openAPI.getComponents().getSchemas().get(schema).getExtensions().containsKey("x-ignored"));
+    }
+
     public static Comparator<CodegenOperation> getCodegenOperationComparator() {
         Map<String, Integer> operationIndexes = new HashMap<>();
         operationIndexes.put("create", 1);

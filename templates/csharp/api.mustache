@@ -52,11 +52,11 @@ namespace {{packageName}}.{{apiPackage}}
 		{{#isDeprecated}}
 		[Obsolete]
 		{{/isDeprecated}}
-		public {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}void{{/returnType}} {{operationId}}Async({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = default{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},IUploadProgressListener progressListener = null{{/vendorExtensions.x-client-chunk-upload}}, CancellationToken cancellationToken = default)
+		public {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task<ApiResponse<object>>{{/returnType}} {{operationId}}Async({{#allParams}}{{{dataType}}} {{paramName}}{{^required}}{{#optionalMethodArgument}} = default{{/optionalMethodArgument}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},IUploadProgressListener progressListener = null{{/vendorExtensions.x-client-chunk-upload}}, CancellationToken cancellationToken = default)
         {
              {{#returnType}}Task<ApiResponse<{{{returnType}}}>> localVarResponse = {{operationId}}WithHttpInfoAsync({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}{{#vendorExtensions.x-client-chunk-upload}},progressListener{{/vendorExtensions.x-client-chunk-upload}}, cancellationToken);
              return localVarResponse.ContinueWith((Task<ApiResponse<{{{returnType}}}>> task) => task.Result.Data );
-             {{/returnType}}{{^returnType}}{{operationId}}WithHttpInfoAsync({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, cancellationToken);{{/returnType}}
+             {{/returnType}}{{^returnType}}return {{operationId}}WithHttpInfoAsync({{#allParams}}{{paramName}}{{^-last}}, {{/-last}}{{/allParams}}, cancellationToken);{{/returnType}}
         }
 
         /// <summary>

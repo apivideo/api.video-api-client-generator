@@ -3,6 +3,7 @@ package video.api.client.generator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Maps;
 import io.swagger.util.Json;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.*;
@@ -38,6 +39,13 @@ public class Go extends GoClientCodegen {
             return new CodegenProperty();
         }
         return super.fromProperty(name, p);
+    }
+
+
+    @Override
+    public void preprocessOpenAPI(OpenAPI openAPI) {
+        super.preprocessOpenAPI(openAPI);
+        Common.preprocessOpenAPI(openAPI);
     }
 
     @Override
@@ -82,7 +90,11 @@ public class Go extends GoClientCodegen {
                 }
 
                 operation.queryParams.forEach(queryParam -> {
-                    if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
+                    if(queryParam.dataFormat != null && queryParam.dataFormat.equalsIgnoreCase("date-time")) {
+                        operation.allParams.stream().filter(p -> p.baseName.equals(queryParam.baseName)).forEach(p -> p.dataType = "time.Time");
+                        queryParam.dataType = "time.Time";
+                    }
+                    //if(queryParam.vendorExtensions.containsKey("x-is-deep-object")) additionalImports.add("fmt");
                 });
 
                 // overwrite operationId & nickname values of the operation with the x-client-action

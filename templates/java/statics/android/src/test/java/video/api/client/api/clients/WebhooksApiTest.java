@@ -176,11 +176,11 @@ public class WebhooksApiTest extends AbstractApiTest {
             ApiException e = assertThrows(ApiException.class, () -> api.create(new WebhooksCreationPayload().url("url")));
             assertThat(e.getCode()).isEqualTo(400);
             assertThat(e.getProblems()).containsExactlyElementsIn(Arrays.asList(
-                        new ApiException.ApiProblem("https://docs.api.video/docs/attributerequired",
+                        new ApiException.ApiProblem("https://docs.api.video/reference/attribute-required",
                                 "This attribute is required.", "events"),
-                        new ApiException.ApiProblem("https://docs.api.video/docs/attributerequired",
+                        new ApiException.ApiProblem("https://docs.api.video/reference/attribute-required",
                                 "This attribute is required.", "url"),
-                        new ApiException.ApiProblem("https://docs.api.video/docs/attributeinvalid",
+                        new ApiException.ApiProblem("https://docs.api.video/reference/invalid-attribute",
                                 "This attribute must be an array.", "events")))
                     .inOrder();
             assertThat(e).hasMessageThat().contains("This attribute is required.");

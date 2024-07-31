@@ -94,7 +94,7 @@ export default class ObjectSerializer {
 
         return data.getFullYear() + "-" + month + "-" + day;
       } else {
-        return data.toISOString();
+        return data.toISOString().split('.')[0] + 'Z';
       }
     } else {
       if (enumsMap.has(type)) {

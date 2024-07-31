@@ -35,6 +35,10 @@ import Foundation
         setup()
     }
 
+    override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func string(from date: Date) -> String {
+        return OpenISO8601DateFormatter.withoutSeconds.string(from: date)
+    }
+
     override {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} func date(from string: String) -> Date? {
         if let result = super.date(from: string) {
             return result
