@@ -12004,6 +12004,41 @@ paths:
           type: string
           format: date-time
         example: 2024-02-06T00:00:00+01:00
+      - name: sortBy
+        in: query
+        description: |
+          Use this parameter to choose which field the API will use to sort the analytics data.
+
+          These are the available fields to sort by:
+
+          - `metricValue`: Sorts the results based on the **metric** you selected in your request.
+          - `dimensionValue`: Sorts the results based on the **dimension** you selected in your request.
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - metricValue
+            - dimensionValue
+        example: metricValue
+      - name: sortOrder
+        in: query
+        description: |
+          Use this parameter to define the sort order of results.
+
+          These are the available sort orders:
+
+          - `asc`: Sorts the results in ascending order: `A to Z` and `0 to 9`.
+          - `desc`: Sorts the results in descending order: `Z to A` and `9 to 0`.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: 
+            - asc
+            - desc
+        example: asc
       - $ref: '#/components/parameters/filterBy'
       - $ref: '#/components/parameters/current-page'
       - $ref: '#/components/parameters/page-size'
@@ -12279,6 +12314,41 @@ paths:
           type: string
           enum: [hour, day]
         example: hour
+      - name: sortBy
+        in: query
+        description: |
+          Use this parameter to choose which field the API will use to sort the analytics data.
+
+          These are the available fields to sort by:
+
+          - `metricValue`: Sorts the results based on the **metric** you selected in your request.
+          - `emittedAt`: Sorts the results based on the **timestamp** of the event in ATOM date-time format.
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - metricValue
+            - emittedAt
+        example: metricValue
+      - name: sortOrder
+        in: query
+        description: |
+          Use this parameter to define the sort order of results.
+
+          These are the available sort orders:
+
+          - `asc`: Sorts the results in ascending order: `A to Z` and `0 to 9`.
+          - `desc`: Sorts the results in descending order: `Z to A` and `9 to 0`.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum: 
+            - asc
+            - desc
+        example: asc
       - $ref: '#/components/parameters/filterBy'
       - $ref: '#/components/parameters/current-page'
       - $ref: '#/components/parameters/page-size'
