@@ -1,14 +1,13 @@
 name: Run tests
 
-on: [push]
+on: [ push ]
 
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'adopt'
@@ -16,22 +15,53 @@ jobs:
         run: chmod +x ./gradlew
       - name: Run unit test
         run: ./gradlew test
+      - name: Upload test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-unit-tests
+          path: '**/build/reports/tests'
   instrumented-tests:
-     runs-on: macos-latest
-     steps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      matrix:
+        api-level: [ 34 ]
+    steps:
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
       - uses: actions/checkout@v4
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'zulu'
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Run Android Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: ${{ matrix.api-level }}
           arch: x86_64
-          script: ./gradlew connectedCheck
+          disable-animations: true
+          emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back emulated -camera-front emulated -gpu swiftshader_indirect
+          script: |
+            adb root
+            adb logcat -c
+            touch emulator.log
+            chmod 777 emulator.log
+            adb logcat >> emulator.log &
+            ./gradlew -Pandroid.testInstrumentationRunnerArguments.INTEGRATION_TESTS_API_KEY=$INTEGRATION_TESTS_API_KEY connectedCheck
         env:
-          INTEGRATION_TESTS_API_KEY: ${{ secrets.INTEGRATION_TESTS_API_TOKEN }}
+          INTEGRATION_TESTS_API_KEY: ${{ secrets.INTEGRATION_TESTS_API_KEY }}
+      - name: Upload test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-instrumented-${{ matrix.api-level }}
+          path: |
+            '**/build/reports/androidTests'
+            emulator.log
