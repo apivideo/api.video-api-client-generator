@@ -39,7 +39,7 @@ jobs:
           scheme: ${{ 'default' }}
         run: |
           if [ $scheme = default ]; then scheme=$(cat default); fi
-          xcodebuild -scheme $scheme  -destination 'platform=iOS Simulator,name=iPhone 13'
+          xcodebuild -scheme $scheme  -destination 'platform=iOS Simulator,name=iPhone 16'
       - name: Build Example
         env:
           scheme: ${{ 'default' }}
