@@ -72,6 +72,9 @@ files:
   Nullable.mustache:
     folder: src/main/java/video/api/client/api/models
     destinationFilename: Nullable.java
+  DeepObject.mustache:
+    folder: src/main/java/video/api/client/api/models
+    destinationFilename: DeepObject.java
   Environment.mustache:
     folder: src/main/java/video/api/client/api/models
     destinationFilename: Environment.java
