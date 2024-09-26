@@ -906,6 +906,120 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#create
+  /tags:
+    get:
+      tags:
+        - Tags
+      summary: List all video tags
+      description: This endpoint enables you to search for video tags in a project and see how many videos are tagged with them. If you do not define any query parameters, the endpoint lists all video tags and the numbers of times they are used in a project.
+      operationId: LIST-tags
+      x-client-action: list
+      x-group-parameters: true
+      x-client-paginated: true
+      parameters:
+        - name: value
+          in: query
+          description: |
+            Use this parameter to search for specific video tags. The API filters results even on partial values, and ignores accents, uppercase, and lowercase.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: |
+            Use this parameter to choose which field the API will use to sort the response data. The default is `value`.
+            
+            These are the available fields to sort by:
+            
+            - `value`: Sorts the results based on tag values in alphabetic order.
+            - `videoCount`: Sorts the results based on the number of times a video tag is used.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [value, videoCount]
+          example: value
+        - name: sortOrder
+          in: query
+          description: Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [asc, desc]
+          example: asc
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
+      responses:
+        '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list-tags-response'
+              examples:
+                response:
+                  value:
+                    data:
+                      - value: maths
+                        videoCount: '33'
+                      - value: tutorials
+                        videoCount: '10'
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 2
+                      currentPageItems: 2
+                      links:
+                        - rel: self
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+                        - rel: first
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+                        - rel: last
+                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+        '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                Too many requests:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
   '/videos/{videoId}/source':
     post:
       tags:
@@ -14632,6 +14746,23 @@ components:
           - video_delete
           - video_download
           - video_update
+    list-tags-response:
+      title: Tags
+      type: object
+      properties:
+        data:
+          type: array
+          items:            
+            type: object
+            properties:
+              value:
+                description: Returns the value of a video tag used in your project.
+                type: string
+              videoCount:
+                description: Returns the number of times a video tag is used.
+                type: integer
+        pagination:
+          $ref: '#/components/schemas/pagination'
     watermark:
       title: Watermark
       type: object
