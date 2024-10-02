@@ -121,7 +121,7 @@ public class WebhooksApiTest extends AbstractApiTest {
             assertThat(page.getCurrentPage()).isEqualTo(1);
             assertThat(page.getPageSize()).isEqualTo(25);
             assertThat(page.getPagesTotal()).isEqualTo(1);
-            assertThat(page.getCurrentPageItems()).isEqualTo(11);
+            assertThat(page.getCurrentPageItems()).isEqualTo(2);
 
             assertThat(page.getItems()).hasSize(2);
 
@@ -129,11 +129,13 @@ public class WebhooksApiTest extends AbstractApiTest {
                     new Webhook().webhookId("webhook_XXXXXXXXXXXXXXX")
                             .createdAt(OffsetDateTime.parse("2021-01-08T14:12:18.000+00:00"))
                             .addEventsItem("video.encoding.quality.completed")
-                            .url("http://clientnotificationserver.com/notif?myquery=query"),
+                            .url("http://clientnotificationserver.com/notif?myquery=query")
+                            .signatureSecret("sig_sec_Abcd12348RLP7VPLi7nYVh"),
                     new Webhook().webhookId("webhook_XXXXXXXXXYYYYYY")
                             .createdAt(OffsetDateTime.parse("2021-01-12T12:12:12.000+00:00"))
                             .addEventsItem("video.encoding.quality.completed")
-                            .url("http://clientnotificationserver.com/notif?myquery=query2"));
+                            .url("http://clientnotificationserver.com/notif?myquery=query2")
+                            .signatureSecret("sig_sec_Abcd12358RLP7VPLi7nYVy"));
         }
     }
 
