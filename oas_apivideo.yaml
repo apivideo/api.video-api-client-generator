@@ -906,6 +906,120 @@ paths:
             code: |
               // First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started
               // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#create
+  /tags:
+    get:
+      tags:
+        - Tags
+      summary: List all video tags
+      description: This endpoint enables you to search for video tags in a project and see how many videos are tagged with them. If you do not define any query parameters, the endpoint lists all video tags and the numbers of times they are used in a project.
+      operationId: LIST-tags
+      x-client-action: list
+      x-group-parameters: true
+      x-client-paginated: true
+      parameters:
+        - name: value
+          in: query
+          description: |
+            Use this parameter to search for specific video tags. The API filters results even on partial values, and ignores accents, uppercase, and lowercase.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: |
+            Use this parameter to choose which field the API will use to sort the response data. The default is `value`.
+            
+            These are the available fields to sort by:
+            
+            - `value`: Sorts the results based on tag values in alphabetic order.
+            - `videoCount`: Sorts the results based on the number of times a video tag is used.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [value, videoCount]
+          example: value
+        - name: sortOrder
+          in: query
+          description: Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [asc, desc]
+          example: asc
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
+      responses:
+        '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list-tags-response'
+              examples:
+                response:
+                  value:
+                    data:
+                      - value: maths
+                        videoCount: '33'
+                      - value: tutorials
+                        videoCount: '10'
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 2
+                      currentPageItems: 2
+                      links:
+                        - rel: self
+                          uri: '/tags?currentPage=1&pageSize=25'
+                        - rel: first
+                          uri: '/tags?currentPage=1&pageSize=25'
+                        - rel: last
+                          uri: '/tags?currentPage=1&pageSize=25'
+        '429':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+              examples:
+                Too many requests:
+                  value:
+                    type: 'https://docs.api.video/reference/too-many-requests'
+                    title: Too many requests.
+                    status: 429
   '/videos/{videoId}/source':
     post:
       tags:
@@ -13385,17 +13499,19 @@ paths:
                         events:
                           - video.encoding.quality.completed
                         url: 'http://clientnotificationserver.com/notif?myquery=query'
+                        signatureSecret: 'sig_sec_Abcd12348RLP7VPLi7nYVh'
                       - webhookId: webhook_XXXXXXXXXYYYYYY
                         createdAt: '2021-01-12T12:12:12+00:00'
                         events:
                           - video.encoding.quality.completed
                         url: 'http://clientnotificationserver.com/notif?myquery=query2'
+                        signatureSecret: 'sig_sec_Abcd12358RLP7VPLi7nYVy'
                     pagination:
                       currentPage: 1
                       pageSize: 25
                       pagesTotal: 1
-                      itemsTotal: 11
-                      currentPageItems: 11
+                      itemsTotal: 2
+                      currentPageItems: 2
                       links:
                         - rel: self
                           uri: 'https://ws.api.video/webhooks?currentPage=1'
@@ -14632,6 +14748,23 @@ components:
           - video_delete
           - video_download
           - video_update
+    list-tags-response:
+      title: Tags
+      type: object
+      properties:
+        data:
+          type: array
+          items:            
+            type: object
+            properties:
+              value:
+                description: Returns the value of a video tag used in your project.
+                type: string
+              videoCount:
+                description: Returns the number of times a video tag is used.
+                type: integer
+        pagination:
+          $ref: '#/components/schemas/pagination'
     watermark:
       title: Watermark
       type: object
@@ -14982,23 +15115,26 @@ components:
       properties:
         webhookId:
           type: string
-          description: Unique identifier of the webhook
+          description: A unique identifier of the webhook you subscribed to.
           example: webhook_XXXXXXXXXXXXXXX
         createdAt:
           type: string
-          description: 'When an webhook was created, presented in ATOM UTC format.'
+          description: 'The time and date when you created this webhook subscription, in ATOM UTC format.'
           format: date-time
           example: '2019-06-24T11:45:01+00:00'
         events:
           type: array
-          description: A list of events that will trigger the webhook.
+          description: A list of events that you subscribed to. When these events occur, the API triggers a webhook call to the URL you provided.
           example: '["video.encoding.quality.completed"]'
           items:
             type: string
         url:
           type: string
-          description: URL of the webhook
+          description: The URL where the API sends the webhook.
           example: 'http://clientnotificationserver.com/notif?myquery=query'
+        signatureSecret:
+          type: string
+          description: A secret key for the webhook you subscribed to. You can use it to verify the origin of the webhook call that you receive.
     video-status:
       title: VideoStatus
       type: object
@@ -16221,3 +16357,190 @@ x-doctave:
     - node
     - php
     - python
+x-webhooks:
+  live-stream.broadcast.started:
+    post:
+      tags:
+        - Webhooks
+      summary: Live stream started
+      description: This webhook triggers when a live stream broadcast is started.
+      operationId: POST-webhooks
+      parameters:
+        - in: header
+          name: X-Api-Video-WebhookID
+          schema:
+            type: string
+          description: The unique ID of your webhook.
+          required: true
+        - in: header
+          name: X-Api-Video-Signature
+          schema:
+            type: string
+          description: The webhook's body encrypted using the webhook's signature secret, in HMAC SHA256. Use this hash to verify that api.video is the origin of this webhook notification.
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: live-stream.broadcast.started
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: '2024-08-151T10:18:47+00:00'
+                liveStreamId:
+                  description: The ID of the live stream that started broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+      responses:
+        '202':
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to signal that the webhook is accepted.
+  live-stream.broadcast.ended:
+    post:
+      tags:
+        - Webhooks
+      summary: Live stream ended
+      description: This webhook triggers when a live stream broadcast is ended.
+      operationId: POST-webhooks
+      parameters:
+        - in: header
+          name: X-Api-Video-WebhookID
+          schema:
+            type: string
+          description: The unique ID of your webhook.
+          required: true
+        - in: header
+          name: X-Api-Video-Signature
+          schema:
+            type: string
+          description: The webhook's body encrypted using the webhook's signature secret, in HMAC SHA256. Use this hash to verify that api.video is the origin of this webhook notification.
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: live-stream.broadcast.ended
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: '2024-08-151T10:18:47+00:00'
+                liveStreamId:
+                  description: The ID of the live stream that ended broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+      responses:
+        '202':
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to signal that the webhook is accepted.
+  video.source.recorded:
+    post:
+      tags:
+        - Webhooks
+      summary: Video source recorded
+      description: This webhook triggers when a live stream broadcast is completed and the recording of the stream is ready for transcoding. This means that the video is in queue for transcoding.
+      operationId: POST-webhooks
+      parameters:
+        - in: header
+          name: X-Api-Video-WebhookID
+          schema:
+            type: string
+          description: The unique ID of your webhook.
+          required: true
+        - in: header
+          name: X-Api-Video-Signature
+          schema:
+            type: string
+          description: The webhook's body encrypted using the webhook's signature secret, in HMAC SHA256. Use this hash to verify that api.video is the origin of this webhook notification.
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: video.source.recorded
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: '2024-08-151T10:18:47+00:00'
+                liveStreamId:
+                  description: The ID of the live stream that ended broadcasting.
+                  type: string
+                  example: li400mYKSgQ6xs7taUeSaEap
+                videoId:
+                  description: The video ID of the live stream recording.
+                  type: string
+                  example: vi4blUQJFrYWbaG44NChkH11
+      responses:
+        '202':
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to signal that the webhook is accepted.
+  video.encoding.quality.completed:
+    post:
+      tags:
+        - Webhooks
+      summary: Video encoding completed
+      description: This webhook triggers when a new video is uploaded into your account, and all HLS and mp4 quality versions are encoded.
+      operationId: POST-webhooks
+      parameters:
+        - in: header
+          name: X-Api-Video-WebhookID
+          schema:
+            type: string
+          description: The unique ID of your webhook.
+          required: true
+        - in: header
+          name: X-Api-Video-Signature
+          schema:
+            type: string
+          description: The webhook's body encrypted using the webhook's signature secret, in HMAC SHA256. Use this hash to verify that api.video is the origin of this webhook notification.
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The name of the webhook event that occured.
+                  example: video.encoding.quality.completed
+                emittedAt:
+                  description: Returns the date-time when the webhook event occurred.
+                  type: string
+                  format: date-time
+                  example: '2024-08-151T10:18:47+00:00'
+                videoId:
+                  description: The ID of the video where a certain quality version's encoding is finished.
+                  type: string
+                  example: vi4blUQJFrYWbaG44NChkH11
+                encoding:
+                  description: The type of encoding that is finished.
+                  type: string
+                  enum: [hls, mp4]
+                  example: hls
+                quality:
+                  description: The quality version of encoding that is finished.
+                  type: string
+                  enum: [240p, 360p, 480p, 720p, 1080p]
+                  example: 1080p
+      responses:
+        '202':
+          summary: Accepted
+          description: Your webhook server may return this response to api.video to signal that the webhook is accepted.
