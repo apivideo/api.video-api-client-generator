@@ -990,11 +990,11 @@ paths:
                       currentPageItems: 2
                       links:
                         - rel: self
-                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+                          uri: '/tags?currentPage=1&pageSize=25'
                         - rel: first
-                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+                          uri: '/tags?currentPage=1&pageSize=25'
                         - rel: last
-                          uri: 'https://ws.api.video/watermarks?currentPage=1'
+                          uri: '/tags?currentPage=1&pageSize=25'
         '429':
           headers:
             X-RateLimit-Limit:
