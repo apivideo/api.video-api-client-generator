@@ -304,7 +304,7 @@ namespace VideoApiTests.Client
         public void UpdateResponseWithStatus400Test()
         {
             InitUpdateTests();
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
             api.Invoking(x => x.update("vi4k0jvEUuaTdRAEjQ4Jfrgz", new VideoUpdatePayload()))
                                 .Should()
@@ -458,7 +458,7 @@ namespace VideoApiTests.Client
         public void CreateResponseWithStatus400Test()
         {
             InitCreateTests();
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
             api.Invoking(x => x.create(new VideoCreationPayload() { title = "title" }))
                                 .Should()

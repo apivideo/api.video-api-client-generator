@@ -331,7 +331,7 @@ public class VideosApiTest extends AbstractApiTest {
         @Test
         @DisplayName("400 response")
         public void responseWithStatus400Test() throws ApiException {
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
             ApiException e = assertThrows(ApiException.class,
                     () -> api.update("vi4blUQJFrYWbaG44NChkH27", new VideoUpdatePayload()));
@@ -471,7 +471,7 @@ public class VideosApiTest extends AbstractApiTest {
         @Test
         @DisplayName("400 response")
         public void responseWithStatus400Test() throws ApiException {
-            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400.json"));
+            answerOnAnyRequest(400, readResourceFile(PAYLOADS_PATH + "responses/400-0.json"));
 
             ApiException e = assertThrows(ApiException.class,
                     () -> api.create(new VideoCreationPayload().title("title")));
