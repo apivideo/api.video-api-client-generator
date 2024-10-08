@@ -1,4 +1,6 @@
 changelog:
+  - 1.2.4 (2024-10-08):
+    - Add transcript feature
   - 1.2.3 (2024-04-25):
     - Add API to get rate limiting headers
   - 1.2.2 (2023-08-25):
