@@ -15449,6 +15449,7 @@ components:
           $ref: '#/components/schemas/video-watermark'
         language:
           type: string
+          nullable: true
           enum: [ar, ca, cs, da, de, el, en, es, fa, fi, fr, he, hi, hr, hu, it, ja, ko, ml, nl, nn, no, pl, pt, ru, sk, sl, te, tr, uk, ur, vi, zh]
           example: fr
           description: |-
@@ -15547,6 +15548,7 @@ components:
             $ref: '#/components/schemas/metadata'
         language:
           type: string
+          nullable: true
           enum: [ar, ca, cs, da, de, el, en, es, fa, fi, fr, he, hi, hr, hu, it, ja, ko, ml, nl, nn, no, pl, pt, ru, sk, sl, te, tr, uk, ur, vi, zh]
           example: fr
           description: |-
