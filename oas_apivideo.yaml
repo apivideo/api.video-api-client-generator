@@ -15761,6 +15761,7 @@ components:
       type: object
       properties:
         default:
+          description: Set this parameter to `true` to define a caption as the default for a video.
           type: boolean
     captions-list-response:
       title: VideoCaptions
