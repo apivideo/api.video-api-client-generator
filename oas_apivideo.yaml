@@ -1050,9 +1050,12 @@ paths:
         - Summaries
       summary: Generate video summary
       description: Generate a title, abstract, and key takeaways for a video.
+      x-client-action: create
       x-client-description:
         default: 'Generate a title, abstract, and key takeaways for a video.'
       operationId: POST_summaries
+      security:
+        - apiKey: []
       requestBody:
         required: true
         content:
@@ -1135,6 +1138,7 @@ paths:
       - Summaries
       summary: List summaries
       description: List all summarries for your videos in a project.
+      x-client-action: list
       x-client-description:
         default: 'List all summarries for your videos in a project.'
       operationId: GET_summaries
@@ -1180,9 +1184,12 @@ paths:
         - Summaries
       summary: Delete video summary
       description: Delete a summary tied to a video.
+      x-client-action: delete
       x-client-description:
         default: 'Delete a summary tied to a video.'
       operationId: DELETE_summaries-summaryId
+      security:
+        - apiKey: []
       parameters:
         - name: summaryId
           in: path
@@ -1215,9 +1222,12 @@ paths:
         - Summaries
       summary: Get summary details
       description: Get all details for a summary
+      x-client-action: get
       x-client-description:
         default: 'Get all details for a summary.'
       operationId: GET_summaries-summaryId-source
+      security:
+        - apiKey: []
       parameters:
         - name: summaryId
           in: path
@@ -1279,6 +1289,7 @@ paths:
         - Summaries
       summary: Update summary details
       description: Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.
+      x-client-action: update
       x-client-description:
         default: 'Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.'
       operationId: PATCH_summaries-summaryId-source
