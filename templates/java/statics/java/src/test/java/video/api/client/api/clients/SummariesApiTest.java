@@ -65,7 +65,7 @@ public class SummariesApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("get")
     class get {
-        private static final String PAYLOADS_PATH = "/payloads/summaries/get/";
+        private static final String PAYLOADS_PATH = "/payloads/summaries/getSummarySource/";
 
         @Test
         @DisplayName("required parameters")

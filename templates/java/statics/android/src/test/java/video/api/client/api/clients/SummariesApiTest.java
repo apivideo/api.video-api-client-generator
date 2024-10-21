@@ -65,7 +65,7 @@ public class SummariesApiTest extends AbstractApiTest {
     @Nested
     @DisplayName("get")
     class get {
-        private static final String PAYLOADS_PATH = "/payloads/summaries/get/";
+        private static final String PAYLOADS_PATH = "/payloads/summaries/getSummarySource/";
 
         @Test
         @DisplayName("required parameters")
@@ -83,7 +83,8 @@ public class SummariesApiTest extends AbstractApiTest {
         public void responseWithStatus404Test() throws ApiException {
             answerOnAnyRequest(404, readResourceFile(PAYLOADS_PATH + "responses/404.json"));
 
-            assertThatThrownBy(() -> api.getSummarySource("summary_1CGHWuXjhxmeH4WiZ51234")).isInstanceOf(ApiException.class)
+            assertThatThrownBy(() -> api.getSummarySource("summary_1CGHWuXjhxmeH4WiZ51234"))
+                    .isInstanceOf(ApiException.class)
                     .satisfies(e -> assertThat(((ApiException) e).getCode()).isEqualTo(404))
                     .hasMessage("The requested resource was not found.");
 
