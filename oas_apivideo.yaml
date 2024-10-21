@@ -1128,23 +1128,64 @@ paths:
         default: 'List all summarries for your videos in a project.'
       operationId: GET_summaries
       parameters:
+        - name: videoId
+          in: query
+          required: false
+          description: Use this parameter to filter for a summary that belongs to a specific video.
+          schema:
+            type: string
+          example: vilkR8K3N7yrRcxcMt91234
+        - name: origin
+          in: query
+          required: false
+          description: 'Use this parameter to filter for summaries based on the way they were created: automatically or manually via the API.'
+          schema:
+            type: string
+            enum: [auto, api]
+          example: auto
+        - name: sourceStatus
+          in: query
+          required: false
+          description: |
+            Use this parameter to filter for summaries based on the current status of the summary source.
+            
+            These are the available statuses:
+            
+            `missing`: the input for a summary is not present.
+            `waiting` : the input video is being processed and a summary will be generated.
+            `failed`: a technical issue prevented summary generation.
+            `completed`: the summary is generated.
+            `unprocessable`: the API rules the source video to be unsuitable for summary generation. An example for this is an input video that has no audio.
+          schema:
+            type: string
+            enum: [missing, waiting, failed, completed, unprocessable]
+          example: auto
         - name: sortBy
           in: query
-          description: 'Allowed: createdAt. You can search by the time watermark were created at.'
+          description: |
+            Use this parameter to choose which field the API will use to sort the response data. The default is `value`.
+            
+            These are the available fields to sort by:
+            
+            - `createdAt`: Sorts the results based on date and timestamps when summaries were created.
+            - `updatedAt`: Sorts the results based on date and timestamps when summaries were last updated.
+            - `videoId`: Sorts the results based on video IDs.
           required: false
           style: form
           explode: true
           schema:
             type: string
+            enum: [createdAt, updatedAt, videoId]
           example: createdAt
         - name: sortOrder
           in: query
-          description: 'Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.'
+          description: 'Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.'
           required: false
           style: form
           explode: true
           schema:
             type: string
+            enum: [asc, desc]
           example: asc
         - $ref: '#/components/parameters/current-page'
         - $ref: '#/components/parameters/page-size'
