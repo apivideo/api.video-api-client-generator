@@ -1059,24 +1059,9 @@ paths:
       requestBody:
         required: true
         content:
-          applictaion/json:
+          application/json:
             schema:
-              type: object
-              properties:
-                videoId:
-                  type: string
-                  description: Create a summary of a video using the video ID.
-                  example: vi4k0jvEUuaTdRAEjQ4Jfrgz
-                origin:
-                  type: string
-                  enum: [auto]
-                  description: |-
-                    Use this parameter to define how the API generates the summary. The only allowed value is `auto`, which means that the API generates a summary automatically.
-
-                    If you do not set this parameter, **the API will not generate a summary automatically**.
-
-                    In this case, `sourceStatus` will return `missing`, and you have to manually add a summary using the `PATCH /summaries/{summaryId}/source` endpoint operation.
-                  example: auto
+              $ref: '#/components/schemas/summary-creation-payload'
       responses:
         '201':
           headers:
@@ -1096,7 +1081,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/summary-object'
+                $ref: '#/components/schemas/summary'
               examples:
                 Summary created:
                   value:
@@ -1142,6 +1127,29 @@ paths:
       x-client-description:
         default: 'List all summarries for your videos in a project.'
       operationId: GET_summaries
+      parameters:
+        - name: sortBy
+          in: query
+          description: 'Allowed: createdAt. You can search by the time watermark were created at.'
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: createdAt
+        - name: sortOrder
+          in: query
+          description: 'Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.'
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: asc
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
+      x-group-parameters: true
+      x-client-paginated: true
       responses:
         '200':
           headers:
@@ -1161,7 +1169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get-summaries'
+                $ref: '#/components/schemas/summaries-list-response'
               examples:
                 List all summaries:
                   value:
@@ -1177,7 +1185,20 @@ paths:
                       updatedAt: '2024-07-15T23:36:07+00:00'
                       videoId: 'vibaBXK3N7yrRcxcMt95678'
                       origin: auto
-                      sourceStatus: waiting      
+                      sourceStatus: waiting     
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 11
+                      currentPageItems: 11
+                      links:
+                        - rel: self
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
+                        - rel: first
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
+                        - rel: last
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
   /summaries/{summaryId}:
     delete:
       tags:
@@ -1222,7 +1243,7 @@ paths:
         - Summaries
       summary: Get summary details
       description: Get all details for a summary
-      x-client-action: get
+      x-client-action: getSummarySource
       x-client-description:
         default: 'Get all details for a summary.'
       operationId: GET_summaries-summaryId-source
@@ -1308,7 +1329,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/update-summary-request'
+              $ref: '#/components/schemas/summary-update-payload'
       responses:
         '201':
           headers:
@@ -15817,7 +15838,26 @@ components:
             - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
       required:
         - title
-    update-summary-request:
+    summary-creation-payload:
+      required:
+        - videoId
+      type: object
+      properties:
+        videoId:
+          type: string
+          description: Create a summary of a video using the video ID.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+        origin:
+          type: string
+          enum: [auto]
+          description: |-
+            Use this parameter to define how the API generates the summary. The only allowed value is `auto`, which means that the API generates a summary automatically.
+
+            If you do not set this parameter, **the API will not generate a summary automatically**.
+
+            In this case, `sourceStatus` will return `missing`, and you have to manually add a summary using the `PATCH /summaries/{summaryId}/source` endpoint operation.
+          example: auto
+    summary-update-payload:
       type: object
       properties:
         title:
@@ -15877,15 +15917,21 @@ components:
           - Quantum theory is complicated.
           - Schrödinger's cat is neither dead, nor alive.
           - Quantum computers are super cool.
-    get-summaries:
+    summaries-list-response:
       type: object
+      title: Summaries
       properties:
         data:
-          description: An array of summary objects.
           type: array
+          description: An array of summary objects.
           items:
-            $ref: '#/components/schemas/summary-object'
-    summary-object:
+            $ref: '#/components/schemas/summary'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
+    summary:
       type: object
       properties:        
         summaryId:
@@ -15907,6 +15953,10 @@ components:
           description: The unique identifier of the video object.
           example: 'vi4k0jvEUuaTdRAEjQ4Prklg'
         origin:
+          type: string
+          enum: 
+            - api
+            - auto
           description:  |-
             Returns the origin of how the summary was created.
 
