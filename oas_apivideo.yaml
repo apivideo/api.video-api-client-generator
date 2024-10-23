@@ -1044,6 +1044,379 @@ paths:
                     type: 'https://docs.api.video/reference/too-many-requests'
                     title: Too many requests.
                     status: 429
+  /summaries:
+    post:
+      tags:
+        - Summaries
+      summary: Generate video summary
+      description: Generate a title, abstract, and key takeaways for a video.
+      x-client-action: create
+      x-client-description:
+        default: 'Generate a title, abstract, and key takeaways for a video.'
+      operationId: POST_summaries
+      security:
+        - apiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/summary-creation-payload'
+      responses:
+        '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/summary'
+              examples:
+                Summary created:
+                  value:
+                    summaryId: 'summary_1CGHWuXjhxmeH4WiZ51234'
+                    createdAt: '2024-07-14T23:36:07+00:00'
+                    updatedAt: '2024-07-14T23:36:07+00:00'
+                    videoId: 'vilkR8K3N7yrRcxcMt91234'
+                    origin: auto
+                    sourceStatus: completed
+        '409':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflict-error'
+              examples:
+                Summary already exists:
+                  value:
+                    type: https://docs.api.video/reference/summary-already-exists
+                    title: A summary already exists or is being created on this video.
+                    status: 409
+                    detail: You can delete the existing summary and generate a new one.
+                    name: videoId
+    get:
+      tags:
+      - Summaries
+      summary: List summaries
+      description: List all summarries for your videos in a project.
+      x-client-action: list
+      x-client-description:
+        default: 'List all summarries for your videos in a project.'
+      operationId: GET_summaries
+      parameters:
+        - name: videoId
+          in: query
+          required: false
+          description: Use this parameter to filter for a summary that belongs to a specific video.
+          schema:
+            type: string
+          example: vilkR8K3N7yrRcxcMt91234
+        - name: origin
+          in: query
+          required: false
+          description: 'Use this parameter to filter for summaries based on the way they were created: automatically or manually via the API.'
+          schema:
+            type: string
+            enum: [auto, api]
+          example: auto
+        - name: sourceStatus
+          in: query
+          required: false
+          description: |
+            Use this parameter to filter for summaries based on the current status of the summary source.
+            
+            These are the available statuses:
+            
+            `missing`: the input for a summary is not present.
+            `waiting` : the input video is being processed and a summary will be generated.
+            `failed`: a technical issue prevented summary generation.
+            `completed`: the summary is generated.
+            `unprocessable`: the API rules the source video to be unsuitable for summary generation. An example for this is an input video that has no audio.
+          schema:
+            type: string
+            enum: [missing, waiting, failed, completed, unprocessable]
+          example: auto
+        - name: sortBy
+          in: query
+          description: |
+            Use this parameter to choose which field the API will use to sort the response data. The default is `value`.
+            
+            These are the available fields to sort by:
+            
+            - `createdAt`: Sorts the results based on date and timestamps when summaries were created.
+            - `updatedAt`: Sorts the results based on date and timestamps when summaries were last updated.
+            - `videoId`: Sorts the results based on video IDs.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [createdAt, updatedAt, videoId]
+          example: createdAt
+        - name: sortOrder
+          in: query
+          description: 'Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.'
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum: [asc, desc]
+          example: asc
+        - $ref: '#/components/parameters/current-page'
+        - $ref: '#/components/parameters/page-size'
+      x-group-parameters: true
+      x-client-paginated: true
+      responses:
+        '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/summaries-list-response'
+              examples:
+                List all summaries:
+                  value:
+                    data:
+                    - summaryId: 'summary_1CGHWuXjhxmeH4WiZ51234'
+                      createdAt: '2024-07-14T23:36:07+00:00'
+                      updatedAt: '2024-07-14T23:36:07+00:00'
+                      videoId: 'vilkR8K3N7yrRcxcMt91234'
+                      origin: auto
+                      sourceStatus: completed
+                    - summaryId: 'summary_123HWuXjhxmeH4WiZ55678'
+                      createdAt: '2024-07-15T23:36:07+00:00'
+                      updatedAt: '2024-07-15T23:36:07+00:00'
+                      videoId: 'vibaBXK3N7yrRcxcMt95678'
+                      origin: auto
+                      sourceStatus: waiting     
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 11
+                      currentPageItems: 11
+                      links:
+                        - rel: self
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
+                        - rel: first
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
+                        - rel: last
+                          uri: 'https://ws.api.video/summaries?currentPage=1'
+  /summaries/{summaryId}:
+    delete:
+      tags:
+        - Summaries
+      summary: Delete video summary
+      description: Delete a summary tied to a video.
+      x-client-action: delete
+      x-client-description:
+        default: 'Delete a summary tied to a video.'
+      operationId: DELETE_summaries-summaryId
+      security:
+        - apiKey: []
+      parameters:
+        - name: summaryId
+          in: path
+          description: The unique identifier of the summary you want to delete.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 'summary_1CGHWuXjhxmeH4WiZ51234'
+      responses:
+        '204':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: No Content      
+  /summaries/{summaryId}/source:
+    get:
+      tags:
+        - Summaries
+      summary: Get summary details
+      description: Get all details for a summary
+      x-client-action: getSummarySource
+      x-client-description:
+        default: 'Get all details for a summary.'
+      operationId: GET_summaries-summaryId-source
+      security:
+        - apiKey: []
+      parameters:
+        - name: summaryId
+          in: path
+          description: The unique identifier of the summary source you want to retrieve.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 'summary_1CGHWuXjhxmeH4WiZ51234'
+      responses:
+        '200':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/summary-source'
+        '404':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not-found'
+              examples:
+                response:
+                  value:
+                    type: 'https://docs.api.video/reference/resource-not-found'
+                    title: The requested resource was not found.
+                    name: summaryId
+                    status: 404
+    patch:
+      tags:
+        - Summaries
+      summary: Update summary details
+      description: Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.
+      x-client-action: update
+      x-client-description:
+        default: 'Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.'
+      operationId: PATCH_summaries-summaryId-source
+      parameters:
+        - name: summaryId
+          in: path
+          description: The unique identifier of the summary source you want to update.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 'summary_1CGHWuXjhxmeH4WiZ51234'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/summary-update-payload'
+      responses:
+        '201':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/summary-source'
+        '409':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflict-error'
+              examples:
+                Summary already exists:
+                  value:
+                    type: https://docs.api.video/reference/summary-already-exists
+                    title: A summary already exists or is being created on this video.
+                    status: 409
+                    detail: You can delete the existing summary and generate a new one.
   '/videos/{videoId}/source':
     post:
       tags:
@@ -3366,6 +3739,33 @@ paths:
                     title: The requested resource was not found.
                     name: videoId
                     status: 404
+        '409':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflict-error'
+              examples:
+                Summary already exists:
+                  value:
+                    type: https://docs.api.video/reference/summary-already-exists
+                    title: A summary already exists or is being created on this video.
+                    status: 409
+                    detail: You can delete the existing summary and generate a new one.
+                    name: transcriptSummary
         '429':
           headers:
             X-RateLimit-Limit:
@@ -14646,12 +15046,16 @@ components:
       type: object
       properties:
         type:
+          description: A link to the error documentation.
           type: string
         title:
+          description: A description of the error that occurred.
           type: string
         name:
+          description: The name of the parameter that caused the error.
           type: string
         status:
+          description: The HTTP status code.
           type: integer
     too-many-requests:
       title: TooManyRequests
@@ -15465,8 +15869,151 @@ components:
             - The default value is `false`.
             - If you define a video language using the `language` parameter, the API uses that language to transcribe the video. If you do not define a language, the API detects it based on the video. 
             - When the API generates a transcript, it will be available as a caption for the video.
+        transcriptSummary:
+          type: boolean
+          description: |-
+            Use this parameter to enable summarization. We recommend using this parameter together with `transcript: true`.
+            
+            - When `true`, the API generates a summary for the video, based on the transcription.
+            - The default value is `false`.
+            - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
       required:
         - title
+    summary-creation-payload:
+      required:
+        - videoId
+      type: object
+      properties:
+        videoId:
+          type: string
+          description: Create a summary of a video using the video ID.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+        origin:
+          type: string
+          enum: [auto]
+          description: |-
+            Use this parameter to define how the API generates the summary. The only allowed value is `auto`, which means that the API generates a summary automatically.
+
+            If you do not set this parameter, **the API will not generate a summary automatically**.
+
+            In this case, `sourceStatus` will return `missing`, and you have to manually add a summary using the `PATCH /summaries/{summaryId}/source` endpoint operation.
+          example: auto
+    summary-update-payload:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A video title, based on the contents of the video.
+          example: 'A short lecture on quantum theory'
+        abstract:
+          type: string
+          description: A short outline of the contents of the video.
+          example: 'In this lecture, we discuss how complicated quantum theory is, using the famous example of Schrödingers cat. We also discuss practical applications like quantum computing.'
+        takeaways:
+          type: array
+          description: A list of 3 key points from the video, in chronological order.
+          maxItems: 3
+          items:
+            type: string
+          example:
+          - Quantum theory is complicated.
+          - Schrödinger's cat is neither dead, nor alive.
+          - Quantum computers are super cool.
+    conflict-error:
+      type: object
+      properties:
+          type:
+            description: A link to the error documentation.
+            type: string
+          title:
+            description: A description of the error that occurred.
+            type: string
+          name:
+            description: The name of the parameter that caused the error.
+            type: string
+          status:
+            description: The HTTP status code.
+            type: integer
+          detail:
+            description:  A solution for the error.
+            type: string
+    summary-source:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A video title, based on the contents of the video.
+          example: 'A short lecture on quantum theory'
+        abstract:
+          type: string
+          description: A short outline of the contents of the video. The length of an `abstract` depends on the amount of content in a video that can be transcribed. The API condenses the contents into minimum 20, maximum 300 words.
+          example: 'In this lecture, we discuss how complicated quantum theory is, using the famous example of Schrödingers cat. We also discuss practical applications like quantum computing.'
+        takeaways:
+          type: array
+          description: A list of 3 key points from the video, in chronological order.
+          maxItems: 3
+          items:
+            type: string
+          example:
+          - Quantum theory is complicated.
+          - Schrödinger's cat is neither dead, nor alive.
+          - Quantum computers are super cool.
+    summaries-list-response:
+      type: object
+      title: Summaries
+      properties:
+        data:
+          type: array
+          description: An array of summary objects.
+          items:
+            $ref: '#/components/schemas/summary'
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      required:
+        - data
+        - pagination
+    summary:
+      type: object
+      properties:        
+        summaryId:
+          type: string
+          description: The unique identifier of the summary object.
+          example: 'summary_1CGHWuXjhxmeH4WiZ51234'
+        createdAt:
+          description: Returns the date and time when the summary was created in ATOM date-time format.
+          type: string
+          format: date-time
+          example: '2024-05-28T11:15:07+00:00'
+        updatedAt:
+          description: Returns the date and time when the summary was last updated in ATOM date-time format.
+          type: string
+          format: date-time
+          example: '2024-05-28T11:15:07+00:00'
+        videoId:
+          type: string
+          description: The unique identifier of the video object.
+          example: 'vi4k0jvEUuaTdRAEjQ4Prklg'
+        origin:
+          type: string
+          enum: 
+            - api
+            - auto
+          description:  |-
+            Returns the origin of how the summary was created.
+
+            - `api` means that no summary was generated automatically. You can add summary manually using the `PATCH /summaries/{summaryId}/source` endpoint operation. Until this happens, `sourceStatus` returns `missing`.
+            - `auto` means that the API generated the summary automatically.
+        sourceStatus:
+          type: string
+          description: |-
+            Returns the current status of summary generation.
+            
+            `missing`: the input for a summary is not present.
+            `waiting` : the input video is being processed and a summary will be generated.
+            `failed`: a technical issue prevented summary generation.
+            `completed`: the summary is generated.
+            `unprocessable`: the API rules the source video to be unsuitable for summary generation. An example for this is an input video that has no audio.
+          enum: [missing, waiting, failed, completed, unprocessable]
     video-upload-payload:
       required:
         - file
@@ -15564,6 +16111,14 @@ components:
             - The default value is `false`.
             - If you define a video language using the `language` parameter, the API uses that language to transcribe the video. If you do not define a language, the API detects it based on the video. 
             - When the API generates a transcript, it will be available as a caption for the video.
+        transcriptSummary:
+          type: boolean
+          description: |-
+            Use this parameter to enable summarization. 
+            
+            - When `true`, the API generates a summary for the video, based on the transcription.
+            - The default value is `false`.
+            - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
       example:
         playerId: pl45KFKdlddgk654dspkze
         title: String theory
@@ -15571,6 +16126,7 @@ components:
         public: false
         language: 'en'
         transcript: true
+        transcriptSummary: true
         panoramic: false
         mp4Support: true
         tags:
