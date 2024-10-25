@@ -12605,6 +12605,8 @@ paths:
           - `impression` is the number of times your content has been loaded and was ready for playback. You can use the aggregation `count` with this metric.
           - `impression-time` is the time in milliseconds that your content was loading for until the first video frame is displayed. You can use the aggregations `average` and `sum` with this metric.
           - `watch-time` is the cumulative time in seconds that the user has spent watching your content. You can use the aggregations `average` and `sum` with this metric.
+          - `ccv` TODO
+          - `view` TODO
         required: true
         style: simple
         explode: false
@@ -12617,6 +12619,8 @@ paths:
             - impression
             - impression-time
             - watch-time
+            - ccv
+            - view
       - name: aggregation
         in: path
         description: |
@@ -12627,6 +12631,8 @@ paths:
           - `total` calculates the total number of events for the `play` metric. 
           - `average` calculates an average value for the selected metric.
           - `sum` adds up the total value of the select metric.
+          - `peak` TODO
+          - `live` TODO
         style: simple
         explode: false
         required: true
@@ -12638,6 +12644,8 @@ paths:
             - total
             - average
             - sum
+            - peak
+            - live
       - name: from
         in: query
         description: |
@@ -12667,6 +12675,29 @@ paths:
           type: string
           format: date-time
         example: 2024-02-06T00:00:00+01:00
+      - name: unique
+        in: query
+        description: |
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: boolean
+        example: true
+      - name: viewDuration
+        in: query
+        description: | 
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - 3s
+            - 5s
+            - 10s
+            - 30s
+        example: 5s
       - $ref: '#/components/parameters/filterBy'
       responses:
         '200':
@@ -12872,6 +12903,8 @@ paths:
           - `start` is the number of times playback was started.
           - `end` is the number of times playback has ended with the content watch until the end.
           - `impression` is the number of times your content has been loaded and was ready for playback.
+          - `ccv-peak` TODO
+          - `ccv-average` TODO
         required: true
         style: simple
         explode: false
@@ -12884,6 +12917,9 @@ paths:
             - start
             - end
             - impression
+            - ccv-peak
+            - ccv-average
+            - view
       - name: breakdown
         in: path
         description: |
@@ -12898,6 +12934,7 @@ paths:
           - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
           - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`.
           - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+          - `referrer`: TODO
         style: simple
         explode: false
         required: true
@@ -12911,6 +12948,7 @@ paths:
             - device-type
             - operating-system
             - browser
+            - referrer
       - name: from
         in: query
         description: |
@@ -12973,6 +13011,28 @@ paths:
             - asc
             - desc
         example: asc
+      - name: unique
+        in: query
+        description: |
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: boolean
+        example: true
+      - name: viewDuration
+        in: query
+        description: | 
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - 3s
+            - 5s
+            - 10s
+            - 30s
       - $ref: '#/components/parameters/filterBy'
       - $ref: '#/components/parameters/current-page'
       - $ref: '#/components/parameters/page-size'
@@ -13207,6 +13267,9 @@ paths:
             - start
             - end
             - impression
+            - ccv-peak
+            - ccv-average
+            - view
       - name: from
         in: query
         description: |
@@ -13237,7 +13300,7 @@ paths:
       - name: interval
         in: query
         description: |
-          Use this query parameter to define how granularity of the data. Possible values: `hour`, `day`.
+          Use this query parameter to define how granularity of the data. Possible values: `minute`, `hour`, `day`.
 
           - Default: If no interval specified and the period (different between from and to) ≤ 2 days then hour, otherwise day.
 
@@ -13246,7 +13309,7 @@ paths:
         explode: false
         schema:
           type: string
-          enum: [hour, day]
+          enum: [minute, hour, day]
         example: hour
       - name: sortBy
         in: query
@@ -13283,6 +13346,28 @@ paths:
             - asc
             - desc
         example: asc
+      - name: unique
+        in: query
+        description: |
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: boolean
+        example: true
+      - name: viewDuration
+        in: query
+        description: | 
+          TODO
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+            - 3s
+            - 5s
+            - 10s
+            - 30s
       - $ref: '#/components/parameters/filterBy'
       - $ref: '#/components/parameters/current-page'
       - $ref: '#/components/parameters/page-size'
