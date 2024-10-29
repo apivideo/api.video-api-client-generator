@@ -6120,6 +6120,7 @@ paths:
                     title: Maths video
                     description: An amazing video explaining the string theory
                     language: 'en'
+                    languageOrigin: 'api'
                     public: false
                     panoramic: false
                     tags:
@@ -15138,6 +15139,7 @@ components:
         language:
           type: string
           description: Returns the language of a video in [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format. You can set the language during video creation via the API, otherwise it is detected automatically.
+          example: en
         languageOrigin:
           nullable: true
           type: string
@@ -15147,6 +15149,7 @@ components:
 
             - `api` means that the last update was requested from the API.
             - `auto` means that the last update was done automatically by the API.
+          example: api
         tags:
           type: array
           description: |
