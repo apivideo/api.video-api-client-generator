@@ -13081,10 +13081,10 @@ paths:
         description: |
           Use this query parameter to control how viewer data is counted:
 
-          - `true` means that a single user watchig multiple times counts as 1 unique viewer
+          - `true` means that a single user watching multiple times counts as 1 unique viewer
           - `false` means that all views count, even if from the same user.
 
-          The API accepts this parameter only when you use the `ccv-peak`, `ccv-average`, or `view` metric.          
+          The API accepts this parameter only when you use the `ccv` or `view` metric.          
           
           Viewers are unique for 1 day.
 
@@ -13099,7 +13099,7 @@ paths:
         description: | 
           Use this query parameter to define how many seconds a view has to last to be counted in analytics data.
 
-          - You can only use this parameter together with the `view` metric.
+          - You can only use this parameter with the `view` metric.
           - The accepted values are `3s`, `5s`, `10s`, and `30s`. 
           - If you do not set this parameter, the API defaults to `5s`.
         style: form
@@ -13365,7 +13365,7 @@ paths:
           - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
           - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`.
           - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
-          - `referrer`: Returns the URL where the view originates from, for example a website where the video is embedded. View events from Android and iOS return empty strings as referrer.
+          - `referrer`: Returns the URL where the view originates from, for example a website where the video is embedded. View events from Android and iOS return empty strings as the value for `referrer`.
         style: simple
         explode: false
         required: true
@@ -13447,7 +13447,7 @@ paths:
         description: |
           Use this query parameter to control how viewer data is counted:
 
-          - `true` means that a single user watchig multiple times counts as 1 unique viewer
+          - `true` means that a single user watching multiple times counts as 1 unique viewer
           - `false` means that all views count, even if from the same user.
 
           The API accepts this parameter only when you use the `ccv-peak`, `ccv-average`, or `view` metric.          
@@ -13766,7 +13766,7 @@ paths:
           Use this query parameter to define the granularity of the data. Possible values: `minute`, `hour`, `day`.
 
           - If you do not set a value for `interval`, and the period you set using the `from` and `to` parameters is less than or equals to 2 days, then the default assigned value is `hour`. Otherwise the API sets it to `day`.
-          - When you set `minute` as interval, the timeframe you define with the `from` and `to` parameters should be less than 60 minutes.
+          - When you set `minute` as interval, the timeframe you define with the `from` and `to` parameters must be less than 60 minutes.
         style: form
         explode: false
         schema:
@@ -13813,7 +13813,7 @@ paths:
         description: |
           Use this query parameter to control how viewer data is counted:
 
-          - `true` means that a single user watchig multiple times counts as 1 unique viewer
+          - `true` means that a single user watching multiple times counts as 1 unique viewer
           - `false` means that all views count, even if from the same user.
 
           The API accepts this parameter only when you use the `ccv-peak`, `ccv-average`, or `view` metric.          
@@ -17210,8 +17210,12 @@ components:
               type: string
               format: uri
               maxLength: 2048
-            description: Filters data based on the URL where the view is originating from. This filter parameter accepts an empty string to filter view events where no referrer is available.
-            example: ['http://my.list/of-videos']
+            description: |-
+              Filters data based on the URL where the view is originating from. This filter parameter accepts an empty string to filter view events where no referrer is available.
+
+              - The API filters for exact matches. Include the trailing `/` characters if needed.
+              - The URLs you add must be URL encoded.
+            example: ['https%3A%2F%2Fmy-awesome-videos.com']
     current-page:
       name: currentPage
       in: query
