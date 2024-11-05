@@ -1390,7 +1390,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/summary-source'
+                $ref: '#/components/schemas/summary-source'        
+        '409':
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: The request limit per minute.
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: The number of available requests left for the current time window.
+            X-RateLimit-Retry-After:
+              schema:
+                type: integer
+              description: The number of seconds left until the current rate limit window resets.
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflict-error'
+              examples:
+                Summary generation still in progress:
+                  value:
+                    type: https://docs.api.video/reference/summary-already-exists
+                    title: A summary already exists or is being created on this video.
+                    status: 409
+                    detail: You can delete the existing summary and generate a new one.
   '/videos/{videoId}/source':
     post:
       tags:
