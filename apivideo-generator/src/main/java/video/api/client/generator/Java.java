@@ -75,10 +75,12 @@ public class Java extends JavaClientCodegen {
                         .flatMap(p -> p.vars.stream())
                         .forEach(v -> {
                             if (v.dataType.equals("List<String>")) {
-                                v.example = "Arrays.asList(" + v.example
-                                        .replaceAll("\\[", "")
-                                        .replaceAll("\\]", "")
-                                        .replaceAll("\\\\\"", "\"") + ")";
+                                if(v.example != null) {
+                                    v.example = "Arrays.asList(" + v.example
+                                            .replaceAll("\\[", "")
+                                            .replaceAll("\\]", "")
+                                            .replaceAll("\\\\\"", "\"") + ")";
+                                }
                             } else if (v.isArray) {
                                 v.example = "Collections.<" + v.items.dataType + ">emptyList()";
                             } else if (v.isString) {

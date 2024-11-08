@@ -1049,10 +1049,10 @@ paths:
       tags:
         - Summaries
       summary: Generate video summary
-      description: Generate a title, abstract, and key takeaways for a video.
+      description: Generate an abstract and key takeaways for a video.
       x-client-action: create
       x-client-description:
-        default: 'Generate a title, abstract, and key takeaways for a video.'
+        default: 'Generate an abstract and key takeaways for a video.'
       operationId: POST_summaries
       security:
         - apiKey: []
@@ -1350,10 +1350,10 @@ paths:
       tags:
         - Summaries
       summary: Update summary details
-      description: Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.
+      description: Update details for a summary.
       x-client-action: update
       x-client-description:
-        default: 'Update details for a summary. Note that this operation is only allowed for summary objects where `sourceStatus` is `missing`.'
+        default: 'Update details for a summary.'
       operationId: PATCH_summaries-summaryId-source
       parameters:
         - name: summaryId
@@ -1390,7 +1390,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/summary-source'
+                $ref: '#/components/schemas/summary-source'        
         '409':
           headers:
             X-RateLimit-Limit:
@@ -1411,7 +1411,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/conflict-error'
               examples:
-                Summary already exists:
+                Summary generation still in progress:
                   value:
                     type: https://docs.api.video/reference/summary-already-exists
                     title: A summary already exists or is being created on this video.
@@ -15982,6 +15982,10 @@ components:
         playerId: pl45KFKdlddgk654dspkze
         language: en
         transcript: true
+        transcriptSummary: true
+        transcriptSummaryAttributes:
+          - abstract
+          - takeaways
         tags:
           - maths
           - string theory
@@ -16071,6 +16075,12 @@ components:
             - When `true`, the API generates a summary for the video, based on the transcription.
             - The default value is `false`.
             - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
+        transcriptSummaryAttributes:
+          description: Use this parameter to define the elements of a summary that you want to generate. If you do not define this parameter, the API generates a full summary with all attributes.
+          type: array
+          items:
+            type: string
+            enum: [abstract, takeaways]
       required:
         - title
     summary-creation-payload:
@@ -16092,13 +16102,15 @@ components:
 
             In this case, `sourceStatus` will return `missing`, and you have to manually add a summary using the `PATCH /summaries/{summaryId}/source` endpoint operation.
           example: auto
+        attributes:
+          description: Use this parameter to define the elements of a summary that you want to generate. If you do not define this parameter, the API generates a full summary with all attributes.
+          type: array
+          items:
+            type: string
+            enum: [abstract, takeaways]
     summary-update-payload:
       type: object
       properties:
-        title:
-          type: string
-          description: A video title, based on the contents of the video.
-          example: 'A short lecture on quantum theory'
         abstract:
           type: string
           description: A short outline of the contents of the video.
@@ -16134,10 +16146,6 @@ components:
     summary-source:
       type: object
       properties:
-        title:
-          type: string
-          description: A video title, based on the contents of the video.
-          example: 'A short lecture on quantum theory'
         abstract:
           type: string
           description: A short outline of the contents of the video. The length of an `abstract` depends on the amount of content in a video that can be transcribed. The API condenses the contents into minimum 20, maximum 300 words.
@@ -16313,6 +16321,12 @@ components:
             - When `true`, the API generates a summary for the video, based on the transcription.
             - The default value is `false`.
             - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
+        transcriptSummaryAttributes:
+          description: Use this parameter to define the elements of a summary that you want to generate. If you do not define this parameter, the API generates a full summary with all attributes.
+          type: array
+          items:
+            type: string
+            enum: [abstract, takeaways]
       example:
         playerId: pl45KFKdlddgk654dspkze
         title: String theory
@@ -16321,6 +16335,9 @@ components:
         language: 'en'
         transcript: true
         transcriptSummary: true
+        transcriptSummaryAttributes:
+          - abstract
+          - takeaways
         panoramic: false
         mp4Support: true
         tags:
