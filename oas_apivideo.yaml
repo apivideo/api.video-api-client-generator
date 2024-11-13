@@ -17498,7 +17498,7 @@ x-webhooks:
                   format: date-time
                   example: '2024-08-151T10:18:47+00:00'
                 videoId:
-                  description: The ID of the video where the caption was generated.
+                  description: The ID of the video for which the caption was generated.
                   type: string
                   example: vi4blUQJFrYWbaG44NCh1234
                 captionId:
@@ -17555,7 +17555,7 @@ x-webhooks:
                   format: date-time
                   example: '2024-08-151T10:18:47+00:00'
                 videoId:
-                  description: The ID of the video where the summary was generated.
+                  description: The ID of the video for which the summary was generated.
                   type: string
                   example: vi4blUQJFrYWbaG44NCh1234
                 summaryId:
