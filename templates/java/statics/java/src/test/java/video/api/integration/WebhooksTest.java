@@ -27,7 +27,7 @@ public class WebhooksTest extends AbstractTest {
     public void createWebhook() throws ApiException {
         this.webhook = apiClient.webhooks()
                 .create(new WebhooksCreationPayload()
-                        .events(Collections.singletonList("video.encoding.quality.completed"))
+                        .events(Collections.singletonList(WebhooksCreationPayload.EventsEnum.VIDEO_ENCODING_QUALITY_COMPLETED))
                         .url("https://webhooks.test-java-api-client.fr"));
 
         assertThat(webhook.getWebhookId()).isNotNull();

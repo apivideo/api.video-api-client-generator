@@ -96,7 +96,7 @@ public class WebhooksApiTest extends AbstractApiTest {
 
             assertThat(res.getWebhookId()).isEqualTo("webhook_XXXXXXXXXXXXXXX");
             assertThat(res.getCreatedAt().toString()).isEqualTo("2021-01-08T14:12:18Z");
-            assertThat(res.getEvents()).containsExactlyElementsIn(Arrays.asList(("video.encoding.quality.completed")));
+            assertThat(res.getEvents()).containsExactlyElementsIn(Arrays.asList((Webhook.EventsEnum.VIDEO_ENCODING_QUALITY_COMPLETED)));
             assertThat(res.getUrl()).isEqualTo("http://clientnotificationserver.com/notif?myquery=query");
         }
     }
@@ -131,12 +131,12 @@ public class WebhooksApiTest extends AbstractApiTest {
             assertThat(page.getItems()).containsExactlyElementsIn(Arrays.asList(
                     new Webhook().webhookId("webhook_XXXXXXXXXXXXXXX")
                             .createdAt(OffsetDateTime.parse("2021-01-08T14:12:18.000+00:00"))
-                            .addEventsItem("video.encoding.quality.completed")
+                            .addEventsItem(Webhook.EventsEnum.VIDEO_ENCODING_QUALITY_COMPLETED)
                             .url("http://clientnotificationserver.com/notif?myquery=query")
                             .signatureSecret("sig_sec_Abcd12348RLP7VPLi7nYVh"),
                     new Webhook().webhookId("webhook_XXXXXXXXXYYYYYY")
                             .createdAt(OffsetDateTime.parse("2021-01-12T12:12:12.000+00:00"))
-                            .addEventsItem("video.encoding.quality.completed")
+                            .addEventsItem(Webhook.EventsEnum.VIDEO_ENCODING_QUALITY_COMPLETED)
                             .url("http://clientnotificationserver.com/notif?myquery=query2")
                             .signatureSecret("sig_sec_Abcd12358RLP7VPLi7nYVy")))
                     .inOrder();
