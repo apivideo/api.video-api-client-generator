@@ -20,6 +20,15 @@ public class ChangeLog {
     public void writeTo(String outputDir) {
         Path outputFile = Paths.get(outputDir, "CHANGELOG.md");
 
+        // create the file and parent folders if it doesn't exist
+        try {
+            outputFile.toFile().getParentFile().mkdirs();
+            outputFile.toFile().createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
+
         String content = "# Changelog\nAll changes to this project will be documented in this file.\n\n" +
                 this.versions.stream().map(v -> {
             String changes = v.changes.stream().map(c -> "- " + c).collect(Collectors.joining("\n"));
