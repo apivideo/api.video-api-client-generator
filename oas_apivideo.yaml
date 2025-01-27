@@ -16009,6 +16009,10 @@ components:
           type: string
           description: The title of your new video.
           example: Maths video
+        subtitle:
+          type: string
+          description: A subtitle of your video.
+          example: This is a great subtitle.
         description:
           type: string
           description: A brief description of your video.
