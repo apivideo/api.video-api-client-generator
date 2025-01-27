@@ -1,4 +1,6 @@
 changelog:
+  - 1.4.8 (2025-01-27):
+      - Add subtitle attribute in video creation payload
   - 1.4.7 (2024-11-06):
       - AI summary updates
   - 1.4.6 (2024-11-04):
