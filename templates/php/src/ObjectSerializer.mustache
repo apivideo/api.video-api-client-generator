@@ -45,7 +45,9 @@ class ObjectSerializer
         }
 
         if ($data instanceof \DateTime) {
-            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(self::$dateTimeFormat);
+            return ($type === 'date' || $format === 'date')
+                ? $data->format('Y-m-d')
+                : $data->format(self::$dateTimeFormat);
         }
 
         if (is_array($data)) {
